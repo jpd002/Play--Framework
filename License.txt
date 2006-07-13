@@ -12,5 +12,3 @@ or as source code.
 If there's questions about the license, you may contact the author through these means: 
 WWW:    http://purei.org
 e-mail: jean-philip.desjardins@polymtl.ca
-
-test
