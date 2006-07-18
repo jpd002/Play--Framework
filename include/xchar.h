@@ -2,9 +2,8 @@
 #define _XCHAR_H_
 
 #include "Str.h"
+#include "countof.h"
 #include <string>
-
-#define countof(a) (sizeof(a) / sizeof(a[0]))
 
 #if (defined(WIN32) && defined(UNICODE))
 
@@ -75,6 +74,7 @@ namespace Framework
 namespace std
 {
 	typedef basic_string< xchar, char_traits<xchar>, allocator<xchar> > xstring;
+	typedef basic_stringstream< xchar, char_traits<xchar>, allocator<xchar> > xstringstream;
 };
 
 #endif

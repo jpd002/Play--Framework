@@ -4,11 +4,11 @@
 template <typename Type> class CSingleton
 {
 public:
-	static Type* GetInstance()
+	static Type& GetInstance()
 	{
 		static Type Instance;
-		return &Instance;
-	};
+		return Instance;
+	}
 };
 
 #endif

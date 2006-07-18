@@ -6,7 +6,7 @@
 #endif
 #include <sql.h>
 #include <sqlext.h>
-#include "xchar.h"
+#include "tcharx.h"
 
 namespace Framework
 {
@@ -15,7 +15,7 @@ namespace Framework
 		class CConnection
 		{
 		public:
-							CConnection(const xchar*);
+							CConnection(const TCHAR*);
 							~CConnection();
 
 			SQLHANDLE		GetConnectionHandle();

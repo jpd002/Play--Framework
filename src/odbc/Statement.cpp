@@ -1,6 +1,8 @@
 #include <string.h>
+#include <exception>
 #include "odbc/Statement.h"
 
+using namespace std;
 using namespace Framework::Odbc;
 
 CStatement::CStatement(CConnection* pConnection)
@@ -13,11 +15,11 @@ CStatement::~CStatement()
 	SQLFreeHandle(SQL_HANDLE_STMT, m_StmtHandle);
 }
 
-void CStatement::Execute(const xchar* sQuery)
+void CStatement::Execute(const TCHAR* sQuery)
 {
-	if(SQLExecDirect(m_StmtHandle, const_cast<xchar*>(sQuery), SQL_NTS) == SQL_ERROR)
+	if(SQLExecDirect(m_StmtHandle, const_cast<TCHAR*>(sQuery), SQL_NTS) == SQL_ERROR)
 	{
-		throw "Error executing query.";	
+		throw exception("Error executing query.");
 	}
 }
 
@@ -44,7 +46,7 @@ const wchar_t* CStatement::GetData(unsigned int nColIndex, wchar_t* sBuffer, uns
 	SQLGetData(m_StmtHandle, nColIndex, SQL_WCHAR, (SQLPOINTER)sBuffer, nBufferCount, &nBytesAvail);
 	if(nBytesAvail == SQL_NULL_DATA)
 	{
-		wcsncpy(sBuffer, CStrPrimitives<wchar_t>::Empty(), nBufferCount);
+		wcsncpy(sBuffer, L"", nBufferCount);
 	}
 
 	return sBuffer;

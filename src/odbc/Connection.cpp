@@ -1,20 +1,21 @@
 #include "odbc/Connection.h"
+#include "string_cast.h"
 #include <exception>
 
+using namespace std;
 using namespace Framework::Odbc;
 
-CConnection::CConnection(const xchar* sConnectionString)
+CConnection::CConnection(const TCHAR* sConnectionString)
 {
-	xchar sOutBuffer[256];
+	TCHAR sOutBuffer[256];
 	SQLSMALLINT nOutBufferSize;
 
 	SQLAllocHandle(SQL_HANDLE_ENV, SQL_NULL_HANDLE, &m_EnvHandle);
 	SQLSetEnvAttr(m_EnvHandle, SQL_ATTR_ODBC_VERSION, (SQLPOINTER)SQL_OV_ODBC3, SQL_IS_UINTEGER);
 
 	SQLAllocHandle(SQL_HANDLE_DBC, m_EnvHandle, &m_ConHandle);
-	if(SQLDriverConnect(m_ConHandle, GetDesktopWindow(), const_cast<xchar*>(sConnectionString), (SQLSMALLINT)xstrlen(sConnectionString), sOutBuffer, 255, &nOutBufferSize, SQL_DRIVER_NOPROMPT) == SQL_ERROR)
+	if(SQLDriverConnect(m_ConHandle, GetDesktopWindow(), const_cast<TCHAR*>(sConnectionString), (SQLSMALLINT)_tcslen(sConnectionString), sOutBuffer, countof(sOutBuffer), &nOutBufferSize, SQL_DRIVER_NOPROMPT) == SQL_ERROR)
 	{
-		//throw "Couldn't connect to data source.";
 		ThrowErrorException();
 	}
 }
@@ -32,10 +33,10 @@ SQLHANDLE CConnection::GetConnectionHandle()
 
 void CConnection::ThrowErrorException()
 {
-	xchar sError[1024];
-	char sConvert[1024];
 	SQLSMALLINT nBufferSize;
-	SQLError(NULL, m_ConHandle, SQL_NULL_HSTMT, NULL, NULL, sError, 1024, &nBufferSize);
-	xconvert(sConvert, sError, 1024);
-	throw new std::exception(sConvert);
+	TCHAR sError[1024];
+	
+	SQLError(NULL, m_ConHandle, SQL_NULL_HSTMT, NULL, NULL, sError, countof(sError), &nBufferSize);
+
+	throw std::exception(string_cast<string>(sError).c_str());
 }

@@ -20,7 +20,7 @@ namespace Framework
 			void			GetItemLabelRect(HTREEITEM, RECT*);
 			HTREEITEM		GetRoot();
 			bool			SetSelection(HTREEITEM);
-			bool			Expand(HTREEITEM, unsigned int);
+			bool			Expand(HTREEITEM, unsigned int = TVE_EXPAND);
 			bool			DeleteAllItems();
 		};
 	}
