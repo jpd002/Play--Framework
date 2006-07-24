@@ -22,6 +22,7 @@ CConnection::CConnection(const TCHAR* sConnectionString)
 
 CConnection::~CConnection()
 {
+	SQLDisconnect(m_ConHandle);
 	SQLFreeHandle(SQL_HANDLE_DBC, m_ConHandle);
 	SQLFreeHandle(SQL_HANDLE_ENV, m_EnvHandle);
 }

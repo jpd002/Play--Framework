@@ -10,6 +10,7 @@
 
 #include <windows.h>
 #include "xchar.h"
+#include "tcharx.h"
 
 namespace Framework
 {

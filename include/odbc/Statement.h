@@ -20,6 +20,7 @@ namespace Framework
 			bool			FetchRow();
 
 		private:
+			void			ThrowErrorException();
 			SQLHANDLE		m_StmtHandle;
 		};
 	}

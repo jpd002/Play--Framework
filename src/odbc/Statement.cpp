@@ -1,6 +1,7 @@
 #include <string.h>
 #include <exception>
 #include "odbc/Statement.h"
+#include "string_cast.h"
 
 using namespace std;
 using namespace Framework::Odbc;
@@ -19,7 +20,7 @@ void CStatement::Execute(const TCHAR* sQuery)
 {
 	if(SQLExecDirect(m_StmtHandle, const_cast<TCHAR*>(sQuery), SQL_NTS) == SQL_ERROR)
 	{
-		throw exception("Error executing query.");
+		ThrowErrorException();
 	}
 }
 
@@ -55,4 +56,14 @@ const wchar_t* CStatement::GetData(unsigned int nColIndex, wchar_t* sBuffer, uns
 bool CStatement::FetchRow()
 {
 	return SQLFetch(m_StmtHandle) != SQL_NO_DATA;
+}
+
+void CStatement::ThrowErrorException()
+{
+	SQLSMALLINT nBufferSize;
+	TCHAR sError[1024];
+	
+	SQLError(NULL, NULL, m_StmtHandle, NULL, NULL, sError, countof(sError), &nBufferSize);
+
+	throw std::exception(string_cast<string>(sError).c_str());
 }

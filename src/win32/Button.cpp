@@ -4,7 +4,7 @@
 using namespace Framework;
 using namespace Framework::Win32;
 
-CButton::CButton(xchar* sCaption, HWND hParent, RECT* pR, unsigned long nStyle)
+CButton::CButton(const xchar* sCaption, HWND hParent, RECT* pR, unsigned long nStyle)
 {
 	Create(NULL, _X("BUTTON"), sCaption, WS_VISIBLE | WS_CHILD | nStyle, pR, hParent, NULL);
 	SetFont(CDefaultFonts::GetMessageFont());
