@@ -32,6 +32,12 @@ wstring string_cast<wstring>(const char* sSource)
 }
 
 template <>
+wstring string_cast<wstring>(const wchar_t* sSource)
+{
+	return wstring(sSource);
+}
+
+template <>
 string string_cast<string>(const wstring& sSource)
 {
 	return string_cast<string>(sSource.c_str());

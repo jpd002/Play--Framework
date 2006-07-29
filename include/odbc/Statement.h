@@ -13,6 +13,7 @@ namespace Framework
 							CStatement(CConnection*);
 							~CStatement();
 			void			Execute(const TCHAR*);
+			unsigned int	GetColumnIndex(const TCHAR*);
 			void			BindColumn(int, unsigned int*);
 			unsigned int	GetData(unsigned int);
 			const wchar_t*	GetData(unsigned int, wchar_t*, unsigned int);

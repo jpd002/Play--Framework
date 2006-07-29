@@ -24,6 +24,24 @@ void CStatement::Execute(const TCHAR* sQuery)
 	}
 }
 
+unsigned int CStatement::GetColumnIndex(const TCHAR* sName)
+{
+	SQLSMALLINT nCount;
+
+	SQLNumResultCols(m_StmtHandle, &nCount);
+
+	for(SQLSMALLINT i = 1; i <= nCount; i++)
+	{
+		SQLSMALLINT nNameLength;
+
+		SQLDescribeCol(m_StmtHandle, i, NULL, 0, &nNameLength, NULL, NULL, NULL, NULL);
+
+		nNameLength++;
+	}
+
+	return 0;
+}
+
 void CStatement::BindColumn(int nIndex, unsigned int* nValue)
 {
 	SQLBindCol(m_StmtHandle, nIndex, SQL_C_ULONG, (SQLPOINTER)nValue, sizeof(unsigned int), NULL);
