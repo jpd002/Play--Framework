@@ -14,7 +14,7 @@ namespace Framework
 							~CFileDialog();
 			int				Summon(HWND);
 			OPENFILENAME	m_OFN;
-			xchar			m_sFile[MAX_PATH];
+			TCHAR			m_sFile[MAX_PATH];
 
 		private:
 
