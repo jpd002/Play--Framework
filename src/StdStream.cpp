@@ -65,7 +65,7 @@ uint64 CStdStream::Read(void* pBuffer, uint64 nLength)
 	assert(m_pFile != NULL);
 	if(feof(m_pFile) || ferror(m_pFile))
 	{
-		throw "Can't read after end of file.";
+		throw exception("Can't read after end of file.");
 	}
 	return fread(pBuffer, 1, (size_t)nLength, m_pFile);
 }
