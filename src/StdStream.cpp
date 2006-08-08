@@ -7,14 +7,16 @@
 
 #include "StdStream.h"
 #include <assert.h>
+#include <exception>
 
 using namespace Framework;
+using namespace std;
 
 CStdStream::CStdStream(FILE* pFile)
 {
 	if(pFile == NULL)
 	{
-		throw "Invalid file handle.";
+		throw exception("Invalid file handle.");
 	}
 	m_pFile = pFile;
 }
