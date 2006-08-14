@@ -186,12 +186,17 @@ void CWindow::GetClientRect(RECT* pR)
 	::GetClientRect(m_hWnd, pR);
 }
 
+void CWindow::GetWindowRect(RECT* pR)
+{
+	::GetWindowRect(m_hWnd, pR);
+}
+
 void CWindow::Center(HWND hParent)
 {
 	RECT rParent;
 	RECT rWindow;
 
-	GetWindowRect(m_hWnd, &rWindow);
+	GetWindowRect(&rWindow);
 	if(hParent == NULL)
 	{
 		SetRect(&rParent, 0, 0, GetDeviceCaps(GetDC(NULL), HORZRES), GetDeviceCaps(GetDC(NULL), VERTRES));

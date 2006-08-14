@@ -56,6 +56,7 @@ namespace Framework
 		void					SetSizePosition(RECT*);
 		void					Center(HWND = 0);
 		void					GetClientRect(RECT*);
+		void					GetWindowRect(RECT*);
 		HWND					GetParent();
 		void					Redraw();
 		void					ModifyStyleOr(unsigned long);

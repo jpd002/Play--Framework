@@ -33,10 +33,18 @@ unsigned int CStatement::GetColumnIndex(const TCHAR* sName)
 	for(SQLSMALLINT i = 1; i <= nCount; i++)
 	{
 		SQLSMALLINT nNameLength;
+		TCHAR* sColumnName;
 
 		SQLDescribeCol(m_StmtHandle, i, NULL, 0, &nNameLength, NULL, NULL, NULL, NULL);
-
 		nNameLength++;
+
+		sColumnName = reinterpret_cast<TCHAR*>(_alloca(nNameLength * sizeof(TCHAR)));
+		SQLDescribeCol(m_StmtHandle, i, sColumnName, nNameLength, &nNameLength, NULL, NULL, NULL, NULL);
+
+		if(_tcscmp(sColumnName, sName) == 0)
+		{
+			return i;
+		}
 	}
 
 	return 0;
@@ -47,25 +55,54 @@ void CStatement::BindColumn(int nIndex, unsigned int* nValue)
 	SQLBindCol(m_StmtHandle, nIndex, SQL_C_ULONG, (SQLPOINTER)nValue, sizeof(unsigned int), NULL);
 }
 
-unsigned int CStatement::GetData(unsigned int nColIndex)
+unsigned int CStatement::GetDataInt(unsigned int nColIndex)
 {
 	SQLLEN nBytesAvail;
 	unsigned int nValue;
 
-	SQLGetData(m_StmtHandle, nColIndex, SQL_C_ULONG, (SQLPOINTER)&nValue, sizeof(unsigned int), &nBytesAvail);
-	if(nBytesAvail == SQL_NULL_DATA) nValue = 0;
+	if(SQLGetData(m_StmtHandle, nColIndex, SQL_C_ULONG, (SQLPOINTER)&nValue, sizeof(unsigned int), &nBytesAvail) == SQL_ERROR)
+	{
+		ThrowErrorException();
+	}
+	if(nBytesAvail == SQL_NULL_DATA) 
+	{
+		throw exception("Null data.");		
+	}
 
 	return nValue;
 }
 
-const wchar_t* CStatement::GetData(unsigned int nColIndex, wchar_t* sBuffer, unsigned int nBufferCount)
+wstring CStatement::GetDataWStr(unsigned int nColIndex)
+{
+	SQLLEN nBytesAvail;
+	SQLRETURN nRet;
+	wstring sValue;
+	wchar_t sBuffer[256];
+	
+	nRet = SQLGetData(m_StmtHandle, nColIndex, SQL_WCHAR, sBuffer, sizeof(sBuffer), &nBytesAvail);
+	if(nBytesAvail == SQL_NULL_DATA)
+	{
+		throw exception("Null data.");
+	}
+
+	sValue += sBuffer;
+	while(nRet == SQL_SUCCESS_WITH_INFO)
+	{
+		nRet = SQLGetData(m_StmtHandle, nColIndex, SQL_WCHAR, sBuffer, sizeof(sBuffer), &nBytesAvail);
+		sValue += sBuffer;
+	}
+
+	return sValue;
+}
+
+const wchar_t* CStatement::GetDataWStr(unsigned int nColIndex, wchar_t* sBuffer, unsigned int nBufferCount)
 {
 	SQLLEN nBytesAvail;
 	
 	SQLGetData(m_StmtHandle, nColIndex, SQL_WCHAR, (SQLPOINTER)sBuffer, nBufferCount, &nBytesAvail);
 	if(nBytesAvail == SQL_NULL_DATA)
 	{
-		wcsncpy(sBuffer, L"", nBufferCount);
+		throw exception("Null data.");
 	}
 
 	return sBuffer;

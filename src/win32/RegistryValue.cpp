@@ -13,10 +13,17 @@ CRegistryValue::CRegistryValue(HKEY hKey, const TCHAR* sSubKey, const TCHAR* sVa
 	RegCreateKey(hKey, sSubKey, &nKey);
 	RegQueryValueEx(nKey, sValue, NULL, NULL, NULL, &nLength);
 	
-	sBuffer = reinterpret_cast<TCHAR*>(_alloca(nLength));
-	RegQueryValueEx(nKey, sValue, NULL, NULL, reinterpret_cast<BYTE*>(sBuffer), &nLength);
+	if(nLength != 0)
+	{
+		sBuffer = reinterpret_cast<TCHAR*>(_alloca(nLength));
+		RegQueryValueEx(nKey, sValue, NULL, NULL, reinterpret_cast<BYTE*>(sBuffer), &nLength);
 
-	m_sValue = sBuffer;
+		m_sValue = sBuffer;
+	}
+	else
+	{
+		m_sValue = _T("");
+	}
 
 	RegCloseKey(nKey);
 }
