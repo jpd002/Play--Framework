@@ -55,6 +55,16 @@ void CStatement::BindColumn(int nIndex, unsigned int* nValue)
 	SQLBindCol(m_StmtHandle, nIndex, SQL_C_ULONG, (SQLPOINTER)nValue, sizeof(unsigned int), NULL);
 }
 
+template <> unsigned int CStatement::GetData(const TCHAR* sColumnName)
+{
+	return GetDataInt(GetColumnIndex(sColumnName));
+}
+
+template <> wstring CStatement::GetData(const TCHAR* sColumnName)
+{
+	return GetDataWStr(GetColumnIndex(sColumnName));
+}
+
 unsigned int CStatement::GetDataInt(unsigned int nColIndex)
 {
 	SQLLEN nBytesAvail;

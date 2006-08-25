@@ -15,6 +15,7 @@ namespace Framework
 			void			Execute(const TCHAR*);
 			unsigned int	GetColumnIndex(const TCHAR*);
 			void			BindColumn(int, unsigned int*);
+			template <typename T> T GetData(const TCHAR*);
 			unsigned int	GetDataInt(unsigned int);
 			std::wstring	GetDataWStr(unsigned int);
 			const wchar_t*	GetDataWStr(unsigned int, wchar_t*, unsigned int);
