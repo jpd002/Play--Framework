@@ -622,6 +622,10 @@
 				Name="xml"
 				>
 				<File
+					RelativePath=".\src\xml\FilteringNodeIterator.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\Xml\Node.cpp"
 					>
 				</File>
@@ -959,6 +963,10 @@
 			<Filter
 				Name="xml"
 				>
+				<File
+					RelativePath=".\include\xml\FilteringNodeIterator.h"
+					>
+				</File>
 				<File
 					RelativePath=".\include\Xml\Node.h"
 					>

@@ -169,21 +169,21 @@ Xml::CNode* Xml::CreateNodeBoolValue(const char* sName, bool nValue)
 	return pNode;
 }
 
-CStrPair* Xml::CreateAttributeStringValue(const char* sName, const char* sValue)
+Xml::AttributeType Xml::CreateAttributeStringValue(const char* sName, const char* sValue)
 {
-	return new CStrPair(sName, sValue);
+	return AttributeType(sName, sValue);
 }
 
-CStrPair* Xml::CreateAttributeIntValue(const char* sName, int nValue)
+Xml::AttributeType Xml::CreateAttributeIntValue(const char* sName, int nValue)
 {
 	char sValue[256];
 
 	sprintf(sValue, "%i", nValue);
 
-	return new CStrPair(sName, sValue);
+	return AttributeType(sName, sValue);
 }
 
-CStrPair* Xml::CreateAttributeBoolValue(const char* sName, bool nValue)
+Xml::AttributeType Xml::CreateAttributeBoolValue(const char* sName, bool nValue)
 {
-	return new CStrPair(sName, nValue ? "true" : "false");
+	return AttributeType(sName, nValue ? "true" : "false");
 }

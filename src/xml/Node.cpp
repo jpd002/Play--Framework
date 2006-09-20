@@ -18,13 +18,10 @@ CNode::CNode(const char* sText, bool nIsTag)
 
 CNode::~CNode()
 {
-	while(m_Child.Count() != 0)
+	while(m_Children.size() != 0)
 	{
-		delete m_Child.Pull();
-	}
-	while(m_Attribute.Count() != 0)
-	{
-		delete m_Attribute.Pull();
+		delete (*m_Children.rbegin());
+		m_Children.pop_back();
 	}
 }
 
@@ -32,28 +29,28 @@ void CNode::InsertNode(CNode* pNode)
 {
 	assert(pNode->m_pParent == NULL);
 	pNode->m_pParent = this;
-	m_Child.Insert(pNode);
+	m_Children.push_back(pNode);
 }
 
-const char* CNode::GetText()
+const char* CNode::GetText() const
 {
-	return m_sText;
+	return m_sText.c_str();
 }
 
-const char* CNode::GetInnerText()
+const char* CNode::GetInnerText() const
 {
-	if(m_Child.Count() != 1) return NULL;
-	return m_Child.Find(0)->GetText();
+	if(m_Children.size() != 1) return NULL;
+	return (*m_Children.begin())->GetText();
 }
 
-bool CNode::IsTag()
+bool CNode::IsTag() const
 {
 	return m_nIsTag;
 }
 
-void CNode::InsertAttribute(CStrPair* pAttribute)
+void CNode::InsertAttribute(const AttributeType& Attribute)
 {
-	m_Attribute.Insert(pAttribute);
+	m_Attributes[Attribute.first] = Attribute.second;
 }
 
 CNode* CNode::GetParent()
@@ -61,68 +58,64 @@ CNode* CNode::GetParent()
 	return m_pParent;
 }
 
-unsigned int CNode::GetChildCount()
+unsigned int CNode::GetChildCount() const
 {
-	return m_Child.Count();
+	return static_cast<unsigned int>(m_Children.size());
 }
 
 CNode* CNode::GetFirstChild()
 {
-	CList<CNode>::ITERATOR itNode;
-	itNode = m_Child.Begin();
-	return (*itNode);
+	assert(m_Children.size() > 0);
+	return *m_Children.begin();
 }
 
-CList<CNode>::ITERATOR CNode::GetChildIterator()
+CNode::NodeIterator CNode::GetChildrenBegin()
 {
-	CList<CNode>::ITERATOR itNode;
-	itNode = m_Child.Begin();
-	return itNode;
+	return m_Children.begin();
 }
 
-const char* CNode::GetAttribute(const char* sName)
+CNode::NodeIterator CNode::GetChildrenEnd()
 {
-	CList<CStrPair>::ITERATOR itAttribute;
-	CStrPair* pAttribute;
-
-	for(itAttribute = m_Attribute.Begin(); itAttribute.HasNext(); itAttribute++)
-	{
-		pAttribute = (*itAttribute);
-		if(!strcmp(sName, (*pAttribute)[0]))
-		{
-			return (*pAttribute)[1];
-		}
-	}
-
-	return NULL;
+	return m_Children.end();
 }
 
-unsigned int CNode::GetAttributeCount()
+const char* CNode::GetAttribute(const char* sName) const
 {
-	return m_Attribute.Count();
+	AttributeList::const_iterator itAttribute;
+	itAttribute = m_Attributes.find(sName);
+
+	return (itAttribute == m_Attributes.end()) ? NULL : (*itAttribute).second.c_str();
 }
 
-CList<CStrPair>::ITERATOR CNode::GetAttributeIterator()
+unsigned int CNode::GetAttributeCount() const
 {
-	CList<CStrPair>::ITERATOR itAttribute;
-	itAttribute = m_Attribute.Begin();
-	return itAttribute;
+	return static_cast<unsigned int>(m_Attributes.size());
+}
+
+CNode::AttributeIterator CNode::GetAttributesBegin()
+{
+	return m_Attributes.begin();
+}
+
+CNode::AttributeIterator CNode::GetAttributesEnd()
+{
+	return m_Attributes.end();
 }
 
 CNode* CNode::Search(const char* sName)
 {
-	CList<CNode>::ITERATOR itNode;
-	CNode* pNode;
-
-	for(itNode = m_Child.Begin(); itNode.HasNext(); itNode++)
+	for(NodeList::iterator itNode(m_Children.begin()); itNode != m_Children.end(); itNode++)
 	{
+		CNode* pNode;
 		pNode = (*itNode);
+
 		if(!pNode->IsTag()) continue;
 		if(!_stricmp(pNode->GetText(), sName))
 		{
 			return pNode;
 		}
 	}
+
 	return NULL;
 }
 

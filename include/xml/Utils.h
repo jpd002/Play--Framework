@@ -19,9 +19,9 @@ namespace Framework
 		Xml::CNode*		CreateNodeIntValue(const char*, int);
 		Xml::CNode*		CreateNodeBoolValue(const char*, bool);
 
-		CStrPair*		CreateAttributeStringValue(const char*, const char*);
-		CStrPair*		CreateAttributeIntValue(const char*, int);
-		CStrPair*		CreateAttributeBoolValue(const char*, bool);
+		AttributeType	CreateAttributeStringValue(const char*, const char*);
+		AttributeType	CreateAttributeIntValue(const char*, int);
+		AttributeType	CreateAttributeBoolValue(const char*, bool);
 	}
 }
 

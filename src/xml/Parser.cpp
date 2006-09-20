@@ -3,6 +3,7 @@
 
 using namespace Framework;
 using namespace Framework::Xml;
+using namespace std;
 
 CParser::CParser(CStream* pStream, CNode* pRoot)
 {
@@ -16,16 +17,14 @@ CParser::CParser(CStream* pStream, CNode* pRoot)
 
 CParser::~CParser()
 {
-	while(m_Attribute.Count() != 0)
-	{
-		delete m_Attribute.Pull();
-	}
+
 }
 
 bool CParser::Parse()
 {
 	char nValue;
 	bool nRet;
+
 	m_pStream->Read(&nValue, 1);
 	while(!m_pStream->IsEOF())
 	{
@@ -59,9 +58,9 @@ bool CParser::ProcessChar_Text(char nChar)
 	{
 		//Tag is starting
 
-		if(strlen(m_sText) != 0)
+		if(m_sText.size() != 0)
 		{
-			m_pNode->InsertNode(new CNode(m_sText, false));
+			m_pNode->InsertNode(new CNode(m_sText.c_str(), false));
 			m_sText = "";
 		}
 
@@ -77,7 +76,6 @@ bool CParser::ProcessChar_Text(char nChar)
 bool CParser::ProcessChar_Tag(char nChar)
 {
 	CNode* pChild;
-	CStrPair* pAttribute;
 	bool nHasSameName;
 
 	if(nChar == '<')
@@ -100,10 +98,10 @@ bool CParser::ProcessChar_Tag(char nChar)
 	}
 	if(nChar == '>')
 	{
-		if(((const char*)m_sText)[0] != '?')
+		if(m_sText[0] != '?')
 		{
 			//See if the tag name matches the current node's name
-			nHasSameName = _stricmp(m_sText, m_pNode->GetText()) == 0;
+			nHasSameName = _stricmp(m_sText.c_str(), m_pNode->GetText()) == 0;
 
 			if(m_nIsTagEnd && nHasSameName)
 			{
@@ -113,14 +111,14 @@ bool CParser::ProcessChar_Tag(char nChar)
 			else
 			{
 				//Create a new node
-				pChild = new CNode(m_sText, true);
+				pChild = new CNode(m_sText.c_str(), true);
 				m_pNode->InsertNode(pChild);
 
 				//Copy attributes
-				while(m_Attribute.Count() != 0)
+				while(m_Attributes.size() != 0)
 				{
-					pAttribute = m_Attribute.Pull();
-					pChild->InsertAttribute(pAttribute);
+					pChild->InsertAttribute(*m_Attributes.rbegin());
+					m_Attributes.pop_back();
 				}
 
 				//Go down if it's not an singleton
@@ -147,7 +145,7 @@ bool CParser::ProcessChar_AttributeName(char nChar)
 	}
 	if(nChar == ' ')
 	{
-		if(strlen(m_sAttributeName) == 0) return true;
+		if(m_sAttributeName.size() == 0) return true;
 		return false;
 	}
 	if(nChar == '>' || nChar == '/')
@@ -169,7 +167,7 @@ bool CParser::ProcessChar_AttributeValue(char nChar)
 {
 	if(nChar == '"')
 	{
-		m_Attribute.Insert(new CStrPair(m_sAttributeName, m_sAttributeValue));
+		m_Attributes.push_back(AttributeType(m_sAttributeName, m_sAttributeValue));
 
 		m_nState = STATE_ATTRIBUTE_NAME;
 		m_sAttributeName = "";
@@ -181,16 +179,13 @@ bool CParser::ProcessChar_AttributeValue(char nChar)
 
 CNode* CParser::ParseDocument(CStream* pStream)
 {
-	CParser* pParser;
 	CNode* pRoot;
 	bool nRet;
 
 	pRoot = new CNode();
 
-	pParser = new CParser(pStream, pRoot);
-	nRet = pParser->Parse();
-
-	delete pParser;
+	CParser Parser(pStream, pRoot);
+	nRet = Parser.Parse();
 
 	if(!nRet)
 	{

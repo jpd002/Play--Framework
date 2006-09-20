@@ -26,8 +26,6 @@ void CWriter::WriteDocument(CStream* pStream, CNode* pNode)
 
 void CWriter::WriteNode(unsigned int nLevel)
 {
-	CList<CNode>::ITERATOR itNode;
-
 	if(strcmp(m_pNode->GetText(), "") == 0)
 	{
 		if(m_pNode->GetChildCount() == 1)
@@ -81,7 +79,8 @@ void CWriter::WriteNode(unsigned int nLevel)
 	DumpAttributes(m_pNode);
 	DumpString(">\r\n");
 
-	for(itNode = m_pNode->GetChildIterator(); itNode.HasNext(); itNode++)
+	for(CNode::NodeIterator itNode(m_pNode->GetChildrenBegin()); 
+		itNode != m_pNode->GetChildrenEnd(); itNode++)
 	{
 		m_pNode = (*itNode);
 		WriteNode(nLevel + 1);
@@ -111,16 +110,15 @@ void CWriter::DumpTabs(unsigned int nCount)
 
 void CWriter::DumpAttributes(CNode* pNode)
 {
-	CList<CStrPair>::ITERATOR itAttr;
-	CStrPair* pAttribute;
-
-	for(itAttr = pNode->GetAttributeIterator(); itAttr.HasNext(); itAttr++)
+	for(CNode::AttributeIterator itAttr(pNode->GetAttributesBegin());
+		itAttr != pNode->GetAttributesEnd(); itAttr++)
 	{
-		pAttribute = (*itAttr);
+		const AttributeType& Attribute(*itAttr);
+
 		DumpString(" ");
-		DumpString((*pAttribute)[0]);
+		DumpString(Attribute.first.c_str());
 		DumpString("=\"");
-		DumpString((*pAttribute)[1]);
+		DumpString(Attribute.second.c_str());
 		DumpString("\"");
 	}
 }
