@@ -42,6 +42,9 @@ bool CParser::Parse()
 		case STATE_ATTRIBUTE_VALUE:
 			nRet = ProcessChar_AttributeValue(nValue);
 			break;
+		case STATE_COMMENT:
+			nRet = ProcessChar_Comment(nValue);
+			break;
 		}
 		if(nRet == false)
 		{
@@ -78,6 +81,11 @@ bool CParser::ProcessChar_Tag(char nChar)
 	CNode* pChild;
 	bool nHasSameName;
 
+	if((nChar == '!') && (m_sText.size() == 0))
+	{
+		m_nState = STATE_COMMENT;
+		return true;
+	}
 	if(nChar == '<')
 	{
 		//???
@@ -133,6 +141,7 @@ bool CParser::ProcessChar_Tag(char nChar)
 		m_nState = STATE_TEXT;
 		return true;
 	}
+
 	m_sText += nChar;
 	return true;
 }
@@ -174,6 +183,23 @@ bool CParser::ProcessChar_AttributeValue(char nChar)
 		return true;
 	}
 	m_sAttributeValue += nChar;
+	return true;
+}
+
+bool CParser::ProcessChar_Comment(char nChar)
+{
+	if(nChar == '>')
+	{
+		if(!string(m_sText.end() - 2, m_sText.end()).compare("--"))
+		{
+			//Comment end
+			m_sText = "";
+			m_nState = STATE_TEXT;
+			return true;
+		}
+	}
+
+	m_sText += nChar;
 	return true;
 }
 

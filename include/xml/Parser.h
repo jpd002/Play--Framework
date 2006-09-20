@@ -25,6 +25,7 @@ namespace Framework
 			bool						ProcessChar_Tag(char);
 			bool						ProcessChar_AttributeName(char);
 			bool						ProcessChar_AttributeValue(char);
+			bool						ProcessChar_Comment(char);
 
 			enum STATE
 			{
@@ -32,6 +33,7 @@ namespace Framework
 				STATE_TAG,
 				STATE_ATTRIBUTE_NAME,
 				STATE_ATTRIBUTE_VALUE,
+				STATE_COMMENT,
 			};
 
 			CStream*					m_pStream;
