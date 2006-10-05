@@ -6,20 +6,20 @@ using namespace Framework;
 
 CBitmap::CBitmap(unsigned int nWidth, unsigned int nHeight, unsigned int nBPP)
 {
-	m_nWidth = nWidth;
-	m_nHeight = nHeight;
-	m_nBPP = nBPP;
-	m_pData = (uint8*)malloc(GetDataSize());
+	m_nWidth	= nWidth;
+	m_nHeight	= nHeight;
+	m_nBPP		= nBPP;
+	m_pPixels	= reinterpret_cast<uint8*>(malloc(GetPixelsSize()));
 }
 
 CBitmap::~CBitmap()
 {
-	FREEPTR(m_pData);
+	FREEPTR(m_pPixels);
 }
 
-uint8* CBitmap::GetData()
+uint8* CBitmap::GetPixels()
 {
-	return m_pData;
+	return m_pPixels;
 }
 
 unsigned int CBitmap::GetWidth()
@@ -37,16 +37,9 @@ unsigned int CBitmap::GetBitsPerPixel()
 	return m_nBPP;
 }
 
-unsigned int CBitmap::GetDataSize()
+unsigned int CBitmap::GetPixelsSize()
 {
 	unsigned int nSize;
 	nSize = m_nWidth * m_nHeight * m_nBPP;
-	if(nSize % 8)
-	{
-		return (nSize / 8) + 1;
-	}
-	else
-	{
-		return (nSize / 8);
-	}
+	return ((nSize + 7) / 8);
 }
