@@ -17,27 +17,27 @@ CBitmap::~CBitmap()
 	FREEPTR(m_pPixels);
 }
 
-uint8* CBitmap::GetPixels()
+uint8* CBitmap::GetPixels() const
 {
 	return m_pPixels;
 }
 
-unsigned int CBitmap::GetWidth()
+unsigned int CBitmap::GetWidth() const
 {
 	return m_nWidth;
 }
 
-unsigned int CBitmap::GetHeight()
+unsigned int CBitmap::GetHeight() const
 {
 	return m_nHeight;
 }
 
-unsigned int CBitmap::GetBitsPerPixel()
+unsigned int CBitmap::GetBitsPerPixel() const
 {
 	return m_nBPP;
 }
 
-unsigned int CBitmap::GetPixelsSize()
+unsigned int CBitmap::GetPixelsSize() const
 {
 	unsigned int nSize;
 	nSize = m_nWidth * m_nHeight * m_nBPP;

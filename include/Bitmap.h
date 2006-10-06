@@ -11,11 +11,11 @@ namespace Framework
 	public:
 						CBitmap(unsigned int, unsigned int, unsigned int);
 						~CBitmap();
-		unsigned int	GetPixelsSize();
-		unsigned int	GetWidth();
-		unsigned int	GetHeight();
-		unsigned int	GetBitsPerPixel();
-		uint8*			GetPixels();
+		unsigned int	GetPixelsSize() const;
+		unsigned int	GetWidth() const;
+		unsigned int	GetHeight() const;
+		unsigned int	GetBitsPerPixel() const;
+		uint8*			GetPixels() const;
 
 	private:
 		unsigned int	m_nWidth;

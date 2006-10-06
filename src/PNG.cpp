@@ -241,7 +241,7 @@ CBitmap* CPNG::CreateBitmap()
 	pBitmap = new CBitmap(m_IHDR.m_nWidth, m_IHDR.m_nHeight, nBPP);
 
 	pSrc = m_pBuffer;
-	pDst = pBitmap->GetData();
+	pDst = pBitmap->GetPixels();
 
 	nScanBits = nBPP * m_IHDR.m_nWidth;
 	nScanSize = (nScanBits + 7) / 8;
@@ -294,8 +294,8 @@ CBitmap* CPNG::ConvertTo32(CBitmap* pSrcBitmap)
 	pDstBitmap = new CBitmap(pSrcBitmap->GetWidth(), pSrcBitmap->GetHeight(), 32);
 	nPixels = pSrcBitmap->GetWidth() * pSrcBitmap->GetHeight();
 
-	pDst = pDstBitmap->GetData();
-	pSrc = pSrcBitmap->GetData();
+	pDst = pDstBitmap->GetPixels();
+	pSrc = pSrcBitmap->GetPixels();
 	
 	for(i = 0, j = 0; i < nPixels; i++, j += 4)
 	{
