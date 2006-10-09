@@ -1,9 +1,7 @@
 #include <string>
 #include <malloc.h>
-#include <alloca.h>
+//#include <alloca.h>
 #include "string_cast.h"
-
-#define _alloca alloca
 
 using namespace std;
 
@@ -14,7 +12,7 @@ string string_cast<string>(const wchar_t* sSource)
 	size_t nSize;
 
 	nSize = wcslen(sSource) + 1;
-	sConvert = (char*)_alloca(nSize);
+	sConvert = (char*)alloca(nSize);
 	wcstombs(sConvert, sSource, nSize);
 
 	return string(sConvert);	
@@ -27,7 +25,7 @@ wstring string_cast<wstring>(const char* sSource)
 	wchar_t* sConvert;
 
 	nSize = strlen(sSource) + 1;
-	sConvert = (wchar_t*)_alloca(nSize * sizeof(wchar_t));
+	sConvert = (wchar_t*)alloca(nSize * sizeof(wchar_t));
 
 	mbstowcs(sConvert, sSource, nSize);
 
