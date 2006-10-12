@@ -40,11 +40,11 @@ wstring string_cast<wstring>(const wchar_t* sSource)
 template <>
 string string_cast<string>(const wstring& sSource)
 {
-	return string_cast<string, const wchar_t*>(sSource.c_str());
+	return string_cast<string, wchar_t>(sSource.c_str());
 }
 
 template <>
 wstring string_cast<wstring>(const string& sSource)
 {
-	return string_cast<wstring, const char*>(sSource.c_str());
+	return string_cast<wstring, char>(sSource.c_str());
 }

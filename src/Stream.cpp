@@ -21,6 +21,13 @@ void CStream::Flush()
 
 }
 
+uint8 CStream::Read8()
+{
+	uint8 nValue;
+	Read(&nValue, 1);
+	return nValue;
+}
+
 uint16 CStream::Read16()
 {
 	uint16 nValue;
@@ -43,4 +50,9 @@ void CStream::Write8(uint8 nValue)
 void CStream::Write16(uint16 nValue)
 {
 	Write(&nValue, 2);
+}
+
+void CStream::Write32(uint32 nValue)
+{
+	Write(&nValue, 4);
 }

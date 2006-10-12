@@ -55,9 +55,19 @@ void CStatement::BindColumn(int nIndex, unsigned int* nValue)
 	SQLBindCol(m_StmtHandle, nIndex, SQL_C_ULONG, (SQLPOINTER)nValue, sizeof(unsigned int), NULL);
 }
 
+template <> int CStatement::GetData(const TCHAR* sColumnName)
+{
+	return GetDataInt(GetColumnIndex(sColumnName));
+}
+
 template <> unsigned int CStatement::GetData(const TCHAR* sColumnName)
 {
 	return GetDataInt(GetColumnIndex(sColumnName));
+}
+
+template <> string CStatement::GetData(const TCHAR* sColumnName)
+{
+	return GetDataStr(GetColumnIndex(sColumnName));
 }
 
 template <> wstring CStatement::GetData(const TCHAR* sColumnName)
@@ -80,6 +90,29 @@ unsigned int CStatement::GetDataInt(unsigned int nColIndex)
 	}
 
 	return nValue;
+}
+
+string CStatement::GetDataStr(unsigned int nColIndex)
+{
+	SQLLEN nBytesAvail;
+	SQLRETURN nRet;
+	string sValue;
+	char sBuffer[256];
+	
+	nRet = SQLGetData(m_StmtHandle, nColIndex, SQL_CHAR, sBuffer, sizeof(sBuffer), &nBytesAvail);
+	if(nBytesAvail == SQL_NULL_DATA)
+	{
+		throw exception("Null data.");
+	}
+
+	sValue += sBuffer;
+	while(nRet == SQL_SUCCESS_WITH_INFO)
+	{
+		nRet = SQLGetData(m_StmtHandle, nColIndex, SQL_CHAR, sBuffer, sizeof(sBuffer), &nBytesAvail);
+		sValue += sBuffer;
+	}
+
+	return sValue;
 }
 
 wstring CStatement::GetDataWStr(unsigned int nColIndex)
