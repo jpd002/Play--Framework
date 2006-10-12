@@ -10,21 +10,22 @@ namespace Framework
 		class CStatement
 		{
 		public:
-							CStatement(CConnection*);
-							~CStatement();
-			void			Execute(const TCHAR*);
-			unsigned int	GetColumnIndex(const TCHAR*);
-			void			BindColumn(int, unsigned int*);
-			template <typename T> T GetData(const TCHAR*);
-			unsigned int	GetDataInt(unsigned int);
-			std::wstring	GetDataWStr(unsigned int);
-			const wchar_t*	GetDataWStr(unsigned int, wchar_t*, unsigned int);
+										CStatement(CConnection*);
+										~CStatement();
+			void						Execute(const TCHAR*);
+			unsigned int				GetColumnIndex(const TCHAR*);
+			void						BindColumn(int, unsigned int*);
+			template <typename T> T		GetData(const TCHAR*);
+			unsigned int				GetDataInt(unsigned int);
+			std::string					GetDataStr(unsigned int);
+			std::wstring				GetDataWStr(unsigned int);
+			const wchar_t*				GetDataWStr(unsigned int, wchar_t*, unsigned int);
 
-			bool			FetchRow();
+			bool						FetchRow();
 
 		private:
-			void			ThrowErrorException();
-			SQLHANDLE		m_StmtHandle;
+			void						ThrowErrorException();
+			SQLHANDLE					m_StmtHandle;
 		};
 	}
 }
