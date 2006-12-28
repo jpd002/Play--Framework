@@ -753,6 +753,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\lexical_cast_ex.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\List.h"
 				>
 			</File>

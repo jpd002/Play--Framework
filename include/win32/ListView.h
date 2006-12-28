@@ -26,8 +26,8 @@ namespace Framework
 		int				InsertItem(LVITEM*);
 		void			InsertColumn(unsigned int, LVCOLUMN*);
 
-		void			SetItemText(unsigned int, unsigned int, xchar*);
-		void			GetItemText(unsigned int, unsigned int, xchar*, unsigned int);
+		void			SetItemText(unsigned int, unsigned int, const TCHAR*);
+		void			GetItemText(unsigned int, unsigned int, TCHAR*, unsigned int);
 
 		unsigned long	GetItemData(unsigned int);
 

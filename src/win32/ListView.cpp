@@ -56,7 +56,7 @@ void CListView::InsertColumn(unsigned int nCol, LVCOLUMN* pC)
 	ListView_InsertColumn(m_hWnd, nCol, pC);
 }
 
-void CListView::GetItemText(unsigned int nItem, unsigned int nSubItem, xchar* sText, unsigned int nCount)
+void CListView::GetItemText(unsigned int nItem, unsigned int nSubItem, TCHAR* sText, unsigned int nCount)
 {
 	ListView_GetItemText(m_hWnd, nItem, nSubItem, sText, nCount);
 }
@@ -73,9 +73,9 @@ unsigned long CListView::GetItemData(unsigned int nItem)
 	return (unsigned long)it.lParam;
 }
 
-void CListView::SetItemText(unsigned int nItem, unsigned int nSubItem, xchar* sText)
+void CListView::SetItemText(unsigned int nItem, unsigned int nSubItem, const TCHAR* sText)
 {
-	ListView_SetItemText(m_hWnd, nItem, nSubItem, sText);
+	ListView_SetItemText(m_hWnd, nItem, nSubItem, const_cast<TCHAR*>(sText));
 }
 
 int CListView::GetSelection()
