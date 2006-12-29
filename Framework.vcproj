@@ -598,6 +598,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\win32\Rect.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\RegistryTraits.cpp"
 					>
 				</File>
@@ -945,6 +949,10 @@
 				</File>
 				<File
 					RelativePath=".\include\win32\MemoryDeviceContext.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\Rect.h"
 					>
 				</File>
 				<File
