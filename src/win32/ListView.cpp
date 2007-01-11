@@ -7,7 +7,7 @@
 
 #include "win32/ListView.h"
 
-using namespace Framework;
+using namespace Framework::Win32;
 
 CListView::CListView(HWND hParent, RECT* pR, unsigned long nStyle, unsigned long nExStyle)
 {

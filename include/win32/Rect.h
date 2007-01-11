@@ -5,17 +5,20 @@
 
 namespace Framework
 {
-	class CRect
+	namespace Win32
 	{
-	public:
-					CRect(int, int, int, int);
-		virtual		~CRect();
+		class CRect
+		{
+		public:
+						CRect(int, int, int, int);
+			virtual		~CRect();
 
-					operator RECT*();
+						operator RECT*();
 
-	private:
-		RECT		m_Rect;
-	};
+		private:
+			RECT		m_Rect;
+		};
+	}
 }
 
 #endif

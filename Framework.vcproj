@@ -614,6 +614,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\win32\ToolBar.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\TreeView.cpp"
 					>
 				</File>
@@ -965,6 +969,10 @@
 				</File>
 				<File
 					RelativePath=".\include\win32\Static.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\ToolBar.h"
 					>
 				</File>
 				<File

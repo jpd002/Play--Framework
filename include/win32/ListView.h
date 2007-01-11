@@ -13,37 +13,38 @@
 
 namespace Framework
 {
-
-	class CListView : public CWindow
+	namespace Win32
 	{
-	public:
-						CListView(HWND, RECT*, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
-		virtual			~CListView();
+		class CListView : public CWindow
+		{
+		public:
+							CListView(HWND, RECT*, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
+			virtual			~CListView();
 
-		int				GetItemCount();
-		int				FindItemData(unsigned long);
-		void			DeleteAllItems();
-		int				InsertItem(LVITEM*);
-		void			InsertColumn(unsigned int, LVCOLUMN*);
+			int				GetItemCount();
+			int				FindItemData(unsigned long);
+			void			DeleteAllItems();
+			int				InsertItem(LVITEM*);
+			void			InsertColumn(unsigned int, LVCOLUMN*);
 
-		void			SetItemText(unsigned int, unsigned int, const TCHAR*);
-		void			GetItemText(unsigned int, unsigned int, TCHAR*, unsigned int);
+			void			SetItemText(unsigned int, unsigned int, const TCHAR*);
+			void			GetItemText(unsigned int, unsigned int, TCHAR*, unsigned int);
 
-		unsigned long	GetItemData(unsigned int);
+			unsigned long	GetItemData(unsigned int);
 
-		int				GetSelection();
-		void			SetSelection(int);
+			int				GetSelection();
+			void			SetSelection(int);
 
-		void			SetColumnWidth(unsigned int, unsigned int);
+			void			SetColumnWidth(unsigned int, unsigned int);
 
-		void			SetExtendedListViewStyle(unsigned long);
-		unsigned long	GetExtendedListViewStyle();
+			void			SetExtendedListViewStyle(unsigned long);
+			unsigned long	GetExtendedListViewStyle();
 
-		void			SetItemCount(int);
+			void			SetItemCount(int);
 
-		void			EnsureItemVisible(unsigned int, bool);
-	};
-
+			void			EnsureItemVisible(unsigned int, bool);
+		};
+	}
 }
 
 #endif
