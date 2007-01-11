@@ -1,12 +1,13 @@
+#include <exception>
 #include "BMP.h"
 
 using namespace Framework;
+using namespace std;
 
 void CBMP::ToBMP(CBitmap* pBitmap, CStream* pStream)
 {
 	HEADER Header;
 	uint32* pPixels;
-	int i;
 	unsigned int nWidth, nHeight;
 
 	if(pBitmap->GetBitsPerPixel() != 32) return;
@@ -33,8 +34,41 @@ void CBMP::ToBMP(CBitmap* pBitmap, CStream* pStream)
 	nWidth = pBitmap->GetWidth();
 	nHeight = pBitmap->GetHeight();
 	
-	for(i = (nHeight - 1); i >= 0; i--)
+	for(int i = (nHeight - 1); i >= 0; i--)
 	{
 		pStream->Write(pPixels + (i * nWidth), nWidth * 4);
+	}
+}
+
+void CBMP::FromBMP(CBitmap& Dst, CStream& Stream)
+{
+	HEADER Header;
+	uint8* pPixels;
+	unsigned int nWidth, nHeight;
+
+	Stream.Read(&Header, sizeof(HEADER));
+
+	if(Header.nID != 0x4D42)
+	{
+		throw exception("Invalid header signature.");
+	}
+
+	if(Header.nBPP != 8)
+	{
+		throw exception("Bit depths other than 8-bits aren't supported.");
+	}
+
+	nWidth	= Header.nWidth;
+	nHeight	= Header.nHeight;
+
+	Dst.Allocate(nWidth, nHeight, Header.nBPP);
+
+	Stream.Seek(Header.nDataOffset, STREAM_SEEK_SET);
+
+	pPixels = Dst.GetPixels();
+	for(int i = (nHeight - 1); i >= 0; i--)
+	{
+		Stream.Read(pPixels + (i * nWidth), nWidth);
+		Stream.Seek(((4 - (nWidth & 3)) & 3), STREAM_SEEK_CUR);
 	}
 }

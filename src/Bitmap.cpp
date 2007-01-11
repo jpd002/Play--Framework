@@ -27,6 +27,27 @@ CBitmap::~CBitmap()
 	FREEPTR(m_pPixels);
 }
 
+CBitmap& CBitmap::operator =(const CBitmap& Src)
+{
+	if(&Src == this)
+	{
+		return (*this);
+	}
+
+	if(Src.GetPixelsSize() != GetPixelsSize())
+	{
+		m_pPixels = reinterpret_cast<uint8*>(realloc(m_pPixels, Src.GetPixelsSize()));
+	}
+
+	m_nWidth	= Src.GetWidth();
+	m_nHeight	= Src.GetHeight();
+	m_nBPP		= Src.GetBitsPerPixel();
+
+	memcpy(m_pPixels, Src.GetPixels(), GetPixelsSize());
+
+	return (*this);
+}
+
 void CBitmap::Allocate(unsigned int nWidth, unsigned int nHeight, unsigned int nBPP)
 {
 	assert(m_pPixels == NULL);

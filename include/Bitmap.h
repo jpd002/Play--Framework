@@ -15,6 +15,9 @@ namespace Framework
 						CBitmap(unsigned int, unsigned int, unsigned int);
 						CBitmap(ConstructionFunctionType);
 						~CBitmap();
+
+		CBitmap&		operator =(const CBitmap&);
+
 		void			Allocate(unsigned int, unsigned int, unsigned int);
 		bool			IsEmpty() const;
 		unsigned int	GetPixelsSize() const;
@@ -27,7 +30,6 @@ namespace Framework
 
 	private:
 						CBitmap(const CBitmap&) {}
-		CBitmap&		operator =(const CBitmap&) {}
 
 		unsigned int	m_nWidth;
 		unsigned int	m_nHeight;

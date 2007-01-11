@@ -11,6 +11,7 @@ namespace Framework
 	{
 	public:
 		static void		ToBMP(CBitmap*, CStream*);
+		static void		FromBMP(CBitmap&, CStream&);
 
 	private:
 #pragma pack(push, 1)
