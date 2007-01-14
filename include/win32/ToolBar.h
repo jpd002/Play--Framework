@@ -11,9 +11,12 @@ namespace Framework
 		{
 		public:
 						CToolBar(HWND, unsigned int, HINSTANCE, unsigned int, unsigned int, unsigned int);
+						CToolBar(HWND);
 			virtual		~CToolBar();
 
-			void		InsertButton(unsigned int, unsigned int);
+			void		LoadStandardImageList(unsigned int);
+			void		InsertImageButton(unsigned int, unsigned int);
+			void		InsertTextButton(const TCHAR*, unsigned int);
 			void		Resize();
 
 		private:
