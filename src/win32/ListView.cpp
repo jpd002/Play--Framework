@@ -107,3 +107,14 @@ void CListView::EnsureItemVisible(unsigned int nItem, bool nPartialOk)
 {
 	ListView_EnsureVisible(m_hWnd, nItem, nPartialOk);
 }
+
+void CListView::ProcessGetDisplayInfo(NMHDR* pHdr, GetDispInfoCallbackType Callback)
+{
+	if(pHdr->code != LVN_GETDISPINFO) return;
+	if(pHdr->hwndFrom != m_hWnd) return;
+
+	LV_DISPINFO* pDispInfo;
+
+	pDispInfo = reinterpret_cast<LV_DISPINFO*>(pHdr);
+	Callback(&pDispInfo->item);
+}

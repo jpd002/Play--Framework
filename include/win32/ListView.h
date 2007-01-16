@@ -10,6 +10,7 @@
 
 #include "Window.h"
 #include <commctrl.h>
+#include <boost/function.hpp>
 
 namespace Framework
 {
@@ -18,6 +19,8 @@ namespace Framework
 		class CListView : public CWindow
 		{
 		public:
+			typedef boost::function<void (LVITEM*)> GetDispInfoCallbackType;
+
 							CListView(HWND, RECT*, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
 			virtual			~CListView();
 
@@ -43,6 +46,8 @@ namespace Framework
 			void			SetItemCount(int);
 
 			void			EnsureItemVisible(unsigned int, bool);
+			
+			void			ProcessGetDisplayInfo(NMHDR*, GetDispInfoCallbackType);
 		};
 	}
 }

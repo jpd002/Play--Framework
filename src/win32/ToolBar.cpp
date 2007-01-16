@@ -49,8 +49,6 @@ void CToolBar::InsertTextButton(const TCHAR* sText, unsigned int nCommandId)
 	Button.iString		= reinterpret_cast<INT_PTR>(sText);
 
 	SendMessage(m_hWnd, TB_ADDBUTTONS, 1, reinterpret_cast<LPARAM>(&Button));
-
-	
 }
 
 void CToolBar::LoadStandardImageList(unsigned int nIndex)
