@@ -16,3 +16,9 @@ CRect::operator RECT*()
 {
 	return &m_Rect;
 }
+
+CRect& CRect::Adjust(uint32 nStyle, bool nMenu)
+{
+	AdjustWindowRect(&m_Rect, nStyle, (nMenu) ? TRUE : FALSE);
+	return (*this);
+}

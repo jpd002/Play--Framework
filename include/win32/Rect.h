@@ -2,6 +2,7 @@
 #define _RECT_H_
 
 #include "Window.h"
+#include "Types.h"
 
 namespace Framework
 {
@@ -14,6 +15,8 @@ namespace Framework
 			virtual		~CRect();
 
 						operator RECT*();
+
+			CRect&		Adjust(uint32, bool = false);
 
 		private:
 			RECT		m_Rect;

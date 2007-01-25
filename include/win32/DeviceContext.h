@@ -19,6 +19,7 @@ namespace Framework
 			void			DrawLine(int, int, int, int);
 			void			DrawLine(int, int, int, int, COLORREF);
 			void			TextOut(int, int, const xchar*);
+			HGDIOBJ			SelectObject(HGDIOBJ);
 
 		protected:
 			HDC				m_nDC;

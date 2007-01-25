@@ -25,9 +25,9 @@ unsigned int CDeviceContext::GetFontHeight(HFONT nFont)
 	SIZE s;
 	HGDIOBJ nPrevFont;
 
-	nPrevFont = SelectObject(m_nDC, nFont);
+	nPrevFont = SelectObject(nFont);
 	GetTextExtentPoint32(m_nDC, _X("0"), 1, &s);
-	SelectObject(m_nDC, nPrevFont);
+	SelectObject(nPrevFont);
 
 	return s.cy;
 }
@@ -48,11 +48,16 @@ void CDeviceContext::DrawLine(int nX1, int nY1, int nX2, int nY2)
 void CDeviceContext::DrawLine(int nX1, int nY1, int nX2, int nY2, COLORREF nColor)
 {
 	CPen Pen(CreatePen(PS_SOLID, 0, nColor));
-	SelectObject(m_nDC, Pen);
+	SelectObject(Pen);
 	DrawLine(nX1, nY1, nX2, nY2);
 }
 
 void CDeviceContext::TextOut(int nX, int nY, const xchar* sText)
 {
 	::TextOut(m_nDC, nX, nY, sText, static_cast<int>(xstrlen(sText)));
+}
+
+HGDIOBJ CDeviceContext::SelectObject(HGDIOBJ hObject)
+{
+	return ::SelectObject(m_nDC, hObject);
 }
