@@ -32,6 +32,13 @@ void CNode::InsertNode(CNode* pNode)
 	m_Children.push_back(pNode);
 }
 
+void CNode::InsertNodeAt(CNode* pNode, NodeIterator& itPosition)
+{
+	assert(pNode->m_pParent == NULL);
+	pNode->m_pParent = this;
+	m_Children.insert(itPosition, pNode);
+}
+
 const char* CNode::GetText() const
 {
 	return m_sText.c_str();
@@ -77,6 +84,11 @@ CNode::NodeIterator CNode::GetChildrenBegin()
 CNode::NodeIterator CNode::GetChildrenEnd()
 {
 	return m_Children.end();
+}
+
+void CNode::RemoveChild(NodeIterator itNode)
+{
+	m_Children.erase(itNode);
 }
 
 const char* CNode::GetAttribute(const char* sName) const

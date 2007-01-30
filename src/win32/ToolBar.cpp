@@ -82,7 +82,7 @@ void CToolBar::ProcessNotify(WPARAM wParam, NMHDR* pHdr)
 			LPTOOLTIPTEXT pToolTipText(reinterpret_cast<LPTOOLTIPTEXT>(pHdr));
 				
 			ButtonToolTipMap::iterator itToolTip;
-			itToolTip = m_ButtonToolTips.find(pHdr->idFrom);
+			itToolTip = m_ButtonToolTips.find(static_cast<unsigned int>(pHdr->idFrom));
 
 			if(itToolTip == m_ButtonToolTips.end()) return;
 
