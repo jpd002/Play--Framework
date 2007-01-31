@@ -7,7 +7,7 @@
 
 #include "StdStream.h"
 #include <assert.h>
-#include <exception>
+#include <stdexcept>
 
 using namespace Framework;
 using namespace std;
@@ -16,7 +16,7 @@ CStdStream::CStdStream(FILE* pFile)
 {
 	if(pFile == NULL)
 	{
-		throw exception("Invalid file handle.");
+		throw runtime_error("Invalid file handle.");
 	}
 	m_pFile = pFile;
 }
@@ -65,7 +65,7 @@ uint64 CStdStream::Read(void* pBuffer, uint64 nLength)
 	assert(m_pFile != NULL);
 	if(feof(m_pFile) || ferror(m_pFile))
 	{
-		throw exception("Can't read after end of file.");
+		throw runtime_error("Can't read after end of file.");
 	}
 	return fread(pBuffer, 1, (size_t)nLength, m_pFile);
 }

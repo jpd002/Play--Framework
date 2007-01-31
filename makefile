@@ -1,7 +1,7 @@
 GCC = g++
 OUTPUT = libframework.a
 
-NAMES = Bitmap.cpp string_cast.cpp
+NAMES = Bitmap.cpp string_cast.cpp Stream.cpp StdStream.cpp
 SRC = $(NAMES:%.cpp=./src/%.cpp)
 OBJ = $(NAMES:%.cpp=./obj/%.o)
 
@@ -13,7 +13,7 @@ $(OUTPUT) : $(OBJ)
 	ar rcs $(OUTPUT) $(OBJ)
 
 ./obj/%.o : ./src/%.cpp
-	$(GCC) -c -I$(INCLUDE) $< -o $@
+	$(GCC) -c -I$(INCLUDE) -I$(BOOST_INCLUDE) $< -o $@
 
 clean :
 	rm -f $(OBJ)
