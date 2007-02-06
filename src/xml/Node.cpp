@@ -1,5 +1,6 @@
 #include <assert.h>
 #include "xml/Node.h"
+#include "stricmp.h"
 
 using namespace Framework;
 using namespace Framework::Xml;
@@ -122,7 +123,7 @@ CNode* CNode::Search(const char* sName)
 		pNode = (*itNode);
 
 		if(!pNode->IsTag()) continue;
-		if(!strcasecmp(pNode->GetText(), sName))
+		if(!stricmp(pNode->GetText(), sName))
 		{
 			return pNode;
 		}

@@ -1,5 +1,6 @@
 #include "xml/Parser.h"
 #include "Types.h"
+#include "stricmp.h"
 
 using namespace Framework;
 using namespace Framework::Xml;
@@ -109,7 +110,7 @@ bool CParser::ProcessChar_Tag(char nChar)
 		if(m_sText[0] != '?')
 		{
 			//See if the tag name matches the current node's name
-			nHasSameName = strcasecmp(m_sText.c_str(), m_pNode->GetText()) == 0;
+			nHasSameName = stricmp(m_sText.c_str(), m_pNode->GetText()) == 0;
 
 			if(m_nIsTagEnd && nHasSameName)
 			{

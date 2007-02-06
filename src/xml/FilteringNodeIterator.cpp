@@ -1,4 +1,5 @@
 #include "xml/FilteringNodeIterator.h"
+#include "stricmp.h"
 
 using namespace Framework::Xml;
 
@@ -40,7 +41,7 @@ void CFilteringNodeIterator::SeekToNext()
 		const CNode* pNode;
 		pNode = (*m_itNode);
 		if(!pNode->IsTag()) continue;
-		if(strcasecmp(pNode->GetText(), m_sFilter)) continue;
+		if(stricmp(pNode->GetText(), m_sFilter)) continue;
 		break;
 	}
 }
