@@ -1,0 +1,20 @@
+GCC = g++
+OUTPUT = libframework_mysql.a
+
+NAMES = mysql/Client.cpp mysql/Result.cpp 
+
+SRC = $(NAMES:%.cpp=./src/%.cpp)
+OBJ = $(NAMES:%.cpp=./obj/%.o)
+
+INCLUDE = ./include
+
+all : $(OUTPUT)
+
+$(OUTPUT) : $(OBJ)
+	ar rcs $(OUTPUT) $(OBJ)
+
+./obj/%.o : ./src/%.cpp
+	$(GCC) -c -I$(INCLUDE) -I$(BOOST_INCLUDE) -I/usr/include/mysql $< -o $@
+
+clean :
+	rm -f $(OBJ)
