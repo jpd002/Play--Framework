@@ -1,5 +1,5 @@
 #include <exception>
-#include "mysql\Client.h"
+#include "mysql/Client.h"
 
 using namespace Framework::MySql;
 using namespace std;
