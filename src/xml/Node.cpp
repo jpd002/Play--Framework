@@ -122,7 +122,7 @@ CNode* CNode::Search(const char* sName)
 		pNode = (*itNode);
 
 		if(!pNode->IsTag()) continue;
-		if(!_stricmp(pNode->GetText(), sName))
+		if(!strcasecmp(pNode->GetText(), sName))
 		{
 			return pNode;
 		}

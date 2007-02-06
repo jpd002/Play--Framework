@@ -1,7 +1,7 @@
 GCC = g++
 OUTPUT = libframework.a
 
-NAMES = Bitmap.cpp string_cast.cpp Stream.cpp StdStream.cpp
+NAMES = Bitmap.cpp string_cast.cpp Stream.cpp StdStream.cpp xml/Node.cpp xml/FilteringNodeIterator.cpp xml/Writer.cpp xml/Parser.cpp
 SRC = $(NAMES:%.cpp=./src/%.cpp)
 OBJ = $(NAMES:%.cpp=./obj/%.o)
 

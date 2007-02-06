@@ -40,7 +40,7 @@ void CFilteringNodeIterator::SeekToNext()
 		const CNode* pNode;
 		pNode = (*m_itNode);
 		if(!pNode->IsTag()) continue;
-		if(_stricmp(pNode->GetText(), m_sFilter)) continue;
+		if(strcasecmp(pNode->GetText(), m_sFilter)) continue;
 		break;
 	}
 }
