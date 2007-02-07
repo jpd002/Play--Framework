@@ -13,9 +13,9 @@ namespace Framework
 		class CInputBox : public CWindow
 		{
 		public:
-										CInputBox(const xchar*, const xchar*, const xchar*);
+										CInputBox(const TCHAR*, const TCHAR*, const TCHAR*);
 										~CInputBox();
-			const xchar*				GetValue(HWND);
+			const TCHAR*				GetValue(HWND);
 
 		protected:
 			long						OnCommand(unsigned short, unsigned short, HWND);
@@ -28,9 +28,9 @@ namespace Framework
 			void						CancelDialog();
 			HACCEL						CreateAccelerators();
 
-			CStrX						m_sTitle;
-			CStrX						m_sPrompt;
-			CStrX						m_sValue;
+			std::tstring				m_sTitle;
+			std::tstring				m_sPrompt;
+			std::tstring				m_sValue;
 
 			bool						m_nCancelled;
 			CButton*					m_pOk;

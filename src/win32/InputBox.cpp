@@ -5,14 +5,14 @@
 #include "win32/Static.h"
 #include "win32/LayoutWindow.h"
 
-#define CLSNAME		_X("CInputBox")
+#define CLSNAME		_T("CInputBox")
 #define WNDSTYLE	(WS_CAPTION | WS_POPUP | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_SYSMENU)
 #define WNDSTYLEEX	(WS_EX_DLGMODALFRAME)
 
 using namespace Framework;
 using namespace Framework::Win32;
 
-CInputBox::CInputBox(const xchar* sTitle, const xchar* sPrompt, const xchar* sValue)
+CInputBox::CInputBox(const TCHAR* sTitle, const TCHAR* sPrompt, const TCHAR* sValue)
 {
 	m_pOk			= NULL;
 	m_pCancel		= NULL;
@@ -23,7 +23,7 @@ CInputBox::CInputBox(const xchar* sTitle, const xchar* sPrompt, const xchar* sVa
 
 	m_sTitle		= sTitle;
 	m_sPrompt		= sPrompt;
-	m_sValue		= (sValue != NULL) ? sValue : _X("");
+	m_sValue		= (sValue != NULL) ? sValue : _T("");
 }
 
 CInputBox::~CInputBox()
@@ -31,7 +31,7 @@ CInputBox::~CInputBox()
 	DELETEPTR(m_pLayout);
 }
 
-const xchar* CInputBox::GetValue(HWND hParent)
+const TCHAR* CInputBox::GetValue(HWND hParent)
 {
 	HFONT nFont;
 	RECT rc;
@@ -41,7 +41,7 @@ const xchar* CInputBox::GetValue(HWND hParent)
 
 	EnableWindow(GetActiveWindow(), FALSE);
 
-	nFont = CreateFont(-11, 0, 0, 0, 0, 0, 0, 0, ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, FF_DONTCARE, _X("Tahoma"));
+	nFont = CreateFont(-11, 0, 0, 0, 0, 0, 0, 0, ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, FF_DONTCARE, _T("Tahoma"));
 
 	if(!DoesWindowClassExist(CLSNAME))
 	{
@@ -57,19 +57,19 @@ const xchar* CInputBox::GetValue(HWND hParent)
 	}
 
 	SetRect(&rc, 0, 0, 300, 108);
-	Create(WNDSTYLEEX, CLSNAME, m_sTitle, WNDSTYLE, &rc, hParent, NULL);
+	Create(WNDSTYLEEX, CLSNAME, m_sTitle.c_str(), WNDSTYLE, &rc, hParent, NULL);
 	SetClassPtr();
 
 	SetRect(&rc, 0, 0, 0, 0);
 
-	m_pOk = new CButton(_X("OK"), m_hWnd, &rc);
+	m_pOk = new CButton(_T("OK"), m_hWnd, &rc);
 	m_pOk->SetFont(nFont);
 	m_pOk->ModifyStyleOr(BS_DEFPUSHBUTTON);
 
-	m_pCancel = new CButton(_X("Cancel"), m_hWnd, &rc);
+	m_pCancel = new CButton(_T("Cancel"), m_hWnd, &rc);
 	m_pCancel->SetFont(nFont);
 
-	m_pValue = new CEdit(m_hWnd, &rc, m_sValue);
+	m_pValue = new CEdit(m_hWnd, &rc, m_sValue.c_str());
 	m_pValue->SetFont(nFont);
 	m_pValue->SetSelection(0, -1);
 	m_pValue->SetFocus();
@@ -81,7 +81,7 @@ const xchar* CInputBox::GetValue(HWND hParent)
 	pSubLayout0->SetVerticalStretch(0);
 
 	m_pLayout = new CVerticalLayout;
-	m_pLayout->InsertObject(CLayoutWindow::CreateTextBoxBehavior(100, 14, new CStatic(m_hWnd, m_sPrompt)));
+	m_pLayout->InsertObject(CLayoutWindow::CreateTextBoxBehavior(100, 14, new CStatic(m_hWnd, m_sPrompt.c_str())));
 	m_pLayout->InsertObject(CLayoutWindow::CreateTextBoxBehavior(100, 20, m_pValue));
 	m_pLayout->InsertObject(pSubLayout0);
 	m_pLayout->InsertObject(new CLayoutStretch);
@@ -106,7 +106,7 @@ const xchar* CInputBox::GetValue(HWND hParent)
 	DestroyAcceleratorTable(hAccel);
 	DeleteObject(nFont);
 
-	return m_nCancelled ? NULL : (const xchar*)m_sValue;
+	return m_nCancelled ? NULL : m_sValue.c_str();
 }
 
 void CInputBox::RefreshLayout()
@@ -131,7 +131,7 @@ void CInputBox::RestoreFocus()
 
 void CInputBox::ConfirmDialog()
 {
-	xchar sTemp[256];
+	TCHAR sTemp[256];
 	
 	m_pValue->GetText(sTemp, 255);
 	m_sValue = sTemp;
