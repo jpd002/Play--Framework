@@ -26,11 +26,12 @@ CNode::~CNode()
 	}
 }
 
-void CNode::InsertNode(CNode* pNode)
+CNode* CNode::InsertNode(CNode* pNode)
 {
 	assert(pNode->m_pParent == NULL);
 	pNode->m_pParent = this;
 	m_Children.push_back(pNode);
+    return pNode;
 }
 
 void CNode::InsertNodeAt(CNode* pNode, NodeIterator& itPosition)
@@ -56,9 +57,15 @@ bool CNode::IsTag() const
 	return m_nIsTag;
 }
 
-void CNode::InsertAttribute(const AttributeType& Attribute)
+CNode* CNode::InsertAttribute(const AttributeType& Attribute)
 {
 	m_Attributes[Attribute.first] = Attribute.second;
+    return this;
+}
+
+CNode* CNode::InsertAttribute(const char* sName, const char* sValue)
+{
+    return InsertAttribute(AttributeType(sName, sValue));
 }
 
 CNode* CNode::GetParent()

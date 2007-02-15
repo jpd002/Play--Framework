@@ -25,13 +25,14 @@ namespace Framework
 										CNode(const char*, bool);
 										~CNode();
 
-			void						InsertNode(CNode*);
+			CNode* 						InsertNode(CNode*);
 			void						InsertNodeAt(CNode*, NodeIterator&);
 			const char*					GetText() const;
 			const char*					GetInnerText() const;
 			bool						IsTag() const;
 
-			void						InsertAttribute(const AttributeType&);
+			CNode*						InsertAttribute(const AttributeType&);
+            CNode*                      InsertAttribute(const char*, const char*);
 
 			CNode*						GetParent();
 			CNode*						GetFirstChild();
