@@ -486,10 +486,6 @@
 				RelativePath=".\src\Thread.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\src\xchar.cpp"
-				>
-			</File>
 			<Filter
 				Name="Layouts"
 				>
@@ -846,10 +842,6 @@
 			</File>
 			<File
 				RelativePath=".\include\Types.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\xchar.h"
 				>
 			</File>
 			<Filter

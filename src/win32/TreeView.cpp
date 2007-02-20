@@ -7,7 +7,7 @@ using namespace Framework::Win32;
 CTreeView::CTreeView(HWND hParent, RECT* pR, unsigned long nStyle, unsigned long nExStyle)
 {
 	InitCommonControls();
-	Create(nExStyle, WC_TREEVIEW, _X(""), WS_CHILD | WS_VISIBLE | nStyle, pR, hParent, NULL);
+	Create(nExStyle, WC_TREEVIEW, _T(""), WS_CHILD | WS_VISIBLE | nStyle, pR, hParent, NULL);
 }
 
 HTREEITEM CTreeView::InsertItem(TVINSERTSTRUCT* pI)
@@ -15,12 +15,12 @@ HTREEITEM CTreeView::InsertItem(TVINSERTSTRUCT* pI)
 	return TreeView_InsertItem(m_hWnd, pI);
 }
 
-HTREEITEM CTreeView::InsertItem(HTREEITEM nParent, const xchar* sText)
+HTREEITEM CTreeView::InsertItem(HTREEITEM nParent, const TCHAR* sText)
 {
 	TVINSERTSTRUCT s;
 	s.hParent		= nParent;
 	s.hInsertAfter	= TVI_LAST;
-	s.item.pszText	= const_cast<xchar*>(sText);
+	s.item.pszText	= const_cast<TCHAR*>(sText);
 	s.item.mask		= TVIF_TEXT;
 	return InsertItem(&s);
 }
@@ -36,7 +36,7 @@ bool CTreeView::GetItem(HTREEITEM hItem, TVITEM* pI)
 	return ((TreeView_GetItem(m_hWnd, pI) == TRUE) ? true : false);
 }
 
-void CTreeView::GetItemText(HTREEITEM hItem, xchar* sText, size_t nCount)
+void CTreeView::GetItemText(HTREEITEM hItem, TCHAR* sText, size_t nCount)
 {
 	TVITEM Item;
 

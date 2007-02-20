@@ -11,7 +11,7 @@ namespace Framework
 		{
 		public:
 					CStatic(HWND, RECT*, unsigned long = 0);
-					CStatic(HWND, const xchar*, unsigned long = 0);
+					CStatic(HWND, const TCHAR*, unsigned long = 0);
 			void	SetIcon(HANDLE);
 		};
 	}

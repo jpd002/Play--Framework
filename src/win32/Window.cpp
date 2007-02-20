@@ -10,7 +10,7 @@
 
 using namespace Framework;
 
-#define PROPNAME		_X("CWindow::this")
+#define PROPNAME		_T("CWindow::this")
 
 ATOM			CWindow::m_nAtom;
 
@@ -41,13 +41,13 @@ void CWindow::StdMsgLoop(CWindow* pW)
 	}
 }
 
-int CWindow::MessageBoxFormat(HWND hWnd, unsigned int nType, const xchar* sTitle, const xchar* sFormat, ...)
+int CWindow::MessageBoxFormat(HWND hWnd, unsigned int nType, const TCHAR* sTitle, const TCHAR* sFormat, ...)
 {
-	xchar sMessage[256];
+	TCHAR sMessage[256];
 	va_list Args;
 
 	va_start(Args, sFormat);
-	xvsnprintf(sMessage, 256, sFormat, Args);
+	_vsntprintf(sMessage, 256, sFormat, Args);
 	va_end(Args);
 
 	return MessageBox(hWnd, sMessage, sTitle, nType);
@@ -88,7 +88,7 @@ void CWindow::Release()
 	GlobalDeleteAtom(m_nAtom);
 }
 
-unsigned int CWindow::DoesWindowClassExist(xchar* sClass)
+unsigned int CWindow::DoesWindowClassExist(const TCHAR* sClass)
 {
 	WNDCLASS wc;
 	return GetClassInfo(GetModuleHandle(NULL), sClass, &wc);
@@ -98,7 +98,7 @@ unsigned int CWindow::DoesWindowClassExist(xchar* sClass)
 //Window Message Helpers
 ///////////////////////////////////////////////////////////
 
-void CWindow::Create(unsigned long nStyleEx, const xchar* sClass, const xchar* sWindow, unsigned long nStyle, RECT* pR, HWND hParent, void* pParam)
+void CWindow::Create(unsigned long nStyleEx, const TCHAR* sClass, const TCHAR* sWindow, unsigned long nStyle, RECT* pR, HWND hParent, void* pParam)
 {
 	m_hWnd = CreateWindowEx(nStyleEx, sClass, sWindow, nStyle, pR->left, pR->top, (pR->right - pR->left), (pR->bottom - pR->top), hParent, NULL, GetModuleHandle(NULL), pParam);
 }
@@ -131,7 +131,7 @@ unsigned int CWindow::Enable(unsigned int nEnable)
 	return EnableWindow(m_hWnd, nEnable);
 }
 
-int CWindow::GetText(xchar* sText, int nMax)
+int CWindow::GetText(TCHAR* sText, int nMax)
 {
 	return GetWindowText(m_hWnd, sText, nMax);
 }
@@ -141,7 +141,7 @@ unsigned int CWindow::GetTextLength()
 	return (unsigned int)SendMessage(m_hWnd, WM_GETTEXTLENGTH, 0, 0);
 }
 
-unsigned int CWindow::SetText(const xchar* sText)
+unsigned int CWindow::SetText(const TCHAR* sText)
 {
 	return SetWindowText(m_hWnd, sText);
 }

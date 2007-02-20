@@ -10,7 +10,7 @@ namespace Framework
 	{
 	public:
 				CListBox(HWND, RECT*, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
-		void	AddString(const xchar*);
+		void	AddString(const TCHAR*);
 		void	ResetContent();
 
 	};

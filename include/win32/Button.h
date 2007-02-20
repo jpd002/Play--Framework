@@ -10,7 +10,7 @@ namespace Framework
 		class CButton : public CWindow
 		{
 		public:
-						CButton(const xchar*, HWND, RECT*, unsigned long = 0);
+						CButton(const TCHAR*, HWND, RECT*, unsigned long = 0);
 			void		SetCheck(bool = true);
 			void		ResetCheck();
 		};

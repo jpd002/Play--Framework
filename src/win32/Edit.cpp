@@ -9,9 +9,9 @@ CEdit::CEdit(HWND hParent, unsigned int nID)
 	m_hWnd = GetDlgItem(hParent, nID);
 }
 
-CEdit::CEdit(HWND hParent, RECT* pR, const xchar* sText, unsigned long nStyle, unsigned long nStyleEx)
+CEdit::CEdit(HWND hParent, RECT* pR, const TCHAR* sText, unsigned long nStyle, unsigned long nStyleEx)
 {
-	Create(nStyleEx, _X("EDIT"), sText, WS_VISIBLE | WS_CHILD | nStyle, pR, hParent, NULL);
+	Create(nStyleEx, _T("EDIT"), sText, WS_VISIBLE | WS_CHILD | nStyle, pR, hParent, NULL);
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 

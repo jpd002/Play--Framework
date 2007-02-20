@@ -7,7 +7,7 @@ CMDIClient::CMDIClient(HWND hParent, HMENU hMenu)
 	CLIENTCREATESTRUCT ccs;
 	memset(&ccs, 0, sizeof(CLIENTCREATESTRUCT));
 	ccs.hWindowMenu = hMenu;
-	m_hWnd = CreateWindow(_X("MDICLIENT"), _X(""), WS_CLIPCHILDREN | WS_CHILD | WS_VSCROLL | WS_HSCROLL, 0, 0, 600, 600, hParent, (HMENU)0xCAC, GetModuleHandle(NULL), &ccs);
+	m_hWnd = CreateWindow(_T("MDICLIENT"), _T(""), WS_CLIPCHILDREN | WS_CHILD | WS_VSCROLL | WS_HSCROLL, 0, 0, 600, 600, hParent, (HMENU)0xCAC, GetModuleHandle(NULL), &ccs);
 	Show(SW_SHOW);
 }
 

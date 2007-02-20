@@ -4,11 +4,11 @@ using namespace Framework;
 
 CListBox::CListBox(HWND hParent, RECT* pR, unsigned long nStyle, unsigned long nStyleEx)
 {
-	Create(nStyleEx, _X("LISTBOX"), _X(""), WS_VISIBLE | WS_CHILD | nStyle, pR, hParent, NULL);
+	Create(nStyleEx, _T("LISTBOX"), _T(""), WS_VISIBLE | WS_CHILD | nStyle, pR, hParent, NULL);
 	SetFont((HFONT)GetStockObject(ANSI_VAR_FONT));
 }
 
-void CListBox::AddString(const xchar* sValue)
+void CListBox::AddString(const TCHAR* sValue)
 {
 	SendMessage(m_hWnd, LB_ADDSTRING, NULL, (LPARAM)sValue);
 }

@@ -6,11 +6,11 @@ using namespace Framework::Win32;
 
 CComboBox::CComboBox(HWND hParent, RECT* pR, unsigned long nStyle)
 {
-	Create(NULL, _X("ComboBox"), _X(""), WS_VISIBLE | WS_CHILD | WS_VSCROLL | nStyle, pR, hParent, NULL);
+	Create(NULL, _T("ComboBox"), _T(""), WS_VISIBLE | WS_CHILD | WS_VSCROLL | nStyle, pR, hParent, NULL);
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 
-unsigned int CComboBox::AddString(const xchar* sString)
+unsigned int CComboBox::AddString(const TCHAR* sString)
 {
 	return (unsigned int)SendMessage(m_hWnd, CB_ADDSTRING, 0, (LPARAM)sString);
 }

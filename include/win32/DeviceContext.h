@@ -18,7 +18,7 @@ namespace Framework
 			void			FillRect(RECT*, COLORREF);
 			void			DrawLine(int, int, int, int);
 			void			DrawLine(int, int, int, int, COLORREF);
-			void			TextOut(int, int, const xchar*);
+			void			TextOut(int, int, const TCHAR*);
 			HGDIOBJ			SelectObject(HGDIOBJ);
 
 		protected:

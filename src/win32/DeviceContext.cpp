@@ -26,7 +26,7 @@ unsigned int CDeviceContext::GetFontHeight(HFONT nFont)
 	HGDIOBJ nPrevFont;
 
 	nPrevFont = SelectObject(nFont);
-	GetTextExtentPoint32(m_nDC, _X("0"), 1, &s);
+	GetTextExtentPoint32(m_nDC, _T("0"), 1, &s);
 	SelectObject(nPrevFont);
 
 	return s.cy;
@@ -52,9 +52,9 @@ void CDeviceContext::DrawLine(int nX1, int nY1, int nX2, int nY2, COLORREF nColo
 	DrawLine(nX1, nY1, nX2, nY2);
 }
 
-void CDeviceContext::TextOut(int nX, int nY, const xchar* sText)
+void CDeviceContext::TextOut(int nX, int nY, const TCHAR* sText)
 {
-	::TextOut(m_nDC, nX, nY, sText, static_cast<int>(xstrlen(sText)));
+	::TextOut(m_nDC, nX, nY, sText, static_cast<int>(_tcslen(sText)));
 }
 
 HGDIOBJ CDeviceContext::SelectObject(HGDIOBJ hObject)

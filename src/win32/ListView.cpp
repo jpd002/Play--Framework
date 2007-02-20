@@ -12,7 +12,7 @@ using namespace Framework::Win32;
 CListView::CListView(HWND hParent, RECT* pR, unsigned long nStyle, unsigned long nExStyle)
 {
 	InitCommonControls();
-	Create(nExStyle, WC_LISTVIEW, _X(""), WS_CHILD | WS_VISIBLE | nStyle, pR, hParent, NULL);
+	Create(nExStyle, WC_LISTVIEW, _T(""), WS_CHILD | WS_VISIBLE | nStyle, pR, hParent, NULL);
 }
 
 CListView::~CListView()

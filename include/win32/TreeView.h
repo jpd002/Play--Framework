@@ -13,10 +13,10 @@ namespace Framework
 		public:
 							CTreeView(HWND, RECT*, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
 			HTREEITEM		InsertItem(TVINSERTSTRUCT*);
-			HTREEITEM		InsertItem(HTREEITEM, const xchar*);
+			HTREEITEM		InsertItem(HTREEITEM, const TCHAR*);
 			HTREEITEM		GetSelection();
 			bool			GetItem(HTREEITEM, TVITEM*);
-			void			GetItemText(HTREEITEM, xchar*, size_t);
+			void			GetItemText(HTREEITEM, TCHAR*, size_t);
 			void			GetItemLabelRect(HTREEITEM, RECT*);
 			HTREEITEM		GetRoot();
 			bool			SetSelection(HTREEITEM);

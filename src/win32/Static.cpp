@@ -6,14 +6,14 @@ using namespace Framework::Win32;
 
 CStatic::CStatic(HWND hParent, RECT* pR, unsigned long nStyle)
 {
-	Create(NULL, _X("STATIC"), _X(""), WS_CHILD | WS_VISIBLE | nStyle, pR, hParent, NULL);
+	Create(NULL, _T("STATIC"), _T(""), WS_CHILD | WS_VISIBLE | nStyle, pR, hParent, NULL);
 }
 
-CStatic::CStatic(HWND hParent, const xchar* sText, unsigned long nStyle)
+CStatic::CStatic(HWND hParent, const TCHAR* sText, unsigned long nStyle)
 {
 	RECT rc;
 	SetRect(&rc, 0, 0, 0, 0);
-	Create(NULL, _X("STATIC"), sText, WS_CHILD | WS_VISIBLE | nStyle, &rc, hParent, NULL);
+	Create(NULL, _T("STATIC"), sText, WS_CHILD | WS_VISIBLE | nStyle, &rc, hParent, NULL);
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 

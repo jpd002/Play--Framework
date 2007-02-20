@@ -12,7 +12,7 @@ namespace Framework
 		{
 		public:
 							CComboBox(HWND, RECT*, unsigned long = 0);
-			unsigned int	AddString(const xchar*);
+			unsigned int	AddString(const TCHAR*);
 			int				GetSelection();
 			void			SetSelection(int);
 			unsigned int	GetItemCount();

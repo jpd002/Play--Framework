@@ -9,7 +9,6 @@
 #define _WINDOW_H_
 
 #include <windows.h>
-#include "xchar.h"
 #include "tcharx.h"
 
 namespace Framework
@@ -28,23 +27,23 @@ namespace Framework
 		static LRESULT WINAPI	WndProc(HWND, unsigned int, WPARAM, LPARAM);
 		static LRESULT WINAPI	SubClassWndProc(HWND, unsigned int, WPARAM, LPARAM);
 		static void				StdMsgLoop(CWindow*);
-		static int				MessageBoxFormat(HWND, unsigned int, const xchar*, const xchar*, ...);
+		static int				MessageBoxFormat(HWND, unsigned int, const TCHAR*, const TCHAR*, ...);
 		void					SetClassPtr();
 		void					ClearClassPtr();
 		void					SubClass();
 		long					CallBaseWndProc(unsigned int, WPARAM, LPARAM);
-		unsigned int			DoesWindowClassExist(xchar*);
+		unsigned int			DoesWindowClassExist(const TCHAR*);
 
 		//Helpers
-		void					Create(unsigned long, const xchar*, const xchar*, unsigned long, RECT*, HWND, void*);  
+		void					Create(unsigned long, const TCHAR*, const TCHAR*, unsigned long, RECT*, HWND, void*);  
 		unsigned int			Destroy();
 		unsigned int			Show(int);
 		unsigned int			Enable(unsigned int);
 		bool					IsWindow();
 		bool					IsVisible();
-		int						GetText(xchar*, int);
+		int						GetText(TCHAR*, int);
 		unsigned int			GetTextLength();
-		unsigned int			SetText(const xchar*);
+		unsigned int			SetText(const TCHAR*);
 		unsigned int			SetTextA(const char*);
 		HFONT					GetFont();
 		void					SetFont(HFONT);

@@ -8,7 +8,7 @@ CFileDialog::CFileDialog()
 	m_OFN.lStructSize	= sizeof(OPENFILENAME);
 	m_OFN.lpstrFile		= m_sFile;
 	m_OFN.nMaxFile		= MAX_PATH;
-	xstrcpy(m_sFile, _X(""));
+	_tcscpy(m_sFile, _T(""));
 }
 
 CFileDialog::~CFileDialog()
@@ -19,7 +19,7 @@ CFileDialog::~CFileDialog()
 int CFileDialog::Summon(HWND hParent)
 {
 	int nRet;
-	xchar sPath[MAX_PATH + 1];
+	TCHAR sPath[MAX_PATH + 1];
 	GetCurrentDirectory(MAX_PATH, sPath);
 
 	m_OFN.hwndOwner = hParent;
