@@ -2,6 +2,17 @@
 
 using namespace Framework;
 
+CCustomDrawn::CCustomDrawn()
+{
+    m_MemDc = NULL;
+    m_Bitmap = NULL;
+}
+
+CCustomDrawn::~CCustomDrawn()
+{
+    InvalidateBitmap();
+}
+
 long CCustomDrawn::OnPaint()
 {
 	PAINTSTRUCT ps;
@@ -14,16 +25,21 @@ long CCustomDrawn::OnPaint()
 
 	GetClientRect(&rwin);
 
-	hDC = CreateCompatibleDC(hWDC);
-	hBM = CreateCompatibleBitmap(hWDC, rwin.right, rwin.bottom);
-	SelectObject(hDC, hBM);
+	//hDC = CreateCompatibleDC(hWDC);
+	//hBM = CreateCompatibleBitmap(hWDC, rwin.right, rwin.bottom);
+	//SelectObject(hDC, hBM);
 
-	Paint(hDC);
+    if(m_MemDc == NULL)
+    {
+        RecreateBitmap(hWDC);
+    }
 
-	BitBlt(hWDC, 0, 0, rwin.right, rwin.bottom, hDC, 0, 0, SRCCOPY);
+	Paint(m_MemDc);
 
-	DeleteObject(hBM);
-	DeleteDC(hDC);
+	BitBlt(hWDC, 0, 0, rwin.right, rwin.bottom, m_MemDc, 0, 0, SRCCOPY);
+
+	//DeleteObject(hBM);
+	//DeleteDC(hDC);
 
 	EndPaint(m_hWnd, &ps);
 
@@ -32,11 +48,33 @@ long CCustomDrawn::OnPaint()
 
 long CCustomDrawn::OnEraseBkgnd()
 {
-	return FALSE;
+	return TRUE;
 }
 
 long CCustomDrawn::OnSize(unsigned int nType, unsigned int nX, unsigned int nY)
 {
+    InvalidateBitmap();
 	Redraw();
 	return TRUE;
+}
+
+void CCustomDrawn::RecreateBitmap(HDC hWindowDc)
+{
+    RECT rc;
+
+    if(m_MemDc != NULL) return;
+
+    GetClientRect(&rc);
+
+	m_MemDc = CreateCompatibleDC(hWindowDc);
+	m_Bitmap = CreateCompatibleBitmap(hWindowDc, rc.right, rc.bottom);
+	SelectObject(m_MemDc, m_Bitmap);
+}
+
+void CCustomDrawn::InvalidateBitmap()
+{
+	DeleteObject(m_Bitmap);
+	DeleteDC(m_MemDc);
+
+    m_MemDc = NULL;
 }

@@ -8,10 +8,18 @@ namespace Framework
 	class CCustomDrawn : public CWindow
 	{
 	protected:
+                        CCustomDrawn();
+        virtual         ~CCustomDrawn();
 		virtual void	Paint(HDC) = 0;
 		virtual long	OnEraseBkgnd();
 		virtual long	OnPaint();
 		virtual long	OnSize(unsigned int, unsigned int, unsigned int);
+
+    private:
+        void            RecreateBitmap(HDC);
+        void            InvalidateBitmap();
+        HBITMAP         m_Bitmap;
+        HDC             m_MemDc;
 	};
 }
 
