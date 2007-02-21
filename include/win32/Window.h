@@ -85,6 +85,7 @@ namespace Framework
 		virtual long			OnActivateApp(bool, unsigned long);
 		virtual long			OnSetCursor(HWND, unsigned int, unsigned int);
 		virtual long			OnDrawItem(unsigned int, LPDRAWITEMSTRUCT);
+        virtual long            OnCopy();
 
 		//Add parameters for these
 		virtual long			OnPaint();

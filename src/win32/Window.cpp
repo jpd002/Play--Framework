@@ -355,6 +355,10 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 	case WM_DRAWITEM:
 		if(pThis->OnDrawItem((unsigned int)wParam, (LPDRAWITEMSTRUCT)lParam)) return TRUE;
 		break;
+    case WM_COPY:
+        pThis->OnCopy();
+        return TRUE;
+        break;
 	}
 	if(!pThis->OnWndProc(uiMsg, wParam, lParam)) return FALSE;
 	if(!pThis->m_nNoCallDef)
@@ -514,4 +518,9 @@ long CWindow::OnSetCursor(HWND hWndFrom, unsigned int nHitTest, unsigned int nMs
 long CWindow::OnDrawItem(unsigned int nId, LPDRAWITEMSTRUCT pDrawItem)
 {
 	return FALSE;
+}
+
+long CWindow::OnCopy()
+{
+    return TRUE;
 }

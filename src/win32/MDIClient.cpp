@@ -30,3 +30,8 @@ void CMDIClient::TileVertical()
 {
 	SendMessage(m_hWnd, WM_MDITILE, MDITILE_VERTICAL, NULL);
 }
+
+HWND CMDIClient::GetActiveWindow()
+{
+    return reinterpret_cast<HWND>(SendMessage(m_hWnd, WM_MDIGETACTIVE, 0, NULL));
+}

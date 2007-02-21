@@ -14,6 +14,7 @@ namespace Framework
 		void		Cascade();
 		void		TileHorizontal();
 		void		TileVertical();
+        HWND        GetActiveWindow();
 	};
 
 }
