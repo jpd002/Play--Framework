@@ -191,6 +191,13 @@ void CWindow::GetWindowRect(RECT* pR)
 	::GetWindowRect(m_hWnd, pR);
 }
 
+RECT CWindow::GetClientRect()
+{
+    RECT Rect;
+    ::GetClientRect(m_hWnd, &Rect);
+    return Rect;
+}
+
 void CWindow::Center(HWND hParent)
 {
 	RECT rParent;
