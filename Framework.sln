@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Framework", "Framework.vcpr
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FrameworkMySql", "FrameworkMySql.vcproj", "{C8050275-6985-46DE-B2F5-7CA32DC17B65}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FrameworkOpenGl", "FrameworkOpenGl.vcproj", "{9B46B4A7-0FBD-44FD-8E9C-BC2CBA64643A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -27,6 +29,12 @@ Global
 		{C8050275-6985-46DE-B2F5-7CA32DC17B65}.Release|Win32.ActiveCfg = Release|Win32
 		{C8050275-6985-46DE-B2F5-7CA32DC17B65}.Release|Win32.Build.0 = Release|Win32
 		{C8050275-6985-46DE-B2F5-7CA32DC17B65}.Release|x64.ActiveCfg = Release|Win32
+		{9B46B4A7-0FBD-44FD-8E9C-BC2CBA64643A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9B46B4A7-0FBD-44FD-8E9C-BC2CBA64643A}.Debug|Win32.Build.0 = Debug|Win32
+		{9B46B4A7-0FBD-44FD-8E9C-BC2CBA64643A}.Debug|x64.ActiveCfg = Debug|Win32
+		{9B46B4A7-0FBD-44FD-8E9C-BC2CBA64643A}.Release|Win32.ActiveCfg = Release|Win32
+		{9B46B4A7-0FBD-44FD-8E9C-BC2CBA64643A}.Release|Win32.Build.0 = Release|Win32
+		{9B46B4A7-0FBD-44FD-8E9C-BC2CBA64643A}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
