@@ -3,12 +3,13 @@
 
 #include <string>
 #include <assert.h>
+#include <algorithm>
 
 template <typename Format>
 Format lexical_cast_hex(unsigned int nNumber, unsigned int nWidth = 0)
 {
     assert(nWidth <= 8);
-    nWidth = min(nWidth, 8);
+    nWidth = std::min<unsigned int>(nWidth, 8);
 
     Format::value_type* sBuffer;
     sBuffer = reinterpret_cast<Format::value_type*>(_alloca(sizeof(Format::value_type) * (nWidth + 1)));
