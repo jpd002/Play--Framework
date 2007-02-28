@@ -2,16 +2,26 @@
 #define _LEXICAL_CAST_EX_H_
 
 #include <string>
-#include <iomanip>
+#include <assert.h>
 
 template <typename Format>
 Format lexical_cast_hex(unsigned int nNumber, unsigned int nWidth = 0)
 {
-	std::basic_ostringstream<Format::value_type> Stream;
-	Stream << hex << uppercase
-		<< setfill(static_cast<Format::value_type>('0')) << setw(nWidth)
-		<< nNumber;
-	return Stream.str();
+    assert(nWidth <= 8);
+    nWidth = min(nWidth, 8);
+
+    Format::value_type* sBuffer;
+    sBuffer = reinterpret_cast<Format::value_type*>(_alloca(sizeof(Format::value_type) * (nWidth + 1)));
+
+    for(unsigned int i = 0; i < nWidth; i++)
+    {
+        unsigned int nNibble;
+        nNibble = (nNumber >> ((nWidth - i - 1) * 4)) & 0xF;
+        sBuffer[i] = (nNibble > 9) ? (nNibble - 0xA + 'A') : (nNibble + '0');
+    }
+    sBuffer[nWidth] = 0;
+
+    return Format(sBuffer);
 }
 
 #endif

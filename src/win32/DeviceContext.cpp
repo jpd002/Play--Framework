@@ -20,7 +20,7 @@ CDeviceContext::operator HDC()
 	return m_nDC;
 }
 
-unsigned int CDeviceContext::GetFontHeight(HFONT nFont)
+SIZE CDeviceContext::GetFontSize(HFONT nFont)
 {
 	SIZE s;
 	HGDIOBJ nPrevFont;
@@ -29,7 +29,12 @@ unsigned int CDeviceContext::GetFontHeight(HFONT nFont)
 	GetTextExtentPoint32(m_nDC, _T("0"), 1, &s);
 	SelectObject(nPrevFont);
 
-	return s.cy;
+	return s;
+}
+
+unsigned int CDeviceContext::GetFontHeight(HFONT nFont)
+{
+    return GetFontSize(nFont).cy;
 }
 
 void CDeviceContext::FillRect(RECT* pRect, COLORREF nColor)
