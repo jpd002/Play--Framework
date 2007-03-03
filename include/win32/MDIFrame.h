@@ -6,18 +6,19 @@
 
 namespace Framework
 {
-
-	class CMDIFrame : public CWindow
-	{
-	public:
-						CMDIFrame();
-		virtual			~CMDIFrame();
-	protected:
-		virtual long	OnWndProc(unsigned int, WPARAM, LPARAM);
-		void			CreateClient(HMENU);
-		CMDIClient*		m_pMDIClient;
-	};
-
+    namespace Win32
+    {
+	    class CMDIFrame : public CWindow
+	    {
+	    public:
+						    CMDIFrame();
+		    virtual         ~CMDIFrame();
+	    protected:
+		    virtual long    OnWndProc(unsigned int, WPARAM, LPARAM);
+		    void            CreateClient(HMENU);
+		    CMDIClient*     m_pMDIClient;
+	    };
+    }
 }
 
 #endif

@@ -5,18 +5,19 @@
 
 namespace Framework
 {
-
-	class CMDIClient : public CWindow
-	{
-	public:
-					CMDIClient(HWND, HMENU);
-					~CMDIClient();
-		void		Cascade();
-		void		TileHorizontal();
-		void		TileVertical();
-        HWND        GetActiveWindow();
-	};
-
+    namespace Win32
+    {
+	    class CMDIClient : public CWindow
+	    {
+	    public:
+					    CMDIClient(HWND, HMENU);
+					    ~CMDIClient();
+		    void        Cascade();
+		    void        TileHorizontal();
+		    void        TileVertical();
+            HWND        GetActiveWindow();
+	    };
+    }
 }
 
 #endif

@@ -9,6 +9,7 @@
 #include <windowsx.h>
 
 using namespace Framework;
+using namespace Framework::Win32;
 
 #define PROPNAME		_T("CWindow::this")
 

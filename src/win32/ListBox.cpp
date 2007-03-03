@@ -1,6 +1,7 @@
 #include "win32/ListBox.h"
 
 using namespace Framework;
+using namespace Framework::Win32;
 
 CListBox::CListBox(HWND hParent, RECT* pR, unsigned long nStyle, unsigned long nStyleEx)
 {

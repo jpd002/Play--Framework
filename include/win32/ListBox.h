@@ -5,16 +5,17 @@
 
 namespace Framework
 {
+    namespace Win32
+    {
+	    class CListBox : public CWindow
+	    {
+	    public:
+	                CListBox(HWND, RECT*, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
+            void    AddString(const TCHAR*);
+            void    ResetContent();
 
-	class CListBox : public CWindow
-	{
-	public:
-				CListBox(HWND, RECT*, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
-		void	AddString(const TCHAR*);
-		void	ResetContent();
-
-	};
-
+	    };
+    }
 }
 
 #endif

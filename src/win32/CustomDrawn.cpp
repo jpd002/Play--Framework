@@ -1,6 +1,7 @@
 #include "win32/CustomDrawn.h"
 
 using namespace Framework;
+using namespace Framework::Win32;
 
 CCustomDrawn::CCustomDrawn()
 {

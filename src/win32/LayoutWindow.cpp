@@ -2,6 +2,7 @@
 #include "PtrMacro.h"
 
 using namespace Framework;
+using namespace Framework::Win32;
 
 CLayoutWindow::CLayoutWindow(unsigned int nPrefWidth, unsigned int nPrefHeight, unsigned int nHorzStretch, unsigned int nVertStretch, CWindow* pWindow, bool nUseNoCopy) :
 CLayoutObject(nHorzStretch, nVertStretch)

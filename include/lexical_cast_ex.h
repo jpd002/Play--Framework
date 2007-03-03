@@ -2,6 +2,7 @@
 #define _LEXICAL_CAST_EX_H_
 
 #include <string>
+#include <sstream>
 #include <assert.h>
 #include <algorithm>
 
@@ -23,6 +24,21 @@ Format lexical_cast_hex(unsigned int nNumber, unsigned int nWidth = 0)
     sBuffer[nWidth] = 0;
 
     return Format(sBuffer);
+}
+
+template <typename Format>
+unsigned int lexical_cast_hex(const Format& sValue)
+{
+    unsigned int nNumber;
+    std::basic_istringstream<Format::value_type> Stream(sValue);
+    Stream >> hex >> nNumber;
+
+    if(Stream.fail())
+    {
+        throw exception();
+    }
+
+    return nNumber;
 }
 
 #endif

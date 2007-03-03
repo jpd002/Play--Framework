@@ -2,6 +2,7 @@
 #include "PtrMacro.h"
 
 using namespace Framework;
+using namespace Framework::Win32;
 
 CMDIFrame::CMDIFrame()
 {

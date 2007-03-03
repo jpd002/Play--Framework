@@ -1,6 +1,7 @@
 #include "win32/MDIChild.h"
 
 using namespace Framework;
+using namespace Framework::Win32;
 
 void CMDIChild::Create(unsigned long nStyleEx, const TCHAR* sClass, const TCHAR* sWindow, unsigned long nStyle, RECT* pR, HWND hParent, void* pParam)
 {

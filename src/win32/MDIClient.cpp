@@ -1,6 +1,7 @@
 #include "win32/MDIClient.h"
 
 using namespace Framework;
+using namespace Framework::Win32;
 
 CMDIClient::CMDIClient(HWND hParent, HMENU hMenu)
 {
