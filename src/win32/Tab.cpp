@@ -33,13 +33,7 @@ unsigned int CTab::GetItemCount()
 RECT CTab::GetDisplayAreaRect()
 {
     RECT Rect;
-    HWND hParent;
-
-    hParent = GetParent();
-    GetWindowRect(&Rect);
-    ScreenToClient(hParent, reinterpret_cast<POINT*>(&Rect) + 0);
-    ScreenToClient(hParent, reinterpret_cast<POINT*>(&Rect) + 1);
+    Rect = GetClientRect();
     TabCtrl_AdjustRect(m_hWnd, FALSE, &Rect);
-
     return Rect;
 }
