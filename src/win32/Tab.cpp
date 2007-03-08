@@ -25,6 +25,11 @@ int CTab::InsertTab(const TCHAR* sText)
     return TabCtrl_InsertItem(m_hWnd, GetItemCount(), &Item);
 }
 
+int CTab::GetSelection()
+{
+  return TabCtrl_GetCurSel(m_hWnd);
+}
+
 unsigned int CTab::GetItemCount()
 {
     return TabCtrl_GetItemCount(m_hWnd);

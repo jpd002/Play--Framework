@@ -15,6 +15,7 @@ namespace Framework
             virtual         ~CTab();
 
             int             InsertTab(const TCHAR*);
+            int             GetSelection();
             unsigned int    GetItemCount();
             RECT            GetDisplayAreaRect();
 
