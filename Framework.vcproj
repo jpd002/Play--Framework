@@ -534,6 +534,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\win32\ColumnTreeView.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\ComboBox.cpp"
 					>
 				</File>
@@ -884,11 +888,19 @@
 					>
 				</File>
 				<File
+					RelativePath=".\include\win32\ColumnTreeView.h"
+					>
+				</File>
+				<File
 					RelativePath=".\include\win32\ComboBox.h"
 					>
 				</File>
 				<File
 					RelativePath=".\include\win32\CustomDrawn.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\DblBufferedCtrl.h"
 					>
 				</File>
 				<File
