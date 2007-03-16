@@ -32,7 +32,7 @@ CColumnTreeView::CColumnTreeView(HWND hParent, RECT* pRect, unsigned long nTreeV
 	SetClassPtr();
 
 	m_pHeader = new CHeader(m_hWnd, pRect, HDS_FULLDRAG | HDS_HOTTRACK);
-	m_pTreeView = new CDblBufferedCtrl<CTreeView>(new CTreeView(m_hWnd, pRect, nTreeViewStyle));
+	m_pTreeView = new CDblBufferedCtrl<CTreeView>(new CTreeView(m_hWnd, pRect, nTreeViewStyle, 0));
 
 	m_pHeader->SetFont(m_pTreeView->GetFont());
 

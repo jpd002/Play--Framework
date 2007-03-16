@@ -48,3 +48,20 @@ int CHeader::GetItemCount()
 {
 	return Header_GetItemCount(m_hWnd);
 }
+
+void CHeader::SetItemWidth(unsigned int nItem, unsigned int nWidth)
+{
+    HDITEM Item;
+
+    memset(&Item, 0, sizeof(HDITEM));
+    Item.mask   = HDI_WIDTH;
+    Item.cxy    = nWidth;
+
+    Header_SetItem(m_hWnd, nItem, &Item);
+}
+
+void CHeader::SetItemWidth(unsigned int nItem, double nWidth)
+{
+    RECT Rect(GetClientRect());
+    SetItemWidth(nItem, static_cast<unsigned int>(static_cast<double>(Rect.right) * nWidth));
+}

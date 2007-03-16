@@ -17,7 +17,9 @@ namespace Framework
 			int		InsertItem(unsigned int, HDITEM*);
 			void	GetItemRect(unsigned int, RECT*);
 			int		GetItemCount();
-		};
+            void    SetItemWidth(unsigned int, unsigned int);
+            void    SetItemWidth(unsigned int, double);
+        };
 	}
 }
 
