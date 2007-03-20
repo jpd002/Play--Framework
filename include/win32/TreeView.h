@@ -18,7 +18,9 @@ namespace Framework
 			bool			GetItem(HTREEITEM, TVITEM*);
 			void			GetItemText(HTREEITEM, TCHAR*, size_t);
 			void			GetItemLabelRect(HTREEITEM, RECT*);
-			HTREEITEM		GetRoot();
+            void            SetItem(HTREEITEM, TVITEM*);
+            void            SetItemText(HTREEITEM, const TCHAR*);
+            HTREEITEM		GetRoot();
 			bool			SetSelection(HTREEITEM);
 			bool			Expand(HTREEITEM, unsigned int = TVE_EXPAND);
 			bool			DeleteAllItems();

@@ -54,6 +54,23 @@ void CTreeView::GetItemLabelRect(HTREEITEM hItem, RECT* pRect)
 	TreeView_GetItemRect(m_hWnd, hItem, pRect, TRUE);
 }
 
+void CTreeView::SetItem(HTREEITEM hItem, TVITEM* pI)
+{
+	pI->hItem = hItem;
+    TreeView_SetItem(m_hWnd, pI);
+}
+
+void CTreeView::SetItemText(HTREEITEM hItem, const TCHAR* sText)
+{
+    TVITEM Item;
+
+    memset(&Item, 0, sizeof(TVITEM));
+    Item.mask       = TVIF_TEXT;
+    Item.pszText    = const_cast<TCHAR*>(sText);
+
+    SetItem(hItem, &Item);
+}
+
 HTREEITEM CTreeView::GetRoot()
 {
 	return TreeView_GetRoot(m_hWnd);
