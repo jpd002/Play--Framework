@@ -36,6 +36,11 @@ bool CTreeView::GetItem(HTREEITEM hItem, TVITEM* pI)
 	return ((TreeView_GetItem(m_hWnd, pI) == TRUE) ? true : false);
 }
 
+HTREEITEM CTreeView::GetItemParent(HTREEITEM hItem)
+{
+    return TreeView_GetParent(m_hWnd, hItem);
+}
+
 void CTreeView::GetItemText(HTREEITEM hItem, TCHAR* sText, size_t nCount)
 {
 	TVITEM Item;
@@ -46,6 +51,18 @@ void CTreeView::GetItemText(HTREEITEM hItem, TCHAR* sText, size_t nCount)
 	Item.cchTextMax = static_cast<int>(nCount);
 
 	GetItem(hItem, &Item);
+}
+
+void* CTreeView::GetItemParam(HTREEITEM hItem)
+{
+    TVITEM Item;
+
+    memset(&Item, 0, sizeof(TVITEM));
+    Item.mask       = TVIF_PARAM;
+
+    GetItem(hItem, &Item);
+
+    return reinterpret_cast<void*>(Item.lParam);
 }
 
 void CTreeView::GetItemLabelRect(HTREEITEM hItem, RECT* pRect)
@@ -67,6 +84,17 @@ void CTreeView::SetItemText(HTREEITEM hItem, const TCHAR* sText)
     memset(&Item, 0, sizeof(TVITEM));
     Item.mask       = TVIF_TEXT;
     Item.pszText    = const_cast<TCHAR*>(sText);
+
+    SetItem(hItem, &Item);
+}
+
+void CTreeView::SetItemParam(HTREEITEM hItem, void* pParam)
+{
+    TVITEM Item;
+
+    memset(&Item, 0, sizeof(TVITEM));
+    Item.mask       = TVIF_PARAM;
+    Item.lParam     = reinterpret_cast<LPARAM>(pParam);
 
     SetItem(hItem, &Item);
 }

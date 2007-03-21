@@ -70,6 +70,8 @@ long CColumnTreeView::OnEraseBkgnd()
 
 long CColumnTreeView::OnNotify(WPARAM nId, NMHDR* pHdr)
 {
+    bool nRelay = true;
+
 	if(m_pTreeView != NULL)
 	{
 		if(pHdr->hwndFrom == m_pTreeView->m_hWnd)
@@ -78,8 +80,9 @@ long CColumnTreeView::OnNotify(WPARAM nId, NMHDR* pHdr)
 			{
 				NMTVCUSTOMDRAW* pCustomDraw;
 				pCustomDraw	= reinterpret_cast<NMTVCUSTOMDRAW*>(pHdr);
+                nRelay = false;
 
-				switch(pCustomDraw->nmcd.dwDrawStage)
+                switch(pCustomDraw->nmcd.dwDrawStage)
 				{
 				case CDDS_PREPAINT:
 					DrawColumnLines(pCustomDraw->nmcd.hdc);
@@ -110,7 +113,19 @@ long CColumnTreeView::OnNotify(WPARAM nId, NMHDR* pHdr)
 		}
 	}
 
-	return FALSE;
+    if(nRelay)
+    {
+        MESSAGE Msg;
+        Msg.hwndFrom        = m_hWnd;
+        Msg.idFrom          = 0;
+        Msg.code            = pHdr->code;
+        Msg.pOriginalMsg    = pHdr;
+    	return static_cast<long>(SendMessage(GetParent(), WM_NOTIFY, nId, reinterpret_cast<LPARAM>(&Msg)));
+    }
+    else
+    {
+        return FALSE;
+    }
 }
 
 void CColumnTreeView::UpdateLayout()

@@ -14,6 +14,10 @@ namespace Framework
 		class CColumnTreeView : public CWindow
 		{
 		public:
+            struct MESSAGE : public NMHDR
+            {
+                NMHDR* pOriginalMsg;
+            };
                                             CColumnTreeView(HWND, RECT*, unsigned long = 0);
 			virtual                         ~CColumnTreeView();
 			CHeader*                        GetHeader();

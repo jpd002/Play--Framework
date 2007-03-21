@@ -16,14 +16,24 @@ namespace Framework
 			HTREEITEM		InsertItem(HTREEITEM, const TCHAR*);
 			HTREEITEM		GetSelection();
 			bool			GetItem(HTREEITEM, TVITEM*);
-			void			GetItemText(HTREEITEM, TCHAR*, size_t);
+            HTREEITEM       GetItemParent(HTREEITEM);
+            void			GetItemText(HTREEITEM, TCHAR*, size_t);
+            void*           GetItemParam(HTREEITEM);
 			void			GetItemLabelRect(HTREEITEM, RECT*);
             void            SetItem(HTREEITEM, TVITEM*);
             void            SetItemText(HTREEITEM, const TCHAR*);
+            void            SetItemParam(HTREEITEM, void*);
             HTREEITEM		GetRoot();
 			bool			SetSelection(HTREEITEM);
 			bool			Expand(HTREEITEM, unsigned int = TVE_EXPAND);
 			bool			DeleteAllItems();
+
+            //Some templates
+            template <typename Type>
+            Type* GetItemParam(HTREEITEM hItem)
+            {
+                return reinterpret_cast<Type*>(GetItemParam(hItem));   
+            }
 		};
 	}
 }
