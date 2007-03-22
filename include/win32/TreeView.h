@@ -23,6 +23,7 @@ namespace Framework
             void            SetItem(HTREEITEM, TVITEM*);
             void            SetItemText(HTREEITEM, const TCHAR*);
             void            SetItemParam(HTREEITEM, void*);
+            void            SetItemParam(HTREEITEM, unsigned int);
             HTREEITEM		GetRoot();
 			bool			SetSelection(HTREEITEM);
 			bool			Expand(HTREEITEM, unsigned int = TVE_EXPAND);
@@ -30,9 +31,22 @@ namespace Framework
 
             //Some templates
             template <typename Type>
-            Type* GetItemParam(HTREEITEM hItem)
+            Type GetItemParam(HTREEITEM hItem)
             {
-                return reinterpret_cast<Type*>(GetItemParam(hItem));   
+                TVITEM Item;
+                memset(&Item, 0, sizeof(TVITEM));
+                Item.hItem  = hItem;
+                Item.mask   = TVIF_PARAM;
+
+                GetItem(hItem, &Item);
+
+                return static_cast<Type>(Item.lParam);
+            }
+
+            template <typename Type>
+            Type* GetItemParamPtr(HTREEITEM hItem)
+            {
+                return reinterpret_cast<Type*>(GetItemParam(hItem));
             }
 		};
 	}

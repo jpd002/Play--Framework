@@ -99,6 +99,17 @@ void CTreeView::SetItemParam(HTREEITEM hItem, void* pParam)
     SetItem(hItem, &Item);
 }
 
+void CTreeView::SetItemParam(HTREEITEM hItem, unsigned int nParam)
+{
+    TVITEM Item;
+
+    memset(&Item, 0, sizeof(TVITEM));
+    Item.mask       = TVIF_PARAM;
+    Item.lParam     = nParam;
+
+    SetItem(hItem, &Item);
+}
+
 HTREEITEM CTreeView::GetRoot()
 {
 	return TreeView_GetRoot(m_hWnd);
