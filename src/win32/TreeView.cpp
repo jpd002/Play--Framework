@@ -125,6 +125,18 @@ bool CTreeView::Expand(HTREEITEM hItem, unsigned int nFlags)
 	return ((TreeView_Expand(m_hWnd, hItem, nFlags) == TRUE) ? true : false);
 }
 
+void CTreeView::DeleteChildren(HTREEITEM hItem)
+{
+    HTREEITEM hChild(TreeView_GetChild(m_hWnd, hItem));
+
+    while(hChild != NULL)
+    {
+        HTREEITEM hNext(TreeView_GetNextSibling(m_hWnd, hChild));
+        TreeView_DeleteItem(m_hWnd, hChild);
+        hChild = hNext;
+    }
+}
+
 bool CTreeView::DeleteAllItems()
 {
 	return ((TreeView_DeleteAllItems(m_hWnd) == TRUE) ? true : false);

@@ -27,7 +27,8 @@ namespace Framework
             HTREEITEM		GetRoot();
 			bool			SetSelection(HTREEITEM);
 			bool			Expand(HTREEITEM, unsigned int = TVE_EXPAND);
-			bool			DeleteAllItems();
+            void            DeleteChildren(HTREEITEM);
+            bool			DeleteAllItems();
 
             //Some templates
             template <typename Type>
