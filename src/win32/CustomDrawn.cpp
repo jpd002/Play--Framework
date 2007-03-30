@@ -17,9 +17,10 @@ CCustomDrawn::~CCustomDrawn()
 long CCustomDrawn::OnPaint()
 {
 	PAINTSTRUCT ps;
-	HDC hWDC, hDC;
+//	HDC hDC;
+    HDC hWDC;
 	RECT rwin;
-	HBITMAP hBM;
+//	HBITMAP hBM;
 
 	BeginPaint(m_hWnd, &ps);
 	hWDC = ps.hdc;
