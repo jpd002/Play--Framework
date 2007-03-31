@@ -9,8 +9,21 @@
 template <typename Format>
 Format lexical_cast_hex(unsigned int nNumber, unsigned int nWidth = 0)
 {
-    assert(nWidth <= 8);
-    nWidth = std::min<unsigned int>(nWidth, 8);
+    enum MAXNIBBLE
+    {
+        MAXNIBBLE = 8,
+    };
+
+    assert(nWidth <= MAXNIBBLE);
+
+    unsigned int nNumSize = 0;
+    for(unsigned int i = 0; i < MAXNIBBLE; nNumSize++, i++)
+    {
+        if((nNumber >> (i * 4)) == 0) break;
+    }
+
+    nWidth = std::min<unsigned int>(nWidth, MAXNIBBLE);
+    nWidth = std::max<unsigned int>(nNumSize, nWidth);
 
     Format::value_type* sBuffer;
     sBuffer = reinterpret_cast<Format::value_type*>(_alloca(sizeof(Format::value_type) * (nWidth + 1)));
