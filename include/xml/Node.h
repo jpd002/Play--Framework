@@ -48,9 +48,11 @@ namespace Framework
 
 			CNode*						Search(const char*);
 			CNode*						Select(const char*);
-
+            NodeList                    SelectNodes(const char*);
 
 		private:
+            template <bool> NodeList    SelectNodesImpl(const char*);
+
 			std::string					m_sText;
 			CNode*						m_pParent;
 			bool						m_nIsTag;

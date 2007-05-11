@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <stdexcept>
 #include "xml/Utils.h"
 
 using namespace Framework;
+using namespace std;
 
 bool Xml::GetNodeStringValue(Xml::CNode* pNode, const char* sPath, const char** pValue)
 {
@@ -26,6 +28,17 @@ bool Xml::GetNodeStringValue(Xml::CNode* pNode, const char* sPath, const char** 
 
 	(*pValue) = sText;
 	return true;
+}
+
+string Xml::GetNodeStringValue(Xml::CNode* pNode, const char* sPath)
+{
+    const char* sValue;
+    if(!GetNodeStringValue(pNode, sPath, &sValue))
+    {
+        throw exception();
+    }
+
+    return string(sValue);
 }
 
 bool Xml::GetNodeIntValue(Xml::CNode* pNode, const char* sPath, int* pValue)

@@ -1,9 +1,12 @@
 #include <assert.h>
 #include "xml/Node.h"
+#include "xml/FilteringNodeIterator.h"
 #include "stricmp.h"
+#include <string>
 
 using namespace Framework;
 using namespace Framework::Xml;
+using namespace std;
 
 CNode::CNode()
 {
@@ -139,28 +142,53 @@ CNode* CNode::Search(const char* sName)
 	return NULL;
 }
 
+template <bool nSingle>
+CNode::NodeList CNode::SelectNodesImpl(const char* sPath)
+{
+	CNode* pNode(this);
+    string sCurr(sPath);
+
+    while(1)
+    {
+        //Check if we're at the end of an expression
+        size_t nPosition;
+        nPosition = sCurr.find('/');
+        if(nPosition == string::npos)
+        {
+            //We are.
+            break;
+        }
+
+        string sNext(sCurr.begin(), sCurr.begin() + nPosition);
+        pNode = pNode->Search(sNext.c_str());
+
+        if(pNode == NULL)
+        {
+            return NodeList();
+        }
+
+        sCurr = string(sCurr.begin() + nPosition + 1, sCurr.end());
+    }
+
+    NodeList TempList;
+
+    for(CFilteringNodeIterator itNode(pNode, sCurr.c_str()); !itNode.IsEnd(); itNode++)
+    {
+        TempList.push_back(*itNode);
+        if(nSingle) break;
+    }
+
+    return TempList;
+}
+
 CNode* CNode::Select(const char* sPath)
 {
-	const char* sCurr;
-	const char* sNext;
-	char sName[256];
-	CNode* pNode;
+    NodeList Nodes(SelectNodesImpl<true>(sPath));
+    if(Nodes.size() == 0) return NULL;
+    return *Nodes.begin();
+}
 
-	sCurr = sPath;
-	sNext = strchr(sCurr, '/');
-	if(sNext == NULL)
-	{
-		return Search(sPath);
-	}
-	else
-	{
-		strncpy(sName, sPath, (sNext - sCurr));
-		sName[(sNext - sCurr)] = '\0';
-		pNode = Search(sName);
-		if(pNode != NULL)
-		{
-			return pNode->Select(sNext + 1);
-		}
-		return NULL;
-	}	
+CNode::NodeList CNode::SelectNodes(const char* sPath)
+{
+    return SelectNodesImpl<false>(sPath);
 }
