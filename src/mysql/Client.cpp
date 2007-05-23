@@ -1,4 +1,4 @@
-#include <exception>
+#include <stdexcept>
 #include "mysql/Client.h"
 
 using namespace Framework::MySql;
@@ -14,7 +14,7 @@ CClient::CClient(const char* sHostName, const char* sUserName, const char* sPass
 
 	if(mysql_real_connect(m_pConnection, sHostName, sUserName, sPassword, sDatabase, 0, NULL, 0) == NULL)
 	{
-		throw exception();
+		throw runtime_error(mysql_error(m_pConnection));
 	}
 }
 
@@ -25,7 +25,10 @@ CClient::~CClient()
 
 void CClient::Query(const char* sQuery)
 {
-	mysql_query(m_pConnection, sQuery);
+	if(mysql_query(m_pConnection, sQuery) != 0)
+    {
+        throw runtime_error(mysql_error(m_pConnection));
+    }
 }
 
 MYSQL_RES* CClient::StoreResult()
