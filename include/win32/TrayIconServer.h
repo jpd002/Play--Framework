@@ -3,7 +3,7 @@
 
 #include "TrayIcon.h"
 #include <boost/ptr_container/ptr_map.hpp>
-#include <boost/function.hpp>
+#include <functional>
 #include <boost/signal.hpp>
 
 namespace Framework
@@ -13,7 +13,7 @@ namespace Framework
 	    class CTrayIconServer : public CWindow
 	    {
 	    public:
-            typedef boost::function<void (CTrayIcon*, LPARAM)> IconEventHandlerType;
+            typedef std::tr1::function<void (CTrayIcon*, LPARAM)> IconEventHandlerType;
 
 							                                    CTrayIconServer();
 							                                    ~CTrayIconServer();

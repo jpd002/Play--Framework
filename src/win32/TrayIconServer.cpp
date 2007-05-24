@@ -61,7 +61,7 @@ long CTrayIconServer::OnWndProc(unsigned int uiMsg, WPARAM wParam, LPARAM lParam
             itIcon = m_Icons.find(wParam);
             if(itIcon != m_Icons.end())
             {
-                m_IconEventSignal(&(*itIcon), lParam);
+                m_IconEventSignal(&(*itIcon->second), lParam);
             }
         }
 		return FALSE;
