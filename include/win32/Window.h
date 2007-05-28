@@ -28,6 +28,7 @@ namespace Framework
             static LRESULT WINAPI   WndProc(HWND, unsigned int, WPARAM, LPARAM);
             static LRESULT WINAPI   SubClassWndProc(HWND, unsigned int, WPARAM, LPARAM);
             static void             StdMsgLoop(CWindow*);
+            static void             DlgMsgLoop(CWindow&);
             static int              MessageBoxFormat(HWND, unsigned int, const TCHAR*, const TCHAR*, ...);
             void                    SetClassPtr();
             void                    ClearClassPtr();

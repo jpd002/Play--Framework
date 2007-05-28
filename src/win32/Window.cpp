@@ -42,6 +42,20 @@ void CWindow::StdMsgLoop(CWindow* pW)
 	}
 }
 
+void CWindow::DlgMsgLoop(CWindow& Window)
+{
+    MSG Msg;
+    while(Window.IsWindow())
+    {
+        GetMessage(&Msg, NULL, NULL, NULL);
+        if(!IsDialogMessage(Window.m_hWnd, &Msg))
+        {
+            TranslateMessage(&Msg);
+            DispatchMessage(&Msg);
+        }
+    }
+}
+
 int CWindow::MessageBoxFormat(HWND hWnd, unsigned int nType, const TCHAR* sTitle, const TCHAR* sFormat, ...)
 {
 	TCHAR sMessage[256];
