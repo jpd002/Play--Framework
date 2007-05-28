@@ -22,4 +22,6 @@ namespace Framework
 	}
 }
 
+#undef bool
+
 #endif
