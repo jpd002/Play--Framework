@@ -43,6 +43,7 @@ namespace Framework
             unsigned int            Enable(unsigned int);
             bool                    IsWindow();
             bool                    IsVisible();
+            std::tstring            GetText();
             int                     GetText(TCHAR*, int);
             unsigned int            GetTextLength();
             unsigned int            SetText(const TCHAR*);

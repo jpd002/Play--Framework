@@ -10,6 +10,7 @@
 
 using namespace Framework;
 using namespace Framework::Win32;
+using namespace std;
 
 #define PROPNAME		_T("CWindow::this")
 
@@ -144,6 +145,15 @@ unsigned int CWindow::Show(int nMode)
 unsigned int CWindow::Enable(unsigned int nEnable)
 {
 	return EnableWindow(m_hWnd, nEnable);
+}
+
+tstring CWindow::GetText()
+{
+    TCHAR* sBuffer;
+    unsigned int nLength(GetTextLength() + 1);
+    sBuffer = reinterpret_cast<TCHAR*>(_alloca(sizeof(TCHAR) * nLength));
+    GetText(sBuffer, nLength);
+    return tstring(sBuffer);
 }
 
 int CWindow::GetText(TCHAR* sText, int nMax)
