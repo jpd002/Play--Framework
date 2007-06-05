@@ -848,6 +848,10 @@
 				RelativePath=".\include\Types.h"
 				>
 			</File>
+			<File
+				RelativePath=".\include\Utf8.h"
+				>
+			</File>
 			<Filter
 				Name="Layouts"
 				>
