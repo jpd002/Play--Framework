@@ -566,6 +566,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\win32\Font.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\Header.cpp"
 					>
 				</File>
@@ -933,6 +937,10 @@
 				</File>
 				<File
 					RelativePath=".\include\win32\FileDialog.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\Font.h"
 					>
 				</File>
 				<File
