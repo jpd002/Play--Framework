@@ -37,7 +37,7 @@ namespace Framework
             unsigned int            DoesWindowClassExist(const TCHAR*);
 
             //Helpers
-            void                    Create(unsigned long, const TCHAR*, const TCHAR*, unsigned long, RECT*, HWND, void*);  
+            void                    Create(unsigned long, const TCHAR*, const TCHAR*, unsigned long, const RECT*, HWND, void*);  
             unsigned int            Destroy();
             unsigned int            Show(int);
             unsigned int            Enable(unsigned int);

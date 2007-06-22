@@ -610,6 +610,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\win32\RichTextEdit.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\Static.cpp"
 					>
 				</File>
@@ -985,6 +989,10 @@
 				</File>
 				<File
 					RelativePath=".\include\win32\RegistryValue.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\RichTextEdit.h"
 					>
 				</File>
 				<File

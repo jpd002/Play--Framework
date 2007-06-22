@@ -114,7 +114,7 @@ unsigned int CWindow::DoesWindowClassExist(const TCHAR* sClass)
 //Window Message Helpers
 ///////////////////////////////////////////////////////////
 
-void CWindow::Create(unsigned long nStyleEx, const TCHAR* sClass, const TCHAR* sWindow, unsigned long nStyle, RECT* pR, HWND hParent, void* pParam)
+void CWindow::Create(unsigned long nStyleEx, const TCHAR* sClass, const TCHAR* sWindow, unsigned long nStyle, const RECT* pR, HWND hParent, void* pParam)
 {
 	m_hWnd = CreateWindowEx(nStyleEx, sClass, sWindow, nStyle, pR->left, pR->top, (pR->right - pR->left), (pR->bottom - pR->top), hParent, NULL, GetModuleHandle(NULL), pParam);
 }

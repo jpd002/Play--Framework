@@ -12,11 +12,14 @@ namespace Framework
 		{
 		public:
 						CRect(int, int, int, int);
+                        CRect(RECT);
 			virtual		~CRect();
 
 						operator RECT*();
+                        operator RECT&();
 
 			CRect&		Adjust(uint32, bool = false);
+            CRect&      Inflate(int, int);
 
 		private:
 			RECT		m_Rect;
