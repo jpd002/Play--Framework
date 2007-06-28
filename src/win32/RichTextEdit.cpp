@@ -19,6 +19,21 @@ CRichTextEdit::~CRichTextEdit()
 
 }
 
+int CRichTextEdit::GetCharFromPosition(int nX, int nY)
+{
+    POINTL Point;
+    Point.x = nX;
+    Point.y = nY;
+    return static_cast<int>(SendMessage(m_hWnd, EM_CHARFROMPOS, NULL, reinterpret_cast<LPARAM>(&Point)));
+}
+
+POINTL CRichTextEdit::GetPositionFromChar(int nChar)
+{
+    POINTL Point;
+    SendMessage(m_hWnd, EM_POSFROMCHAR, reinterpret_cast<WPARAM>(&Point), nChar);
+    return Point;
+}
+
 void CRichTextEdit::SetSelection(int nStart, int nEnd)
 {
     CHARRANGE Range;

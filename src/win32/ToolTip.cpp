@@ -1,22 +1,38 @@
-#include "ToolTip.h"
-#include <commctrl.h>
+#include "win32/ToolTip.h"
 
-using namespace Framework;
+using namespace Framework::Win32;
+using namespace std;
 
 CToolTip::CToolTip(HWND hParent)
 {
 	InitCommonControls();
-	m_hWnd = CreateWindowEx(NULL, TOOLTIPS_CLASS, _X(""), WS_POPUP | TTS_NOPREFIX | TTS_ALWAYSTIP, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, hParent, NULL, GetModuleHandle(NULL), NULL);
+	m_hWnd = CreateWindowEx(NULL, TOOLTIPS_CLASS, _T(""), WS_POPUP | TTS_NOPREFIX | TTS_ALWAYSTIP, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, hParent, NULL, GetModuleHandle(NULL), NULL);
 	SetWindowPos(m_hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
 	m_hParent = hParent;
 }
 
-void CToolTip::Activate(BOOL nActive)
+void CToolTip::Activate(bool nActive)
 {
-	SendMessage(m_hWnd, TTM_ACTIVATE, nActive, 0);
+    SendMessage(m_hWnd, TTM_ACTIVATE, nActive ? TRUE : FALSE, 0);
 }
 
-void CToolTip::AddTool(HWND hTool, const xchar* sDescription)
+void CToolTip::TrackActivate(unsigned int nId, bool nActive)
+{
+    TOOLINFO ti;
+    memset(&ti, 0, sizeof(TOOLINFO));
+    ti.cbSize   = sizeof(TOOLINFO);
+    ti.hwnd     = m_hParent;
+    ti.uId      = nId;
+
+    SendMessage(m_hWnd, TTM_TRACKACTIVATE, nActive ? TRUE : FALSE, reinterpret_cast<LPARAM>(&ti));    
+}
+
+void CToolTip::TrackPosition(int nX, int nY)
+{
+    SendMessage(m_hWnd, TTM_TRACKPOSITION, 0, MAKELONG(nX, nY));
+}
+
+void CToolTip::AddTool(HWND hTool, const TCHAR* sDescription)
 {
 	TOOLINFO ti;
 	
@@ -29,19 +45,46 @@ void CToolTip::AddTool(HWND hTool, const xchar* sDescription)
 	SendMessage(m_hWnd, TTM_ADDTOOL, NULL, (LPARAM)&ti);
 }
 
-void CToolTip::AddTool(RECT* pR, const xchar* sDescription)
+unsigned int CToolTip::AddTool(const RECT& Rect, const TCHAR* sDescription)
 {
 	TOOLINFO ti;
+    unsigned int nId(GetToolCount());
 
 	memset(&ti, 0, sizeof(TOOLINFO));
 	ti.cbSize	= sizeof(TOOLINFO);
 	ti.uFlags	= TTF_SUBCLASS;
-	ti.uId		= GetToolCount();
-	ti.lpszText	= (LPWSTR)sDescription;
+	ti.uId		= nId;
+	ti.lpszText	= reinterpret_cast<LPWSTR>(const_cast<TCHAR*>(sDescription));
 	ti.hwnd		= m_hParent;
-	CopyRect(&ti.rect, pR);
+	CopyRect(&ti.rect, &Rect);
 
-	SendMessage(m_hWnd, TTM_ADDTOOL, NULL, (LPARAM)&ti);
+	SendMessage(m_hWnd, TTM_ADDTOOL, NULL, reinterpret_cast<LPARAM>(&ti));
+
+    return nId;
+}
+
+unsigned int CToolTip::AddTrackTool(const TCHAR* sText)
+{
+	TOOLINFO ti;
+    unsigned int nId(GetToolCount());
+
+	memset(&ti, 0, sizeof(TOOLINFO));
+	ti.cbSize	= sizeof(TOOLINFO);
+	ti.uFlags	= TTF_SUBCLASS | TTF_TRACK;
+	ti.uId		= nId;
+	ti.lpszText	= reinterpret_cast<LPWSTR>(const_cast<TCHAR*>(sText));
+	ti.hwnd		= m_hParent;
+
+	SendMessage(m_hWnd, TTM_ADDTOOL, NULL, reinterpret_cast<LPARAM>(&ti));
+
+    return nId;
+}
+
+void CToolTip::SetToolText(unsigned int nId, const TCHAR* sText)
+{
+    TOOLINFO ti(GetTool(nId));
+    ti.lpszText = reinterpret_cast<LPWSTR>(const_cast<TCHAR*>(sText));
+    SendMessage(m_hWnd, TTM_SETTOOLINFO, NULL, reinterpret_cast<LPARAM>(&ti));
 }
 
 unsigned int CToolTip::GetToolCount()
@@ -64,4 +107,20 @@ void CToolTip::DeleteAllTools()
 	{
 		DeleteTool(0);
 	}
+}
+
+TOOLINFO CToolTip::GetTool(unsigned int nId)
+{
+    TOOLINFO ti;
+    memset(&ti, 0, sizeof(TOOLINFO));
+    ti.cbSize = sizeof(TOOLINFO);
+    ti.hwnd = m_hParent;
+    ti.uId  = nId;
+
+    if(SendMessage(m_hWnd, TTM_GETTOOLINFO, NULL, reinterpret_cast<LPARAM>(&ti)) == FALSE)
+    {
+        throw exception();
+    }
+
+    return ti;
 }

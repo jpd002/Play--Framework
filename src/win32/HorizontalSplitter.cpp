@@ -1,9 +1,9 @@
-#include "HorizontalSplitter.h"
+#include "win32/HorizontalSplitter.h"
 
-using namespace Framework;
+using namespace Framework::Win32;
 
-CHorizontalSplitter::CHorizontalSplitter(HWND hParent, RECT* pRect) :
-CSplitter(hParent, pRect, LoadCursor(NULL, IDC_SIZEWE), ((pRect->right - pRect->left) - EDGESIZE) / 2)
+CHorizontalSplitter::CHorizontalSplitter(HWND hParent, const RECT& Rect) :
+CSplitter(hParent, Rect, LoadCursor(NULL, IDC_SIZEWE), ((Rect.right - Rect.left) - EDGESIZE) / 2)
 {
 	
 }

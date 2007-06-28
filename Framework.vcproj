@@ -574,6 +574,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\win32\HorizontalSplitter.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\InputBox.cpp"
 					>
 				</File>
@@ -618,6 +622,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\win32\Splitter.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\Static.cpp"
 					>
 				</File>
@@ -634,6 +642,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\win32\ToolTip.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\TrayIcon.cpp"
 					>
 				</File>
@@ -643,6 +655,10 @@
 				</File>
 				<File
 					RelativePath=".\src\win32\TreeView.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\VerticalSplitter.cpp"
 					>
 				</File>
 				<File
@@ -952,6 +968,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\include\win32\HorizontalSplitter.h"
+					>
+				</File>
+				<File
 					RelativePath=".\include\win32\InputBox.h"
 					>
 				</File>
@@ -1004,6 +1024,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\include\win32\Splitter.h"
+					>
+				</File>
+				<File
 					RelativePath=".\include\win32\Static.h"
 					>
 				</File>
@@ -1016,6 +1040,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\include\win32\ToolTip.h"
+					>
+				</File>
+				<File
 					RelativePath=".\include\win32\TrayIcon.h"
 					>
 				</File>
@@ -1025,6 +1053,10 @@
 				</File>
 				<File
 					RelativePath=".\include\win32\TreeView.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\VerticalSplitter.h"
 					>
 				</File>
 				<File

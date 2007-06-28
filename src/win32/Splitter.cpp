@@ -1,12 +1,12 @@
 #include "win32/ClientDeviceContext.h"
-#include "Splitter.h"
+#include "win32/Splitter.h"
 
-#define CLSNAME		_X("CSplitter")
+#define CLSNAME		_T("CSplitter")
 
 using namespace Framework;
 using namespace Framework::Win32;
 
-CSplitter::CSplitter(HWND hParent, RECT* pRect, HCURSOR nCursor, unsigned int nEdgePosition)
+CSplitter::CSplitter(HWND hParent, const RECT& Rect, HCURSOR nCursor, unsigned int nEdgePosition)
 {
 	m_nChild[0] = NULL;
 	m_nChild[1] = NULL;
@@ -27,7 +27,7 @@ CSplitter::CSplitter(HWND hParent, RECT* pRect, HCURSOR nCursor, unsigned int nE
 		RegisterClassEx(&w);
 	}
 
-	Create(NULL, CLSNAME, _X(""), WS_VISIBLE | WS_CHILD | WS_CLIPCHILDREN, pRect, hParent, NULL);
+	Create(NULL, CLSNAME, _T(""), WS_VISIBLE | WS_CHILD | WS_CLIPCHILDREN, &Rect, hParent, NULL);
 	SetClassPtr();
 }
 

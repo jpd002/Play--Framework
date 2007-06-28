@@ -1,9 +1,9 @@
-#include "VerticalSplitter.h"
+#include "win32/VerticalSplitter.h"
 
-using namespace Framework;
+using namespace Framework::Win32;
 
-CVerticalSplitter::CVerticalSplitter(HWND hParent, RECT* pRect) :
-CSplitter(hParent, pRect, LoadCursor(NULL, IDC_SIZENS), ((pRect->bottom - pRect->top) - EDGESIZE) / 2)
+CVerticalSplitter::CVerticalSplitter(HWND hParent, const RECT& Rect) :
+CSplitter(hParent, Rect, LoadCursor(NULL, IDC_SIZENS), ((Rect.bottom - Rect.top) - EDGESIZE) / 2)
 {
 	
 }
