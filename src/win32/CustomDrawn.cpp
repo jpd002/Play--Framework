@@ -17,19 +17,10 @@ CCustomDrawn::~CCustomDrawn()
 long CCustomDrawn::OnPaint()
 {
 	PAINTSTRUCT ps;
-//	HDC hDC;
     HDC hWDC;
-	RECT rwin;
-//	HBITMAP hBM;
 
 	BeginPaint(m_hWnd, &ps);
 	hWDC = ps.hdc;
-
-	GetClientRect(&rwin);
-
-	//hDC = CreateCompatibleDC(hWDC);
-	//hBM = CreateCompatibleBitmap(hWDC, rwin.right, rwin.bottom);
-	//SelectObject(hDC, hBM);
 
     if(m_MemDc == NULL)
     {
@@ -38,14 +29,19 @@ long CCustomDrawn::OnPaint()
 
 	Paint(m_MemDc);
 
-	BitBlt(hWDC, 0, 0, rwin.right, rwin.bottom, m_MemDc, 0, 0, SRCCOPY);
-
-	//DeleteObject(hBM);
-	//DeleteDC(hDC);
+    BitBlt(hWDC, 
+        ps.rcPaint.left,
+        ps.rcPaint.top,
+        ps.rcPaint.right,
+        ps.rcPaint.bottom,
+        m_MemDc,
+        ps.rcPaint.left,
+        ps.rcPaint.top,
+        SRCCOPY);
 
 	EndPaint(m_hWnd, &ps);
 
-	return TRUE;
+	return FALSE;
 }
 
 long CCustomDrawn::OnEraseBkgnd()

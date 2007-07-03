@@ -37,6 +37,16 @@ CNode* CNode::InsertNode(CNode* pNode)
     return pNode;
 }
 
+CNode* CNode::InsertTextNode(const char* sText)
+{
+    return InsertNode(new CNode(sText, false));
+}
+
+CNode* CNode::InsertTagNode(const char* sName)
+{
+    return InsertNode(new CNode(sName, true));
+}
+
 void CNode::InsertNodeAt(CNode* pNode, NodeIterator& itPosition)
 {
 	assert(pNode->m_pParent == NULL);

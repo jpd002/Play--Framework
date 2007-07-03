@@ -26,7 +26,9 @@ namespace Framework
 										~CNode();
 
 			CNode* 						InsertNode(CNode*);
-			void						InsertNodeAt(CNode*, NodeIterator&);
+            CNode*                      InsertTextNode(const char*);
+            CNode*                      InsertTagNode(const char*);
+            void						InsertNodeAt(CNode*, NodeIterator&);
 			const char*					GetText() const;
 			const char*					GetInnerText() const;
 			bool						IsTag() const;

@@ -312,7 +312,10 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 		if(!pThis->OnPaint()) return FALSE;
 		break;
 	case WM_ERASEBKGND:
-		if(!pThis->OnEraseBkgnd()) return FALSE;
+        {
+            long nRet = pThis->OnEraseBkgnd();
+            if(nRet != 0) return nRet;
+        }
 		break;
 	case WM_KEYDOWN:
 		if(!pThis->OnKeyDown((unsigned int)wParam)) return FALSE;
