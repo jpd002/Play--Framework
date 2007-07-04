@@ -1,13 +1,13 @@
 #ifndef _SPLITTER_H_
 #define _SPLITTER_H_
 
-#include "win32/CustomDrawn.h"
+#include "win32/Window.h"
 
 namespace Framework
 {
     namespace Win32
     {
-	    class CSplitter : public CCustomDrawn
+	    class CSplitter : public CWindow
 	    {
 	    public:
 						    CSplitter(HWND, const RECT&, HCURSOR, unsigned int);
@@ -36,7 +36,6 @@ namespace Framework
 		    };
 
 	    private:
-		    void			Paint(HDC);
 		    void			ResizeChild(unsigned int);
 
 		    HCURSOR			m_nCursor;

@@ -443,6 +443,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\IosIStream.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\IosOStream.cpp"
 				>
 			</File>
@@ -786,6 +790,10 @@
 			</File>
 			<File
 				RelativePath=".\include\GZipStream.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\IosIStream.h"
 				>
 			</File>
 			<File

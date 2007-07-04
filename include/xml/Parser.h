@@ -13,6 +13,7 @@ namespace Framework
 		class CParser
 		{
 		public:
+            static CNode*               ParseDocument(const char*);
 			static CNode*				ParseDocument(CStream*);
 
 		private:

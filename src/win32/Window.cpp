@@ -492,7 +492,7 @@ long CWindow::OnTimer()
 
 long CWindow::OnEraseBkgnd()
 {
-	return TRUE;
+	return FALSE;
 }
 
 long CWindow::OnVScroll(unsigned int nType, unsigned int nTrackPos)

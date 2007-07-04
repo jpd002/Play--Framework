@@ -1,6 +1,8 @@
 #include "xml/Parser.h"
 #include "Types.h"
 #include "stricmp.h"
+#include "IosIStream.h"
+#include <sstream>
 
 using namespace Framework;
 using namespace Framework::Xml;
@@ -221,4 +223,11 @@ CNode* CParser::ParseDocument(CStream* pStream)
 	}
 
 	return pRoot;
+}
+
+CNode* CParser::ParseDocument(const char* sDocument)
+{
+    stringstream StringStream(sDocument);
+    CIosIStream Stream(StringStream);
+    return CParser::ParseDocument(&Stream);
 }

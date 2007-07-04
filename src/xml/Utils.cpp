@@ -122,6 +122,16 @@ bool Xml::GetAttributeIntValue(Xml::CNode* pNode, const char* sName, int* pValue
 	return true;
 }
 
+string Xml::GetAttributeStringValue(Xml::CNode* pNode, const char* sName)
+{
+    const char* sValue;
+    if(!GetAttributeStringValue(pNode, sName, &sValue))
+    {
+        throw exception();
+    }
+    return sValue;
+}
+
 int Xml::GetAttributeIntValue(Xml::CNode* pNode, const char* sName)
 {
     int nValue;

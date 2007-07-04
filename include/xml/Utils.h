@@ -17,6 +17,7 @@ namespace Framework
 		bool			GetAttributeIntValue(CNode*, const char*, int*);
 		bool			GetAttributeBoolValue(CNode*, const char*, bool*);
 
+        std::string     GetAttributeStringValue(CNode*, const char*);
         int             GetAttributeIntValue(CNode*, const char*);
 
 		Xml::CNode*		CreateNodeStringValue(const char*, const char*);

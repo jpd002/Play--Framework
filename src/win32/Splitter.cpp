@@ -21,9 +21,10 @@ CSplitter::CSplitter(HWND hParent, const RECT& Rect, HCURSOR nCursor, unsigned i
 		w.cbSize		= sizeof(WNDCLASSEX);
 		w.lpfnWndProc	= CWindow::WndProc;
 		w.lpszClassName	= CLSNAME;
-		w.hbrBackground	= NULL;
+		w.hbrBackground	= (HBRUSH)GetSysColorBrush(COLOR_BTNFACE);
 		w.hInstance		= GetModuleHandle(NULL);
 		w.hCursor		= LoadCursor(NULL, IDC_ARROW);
+        w.style         = CS_VREDRAW | CS_HREDRAW;
 		RegisterClassEx(&w);
 	}
 
@@ -109,13 +110,4 @@ void CSplitter::ResizeChild(unsigned int nIndex)
 		PaneRect.right - PaneRect.left,
 		PaneRect.bottom - PaneRect.top,
 		SWP_NOZORDER);
-}
-
-void CSplitter::Paint(HDC hDC)
-{
-	CDeviceContext PaintDC(hDC);
-	RECT EdgeRect;
-
-	GetEdgeRect(&EdgeRect);
-	FillRect(PaintDC, &EdgeRect, (HBRUSH)COLOR_WINDOW);
 }
