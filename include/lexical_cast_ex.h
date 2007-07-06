@@ -7,7 +7,7 @@
 #include <algorithm>
 
 template <typename Format>
-Format lexical_cast_hex(unsigned int nNumber, unsigned int nWidth = 0)
+Format lexical_cast_hex(unsigned int nNumber, unsigned int nWidth = 1)
 {
     enum MAXNIBBLE
     {

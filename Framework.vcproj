@@ -626,6 +626,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\win32\ScrollBar.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\Splitter.cpp"
 					>
 				</File>
@@ -1029,6 +1033,10 @@
 				</File>
 				<File
 					RelativePath=".\include\win32\RichTextEdit.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\ScrollBar.h"
 					>
 				</File>
 				<File

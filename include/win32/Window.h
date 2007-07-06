@@ -10,6 +10,7 @@
 
 #include <windows.h>
 #include "tcharx.h"
+#include "ScrollBar.h"
 
 namespace Framework
 {
@@ -64,7 +65,8 @@ namespace Framework
             void                    Redraw();
             void                    ModifyStyleOr(unsigned long);
             void                    SetRedraw(bool);
-            unsigned int            GetScrollThumbPosition(int);
+            CScrollBar              GetVerticalScrollBar();
+            CScrollBar              GetHorizontalScrollBar();
 
 	    protected:
             virtual long            OnCommand(unsigned short, unsigned short, HWND);
