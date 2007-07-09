@@ -271,18 +271,6 @@ void CWindow::SetRedraw(bool nRedrawAllowed)
 {
 	SendMessage(m_hWnd, WM_SETREDRAW, (nRedrawAllowed) ? TRUE : FALSE, 0);
 }
-/*
-unsigned int CWindow::GetScrollThumbPosition(int nBar)
-{
-	SCROLLINFO si;
-	memset(&si, 0, sizeof(SCROLLINFO));
-	si.cbSize	= sizeof(SCROLLINFO);
-	si.fMask	= SIF_TRACKPOS;
-	GetScrollInfo(m_hWnd, nBar, &si);
-	return si.nTrackPos;
-}
-*/
-
 CScrollBar CWindow::GetVerticalScrollBar()
 {
     return CScrollBar(m_hWnd, SB_VERT);

@@ -14,6 +14,7 @@ namespace Framework
             virtual     ~CScrollBar();
             
             int         GetPosition() const;
+            int         GetThumbPosition() const;
 
             void        SetPosition(int);
             void        SetRange(int, int);

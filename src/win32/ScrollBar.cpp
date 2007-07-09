@@ -23,6 +23,15 @@ int CScrollBar::GetPosition() const
     return Info.nPos;
 }
 
+int CScrollBar::GetThumbPosition() const
+{
+    SCROLLINFO Info;
+    Info.cbSize = sizeof(SCROLLINFO);
+    Info.fMask  = SIF_TRACKPOS;
+    GetScrollInfo(m_hWnd, m_nBar, &Info);
+    return Info.nTrackPos;
+}
+
 void CScrollBar::SetPosition(int nPosition)
 {
     SCROLLINFO Info;
