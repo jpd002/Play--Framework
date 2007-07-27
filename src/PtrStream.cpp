@@ -25,6 +25,7 @@ void CPtrStream::Seek(int64 nPosition, STREAM_SEEK_DIRECTION nDirection)
 		assert((m_nPosition + nPosition) <= m_nSize);
 		assert((m_nPosition + nPosition) >= 0);
 		m_nPosition += nPosition;
+        break;
 	case STREAM_SEEK_END:
 		m_nPosition = m_nSize;
 		break;
