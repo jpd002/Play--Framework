@@ -11,6 +11,7 @@ namespace Framework
 		class CHeader : public CWindow
 		{
 		public:
+                    CHeader(HWND);
 					CHeader(HWND, RECT*, unsigned long = 0, unsigned long = 0);
 			int		InsertItem(const TCHAR*);
 			int		InsertItem(const TCHAR*, unsigned int);

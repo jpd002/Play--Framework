@@ -38,3 +38,11 @@ CRect& CRect::Inflate(int nDx, int nDy)
     InflateRect(&m_Rect, nDx, nDy);
     return (*this);
 }
+
+bool CRect::PtIn(int nX, int nY)
+{
+    POINT Pt;
+    Pt.x = nX;
+    Pt.y = nY;
+    return PtInRect(&m_Rect, Pt) != 0;
+}

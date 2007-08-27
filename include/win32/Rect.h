@@ -20,6 +20,7 @@ namespace Framework
 
 			CRect&		Adjust(uint32, bool = false);
             CRect&      Inflate(int, int);
+            bool        PtIn(int, int);
 
 		private:
 			RECT		m_Rect;

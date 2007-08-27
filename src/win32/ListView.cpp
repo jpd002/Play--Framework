@@ -118,3 +118,8 @@ void CListView::ProcessGetDisplayInfo(NMHDR* pHdr, GetDispInfoCallbackType Callb
 	pDispInfo = reinterpret_cast<LV_DISPINFO*>(pHdr);
 	Callback(&pDispInfo->item);
 }
+
+HWND CListView::GetHeader()
+{
+    return ListView_GetHeader(m_hWnd);
+}

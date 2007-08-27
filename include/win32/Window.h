@@ -36,6 +36,7 @@ namespace Framework
             void                    SubClass();
             long                    CallBaseWndProc(unsigned int, WPARAM, LPARAM);
             unsigned int            DoesWindowClassExist(const TCHAR*);
+            static bool             IsNotifySource(const CWindow*, const NMHDR*);
 
             //Helpers
             void                    Create(unsigned long, const TCHAR*, const TCHAR*, unsigned long, const RECT*, HWND, void*);  
@@ -101,7 +102,7 @@ namespace Framework
             virtual long            OnSetFocus();
             virtual long            OnKillFocus();
 
-	    public:
+        public:
             HWND                    m_hWnd;
             unsigned int            m_nNoCallDef;
             WNDPROC                 m_pBaseWndProc;

@@ -8,7 +8,7 @@ namespace Framework
 {
 	namespace Win32
 	{
-		class CTreeView : public CWindow
+		class CTreeView : public virtual CWindow
 		{
 		public:
 							CTreeView(HWND, RECT*, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
@@ -18,13 +18,17 @@ namespace Framework
 			bool			GetItem(HTREEITEM, TVITEM*);
             HTREEITEM       GetItemParent(HTREEITEM);
             void			GetItemText(HTREEITEM, TCHAR*, size_t);
+            std::tstring    GetItemText(HTREEITEM);
             void*           GetItemParam(HTREEITEM);
 			void			GetItemLabelRect(HTREEITEM, RECT*);
             void            SetItem(HTREEITEM, TVITEM*);
             void            SetItemText(HTREEITEM, const TCHAR*);
             void            SetItemParam(HTREEITEM, void*);
             void            SetItemParam(HTREEITEM, unsigned int);
+            void            SetImageList(HIMAGELIST);
             HTREEITEM		GetRoot();
+            HTREEITEM       GetChild(HTREEITEM);
+            HTREEITEM       GetNextSibling(HTREEITEM);
 			bool			SetSelection(HTREEITEM);
 			bool			Expand(HTREEITEM, unsigned int = TVE_EXPAND);
             void            DeleteChildren(HTREEITEM);

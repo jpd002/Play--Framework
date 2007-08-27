@@ -570,6 +570,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\win32\FindFile.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\Font.cpp"
 					>
 				</File>
@@ -764,6 +768,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\include\Base64.h"
+				>
+			</File>
 			<File
 				RelativePath=".\include\Bitmap.h"
 				>
@@ -965,6 +973,10 @@
 				</File>
 				<File
 					RelativePath=".\include\win32\FileDialog.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\FindFile.h"
 					>
 				</File>
 				<File

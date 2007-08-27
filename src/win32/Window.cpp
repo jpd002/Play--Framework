@@ -110,6 +110,11 @@ unsigned int CWindow::DoesWindowClassExist(const TCHAR* sClass)
 	return GetClassInfo(GetModuleHandle(NULL), sClass, &wc);
 }
 
+bool CWindow::IsNotifySource(const CWindow* pWindow, const NMHDR* pHdr)
+{
+    return (pWindow != NULL) && (pWindow->m_hWnd == pHdr->hwndFrom);
+}
+
 ///////////////////////////////////////////////////////////
 //Window Message Helpers
 ///////////////////////////////////////////////////////////

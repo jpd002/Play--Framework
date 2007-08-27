@@ -3,6 +3,7 @@
 
 using namespace Framework;
 using namespace Framework::Win32;
+using namespace std;
 
 CTreeView::CTreeView(HWND hParent, RECT* pR, unsigned long nStyle, unsigned long nExStyle)
 {
@@ -53,6 +54,13 @@ void CTreeView::GetItemText(HTREEITEM hItem, TCHAR* sText, size_t nCount)
 	GetItem(hItem, &Item);
 }
 
+tstring CTreeView::GetItemText(HTREEITEM hItem)
+{
+    TCHAR sString[260];
+    GetItemText(hItem, sString, _countof(sString));
+    return tstring(sString);
+}
+
 void* CTreeView::GetItemParam(HTREEITEM hItem)
 {
     TVITEM Item;
@@ -99,6 +107,11 @@ void CTreeView::SetItemParam(HTREEITEM hItem, void* pParam)
     SetItem(hItem, &Item);
 }
 
+void CTreeView::SetImageList(HIMAGELIST hImageList)
+{
+    TreeView_SetImageList(m_hWnd, hImageList, 0);
+}
+
 void CTreeView::SetItemParam(HTREEITEM hItem, unsigned int nParam)
 {
     TVITEM Item;
@@ -113,6 +126,16 @@ void CTreeView::SetItemParam(HTREEITEM hItem, unsigned int nParam)
 HTREEITEM CTreeView::GetRoot()
 {
 	return TreeView_GetRoot(m_hWnd);
+}
+
+HTREEITEM CTreeView::GetChild(HTREEITEM hItem)
+{
+    return TreeView_GetChild(m_hWnd, hItem);
+}
+
+HTREEITEM CTreeView::GetNextSibling(HTREEITEM hItem)
+{
+    return TreeView_GetNextSibling(m_hWnd, hItem);
 }
 
 bool CTreeView::SetSelection(HTREEITEM hItem)

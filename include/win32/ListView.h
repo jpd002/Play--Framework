@@ -16,7 +16,7 @@ namespace Framework
 {
 	namespace Win32
 	{
-		class CListView : public CWindow
+		class CListView : public virtual CWindow
 		{
 		public:
 			typedef boost::function<void (LVITEM*)> GetDispInfoCallbackType;
@@ -48,6 +48,8 @@ namespace Framework
 			void			EnsureItemVisible(unsigned int, bool);
 			
 			void			ProcessGetDisplayInfo(NMHDR*, GetDispInfoCallbackType);
+
+            HWND            GetHeader();
 		};
 	}
 }

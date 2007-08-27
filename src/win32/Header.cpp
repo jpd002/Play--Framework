@@ -4,6 +4,11 @@
 using namespace Framework;
 using namespace Framework::Win32;
 
+CHeader::CHeader(HWND hWnd)
+{
+    m_hWnd = hWnd;
+}
+
 CHeader::CHeader(HWND hParent, RECT* pRect, unsigned long nStyle, unsigned long nExStyle)
 {
 	InitCommonControls();

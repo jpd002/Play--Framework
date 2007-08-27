@@ -15,7 +15,10 @@ namespace Framework
             virtual         ~CTab();
 
             int             InsertTab(const TCHAR*);
+            std::tstring    GetTabText(int);
+            void            SetTabText(int, const TCHAR*);
             int             GetSelection();
+            void            SetSelection(int);
             unsigned int    GetItemCount();
             RECT            GetDisplayAreaRect();
 

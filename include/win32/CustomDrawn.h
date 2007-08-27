@@ -7,7 +7,7 @@ namespace Framework
 {
     namespace Win32
     {
-        class CCustomDrawn : public CWindow
+        class CCustomDrawn : public virtual CWindow
         {
 	    protected:
                             CCustomDrawn();
