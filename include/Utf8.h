@@ -10,7 +10,7 @@ namespace Framework
         template <typename IteratorType>
         std::wstring ConvertFrom(const IteratorType itBegin, const IteratorType itEnd)
         {
-            wstring sTemp;
+            std::wstring sTemp;
 
             for(IteratorType itChar(itBegin); itChar != itEnd; itChar++)
             {
@@ -26,8 +26,8 @@ namespace Framework
                         char nByte1(*(++itChar));
                         char nByte2(*(++itChar));
                         
-                        if((nByte1 & 0xC0) != 0x80) throw exception();
-                        if((nByte2 & 0xC0) != 0x80) throw exception();
+                        if((nByte1 & 0xC0) != 0x80) throw std::exception();
+                        if((nByte2 & 0xC0) != 0x80) throw std::exception();
 
                         wchar_t nWChar;
                         nWChar = ((nChar & 0x0F) << 12) | ((nByte1 & 0x3F) << 6) | (nByte2 & 0x3F);
@@ -36,7 +36,7 @@ namespace Framework
                     }
                     else
                     {
-                        throw exception();
+                        throw std::exception();
                     }
                 }
             }
@@ -44,10 +44,7 @@ namespace Framework
             return sTemp;
         }
 
-        std::wstring ConvertFrom(const std::string& sString)
-        {
-            return ConvertFrom(sString.begin(), sString.end());
-        }
+        std::wstring ConvertFrom(const std::string&);
     };
 }
 

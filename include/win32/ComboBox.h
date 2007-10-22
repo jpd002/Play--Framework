@@ -20,6 +20,7 @@ namespace Framework
 			uint32			GetItemData(unsigned int);
 			int				FindItemData(uint32);
 			void			FixHeight(unsigned int);
+            void            ResetContent();
 		};
 	}
 }

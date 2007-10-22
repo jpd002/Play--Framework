@@ -115,6 +115,11 @@ bool CWindow::IsNotifySource(const CWindow* pWindow, const NMHDR* pHdr)
     return (pWindow != NULL) && (pWindow->m_hWnd == pHdr->hwndFrom);
 }
 
+bool CWindow::IsCommandSource(const CWindow* pWindow, HWND hWndFrom)
+{
+    return (pWindow != NULL) && (pWindow->m_hWnd == hWndFrom);
+}
+
 ///////////////////////////////////////////////////////////
 //Window Message Helpers
 ///////////////////////////////////////////////////////////

@@ -494,6 +494,10 @@
 				RelativePath=".\src\Thread.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\src\Utf8.cpp"
+				>
+			</File>
 			<Filter
 				Name="Layouts"
 				>
@@ -615,6 +619,10 @@
 				</File>
 				<File
 					RelativePath=".\src\win32\MemoryDeviceContext.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\ModalWindow.cpp"
 					>
 				</File>
 				<File
@@ -1029,6 +1037,10 @@
 				</File>
 				<File
 					RelativePath=".\include\win32\MemoryDeviceContext.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\ModalWindow.h"
 					>
 				</File>
 				<File

@@ -27,6 +27,26 @@ CRect::operator RECT&()
     return m_Rect;
 }
 
+int CRect::Left() const
+{
+    return m_Rect.left;
+}
+
+int CRect::Top() const
+{
+    return m_Rect.top;
+}
+
+int CRect::Right() const
+{
+    return m_Rect.right;
+}
+
+int CRect::Bottom() const
+{
+    return m_Rect.bottom;
+}
+
 CRect& CRect::Adjust(uint32 nStyle, bool nMenu)
 {
 	AdjustWindowRect(&m_Rect, nStyle, (nMenu) ? TRUE : FALSE);

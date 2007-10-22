@@ -46,6 +46,11 @@ int CListView::InsertItem(LVITEM* pI)
 	return ListView_InsertItem(m_hWnd, pI);
 }
 
+int CListView::InsertItem(const LVITEM& Item)
+{
+    return InsertItem(const_cast<LVITEM*>(&Item));
+}
+
 void CListView::SetColumnWidth(unsigned int nCol, unsigned int nCX)
 {
 	ListView_SetColumnWidth(m_hWnd, nCol, nCX);
@@ -122,4 +127,37 @@ void CListView::ProcessGetDisplayInfo(NMHDR* pHdr, GetDispInfoCallbackType Callb
 HWND CListView::GetHeader()
 {
     return ListView_GetHeader(m_hWnd);
+}
+
+
+//////////////////////////////////////
+//CItem implementation
+//////////////////////////////////////
+
+CListView::CItem::CItem(const TCHAR* sText)
+{
+    memset(&m_Item, 0, sizeof(LVITEM));
+    SetText(sText);
+}
+
+CListView::CItem::~CItem()
+{
+
+}
+
+void CListView::CItem::SetText(const TCHAR* sText)
+{
+    m_Item.mask |= LVIF_TEXT;
+    m_Item.pszText = const_cast<TCHAR*>(sText);
+}
+
+void CListView::CItem::SetParam(LPARAM lParam)
+{
+    m_Item.mask |= LVIF_PARAM;
+    m_Item.lParam = lParam;
+}
+
+CListView::CItem::operator const LVITEMW&() const
+{
+    return m_Item;
 }

@@ -37,6 +37,7 @@ namespace Framework
             long                    CallBaseWndProc(unsigned int, WPARAM, LPARAM);
             unsigned int            DoesWindowClassExist(const TCHAR*);
             static bool             IsNotifySource(const CWindow*, const NMHDR*);
+            static bool             IsCommandSource(const CWindow*, HWND);
 
             //Helpers
             void                    Create(unsigned long, const TCHAR*, const TCHAR*, unsigned long, const RECT*, HWND, void*);  

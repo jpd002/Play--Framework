@@ -21,6 +21,20 @@ namespace Framework
 		public:
 			typedef boost::function<void (LVITEM*)> GetDispInfoCallbackType;
 
+            class CItem
+            {
+            public:
+                            CItem(const TCHAR*);
+                virtual     ~CItem();
+
+                void        SetText(const TCHAR*);
+                void        SetParam(LPARAM);
+                operator    const LVITEM&() const;
+
+            private:
+                LVITEM      m_Item;
+            };
+
 							CListView(HWND, RECT*, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
 			virtual			~CListView();
 
@@ -28,6 +42,7 @@ namespace Framework
 			int				FindItemData(unsigned long);
 			void			DeleteAllItems();
 			int				InsertItem(LVITEM*);
+            int             InsertItem(const LVITEM&);
 			void			InsertColumn(unsigned int, LVCOLUMN*);
 
 			void			SetItemText(unsigned int, unsigned int, const TCHAR*);

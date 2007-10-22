@@ -18,6 +18,11 @@ namespace Framework
 						operator RECT*();
                         operator RECT&();
 
+            int         Left() const;
+            int         Top() const;
+            int         Right() const;
+            int         Bottom() const;
+
 			CRect&		Adjust(uint32, bool = false);
             CRect&      Inflate(int, int);
             bool        PtIn(int, int);

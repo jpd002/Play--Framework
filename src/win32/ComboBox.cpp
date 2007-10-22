@@ -59,3 +59,8 @@ void CComboBox::FixHeight(unsigned int nHeight)
 	GetClientRect(&rc);
 	SetSize(rc.right - rc.left, nHeight);
 }
+
+void CComboBox::ResetContent()
+{
+    SendMessage(m_hWnd, CB_RESETCONTENT, 0, 0);
+}
