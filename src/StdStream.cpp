@@ -14,11 +14,20 @@ using namespace std;
 
 CStdStream::CStdStream(FILE* pFile)
 {
-	if(pFile == NULL)
-	{
-		throw runtime_error("Invalid file handle.");
-	}
-	m_pFile = pFile;
+    if(pFile == NULL)
+    {
+	    throw runtime_error("Invalid file handle.");
+    }
+    m_pFile = pFile;
+}
+
+CStdStream::CStdStream(const char* path, const char* options)
+{
+    m_pFile = fopen(path, options);
+    if(m_pFile == NULL)
+    {
+	    throw runtime_error("Invalid file handle.");
+    }
 }
 
 CStdStream::~CStdStream()
