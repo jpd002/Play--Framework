@@ -7,7 +7,6 @@
 */
 
 #include "Stream.h"
-#include <malloc.h>
 
 using namespace Framework;
 
