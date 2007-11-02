@@ -4,11 +4,12 @@
 #include <string>
 #include <sstream>
 #include <assert.h>
+#include <alloca.h>
 #include <algorithm>
 
 template <typename Format>
 Format lexical_cast_hex(unsigned int nNumber, unsigned int nWidth = 1)
-{
+{	
     enum MAXNIBBLE
     {
         MAXNIBBLE = 8,
@@ -25,8 +26,8 @@ Format lexical_cast_hex(unsigned int nNumber, unsigned int nWidth = 1)
     nWidth = std::min<unsigned int>(nWidth, MAXNIBBLE);
     nWidth = std::max<unsigned int>(nNumSize, nWidth);
 
-    Format::value_type* sBuffer;
-    sBuffer = reinterpret_cast<Format::value_type*>(_alloca(sizeof(Format::value_type) * (nWidth + 1)));
+    typename Format::value_type* sBuffer;
+    sBuffer = reinterpret_cast<typename Format::value_type*>(alloca(sizeof(typename Format::value_type) * (nWidth + 1)));
 
     for(unsigned int i = 0; i < nWidth; i++)
     {
@@ -43,12 +44,12 @@ template <typename Format>
 unsigned int lexical_cast_hex(const Format& sValue)
 {
     unsigned int nNumber;
-    std::basic_istringstream<Format::value_type> Stream(sValue);
-    Stream >> hex >> nNumber;
+    std::basic_istringstream<typename Format::value_type> Stream(sValue);
+    Stream >> std::hex >> nNumber;
 
     if(Stream.fail())
     {
-        throw exception();
+        throw std::exception();
     }
 
     return nNumber;

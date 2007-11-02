@@ -1,5 +1,5 @@
 #include <assert.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <string.h>
 #include "MemStream.h"
 #include "PtrMacro.h"

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E37675A0CDAC560001F232D /* MemStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E3767580CDAC560001F232D /* MemStream.cpp */; };
+		7E37675B0CDAC560001F232D /* PtrStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E3767590CDAC560001F232D /* PtrStream.cpp */; };
+		7E37675E0CDAC570001F232D /* MemStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E37675C0CDAC570001F232D /* MemStream.h */; };
+		7E37675F0CDAC570001F232D /* PtrStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E37675D0CDAC570001F232D /* PtrStream.h */; };
+		7E37676C0CDAC5C0001F232D /* PtrMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E37676B0CDAC5C0001F232D /* PtrMacro.h */; };
 		7EC8D9CB0CD95EFB0056E15E /* StdStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8D9CA0CD95EFB0056E15E /* StdStream.cpp */; };
 		7EC8D9CD0CD95F1C0056E15E /* Stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8D9CC0CD95F1C0056E15E /* Stream.cpp */; };
 		7EC8D9D00CD95F420056E15E /* StdStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EC8D9CE0CD95F420056E15E /* StdStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -14,6 +19,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7E3767580CDAC560001F232D /* MemStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MemStream.cpp; path = src/MemStream.cpp; sourceTree = "<group>"; };
+		7E3767590CDAC560001F232D /* PtrStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PtrStream.cpp; path = src/PtrStream.cpp; sourceTree = "<group>"; };
+		7E37675C0CDAC570001F232D /* MemStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemStream.h; path = include/MemStream.h; sourceTree = "<group>"; };
+		7E37675D0CDAC570001F232D /* PtrStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PtrStream.h; path = include/PtrStream.h; sourceTree = "<group>"; };
+		7E37676B0CDAC5C0001F232D /* PtrMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PtrMacro.h; path = include/PtrMacro.h; sourceTree = "<group>"; };
 		7EC8D9CA0CD95EFB0056E15E /* StdStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StdStream.cpp; path = src/StdStream.cpp; sourceTree = "<group>"; };
 		7EC8D9CC0CD95F1C0056E15E /* Stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Stream.cpp; path = src/Stream.cpp; sourceTree = "<group>"; };
 		7EC8D9CE0CD95F420056E15E /* StdStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StdStream.h; path = include/StdStream.h; sourceTree = "<group>"; };
@@ -45,6 +55,11 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				7E37676B0CDAC5C0001F232D /* PtrMacro.h */,
+				7E37675C0CDAC570001F232D /* MemStream.h */,
+				7E37675D0CDAC570001F232D /* PtrStream.h */,
+				7E3767580CDAC560001F232D /* MemStream.cpp */,
+				7E3767590CDAC560001F232D /* PtrStream.cpp */,
 				7EC8D9CE0CD95F420056E15E /* StdStream.h */,
 				7EC8D9CF0CD95F420056E15E /* Stream.h */,
 				7EC8D9CC0CD95F1C0056E15E /* Stream.cpp */,
@@ -77,6 +92,9 @@
 			files = (
 				7EC8D9D00CD95F420056E15E /* StdStream.h in Headers */,
 				7EC8D9D10CD95F420056E15E /* Stream.h in Headers */,
+				7E37675E0CDAC570001F232D /* MemStream.h in Headers */,
+				7E37675F0CDAC570001F232D /* PtrStream.h in Headers */,
+				7E37676C0CDAC5C0001F232D /* PtrMacro.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +140,8 @@
 			files = (
 				7EC8D9CB0CD95EFB0056E15E /* StdStream.cpp in Sources */,
 				7EC8D9CD0CD95F1C0056E15E /* Stream.cpp in Sources */,
+				7E37675A0CDAC560001F232D /* MemStream.cpp in Sources */,
+				7E37675B0CDAC560001F232D /* PtrStream.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,6 +181,7 @@
 			buildSettings = {
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ".\\include";
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
@@ -171,6 +192,7 @@
 			buildSettings = {
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ".\\include";
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
