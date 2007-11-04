@@ -4,7 +4,7 @@
 #include <string>
 #include <sstream>
 #include <assert.h>
-#include <alloca.h>
+#include "alloca_def.h"
 #include <algorithm>
 
 template <typename Format>
