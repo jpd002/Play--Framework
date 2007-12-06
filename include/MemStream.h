@@ -21,6 +21,7 @@ namespace Framework
 	private:
 		unsigned int		m_nSize;
 		unsigned int		m_nGrow;
+        unsigned int        m_position;
 		uint8*				m_pData;
 	};
 

@@ -1,14 +1,18 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
+#include <algorithm>
+#include <stdexcept>
 #include "MemStream.h"
 #include "PtrMacro.h"
 
 #define GROWSIZE		(0x1000)
 
 using namespace Framework;
+using namespace std;
 
-CMemStream::CMemStream()
+CMemStream::CMemStream() :
+m_position(0)
 {
 	m_nSize = 0;
 	m_nGrow = 0;
@@ -27,12 +31,24 @@ bool CMemStream::IsEOF()
 
 uint64 CMemStream::Tell()
 {
-	return m_nSize;
+	return m_position;
 }
 
 void CMemStream::Seek(int64 nPosition, STREAM_SEEK_DIRECTION nDir)
 {
-	assert(0);
+    switch(nDir)
+    {
+    case STREAM_SEEK_SET:
+        if(nPosition > m_nSize) throw runtime_error("Invalid position.");
+        m_position = static_cast<unsigned int>(nPosition);
+        break;
+    case STREAM_SEEK_CUR:
+        m_position += static_cast<int>(nPosition);
+        break;
+    case STREAM_SEEK_END:
+        m_position = m_nSize;
+        break;
+    }
 }
 
 uint64 CMemStream::Read(void* pData, uint64 nSize)
@@ -43,13 +59,14 @@ uint64 CMemStream::Read(void* pData, uint64 nSize)
 
 uint64 CMemStream::Write(const void* pData, uint64 nSize)
 {
-	while((m_nSize + nSize) > m_nGrow)
+	while((m_position + nSize) > m_nGrow)
 	{
 		m_nGrow += GROWSIZE;
 		m_pData = (uint8*)realloc(m_pData, m_nGrow);
 	}
-	memcpy(m_pData + m_nSize, pData, (uint32)nSize);
-	m_nSize += (uint32)nSize;
+	memcpy(m_pData + m_position, pData, (uint32)nSize);
+    m_position += static_cast<unsigned int>(nSize);
+	m_nSize = max<unsigned int>(m_nSize, m_position);
 	return nSize;
 }
 

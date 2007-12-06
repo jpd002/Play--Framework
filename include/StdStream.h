@@ -20,6 +20,7 @@ namespace Framework
                 CStdStream(FILE*);
                 CStdStream(const char*, const char*);
         virtual ~CStdStream();
+                operator FILE*();
         void    Seek(int64, STREAM_SEEK_DIRECTION);
         uint64  Tell();
         uint64  Read(void*, uint64);

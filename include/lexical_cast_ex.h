@@ -6,6 +6,7 @@
 #include <assert.h>
 #include "alloca_def.h"
 #include <algorithm>
+#include <iomanip>
 
 template <typename Format>
 Format lexical_cast_hex(unsigned int nNumber, unsigned int nWidth = 1)
@@ -53,6 +54,14 @@ unsigned int lexical_cast_hex(const Format& sValue)
     }
 
     return nNumber;
+}
+
+template <typename Format>
+Format lexical_cast_uint(unsigned int number, unsigned int width = 1)
+{
+    std::basic_ostringstream<typename Format::value_type> stream;
+    stream << std::setw(width) << std::setfill('0') << number;
+    return stream.str();
 }
 
 #endif

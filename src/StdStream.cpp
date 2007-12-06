@@ -39,6 +39,11 @@ CStdStream::~CStdStream()
 	}
 }
 
+CStdStream::operator FILE*()
+{
+    return m_pFile;
+}
+
 void CStdStream::Seek(int64 nPosition, STREAM_SEEK_DIRECTION nDirection)
 {
 	int nDir;
