@@ -12,6 +12,41 @@
 		7E37675E0CDAC570001F232D /* MemStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E37675C0CDAC570001F232D /* MemStream.h */; };
 		7E37675F0CDAC570001F232D /* PtrStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E37675D0CDAC570001F232D /* PtrStream.h */; };
 		7E37676C0CDAC5C0001F232D /* PtrMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E37676B0CDAC5C0001F232D /* PtrMacro.h */; };
+		7E898A070D08C4FF0077F9ED /* FilteringNodeIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A020D08C4FF0077F9ED /* FilteringNodeIterator.cpp */; };
+		7E898A080D08C4FF0077F9ED /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A030D08C4FF0077F9ED /* Node.cpp */; };
+		7E898A090D08C4FF0077F9ED /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A040D08C4FF0077F9ED /* Parser.cpp */; };
+		7E898A0A0D08C4FF0077F9ED /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A050D08C4FF0077F9ED /* Utils.cpp */; };
+		7E898A0B0D08C4FF0077F9ED /* Writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A060D08C4FF0077F9ED /* Writer.cpp */; };
+		7E898A110D08C50E0077F9ED /* FilteringNodeIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A0C0D08C50E0077F9ED /* FilteringNodeIterator.h */; };
+		7E898A120D08C50E0077F9ED /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A0D0D08C50E0077F9ED /* Node.h */; };
+		7E898A130D08C50E0077F9ED /* Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A0E0D08C50E0077F9ED /* Parser.h */; };
+		7E898A140D08C50E0077F9ED /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A0F0D08C50E0077F9ED /* Utils.h */; };
+		7E898A150D08C50E0077F9ED /* Writer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A100D08C50E0077F9ED /* Writer.h */; };
+		7E898A2A0D08C5AF0077F9ED /* GZipStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A290D08C5AF0077F9ED /* GZipStream.cpp */; };
+		7E898A2C0D08C5CE0077F9ED /* GZipStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A2B0D08C5CE0077F9ED /* GZipStream.h */; };
+		7E898A410D08C6590077F9ED /* CodedBlockPatternTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A390D08C6590077F9ED /* CodedBlockPatternTable.cpp */; };
+		7E898A420D08C6590077F9ED /* DcSizeChrominanceTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A3A0D08C6590077F9ED /* DcSizeChrominanceTable.cpp */; };
+		7E898A430D08C6590077F9ED /* DcSizeLuminanceTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A3B0D08C6590077F9ED /* DcSizeLuminanceTable.cpp */; };
+		7E898A440D08C6590077F9ED /* DctCoefficientTable0.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A3C0D08C6590077F9ED /* DctCoefficientTable0.cpp */; };
+		7E898A450D08C6590077F9ED /* DctCoefficientTable1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A3D0D08C6590077F9ED /* DctCoefficientTable1.cpp */; };
+		7E898A460D08C6590077F9ED /* InverseScanTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A3E0D08C6590077F9ED /* InverseScanTable.cpp */; };
+		7E898A470D08C6590077F9ED /* QuantiserScaleTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A3F0D08C6590077F9ED /* QuantiserScaleTable.cpp */; };
+		7E898A480D08C6590077F9ED /* VLCTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A400D08C6590077F9ED /* VLCTable.cpp */; };
+		7E898A520D08C6680077F9ED /* CodedBlockPatternTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A490D08C6680077F9ED /* CodedBlockPatternTable.h */; };
+		7E898A530D08C6680077F9ED /* DcSizeChrominanceTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A4A0D08C6680077F9ED /* DcSizeChrominanceTable.h */; };
+		7E898A540D08C6680077F9ED /* DcSizeLuminanceTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A4B0D08C6680077F9ED /* DcSizeLuminanceTable.h */; };
+		7E898A550D08C6680077F9ED /* DctCoefficientTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A4C0D08C6680077F9ED /* DctCoefficientTable.h */; };
+		7E898A560D08C6680077F9ED /* DctCoefficientTable0.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A4D0D08C6680077F9ED /* DctCoefficientTable0.h */; };
+		7E898A570D08C6680077F9ED /* DctCoefficientTable1.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A4E0D08C6680077F9ED /* DctCoefficientTable1.h */; };
+		7E898A580D08C6680077F9ED /* InverseScanTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A4F0D08C6680077F9ED /* InverseScanTable.h */; };
+		7E898A590D08C6680077F9ED /* QuantiserScaleTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A500D08C6680077F9ED /* QuantiserScaleTable.h */; };
+		7E898A5A0D08C6680077F9ED /* VLCTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A510D08C6680077F9ED /* VLCTable.h */; };
+		7E898A5F0D08C6960077F9ED /* IosIStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A5D0D08C6960077F9ED /* IosIStream.h */; };
+		7E898A600D08C6960077F9ED /* IosOStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898A5E0D08C6960077F9ED /* IosOStream.h */; };
+		7E898A630D08C69F0077F9ED /* IosIStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A610D08C69F0077F9ED /* IosIStream.cpp */; };
+		7E898A640D08C69F0077F9ED /* IosOStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A620D08C69F0077F9ED /* IosOStream.cpp */; };
+		7E898AB00D08CA750077F9ED /* Semaphore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898AAF0D08CA750077F9ED /* Semaphore.cpp */; };
+		7E898AB20D08CA840077F9ED /* Semaphore.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898AB10D08CA840077F9ED /* Semaphore.h */; };
 		7EC8D9CB0CD95EFB0056E15E /* StdStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8D9CA0CD95EFB0056E15E /* StdStream.cpp */; };
 		7EC8D9CD0CD95F1C0056E15E /* Stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8D9CC0CD95F1C0056E15E /* Stream.cpp */; };
 		7EC8D9D00CD95F420056E15E /* StdStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EC8D9CE0CD95F420056E15E /* StdStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -24,6 +59,41 @@
 		7E37675C0CDAC570001F232D /* MemStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemStream.h; path = include/MemStream.h; sourceTree = "<group>"; };
 		7E37675D0CDAC570001F232D /* PtrStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PtrStream.h; path = include/PtrStream.h; sourceTree = "<group>"; };
 		7E37676B0CDAC5C0001F232D /* PtrMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PtrMacro.h; path = include/PtrMacro.h; sourceTree = "<group>"; };
+		7E898A020D08C4FF0077F9ED /* FilteringNodeIterator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FilteringNodeIterator.cpp; path = src/xml/FilteringNodeIterator.cpp; sourceTree = "<group>"; };
+		7E898A030D08C4FF0077F9ED /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Node.cpp; path = src/xml/Node.cpp; sourceTree = "<group>"; };
+		7E898A040D08C4FF0077F9ED /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = src/xml/Parser.cpp; sourceTree = "<group>"; };
+		7E898A050D08C4FF0077F9ED /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Utils.cpp; path = src/xml/Utils.cpp; sourceTree = "<group>"; };
+		7E898A060D08C4FF0077F9ED /* Writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Writer.cpp; path = src/xml/Writer.cpp; sourceTree = "<group>"; };
+		7E898A0C0D08C50E0077F9ED /* FilteringNodeIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilteringNodeIterator.h; path = include/xml/FilteringNodeIterator.h; sourceTree = "<group>"; };
+		7E898A0D0D08C50E0077F9ED /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Node.h; path = include/xml/Node.h; sourceTree = "<group>"; };
+		7E898A0E0D08C50E0077F9ED /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Parser.h; path = include/xml/Parser.h; sourceTree = "<group>"; };
+		7E898A0F0D08C50E0077F9ED /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = include/xml/Utils.h; sourceTree = "<group>"; };
+		7E898A100D08C50E0077F9ED /* Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Writer.h; path = include/xml/Writer.h; sourceTree = "<group>"; };
+		7E898A290D08C5AF0077F9ED /* GZipStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GZipStream.cpp; path = src/GZipStream.cpp; sourceTree = "<group>"; };
+		7E898A2B0D08C5CE0077F9ED /* GZipStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GZipStream.h; path = include/GZipStream.h; sourceTree = "<group>"; };
+		7E898A390D08C6590077F9ED /* CodedBlockPatternTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CodedBlockPatternTable.cpp; path = src/mpeg2/CodedBlockPatternTable.cpp; sourceTree = "<group>"; };
+		7E898A3A0D08C6590077F9ED /* DcSizeChrominanceTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DcSizeChrominanceTable.cpp; path = src/mpeg2/DcSizeChrominanceTable.cpp; sourceTree = "<group>"; };
+		7E898A3B0D08C6590077F9ED /* DcSizeLuminanceTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DcSizeLuminanceTable.cpp; path = src/mpeg2/DcSizeLuminanceTable.cpp; sourceTree = "<group>"; };
+		7E898A3C0D08C6590077F9ED /* DctCoefficientTable0.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DctCoefficientTable0.cpp; path = src/mpeg2/DctCoefficientTable0.cpp; sourceTree = "<group>"; };
+		7E898A3D0D08C6590077F9ED /* DctCoefficientTable1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DctCoefficientTable1.cpp; path = src/mpeg2/DctCoefficientTable1.cpp; sourceTree = "<group>"; };
+		7E898A3E0D08C6590077F9ED /* InverseScanTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InverseScanTable.cpp; path = src/mpeg2/InverseScanTable.cpp; sourceTree = "<group>"; };
+		7E898A3F0D08C6590077F9ED /* QuantiserScaleTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = QuantiserScaleTable.cpp; path = src/mpeg2/QuantiserScaleTable.cpp; sourceTree = "<group>"; };
+		7E898A400D08C6590077F9ED /* VLCTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VLCTable.cpp; path = src/mpeg2/VLCTable.cpp; sourceTree = "<group>"; };
+		7E898A490D08C6680077F9ED /* CodedBlockPatternTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CodedBlockPatternTable.h; path = include/mpeg2/CodedBlockPatternTable.h; sourceTree = "<group>"; };
+		7E898A4A0D08C6680077F9ED /* DcSizeChrominanceTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DcSizeChrominanceTable.h; path = include/mpeg2/DcSizeChrominanceTable.h; sourceTree = "<group>"; };
+		7E898A4B0D08C6680077F9ED /* DcSizeLuminanceTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DcSizeLuminanceTable.h; path = include/mpeg2/DcSizeLuminanceTable.h; sourceTree = "<group>"; };
+		7E898A4C0D08C6680077F9ED /* DctCoefficientTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DctCoefficientTable.h; path = include/mpeg2/DctCoefficientTable.h; sourceTree = "<group>"; };
+		7E898A4D0D08C6680077F9ED /* DctCoefficientTable0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DctCoefficientTable0.h; path = include/mpeg2/DctCoefficientTable0.h; sourceTree = "<group>"; };
+		7E898A4E0D08C6680077F9ED /* DctCoefficientTable1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DctCoefficientTable1.h; path = include/mpeg2/DctCoefficientTable1.h; sourceTree = "<group>"; };
+		7E898A4F0D08C6680077F9ED /* InverseScanTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InverseScanTable.h; path = include/mpeg2/InverseScanTable.h; sourceTree = "<group>"; };
+		7E898A500D08C6680077F9ED /* QuantiserScaleTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuantiserScaleTable.h; path = include/mpeg2/QuantiserScaleTable.h; sourceTree = "<group>"; };
+		7E898A510D08C6680077F9ED /* VLCTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLCTable.h; path = include/mpeg2/VLCTable.h; sourceTree = "<group>"; };
+		7E898A5D0D08C6960077F9ED /* IosIStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IosIStream.h; path = include/IosIStream.h; sourceTree = "<group>"; };
+		7E898A5E0D08C6960077F9ED /* IosOStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IosOStream.h; path = include/IosOStream.h; sourceTree = "<group>"; };
+		7E898A610D08C69F0077F9ED /* IosIStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosIStream.cpp; path = src/IosIStream.cpp; sourceTree = "<group>"; };
+		7E898A620D08C69F0077F9ED /* IosOStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosOStream.cpp; path = src/IosOStream.cpp; sourceTree = "<group>"; };
+		7E898AAF0D08CA750077F9ED /* Semaphore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Semaphore.cpp; path = src/Semaphore.cpp; sourceTree = "<group>"; };
+		7E898AB10D08CA840077F9ED /* Semaphore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Semaphore.h; path = include/Semaphore.h; sourceTree = "<group>"; };
 		7EC8D9CA0CD95EFB0056E15E /* StdStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StdStream.cpp; path = src/StdStream.cpp; sourceTree = "<group>"; };
 		7EC8D9CC0CD95F1C0056E15E /* Stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Stream.cpp; path = src/Stream.cpp; sourceTree = "<group>"; };
 		7EC8D9CE0CD95F420056E15E /* StdStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StdStream.h; path = include/StdStream.h; sourceTree = "<group>"; };
@@ -55,7 +125,17 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				7E898AB10D08CA840077F9ED /* Semaphore.h */,
+				7E898AAF0D08CA750077F9ED /* Semaphore.cpp */,
+				7E898A610D08C69F0077F9ED /* IosIStream.cpp */,
+				7E898A620D08C69F0077F9ED /* IosOStream.cpp */,
+				7E898A5D0D08C6960077F9ED /* IosIStream.h */,
+				7E898A5E0D08C6960077F9ED /* IosOStream.h */,
+				7E898A380D08C64A0077F9ED /* Mpeg2 */,
+				7E898A2B0D08C5CE0077F9ED /* GZipStream.h */,
+				7E898A010D08C4F00077F9ED /* Xml */,
 				7E37676B0CDAC5C0001F232D /* PtrMacro.h */,
+				7E898A290D08C5AF0077F9ED /* GZipStream.cpp */,
 				7E37675C0CDAC570001F232D /* MemStream.h */,
 				7E37675D0CDAC570001F232D /* PtrStream.h */,
 				7E3767580CDAC560001F232D /* MemStream.cpp */,
@@ -74,6 +154,47 @@
 				D2AAC046055464E500DB518D /* libFramework.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		7E898A010D08C4F00077F9ED /* Xml */ = {
+			isa = PBXGroup;
+			children = (
+				7E898A0C0D08C50E0077F9ED /* FilteringNodeIterator.h */,
+				7E898A0D0D08C50E0077F9ED /* Node.h */,
+				7E898A0E0D08C50E0077F9ED /* Parser.h */,
+				7E898A0F0D08C50E0077F9ED /* Utils.h */,
+				7E898A100D08C50E0077F9ED /* Writer.h */,
+				7E898A020D08C4FF0077F9ED /* FilteringNodeIterator.cpp */,
+				7E898A030D08C4FF0077F9ED /* Node.cpp */,
+				7E898A040D08C4FF0077F9ED /* Parser.cpp */,
+				7E898A050D08C4FF0077F9ED /* Utils.cpp */,
+				7E898A060D08C4FF0077F9ED /* Writer.cpp */,
+			);
+			name = Xml;
+			sourceTree = "<group>";
+		};
+		7E898A380D08C64A0077F9ED /* Mpeg2 */ = {
+			isa = PBXGroup;
+			children = (
+				7E898A490D08C6680077F9ED /* CodedBlockPatternTable.h */,
+				7E898A4A0D08C6680077F9ED /* DcSizeChrominanceTable.h */,
+				7E898A4B0D08C6680077F9ED /* DcSizeLuminanceTable.h */,
+				7E898A4C0D08C6680077F9ED /* DctCoefficientTable.h */,
+				7E898A4D0D08C6680077F9ED /* DctCoefficientTable0.h */,
+				7E898A4E0D08C6680077F9ED /* DctCoefficientTable1.h */,
+				7E898A4F0D08C6680077F9ED /* InverseScanTable.h */,
+				7E898A500D08C6680077F9ED /* QuantiserScaleTable.h */,
+				7E898A510D08C6680077F9ED /* VLCTable.h */,
+				7E898A390D08C6590077F9ED /* CodedBlockPatternTable.cpp */,
+				7E898A3A0D08C6590077F9ED /* DcSizeChrominanceTable.cpp */,
+				7E898A3B0D08C6590077F9ED /* DcSizeLuminanceTable.cpp */,
+				7E898A3C0D08C6590077F9ED /* DctCoefficientTable0.cpp */,
+				7E898A3D0D08C6590077F9ED /* DctCoefficientTable1.cpp */,
+				7E898A3E0D08C6590077F9ED /* InverseScanTable.cpp */,
+				7E898A3F0D08C6590077F9ED /* QuantiserScaleTable.cpp */,
+				7E898A400D08C6590077F9ED /* VLCTable.cpp */,
+			);
+			name = Mpeg2;
 			sourceTree = "<group>";
 		};
 		C6A0FF2B0290797F04C91782 /* Documentation */ = {
@@ -95,6 +216,24 @@
 				7E37675E0CDAC570001F232D /* MemStream.h in Headers */,
 				7E37675F0CDAC570001F232D /* PtrStream.h in Headers */,
 				7E37676C0CDAC5C0001F232D /* PtrMacro.h in Headers */,
+				7E898A110D08C50E0077F9ED /* FilteringNodeIterator.h in Headers */,
+				7E898A120D08C50E0077F9ED /* Node.h in Headers */,
+				7E898A130D08C50E0077F9ED /* Parser.h in Headers */,
+				7E898A140D08C50E0077F9ED /* Utils.h in Headers */,
+				7E898A150D08C50E0077F9ED /* Writer.h in Headers */,
+				7E898A2C0D08C5CE0077F9ED /* GZipStream.h in Headers */,
+				7E898A520D08C6680077F9ED /* CodedBlockPatternTable.h in Headers */,
+				7E898A530D08C6680077F9ED /* DcSizeChrominanceTable.h in Headers */,
+				7E898A540D08C6680077F9ED /* DcSizeLuminanceTable.h in Headers */,
+				7E898A550D08C6680077F9ED /* DctCoefficientTable.h in Headers */,
+				7E898A560D08C6680077F9ED /* DctCoefficientTable0.h in Headers */,
+				7E898A570D08C6680077F9ED /* DctCoefficientTable1.h in Headers */,
+				7E898A580D08C6680077F9ED /* InverseScanTable.h in Headers */,
+				7E898A590D08C6680077F9ED /* QuantiserScaleTable.h in Headers */,
+				7E898A5A0D08C6680077F9ED /* VLCTable.h in Headers */,
+				7E898A5F0D08C6960077F9ED /* IosIStream.h in Headers */,
+				7E898A600D08C6960077F9ED /* IosOStream.h in Headers */,
+				7E898AB20D08CA840077F9ED /* Semaphore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,9 +263,11 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "Framework" */;
+			compatibilityVersion = "Xcode 2.4";
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* Framework */;
 			projectDirPath = "";
+			projectRoot = "";
 			targets = (
 				D2AAC045055464E500DB518D /* Framework */,
 			);
@@ -142,6 +283,23 @@
 				7EC8D9CD0CD95F1C0056E15E /* Stream.cpp in Sources */,
 				7E37675A0CDAC560001F232D /* MemStream.cpp in Sources */,
 				7E37675B0CDAC560001F232D /* PtrStream.cpp in Sources */,
+				7E898A070D08C4FF0077F9ED /* FilteringNodeIterator.cpp in Sources */,
+				7E898A080D08C4FF0077F9ED /* Node.cpp in Sources */,
+				7E898A090D08C4FF0077F9ED /* Parser.cpp in Sources */,
+				7E898A0A0D08C4FF0077F9ED /* Utils.cpp in Sources */,
+				7E898A0B0D08C4FF0077F9ED /* Writer.cpp in Sources */,
+				7E898A2A0D08C5AF0077F9ED /* GZipStream.cpp in Sources */,
+				7E898A410D08C6590077F9ED /* CodedBlockPatternTable.cpp in Sources */,
+				7E898A420D08C6590077F9ED /* DcSizeChrominanceTable.cpp in Sources */,
+				7E898A430D08C6590077F9ED /* DcSizeLuminanceTable.cpp in Sources */,
+				7E898A440D08C6590077F9ED /* DctCoefficientTable0.cpp in Sources */,
+				7E898A450D08C6590077F9ED /* DctCoefficientTable1.cpp in Sources */,
+				7E898A460D08C6590077F9ED /* InverseScanTable.cpp in Sources */,
+				7E898A470D08C6590077F9ED /* QuantiserScaleTable.cpp in Sources */,
+				7E898A480D08C6590077F9ED /* VLCTable.cpp in Sources */,
+				7E898A630D08C69F0077F9ED /* IosIStream.cpp in Sources */,
+				7E898A640D08C69F0077F9ED /* IosOStream.cpp in Sources */,
+				7E898AB00D08CA750077F9ED /* Semaphore.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,7 +339,7 @@
 			buildSettings = {
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = ".\\include";
+				HEADER_SEARCH_PATHS = "~/Projects/Framework/include";
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};

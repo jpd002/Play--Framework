@@ -1,4 +1,4 @@
-#include <exception>
+#include <stdexcept>
 #include "GZipStream.h"
 
 using namespace Framework;
@@ -9,7 +9,7 @@ CGZipStream::CGZipStream(const char* sPath, const char* sMode)
 	m_File = gzopen(sPath, sMode);
 	if(m_File == Z_NULL)
 	{
-		throw exception("Couldn't open file specified.");
+		throw runtime_error("Couldn't open file specified.");
 	}
 }
 
@@ -22,7 +22,7 @@ uint64 CGZipStream::Read(void* pData, uint64 nSize)
 {
 	if(gzeof(m_File))
 	{
-		throw exception("Can't read after end of file.");
+		throw runtime_error("Can't read after end of file.");
 	}
 	return gzread(m_File, pData, (unsigned int)nSize);
 }

@@ -7,4 +7,10 @@
 #define stricmp strcasecmp
 #endif
 
+#ifdef WIN32
+#define strnicmp _strnicmp
+#else
+#define strnicmp strncasecmp
+#endif
+
 #endif
