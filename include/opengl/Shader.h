@@ -2,6 +2,7 @@
 #define _SHADER_H_
 
 #include "OpenGl.h"
+#include <stdlib.h>
 
 namespace Framework
 {

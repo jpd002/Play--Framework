@@ -12,7 +12,7 @@ CProgram::~CProgram()
 	glDeleteProgram(m_nHandle);
 }
 
-CProgram::operator GLuint()
+CProgram::operator unsigned int()
 {
 	return m_nHandle;
 }

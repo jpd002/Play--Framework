@@ -51,6 +51,11 @@
 		7EC8D9CD0CD95F1C0056E15E /* Stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8D9CC0CD95F1C0056E15E /* Stream.cpp */; };
 		7EC8D9D00CD95F420056E15E /* StdStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EC8D9CE0CD95F420056E15E /* StdStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7EC8D9D10CD95F420056E15E /* Stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EC8D9CF0CD95F420056E15E /* Stream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7EE2032C0D0B516B002D2B72 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2032A0D0B516B002D2B72 /* Shader.cpp */; };
+		7EE2032D0D0B516B002D2B72 /* Program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2032B0D0B516B002D2B72 /* Program.cpp */; };
+		7EE203310D0B517E002D2B72 /* Shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE2032E0D0B517E002D2B72 /* Shader.h */; };
+		7EE203320D0B517E002D2B72 /* Program.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE2032F0D0B517E002D2B72 /* Program.h */; };
+		7EE203330D0B517E002D2B72 /* OpenGl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE203300D0B517E002D2B72 /* OpenGl.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +103,11 @@
 		7EC8D9CC0CD95F1C0056E15E /* Stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Stream.cpp; path = src/Stream.cpp; sourceTree = "<group>"; };
 		7EC8D9CE0CD95F420056E15E /* StdStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StdStream.h; path = include/StdStream.h; sourceTree = "<group>"; };
 		7EC8D9CF0CD95F420056E15E /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stream.h; path = include/Stream.h; sourceTree = "<group>"; };
+		7EE2032A0D0B516B002D2B72 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Shader.cpp; path = src/opengl/Shader.cpp; sourceTree = "<group>"; };
+		7EE2032B0D0B516B002D2B72 /* Program.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Program.cpp; path = src/opengl/Program.cpp; sourceTree = "<group>"; };
+		7EE2032E0D0B517E002D2B72 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shader.h; path = include/opengl/Shader.h; sourceTree = "<group>"; };
+		7EE2032F0D0B517E002D2B72 /* Program.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Program.h; path = include/opengl/Program.h; sourceTree = "<group>"; };
+		7EE203300D0B517E002D2B72 /* OpenGl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGl.h; path = include/opengl/OpenGl.h; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -125,6 +135,7 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				7EE203290D0B5158002D2B72 /* OpenGl */,
 				7E898AB10D08CA840077F9ED /* Semaphore.h */,
 				7E898AAF0D08CA750077F9ED /* Semaphore.cpp */,
 				7E898A610D08C69F0077F9ED /* IosIStream.cpp */,
@@ -197,6 +208,18 @@
 			name = Mpeg2;
 			sourceTree = "<group>";
 		};
+		7EE203290D0B5158002D2B72 /* OpenGl */ = {
+			isa = PBXGroup;
+			children = (
+				7EE2032E0D0B517E002D2B72 /* Shader.h */,
+				7EE2032F0D0B517E002D2B72 /* Program.h */,
+				7EE203300D0B517E002D2B72 /* OpenGl.h */,
+				7EE2032A0D0B516B002D2B72 /* Shader.cpp */,
+				7EE2032B0D0B516B002D2B72 /* Program.cpp */,
+			);
+			name = OpenGl;
+			sourceTree = "<group>";
+		};
 		C6A0FF2B0290797F04C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +257,9 @@
 				7E898A5F0D08C6960077F9ED /* IosIStream.h in Headers */,
 				7E898A600D08C6960077F9ED /* IosOStream.h in Headers */,
 				7E898AB20D08CA840077F9ED /* Semaphore.h in Headers */,
+				7EE203310D0B517E002D2B72 /* Shader.h in Headers */,
+				7EE203320D0B517E002D2B72 /* Program.h in Headers */,
+				7EE203330D0B517E002D2B72 /* OpenGl.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +326,8 @@
 				7E898A630D08C69F0077F9ED /* IosIStream.cpp in Sources */,
 				7E898A640D08C69F0077F9ED /* IosOStream.cpp in Sources */,
 				7E898AB00D08CA750077F9ED /* Semaphore.cpp in Sources */,
+				7EE2032C0D0B516B002D2B72 /* Shader.cpp in Sources */,
+				7EE2032D0D0B516B002D2B72 /* Program.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

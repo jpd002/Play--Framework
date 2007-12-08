@@ -13,8 +13,8 @@ namespace Framework
 							CProgram();
 							~CProgram();
 
-			operator		GLuint();
-
+			operator		unsigned int();
+			
 			void			AttachShader(GLuint);
 			void			DetachShader(GLuint);
 			bool			Link();
