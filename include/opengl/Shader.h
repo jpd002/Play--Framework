@@ -1,7 +1,7 @@
 #ifndef _SHADER_H_
 #define _SHADER_H_
 
-#include "OpenGl.h"
+#include "OpenGlDef.h"
 #include <stdlib.h>
 
 namespace Framework

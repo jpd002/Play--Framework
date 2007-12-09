@@ -55,7 +55,7 @@
 		7EE2032D0D0B516B002D2B72 /* Program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EE2032B0D0B516B002D2B72 /* Program.cpp */; };
 		7EE203310D0B517E002D2B72 /* Shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE2032E0D0B517E002D2B72 /* Shader.h */; };
 		7EE203320D0B517E002D2B72 /* Program.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE2032F0D0B517E002D2B72 /* Program.h */; };
-		7EE203330D0B517E002D2B72 /* OpenGl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE203300D0B517E002D2B72 /* OpenGl.h */; };
+		7EEF33CE0D0B933C005FE2D8 /* OpenGlDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EEF33CD0D0B933C005FE2D8 /* OpenGlDef.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,7 +107,7 @@
 		7EE2032B0D0B516B002D2B72 /* Program.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Program.cpp; path = src/opengl/Program.cpp; sourceTree = "<group>"; };
 		7EE2032E0D0B517E002D2B72 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shader.h; path = include/opengl/Shader.h; sourceTree = "<group>"; };
 		7EE2032F0D0B517E002D2B72 /* Program.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Program.h; path = include/opengl/Program.h; sourceTree = "<group>"; };
-		7EE203300D0B517E002D2B72 /* OpenGl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGl.h; path = include/opengl/OpenGl.h; sourceTree = "<group>"; };
+		7EEF33CD0D0B933C005FE2D8 /* OpenGlDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGlDef.h; path = include/opengl/OpenGlDef.h; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -211,9 +211,9 @@
 		7EE203290D0B5158002D2B72 /* OpenGl */ = {
 			isa = PBXGroup;
 			children = (
+				7EEF33CD0D0B933C005FE2D8 /* OpenGlDef.h */,
 				7EE2032E0D0B517E002D2B72 /* Shader.h */,
 				7EE2032F0D0B517E002D2B72 /* Program.h */,
-				7EE203300D0B517E002D2B72 /* OpenGl.h */,
 				7EE2032A0D0B516B002D2B72 /* Shader.cpp */,
 				7EE2032B0D0B516B002D2B72 /* Program.cpp */,
 			);
@@ -259,7 +259,7 @@
 				7E898AB20D08CA840077F9ED /* Semaphore.h in Headers */,
 				7EE203310D0B517E002D2B72 /* Shader.h in Headers */,
 				7EE203320D0B517E002D2B72 /* Program.h in Headers */,
-				7EE203330D0B517E002D2B72 /* OpenGl.h in Headers */,
+				7EEF33CE0D0B933C005FE2D8 /* OpenGlDef.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

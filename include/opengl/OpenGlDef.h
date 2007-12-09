@@ -1,5 +1,5 @@
-#ifndef _OPENGL_H_
-#define _OPENGL_H_
+#ifndef _OPENGLDEF_H_
+#define _OPENGLDEF_H_
 
 #ifdef WIN32
 #include <windows.h>
@@ -9,6 +9,7 @@
 #else
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
+#include <OpenGL/OpenGL.h>
 #endif
 
 #endif

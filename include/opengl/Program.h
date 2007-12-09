@@ -1,7 +1,7 @@
 #ifndef _PROGRAM_H_
 #define _PROGRAM_H_
 
-#include "OpenGl.h"
+#include "OpenGlDef.h"
 
 namespace Framework
 {
