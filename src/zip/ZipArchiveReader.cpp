@@ -1,5 +1,6 @@
 #include <zlib.h>
 #include <algorithm>
+#include <functional>
 #include <stdexcept>
 #include "zip/ZipArchiveReader.h"
 #include "zip/ZipInflateStream.h"
@@ -7,6 +8,7 @@
 
 using namespace Framework;
 using namespace std;
+using namespace std::tr1;
 using namespace Zip;
 
 CZipArchiveReader::CZipArchiveReader(CStream& stream) :
@@ -21,7 +23,7 @@ CZipArchiveReader::~CZipArchiveReader()
     
 }
 
-CStream* CZipArchiveReader::BeginReadFile(const char* fileName)
+CZipArchiveReader::StreamPtr CZipArchiveReader::BeginReadFile(const char* fileName)
 {
     if(m_readingLock)
     {
@@ -48,7 +50,9 @@ CStream* CZipArchiveReader::BeginReadFile(const char* fileName)
         throw runtime_error("Unsupported compression method.");
     }
     m_readingLock = true;
-    return new CZipInflateStream(m_stream, fileHeader.compressedSize);
+    return StreamPtr(
+        new CZipInflateStream(m_stream, fileHeader.compressedSize),
+        bind(&CZipArchiveReader::EndReadFile, this, _1));
 }
 
 void CZipArchiveReader::EndReadFile(CStream* stream)
