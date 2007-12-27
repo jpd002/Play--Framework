@@ -19,6 +19,7 @@ typedef long int32;
 
 //Fixes compilation problem under xcode
 #ifndef _UINT32
+#define _UINT32
 typedef unsigned long uint32;
 #endif
 

@@ -47,6 +47,19 @@
 		7E898A640D08C69F0077F9ED /* IosOStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898A620D08C69F0077F9ED /* IosOStream.cpp */; };
 		7E898AB00D08CA750077F9ED /* Semaphore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E898AAF0D08CA750077F9ED /* Semaphore.cpp */; };
 		7E898AB20D08CA840077F9ED /* Semaphore.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E898AB10D08CA840077F9ED /* Semaphore.h */; };
+		7E8BEECB0D171BC800CBEDE8 /* ZipStoreStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BEEC50D171BC800CBEDE8 /* ZipStoreStream.cpp */; };
+		7E8BEECC0D171BC800CBEDE8 /* ZipInflateStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BEEC60D171BC800CBEDE8 /* ZipInflateStream.cpp */; };
+		7E8BEECD0D171BC800CBEDE8 /* ZipFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BEEC70D171BC800CBEDE8 /* ZipFile.cpp */; };
+		7E8BEECE0D171BC800CBEDE8 /* ZipDeflateStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BEEC80D171BC800CBEDE8 /* ZipDeflateStream.cpp */; };
+		7E8BEECF0D171BC800CBEDE8 /* ZipArchiveWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BEEC90D171BC800CBEDE8 /* ZipArchiveWriter.cpp */; };
+		7E8BEED00D171BC800CBEDE8 /* ZipArchiveReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BEECA0D171BC800CBEDE8 /* ZipArchiveReader.cpp */; };
+		7E8BEED80D171BD700CBEDE8 /* ZipStoreStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8BEED10D171BD700CBEDE8 /* ZipStoreStream.h */; };
+		7E8BEED90D171BD700CBEDE8 /* ZipInflateStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8BEED20D171BD700CBEDE8 /* ZipInflateStream.h */; };
+		7E8BEEDA0D171BD700CBEDE8 /* ZipFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8BEED30D171BD700CBEDE8 /* ZipFile.h */; };
+		7E8BEEDB0D171BD700CBEDE8 /* ZipDefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8BEED40D171BD700CBEDE8 /* ZipDefs.h */; };
+		7E8BEEDC0D171BD700CBEDE8 /* ZipDeflateStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8BEED50D171BD700CBEDE8 /* ZipDeflateStream.h */; };
+		7E8BEEDD0D171BD700CBEDE8 /* ZipArchiveWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8BEED60D171BD700CBEDE8 /* ZipArchiveWriter.h */; };
+		7E8BEEDE0D171BD700CBEDE8 /* ZipArchiveReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E8BEED70D171BD700CBEDE8 /* ZipArchiveReader.h */; };
 		7EC8D9CB0CD95EFB0056E15E /* StdStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8D9CA0CD95EFB0056E15E /* StdStream.cpp */; };
 		7EC8D9CD0CD95F1C0056E15E /* Stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8D9CC0CD95F1C0056E15E /* Stream.cpp */; };
 		7EC8D9D00CD95F420056E15E /* StdStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EC8D9CE0CD95F420056E15E /* StdStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -99,6 +112,19 @@
 		7E898A620D08C69F0077F9ED /* IosOStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosOStream.cpp; path = src/IosOStream.cpp; sourceTree = "<group>"; };
 		7E898AAF0D08CA750077F9ED /* Semaphore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Semaphore.cpp; path = src/Semaphore.cpp; sourceTree = "<group>"; };
 		7E898AB10D08CA840077F9ED /* Semaphore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Semaphore.h; path = include/Semaphore.h; sourceTree = "<group>"; };
+		7E8BEEC50D171BC800CBEDE8 /* ZipStoreStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZipStoreStream.cpp; path = src/zip/ZipStoreStream.cpp; sourceTree = "<group>"; };
+		7E8BEEC60D171BC800CBEDE8 /* ZipInflateStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZipInflateStream.cpp; path = src/zip/ZipInflateStream.cpp; sourceTree = "<group>"; };
+		7E8BEEC70D171BC800CBEDE8 /* ZipFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZipFile.cpp; path = src/zip/ZipFile.cpp; sourceTree = "<group>"; };
+		7E8BEEC80D171BC800CBEDE8 /* ZipDeflateStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZipDeflateStream.cpp; path = src/zip/ZipDeflateStream.cpp; sourceTree = "<group>"; };
+		7E8BEEC90D171BC800CBEDE8 /* ZipArchiveWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZipArchiveWriter.cpp; path = src/zip/ZipArchiveWriter.cpp; sourceTree = "<group>"; };
+		7E8BEECA0D171BC800CBEDE8 /* ZipArchiveReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZipArchiveReader.cpp; path = src/zip/ZipArchiveReader.cpp; sourceTree = "<group>"; };
+		7E8BEED10D171BD700CBEDE8 /* ZipStoreStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipStoreStream.h; path = include/zip/ZipStoreStream.h; sourceTree = "<group>"; };
+		7E8BEED20D171BD700CBEDE8 /* ZipInflateStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipInflateStream.h; path = include/zip/ZipInflateStream.h; sourceTree = "<group>"; };
+		7E8BEED30D171BD700CBEDE8 /* ZipFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipFile.h; path = include/zip/ZipFile.h; sourceTree = "<group>"; };
+		7E8BEED40D171BD700CBEDE8 /* ZipDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipDefs.h; path = include/zip/ZipDefs.h; sourceTree = "<group>"; };
+		7E8BEED50D171BD700CBEDE8 /* ZipDeflateStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipDeflateStream.h; path = include/zip/ZipDeflateStream.h; sourceTree = "<group>"; };
+		7E8BEED60D171BD700CBEDE8 /* ZipArchiveWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipArchiveWriter.h; path = include/zip/ZipArchiveWriter.h; sourceTree = "<group>"; };
+		7E8BEED70D171BD700CBEDE8 /* ZipArchiveReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipArchiveReader.h; path = include/zip/ZipArchiveReader.h; sourceTree = "<group>"; };
 		7EC8D9CA0CD95EFB0056E15E /* StdStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StdStream.cpp; path = src/StdStream.cpp; sourceTree = "<group>"; };
 		7EC8D9CC0CD95F1C0056E15E /* Stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Stream.cpp; path = src/Stream.cpp; sourceTree = "<group>"; };
 		7EC8D9CE0CD95F420056E15E /* StdStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StdStream.h; path = include/StdStream.h; sourceTree = "<group>"; };
@@ -135,26 +161,27 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				7E8BEEC40D171BB500CBEDE8 /* Zip */,
 				7EE203290D0B5158002D2B72 /* OpenGl */,
-				7E898AB10D08CA840077F9ED /* Semaphore.h */,
+				7E898A010D08C4F00077F9ED /* Xml */,
+				7E898A380D08C64A0077F9ED /* Mpeg2 */,
 				7E898AAF0D08CA750077F9ED /* Semaphore.cpp */,
+				7E898AB10D08CA840077F9ED /* Semaphore.h */,
 				7E898A610D08C69F0077F9ED /* IosIStream.cpp */,
 				7E898A620D08C69F0077F9ED /* IosOStream.cpp */,
 				7E898A5D0D08C6960077F9ED /* IosIStream.h */,
 				7E898A5E0D08C6960077F9ED /* IosOStream.h */,
-				7E898A380D08C64A0077F9ED /* Mpeg2 */,
-				7E898A2B0D08C5CE0077F9ED /* GZipStream.h */,
-				7E898A010D08C4F00077F9ED /* Xml */,
 				7E37676B0CDAC5C0001F232D /* PtrMacro.h */,
 				7E898A290D08C5AF0077F9ED /* GZipStream.cpp */,
-				7E37675C0CDAC570001F232D /* MemStream.h */,
-				7E37675D0CDAC570001F232D /* PtrStream.h */,
+				7E898A2B0D08C5CE0077F9ED /* GZipStream.h */,
 				7E3767580CDAC560001F232D /* MemStream.cpp */,
+				7E37675C0CDAC570001F232D /* MemStream.h */,
 				7E3767590CDAC560001F232D /* PtrStream.cpp */,
-				7EC8D9CE0CD95F420056E15E /* StdStream.h */,
-				7EC8D9CF0CD95F420056E15E /* Stream.h */,
-				7EC8D9CC0CD95F1C0056E15E /* Stream.cpp */,
+				7E37675D0CDAC570001F232D /* PtrStream.h */,
 				7EC8D9CA0CD95EFB0056E15E /* StdStream.cpp */,
+				7EC8D9CE0CD95F420056E15E /* StdStream.h */,
+				7EC8D9CC0CD95F1C0056E15E /* Stream.cpp */,
+				7EC8D9CF0CD95F420056E15E /* Stream.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -206,6 +233,26 @@
 				7E898A400D08C6590077F9ED /* VLCTable.cpp */,
 			);
 			name = Mpeg2;
+			sourceTree = "<group>";
+		};
+		7E8BEEC40D171BB500CBEDE8 /* Zip */ = {
+			isa = PBXGroup;
+			children = (
+				7E8BEED10D171BD700CBEDE8 /* ZipStoreStream.h */,
+				7E8BEED20D171BD700CBEDE8 /* ZipInflateStream.h */,
+				7E8BEED30D171BD700CBEDE8 /* ZipFile.h */,
+				7E8BEED40D171BD700CBEDE8 /* ZipDefs.h */,
+				7E8BEED50D171BD700CBEDE8 /* ZipDeflateStream.h */,
+				7E8BEED60D171BD700CBEDE8 /* ZipArchiveWriter.h */,
+				7E8BEED70D171BD700CBEDE8 /* ZipArchiveReader.h */,
+				7E8BEEC50D171BC800CBEDE8 /* ZipStoreStream.cpp */,
+				7E8BEEC60D171BC800CBEDE8 /* ZipInflateStream.cpp */,
+				7E8BEEC70D171BC800CBEDE8 /* ZipFile.cpp */,
+				7E8BEEC80D171BC800CBEDE8 /* ZipDeflateStream.cpp */,
+				7E8BEEC90D171BC800CBEDE8 /* ZipArchiveWriter.cpp */,
+				7E8BEECA0D171BC800CBEDE8 /* ZipArchiveReader.cpp */,
+			);
+			name = Zip;
 			sourceTree = "<group>";
 		};
 		7EE203290D0B5158002D2B72 /* OpenGl */ = {
@@ -260,6 +307,13 @@
 				7EE203310D0B517E002D2B72 /* Shader.h in Headers */,
 				7EE203320D0B517E002D2B72 /* Program.h in Headers */,
 				7EEF33CE0D0B933C005FE2D8 /* OpenGlDef.h in Headers */,
+				7E8BEED80D171BD700CBEDE8 /* ZipStoreStream.h in Headers */,
+				7E8BEED90D171BD700CBEDE8 /* ZipInflateStream.h in Headers */,
+				7E8BEEDA0D171BD700CBEDE8 /* ZipFile.h in Headers */,
+				7E8BEEDB0D171BD700CBEDE8 /* ZipDefs.h in Headers */,
+				7E8BEEDC0D171BD700CBEDE8 /* ZipDeflateStream.h in Headers */,
+				7E8BEEDD0D171BD700CBEDE8 /* ZipArchiveWriter.h in Headers */,
+				7E8BEEDE0D171BD700CBEDE8 /* ZipArchiveReader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +382,12 @@
 				7E898AB00D08CA750077F9ED /* Semaphore.cpp in Sources */,
 				7EE2032C0D0B516B002D2B72 /* Shader.cpp in Sources */,
 				7EE2032D0D0B516B002D2B72 /* Program.cpp in Sources */,
+				7E8BEECB0D171BC800CBEDE8 /* ZipStoreStream.cpp in Sources */,
+				7E8BEECC0D171BC800CBEDE8 /* ZipInflateStream.cpp in Sources */,
+				7E8BEECD0D171BC800CBEDE8 /* ZipFile.cpp in Sources */,
+				7E8BEECE0D171BC800CBEDE8 /* ZipDeflateStream.cpp in Sources */,
+				7E8BEECF0D171BC800CBEDE8 /* ZipArchiveWriter.cpp in Sources */,
+				7E8BEED00D171BC800CBEDE8 /* ZipArchiveReader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,7 +427,11 @@
 			buildSettings = {
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "~/Projects/Framework/include";
+				HEADER_SEARCH_PATHS = (
+					"~/Libraries/boost_1_34_1/boost/tr1/tr1",
+					"~/Libraries/boost_1_34_1/",
+					"~/Projects/Framework/include",
+				);
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
@@ -379,7 +443,11 @@
 				ARCHS = "$(NATIVE_ARCH)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "~/Projects/Framework/include";
+				HEADER_SEARCH_PATHS = (
+					"~/Libraries/boost_1_34_1/boost/tr1/tr1",
+					"~/Libraries/boost_1_34_1/",
+					"~/Projects/Framework/include",
+				);
 				PREBINDING = NO;
 				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 				VALID_ARCHS = "i386 x86_64";
