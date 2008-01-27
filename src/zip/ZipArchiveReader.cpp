@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <functional>
 #include <stdexcept>
+#include <boost/regex.hpp>
 #include "zip/ZipArchiveReader.h"
 #include "zip/ZipInflateStream.h"
 #include "alloca_def.h"
@@ -10,6 +11,7 @@ using namespace Framework;
 using namespace std;
 using namespace std::tr1;
 using namespace Zip;
+using namespace boost;
 
 CZipArchiveReader::CZipArchiveReader(CStream& stream) :
 m_stream(stream),
@@ -63,6 +65,23 @@ void CZipArchiveReader::EndReadFile(CStream* stream)
     }
     delete stream;
     m_readingLock = false;
+}
+
+CZipArchiveReader::FileNameList CZipArchiveReader::GetFileNameList(const char* regexString)
+{
+    FileNameList result;
+    regex expression(regexString);
+    for(FileHeaderList::const_iterator fileIterator(m_files.begin());
+        fileIterator != m_files.end(); fileIterator++)
+    {
+        const string& fileName(fileIterator->first);
+        cmatch match;
+        if(regex_match(fileName.c_str(), match, expression))
+        {
+            result.push_back(fileName);
+        }
+    }
+    return result;
 }
 
 void CZipArchiveReader::Read(Framework::CStream& stream)
