@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8,00"
+	Version="9,00"
 	Name="Framework"
-	ProjectGUID="{CF8E8640-24C8-49F1-B510-CF5BB945F99C}"
+	ProjectGUID="{E3CCDBB1-FB55-4416-BE80-FAB313BE549C}"
 	RootNamespace="Framework"
 	Keyword="Win32Proj"
+	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
 		<Platform
 			Name="Win32"
-		/>
-		<Platform
-			Name="x64"
 		/>
 	</Platforms>
 	<ToolFiles>
@@ -20,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="1"
 			>
@@ -43,14 +41,13 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(ProjectDir)\include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;UNICODE;_CRT_SECURE_NO_DEPRECATE;_MSVC"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)/include&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_MSVC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="4"
 			/>
 			<Tool
@@ -64,72 +61,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\$(ProjectName).lib"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Debug|x64"
-			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
-			ConfigurationType="4"
-			CharacterSet="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-				TargetEnvironment="3"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="0"
-				AdditionalIncludeDirectories="$(ProjectDir)\include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;UNICODE;_CRT_SECURE_NO_DEPRECATE;GLEW_STATIC;_MSVC"
-				MinimalRebuild="true"
-				BasicRuntimeChecks="3"
-				RuntimeLibrary="1"
-				UsePrecompiledHeader="0"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\$(ProjectName).lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -149,8 +80,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -172,12 +103,14 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(ProjectDir)\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;UNICODE;_CRT_SECURE_NO_DEPRECATE;_MSVC"
+				Optimization="2"
+				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)/include&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_MSVC"
 				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="3"
 			/>
 			<Tool
@@ -191,211 +124,6 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\$(ProjectName).lib"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Release|x64"
-			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
-			ConfigurationType="4"
-			CharacterSet="1"
-			WholeProgramOptimization="0"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-				TargetEnvironment="3"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(ProjectDir)\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;UNICODE;_CRT_SECURE_NO_DEPRECATE"
-				RuntimeLibrary="0"
-				UsePrecompiledHeader="0"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\$(ProjectName).lib"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Debug+|Win32"
-			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
-			ConfigurationType="4"
-			CharacterSet="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="3"
-				InlineFunctionExpansion="2"
-				EnableIntrinsicFunctions="true"
-				FavorSizeOrSpeed="1"
-				OmitFramePointers="true"
-				EnableFiberSafeOptimizations="false"
-				WholeProgramOptimization="false"
-				AdditionalIncludeDirectories="$(ProjectDir)\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;UNICODE;_CRT_SECURE_NO_DEPRECATE;_MSVC"
-				MinimalRebuild="false"
-				BasicRuntimeChecks="0"
-				RuntimeLibrary="0"
-				UsePrecompiledHeader="0"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\$(ProjectName).lib"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
-			Name="Debug+|x64"
-			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
-			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
-			ConfigurationType="4"
-			CharacterSet="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-				TargetEnvironment="3"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				Optimization="3"
-				InlineFunctionExpansion="2"
-				EnableIntrinsicFunctions="true"
-				FavorSizeOrSpeed="1"
-				OmitFramePointers="true"
-				EnableFiberSafeOptimizations="false"
-				WholeProgramOptimization="false"
-				AdditionalIncludeDirectories="$(ProjectDir)\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;UNICODE;_CRT_SECURE_NO_DEPRECATE"
-				MinimalRebuild="false"
-				BasicRuntimeChecks="0"
-				RuntimeLibrary="0"
-				UsePrecompiledHeader="0"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
-				DebugInformationFormat="3"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="$(OutDir)\$(ProjectName).lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -423,393 +151,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\src\Bitmap.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\BMP.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\Deflate.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\Endian.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\GZipStream.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\IosIStream.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\IosOStream.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\MemStream.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\PNG.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\PtrStream.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\Semaphore.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\StdStream.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\Stream.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\StreamBitStream.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\string_cast.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\StrPair.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\StrPrimitives.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\Thread.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\Utf8.cpp"
-				>
-			</File>
-			<Filter
-				Name="Layouts"
-				>
-				<File
-					RelativePath=".\src\FlatLayout.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\GridLayout.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\HorizontalLayout.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\LayoutBase.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\LayoutBaseItem.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\LayoutObject.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\LayoutStretch.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\VerticalLayout.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="win32"
-				>
-				<File
-					RelativePath=".\src\win32\Button.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\ClientDeviceContext.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\ColumnTreeView.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\ComboBox.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\CustomDrawn.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\DefaultFonts.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\DeviceContext.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\Edit.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\FileDialog.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\FindFile.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\Font.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\Header.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\HorizontalSplitter.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\InputBox.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\LayoutWindow.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\ListBox.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\ListView.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\MDIChild.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\MDIClient.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\MDIFrame.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\MemoryDeviceContext.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\ModalWindow.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\Rect.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\RegistryTraits.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\RichTextEdit.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\ScrollBar.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\Splitter.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\Static.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\StatusBar.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\Tab.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\ToolBar.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\ToolTip.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\TrayIcon.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\TrayIconServer.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\TreeView.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\VerticalSplitter.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\win32\Window.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="xml"
-				>
-				<File
-					RelativePath=".\src\xml\FilteringNodeIterator.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\Xml\Node.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\Xml\Parser.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\Xml\Utils.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\Xml\Writer.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="mpeg2"
-				>
-				<File
-					RelativePath=".\src\mpeg2\CodedBlockPatternTable.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\mpeg2\DcSizeChrominanceTable.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\mpeg2\DcSizeLuminanceTable.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\mpeg2\DctCoefficientTable0.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\mpeg2\DctCoefficientTable1.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\mpeg2\InverseScanTable.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\mpeg2\QuantiserScaleTable.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\mpeg2\VLCTable.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="idct"
-				>
-				<File
-					RelativePath=".\src\idct\IEEE1180.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\idct\TrivialC.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="odbc"
-				>
-				<File
-					RelativePath=".\src\odbc\Connection.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\odbc\Statement.cpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="zip"
-				>
-				<File
-					RelativePath=".\src\zip\ZipArchiveReader.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\zip\ZipArchiveWriter.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\zip\ZipDeflateStream.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\zip\ZipFile.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\zip\ZipInflateStream.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\src\zip\ZipStoreStream.cpp"
-					>
-				</File>
-			</Filter>
-		</Filter>
-		<Filter
-			Name="Header Files"
-			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
-			>
-			<File
 				RelativePath=".\include\alloca_def.h"
 				>
 			</File>
 			<File
 				RelativePath=".\include\Base64.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Bitmap.cpp"
 				>
 			</File>
 			<File
@@ -821,11 +171,27 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\BMP.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\include\BMP.h"
 				>
 			</File>
 			<File
+				RelativePath=".\include\countof.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Deflate.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\include\Deflate.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Endian.cpp"
 				>
 			</File>
 			<File
@@ -837,7 +203,31 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\EventEx.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\EventHandler.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\FlatLayout.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\FlatLayout.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\GridLayout.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\GridLayout.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\GZipStream.cpp"
 				>
 			</File>
 			<File
@@ -845,11 +235,59 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\HorizontalLayout.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\HorizontalLayout.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\IosIStream.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\include\IosIStream.h"
 				>
 			</File>
 			<File
+				RelativePath=".\src\IosOStream.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\include\IosOStream.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\LayoutBase.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\LayoutBase.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\LayoutBaseItem.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\LayoutBaseItem.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\LayoutObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\LayoutObject.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\LayoutStretch.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\LayoutStretch.h"
 				>
 			</File>
 			<File
@@ -861,7 +299,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\MemStream.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\include\MemStream.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\PNG.cpp"
 				>
 			</File>
 			<File
@@ -873,7 +319,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\PtrStream.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\include\PtrStream.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Semaphore.cpp"
 				>
 			</File>
 			<File
@@ -885,7 +339,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\include\win32\StatusBar.h"
+				RelativePath=".\src\StdStream.cpp"
 				>
 			</File>
 			<File
@@ -897,7 +351,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Stream.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\include\Stream.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StreamBitStream.cpp"
 				>
 			</File>
 			<File
@@ -909,11 +371,23 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\string_cast.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\include\string_cast.h"
 				>
 			</File>
 			<File
+				RelativePath=".\src\StrPair.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\include\StrPair.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\StrPrimitives.cpp"
 				>
 			</File>
 			<File
@@ -925,238 +399,46 @@
 				>
 			</File>
 			<File
-				RelativePath=".\include\Thread.h"
+				RelativePath=".\include\Types.h"
 				>
 			</File>
 			<File
-				RelativePath=".\include\Types.h"
+				RelativePath=".\src\Utf8.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\include\Utf8.h"
 				>
 			</File>
+			<File
+				RelativePath=".\src\VerticalLayout.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\VerticalLayout.h"
+				>
+			</File>
 			<Filter
-				Name="Layouts"
+				Name="idct"
 				>
 				<File
-					RelativePath=".\include\FlatLayout.h"
+					RelativePath=".\src\idct\IEEE1180.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\include\GridLayout.h"
+					RelativePath=".\include\idct\IEEE1180.h"
 					>
 				</File>
 				<File
-					RelativePath=".\include\HorizontalLayout.h"
+					RelativePath=".\include\idct\Interface.h"
 					>
 				</File>
 				<File
-					RelativePath=".\include\LayoutBase.h"
+					RelativePath=".\src\idct\TrivialC.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\include\LayoutBaseItem.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\LayoutObject.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\LayoutStretch.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\VerticalLayout.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="win32"
-				>
-				<File
-					RelativePath=".\include\win32\Button.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\ClientDeviceContext.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\ColumnTreeView.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\ComboBox.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\CustomDrawn.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\DblBufferedCtrl.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\DefaultFonts.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\DeviceContext.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\Edit.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\FileDialog.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\FindFile.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\Font.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\GdiObj.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\Header.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\HorizontalSplitter.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\InputBox.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\Layouts.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\LayoutWindow.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\ListBox.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\ListView.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\MDIChild.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\MDIClient.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\MDIFrame.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\MemoryDeviceContext.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\ModalWindow.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\Rect.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\RegistryTraits.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\RegistryValue.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\RichTextEdit.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\ScrollBar.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\Splitter.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\Static.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\Tab.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\ToolBar.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\ToolTip.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\TrayIcon.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\TrayIconServer.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\TreeView.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\VerticalSplitter.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\win32\Window.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="xml"
-				>
-				<File
-					RelativePath=".\include\xml\FilteringNodeIterator.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\Xml\Node.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\Xml\Parser.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\Xml\Utils.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\Xml\Writer.h"
+					RelativePath=".\include\idct\TrivialC.h"
 					>
 				</File>
 			</Filter>
@@ -1164,11 +446,23 @@
 				Name="mpeg2"
 				>
 				<File
+					RelativePath=".\src\mpeg2\CodedBlockPatternTable.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\include\mpeg2\CodedBlockPatternTable.h"
 					>
 				</File>
 				<File
+					RelativePath=".\src\mpeg2\DcSizeChrominanceTable.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\include\mpeg2\DcSizeChrominanceTable.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\mpeg2\DcSizeLuminanceTable.cpp"
 					>
 				</File>
 				<File
@@ -1180,7 +474,15 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\mpeg2\DctCoefficientTable0.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\include\mpeg2\DctCoefficientTable0.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\mpeg2\DctCoefficientTable1.cpp"
 					>
 				</File>
 				<File
@@ -1188,11 +490,23 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\mpeg2\InverseScanTable.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\include\mpeg2\InverseScanTable.h"
 					>
 				</File>
 				<File
+					RelativePath=".\src\mpeg2\QuantiserScaleTable.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\include\mpeg2\QuantiserScaleTable.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\mpeg2\VLCTable.cpp"
 					>
 				</File>
 				<File
@@ -1201,26 +515,18 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="idct"
-				>
-				<File
-					RelativePath=".\include\idct\IEEE1180.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\idct\Interface.h"
-					>
-				</File>
-				<File
-					RelativePath=".\include\idct\TrivialC.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="odbc"
 				>
 				<File
+					RelativePath=".\src\odbc\Connection.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\include\odbc\Connection.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\odbc\Statement.cpp"
 					>
 				</File>
 				<File
@@ -1229,14 +535,386 @@
 				</File>
 			</Filter>
 			<Filter
+				Name="win32"
+				>
+				<File
+					RelativePath=".\src\win32\Button.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\Button.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\ClientDeviceContext.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\ClientDeviceContext.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\ColumnTreeView.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\ColumnTreeView.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\ComboBox.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\ComboBox.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\CustomDrawn.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\CustomDrawn.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\DblBufferedCtrl.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\DefaultFonts.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\DefaultFonts.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\DeviceContext.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\DeviceContext.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\Edit.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\Edit.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\FileDialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\FileDialog.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\FindFile.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\FindFile.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\Font.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\Font.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\GdiObj.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\Header.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\Header.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\HorizontalSplitter.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\HorizontalSplitter.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\InputBox.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\InputBox.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\Layouts.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\LayoutWindow.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\LayoutWindow.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\ListBox.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\ListBox.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\ListView.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\ListView.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\MDIChild.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\MDIChild.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\MDIClient.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\MDIClient.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\MDIFrame.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\MDIFrame.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\MemoryDeviceContext.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\MemoryDeviceContext.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\ModalWindow.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\ModalWindow.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\Rect.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\Rect.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\RegistryTraits.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\RegistryTraits.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\RegistryValue.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\RichTextEdit.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\RichTextEdit.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\ScrollBar.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\ScrollBar.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\Splitter.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\Splitter.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\Static.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\Static.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\StatusBar.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\StatusBar.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\Tab.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\Tab.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\ToolBar.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\ToolBar.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\ToolTip.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\ToolTip.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\TrayIcon.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\TrayIcon.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\TrayIconServer.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\TrayIconServer.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\TreeView.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\TreeView.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\VerticalSplitter.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\VerticalSplitter.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\win32\Window.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\Window.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="xml"
+				>
+				<File
+					RelativePath=".\src\xml\FilteringNodeIterator.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\xml\FilteringNodeIterator.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\xml\Node.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\xml\Node.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\xml\Parser.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\xml\Parser.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\xml\Utils.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\xml\Utils.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\xml\Writer.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\xml\Writer.h"
+					>
+				</File>
+			</Filter>
+			<Filter
 				Name="zip"
 				>
+				<File
+					RelativePath=".\src\zip\ZipArchiveReader.cpp"
+					>
+				</File>
 				<File
 					RelativePath=".\include\zip\ZipArchiveReader.h"
 					>
 				</File>
 				<File
+					RelativePath=".\src\zip\ZipArchiveWriter.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\include\zip\ZipArchiveWriter.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\zip\ZipDeflateStream.cpp"
 					>
 				</File>
 				<File
@@ -1248,11 +926,23 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\zip\ZipFile.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\include\zip\ZipFile.h"
 					>
 				</File>
 				<File
+					RelativePath=".\src\zip\ZipInflateStream.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\include\zip\ZipInflateStream.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\zip\ZipStoreStream.cpp"
 					>
 				</File>
 				<File

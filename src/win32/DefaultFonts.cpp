@@ -1,3 +1,4 @@
+#include <assert.h>
 #include "win32/DefaultFonts.h"
 
 using namespace Framework;
@@ -14,8 +15,12 @@ HFONT CDefaultFonts::CreateMessageFont()
 {
 	NONCLIENTMETRICS Metrics;
 	memset(&Metrics, 0, sizeof(NONCLIENTMETRICS));
-	Metrics.cbSize = sizeof(NONCLIENTMETRICS);
+    //SDK 6.0 is broken... so we need to do that
+//	Metrics.cbSize = sizeof(NONCLIENTMETRICS);
+    Metrics.cbSize = 500;
 
-	SystemParametersInfo(SPI_GETNONCLIENTMETRICS, sizeof(NONCLIENTMETRICS), &Metrics, 0);
+    assert(sizeof(NONCLIENTMETRICS) >= Metrics.cbSize);
+
+	SystemParametersInfo(SPI_GETNONCLIENTMETRICS, 0, &Metrics, 0);
 	return CreateFontIndirect(&Metrics.lfMessageFont);
 }
