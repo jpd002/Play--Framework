@@ -456,8 +456,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"~/Libraries/boost_1_34_1/boost/tr1/tr1",
-					"~/Libraries/boost_1_34_1/",
+					"/usr/local/include/boost-1_35/boost/tr1/tr1/",
+					"/usr/local/include/boost-1_35/",
 					"~/Projects/Framework/include",
 				);
 				PREBINDING = NO;
@@ -472,8 +472,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"~/Libraries/boost_1_34_1/boost/tr1/tr1",
-					"~/Libraries/boost_1_34_1/",
+					"/usr/local/include/boost-1_35/boost/tr1/tr1/",
+					"/usr/local/include/boost-1_35/",
 					"~/Projects/Framework/include",
 				);
 				PREBINDING = NO;
