@@ -10,22 +10,18 @@ CFlatLayout(0, 1, nSpacing)
 
 unsigned int CVerticalLayout::GetPreferredWidth()
 {
-	unsigned int nWidth;
-	CLayoutObject* pObject;
-	CList<CLayoutObject>::ITERATOR itObject;
+    unsigned int nWidth = 0;
+    for(ObjectList::iterator objectIterator(m_objects.begin()); 
+        objectIterator != m_objects.end(); objectIterator++)
+    {
+        CLayoutObject& object(*objectIterator);
+        if(object.GetPreferredWidth() > nWidth)
+        {
+            nWidth = object.GetPreferredWidth();
+        }
+    }
 
-	nWidth = 0;
-	for(itObject = m_Object.Begin(); itObject.HasNext(); itObject++)
-	{
-		pObject = (*itObject);
-		if(pObject == NULL) continue;
-		if(pObject->GetPreferredWidth() > nWidth)
-		{
-			nWidth = pObject->GetPreferredWidth();
-		}
-	}
-
-	return nWidth;
+    return nWidth;
 }
 
 unsigned int CVerticalLayout::GetPreferredHeight()

@@ -15,22 +15,18 @@ unsigned int CHorizontalLayout::GetPreferredWidth()
 
 unsigned int CHorizontalLayout::GetPreferredHeight()
 {
-	unsigned int nHeight;
-	CLayoutObject* pObject;
-	CList<CLayoutObject>::ITERATOR itObject;
+    unsigned int nHeight = 0;
+    for(ObjectList::iterator objectIterator(m_objects.begin()); 
+        objectIterator != m_objects.end(); objectIterator++)
+    {
+        CLayoutObject& object(*objectIterator);
+        if(object.GetPreferredHeight() > nHeight)
+        {
+            nHeight = object.GetPreferredHeight();
+        }
+    }
 
-	nHeight = 0;
-	for(itObject = m_Object.Begin(); itObject.HasNext(); itObject++)
-	{
-		pObject = (*itObject);
-		if(pObject == NULL) continue;
-		if(pObject->GetPreferredHeight() > nHeight)
-		{
-			nHeight = pObject->GetPreferredHeight();
-		}
-	}
-
-	return nHeight;
+    return nHeight;
 }
 
 CLayoutBaseItem* CHorizontalLayout::CreateLayoutBaseItem(CLayoutObject* pObject)

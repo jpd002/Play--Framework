@@ -1,12 +1,14 @@
 #ifndef _LAYOUTBASEITEM_H_
 #define _LAYOUTBASEITEM_H_
 
+#include <boost/noncopyable.hpp>
+
 namespace Framework
 {
 
 	class CLayoutObject;
 
-	class CLayoutBaseItem
+    class CLayoutBaseItem : public boost::noncopyable
 	{
 	public:
 						CLayoutBaseItem(unsigned int, unsigned int, CLayoutObject*);

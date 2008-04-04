@@ -1,6 +1,8 @@
 #ifndef _LAYOUTOBJECT_H_
 #define _LAYOUTOBJECT_H_
 
+#include <memory>
+
 #define LAYOUT_DEFAULT_SPACING	(5)
 
 namespace Framework
@@ -47,6 +49,8 @@ namespace Framework
 		unsigned int			m_nHorizontalStretch;
 		unsigned int			m_nVerticalStretch;
 	};
+
+    typedef std::tr1::shared_ptr<CLayoutObject> LayoutObjectPtr;
 };
 
 #endif

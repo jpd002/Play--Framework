@@ -1,27 +1,32 @@
 #ifndef _LAYOUTBASE_H_
 #define _LAYOUTBASE_H_
 
-#include "List.h"
+#include <boost/ptr_container/ptr_list.hpp>
 #include "LayoutBaseItem.h"
 
 namespace Framework
 {
 
-	class CLayoutBase
-	{
-	public:
-									~CLayoutBase();
-		void						Clear();
-		void						InsertItem(CLayoutBaseItem*);
-		void						ComputeRanges(unsigned int);
-		unsigned int				GetPreferredSize();
-		CList<CLayoutBaseItem>*		GetItems();
+    class CLayoutBase
+    {
+    public:
+        typedef boost::ptr_list<CLayoutBaseItem> ItemList;
+        typedef ItemList::const_iterator ItemIterator;
 
-	private:
-		bool						HasOnlyNonStretchable();
-		unsigned int				GetTotalStretchUnits();
-		CList<CLayoutBaseItem>		m_Item;
-	};
+                                    ~CLayoutBase();
+        void                        Clear();
+        void                        InsertItem(CLayoutBaseItem*);
+        void                        ComputeRanges(unsigned int);
+        unsigned int                GetPreferredSize() const;
+        
+        ItemIterator                GetItemsBegin() const;
+        ItemIterator                GetItemsEnd() const;
+
+    private:
+        bool                        HasOnlyNonStretchable() const;
+        unsigned int                GetTotalStretchUnits() const;
+        ItemList                    m_items;
+    };
 
 }
 

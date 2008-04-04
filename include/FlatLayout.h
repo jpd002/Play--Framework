@@ -1,34 +1,37 @@
 #ifndef _FLATLAYOUT_H_
 #define _FLATLAYOUT_H_
 
-#include "List.h"
+#include <boost/ptr_container/ptr_list.hpp>
 #include "LayoutObject.h"
 #include "LayoutBase.h"
 
 namespace Framework
 {
 
-	class CFlatLayout : public CLayoutObject
-	{
-	public:
-									CFlatLayout(unsigned int, unsigned int, unsigned int = LAYOUT_DEFAULT_SPACING);
-		virtual						~CFlatLayout();
-		void						InsertObject(CLayoutObject*);
-		virtual	void				RefreshGeometry();
+    class CFlatLayout : public CLayoutObject, public boost::noncopyable
+    {
+    public:
+        typedef boost::ptr_list<CLayoutObject> ObjectList;
+        typedef ObjectList::const_iterator ObjectIterator;
 
-	protected:
-		virtual CLayoutBaseItem*	CreateLayoutBaseItem(CLayoutObject*)						= 0;
-		virtual void				SetObjectRange(CLayoutObject*, unsigned int, unsigned int)	= 0;
-		virtual unsigned int		GetObjectPreferredSize(CLayoutObject*)						= 0;
-		virtual unsigned int		GetLayoutSize()												= 0;
-		unsigned int				GetPreferredSize();
-		CList<CLayoutObject>		m_Object;
+                                    CFlatLayout(unsigned int, unsigned int, unsigned int = LAYOUT_DEFAULT_SPACING);
+        virtual                     ~CFlatLayout();
+        void                        InsertObject(CLayoutObject*);
+        virtual	void                RefreshGeometry();
 
-	private:
-		CLayoutBase					m_LayoutBase;
-		unsigned int				m_nSpacing;
+    protected:
+        virtual CLayoutBaseItem*    CreateLayoutBaseItem(CLayoutObject*)						= 0;
+        virtual void                SetObjectRange(CLayoutObject*, unsigned int, unsigned int)	= 0;
+        virtual unsigned int        GetObjectPreferredSize(CLayoutObject*)						= 0;
+        virtual unsigned int        GetLayoutSize()												= 0;
+        unsigned int                GetPreferredSize() const;
+        ObjectList                  m_objects;
 
-	};
+    private:
+        CLayoutBase                 m_LayoutBase;
+        unsigned int                m_nSpacing;
+
+    };
 
 }
 
