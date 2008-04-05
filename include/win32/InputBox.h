@@ -4,7 +4,7 @@
 #include "win32/Window.h"
 #include "win32/Button.h"
 #include "win32/Edit.h"
-#include "VerticalLayout.h"
+#include "layout/VerticalLayout.h"
 
 namespace Framework
 {

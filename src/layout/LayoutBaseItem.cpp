@@ -1,4 +1,4 @@
-#include "LayoutBaseItem.h"
+#include "layout/LayoutBaseItem.h"
 #include "PtrMacro.h"
 
 using namespace Framework;
@@ -53,6 +53,7 @@ unsigned int CLayoutBaseItem::GetRangeEnd() const
 
 void CLayoutBaseItem::SetRange(unsigned int nStart, unsigned int nEnd)
 {
+//    assert(nStart <= nEnd);
 	m_nRangeStart = nStart;
 	m_nRangeEnd = nEnd;
 }

@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(ProjectDir)/include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_MSVC"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_MSVC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -106,7 +106,7 @@
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="&quot;$(ProjectDir)/include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_MSVC"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_MSVC"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -211,35 +211,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\FlatLayout.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\FlatLayout.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\GridLayout.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\GridLayout.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\GZipStream.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\include\GZipStream.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\HorizontalLayout.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\HorizontalLayout.h"
 				>
 			</File>
 			<File
@@ -256,38 +232,6 @@
 			</File>
 			<File
 				RelativePath=".\include\IosOStream.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\LayoutBase.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\LayoutBase.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\LayoutBaseItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\LayoutBaseItem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\LayoutObject.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\LayoutObject.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\LayoutStretch.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\LayoutStretch.h"
 				>
 			</File>
 			<File
@@ -408,14 +352,6 @@
 			</File>
 			<File
 				RelativePath=".\include\Utf8.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\VerticalLayout.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\VerticalLayout.h"
 				>
 			</File>
 			<Filter
@@ -947,6 +883,74 @@
 				</File>
 				<File
 					RelativePath=".\include\zip\ZipStoreStream.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="layout"
+				>
+				<File
+					RelativePath=".\src\layout\FlatLayout.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\layout\FlatLayout.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\layout\GridLayout.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\layout\GridLayout.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\layout\HorizontalLayout.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\layout\HorizontalLayout.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\layout\LayoutBase.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\layout\LayoutBase.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\layout\LayoutBaseItem.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\layout\LayoutBaseItem.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\layout\LayoutObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\layout\LayoutObject.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\layout\LayoutStretch.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\layout\LayoutStretch.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\layout\VerticalLayout.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\layout\VerticalLayout.h"
 					>
 				</File>
 			</Filter>

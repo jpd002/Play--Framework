@@ -1,4 +1,4 @@
-#include "LayoutBase.h"
+#include "layout/LayoutBase.h"
 
 using namespace Framework;
 
@@ -9,7 +9,7 @@ CLayoutBase::~CLayoutBase()
 
 void CLayoutBase::Clear()
 {
-
+    m_items.clear();
 }
 
 void CLayoutBase::InsertItem(CLayoutBaseItem* pItem)
@@ -90,9 +90,9 @@ void CLayoutBase::ComputeRanges(unsigned int nSize)
     }
     else
     {
-        unsigned int nStretchUnits = GetTotalStretchUnits();
         if(nSize >= nSizeTotal)
         {
+            unsigned int nStretchUnits = GetTotalStretchUnits();
             unsigned int nDim0 = 0, nDim1 = 0, i = 0;
             for(ItemList::iterator itemIterator(m_items.begin());
                 m_items.end() != itemIterator; itemIterator++, i++)
@@ -123,7 +123,9 @@ void CLayoutBase::ComputeRanges(unsigned int nSize)
                 CLayoutBaseItem& item(*itemIterator);
                 if(item.GetPreferredSize() != 0)
                 {
-                    nDim1 = nDim0 + item.GetPreferredSize() + (((int)nRest * (int)item.GetPreferredSize()) / (int)nSizeTotal);
+                    int availableSize = (((int)nRest * (int)item.GetPreferredSize()) / (int)nSizeTotal);
+//                    assert(availableSize >= 0);
+                    nDim1 = nDim0 + item.GetPreferredSize() + availableSize;
                     if(i == (m_items.size() - 1))
                     {
                         nDim1 = nSize;

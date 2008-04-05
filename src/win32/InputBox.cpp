@@ -1,7 +1,7 @@
 #include "win32/InputBox.h"
 #include "PtrMacro.h"
-#include "HorizontalLayout.h"
-#include "LayoutStretch.h"
+#include "layout/HorizontalLayout.h"
+#include "layout/LayoutStretch.h"
 #include "win32/Static.h"
 #include "win32/LayoutWindow.h"
 

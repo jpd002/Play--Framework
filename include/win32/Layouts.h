@@ -1,10 +1,10 @@
 #ifndef _LAYOUTS_H_
 #define _LAYOUTS_H_
 
-#include "../VerticalLayout.h"
-#include "../HorizontalLayout.h"
-#include "../GridLayout.h"
-#include "../LayoutStretch.h"
+#include "../layout/VerticalLayout.h"
+#include "../layout/HorizontalLayout.h"
+#include "../layout/GridLayout.h"
+#include "../layout/LayoutStretch.h"
 #include "LayoutWindow.h"
 
 #endif

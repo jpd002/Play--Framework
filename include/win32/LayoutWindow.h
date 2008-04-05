@@ -2,7 +2,7 @@
 #define _LAYOUTWINDOW_H_
 
 #include "Window.h"
-#include "LayoutObject.h"
+#include "layout/LayoutObject.h"
 
 namespace Framework
 {
