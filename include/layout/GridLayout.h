@@ -18,10 +18,10 @@ namespace Framework
         unsigned int        GetPreferredHeight();
         void                RefreshGeometry();
 
-        void                SetObject(unsigned int, unsigned int, CLayoutObject*);
+        void                SetObject(unsigned int, unsigned int, const LayoutObjectPtr&);
 
     private:
-        typedef boost::multi_array<CLayoutObject*, 2> GridArray;
+        typedef boost::multi_array<LayoutObjectPtr, 2> GridArray;
 
         void                RebuildLayouts();
         CLayoutBaseItem*    CreateColLayoutBaseItem(unsigned int);

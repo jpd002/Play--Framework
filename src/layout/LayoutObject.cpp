@@ -85,10 +85,10 @@ unsigned int CLayoutObject::GetBottom() const
 
 CLayoutBaseItem* CLayoutObject::CreateHorizontalBaseLayoutItem()
 {
-	return new CLayoutBaseItem(GetPreferredWidth(), GetHorizontalStretch(), this);
+	return new CLayoutBaseItem(GetPreferredWidth(), GetHorizontalStretch(), shared_from_this());
 }
 
 CLayoutBaseItem* CLayoutObject::CreateVerticalBaseLayoutItem()
 {
-	return new CLayoutBaseItem(GetPreferredHeight(), GetVerticalStretch(), this);
+	return new CLayoutBaseItem(GetPreferredHeight(), GetVerticalStretch(), shared_from_this());
 }

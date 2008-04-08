@@ -9,10 +9,13 @@ namespace Framework
 	class CLayoutStretch : public CLayoutObject
 	{
 	public:
-							CLayoutStretch(unsigned int = 1, unsigned int = 1);
-		unsigned int		GetPreferredWidth();
-		unsigned int		GetPreferredHeight();
-		void				RefreshGeometry();
+							        CLayoutStretch(unsigned int, unsigned int);
+
+        static LayoutObjectPtr      Create(unsigned int = 1, unsigned int = 1);
+
+		unsigned int                GetPreferredWidth();
+		unsigned int                GetPreferredHeight();
+		void				        RefreshGeometry();
 
 	private:
 

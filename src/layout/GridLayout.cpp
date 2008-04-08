@@ -16,13 +16,7 @@ m_objects(extents[nCols][nRows])
 
 CGridLayout::~CGridLayout()
 {
-    for(unsigned int i = 0; i < m_nCols; i++)
-    {
-        for(unsigned int j = 0; j < m_nRows; j++)
-        {
-            DELETEPTR(m_objects[i][j]);
-        }
-    }
+
 }
 
 unsigned int CGridLayout::GetPreferredWidth()
@@ -35,13 +29,13 @@ unsigned int CGridLayout::GetPreferredHeight()
 	return m_VertLayout.GetPreferredSize();
 }
 
-void CGridLayout::SetObject(unsigned int nCol, unsigned int nRow, CLayoutObject* pObject)
+void CGridLayout::SetObject(unsigned int nCol, unsigned int nRow, const LayoutObjectPtr& object)
 {
     assert(nCol < m_nCols);
     assert(nRow < m_nRows);
-    assert(m_objects[nCol][nRow] == NULL);
+    assert(!m_objects[nCol][nRow]);
 
-    m_objects[nCol][nRow] = pObject;
+    m_objects[nCol][nRow] = object;
     RebuildLayouts();
 }
 
@@ -81,15 +75,15 @@ CLayoutBaseItem* CGridLayout::CreateColLayoutBaseItem(unsigned int nCol)
 
     for(unsigned int i = 0; i < m_nRows; i++)
     {
-        CLayoutObject* pObject = m_objects[nCol][i];
-        if(pObject == NULL) continue;
-        if(pObject->GetPreferredWidth() > nMaxWidth)
+        const LayoutObjectPtr& object = m_objects[nCol][i];
+        if(!object) continue;
+        if(object->GetPreferredWidth() > nMaxWidth)
         {
-            nMaxWidth = pObject->GetPreferredWidth();
+            nMaxWidth = object->GetPreferredWidth();
         }
-        if(pObject->GetHorizontalStretch() > nMaxStretch)
+        if(object->GetHorizontalStretch() > nMaxStretch)
         {
-            nMaxStretch = pObject->GetHorizontalStretch();
+            nMaxStretch = object->GetHorizontalStretch();
         }
     }
 
@@ -103,15 +97,15 @@ CLayoutBaseItem* CGridLayout::CreateRowLayoutBaseItem(unsigned int nRow)
 
     for(unsigned int i = 0; i < m_nCols; i++)
     {
-        CLayoutObject* pObject = m_objects[i][nRow];
-        if(pObject == NULL) continue;
-        if(pObject->GetPreferredHeight() > nMaxHeight)
+        const LayoutObjectPtr& object = m_objects[i][nRow];
+        if(!object) continue;
+        if(object->GetPreferredHeight() > nMaxHeight)
         {
-            nMaxHeight = pObject->GetPreferredHeight();
+            nMaxHeight = object->GetPreferredHeight();
         }
-        if(pObject->GetVerticalStretch() > nMaxStretch)
+        if(object->GetVerticalStretch() > nMaxStretch)
         {
-            nMaxStretch = pObject->GetVerticalStretch();
+            nMaxStretch = object->GetVerticalStretch();
         }
     }
 
@@ -135,10 +129,10 @@ void CGridLayout::RefreshGeometry()
 
         for(unsigned int i = 0; i < m_nRows; i++)
         {
-            CLayoutObject* pObject = m_objects[nIndex][i];
-            if(pObject == NULL) continue;
-            pObject->SetLeft(GetLeft() + item.GetRangeStart());
-            pObject->SetRight(GetLeft() + item.GetRangeEnd());
+            const LayoutObjectPtr& object = m_objects[nIndex][i];
+            if(!object) continue;
+            object->SetLeft(GetLeft() + item.GetRangeStart());
+            object->SetRight(GetLeft() + item.GetRangeEnd());
         }
     }
 
@@ -151,10 +145,10 @@ void CGridLayout::RefreshGeometry()
 
         for(unsigned int i = 0; i < m_nCols; i++)
         {
-            CLayoutObject* pObject = m_objects[i][nIndex];
-            if(pObject == NULL) continue;
-            pObject->SetTop(GetTop() + item.GetRangeStart());
-            pObject->SetBottom(GetTop() + item.GetRangeEnd());
+            const LayoutObjectPtr& object = m_objects[i][nIndex];
+            if(!object) continue;
+            object->SetTop(GetTop() + item.GetRangeStart());
+            object->SetBottom(GetTop() + item.GetRangeEnd());
         }
     }
 
@@ -162,9 +156,9 @@ void CGridLayout::RefreshGeometry()
     {
         for(unsigned int j = 0; j < m_nRows; j++)
         {
-            CLayoutObject* pObject = m_objects[i][j];
-            if(pObject == NULL) continue;
-            pObject->RefreshGeometry();
+            const LayoutObjectPtr& object = m_objects[i][j];
+            if(!object) continue;
+            object->RefreshGeometry();
         }
     }
 }

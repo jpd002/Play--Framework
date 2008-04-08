@@ -9,7 +9,7 @@ namespace Framework
 {
 	class CLayoutBaseItem;
 
-	class CLayoutObject
+    class CLayoutObject : public std::tr1::enable_shared_from_this<CLayoutObject>
 	{
 	public:
 								CLayoutObject(unsigned int, unsigned int);

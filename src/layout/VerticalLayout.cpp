@@ -14,10 +14,10 @@ unsigned int CVerticalLayout::GetPreferredWidth()
     for(ObjectList::iterator objectIterator(m_objects.begin()); 
         objectIterator != m_objects.end(); objectIterator++)
     {
-        CLayoutObject& object(*objectIterator);
-        if(object.GetPreferredWidth() > nWidth)
+        const LayoutObjectPtr& object(*objectIterator);
+        if(object->GetPreferredWidth() > nWidth)
         {
-            nWidth = object.GetPreferredWidth();
+            nWidth = object->GetPreferredWidth();
         }
     }
 
@@ -29,12 +29,12 @@ unsigned int CVerticalLayout::GetPreferredHeight()
 	return GetPreferredSize();
 }
 
-CLayoutBaseItem* CVerticalLayout::CreateLayoutBaseItem(CLayoutObject* pObject)
+CLayoutBaseItem* CVerticalLayout::CreateLayoutBaseItem(const LayoutObjectPtr& pObject)
 {
 	return pObject->CreateVerticalBaseLayoutItem();
 }
 
-void CVerticalLayout::SetObjectRange(CLayoutObject* pObject, unsigned int nStart, unsigned int nEnd)
+void CVerticalLayout::SetObjectRange(const LayoutObjectPtr& pObject, unsigned int nStart, unsigned int nEnd)
 {
 	pObject->SetLeft(GetLeft());
 	pObject->SetRight(GetRight());
@@ -42,7 +42,7 @@ void CVerticalLayout::SetObjectRange(CLayoutObject* pObject, unsigned int nStart
 	pObject->SetBottom(GetTop() + nEnd);
 }
 
-unsigned int CVerticalLayout::GetObjectPreferredSize(CLayoutObject* pObject)
+unsigned int CVerticalLayout::GetObjectPreferredSize(const LayoutObjectPtr& pObject)
 {
 	return pObject->GetPreferredHeight();
 }

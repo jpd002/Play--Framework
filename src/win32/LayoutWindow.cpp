@@ -18,14 +18,14 @@ CLayoutWindow::~CLayoutWindow()
 	DELETEPTR(m_pWindow);
 }
 
-CLayoutWindow* CLayoutWindow::CreateButtonBehavior(unsigned int nWidth, unsigned int nHeight, CWindow* pWindow)
+LayoutObjectPtr CLayoutWindow::CreateButtonBehavior(unsigned int nWidth, unsigned int nHeight, CWindow* pWindow)
 {
-	return new CLayoutWindow(nWidth, nHeight, 0, 0, pWindow);
+	return LayoutObjectPtr(new CLayoutWindow(nWidth, nHeight, 0, 0, pWindow));
 }
 
-CLayoutWindow* CLayoutWindow::CreateTextBoxBehavior(unsigned int nWidth, unsigned int nHeight, CWindow* pWindow)
+LayoutObjectPtr CLayoutWindow::CreateTextBoxBehavior(unsigned int nWidth, unsigned int nHeight, CWindow* pWindow)
 {
-	return new CLayoutWindow(nWidth, nHeight, 1, 0, pWindow);
+	return LayoutObjectPtr(new CLayoutWindow(nWidth, nHeight, 1, 0, pWindow));
 }
 
 unsigned int CLayoutWindow::GetPreferredWidth()

@@ -3,25 +3,24 @@
 
 using namespace Framework;
 
-CLayoutBaseItem::CLayoutBaseItem(unsigned int nPreferredSize, unsigned nStretch, CLayoutObject* pObject)
+CLayoutBaseItem::CLayoutBaseItem(unsigned int nPreferredSize, unsigned nStretch, const LayoutObjectPtr& pObject) :
+m_nPreferredSize(nPreferredSize),
+m_nStretch(m_nStretch),
+m_pObject(pObject),
+m_nKey(-1)
 {
-	m_nPreferredSize = nPreferredSize;
-	m_nStretch = nStretch;
-	m_pObject = pObject;
-	m_nKey = -1;
-	SetRange(0, 0);
+    SetRange(0, 0);
 }
 
-CLayoutBaseItem::CLayoutBaseItem(unsigned int nPreferredSize, unsigned int nStretch, unsigned int nKey)
+CLayoutBaseItem::CLayoutBaseItem(unsigned int nPreferredSize, unsigned int nStretch, unsigned int nKey) :
+m_nPreferredSize(nPreferredSize),
+m_nStretch(nStretch),
+m_nKey(nKey)
 {
-	m_nPreferredSize = nPreferredSize;
-	m_nStretch = nStretch;
-	m_pObject = NULL;
-	m_nKey = nKey;
-	SetRange(0, 0);
+    SetRange(0, 0);
 }
 
-CLayoutObject* CLayoutBaseItem::GetObject() const
+LayoutObjectPtr CLayoutBaseItem::GetObject() const
 {
 	return m_pObject;
 }

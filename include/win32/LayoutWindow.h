@@ -11,17 +11,18 @@ namespace Framework
         class CLayoutWindow : public CLayoutObject
         {
         public:
-				                    CLayoutWindow(unsigned int, unsigned int, unsigned int, unsigned int, CWindow*, bool = true);
             virtual                 ~CLayoutWindow();
 
-            static CLayoutWindow*   CreateButtonBehavior(unsigned int, unsigned int, CWindow*);
-            static CLayoutWindow*   CreateTextBoxBehavior(unsigned int, unsigned int, CWindow*);
+            static LayoutObjectPtr  CreateButtonBehavior(unsigned int, unsigned int, CWindow*);
+            static LayoutObjectPtr  CreateTextBoxBehavior(unsigned int, unsigned int, CWindow*);
 
             unsigned int            GetPreferredWidth();
             unsigned int            GetPreferredHeight();
             void                    RefreshGeometry();
 
         private:
+				                    CLayoutWindow(unsigned int, unsigned int, unsigned int, unsigned int, CWindow*, bool = true);
+
             CWindow*                m_pWindow;
             unsigned int            m_nPrefWidth;
             unsigned int            m_nPrefHeight;

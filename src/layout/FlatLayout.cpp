@@ -13,17 +13,17 @@ CFlatLayout::~CFlatLayout()
 
 }
 
-void CFlatLayout::InsertObject(CLayoutObject* pObject)
+void CFlatLayout::InsertObject(const LayoutObjectPtr& object)
 {
     if(m_objects.size() != 0)
 	{
 		if(m_nSpacing != 0)
 		{
-			m_LayoutBase.InsertItem(new CLayoutBaseItem(m_nSpacing, 0, (CLayoutObject*)NULL));
+			m_LayoutBase.InsertItem(new CLayoutBaseItem(m_nSpacing, 0));
 		}
 	}
-	m_objects.push_back(pObject);
-	m_LayoutBase.InsertItem(CreateLayoutBaseItem(pObject));
+	m_objects.push_back(object);
+	m_LayoutBase.InsertItem(CreateLayoutBaseItem(object));
 }
 
 unsigned int CFlatLayout::GetPreferredSize() const
@@ -39,9 +39,9 @@ void CFlatLayout::RefreshGeometry()
         itemIterator != m_LayoutBase.GetItemsEnd(); itemIterator++)
     {
 		const CLayoutBaseItem& item(*itemIterator);
-        CLayoutObject* pObject = item.GetObject();
-        if(pObject == NULL) continue;
-        SetObjectRange(pObject, item.GetRangeStart(), item.GetRangeEnd());
-        pObject->RefreshGeometry();
+        LayoutObjectPtr object = item.GetObject();
+        if(!object) continue;
+        SetObjectRange(object, item.GetRangeStart(), item.GetRangeEnd());
+        object->RefreshGeometry();
     }
 }

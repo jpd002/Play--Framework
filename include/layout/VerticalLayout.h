@@ -14,9 +14,9 @@ namespace Framework
 		unsigned int		GetPreferredHeight();
 
 	protected:
-		CLayoutBaseItem*	CreateLayoutBaseItem(CLayoutObject*);
-		void				SetObjectRange(CLayoutObject*, unsigned int, unsigned int);
-		unsigned int		GetObjectPreferredSize(CLayoutObject*);
+		CLayoutBaseItem*	CreateLayoutBaseItem(const LayoutObjectPtr&);
+		void				SetObjectRange(const LayoutObjectPtr&, unsigned int, unsigned int);
+		unsigned int		GetObjectPreferredSize(const LayoutObjectPtr&);
 		unsigned int		GetLayoutSize();
 		
 
