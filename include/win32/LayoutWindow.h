@@ -15,6 +15,7 @@ namespace Framework
 
             static LayoutObjectPtr  CreateButtonBehavior(unsigned int, unsigned int, CWindow*);
             static LayoutObjectPtr  CreateTextBoxBehavior(unsigned int, unsigned int, CWindow*);
+            static LayoutObjectPtr  CreateCustomBehavior(unsigned int, unsigned int, unsigned int, unsigned int, CWindow*, bool = true);
 
             unsigned int            GetPreferredWidth();
             unsigned int            GetPreferredHeight();

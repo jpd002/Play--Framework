@@ -28,14 +28,13 @@ CInputBox::CInputBox(const TCHAR* sTitle, const TCHAR* sPrompt, const TCHAR* sVa
 
 CInputBox::~CInputBox()
 {
-	DELETEPTR(m_pLayout);
+
 }
 
 const TCHAR* CInputBox::GetValue(HWND hParent)
 {
 	HFONT nFont;
 	RECT rc;
-	CHorizontalLayout* pSubLayout0;
 	HACCEL hAccel;
 	MSG msg;
 
@@ -74,17 +73,17 @@ const TCHAR* CInputBox::GetValue(HWND hParent)
 	m_pValue->SetSelection(0, -1);
 	m_pValue->SetFocus();
 	
-	pSubLayout0 = new CHorizontalLayout;
-	pSubLayout0->InsertObject(new CLayoutStretch);
+    FlatLayoutPtr pSubLayout0 = CHorizontalLayout::Create();
+    pSubLayout0->InsertObject(CLayoutStretch::Create());
 	pSubLayout0->InsertObject(CLayoutWindow::CreateButtonBehavior(75, 23, m_pOk));
 	pSubLayout0->InsertObject(CLayoutWindow::CreateButtonBehavior(75, 23, m_pCancel));
 	pSubLayout0->SetVerticalStretch(0);
 
-	m_pLayout = new CVerticalLayout;
-	m_pLayout->InsertObject(CLayoutWindow::CreateTextBoxBehavior(100, 14, new CStatic(m_hWnd, m_sPrompt.c_str())));
-	m_pLayout->InsertObject(CLayoutWindow::CreateTextBoxBehavior(100, 20, m_pValue));
-	m_pLayout->InsertObject(pSubLayout0);
-	m_pLayout->InsertObject(new CLayoutStretch);
+    m_layout = CVerticalLayout::Create();
+	m_layout->InsertObject(CLayoutWindow::CreateTextBoxBehavior(100, 14, new CStatic(m_hWnd, m_sPrompt.c_str())));
+	m_layout->InsertObject(CLayoutWindow::CreateTextBoxBehavior(100, 20, m_pValue));
+	m_layout->InsertObject(pSubLayout0);
+    m_layout->InsertObject(CLayoutStretch::Create());
 
 	RefreshLayout();
 
@@ -119,8 +118,8 @@ void CInputBox::RefreshLayout()
 	rc.top		+= 7;
 	rc.bottom	-= 7;
 
-	m_pLayout->SetRect(rc.left, rc.top, rc.right, rc.bottom);
-	m_pLayout->RefreshGeometry();
+	m_layout->SetRect(rc.left, rc.top, rc.right, rc.bottom);
+	m_layout->RefreshGeometry();
 }
 
 void CInputBox::RestoreFocus()

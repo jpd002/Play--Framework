@@ -28,6 +28,11 @@ LayoutObjectPtr CLayoutWindow::CreateTextBoxBehavior(unsigned int nWidth, unsign
 	return LayoutObjectPtr(new CLayoutWindow(nWidth, nHeight, 1, 0, pWindow));
 }
 
+LayoutObjectPtr CLayoutWindow::CreateCustomBehavior(unsigned int prefWidth, unsigned int prefHeight, unsigned int horzStretch, unsigned int vertStretch, CWindow* window, bool useNoCopy)
+{
+    return LayoutObjectPtr(new CLayoutWindow(prefWidth, prefHeight, horzStretch, vertStretch, window, useNoCopy));
+}
+
 unsigned int CLayoutWindow::GetPreferredWidth()
 {
 	return m_nPrefWidth;

@@ -1,7 +1,6 @@
 #ifndef _FLATLAYOUT_H_
 #define _FLATLAYOUT_H_
 
-#include <boost/ptr_container/ptr_list.hpp>
 #include "LayoutObject.h"
 #include "LayoutBase.h"
 
@@ -33,6 +32,7 @@ namespace Framework
 
     };
 
+    typedef std::tr1::shared_ptr<CFlatLayout> FlatLayoutPtr;
 }
 
 #endif

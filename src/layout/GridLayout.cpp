@@ -19,6 +19,11 @@ CGridLayout::~CGridLayout()
 
 }
 
+GridLayoutPtr CGridLayout::Create(unsigned int cols, unsigned int rows, unsigned int spacing)
+{
+    return GridLayoutPtr(new CGridLayout(cols, rows, spacing));
+}
+
 unsigned int CGridLayout::GetPreferredWidth()
 {
 	return m_HorzLayout.GetPreferredSize();

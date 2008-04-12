@@ -36,7 +36,7 @@ namespace Framework
 			CButton*					m_pOk;
 			CButton*					m_pCancel;
 			CEdit*						m_pValue;
-			CVerticalLayout*			m_pLayout;
+			FlatLayoutPtr               m_layout;
 		};
 	}
 }

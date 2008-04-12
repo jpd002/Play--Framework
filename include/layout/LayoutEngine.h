@@ -92,18 +92,18 @@ namespace Framework
     // Operators
     //----------------------------------
 
-    LayoutExpressionList operator +(const LayoutExpression& lhs, const LayoutExpression& rhs)
+    static LayoutExpressionList operator +(const LayoutExpression& lhs, const LayoutExpression& rhs)
     {
         return LayoutExpressionList(lhs, rhs);
     }
 
-    LayoutExpression& operator *(LayoutExpression& expression, const LayoutSetHorizontalStretch& stretch)
+    static LayoutExpression& operator *(LayoutExpression& expression, const LayoutSetHorizontalStretch& stretch)
     {
         static_cast<LayoutObjectPtr>(expression)->SetHorizontalStretch(stretch.value);
         return expression;
     }
 
-    LayoutExpression& operator *(LayoutExpression& expression, const LayoutSetVerticalStretch& stretch)
+    static LayoutExpression& operator *(LayoutExpression& expression, const LayoutSetVerticalStretch& stretch)
     {
         static_cast<LayoutObjectPtr>(expression)->SetVerticalStretch(stretch.value);
         return expression;
@@ -118,7 +118,7 @@ namespace Framework
     {
     public:
         FlatLayoutContainer(const LayoutExpressionList& contents) :
-          LayoutExpression(LayoutObjectPtr(new LayoutType()))
+          LayoutExpression(LayoutType::Create())
         {
             m_layout = dynamic_cast<LayoutType*>(m_object.get());
             if(m_layout == NULL)

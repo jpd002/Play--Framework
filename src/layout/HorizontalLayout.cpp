@@ -8,6 +8,11 @@ CFlatLayout(1, 0, nSpacing)
 
 }
 
+FlatLayoutPtr CHorizontalLayout::Create(unsigned int spacing)
+{
+    return FlatLayoutPtr(new CHorizontalLayout(spacing));
+}
+
 unsigned int CHorizontalLayout::GetPreferredWidth()
 {
 	return GetPreferredSize();

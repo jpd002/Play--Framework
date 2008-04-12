@@ -7,37 +7,41 @@
 
 namespace Framework
 {
+    class CGridLayout;
+    typedef std::tr1::shared_ptr<CGridLayout> GridLayoutPtr;
 
     class CGridLayout : public CLayoutObject
     {
     public:
-                            CGridLayout(unsigned int, unsigned int, unsigned int = LAYOUT_DEFAULT_SPACING);
-        virtual             ~CGridLayout();
+        virtual                 ~CGridLayout();
 
-        unsigned int        GetPreferredWidth();
-        unsigned int        GetPreferredHeight();
-        void                RefreshGeometry();
+        static GridLayoutPtr    Create(unsigned int, unsigned int, unsigned int = LAYOUT_DEFAULT_SPACING);
 
-        void                SetObject(unsigned int, unsigned int, const LayoutObjectPtr&);
+        unsigned int            GetPreferredWidth();
+        unsigned int            GetPreferredHeight();
+        void                    RefreshGeometry();
+
+        void                    SetObject(unsigned int, unsigned int, const LayoutObjectPtr&);
 
     private:
         typedef boost::multi_array<LayoutObjectPtr, 2> GridArray;
 
-        void                RebuildLayouts();
-        CLayoutBaseItem*    CreateColLayoutBaseItem(unsigned int);
-        CLayoutBaseItem*    CreateRowLayoutBaseItem(unsigned int);
+                                CGridLayout(unsigned int, unsigned int, unsigned int);
 
-        unsigned int        m_nCols;
-        unsigned int        m_nRows;
-        unsigned int        m_nSpacing;
+        void                    RebuildLayouts();
+        CLayoutBaseItem*        CreateColLayoutBaseItem(unsigned int);
+        CLayoutBaseItem*        CreateRowLayoutBaseItem(unsigned int);
 
-        GridArray           m_objects;
+        unsigned int            m_nCols;
+        unsigned int            m_nRows;
+        unsigned int            m_nSpacing;
 
-        CLayoutBase         m_HorzLayout;
-        CLayoutBase         m_VertLayout;
+        GridArray               m_objects;
+
+        CLayoutBase             m_HorzLayout;
+        CLayoutBase             m_VertLayout;
 
     };
-
 }
 
 #endif

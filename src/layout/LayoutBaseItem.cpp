@@ -5,7 +5,7 @@ using namespace Framework;
 
 CLayoutBaseItem::CLayoutBaseItem(unsigned int nPreferredSize, unsigned nStretch, const LayoutObjectPtr& pObject) :
 m_nPreferredSize(nPreferredSize),
-m_nStretch(m_nStretch),
+m_nStretch(nStretch),
 m_pObject(pObject),
 m_nKey(-1)
 {

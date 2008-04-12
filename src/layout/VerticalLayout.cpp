@@ -8,6 +8,11 @@ CFlatLayout(0, 1, nSpacing)
 
 }
 
+FlatLayoutPtr CVerticalLayout::Create(unsigned int spacing)
+{
+    return FlatLayoutPtr(new CVerticalLayout(spacing));
+}
+
 unsigned int CVerticalLayout::GetPreferredWidth()
 {
     unsigned int nWidth = 0;
