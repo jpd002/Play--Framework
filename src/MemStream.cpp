@@ -59,9 +59,9 @@ uint64 CMemStream::Read(void* pData, uint64 nSize)
 
 uint64 CMemStream::Write(const void* pData, uint64 nSize)
 {
-	while((m_position + nSize) > m_nGrow)
+	if((m_position + nSize) > m_nGrow)
 	{
-		m_nGrow += GROWSIZE;
+		m_nGrow += ((static_cast<unsigned int>(nSize) + GROWSIZE - 1) / GROWSIZE) * GROWSIZE;
 		m_pData = (uint8*)realloc(m_pData, m_nGrow);
 	}
 	memcpy(m_pData + m_position, pData, (uint32)nSize);
