@@ -291,10 +291,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\include\Str.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\Stream.cpp"
 				>
 			</File>
@@ -320,22 +316,6 @@
 			</File>
 			<File
 				RelativePath=".\include\string_cast.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\StrPair.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\StrPair.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\StrPrimitives.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\StrPrimitives.h"
 				>
 			</File>
 			<File

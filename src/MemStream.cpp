@@ -59,15 +59,15 @@ uint64 CMemStream::Read(void* pData, uint64 nSize)
 
 uint64 CMemStream::Write(const void* pData, uint64 nSize)
 {
-	if((m_position + nSize) > m_nGrow)
-	{
-		m_nGrow += ((static_cast<unsigned int>(nSize) + GROWSIZE - 1) / GROWSIZE) * GROWSIZE;
-		m_pData = (uint8*)realloc(m_pData, m_nGrow);
-	}
-	memcpy(m_pData + m_position, pData, (uint32)nSize);
+    if((m_position + nSize) > m_nGrow)
+    {
+        m_nGrow += ((static_cast<unsigned int>(nSize) + GROWSIZE - 1) / GROWSIZE) * GROWSIZE;
+        m_pData = reinterpret_cast<uint8*>(realloc(m_pData, m_nGrow));
+    }
+    memcpy(m_pData + m_position, pData, (uint32)nSize);
     m_position += static_cast<unsigned int>(nSize);
-	m_nSize = max<unsigned int>(m_nSize, m_position);
-	return nSize;
+    m_nSize = max<unsigned int>(m_nSize, m_position);
+    return nSize;
 }
 
 const uint8* CMemStream::GetBuffer()
