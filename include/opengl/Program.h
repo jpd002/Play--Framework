@@ -15,8 +15,8 @@ namespace Framework
 
 			operator		unsigned int();
 			
-			void			AttachShader(GLuint);
-			void			DetachShader(GLuint);
+			void			AttachShader(unsigned int);
+			void			DetachShader(unsigned int);
 			bool			Link();
 			void			SetUniformf(const char*, float, float);
 			void			SetUniformi(const char*, int);

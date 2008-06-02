@@ -2,7 +2,7 @@
 
 using namespace Framework::OpenGl;
 
-CShader::CShader(GLenum nType)
+CShader::CShader(unsigned int nType)
 {
 	m_nHandle = glCreateShader(nType);
 }
@@ -12,7 +12,7 @@ CShader::~CShader()
 	glDeleteShader(m_nHandle);
 }
 
-CShader::operator GLuint()
+CShader::operator unsigned int()
 {
 	return m_nHandle;
 }

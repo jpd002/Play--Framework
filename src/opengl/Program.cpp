@@ -17,12 +17,12 @@ CProgram::operator unsigned int()
 	return m_nHandle;
 }
 
-void CProgram::AttachShader(GLuint nShader)
+void CProgram::AttachShader(unsigned int nShader)
 {
 	glAttachShader(m_nHandle, nShader);
 }
 
-void CProgram::DetachShader(GLuint nShader)
+void CProgram::DetachShader(unsigned int nShader)
 {
 	glDetachShader(m_nHandle, nShader);
 }
