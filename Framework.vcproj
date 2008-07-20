@@ -454,6 +454,14 @@
 				Name="win32"
 				>
 				<File
+					RelativePath=".\src\win32\AcceleratorTableGenerator.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\AcceleratorTableGenerator.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\Button.cpp"
 					>
 				</File>
