@@ -120,6 +120,19 @@ bool CWindow::IsCommandSource(const CWindow* pWindow, HWND hWndFrom)
     return (pWindow != NULL) && (pWindow->m_hWnd == hWndFrom);
 }
 
+WNDCLASSEX CWindow::MakeWndClass(const TCHAR* className)
+{
+	WNDCLASSEX w;
+	memset(&w, 0, sizeof(WNDCLASSEX));
+	w.cbSize		= sizeof(WNDCLASSEX);
+	w.lpfnWndProc	= CWindow::WndProc;
+	w.lpszClassName	= className;
+	w.hbrBackground	= (HBRUSH)GetSysColorBrush(COLOR_BTNFACE);
+	w.hInstance		= GetModuleHandle(NULL);
+	w.hCursor		= LoadCursor(NULL, IDC_ARROW);
+	return w;
+}
+
 ///////////////////////////////////////////////////////////
 //Window Message Helpers
 ///////////////////////////////////////////////////////////

@@ -24,5 +24,5 @@ void CAcceleratorTableGenerator::Insert(unsigned int cmd, unsigned int key, unsi
 
 HACCEL CAcceleratorTableGenerator::Create()
 {
-    return CreateAcceleratorTable(&m_table[0], m_table.size());
+    return CreateAcceleratorTable(&m_table[0], static_cast<int>(m_table.size()));
 }

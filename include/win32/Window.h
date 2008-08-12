@@ -38,6 +38,7 @@ namespace Framework
             unsigned int            DoesWindowClassExist(const TCHAR*);
             static bool             IsNotifySource(const CWindow*, const NMHDR*);
             static bool             IsCommandSource(const CWindow*, HWND);
+			static WNDCLASSEX		MakeWndClass(const TCHAR*);
 
             //Helpers
             void                    Create(unsigned long, const TCHAR*, const TCHAR*, unsigned long, const RECT*, HWND, void*);  
