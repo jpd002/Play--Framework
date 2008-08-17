@@ -11,4 +11,14 @@ public:
 	}
 };
 
+template <typename Type, typename DependantType> class CDependantSingleton
+{
+public:
+	static Type& GetInstance()
+	{
+        static Type Instance(DependantType::GetInstance());
+		return Instance;
+	}
+};
+
 #endif

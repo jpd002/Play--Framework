@@ -179,6 +179,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\Config.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\Config.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\countof.h"
 				>
 			</File>
@@ -196,18 +204,6 @@
 			</File>
 			<File
 				RelativePath=".\include\Endian.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\Event.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\EventEx.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\EventHandler.h"
 				>
 			</File>
 			<File
@@ -239,15 +235,19 @@
 				>
 			</File>
 			<File
-				RelativePath=".\include\List.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\MemStream.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\include\MemStream.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\PathUtils.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\PathUtils.h"
 				>
 			</File>
 			<File

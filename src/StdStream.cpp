@@ -30,6 +30,19 @@ CStdStream::CStdStream(const char* path, const char* options)
     }
 }
 
+CStdStream::CStdStream(const wchar_t* path, const wchar_t* options)
+{
+#ifdef _MSVC
+    m_pFile = _wfopen(path, options);
+#else
+    m_pFile = NULL;
+#endif
+    if(m_pFile == NULL)
+    {
+	    throw runtime_error("Invalid file handle.");
+    }
+}
+
 CStdStream::~CStdStream()
 {
 	if(m_pFile != NULL)
