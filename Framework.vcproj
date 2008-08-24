@@ -271,14 +271,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\Semaphore.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\Semaphore.h"
-				>
-			</File>
-			<File
 				RelativePath=".\include\Singleton.h"
 				>
 			</File>
