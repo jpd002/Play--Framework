@@ -558,6 +558,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\include\win32\GuidUtils.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\Header.cpp"
 					>
 				</File>
