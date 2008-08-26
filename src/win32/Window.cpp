@@ -261,8 +261,21 @@ void CWindow::Center(HWND hParent)
 		::GetClientRect(hParent, &rParent);
 	}
 
-	SetWindowPos(m_hWnd, NULL, (rParent.right - (rWindow.right - rWindow.left)) / 2, (rParent.bottom - (rWindow.bottom - rWindow.top)) / 2, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+	POINT result;
+	result.x = (rParent.right - (rWindow.right - rWindow.left)) / 2;
+	result.y = (rParent.bottom - (rWindow.bottom - rWindow.top)) / 2;
 
+	if(hParent != NULL)
+	{
+		POINT origin;
+		origin.x = 0;
+		origin.y = 0;
+		ClientToScreen(hParent, &origin);
+		result.x += origin.x;
+		result.y += origin.y;
+	}
+
+	SetWindowPos(m_hWnd, NULL, result.x, result.y, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 }
 
 void CWindow::SetSize(unsigned int nWidth, unsigned int nHeight)

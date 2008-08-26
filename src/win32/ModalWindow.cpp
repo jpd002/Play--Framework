@@ -17,7 +17,7 @@ CModalWindow::~CModalWindow()
 
 void CModalWindow::DoModal()
 {
-	Center();
+	Center(GetParent());
 	Show(SW_SHOW);
 
 	CWindow::StdMsgLoop(this);
