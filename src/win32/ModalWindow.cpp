@@ -23,6 +23,20 @@ void CModalWindow::DoModal()
 	CWindow::StdMsgLoop(this);
 }
 
+void CModalWindow::OnEscPressed()
+{
+	Destroy();
+}
+
+long CModalWindow::OnKeyDown(unsigned int keyCode)
+{
+	if(keyCode == VK_ESCAPE)
+	{
+		OnEscPressed();
+	}
+	return TRUE;
+}
+
 long CModalWindow::OnSysCommand(unsigned int nCmd, LPARAM lParam)
 {
 	switch(nCmd)
