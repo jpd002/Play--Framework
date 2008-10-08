@@ -18,7 +18,6 @@ namespace Framework
 			virtual void	OnEscPressed();
 
 	        unsigned int	Destroy();
-			long			OnKeyDown(unsigned int);
 	        long			OnSysCommand(unsigned int, LPARAM);
 	        void			UnModalWindow();
         };

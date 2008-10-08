@@ -20,21 +20,22 @@ void CModalWindow::DoModal()
 	Center(GetParent());
 	Show(SW_SHOW);
 
-	CWindow::StdMsgLoop(this);
+	while(IsWindow())
+	{
+		MSG m;
+		GetMessage(&m, NULL, NULL, NULL);
+		if(m.message == WM_KEYDOWN && m.wParam == VK_ESCAPE)
+		{
+			OnEscPressed();
+		}
+		TranslateMessage(&m);
+		DispatchMessage(&m);
+	}
 }
 
 void CModalWindow::OnEscPressed()
 {
 	Destroy();
-}
-
-long CModalWindow::OnKeyDown(unsigned int keyCode)
-{
-	if(keyCode == VK_ESCAPE)
-	{
-		OnEscPressed();
-	}
-	return TRUE;
 }
 
 long CModalWindow::OnSysCommand(unsigned int nCmd, LPARAM lParam)
