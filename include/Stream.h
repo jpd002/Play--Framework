@@ -31,6 +31,7 @@ namespace Framework
         virtual uint64  Write(const void*, uint64) = 0;
         virtual bool    IsEOF() = 0;
         virtual void    Flush();
+        virtual uint64  GetLength();
 
         uint8           Read8();
         uint16          Read16();
