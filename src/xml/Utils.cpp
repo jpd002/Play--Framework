@@ -220,3 +220,68 @@ Xml::AttributeType Xml::CreateAttributeBoolValue(const char* sName, bool nValue)
 {
 	return AttributeType(sName, nValue ? "true" : "false");
 }
+
+string Xml::EscapeText(const string& text)
+{
+	string result;
+	for(string::const_iterator charIterator(text.begin());
+		charIterator != text.end(); charIterator++)
+	{
+		switch(*charIterator)
+		{
+		case '&':
+			result += "&amp;";
+			break;
+		case '<':
+			result += "&lt;";
+			break;
+		case '>':
+			result += "&gt;";
+			break;
+		case '\'':
+			result += "&apos;";
+			break;
+		case '\"':
+			result += "&quot;";
+			break;
+		default:
+			result += *charIterator;
+			break;
+		}
+	}
+	return result;
+}
+
+string Xml::UnescapeText(const string& text)
+{
+	string result;
+	for(string::const_iterator charIterator(text.begin());
+		charIterator != text.end(); charIterator++)
+	{
+		if(*charIterator == '&')
+		{
+			string::size_type currentPos = charIterator - text.begin();
+			string::size_type endPos = text.find(';', currentPos);
+			if(endPos == -1)
+			{
+				return "";
+			}
+			string escapeName(text.substr(currentPos + 1, endPos - currentPos - 1));
+					if(!strcmp(escapeName.c_str(), "amp"))	result += '&';
+			else	if(!strcmp(escapeName.c_str(), "lt"))	result += '<';
+			else	if(!strcmp(escapeName.c_str(), "gt"))	result += '>';
+			else	if(!strcmp(escapeName.c_str(), "apos"))	result += '\'';
+			else	if(!strcmp(escapeName.c_str(), "quot"))	result += '\"';
+			else
+			{
+				return "";
+			}
+			charIterator = text.begin() + endPos;
+		}
+		else
+		{
+			result += *charIterator;
+		}
+	}
+	return result;
+}

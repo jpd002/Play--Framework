@@ -1,5 +1,6 @@
 #include <string.h>
 #include "xml/Writer.h"
+#include "xml/Utils.h"
 
 using namespace Framework;
 using namespace Framework::Xml;
@@ -61,7 +62,7 @@ void CWriter::WriteNode(unsigned int nLevel)
 			DumpAttributes(m_pNode);
 			DumpString(">");
 
-			DumpString(m_pNode->GetInnerText());
+			DumpString(EscapeText(m_pNode->GetInnerText()).c_str());
 
 			DumpString("</");
 			DumpString(m_pNode->GetText());
@@ -118,7 +119,7 @@ void CWriter::DumpAttributes(CNode* pNode)
 		DumpString(" ");
 		DumpString(Attribute.first.c_str());
 		DumpString("=\"");
-		DumpString(Attribute.second.c_str());
+		DumpString(EscapeText(Attribute.second).c_str());
 		DumpString("\"");
 	}
 }

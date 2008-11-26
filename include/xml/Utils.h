@@ -1,6 +1,7 @@
 #ifndef _XML_UTILS_H_
 #define _XML_UTILS_H_
 
+#include <string>
 #include "Node.h"
 
 namespace Framework
@@ -27,6 +28,9 @@ namespace Framework
 		AttributeType	CreateAttributeStringValue(const char*, const char*);
 		AttributeType	CreateAttributeIntValue(const char*, int);
 		AttributeType	CreateAttributeBoolValue(const char*, bool);
+
+		std::string		EscapeText(const std::string&);
+		std::string		UnescapeText(const std::string&);
 	}
 }
 

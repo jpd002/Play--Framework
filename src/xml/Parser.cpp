@@ -1,4 +1,5 @@
 #include "xml/Parser.h"
+#include "xml/Utils.h"
 #include "Types.h"
 #include "stricmp.h"
 #include "IosIStream.h"
@@ -66,7 +67,7 @@ bool CParser::ProcessChar_Text(char nChar)
 
 		if(m_sText.size() != 0)
 		{
-			m_pNode->InsertNode(new CNode(m_sText.c_str(), false));
+			m_pNode->InsertNode(new CNode(UnescapeText(m_sText).c_str(), false));
 			m_sText = "";
 		}
 
@@ -179,7 +180,7 @@ bool CParser::ProcessChar_AttributeValue(char nChar)
 {
 	if(nChar == '"')
 	{
-		m_Attributes.push_back(AttributeType(m_sAttributeName, m_sAttributeValue));
+		m_Attributes.push_back(AttributeType(m_sAttributeName, UnescapeText(m_sAttributeValue)));
 
 		m_nState = STATE_ATTRIBUTE_NAME;
 		m_sAttributeName = "";
