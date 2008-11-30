@@ -164,3 +164,8 @@ bool CTreeView::DeleteAllItems()
 {
 	return ((TreeView_DeleteAllItems(m_hWnd) == TRUE) ? true : false);
 }
+
+void CTreeView::SortChildren(HTREEITEM item, bool recurse)
+{
+    TreeView_SortChildren(m_hWnd, item, recurse);
+}

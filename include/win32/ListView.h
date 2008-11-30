@@ -53,6 +53,10 @@ namespace Framework
 			int				GetSelection();
 			void			SetSelection(int);
 
+            void            EnableGroupView(bool);
+            int             InsertGroup(const TCHAR*, unsigned int, unsigned int = -1);
+            void            RemoveAllGroups();
+
 			void			SetColumnWidth(unsigned int, unsigned int);
 
 			void			SetExtendedListViewStyle(unsigned long);

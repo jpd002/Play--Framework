@@ -33,6 +33,7 @@ namespace Framework
 			bool			Expand(HTREEITEM, unsigned int = TVE_EXPAND);
             void            DeleteChildren(HTREEITEM);
             bool			DeleteAllItems();
+            void            SortChildren(HTREEITEM, bool);
 
             //Some templates
             template <typename Type>

@@ -93,6 +93,27 @@ void CListView::SetSelection(int nIndex)
 	ListView_SetSelectionMark(m_hWnd, nIndex);
 }
 
+void CListView::EnableGroupView(bool enabled)
+{
+    ListView_EnableGroupView(m_hWnd, enabled);
+}
+
+int CListView::InsertGroup(const TCHAR* name, unsigned int id, unsigned int index)
+{
+    LVGROUP group;
+    memset(&group, 0, sizeof(group));
+    group.cbSize        = sizeof(LVGROUP);
+    group.mask          = LVGF_HEADER | LVGF_GROUPID;
+    group.pszHeader     = const_cast<TCHAR*>(name);
+    group.iGroupId      = id;
+    return ListView_InsertGroup(m_hWnd, index, &group);
+}
+
+void CListView::RemoveAllGroups()
+{
+    ListView_RemoveAllGroups(m_hWnd);
+}
+
 void CListView::SetExtendedListViewStyle(unsigned long nStyle)
 {
 	ListView_SetExtendedListViewStyle(m_hWnd, nStyle);

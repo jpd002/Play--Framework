@@ -20,6 +20,7 @@ CWindow::CWindow()
 {
 	m_nNoCallDef = 0;
 	m_hWnd = 0;
+    m_pBaseWndProc = NULL;
 }
 
 CWindow::~CWindow()
