@@ -9,7 +9,9 @@
 #define _LISTVIEW_H_
 
 #include "Window.h"
+#ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x501
+#endif
 #include <commctrl.h>
 #include <boost/function.hpp>
 
