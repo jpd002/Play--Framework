@@ -638,6 +638,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\win32\MenuItem.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\MenuItem.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\ModalWindow.cpp"
 					>
 				</File>
