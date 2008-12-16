@@ -14,6 +14,7 @@ namespace Framework
 			virtual				~CMenuItem();
 
 			void				Check(bool);
+			void				Enable(bool);
 			bool				IsNull() const;
 
 			static CMenuItem	FindById(HMENU, unsigned int);

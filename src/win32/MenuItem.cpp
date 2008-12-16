@@ -26,6 +26,12 @@ void CMenuItem::Check(bool checked)
 	CheckMenuItem(m_menu, m_position, MF_BYPOSITION | (checked ? MF_CHECKED : MF_UNCHECKED));
 }
 
+void CMenuItem::Enable(bool enabled)
+{
+	if(IsNull()) return;
+	EnableMenuItem(m_menu, m_position, MF_BYPOSITION | (enabled ? MF_ENABLED : MF_GRAYED));
+}
+
 CMenuItem CMenuItem::FindById(HMENU hMenu, unsigned int id)
 {
 	CMenuItem result;
