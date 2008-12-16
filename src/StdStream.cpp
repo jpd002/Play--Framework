@@ -73,7 +73,11 @@ void CStdStream::Seek(int64 nPosition, STREAM_SEEK_DIRECTION nDirection)
 		break;
 	}
 	assert(m_pFile != NULL);
-	fseek(m_pFile, (long)nPosition, nDir);
+#ifdef WIN32
+    _fseeki64(m_pFile, nPosition, nDir);
+#else
+	fseek(m_pFile, nPosition, nDir);
+#endif
 }
 
 bool CStdStream::IsEOF()
@@ -84,7 +88,11 @@ bool CStdStream::IsEOF()
 uint64 CStdStream::Tell()
 {
 	assert(m_pFile != NULL);
+#ifdef WIN32
+    return _ftelli64(m_pFile);
+#else
 	return ftell(m_pFile);
+#endif
 }
 
 uint64 CStdStream::Read(void* pBuffer, uint64 nLength)
