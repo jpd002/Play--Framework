@@ -1,7 +1,7 @@
 #ifndef _OPENAL_DEVICE_H_
 #define _OPENAL_DEVICE_H_
 
-#include <alc.h>
+#include "OpenAlDef.h"
 
 namespace OpenAl
 {

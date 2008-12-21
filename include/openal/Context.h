@@ -1,7 +1,7 @@
 #ifndef _CONTEXT_H_
 #define _CONTEXT_H_
 
-#include <alc.h>
+#include "OpenAlDef.h"
 
 namespace OpenAl
 {

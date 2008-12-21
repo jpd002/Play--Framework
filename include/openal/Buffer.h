@@ -1,7 +1,7 @@
 #ifndef _OPENAL_BUFFER_H_
 #define _OPENAL_BUFFER_H_
 
-#include <al.h>
+#include "OpenAlDef.h"
 
 namespace OpenAl
 {
