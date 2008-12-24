@@ -251,6 +251,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\placeholder_def.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\PNG.cpp"
 				>
 			</File>
