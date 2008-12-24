@@ -45,6 +45,8 @@ string CConfig::MakePreferenceName(const string& level0, const string& level1, c
     return result;
 }
 
+namespace Framework {
+	
 template <> CConfig::CPreference* CConfig::CastPreference<CConfig::CPreference>(CPreference* pPreference)
 {
 	return pPreference;
@@ -75,6 +77,8 @@ template <> CConfig::CPreferenceString* CConfig::CastPreference<CConfig::CPrefer
 		return NULL;
 	}
 	return (CPreferenceString*)pPreference;
+}
+
 }
 
 template <typename Type> Type* CConfig::FindPreference(const char* sName)

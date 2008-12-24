@@ -67,6 +67,8 @@
 		7EB976420EFE163300CFB457 /* Device.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EB9763E0EFE163300CFB457 /* Device.h */; };
 		7EB976430EFE163300CFB457 /* Buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EB9763F0EFE163300CFB457 /* Buffer.h */; };
 		7EB976790EFE1B4C00CFB457 /* OpenAlDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EB976780EFE1B4C00CFB457 /* OpenAlDef.h */; };
+		7EB978970F003CE000CFB457 /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EB978960F003CE000CFB457 /* Config.cpp */; };
+		7EB978990F003CEB00CFB457 /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EB978980F003CEB00CFB457 /* Config.h */; };
 		7EC8D9CB0CD95EFB0056E15E /* StdStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8D9CA0CD95EFB0056E15E /* StdStream.cpp */; };
 		7EC8D9CD0CD95F1C0056E15E /* Stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EC8D9CC0CD95F1C0056E15E /* Stream.cpp */; };
 		7EC8D9D00CD95F420056E15E /* StdStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EC8D9CE0CD95F420056E15E /* StdStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -144,6 +146,8 @@
 		7EB9763E0EFE163300CFB457 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Device.h; path = include/openal/Device.h; sourceTree = "<group>"; };
 		7EB9763F0EFE163300CFB457 /* Buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Buffer.h; path = include/openal/Buffer.h; sourceTree = "<group>"; };
 		7EB976780EFE1B4C00CFB457 /* OpenAlDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenAlDef.h; path = include/openal/OpenAlDef.h; sourceTree = "<group>"; };
+		7EB978960F003CE000CFB457 /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Config.cpp; path = src/Config.cpp; sourceTree = "<group>"; };
+		7EB978980F003CEB00CFB457 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = include/Config.h; sourceTree = "<group>"; };
 		7EC8D9CA0CD95EFB0056E15E /* StdStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StdStream.cpp; path = src/StdStream.cpp; sourceTree = "<group>"; };
 		7EC8D9CC0CD95F1C0056E15E /* Stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Stream.cpp; path = src/Stream.cpp; sourceTree = "<group>"; };
 		7EC8D9CE0CD95F420056E15E /* StdStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StdStream.h; path = include/StdStream.h; sourceTree = "<group>"; };
@@ -185,6 +189,8 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				7EB978960F003CE000CFB457 /* Config.cpp */,
+				7EB978980F003CEB00CFB457 /* Config.h */,
 				7E898A290D08C5AF0077F9ED /* GZipStream.cpp */,
 				7E898A2B0D08C5CE0077F9ED /* GZipStream.h */,
 				7EE362C70D5FA37700C21032 /* Idct */,
@@ -373,6 +379,7 @@
 				7EB976420EFE163300CFB457 /* Device.h in Headers */,
 				7EB976430EFE163300CFB457 /* Buffer.h in Headers */,
 				7EB976790EFE1B4C00CFB457 /* OpenAlDef.h in Headers */,
+				7EB978990F003CEB00CFB457 /* Config.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +459,7 @@
 				7EB976390EFE160400CFB457 /* Device.cpp in Sources */,
 				7EB9763A0EFE160400CFB457 /* Context.cpp in Sources */,
 				7EB9763B0EFE160400CFB457 /* Buffer.cpp in Sources */,
+				7EB978970F003CE000CFB457 /* Config.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,8 +500,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"/usr/local/include/boost-1_35/boost/tr1/tr1/",
-					"/usr/local/include/boost-1_35/",
+					"/usr/local/include/boost-1_37/boost/tr1/tr1/",
+					"/usr/local/include/boost-1_37/",
 					"~/Projects/Framework/include",
 				);
 				PREBINDING = NO;
