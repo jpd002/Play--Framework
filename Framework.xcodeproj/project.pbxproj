@@ -516,8 +516,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"/usr/local/include/boost-1_35/boost/tr1/tr1/",
-					"/usr/local/include/boost-1_35/",
+					"/usr/local/include/boost-1_37/boost/tr1/tr1/",
+					"/usr/local/include/boost-1_37/",
 					"~/Projects/Framework/include",
 				);
 				PREBINDING = NO;
