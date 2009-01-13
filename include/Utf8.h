@@ -45,6 +45,7 @@ namespace Framework
         }
 
         std::wstring ConvertFrom(const std::string&);
+		std::wstring ConvertFromSafe(const std::string&);
     };
 }
 

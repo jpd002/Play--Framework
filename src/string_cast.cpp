@@ -48,3 +48,9 @@ wstring string_cast<wstring>(const string& sSource)
 {
 	return string_cast<wstring, char>(sSource.c_str());
 }
+
+template <>
+wstring string_cast<wstring>(const wstring& sSource)
+{
+	return sSource;
+}
