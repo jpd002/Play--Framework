@@ -315,6 +315,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\string_cast_sjis.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\string_cast_sjis.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\tcharx.h"
 				>
 			</File>
