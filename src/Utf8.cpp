@@ -20,3 +20,8 @@ wstring Utf8::ConvertFromSafe(const string& inputString)
 	}
 	return wstring();
 }
+
+string Utf8::ConvertTo(const wstring& input)
+{
+    return ConvertTo(input.begin(), input.end());
+}

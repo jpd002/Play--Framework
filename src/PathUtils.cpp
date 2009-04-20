@@ -23,6 +23,11 @@ filesystem::wpath PathUtils::GetRoamingDataPath()
     return GetPathFromCsidl(CSIDL_APPDATA);
 }
 
+filesystem::wpath PathUtils::GetPersonalDataPath()
+{
+    return GetPathFromCsidl(CSIDL_PERSONAL);
+}
+
 #endif
 
 #ifdef MACOSX

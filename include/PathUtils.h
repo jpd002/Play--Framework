@@ -11,6 +11,7 @@ namespace Framework
 #ifdef WIN32
         boost::filesystem::wpath    GetPathFromCsidl(int);
         boost::filesystem::wpath    GetRoamingDataPath();
+        boost::filesystem::wpath    GetPersonalDataPath();
 #endif
 #ifdef MACOSX
         boost::filesystem::path     GetHomePath();
