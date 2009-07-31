@@ -20,7 +20,7 @@ namespace Framework
 
 		    CTrayIcon*			                                Insert();
 
-		    void				                                RegisterHandler(IconEventHandlerType);
+		    void				                                RegisterHandler(const IconEventHandlerType&);
 
 	    protected:
 		    long				                                OnWndProc(unsigned int, WPARAM, LPARAM);

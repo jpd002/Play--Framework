@@ -32,7 +32,7 @@ CTrayIconServer::~CTrayIconServer()
 	DestroyWindow(m_hWnd);
 }
 
-void CTrayIconServer::RegisterHandler(IconEventHandlerType Handler)
+void CTrayIconServer::RegisterHandler(const IconEventHandlerType& Handler)
 {
     m_IconEventSignal.connect(Handler);
 }

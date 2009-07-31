@@ -60,7 +60,7 @@ template <typename Format>
 Format lexical_cast_uint(unsigned int number, unsigned int width = 1)
 {
     std::basic_ostringstream<typename Format::value_type> stream;
-    stream << std::setw(width) << std::setfill('0') << number;
+    stream << std::setw(width) << std::setfill(static_cast<typename Format::value_type>('0')) << number;
     return stream.str();
 }
 

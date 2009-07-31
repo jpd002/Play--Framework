@@ -15,6 +15,11 @@ CMenuItem::~CMenuItem()
 
 }
 
+CMenuItem::operator HMENU() const
+{
+    return m_menu;
+}
+
 bool CMenuItem::IsNull() const
 {
 	return (m_menu == NULL);

@@ -13,6 +13,8 @@ namespace Framework
 								CMenuItem(HMENU = NULL, int = 0);
 			virtual				~CMenuItem();
 
+                                operator HMENU() const;
+
 			void				Check(bool);
 			void				Enable(bool);
 			bool				IsNull() const;

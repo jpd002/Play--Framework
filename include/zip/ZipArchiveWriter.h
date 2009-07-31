@@ -5,19 +5,22 @@
 #include "ZipFile.h"
 #include "Stream.h"
 
-class CZipArchiveWriter
+namespace Framework
 {
-public:
-                            CZipArchiveWriter();
-    virtual                 ~CZipArchiveWriter();
+    class CZipArchiveWriter
+    {
+    public:
+                                CZipArchiveWriter();
+        virtual                 ~CZipArchiveWriter();
 
-    void                    Write(Framework::CStream&);
-    void                    InsertFile(CZipFile*);
+        void                    Write(Framework::CStream&);
+        void                    InsertFile(CZipFile*);
 
-private:
-    typedef std::list<CZipFile*> FileList;
+    private:
+        typedef std::list<CZipFile*> FileList;
 
-    FileList                m_files;
-};
+        FileList                m_files;
+    };
+}
 
 #endif

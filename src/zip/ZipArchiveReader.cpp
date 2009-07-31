@@ -53,8 +53,13 @@ CZipArchiveReader::StreamPtr CZipArchiveReader::BeginReadFile(const char* fileNa
         throw runtime_error("Unsupported compression method.");
     }
     m_readingLock = true;
+    uint32 compressedSize = fileHeader.compressedSize;
+    if(compressedSize == 0)
+    {
+        compressedSize = fileIterator->second.compressedSize;
+    }
     return StreamPtr(
-        new CZipInflateStream(m_stream, fileHeader.compressedSize),
+        new CZipInflateStream(m_stream, compressedSize),
         bind(&CZipArchiveReader::EndReadFile, this, _1));
 }
 

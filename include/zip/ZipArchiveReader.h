@@ -8,27 +8,30 @@
 #include "ZipDefs.h"
 #include "Stream.h"
 
-class CZipArchiveReader
+namespace Framework
 {
-public:
-    typedef std::tr1::shared_ptr<Framework::CStream> StreamPtr;
-    typedef std::list<std::string> FileNameList;
+    class CZipArchiveReader
+    {
+    public:
+        typedef std::tr1::shared_ptr<Framework::CStream> StreamPtr;
+        typedef std::list<std::string> FileNameList;
 
-                            CZipArchiveReader(Framework::CStream&);
-    virtual                 ~CZipArchiveReader();
+                                CZipArchiveReader(Framework::CStream&);
+        virtual                 ~CZipArchiveReader();
 
-    StreamPtr               BeginReadFile(const char*);
-    FileNameList            GetFileNameList(const char*);
+        StreamPtr               BeginReadFile(const char*);
+        FileNameList            GetFileNameList(const char*);
 
-private:
-    typedef std::map<std::string, Zip::ZIPDIRFILEHEADER> FileHeaderList;
+    private:
+        typedef std::map<std::string, Zip::ZIPDIRFILEHEADER> FileHeaderList;
 
-    void                    Read(Framework::CStream&);
-    void                    EndReadFile(Framework::CStream*);
+        void                    Read(Framework::CStream&);
+        void                    EndReadFile(Framework::CStream*);
 
-    Framework::CStream&     m_stream;
-    FileHeaderList          m_files;
-    bool                    m_readingLock;
-};
+        Framework::CStream&     m_stream;
+        FileHeaderList          m_files;
+        bool                    m_readingLock;
+    };
+}
 
 #endif

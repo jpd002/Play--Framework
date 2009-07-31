@@ -1,5 +1,7 @@
 #include "zip/ZipFile.h"
 
+using namespace Framework;
+
 CZipFile::CZipFile(const char* name) :
 m_name(name)
 {
