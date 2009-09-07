@@ -83,6 +83,10 @@
 		7EE362D00D5FA3A100C21032 /* Interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE362CD0D5FA3A100C21032 /* Interface.h */; };
 		7EE362D10D5FA3A100C21032 /* TrivialC.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EE362CE0D5FA3A100C21032 /* TrivialC.h */; };
 		7EEF33CE0D0B933C005FE2D8 /* OpenGlDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EEF33CD0D0B933C005FE2D8 /* OpenGlDef.h */; };
+		7EF8E5F31055877800DB0236 /* Utf8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EF8E5F21055877800DB0236 /* Utf8.cpp */; };
+		7EF8E5F51055878200DB0236 /* Utf8.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EF8E5F41055878200DB0236 /* Utf8.h */; };
+		7EFA618B10547E17000BB472 /* PathUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA618A10547E17000BB472 /* PathUtils.cpp */; };
+		7EFA618D10547E28000BB472 /* PathUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EFA618C10547E28000BB472 /* PathUtils.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -162,6 +166,10 @@
 		7EE362CD0D5FA3A100C21032 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Interface.h; path = include/idct/Interface.h; sourceTree = "<group>"; };
 		7EE362CE0D5FA3A100C21032 /* TrivialC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrivialC.h; path = include/idct/TrivialC.h; sourceTree = "<group>"; };
 		7EEF33CD0D0B933C005FE2D8 /* OpenGlDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGlDef.h; path = include/opengl/OpenGlDef.h; sourceTree = "<group>"; };
+		7EF8E5F21055877800DB0236 /* Utf8.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Utf8.cpp; path = src/Utf8.cpp; sourceTree = "<group>"; };
+		7EF8E5F41055878200DB0236 /* Utf8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utf8.h; path = include/Utf8.h; sourceTree = "<group>"; };
+		7EFA618A10547E17000BB472 /* PathUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PathUtils.cpp; path = src/PathUtils.cpp; sourceTree = "<group>"; };
+		7EFA618C10547E28000BB472 /* PathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathUtils.h; path = include/PathUtils.h; sourceTree = "<group>"; };
 		D2AAC046055464E500DB518D /* libFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -203,6 +211,8 @@
 				7E898A380D08C64A0077F9ED /* Mpeg2 */,
 				7EB9762A0EFE15C300CFB457 /* OpenAl */,
 				7EE203290D0B5158002D2B72 /* OpenGl */,
+				7EFA618A10547E17000BB472 /* PathUtils.cpp */,
+				7EFA618C10547E28000BB472 /* PathUtils.h */,
 				7E37676B0CDAC5C0001F232D /* PtrMacro.h */,
 				7E3767590CDAC560001F232D /* PtrStream.cpp */,
 				7E37675D0CDAC570001F232D /* PtrStream.h */,
@@ -210,6 +220,8 @@
 				7EC8D9CE0CD95F420056E15E /* StdStream.h */,
 				7EC8D9CC0CD95F1C0056E15E /* Stream.cpp */,
 				7EC8D9CF0CD95F420056E15E /* Stream.h */,
+				7EF8E5F21055877800DB0236 /* Utf8.cpp */,
+				7EF8E5F41055878200DB0236 /* Utf8.h */,
 				7E898A010D08C4F00077F9ED /* Xml */,
 				7E8BEEC40D171BB500CBEDE8 /* Zip */,
 			);
@@ -380,6 +392,8 @@
 				7EB976430EFE163300CFB457 /* Buffer.h in Headers */,
 				7EB976790EFE1B4C00CFB457 /* OpenAlDef.h in Headers */,
 				7EB978990F003CEB00CFB457 /* Config.h in Headers */,
+				7EFA618D10547E28000BB472 /* PathUtils.h in Headers */,
+				7EF8E5F51055878200DB0236 /* Utf8.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,6 +474,8 @@
 				7EB9763A0EFE160400CFB457 /* Context.cpp in Sources */,
 				7EB9763B0EFE160400CFB457 /* Buffer.cpp in Sources */,
 				7EB978970F003CE000CFB457 /* Config.cpp in Sources */,
+				7EFA618B10547E17000BB472 /* PathUtils.cpp in Sources */,
+				7EF8E5F31055877800DB0236 /* Utf8.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +513,7 @@
 		1DEB91F008733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = MACOSX;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -505,7 +522,8 @@
 					"~/Projects/Framework/include",
 				);
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				VALID_ARCHS = "armv6 i386 ppc ppc64 ppc7400 ppc970 x86_64";
 			};
 			name = Debug;
 		};
