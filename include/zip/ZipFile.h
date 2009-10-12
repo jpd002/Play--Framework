@@ -4,18 +4,21 @@
 #include "Stream.h"
 #include <string>
 
-class CZipFile
+namespace Framework
 {
-public:
-                    CZipFile(const char*);
-    virtual         ~CZipFile();
+	class CZipFile
+	{
+	public:
+						CZipFile(const char*);
+		virtual         ~CZipFile();
 
-    const char*     GetName() const;
+		const char*     GetName() const;
 
-    virtual void    Write(Framework::CStream&) = 0;
+		virtual void    Write(Framework::CStream&) = 0;
 
-private:
-    std::string     m_name;
-};
+	private:
+		std::string     m_name;
+	};
+}
 
 #endif
