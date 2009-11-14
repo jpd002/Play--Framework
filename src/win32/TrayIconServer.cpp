@@ -7,8 +7,11 @@ using namespace Framework;
 using namespace Framework::Win32;
 
 CTrayIconServer::CTrayIconServer()
+: m_taskBarCreatedMessage(0)
 {
-	RECT rc;
+    m_taskBarCreatedMessage = RegisterWindowMessage(_T("TaskbarCreated"));
+
+    RECT rc;
 
 	if(!DoesWindowClassExist(CLSNAME))
 	{
@@ -39,11 +42,8 @@ void CTrayIconServer::RegisterHandler(const IconEventHandlerType& Handler)
 
 CTrayIcon* CTrayIconServer::Insert()
 {
-	CTrayIcon* pIcon;
-	unsigned int nID;
-
-    nID = static_cast<unsigned int>(m_Icons.size());
-	pIcon = new CTrayIcon(m_hWnd, nID);
+    unsigned int nID = static_cast<unsigned int>(m_Icons.size());
+	CTrayIcon* pIcon = new CTrayIcon(m_hWnd, nID);
     pIcon->SetMessage(WM_TRAY);
 
     m_Icons.insert(nID, pIcon);
@@ -57,8 +57,7 @@ long CTrayIconServer::OnWndProc(unsigned int uiMsg, WPARAM wParam, LPARAM lParam
 	{
 	case WM_TRAY:
         {
-            TrayIconMapType::iterator itIcon;
-            itIcon = m_Icons.find(wParam);
+            TrayIconMapType::iterator itIcon = m_Icons.find(wParam);
             if(itIcon != m_Icons.end())
             {
                 m_IconEventSignal(&(*itIcon->second), lParam);
@@ -67,5 +66,13 @@ long CTrayIconServer::OnWndProc(unsigned int uiMsg, WPARAM wParam, LPARAM lParam
 		return FALSE;
 		break;
 	}
+    if(uiMsg == m_taskBarCreatedMessage)
+    {
+        for(TrayIconMapType::iterator itIcon = m_Icons.begin();
+            itIcon != m_Icons.end(); itIcon++)
+        {
+            itIcon->second->Rebuild();
+        }
+    }
 	return TRUE;
 }

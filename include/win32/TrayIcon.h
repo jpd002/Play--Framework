@@ -12,14 +12,21 @@ namespace Framework
 	    public:
 						    CTrayIcon(HWND, unsigned int);
 						    ~CTrayIcon();
-		    void			SetTip(TCHAR*);
+		    void			SetTip(const TCHAR*);
 		    void			SetIcon(HICON);
 		    void			SetMessage(unsigned int);
 		    unsigned int	GetID();
+            void            Rebuild();
+
 	    private:
 		    void			Add();
 		    void			Delete();
 		    void			InitStructure(NOTIFYICONDATA*);
+
+            std::tstring    m_tip;
+            HICON           m_icon;
+            unsigned int    m_message;
+
 		    HWND			m_hWnd;
 		    unsigned int	m_nID;
 	    };

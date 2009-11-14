@@ -30,6 +30,7 @@ namespace Framework
 
 		    TrayIconMapType	                                    m_Icons;
             boost::signal<void (CTrayIcon*, LPARAM)>            m_IconEventSignal;
+            unsigned int                                        m_taskBarCreatedMessage;
         };
     }
 }

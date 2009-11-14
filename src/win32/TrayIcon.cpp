@@ -4,6 +4,8 @@ using namespace Framework;
 using namespace Framework::Win32;
 
 CTrayIcon::CTrayIcon(HWND hWnd, unsigned int nID)
+: m_message(0)
+, m_icon(NULL)
 {
 	m_hWnd = hWnd;
 	m_nID = nID;
@@ -37,6 +39,26 @@ void CTrayIcon::Delete()
 	Shell_NotifyIcon(NIM_DELETE, &d);
 }
 
+void CTrayIcon::Rebuild()
+{
+    Add();
+
+    if(m_icon != NULL)
+    {
+        SetIcon(m_icon);
+    }
+
+    if(m_message != 0)
+    {
+        SetMessage(m_message);
+    }
+
+    if(m_tip.length() != 0)
+    {
+        SetTip(m_tip.c_str());
+    }
+}
+
 void CTrayIcon::SetMessage(unsigned int nMessage)
 {
 	NOTIFYICONDATA d;
@@ -44,15 +66,19 @@ void CTrayIcon::SetMessage(unsigned int nMessage)
 	d.uCallbackMessage = nMessage;
 	d.uFlags = NIF_MESSAGE;
 	Shell_NotifyIcon(NIM_MODIFY, &d);
+
+    m_message = nMessage;
 }
 
-void CTrayIcon::SetTip(TCHAR* sTip)
+void CTrayIcon::SetTip(const TCHAR* sTip)
 {
 	NOTIFYICONDATA d;
 	InitStructure(&d);
-    _tcscpy(d.szTip, sTip);
+    _tcsncpy(d.szTip, sTip, sizeof(d.szTip) / sizeof(TCHAR));
 	d.uFlags = NIF_TIP;
 	Shell_NotifyIcon(NIM_MODIFY, &d);
+
+    m_tip = sTip;
 }
 
 void CTrayIcon::SetIcon(HICON hIcon)
@@ -62,6 +88,8 @@ void CTrayIcon::SetIcon(HICON hIcon)
 	d.hIcon     = hIcon;
 	d.uFlags    = NIF_ICON;
 	Shell_NotifyIcon(NIM_MODIFY, &d);
+
+    m_icon = hIcon;
 }
 
 unsigned int CTrayIcon::GetID()
