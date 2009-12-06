@@ -13,4 +13,10 @@
 #define strnicmp strncasecmp
 #endif
 
+#ifdef WIN32
+#define wcsicmp _wcsicmp
+#else
+#define wcsicmp wcscasecmp
+#endif
+
 #endif

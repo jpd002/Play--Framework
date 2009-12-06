@@ -7,6 +7,7 @@
 
 #include "win32/Window.h"
 #include <windowsx.h>
+#include <assert.h>
 
 using namespace Framework;
 using namespace Framework::Win32;
@@ -141,6 +142,7 @@ WNDCLASSEX CWindow::MakeWndClass(const TCHAR* className)
 void CWindow::Create(unsigned long nStyleEx, const TCHAR* sClass, const TCHAR* sWindow, unsigned long nStyle, const RECT* pR, HWND hParent, void* pParam)
 {
 	m_hWnd = CreateWindowEx(nStyleEx, sClass, sWindow, nStyle, pR->left, pR->top, (pR->right - pR->left), (pR->bottom - pR->top), hParent, NULL, GetModuleHandle(NULL), pParam);
+    assert(m_hWnd != NULL);
 }
 
 bool CWindow::IsWindow()

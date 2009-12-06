@@ -2,6 +2,7 @@
 #define _FILEDIALOG_H_
 
 #include "win32/Window.h"
+#include <list>
 
 namespace Framework
 {
@@ -10,14 +11,21 @@ namespace Framework
 		class CFileDialog
 		{
 		public:
-							CFileDialog();
-							~CFileDialog();
-			int				Summon(HWND);
-			OPENFILENAME	m_OFN;
-			TCHAR			m_sFile[MAX_PATH];
+            typedef std::list<std::tstring> PathList;
+
+							CFileDialog(unsigned int bufferSize = MAX_PATH);
+			virtual         ~CFileDialog();
+
+            const TCHAR*    GetPath() const;
+            PathList        GetMultiPaths() const;
+
+			int				SummonOpen(HWND);
+            int             SummonSave(HWND);
+
+            OPENFILENAME	m_OFN;
 
 		private:
-
+            TCHAR*          m_sFile;
 		};
 	}
 }

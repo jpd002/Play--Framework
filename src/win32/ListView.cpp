@@ -36,6 +36,11 @@ int CListView::FindItemData(unsigned long nData)
 	return ListView_FindItem(m_hWnd, -1, &info);
 }
 
+void CListView::DeleteItem(unsigned int itemIdx)
+{
+    ListView_DeleteItem(m_hWnd, itemIdx);
+}
+
 void CListView::DeleteAllItems()
 {
 	ListView_DeleteAllItems(m_hWnd);

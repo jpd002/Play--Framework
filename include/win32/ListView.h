@@ -43,6 +43,7 @@ namespace Framework
 
 			int				GetItemCount();
 			int				FindItemData(unsigned long);
+            void            DeleteItem(unsigned int);
 			void			DeleteAllItems();
 			int				InsertItem(LVITEM*);
             int             InsertItem(const LVITEM&);
