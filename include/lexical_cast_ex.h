@@ -17,6 +17,7 @@ Format lexical_cast_hex(unsigned int nNumber, unsigned int nWidth = 1)
     };
 
     assert(nWidth <= MAXNIBBLE);
+    if(nWidth == 0) nWidth = 1;
 
     unsigned int nNumSize = 0;
     for(unsigned int i = 0; i < MAXNIBBLE; nNumSize++, i++)
