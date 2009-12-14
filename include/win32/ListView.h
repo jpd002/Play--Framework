@@ -52,6 +52,8 @@ namespace Framework
 			void			SetItemText(unsigned int, unsigned int, const TCHAR*);
 			void			GetItemText(unsigned int, unsigned int, TCHAR*, unsigned int);
 
+			void			SetItemState(unsigned int, unsigned int, unsigned int);
+
 			unsigned long	GetItemData(unsigned int);
 
 			int				GetSelection();

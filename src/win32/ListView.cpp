@@ -88,6 +88,11 @@ void CListView::SetItemText(unsigned int nItem, unsigned int nSubItem, const TCH
 	ListView_SetItemText(m_hWnd, nItem, nSubItem, const_cast<TCHAR*>(sText));
 }
 
+void CListView::SetItemState(unsigned int itemIdx, unsigned int state, unsigned int mask)
+{
+	ListView_SetItemState(m_hWnd, itemIdx, state, mask);
+}
+
 int CListView::GetSelection()
 {
 	return ListView_GetSelectionMark(m_hWnd);
