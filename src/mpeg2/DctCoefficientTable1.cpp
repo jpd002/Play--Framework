@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <string.h>
 #include "mpeg2/DctCoefficientTable1.h"
 
@@ -300,42 +301,39 @@ void CDctCoefficientTable1::SkipEndOfBlock(CBitStream* pStream)
 
 void CDctCoefficientTable1::GetRunLevelPair(CBitStream* pStream, RUNLEVELPAIR* pPairDst, bool nIsMPEG2)
 {
-	uint32 nIndex;
-	uint8 nSign;
-	RUNLEVELPAIR* pPair;
-
-	nIndex = Decode(pStream);
-
-/*
-	if(nIndex == 0)
+	const VLCTABLEENTRY* entry(NULL);
+	uint8 bitCount = 0;
+	int result = TryPeekSymbol(pStream, entry);
+	if(result != 0)
 	{
-		//Error
-		return;
+		ThrowError(result);
 	}
-*/
 
-	pPair = &m_pRunLevelTable[nIndex];
+	bitCount += entry->nCodeLength;
+	uint32 index = entry->nValue;
+	RUNLEVELPAIR* pPair = &m_pRunLevelTable[index];
 
 	if(pPair->nRun == RUN_ESCAPE)
 	{
-		pPairDst->nRun		= pStream->GetBits_MSBF(6);
+		pPairDst->nRun		= TryGetValueOfs(pStream, 6, bitCount);
 
 		if(!nIsMPEG2)
 		{
-			pPairDst->nLevel	= (int8)pStream->GetBits_MSBF(8);
-			
-			if(pPairDst->nLevel == 0)
-			{
-				pPairDst->nLevel = (uint8)pStream->GetBits_MSBF(8);
-			}
-			else if((uint8)pPairDst->nLevel == 128)
-			{
-				pPairDst->nLevel = (pStream->GetBits_MSBF(8) - 256);
-			}
+			assert(0);
+			//pPairDst->nLevel	= (int8)pStream->GetBits_MSBF(8);
+			//
+			//if(pPairDst->nLevel == 0)
+			//{
+			//	pPairDst->nLevel = (uint8)pStream->GetBits_MSBF(8);
+			//}
+			//else if((uint8)pPairDst->nLevel == 128)
+			//{
+			//	pPairDst->nLevel = (pStream->GetBits_MSBF(8) - 256);
+			//}
 		}
 		else
 		{
-			pPairDst->nLevel	= pStream->GetBits_MSBF(12); 
+			pPairDst->nLevel	= TryGetValueOfs(pStream, 12, bitCount); 
 
 			if(pPairDst->nLevel & 0x800)
 			{
@@ -347,7 +345,7 @@ void CDctCoefficientTable1::GetRunLevelPair(CBitStream* pStream, RUNLEVELPAIR* p
 	}
 	else
 	{
-		nSign = (uint8)pStream->GetBits_MSBF(1);
+		uint8 nSign = static_cast<uint8>(TryGetValueOfs(pStream, 1, bitCount));
 
 		if(pPairDst != NULL)
 		{
@@ -363,10 +361,14 @@ void CDctCoefficientTable1::GetRunLevelPair(CBitStream* pStream, RUNLEVELPAIR* p
 			}
 		}
 	}
+
+	pStream->Advance(bitCount);
 }
 
 void CDctCoefficientTable1::GetRunLevelPairDc(CBitStream* pStream, RUNLEVELPAIR* pPairDst, bool nIsMPEG2)
 {
+	assert(0);
+
 	uint8 nSign;
 
 	//Special case

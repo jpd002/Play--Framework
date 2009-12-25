@@ -15,11 +15,28 @@ namespace MPEG2
 	class CVLCTable
 	{
 	public:
-		virtual			~CVLCTable();
-		uint32			Decode(Framework::CBitStream*);
+		class CVLCTableException : public std::exception
+		{
 
+		};
+
+		enum DECODE_ERROR
+		{
+			DECODE_ERROR_NOTENOUGHDATA = -1,
+			DECODE_ERROR_SYMBOLNOTFOUND = -2,
+		};
+
+		virtual			~CVLCTable();
+
+		int				TryPeekSymbol(Framework::CBitStream*, const VLCTABLEENTRY*&);
+		int				TryGetSymbol(Framework::CBitStream*, const VLCTABLEENTRY*&);
+
+		uint32			GetSymbol(Framework::CBitStream*);
+		
 	protected:
 						CVLCTable(unsigned int, VLCTABLEENTRY*, unsigned int, unsigned int*);
+
+		void			ThrowError(int);
 
 	private:
 		unsigned int	m_nMaxBits;

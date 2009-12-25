@@ -1,37 +1,38 @@
 #ifndef _STREAMBITSTREAM_H_
 #define _STREAMBITSTREAM_H_
 
+#include <stdexcept>
+#include "Types.h"
 #include "Stream.h"
 #include "BitStream.h"
 
 namespace Framework
 {
-
 	class CStreamBitStream : public CBitStream
 	{
 	public:
-						CStreamBitStream(CStream*);
-		virtual			~CStreamBitStream();
-		uint32			GetBits_LSBF(uint8);
-		uint32			GetBits_MSBF(uint8);
-		uint32			PeekBits_LSBF(uint8);
-		uint32			PeekBits_MSBF(uint8);
-		void			SeekToByteAlign();
-		bool			IsOnByteBoundary();
 
-	protected:
-		enum BUFFERSIZE
+								CStreamBitStream(Framework::CStream&);
+		virtual					~CStreamBitStream();
+
+		virtual void			Advance(uint8);
+		virtual uint8			GetBitIndex() const;
+
+		virtual bool			TryPeekBits_LSBF(uint8, uint32&);
+		virtual bool			TryPeekBits_MSBF(uint8, uint32&);
+
+	private:
+		enum
 		{
-			BUFFERSIZE = 8,
+			BUFFER_SIZE = 16,
 		};
 
-		virtual void	SkipBits(uint8);
+		uint8					m_buffer[BUFFER_SIZE];
+		unsigned int			m_cursor;
+		unsigned int			m_availableBits;
 
-		CStream*		m_pStream;
-		uint8			m_nPointer;
-		uint8			m_nBuffer[BUFFERSIZE];
+		Framework::CStream&		m_stream;
 	};
-
 }
 
 #endif

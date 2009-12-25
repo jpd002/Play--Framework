@@ -26,7 +26,7 @@ CMemStream::~CMemStream()
 
 bool CMemStream::IsEOF()
 {
-	return true;
+	return (m_position == m_nSize);
 }
 
 uint64 CMemStream::Tell()
@@ -53,8 +53,11 @@ void CMemStream::Seek(int64 nPosition, STREAM_SEEK_DIRECTION nDir)
 
 uint64 CMemStream::Read(void* pData, uint64 nSize)
 {
-	assert(0);
-	return 0;
+	assert(m_nSize >= m_position);
+	unsigned int readSize = std::min(static_cast<unsigned int>(nSize), m_nSize - m_position);
+	memcpy(pData, m_pData + m_position, readSize);
+	m_position += readSize;
+	return readSize;
 }
 
 uint64 CMemStream::Write(const void* pData, uint64 nSize)
@@ -70,12 +73,18 @@ uint64 CMemStream::Write(const void* pData, uint64 nSize)
     return nSize;
 }
 
-const uint8* CMemStream::GetBuffer()
+void CMemStream::ResetBuffer()
+{
+	m_nSize = 0;
+	m_position = 0;
+}
+
+const uint8* CMemStream::GetBuffer() const
 {
 	return m_pData;
 }
 
-const unsigned int CMemStream::GetSize()
+unsigned int CMemStream::GetSize() const
 {
 	return m_nSize;
 }

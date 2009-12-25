@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="Framework"
 	ProjectGUID="{E3CCDBB1-FB55-4416-BE80-FAB313BE549C}"
 	RootNamespace="Framework"
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)/include&quot;;C:\Components\boost_1_40_0;C:\Projects\zlib"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;_MSVC"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -164,6 +164,10 @@
 			</File>
 			<File
 				RelativePath=".\include\Bitmap.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\BitStream.cpp"
 				>
 			</File>
 			<File
@@ -387,6 +391,10 @@
 				</File>
 				<File
 					RelativePath=".\include\mpeg2\DcSizeLuminanceTable.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\mpeg2\DctCoefficientTable.cpp"
 					>
 				</File>
 				<File

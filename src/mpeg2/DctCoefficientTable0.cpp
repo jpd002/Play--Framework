@@ -1,4 +1,5 @@
 #include <string.h>
+#include <assert.h>
 #include "mpeg2/DctCoefficientTable0.h"
 
 using namespace MPEG2;
@@ -300,42 +301,40 @@ void CDctCoefficientTable0::SkipEndOfBlock(CBitStream* pStream)
 
 void CDctCoefficientTable0::GetRunLevelPair(CBitStream* pStream, RUNLEVELPAIR* pPairDst, bool nIsMPEG2)
 {
-	uint32 nIndex;
-	uint8 nSign;
-	RUNLEVELPAIR* pPair;
+	const VLCTABLEENTRY* entry(NULL);
+	uint8 bitCount = 0;
 
-	nIndex = Decode(pStream);
-
-/*
-	if(nIndex == 0)
+	int result = TryPeekSymbol(pStream, entry);
+	if(result != 0)
 	{
-		//Error
-		return;
+		ThrowError(result);
 	}
-*/
 
-	pPair = &m_pRunLevelTable[nIndex];
+	bitCount += entry->nCodeLength;
+	uint32 index = entry->nValue;
+	RUNLEVELPAIR* pPair = &m_pRunLevelTable[index];
 
 	if(pPair->nRun == RUN_ESCAPE)
 	{
-		pPairDst->nRun		= pStream->GetBits_MSBF(6);
+		pPairDst->nRun		= TryGetValueOfs(pStream, 6, bitCount);
 
 		if(!nIsMPEG2)
 		{
-			pPairDst->nLevel	= (int8)pStream->GetBits_MSBF(8);
-			
-			if(pPairDst->nLevel == 0)
-			{
-				pPairDst->nLevel = (uint8)pStream->GetBits_MSBF(8);
-			}
-			else if((uint8)pPairDst->nLevel == 128)
-			{
-				pPairDst->nLevel = (pStream->GetBits_MSBF(8) - 256);
-			}
+			assert(0);
+			//pPairDst->nLevel	= (int8)pStream->GetBits_MSBF(8);
+			//
+			//if(pPairDst->nLevel == 0)
+			//{
+			//	pPairDst->nLevel = (uint8)pStream->GetBits_MSBF(8);
+			//}
+			//else if((uint8)pPairDst->nLevel == 128)
+			//{
+			//	pPairDst->nLevel = (pStream->GetBits_MSBF(8) - 256);
+			//}
 		}
 		else
 		{
-			pPairDst->nLevel	= pStream->GetBits_MSBF(12); 
+			pPairDst->nLevel	= TryGetValueOfs(pStream, 12, bitCount); 
 
 			if(pPairDst->nLevel & 0x800)
 			{
@@ -347,7 +346,7 @@ void CDctCoefficientTable0::GetRunLevelPair(CBitStream* pStream, RUNLEVELPAIR* p
 	}
 	else
 	{
-		nSign = (uint8)pStream->GetBits_MSBF(1);
+		uint8 nSign = static_cast<uint8>(TryGetValueOfs(pStream, 1, bitCount));
 
 		if(pPairDst != NULL)
 		{
@@ -363,16 +362,80 @@ void CDctCoefficientTable0::GetRunLevelPair(CBitStream* pStream, RUNLEVELPAIR* p
 			}
 		}
 	}
+
+	pStream->Advance(bitCount);
+
+//	uint32 nIndex;
+//	uint8 nSign;
+//	RUNLEVELPAIR* pPair;
+//
+//	nIndex = GetSymbol(pStream);
+//
+///*
+//	if(nIndex == 0)
+//	{
+//		//Error
+//		return;
+//	}
+//*/
+//
+//	pPair = &m_pRunLevelTable[nIndex];
+//
+//	if(pPair->nRun == RUN_ESCAPE)
+//	{
+//		pPairDst->nRun		= pStream->GetBits_MSBF(6);
+//
+//		if(!nIsMPEG2)
+//		{
+//			pPairDst->nLevel	= (int8)pStream->GetBits_MSBF(8);
+//			
+//			if(pPairDst->nLevel == 0)
+//			{
+//				pPairDst->nLevel = (uint8)pStream->GetBits_MSBF(8);
+//			}
+//			else if((uint8)pPairDst->nLevel == 128)
+//			{
+//				pPairDst->nLevel = (pStream->GetBits_MSBF(8) - 256);
+//			}
+//		}
+//		else
+//		{
+//			pPairDst->nLevel	= pStream->GetBits_MSBF(12); 
+//
+//			if(pPairDst->nLevel & 0x800)
+//			{
+//				pPairDst->nLevel |= 0xF000;
+//				pPairDst->nLevel = (int16)pPairDst->nLevel;
+//			}
+//		}
+//
+//	}
+//	else
+//	{
+//		nSign = (uint8)pStream->GetBits_MSBF(1);
+//
+//		if(pPairDst != NULL)
+//		{
+//			pPairDst->nRun			= pPair->nRun;
+//
+//			if(nSign == 1)
+//			{
+//				pPairDst->nLevel	= 0 - pPair->nLevel;
+//			}
+//			else
+//			{
+//				pPairDst->nLevel	= pPair->nLevel;
+//			}
+//		}
+//	}
 }
 
 void CDctCoefficientTable0::GetRunLevelPairDc(CBitStream* pStream, RUNLEVELPAIR* pPairDst, bool nIsMPEG2)
 {
-	uint8 nSign;
-
 	//Special case
 	if(pStream->PeekBits_MSBF(1) == 1)
 	{
-		nSign = (uint8)(pStream->GetBits_MSBF(2) & 0x01);
+		uint8 nSign = (uint8)(pStream->GetBits_MSBF(2) & 0x01);
 
 		pPairDst->nRun = 0;
 
@@ -387,6 +450,8 @@ void CDctCoefficientTable0::GetRunLevelPairDc(CBitStream* pStream, RUNLEVELPAIR*
 
 		return;
 	}
-
-	GetRunLevelPair(pStream, pPairDst, nIsMPEG2);
+	else
+	{
+		GetRunLevelPair(pStream, pPairDst, nIsMPEG2);
+	}
 }

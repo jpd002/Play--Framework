@@ -16,8 +16,10 @@ namespace Framework
 		uint64				Tell();
 		void				Seek(int64, STREAM_SEEK_DIRECTION);
 		bool				IsEOF();
-		const uint8*		GetBuffer();
-		const unsigned int	GetSize();
+		void				ResetBuffer();
+		const uint8*		GetBuffer() const;
+		unsigned int		GetSize() const;
+
 	private:
 		unsigned int		m_nSize;
 		unsigned int		m_nGrow;

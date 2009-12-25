@@ -24,6 +24,9 @@ namespace MPEG2
 		virtual void		GetRunLevelPairDc(Framework::CBitStream*, RUNLEVELPAIR*, bool) = 0;
 		virtual bool		IsEndOfBlock(Framework::CBitStream*) = 0;
 		virtual void		SkipEndOfBlock(Framework::CBitStream*) = 0;
+
+	protected:
+		static uint32		TryGetValueOfs(Framework::CBitStream*, uint8, uint8&);
 	};
 };
 

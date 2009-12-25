@@ -96,7 +96,7 @@ void CPNG::UncompressIDAT()
 	CPtrStream p(m_pIDAT, m_nIDATSize);
 	p.Read(&nMethod, 1);
 	p.Read(&nFlags, 1);
-	CStreamBitStream s(&p);
+	CStreamBitStream s(p);
 	CDeflate::Decompress(&s, m_pBuffer);
 }
 
