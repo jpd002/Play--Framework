@@ -3,12 +3,12 @@
 
 #ifdef _MSVC
 
-#define PLACEHOLDER_1   placeholders::_1
-#define PLACEHOLDER_2   placeholders::_2
-#define PLACEHOLDER_3   placeholders::_3
-#define PLACEHOLDER_4   placeholders::_4
-#define PLACEHOLDER_5   placeholders::_5
-#define PLACEHOLDER_6   placeholders::_6
+#define PLACEHOLDER_1   std::tr1::placeholders::_1
+#define PLACEHOLDER_2   std::tr1::placeholders::_2
+#define PLACEHOLDER_3   std::tr1::placeholders::_3
+#define PLACEHOLDER_4   std::tr1::placeholders::_4
+#define PLACEHOLDER_5   std::tr1::placeholders::_5
+#define PLACEHOLDER_6   std::tr1::placeholders::_6
 
 #else
 
