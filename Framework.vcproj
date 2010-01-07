@@ -426,6 +426,46 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\mpeg2\MacroblockAddressIncrementTable.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\mpeg2\MacroblockAddressIncrementTable.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\mpeg2\MacroblockTypeBTable.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\mpeg2\MacroblockTypeBTable.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\mpeg2\MacroblockTypeITable.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\mpeg2\MacroblockTypeITable.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\mpeg2\MacroblockTypePTable.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\mpeg2\MacroblockTypePTable.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\mpeg2\MotionCodeTable.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\mpeg2\MotionCodeTable.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\mpeg2\QuantiserScaleTable.cpp"
 					>
 				</File>
