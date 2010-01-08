@@ -64,3 +64,12 @@ uint64 CStream::GetLength()
     Seek(position, STREAM_SEEK_SET);
     return size;
 }
+
+uint64 CStream::GetRemainingLength()
+{
+    uint64 position = Tell();
+    Seek(0, STREAM_SEEK_END);
+    uint64 size = Tell();
+    Seek(position, STREAM_SEEK_SET);
+    return size - position;
+}

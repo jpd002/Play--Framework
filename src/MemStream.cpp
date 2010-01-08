@@ -79,6 +79,14 @@ void CMemStream::ResetBuffer()
 	m_position = 0;
 }
 
+void CMemStream::Truncate()
+{
+	m_nSize = GetRemainingLength();
+	assert(m_nSize <= m_nGrow);
+	memmove(m_pData, m_pData + m_position, m_nSize);
+	m_position = 0;
+}
+
 const uint8* CMemStream::GetBuffer() const
 {
 	return m_pData;

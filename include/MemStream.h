@@ -17,6 +17,7 @@ namespace Framework
 		void				Seek(int64, STREAM_SEEK_DIRECTION);
 		bool				IsEOF();
 		void				ResetBuffer();
+		void				Truncate();
 		const uint8*		GetBuffer() const;
 		unsigned int		GetSize() const;
 

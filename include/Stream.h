@@ -32,6 +32,7 @@ namespace Framework
         virtual bool    IsEOF() = 0;
         virtual void    Flush();
         virtual uint64  GetLength();
+		virtual uint64	GetRemainingLength();
 
         uint8           Read8();
         uint16          Read16();
