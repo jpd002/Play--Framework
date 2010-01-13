@@ -100,7 +100,7 @@ namespace Framework
             virtual long            OnPaint();
             virtual long            OnMouseLeave();
             virtual long            OnEraseBkgnd();
-            virtual long            OnTimer();
+            virtual long            OnTimer(WPARAM);
             virtual long            OnSetFocus();
             virtual long            OnKillFocus();
 

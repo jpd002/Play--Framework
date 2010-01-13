@@ -371,7 +371,7 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 		return pThis->OnNotify(wParam, (NMHDR*)lParam);
 		break;
 	case WM_TIMER:
-		pThis->OnTimer();
+		pThis->OnTimer(wParam);
 		return FALSE;
 		break;
 	case WM_HSCROLL:
@@ -523,7 +523,7 @@ long CWindow::OnPaint()
 	return TRUE;
 }
 
-long CWindow::OnTimer()
+long CWindow::OnTimer(WPARAM)
 {
 	return TRUE;
 }
