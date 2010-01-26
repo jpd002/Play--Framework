@@ -326,10 +326,15 @@ void CDctCoefficientTable0::GetRunLevelPair(CBitStream* pStream, RUNLEVELPAIR* p
 			{
 				pPairDst->nLevel = TryGetValueOfs(pStream, 8, bitCount);
 			}
-			else if((uint8)pPairDst->nLevel == 128)
+			else if(static_cast<uint8>(pPairDst->nLevel) == 128)
 			{
 				pPairDst->nLevel = (TryGetValueOfs(pStream, 8, bitCount) - 256);
 			}
+			else if(pPairDst->nLevel > 128)
+			{
+				pPairDst->nLevel -= 256;
+			}
+
 		}
 		else
 		{
