@@ -21,22 +21,29 @@ namespace Framework
                 }
                 else
                 {
-                    if((nChar & 0xF0) == 0xE0)
+					if((nChar & 0xE0) == 0xC0)
+					{
+                        char nByte1(*(++itChar));
+
+                        if((nByte1 & 0xC0) != 0x80) throw std::runtime_error("Invalid UTF-8 character.");
+
+						wchar_t nWChar = ((nChar & 0x1F) << 6) | (nByte1 & 0x3F);
+                        sTemp += nWChar;
+					}
+                    else if((nChar & 0xF0) == 0xE0)
                     {
                         char nByte1(*(++itChar));
                         char nByte2(*(++itChar));
                         
-                        if((nByte1 & 0xC0) != 0x80) throw std::exception();
-                        if((nByte2 & 0xC0) != 0x80) throw std::exception();
+                        if((nByte1 & 0xC0) != 0x80) throw std::runtime_error("Invalid UTF-8 character.");
+                        if((nByte2 & 0xC0) != 0x80) throw std::runtime_error("Invalid UTF-8 character.");
 
-                        wchar_t nWChar;
-                        nWChar = ((nChar & 0x0F) << 12) | ((nByte1 & 0x3F) << 6) | (nByte2 & 0x3F);
-
+                        wchar_t nWChar = ((nChar & 0x0F) << 12) | ((nByte1 & 0x3F) << 6) | (nByte2 & 0x3F);
                         sTemp += nWChar;
                     }
                     else
                     {
-                        throw std::exception();
+						throw std::runtime_error("Invalid UTF-8 character.");
                     }
                 }
             }
