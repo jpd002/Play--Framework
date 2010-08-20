@@ -32,7 +32,7 @@ CStdStream::CStdStream(const char* path, const char* options)
 
 CStdStream::CStdStream(const wchar_t* path, const wchar_t* options)
 {
-#ifdef _MSVC
+#ifdef _MSC_VER
     m_pFile = _wfopen(path, options);
 #else
     m_pFile = NULL;

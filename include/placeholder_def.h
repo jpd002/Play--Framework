@@ -1,7 +1,7 @@
 #ifndef _PLACEHOLDER_DEF_H_
 #define _PLACEHOLDER_DEF_H_
 
-#ifdef _MSVC
+#ifdef _MSC_VER
 
 #define PLACEHOLDER_1   std::tr1::placeholders::_1
 #define PLACEHOLDER_2   std::tr1::placeholders::_2
