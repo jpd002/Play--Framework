@@ -50,12 +50,12 @@ void CBMP::FromBMP(CBitmap& Dst, CStream& Stream)
 
 	if(Header.nID != 0x4D42)
 	{
-		throw exception("Invalid header signature.");
+		throw std::runtime_error("Invalid header signature.");
 	}
 
 	if(Header.nBPP != 8)
 	{
-		throw exception("Bit depths other than 8-bits aren't supported.");
+		throw std::runtime_error("Bit depths other than 8-bits aren't supported.");
 	}
 
 	nWidth	= Header.nWidth;
