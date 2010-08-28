@@ -377,6 +377,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\offsetof_def.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\PathUtils.cpp"
 				>
 			</File>
