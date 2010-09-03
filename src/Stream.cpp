@@ -41,6 +41,13 @@ uint32 CStream::Read32()
 	return nValue;
 }
 
+uint64 CStream::Read64()
+{
+	uint64 value;
+	Read(&value, 8);
+	return value;
+}
+
 void CStream::Write8(uint8 nValue)
 {
 	Write(&nValue, 1);
