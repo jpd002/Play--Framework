@@ -1,0 +1,421 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7E2720B11213AEC200C0DEBF /* MemStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2720AD1213AEC200C0DEBF /* MemStream.cpp */; };
+		7E2720B21213AEC200C0DEBF /* PtrStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2720AE1213AEC200C0DEBF /* PtrStream.cpp */; };
+		7E2720B31213AEC200C0DEBF /* StdStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2720AF1213AEC200C0DEBF /* StdStream.cpp */; };
+		7E2720B41213AEC200C0DEBF /* Stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2720B01213AEC200C0DEBF /* Stream.cpp */; };
+		7E2720B91213AED800C0DEBF /* MemStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2720B51213AED800C0DEBF /* MemStream.h */; };
+		7E2720BA1213AED800C0DEBF /* PtrStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2720B61213AED800C0DEBF /* PtrStream.h */; };
+		7E2720BB1213AED800C0DEBF /* StdStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2720B71213AED800C0DEBF /* StdStream.h */; };
+		7E2720BC1213AED800C0DEBF /* Stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2720B81213AED800C0DEBF /* Stream.h */; };
+		7E2722381214F94D00C0DEBF /* FilteringNodeIterator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722331214F94D00C0DEBF /* FilteringNodeIterator.cpp */; };
+		7E2722391214F94D00C0DEBF /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722341214F94D00C0DEBF /* Node.cpp */; };
+		7E27223A1214F94D00C0DEBF /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722351214F94D00C0DEBF /* Parser.cpp */; };
+		7E27223B1214F94D00C0DEBF /* Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722361214F94D00C0DEBF /* Utils.cpp */; };
+		7E27223C1214F94D00C0DEBF /* Writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722371214F94D00C0DEBF /* Writer.cpp */; };
+		7E2722421214F95800C0DEBF /* FilteringNodeIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E27223D1214F95800C0DEBF /* FilteringNodeIterator.h */; };
+		7E2722431214F95800C0DEBF /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E27223E1214F95800C0DEBF /* Node.h */; };
+		7E2722441214F95800C0DEBF /* Parser.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E27223F1214F95800C0DEBF /* Parser.h */; };
+		7E2722451214F95800C0DEBF /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722401214F95800C0DEBF /* Utils.h */; };
+		7E2722461214F95800C0DEBF /* Writer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722411214F95800C0DEBF /* Writer.h */; };
+		7E2722581214F99500C0DEBF /* ZipArchiveReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722521214F99400C0DEBF /* ZipArchiveReader.cpp */; };
+		7E2722591214F99500C0DEBF /* ZipArchiveWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722531214F99500C0DEBF /* ZipArchiveWriter.cpp */; };
+		7E27225A1214F99500C0DEBF /* ZipDeflateStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722541214F99500C0DEBF /* ZipDeflateStream.cpp */; };
+		7E27225B1214F99500C0DEBF /* ZipFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722551214F99500C0DEBF /* ZipFile.cpp */; };
+		7E27225C1214F99500C0DEBF /* ZipInflateStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722561214F99500C0DEBF /* ZipInflateStream.cpp */; };
+		7E27225D1214F99500C0DEBF /* ZipStoreStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722571214F99500C0DEBF /* ZipStoreStream.cpp */; };
+		7E2722671214F9AD00C0DEBF /* ZipArchiveReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722601214F9AD00C0DEBF /* ZipArchiveReader.h */; };
+		7E2722681214F9AD00C0DEBF /* ZipArchiveWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722611214F9AD00C0DEBF /* ZipArchiveWriter.h */; };
+		7E2722691214F9AD00C0DEBF /* ZipDeflateStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722621214F9AD00C0DEBF /* ZipDeflateStream.h */; };
+		7E27226A1214F9AD00C0DEBF /* ZipDefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722631214F9AD00C0DEBF /* ZipDefs.h */; };
+		7E27226B1214F9AD00C0DEBF /* ZipFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722641214F9AD00C0DEBF /* ZipFile.h */; };
+		7E27226C1214F9AD00C0DEBF /* ZipInflateStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722651214F9AD00C0DEBF /* ZipInflateStream.h */; };
+		7E27226D1214F9AD00C0DEBF /* ZipStoreStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722661214F9AD00C0DEBF /* ZipStoreStream.h */; };
+		7E2722AB1214FAAA00C0DEBF /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722A71214FAAA00C0DEBF /* Buffer.cpp */; };
+		7E2722AC1214FAAA00C0DEBF /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722A81214FAAA00C0DEBF /* Context.cpp */; };
+		7E2722AD1214FAAA00C0DEBF /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722A91214FAAA00C0DEBF /* Device.cpp */; };
+		7E2722AE1214FAAA00C0DEBF /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722AA1214FAAA00C0DEBF /* Source.cpp */; };
+		7E2722B41214FAB700C0DEBF /* Buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722AF1214FAB700C0DEBF /* Buffer.h */; };
+		7E2722B51214FAB700C0DEBF /* Context.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722B01214FAB700C0DEBF /* Context.h */; };
+		7E2722B61214FAB700C0DEBF /* Device.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722B11214FAB700C0DEBF /* Device.h */; };
+		7E2722B71214FAB700C0DEBF /* OpenAlDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722B21214FAB700C0DEBF /* OpenAlDef.h */; };
+		7E2722B81214FAB700C0DEBF /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722B31214FAB700C0DEBF /* Source.h */; };
+		7E2722BE1214FAD800C0DEBF /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722BD1214FAD800C0DEBF /* Config.cpp */; };
+		7E2722C01214FAE200C0DEBF /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722BF1214FAE200C0DEBF /* Config.h */; };
+		AA747D9F0F9514B9006C5449 /* Framework_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* Framework_Prefix.pch */; };
+		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7E2720AD1213AEC200C0DEBF /* MemStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MemStream.cpp; path = ../src/MemStream.cpp; sourceTree = SOURCE_ROOT; };
+		7E2720AE1213AEC200C0DEBF /* PtrStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PtrStream.cpp; path = ../src/PtrStream.cpp; sourceTree = SOURCE_ROOT; };
+		7E2720AF1213AEC200C0DEBF /* StdStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StdStream.cpp; path = ../src/StdStream.cpp; sourceTree = SOURCE_ROOT; };
+		7E2720B01213AEC200C0DEBF /* Stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Stream.cpp; path = ../src/Stream.cpp; sourceTree = SOURCE_ROOT; };
+		7E2720B51213AED800C0DEBF /* MemStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemStream.h; path = ../include/MemStream.h; sourceTree = SOURCE_ROOT; };
+		7E2720B61213AED800C0DEBF /* PtrStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PtrStream.h; path = ../include/PtrStream.h; sourceTree = SOURCE_ROOT; };
+		7E2720B71213AED800C0DEBF /* StdStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StdStream.h; path = ../include/StdStream.h; sourceTree = SOURCE_ROOT; };
+		7E2720B81213AED800C0DEBF /* Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Stream.h; path = ../include/Stream.h; sourceTree = SOURCE_ROOT; };
+		7E2722331214F94D00C0DEBF /* FilteringNodeIterator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FilteringNodeIterator.cpp; path = ../src/xml/FilteringNodeIterator.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722341214F94D00C0DEBF /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Node.cpp; path = ../src/xml/Node.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722351214F94D00C0DEBF /* Parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Parser.cpp; path = ../src/xml/Parser.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722361214F94D00C0DEBF /* Utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Utils.cpp; path = ../src/xml/Utils.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722371214F94D00C0DEBF /* Writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Writer.cpp; path = ../src/xml/Writer.cpp; sourceTree = SOURCE_ROOT; };
+		7E27223D1214F95800C0DEBF /* FilteringNodeIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilteringNodeIterator.h; path = ../include/xml/FilteringNodeIterator.h; sourceTree = SOURCE_ROOT; };
+		7E27223E1214F95800C0DEBF /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Node.h; path = ../include/xml/Node.h; sourceTree = SOURCE_ROOT; };
+		7E27223F1214F95800C0DEBF /* Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Parser.h; path = ../include/xml/Parser.h; sourceTree = SOURCE_ROOT; };
+		7E2722401214F95800C0DEBF /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = ../include/xml/Utils.h; sourceTree = SOURCE_ROOT; };
+		7E2722411214F95800C0DEBF /* Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Writer.h; path = ../include/xml/Writer.h; sourceTree = SOURCE_ROOT; };
+		7E2722521214F99400C0DEBF /* ZipArchiveReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZipArchiveReader.cpp; path = ../src/zip/ZipArchiveReader.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722531214F99500C0DEBF /* ZipArchiveWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZipArchiveWriter.cpp; path = ../src/zip/ZipArchiveWriter.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722541214F99500C0DEBF /* ZipDeflateStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZipDeflateStream.cpp; path = ../src/zip/ZipDeflateStream.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722551214F99500C0DEBF /* ZipFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZipFile.cpp; path = ../src/zip/ZipFile.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722561214F99500C0DEBF /* ZipInflateStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZipInflateStream.cpp; path = ../src/zip/ZipInflateStream.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722571214F99500C0DEBF /* ZipStoreStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZipStoreStream.cpp; path = ../src/zip/ZipStoreStream.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722601214F9AD00C0DEBF /* ZipArchiveReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipArchiveReader.h; path = ../include/zip/ZipArchiveReader.h; sourceTree = SOURCE_ROOT; };
+		7E2722611214F9AD00C0DEBF /* ZipArchiveWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipArchiveWriter.h; path = ../include/zip/ZipArchiveWriter.h; sourceTree = SOURCE_ROOT; };
+		7E2722621214F9AD00C0DEBF /* ZipDeflateStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipDeflateStream.h; path = ../include/zip/ZipDeflateStream.h; sourceTree = SOURCE_ROOT; };
+		7E2722631214F9AD00C0DEBF /* ZipDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipDefs.h; path = ../include/zip/ZipDefs.h; sourceTree = SOURCE_ROOT; };
+		7E2722641214F9AD00C0DEBF /* ZipFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipFile.h; path = ../include/zip/ZipFile.h; sourceTree = SOURCE_ROOT; };
+		7E2722651214F9AD00C0DEBF /* ZipInflateStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipInflateStream.h; path = ../include/zip/ZipInflateStream.h; sourceTree = SOURCE_ROOT; };
+		7E2722661214F9AD00C0DEBF /* ZipStoreStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZipStoreStream.h; path = ../include/zip/ZipStoreStream.h; sourceTree = SOURCE_ROOT; };
+		7E2722A71214FAAA00C0DEBF /* Buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Buffer.cpp; path = ../src/openal/Buffer.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722A81214FAAA00C0DEBF /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Context.cpp; path = ../src/openal/Context.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722A91214FAAA00C0DEBF /* Device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Device.cpp; path = ../src/openal/Device.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722AA1214FAAA00C0DEBF /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Source.cpp; path = ../src/openal/Source.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722AF1214FAB700C0DEBF /* Buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Buffer.h; path = ../include/openal/Buffer.h; sourceTree = SOURCE_ROOT; };
+		7E2722B01214FAB700C0DEBF /* Context.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Context.h; path = ../include/openal/Context.h; sourceTree = SOURCE_ROOT; };
+		7E2722B11214FAB700C0DEBF /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Device.h; path = ../include/openal/Device.h; sourceTree = SOURCE_ROOT; };
+		7E2722B21214FAB700C0DEBF /* OpenAlDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenAlDef.h; path = ../include/openal/OpenAlDef.h; sourceTree = SOURCE_ROOT; };
+		7E2722B31214FAB700C0DEBF /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Source.h; path = ../include/openal/Source.h; sourceTree = SOURCE_ROOT; };
+		7E2722BD1214FAD800C0DEBF /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Config.cpp; path = ../src/Config.cpp; sourceTree = SOURCE_ROOT; };
+		7E2722BF1214FAE200C0DEBF /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = ../include/Config.h; sourceTree = SOURCE_ROOT; };
+		AA747D9E0F9514B9006C5449 /* Framework_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Framework_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D2AAC07E0554694100DB518D /* libFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AAC07C0554694100DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC07E0554694100DB518D /* libFramework.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AEFE84172EC02AAC07 /* Classes */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				7E2722BD1214FAD800C0DEBF /* Config.cpp */,
+				7E2722BF1214FAE200C0DEBF /* Config.h */,
+				7E2720AD1213AEC200C0DEBF /* MemStream.cpp */,
+				7E2720B51213AED800C0DEBF /* MemStream.h */,
+				7E2722A61214FA9B00C0DEBF /* openal */,
+				7E2720AE1213AEC200C0DEBF /* PtrStream.cpp */,
+				7E2720B61213AED800C0DEBF /* PtrStream.h */,
+				7E2720AF1213AEC200C0DEBF /* StdStream.cpp */,
+				7E2720B71213AED800C0DEBF /* StdStream.h */,
+				7E2720B01213AEC200C0DEBF /* Stream.cpp */,
+				7E2720B81213AED800C0DEBF /* Stream.h */,
+				7E2722321214F93C00C0DEBF /* xml */,
+				7E27224F1214F98100C0DEBF /* zip */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				AA747D9E0F9514B9006C5449 /* Framework_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		7E2722321214F93C00C0DEBF /* xml */ = {
+			isa = PBXGroup;
+			children = (
+				7E2722331214F94D00C0DEBF /* FilteringNodeIterator.cpp */,
+				7E27223D1214F95800C0DEBF /* FilteringNodeIterator.h */,
+				7E2722341214F94D00C0DEBF /* Node.cpp */,
+				7E27223E1214F95800C0DEBF /* Node.h */,
+				7E2722351214F94D00C0DEBF /* Parser.cpp */,
+				7E27223F1214F95800C0DEBF /* Parser.h */,
+				7E2722361214F94D00C0DEBF /* Utils.cpp */,
+				7E2722401214F95800C0DEBF /* Utils.h */,
+				7E2722371214F94D00C0DEBF /* Writer.cpp */,
+				7E2722411214F95800C0DEBF /* Writer.h */,
+			);
+			name = xml;
+			sourceTree = "<group>";
+		};
+		7E27224F1214F98100C0DEBF /* zip */ = {
+			isa = PBXGroup;
+			children = (
+				7E2722521214F99400C0DEBF /* ZipArchiveReader.cpp */,
+				7E2722601214F9AD00C0DEBF /* ZipArchiveReader.h */,
+				7E2722531214F99500C0DEBF /* ZipArchiveWriter.cpp */,
+				7E2722611214F9AD00C0DEBF /* ZipArchiveWriter.h */,
+				7E2722541214F99500C0DEBF /* ZipDeflateStream.cpp */,
+				7E2722621214F9AD00C0DEBF /* ZipDeflateStream.h */,
+				7E2722631214F9AD00C0DEBF /* ZipDefs.h */,
+				7E2722551214F99500C0DEBF /* ZipFile.cpp */,
+				7E2722641214F9AD00C0DEBF /* ZipFile.h */,
+				7E2722561214F99500C0DEBF /* ZipInflateStream.cpp */,
+				7E2722651214F9AD00C0DEBF /* ZipInflateStream.h */,
+				7E2722571214F99500C0DEBF /* ZipStoreStream.cpp */,
+				7E2722661214F9AD00C0DEBF /* ZipStoreStream.h */,
+			);
+			name = zip;
+			sourceTree = "<group>";
+		};
+		7E2722A61214FA9B00C0DEBF /* openal */ = {
+			isa = PBXGroup;
+			children = (
+				7E2722A71214FAAA00C0DEBF /* Buffer.cpp */,
+				7E2722AF1214FAB700C0DEBF /* Buffer.h */,
+				7E2722A81214FAAA00C0DEBF /* Context.cpp */,
+				7E2722B01214FAB700C0DEBF /* Context.h */,
+				7E2722A91214FAAA00C0DEBF /* Device.cpp */,
+				7E2722B11214FAB700C0DEBF /* Device.h */,
+				7E2722B21214FAB700C0DEBF /* OpenAlDef.h */,
+				7E2722AA1214FAAA00C0DEBF /* Source.cpp */,
+				7E2722B31214FAB700C0DEBF /* Source.h */,
+			);
+			name = openal;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC07A0554694100DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA747D9F0F9514B9006C5449 /* Framework_Prefix.pch in Headers */,
+				7E2720B91213AED800C0DEBF /* MemStream.h in Headers */,
+				7E2720BA1213AED800C0DEBF /* PtrStream.h in Headers */,
+				7E2720BB1213AED800C0DEBF /* StdStream.h in Headers */,
+				7E2720BC1213AED800C0DEBF /* Stream.h in Headers */,
+				7E2722421214F95800C0DEBF /* FilteringNodeIterator.h in Headers */,
+				7E2722431214F95800C0DEBF /* Node.h in Headers */,
+				7E2722441214F95800C0DEBF /* Parser.h in Headers */,
+				7E2722451214F95800C0DEBF /* Utils.h in Headers */,
+				7E2722461214F95800C0DEBF /* Writer.h in Headers */,
+				7E2722671214F9AD00C0DEBF /* ZipArchiveReader.h in Headers */,
+				7E2722681214F9AD00C0DEBF /* ZipArchiveWriter.h in Headers */,
+				7E2722691214F9AD00C0DEBF /* ZipDeflateStream.h in Headers */,
+				7E27226A1214F9AD00C0DEBF /* ZipDefs.h in Headers */,
+				7E27226B1214F9AD00C0DEBF /* ZipFile.h in Headers */,
+				7E27226C1214F9AD00C0DEBF /* ZipInflateStream.h in Headers */,
+				7E27226D1214F9AD00C0DEBF /* ZipStoreStream.h in Headers */,
+				7E2722B41214FAB700C0DEBF /* Buffer.h in Headers */,
+				7E2722B51214FAB700C0DEBF /* Context.h in Headers */,
+				7E2722B61214FAB700C0DEBF /* Device.h in Headers */,
+				7E2722B71214FAB700C0DEBF /* OpenAlDef.h in Headers */,
+				7E2722B81214FAB700C0DEBF /* Source.h in Headers */,
+				7E2722C01214FAE200C0DEBF /* Config.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC07D0554694100DB518D /* Framework */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "Framework" */;
+			buildPhases = (
+				D2AAC07A0554694100DB518D /* Headers */,
+				D2AAC07B0554694100DB518D /* Sources */,
+				D2AAC07C0554694100DB518D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Framework;
+			productName = Framework;
+			productReference = D2AAC07E0554694100DB518D /* libFramework.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Framework" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 0867D691FE84028FC02AAC07 /* Framework */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC07D0554694100DB518D /* Framework */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC07B0554694100DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E2720B11213AEC200C0DEBF /* MemStream.cpp in Sources */,
+				7E2720B21213AEC200C0DEBF /* PtrStream.cpp in Sources */,
+				7E2720B31213AEC200C0DEBF /* StdStream.cpp in Sources */,
+				7E2720B41213AEC200C0DEBF /* Stream.cpp in Sources */,
+				7E2722381214F94D00C0DEBF /* FilteringNodeIterator.cpp in Sources */,
+				7E2722391214F94D00C0DEBF /* Node.cpp in Sources */,
+				7E27223A1214F94D00C0DEBF /* Parser.cpp in Sources */,
+				7E27223B1214F94D00C0DEBF /* Utils.cpp in Sources */,
+				7E27223C1214F94D00C0DEBF /* Writer.cpp in Sources */,
+				7E2722581214F99500C0DEBF /* ZipArchiveReader.cpp in Sources */,
+				7E2722591214F99500C0DEBF /* ZipArchiveWriter.cpp in Sources */,
+				7E27225A1214F99500C0DEBF /* ZipDeflateStream.cpp in Sources */,
+				7E27225B1214F99500C0DEBF /* ZipFile.cpp in Sources */,
+				7E27225C1214F99500C0DEBF /* ZipInflateStream.cpp in Sources */,
+				7E27225D1214F99500C0DEBF /* ZipStoreStream.cpp in Sources */,
+				7E2722AB1214FAAA00C0DEBF /* Buffer.cpp in Sources */,
+				7E2722AC1214FAAA00C0DEBF /* Context.cpp in Sources */,
+				7E2722AD1214FAAA00C0DEBF /* Device.cpp in Sources */,
+				7E2722AE1214FAAA00C0DEBF /* Source.cpp in Sources */,
+				7E2722BE1214FAD800C0DEBF /* Config.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB921F08733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/Framework.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Framework_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = Framework;
+			};
+			name = Debug;
+		};
+		1DEB922008733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/Framework.dst;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Framework_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = Framework;
+			};
+			name = Release;
+		};
+		1DEB922308733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"~/Libraries/boost_1_42_0/boost/tr1/tr1",
+					"~/Libraries/boost_1_42_0",
+					../include,
+				);
+				OTHER_CFLAGS = "-fvisibility=hidden";
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.0;
+			};
+			name = Debug;
+		};
+		1DEB922408733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"~/Libraries/boost_1_42_0/boost/tr1/tr1",
+					"~/Libraries/boost_1_42_0",
+					../include,
+				);
+				OTHER_CFLAGS = "-fvisibility=hidden";
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB921F08733DC00010E9CD /* Debug */,
+				1DEB922008733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB922308733DC00010E9CD /* Debug */,
+				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
