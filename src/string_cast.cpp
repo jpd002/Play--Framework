@@ -1,5 +1,5 @@
 #include <string>
-#include <malloc.h>
+#include <stdlib.h>
 #include "string_cast.h"
 
 using namespace std;

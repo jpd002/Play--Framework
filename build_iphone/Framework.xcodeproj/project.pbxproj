@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E1C41B81234236D00BB4E9C /* IosIStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C41B31234236D00BB4E9C /* IosIStream.cpp */; };
+		7E1C41B91234236D00BB4E9C /* IosOStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C41B41234236D00BB4E9C /* IosOStream.cpp */; };
+		7E1C41BA1234236D00BB4E9C /* string_cast_sjis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C41B51234236D00BB4E9C /* string_cast_sjis.cpp */; };
+		7E1C41BB1234236D00BB4E9C /* string_cast.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C41B61234236D00BB4E9C /* string_cast.cpp */; };
+		7E1C41BC1234236D00BB4E9C /* Utf8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C41B71234236D00BB4E9C /* Utf8.cpp */; };
+		7E1C41C31234238200BB4E9C /* IosIStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E1C41BD1234238200BB4E9C /* IosIStream.h */; };
+		7E1C41C41234238200BB4E9C /* IosOStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E1C41BE1234238200BB4E9C /* IosOStream.h */; };
+		7E1C41C51234238200BB4E9C /* string_cast_sjis.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E1C41BF1234238200BB4E9C /* string_cast_sjis.h */; };
+		7E1C41C61234238200BB4E9C /* string_cast_win1252.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E1C41C01234238200BB4E9C /* string_cast_win1252.h */; };
+		7E1C41C71234238200BB4E9C /* string_cast.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E1C41C11234238200BB4E9C /* string_cast.h */; };
+		7E1C41C81234238200BB4E9C /* Utf8.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E1C41C21234238200BB4E9C /* Utf8.h */; };
+		7E1C41E21234240C00BB4E9C /* string_cast_win1252.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C41E11234240C00BB4E9C /* string_cast_win1252.cpp */; };
 		7E2720B11213AEC200C0DEBF /* MemStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2720AD1213AEC200C0DEBF /* MemStream.cpp */; };
 		7E2720B21213AEC200C0DEBF /* PtrStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2720AE1213AEC200C0DEBF /* PtrStream.cpp */; };
 		7E2720B31213AEC200C0DEBF /* StdStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2720AF1213AEC200C0DEBF /* StdStream.cpp */; };
@@ -54,6 +66,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7E1C41B31234236D00BB4E9C /* IosIStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosIStream.cpp; path = ../src/IosIStream.cpp; sourceTree = SOURCE_ROOT; };
+		7E1C41B41234236D00BB4E9C /* IosOStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosOStream.cpp; path = ../src/IosOStream.cpp; sourceTree = SOURCE_ROOT; };
+		7E1C41B51234236D00BB4E9C /* string_cast_sjis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = string_cast_sjis.cpp; path = ../src/string_cast_sjis.cpp; sourceTree = SOURCE_ROOT; };
+		7E1C41B61234236D00BB4E9C /* string_cast.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = string_cast.cpp; path = ../src/string_cast.cpp; sourceTree = SOURCE_ROOT; };
+		7E1C41B71234236D00BB4E9C /* Utf8.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Utf8.cpp; path = ../src/Utf8.cpp; sourceTree = SOURCE_ROOT; };
+		7E1C41BD1234238200BB4E9C /* IosIStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IosIStream.h; path = ../include/IosIStream.h; sourceTree = SOURCE_ROOT; };
+		7E1C41BE1234238200BB4E9C /* IosOStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IosOStream.h; path = ../include/IosOStream.h; sourceTree = SOURCE_ROOT; };
+		7E1C41BF1234238200BB4E9C /* string_cast_sjis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = string_cast_sjis.h; path = ../include/string_cast_sjis.h; sourceTree = SOURCE_ROOT; };
+		7E1C41C01234238200BB4E9C /* string_cast_win1252.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = string_cast_win1252.h; path = ../include/string_cast_win1252.h; sourceTree = SOURCE_ROOT; };
+		7E1C41C11234238200BB4E9C /* string_cast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = string_cast.h; path = ../include/string_cast.h; sourceTree = SOURCE_ROOT; };
+		7E1C41C21234238200BB4E9C /* Utf8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utf8.h; path = ../include/Utf8.h; sourceTree = SOURCE_ROOT; };
+		7E1C41E11234240C00BB4E9C /* string_cast_win1252.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = string_cast_win1252.cpp; path = ../src/string_cast_win1252.cpp; sourceTree = SOURCE_ROOT; };
 		7E2720AD1213AEC200C0DEBF /* MemStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MemStream.cpp; path = ../src/MemStream.cpp; sourceTree = SOURCE_ROOT; };
 		7E2720AE1213AEC200C0DEBF /* PtrStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PtrStream.cpp; path = ../src/PtrStream.cpp; sourceTree = SOURCE_ROOT; };
 		7E2720AF1213AEC200C0DEBF /* StdStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StdStream.cpp; path = ../src/StdStream.cpp; sourceTree = SOURCE_ROOT; };
@@ -145,6 +169,10 @@
 			children = (
 				7E2722BD1214FAD800C0DEBF /* Config.cpp */,
 				7E2722BF1214FAE200C0DEBF /* Config.h */,
+				7E1C41B31234236D00BB4E9C /* IosIStream.cpp */,
+				7E1C41BD1234238200BB4E9C /* IosIStream.h */,
+				7E1C41B41234236D00BB4E9C /* IosOStream.cpp */,
+				7E1C41BE1234238200BB4E9C /* IosOStream.h */,
 				7E2720AD1213AEC200C0DEBF /* MemStream.cpp */,
 				7E2720B51213AED800C0DEBF /* MemStream.h */,
 				7E2722A61214FA9B00C0DEBF /* openal */,
@@ -154,6 +182,14 @@
 				7E2720B71213AED800C0DEBF /* StdStream.h */,
 				7E2720B01213AEC200C0DEBF /* Stream.cpp */,
 				7E2720B81213AED800C0DEBF /* Stream.h */,
+				7E1C41B61234236D00BB4E9C /* string_cast.cpp */,
+				7E1C41C11234238200BB4E9C /* string_cast.h */,
+				7E1C41B51234236D00BB4E9C /* string_cast_sjis.cpp */,
+				7E1C41BF1234238200BB4E9C /* string_cast_sjis.h */,
+				7E1C41E11234240C00BB4E9C /* string_cast_win1252.cpp */,
+				7E1C41C01234238200BB4E9C /* string_cast_win1252.h */,
+				7E1C41B71234236D00BB4E9C /* Utf8.cpp */,
+				7E1C41C21234238200BB4E9C /* Utf8.h */,
 				7E2722321214F93C00C0DEBF /* xml */,
 				7E27224F1214F98100C0DEBF /* zip */,
 			);
@@ -251,6 +287,12 @@
 				7E2722B71214FAB700C0DEBF /* OpenAlDef.h in Headers */,
 				7E2722B81214FAB700C0DEBF /* Source.h in Headers */,
 				7E2722C01214FAE200C0DEBF /* Config.h in Headers */,
+				7E1C41C31234238200BB4E9C /* IosIStream.h in Headers */,
+				7E1C41C41234238200BB4E9C /* IosOStream.h in Headers */,
+				7E1C41C51234238200BB4E9C /* string_cast_sjis.h in Headers */,
+				7E1C41C61234238200BB4E9C /* string_cast_win1252.h in Headers */,
+				7E1C41C71234238200BB4E9C /* string_cast.h in Headers */,
+				7E1C41C81234238200BB4E9C /* Utf8.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +359,12 @@
 				7E2722AD1214FAAA00C0DEBF /* Device.cpp in Sources */,
 				7E2722AE1214FAAA00C0DEBF /* Source.cpp in Sources */,
 				7E2722BE1214FAD800C0DEBF /* Config.cpp in Sources */,
+				7E1C41B81234236D00BB4E9C /* IosIStream.cpp in Sources */,
+				7E1C41B91234236D00BB4E9C /* IosOStream.cpp in Sources */,
+				7E1C41BA1234236D00BB4E9C /* string_cast_sjis.cpp in Sources */,
+				7E1C41BB1234236D00BB4E9C /* string_cast.cpp in Sources */,
+				7E1C41BC1234236D00BB4E9C /* Utf8.cpp in Sources */,
+				7E1C41E21234240C00BB4E9C /* string_cast_win1252.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
