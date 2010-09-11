@@ -2,6 +2,7 @@
 #include "alloca_def.h"
 #ifdef WIN32
 #include <windows.h>
+#elif defined(__APPLE__)
 #else
 #include <unicode/ucnv.h>
 #endif
@@ -17,6 +18,8 @@ wstring string_cast_win1252(const string& input)
 	MultiByteToWideChar(codePage, 0, input.c_str(), input.length(), output, reqLength);
 	output[reqLength] = 0;
 	return wstring(output);
+#elif defined(__APPLE__)
+	return wstring(L"???");
 #else
 	assert(0);
 #endif

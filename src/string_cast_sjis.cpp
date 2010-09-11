@@ -2,6 +2,8 @@
 #include "alloca_def.h"
 #ifdef WIN32
 #include <windows.h>
+#elif defined(__APPLE__)
+
 #else
 #include <unicode/ucnv.h>
 #endif
@@ -17,6 +19,8 @@ wstring string_cast_sjis(const string& input)
 	MultiByteToWideChar(codePage, 0, input.c_str(), input.length(), output, reqLength);
 	output[reqLength] = 0;
 	return wstring(output);
+#elif defined(__APPLE__)
+	return wstring(L"???");
 #else
 	int32_t length = static_cast<int32_t>(input.length());
 	UErrorCode nStatus = U_ZERO_ERROR;
