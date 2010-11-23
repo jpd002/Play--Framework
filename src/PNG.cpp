@@ -2,37 +2,32 @@
 #include <malloc.h>
 #include <assert.h>
 #include <math.h>
+#include <zlib.h>
 #include "PNG.h"
 #include "Endian.h"
-#include "Deflate.h"
 #include "PtrStream.h"
 #include "PtrMacro.h"
 #include "StreamBitStream.h"
 
 using namespace Framework;
 
-CBitmap* CPNG::FromPNG(CStream* pStream)
+CBitmap* CPNG::ReadBitmap(CStream& pStream)
 {
-	CBitmap* pBitmap;
+	CBitmap* pBitmap(NULL);
 	CPNG PNG(pStream, &pBitmap);
 	return pBitmap;
 }
 
-CPNG::CPNG(CStream* pStream, CBitmap** pBitmap)
+CPNG::CPNG(CStream& pStream, CBitmap** pBitmap)
 {
-	uint8 pHeader[8];
-	unsigned int nBufferSize, nIDATPos;
-	bool nDone;
-	uint64 nLenght;
-	uint32 nChunkType, nChunkSize;
-
 	(*pBitmap) = NULL;
 
-	pStream->Seek(0, STREAM_SEEK_END);
-	nLenght = pStream->Tell();
-	pStream->Seek(0, STREAM_SEEK_SET);
+	pStream.Seek(0, STREAM_SEEK_END);
+	uint64 nLength = pStream.Tell();
+	pStream.Seek(0, STREAM_SEEK_SET);
 
-	pStream->Read(pHeader, 8);
+	uint8 pHeader[8];
+	pStream.Read(pHeader, 8);
 
 	if((pHeader[0] != 0x89) && (pHeader[1] != 'P') && (pHeader[2] != 'N') && (pHeader[3] != 'G'))
 	{
@@ -42,28 +37,32 @@ CPNG::CPNG(CStream* pStream, CBitmap** pBitmap)
 	m_nIDATSize = 0;
 	m_pIDAT = NULL;
 
-	nDone = false;
+	bool nDone = false;
 	while(!nDone)
 	{
-		if(pStream->Tell() >= nLenght) break;
+		if(pStream.Tell() >= nLength) break;
 
-		nChunkSize = FromMSBF32(pStream->Read32());
-		nChunkType = FromMSBF32(pStream->Read32());
+		uint32 nChunkSize = FromMSBF32(pStream.Read32());
+		uint32 nChunkType = FromMSBF32(pStream.Read32());
 
 		switch(nChunkType)
 		{
 		case 0x49484452:
 			//IHDR
-			m_IHDR.Unserialize(pStream);
-			nBufferSize = m_IHDR.CalculateNeededBufferSize();
-			m_pBuffer = (uint8*)malloc(nBufferSize);
+			{
+				m_IHDR.Unserialize(pStream);
+				unsigned int nBufferSize = m_IHDR.CalculateNeededBufferSize();
+				m_pBuffer = reinterpret_cast<uint8*>(malloc(nBufferSize));
+			}
 			break;
 		case 0x49444154:
 			//IDAT
-			nIDATPos = m_nIDATSize;
-			m_nIDATSize += nChunkSize;
-			m_pIDAT = (uint8*)realloc(m_pIDAT, m_nIDATSize);
-			pStream->Read(m_pIDAT + nIDATPos, nChunkSize);
+			{
+				unsigned int nIDATPos = m_nIDATSize;
+				m_nIDATSize += nChunkSize;
+				m_pIDAT = (uint8*)realloc(m_pIDAT, m_nIDATSize);
+				pStream.Read(m_pIDAT + nIDATPos, nChunkSize);
+			}
 			break;
 		case 0x49454E44:
 			//IEND
@@ -72,15 +71,15 @@ CPNG::CPNG(CStream* pStream, CBitmap** pBitmap)
 			break;
 		case 0x504C5445:
 			//PLTE
-			pStream->Read(m_nPalette, nChunkSize);
+			pStream.Read(m_nPalette, nChunkSize);
 			break;
 		default:
-			pStream->Seek(nChunkSize, STREAM_SEEK_CUR);
+			pStream.Seek(nChunkSize, STREAM_SEEK_CUR);
 			break;
 		}
 
 		//Skip CRC
-		pStream->Seek(4, STREAM_SEEK_CUR);
+		pStream.Seek(4, STREAM_SEEK_CUR);
 	}
 }
 
@@ -91,25 +90,21 @@ CPNG::~CPNG()
 
 void CPNG::UncompressIDAT()
 {
-	uint8 nMethod;
-	uint8 nFlags;
-	CPtrStream p(m_pIDAT, m_nIDATSize);
-	p.Read(&nMethod, 1);
-	p.Read(&nFlags, 1);
-	CStreamBitStream s(p);
-	CDeflate::Decompress(&s, m_pBuffer);
+	uLongf dstLength = m_IHDR.CalculateNeededBufferSize();
+	int result = uncompress(m_pBuffer, &dstLength, m_pIDAT, m_nIDATSize);
+	if(result != Z_OK)
+	{
+		throw std::runtime_error("Couldn't uncompress IDAT stream.");
+	}
 }
 
 void CPNG::SubFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline, unsigned int nBPP)
 {
-	uint8 nPredictor;
-	int i;
-	int nDist;
+	int nDist = (nBPP / 8);
 
-	nDist = (nBPP / 8);
-
-	for(i = 0; i < (int)nPitch; i++)
+	for(int i = 0; i < static_cast<int>(nPitch); i++)
 	{
+		uint8 nPredictor = 0;
 		if((i - nDist) < 0)
 		{
 			nPredictor = 0;
@@ -120,16 +115,13 @@ void CPNG::SubFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline, u
 		}
 		pRaw[i] += nPredictor;
 	}
-
 }
 
 void CPNG::UpFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline, unsigned int nBPP)
 {
-	uint8 nPredictor;
-	int i;
-
-	for(i = 0; i < (int)nPitch; i++)
+	for(int i = 0; i < static_cast<int>(nPitch); i++)
 	{
+		uint8 nPredictor = 0;
 		if(nScanline == 0)
 		{
 			nPredictor = 0;
@@ -144,15 +136,11 @@ void CPNG::UpFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline, un
 
 void CPNG::AverageFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline, unsigned int nBPP)
 {
-	uint8 nPredictor;
-	unsigned int nLeft, nAbove;
-	int i;
-	int nDist;
+	int nDist = (nBPP / 8);
 
-	nDist = (nBPP / 8);
-
-	for(i = 0; i < (int)nPitch; i++)
+	for(int i = 0; i < static_cast<int>(nPitch); i++)
 	{
+		unsigned int nAbove = 0;
 		if(nScanline == 0)
 		{
 			nAbove = 0;
@@ -161,6 +149,8 @@ void CPNG::AverageFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanlin
 		{
 			nAbove = pRaw[i - nPitch];
 		}
+
+		unsigned int nLeft = 0;
 		if((i - nDist) < 0)
 		{
 			nLeft = 0;
@@ -169,19 +159,18 @@ void CPNG::AverageFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanlin
 		{
 			nLeft = pRaw[i - nDist];
 		}
-		nPredictor = (uint8)((nLeft + nAbove) / 2);
+
+		uint8 nPredictor = (uint8)((nLeft + nAbove) / 2);
 		pRaw[i] += nPredictor;
 	}
 }
 
 uint8 CPNG::PaethPredictor(uint8 a, uint8 b, uint8 c)
 {
-	int p, pa, pb, pc;
-
-	p = a + b - c;
-	pa = abs(p - a);
-	pb = abs(p - b);
-	pc = abs(p - c);
+	int p = a + b - c;
+	int pa = abs(p - a);
+	int pb = abs(p - b);
+	int pc = abs(p - c);
 
 	if((pa <= pb) && (pa <= pc)) return a;
 	if((pb <= pc)) return b;
@@ -190,15 +179,12 @@ uint8 CPNG::PaethPredictor(uint8 a, uint8 b, uint8 c)
 
 void CPNG::PaethFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline, unsigned int nBPP)
 {
-	uint8 nPredictor;
-	uint8 nLeft, nAbove, nUpperLeft;
-	int nDist;
-	int i;
+	int nDist = (nBPP / 8);
 
-	nDist = (nBPP / 8);
-
-	for(i = 0; i < (int)nPitch; i++)
+	for(int i = 0; i < static_cast<int>(nPitch); i++)
 	{
+		uint8 nLeft = 0;
+		uint8 nUpperLeft = 0;
 		if((i - nDist) < 0)
 		{
 			nLeft = 0;
@@ -216,6 +202,8 @@ void CPNG::PaethFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline,
 				nUpperLeft = pRaw[(i - nDist) - nPitch];
 			}
 		}
+
+		uint8 nAbove = 0;
 		if(nScanline == 0)
 		{
 			nAbove = 0;
@@ -224,31 +212,25 @@ void CPNG::PaethFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline,
 		{
 			nAbove = pRaw[i - nPitch];
 		}
-		nPredictor = PaethPredictor(nLeft, nAbove, nUpperLeft);
+		uint8 nPredictor = PaethPredictor(nLeft, nAbove, nUpperLeft);
 		pRaw[i] += nPredictor;
 	}
 }
 
 CBitmap* CPNG::CreateBitmap()
 {
-	unsigned int i, nScanSize, nScanBits, nBPP;
-	CBitmap* pBitmap;
-	uint8* pSrc;
-	uint8* pDst;
+	unsigned int nBPP = m_IHDR.GetSamplesPerPixel() * m_IHDR.m_nDepth;
 
-	nBPP = m_IHDR.GetSamplesPerPixel() * m_IHDR.m_nDepth;
+	CBitmap* pBitmap = new CBitmap(m_IHDR.m_nWidth, m_IHDR.m_nHeight, nBPP);
 
-	pBitmap = new CBitmap(m_IHDR.m_nWidth, m_IHDR.m_nHeight, nBPP);
+	uint8* pSrc = m_pBuffer;
+	uint8* pDst = pBitmap->GetPixels();
 
-	pSrc = m_pBuffer;
-	pDst = pBitmap->GetPixels();
+	unsigned int nScanBits = nBPP * m_IHDR.m_nWidth;
+	unsigned int nScanSize = (nScanBits + 7) / 8;
 
-	nScanBits = nBPP * m_IHDR.m_nWidth;
-	nScanSize = (nScanBits + 7) / 8;
-
-	for(i = 0; i < m_IHDR.m_nHeight; i++)
+	for(unsigned int i = 0; i < m_IHDR.m_nHeight; i++)
 	{
-		
 		memcpy(pDst, pSrc + 1, nScanSize);
 		switch(pSrc[0])
 		{
@@ -311,15 +293,15 @@ CBitmap* CPNG::ConvertTo32(CBitmap* pSrcBitmap)
 	return pDstBitmap;
 }
 
-void CPNG::CIHDR::Unserialize(CStream* pStream)
+void CPNG::CIHDR::Unserialize(CStream& pStream)
 {
-	m_nWidth = FromMSBF32(pStream->Read32());
-	m_nHeight = FromMSBF32(pStream->Read32());
-	pStream->Read(&m_nDepth, 1);
-	pStream->Read(&m_nColorType, 1);
-	pStream->Read(&m_nCompression, 1);
-	pStream->Read(&m_nFilter, 1);
-	pStream->Read(&m_nInterlace, 1);
+	m_nWidth = FromMSBF32(pStream.Read32());
+	m_nHeight = FromMSBF32(pStream.Read32());
+	pStream.Read(&m_nDepth, 1);
+	pStream.Read(&m_nColorType, 1);
+	pStream.Read(&m_nCompression, 1);
+	pStream.Read(&m_nFilter, 1);
+	pStream.Read(&m_nInterlace, 1);
 }
 
 unsigned int CPNG::CIHDR::GetSamplesPerPixel()
@@ -346,9 +328,8 @@ unsigned int CPNG::CIHDR::GetSamplesPerPixel()
 
 unsigned int CPNG::CIHDR::CalculateNeededBufferSize()
 {
-	unsigned int nBitsPerPixel, nScanline;
-	nBitsPerPixel = (GetSamplesPerPixel() * m_nDepth);
-	nScanline = (nBitsPerPixel * m_nWidth) / 8;
+	unsigned int nBitsPerPixel = (GetSamplesPerPixel() * m_nDepth);
+	unsigned int nScanline = (nBitsPerPixel * m_nWidth) / 8;
 	if((nBitsPerPixel * m_nWidth) % 8) nScanline++;
 	nScanline++;
 	return (nScanline * m_nHeight);

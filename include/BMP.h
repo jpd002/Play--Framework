@@ -1,6 +1,7 @@
 #ifndef _BMP_H_
 #define _BMP_H_
 
+#include <functional>
 #include "Stream.h"
 #include "Bitmap.h"
 
@@ -10,10 +11,12 @@ namespace Framework
 	class CBMP
 	{
 	public:
-		static void		ToBMP(CBitmap*, CStream*);
-		static void		FromBMP(CBitmap&, CStream&);
+		static CBitmap*		ReadBitmap(CStream&);
+		static void			WriteBitmap(const CBitmap&, CStream&);
 
 	private:
+		typedef std::tr1::function<void (CStream&, const CColor&)> PixelWriterFunction;
+
 #pragma pack(push, 1)
 		struct HEADER
 		{
@@ -34,6 +37,9 @@ namespace Framework
 			uint32		nImportantColors;
 		};
 #pragma pack(pop)
+
+		static void PixelWriter24(CStream&, const CColor&);
+		static void PixelWriter32(CStream&, const CColor&);
 	};
 
 }

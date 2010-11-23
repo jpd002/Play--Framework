@@ -11,16 +11,16 @@ namespace Framework
 	class CPNG
 	{
 	public:
-		static CBitmap*		FromPNG(CStream*);
+		static CBitmap*		ReadBitmap(CStream&);
 
 	private:
-							CPNG(CStream*, CBitmap**);
+							CPNG(CStream&, CBitmap**);
 							~CPNG();
 
 		class CIHDR
 		{
 		public:
-			void			Unserialize(CStream*);
+			void			Unserialize(CStream&);
 			unsigned int	GetSamplesPerPixel();
 			unsigned int	CalculateNeededBufferSize();
 

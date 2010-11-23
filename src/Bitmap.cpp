@@ -1,11 +1,10 @@
 #include <stdlib.h>
 #include <assert.h>
-#include <exception>
+#include <stdexcept>
 #include "PtrMacro.h"
 #include "Bitmap.h"
 
 using namespace Framework;
-using namespace std;
 
 CBitmap::CBitmap(unsigned int nWidth, unsigned int nHeight, unsigned int nBPP)
 {
@@ -16,7 +15,7 @@ CBitmap::CBitmap(unsigned int nWidth, unsigned int nHeight, unsigned int nBPP)
 	Allocate(nWidth, nHeight, nBPP);
 }
 
-CBitmap::CBitmap(ConstructionFunctionType ConstructionFunction)
+CBitmap::CBitmap(const ConstructionFunctionType& ConstructionFunction)
 {
 	m_pPixels = NULL;
 	ConstructionFunction(*this);
@@ -69,6 +68,31 @@ uint8* CBitmap::GetPixels() const
 	return m_pPixels;
 }
 
+CColor CBitmap::GetPixel(unsigned int x, unsigned int y) const
+{
+	if(m_pPixels == NULL)
+	{
+		return CColor(0, 0, 0, 0);
+	}
+
+	if(x > m_nWidth) return CColor(0, 0, 0, 0);
+	if(y > m_nHeight) return CColor(0, 0, 0, 0);
+
+	uint8* pixelPtr = (m_pPixels + (GetPitch() * y) + (GetPixelSize() * x));
+	switch(m_nBPP)
+	{
+	case 32:
+		return CColor(pixelPtr[0], pixelPtr[1], pixelPtr[2], pixelPtr[3]);
+		break;
+	case 24:
+		return CColor(pixelPtr[0], pixelPtr[1], pixelPtr[2], 0);
+		break;
+	default:
+		throw std::runtime_error("Unknown bit depth.");
+		break;
+	}
+}
+
 unsigned int CBitmap::GetWidth() const
 {
 	return m_nWidth;
@@ -84,10 +108,14 @@ unsigned int CBitmap::GetBitsPerPixel() const
 	return m_nBPP;
 }
 
+unsigned int CBitmap::GetPixelSize() const
+{
+	return (m_nBPP + 7) / 8;
+}
+
 unsigned int CBitmap::GetPixelsSize() const
 {
-	unsigned int nSize;
-	nSize = m_nWidth * m_nHeight * m_nBPP;
+	unsigned int nSize = m_nWidth * m_nHeight * m_nBPP;
 	return ((nSize + 7) / 8);
 }
 
@@ -106,22 +134,22 @@ void CBitmap::Blit(const CBitmap& Src, unsigned int nLeft, unsigned int nTop)
 
 	if(&Dst == &Src)
 	{
-		throw exception();
+		throw std::exception();
 	}
 
 	if((nWidth + nLeft) > Dst.GetWidth())
 	{
-		throw exception();
+		throw std::exception();
 	}
 
 	if((nHeight + nTop) > Dst.GetHeight())
 	{
-		throw exception();
+		throw std::exception();
 	}
 
 	if(Dst.GetBitsPerPixel() != Src.GetBitsPerPixel())
 	{
-		throw exception();
+		throw std::exception();
 	}
 
 	size_t nSrcPitch;

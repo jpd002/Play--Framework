@@ -1,51 +1,72 @@
-#include <exception>
+#include <stdexcept>
 #include "BMP.h"
 
 using namespace Framework;
 using namespace std;
 
-void CBMP::ToBMP(CBitmap* pBitmap, CStream* pStream)
+void CBMP::WriteBitmap(const CBitmap& bitmap, CStream& stream)
 {
-	HEADER Header;
-	uint32* pPixels;
-	unsigned int nWidth, nHeight;
-
-	if(pBitmap->GetBitsPerPixel() != 32) return;
-
-	Header.nID				= 0x4D42;
-	Header.nFileSize		= sizeof(HEADER) + pBitmap->GetPixelsSize();
-	Header.nReserved		= 0;
-	Header.nDataOffset		= 0x36;
-	Header.nHeaderSize		= 0x28;
-	Header.nWidth			= pBitmap->GetWidth();
-	Header.nHeight			= pBitmap->GetHeight();
-	Header.nPlanes			= 1;
-	Header.nBPP				= pBitmap->GetBitsPerPixel();
-	Header.nCompression		= 0;
-	Header.nDataSize		= pBitmap->GetPixelsSize();
-	Header.nHorzResolution	= 0;
-	Header.nVertResolution	= 0;
-	Header.nColors			= 0;
-	Header.nImportantColors	= 0;
-
-	pStream->Write(&Header, sizeof(HEADER));
-
-	pPixels = reinterpret_cast<uint32*>(pBitmap->GetPixels());
-	nWidth = pBitmap->GetWidth();
-	nHeight = pBitmap->GetHeight();
-	
-	for(int i = (nHeight - 1); i >= 0; i--)
+	unsigned int bitDepth = bitmap.GetBitsPerPixel();
+	if(bitDepth != 32 && bitDepth != 24)
 	{
-		pStream->Write(pPixels + (i * nWidth), nWidth * 4);
+		throw std::runtime_error("Only 24 or 32-bits bitmaps supported.");	
+	}
+
+	HEADER header;
+	header.nID				= 0x4D42;
+	header.nFileSize		= sizeof(HEADER) + bitmap.GetPixelsSize();
+	header.nReserved		= 0;
+	header.nDataOffset		= 0x36;
+	header.nHeaderSize		= 0x28;
+	header.nWidth			= bitmap.GetWidth();
+	header.nHeight			= bitmap.GetHeight();
+	header.nPlanes			= 1;
+	header.nBPP				= bitDepth;
+	header.nCompression		= 0;
+	header.nDataSize		= bitmap.GetPixelsSize();
+	header.nHorzResolution	= 0;
+	header.nVertResolution	= 0;
+	header.nColors			= 0;
+	header.nImportantColors	= 0;
+
+	stream.Write(&header, sizeof(HEADER));
+
+	uint8* pixels = bitmap.GetPixels();
+	unsigned int width = bitmap.GetWidth();
+	unsigned int height = bitmap.GetHeight();
+	unsigned int pitch = bitmap.GetPitch();
+
+	PixelWriterFunction pixelWriter;
+	switch(bitDepth)
+	{
+	case 32:
+		pixelWriter = PixelWriter32;
+		break;
+	case 24:
+		pixelWriter = PixelWriter24;
+		break;
+	}
+
+	unsigned int paddingSize = (4 - (bitmap.GetPitch() & 3) & 3);
+	uint32 paddingValue = 0;
+
+	for(int y = (height - 1); y >= 0; y--)
+	{
+		for(int x = 0; x < static_cast<int>(width); x++)
+		{
+			CColor pixel = bitmap.GetPixel(x, y);
+			pixelWriter(stream, pixel);
+		}
+		if(paddingSize != 0)
+		{
+			stream.Write(&paddingValue, paddingSize);
+		}
 	}
 }
 
-void CBMP::FromBMP(CBitmap& Dst, CStream& Stream)
+CBitmap* CBMP::ReadBitmap(CStream& Stream)
 {
 	HEADER Header;
-	uint8* pPixels;
-	unsigned int nWidth, nHeight;
-
 	Stream.Read(&Header, sizeof(HEADER));
 
 	if(Header.nID != 0x4D42)
@@ -58,17 +79,33 @@ void CBMP::FromBMP(CBitmap& Dst, CStream& Stream)
 		throw std::runtime_error("Bit depths other than 8-bits aren't supported.");
 	}
 
-	nWidth	= Header.nWidth;
-	nHeight	= Header.nHeight;
-
-	Dst.Allocate(nWidth, nHeight, Header.nBPP);
+	unsigned int nWidth		= Header.nWidth;
+	unsigned int nHeight	= Header.nHeight;
 
 	Stream.Seek(Header.nDataOffset, STREAM_SEEK_SET);
 
-	pPixels = Dst.GetPixels();
+	CBitmap* result(new CBitmap(nWidth, nHeight, Header.nBPP));
+	uint8* pPixels = result->GetPixels();
 	for(int i = (nHeight - 1); i >= 0; i--)
 	{
 		Stream.Read(pPixels + (i * nWidth), nWidth);
 		Stream.Seek(((4 - (nWidth & 3)) & 3), STREAM_SEEK_CUR);
 	}
+
+	return result;
+}
+
+void CBMP::PixelWriter24(CStream& stream, const CColor& pixel)
+{
+	stream.Write(&pixel.b, 1);
+	stream.Write(&pixel.g, 1);
+	stream.Write(&pixel.r, 1);
+}
+
+void CBMP::PixelWriter32(CStream& stream, const CColor& pixel)
+{
+	stream.Write(&pixel.b, 1);
+	stream.Write(&pixel.g, 1);
+	stream.Write(&pixel.r, 1);
+	stream.Write(&pixel.a, 1);
 }
