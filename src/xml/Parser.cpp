@@ -101,7 +101,7 @@ bool CParser::ProcessChar_Tag(char nChar)
 		m_nIsTagEnd = true;
 		return true;
 	}
-	if(nChar == ' ')
+	if(nChar == ' ' || nChar == '\t' || nChar == '\r' || nChar == '\n')
 	{
 		//Attributes follow
 		m_nState = STATE_ATTRIBUTE_NAME;
@@ -156,7 +156,7 @@ bool CParser::ProcessChar_AttributeName(char nChar)
 	{
 		return true;
 	}
-	if(nChar == ' ')
+	if(nChar == ' ' || nChar == '\t' || nChar == '\r' || nChar == '\n')
 	{
 		if(m_sAttributeName.size() == 0) return true;
 		return false;
