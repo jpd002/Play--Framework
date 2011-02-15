@@ -9,24 +9,24 @@
 #define GROWSIZE		(0x1000)
 
 using namespace Framework;
-using namespace std;
 
-CMemStream::CMemStream() :
-m_position(0)
+CMemStream::CMemStream() 
+: m_position(0)
+, m_isEof(false)
 {
-	m_nSize = 0;
-	m_nGrow = 0;
-	m_pData = NULL;
+	m_size = 0;
+	m_grow = 0;
+	m_data = NULL;
 }
 
 CMemStream::~CMemStream()
 {
-	FREEPTR(m_pData);
+	FREEPTR(m_data);
 }
 
 bool CMemStream::IsEOF()
 {
-	return (m_position == m_nSize);
+	return (m_isEof);
 }
 
 uint64 CMemStream::Tell()
@@ -34,65 +34,80 @@ uint64 CMemStream::Tell()
 	return m_position;
 }
 
-void CMemStream::Seek(int64 nPosition, STREAM_SEEK_DIRECTION nDir)
+void CMemStream::Seek(int64 position, STREAM_SEEK_DIRECTION dir)
 {
-    switch(nDir)
+    switch(dir)
     {
     case STREAM_SEEK_SET:
-        if(nPosition > m_nSize) throw runtime_error("Invalid position.");
-        m_position = static_cast<unsigned int>(nPosition);
-        break;
+		if(position > m_size) throw std::runtime_error("Invalid position.");
+        m_position = static_cast<unsigned int>(position);
+		m_isEof = false;
+		break;
     case STREAM_SEEK_CUR:
-        m_position += static_cast<int>(nPosition);
+        m_position += static_cast<int>(position);
+		m_isEof = false;
         break;
     case STREAM_SEEK_END:
-        m_position = m_nSize;
+        m_position = m_size;
+		m_isEof = true;
         break;
     }
 }
 
-uint64 CMemStream::Read(void* pData, uint64 nSize)
+uint64 CMemStream::Read(void* data, uint64 size)
 {
-	assert(m_nSize >= m_position);
-	unsigned int readSize = std::min(static_cast<unsigned int>(nSize), m_nSize - m_position);
-	memcpy(pData, m_pData + m_position, readSize);
+	if(m_position >= m_size)
+	{
+		m_isEof = true;
+		return 0;
+	}
+	unsigned int readSize = std::min(static_cast<unsigned int>(size), m_size - m_position);
+	memcpy(data, m_data + m_position, readSize);
 	m_position += readSize;
 	return readSize;
 }
 
-uint64 CMemStream::Write(const void* pData, uint64 nSize)
+uint64 CMemStream::Write(const void* data, uint64 size)
 {
-    if((m_position + nSize) > m_nGrow)
+    if((m_position + size) > m_grow)
     {
-        m_nGrow += ((static_cast<unsigned int>(nSize) + GROWSIZE - 1) / GROWSIZE) * GROWSIZE;
-        m_pData = reinterpret_cast<uint8*>(realloc(m_pData, m_nGrow));
+        m_grow += ((static_cast<unsigned int>(size) + GROWSIZE - 1) / GROWSIZE) * GROWSIZE;
+        m_data = reinterpret_cast<uint8*>(realloc(m_data, m_grow));
     }
-    memcpy(m_pData + m_position, pData, (uint32)nSize);
-    m_position += static_cast<unsigned int>(nSize);
-    m_nSize = max<unsigned int>(m_nSize, m_position);
-    return nSize;
+    memcpy(m_data + m_position, data, static_cast<uint32>(size));
+    m_position += static_cast<unsigned int>(size);
+	m_size = std::max<unsigned int>(m_size, m_position);
+    return size;
+}
+
+void CMemStream::Allocate(unsigned int size)
+{
+	assert(size >= m_size);
+    m_data = reinterpret_cast<uint8*>(realloc(m_data, size));
+	m_size = size;
 }
 
 void CMemStream::ResetBuffer()
 {
-	m_nSize = 0;
+	m_size = 0;
 	m_position = 0;
+	m_isEof = false;
 }
 
 void CMemStream::Truncate()
 {
-	m_nSize = GetRemainingLength();
-	assert(m_nSize <= m_nGrow);
-	memmove(m_pData, m_pData + m_position, m_nSize);
+	m_size = static_cast<uint32>(GetRemainingLength());
+	assert(m_size <= m_grow);
+	memmove(m_data, m_data + m_position, m_size);
 	m_position = 0;
 }
 
-const uint8* CMemStream::GetBuffer() const
+uint8* CMemStream::GetBuffer() const
 {
-	return m_pData;
+	return m_data;
 }
 
 unsigned int CMemStream::GetSize() const
 {
-	return m_nSize;
+	return m_size;
 }
