@@ -26,6 +26,16 @@ CZipArchiveReader::~CZipArchiveReader()
     
 }
 
+CZipArchiveReader::FileHeaderIterator CZipArchiveReader::GetFileHeadersBegin() const
+{
+	return m_files.begin();
+}
+
+CZipArchiveReader::FileHeaderIterator CZipArchiveReader::GetFileHeadersEnd() const
+{
+	return m_files.end();
+}
+
 CZipArchiveReader::StreamPtr CZipArchiveReader::BeginReadFile(const char* fileName)
 {
     if(m_readingLock)

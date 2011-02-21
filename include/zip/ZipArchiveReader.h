@@ -13,18 +13,21 @@ namespace Framework
     class CZipArchiveReader
     {
     public:
-        typedef std::tr1::shared_ptr<Framework::CStream> StreamPtr;
+        typedef std::map<std::string, Zip::ZIPDIRFILEHEADER> FileHeaderList;
+		typedef FileHeaderList::const_iterator FileHeaderIterator;
+		typedef std::tr1::shared_ptr<Framework::CStream> StreamPtr;
         typedef std::list<std::string> FileNameList;
 
                                 CZipArchiveReader(Framework::CStream&);
         virtual                 ~CZipArchiveReader();
+		
+		FileHeaderIterator		GetFileHeadersBegin() const;
+		FileHeaderIterator		GetFileHeadersEnd() const;
 
         StreamPtr               BeginReadFile(const char*);
         FileNameList            GetFileNameList(const char*);
 
     private:
-        typedef std::map<std::string, Zip::ZIPDIRFILEHEADER> FileHeaderList;
-
         void                    Read(Framework::CStream&);
         void                    EndReadFile(Framework::CStream*);
 

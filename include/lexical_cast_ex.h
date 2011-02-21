@@ -65,4 +65,12 @@ Format lexical_cast_uint(unsigned int number, unsigned int width = 1)
     return stream.str();
 }
 
+template <typename Format>
+Format lexical_cast_int(int number, unsigned int width = 1, typename Format::value_type fillChar = '0')
+{
+    std::basic_ostringstream<typename Format::value_type> stream;
+    stream << std::setw(width) << std::setfill(fillChar) << number;
+    return stream.str();
+}
+
 #endif
