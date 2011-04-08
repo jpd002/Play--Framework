@@ -8,30 +8,16 @@ namespace Framework
 {
     namespace PathUtils
     {
-#ifdef WIN32
-        boost::filesystem::wpath    GetPathFromCsidl(int);
-        boost::filesystem::wpath    GetRoamingDataPath();
-        boost::filesystem::wpath    GetPersonalDataPath();
+#ifdef _WIN32
+		boost::filesystem::path		GetPathFromCsidl(int);
+		boost::filesystem::path		GetRoamingDataPath();
+		boost::filesystem::path		GetPersonalDataPath();
 #endif
-#ifdef MACOSX
-        boost::filesystem::path     GetHomePath();
+#if defined(__APPLE__)
+		boost::filesystem::path		GetHomePath();
 #endif
 
-		template<typename String, typename Traits>
-		void EnsurePathExists(const boost::filesystem::basic_path<String, Traits>& path)
-		{
-			typedef boost::filesystem::basic_path<String, Traits> PathType;
-			PathType buildPath;
-			for(typename PathType::iterator pathIterator(path.begin());
-				pathIterator != path.end(); pathIterator++)
-			{
-				buildPath /= (*pathIterator);
-				if(!boost::filesystem::exists(buildPath))
-				{
-					boost::filesystem::create_directory(buildPath);
-				}
-			}
-		}
+		void EnsurePathExists(const boost::filesystem::path&);
     };
 };
 

@@ -13,7 +13,7 @@ namespace Framework
     class CConfig : public boost::noncopyable
     {
     public:
-        typedef boost::filesystem::wpath PathType;
+        typedef boost::filesystem::path PathType;
 
                                             CConfig(const PathType&);
 										    ~CConfig();

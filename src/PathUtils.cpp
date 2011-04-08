@@ -1,36 +1,34 @@
 #include "PathUtils.h"
 
 using namespace Framework;
-using namespace boost;
-using namespace std;
 
-#ifdef WIN32
+#ifdef _WIN32
 
 #include <shlobj.h>
 
-filesystem::wpath PathUtils::GetPathFromCsidl(int csidl)
+boost::filesystem::path PathUtils::GetPathFromCsidl(int csidl)
 {
     wchar_t userPathString[MAX_PATH];
     if(FAILED(SHGetFolderPathW(NULL, csidl, NULL, 0, userPathString)))
     {
-        throw runtime_error("Couldn't get path from csidl.");
+		throw std::runtime_error("Couldn't get path from csidl.");
     }
-    return filesystem::wpath(userPathString, filesystem::native);
+	return boost::filesystem::wpath(userPathString, boost::filesystem::native);
 }
 
-filesystem::wpath PathUtils::GetRoamingDataPath()
+boost::filesystem::path PathUtils::GetRoamingDataPath()
 {
     return GetPathFromCsidl(CSIDL_APPDATA);
 }
 
-filesystem::wpath PathUtils::GetPersonalDataPath()
+boost::filesystem::path PathUtils::GetPersonalDataPath()
 {
     return GetPathFromCsidl(CSIDL_PERSONAL);
 }
 
 #endif
 
-#ifdef MACOSX
+#if defined(__APPLE__)
 
 #include <pwd.h>
 
@@ -41,3 +39,18 @@ filesystem::path PathUtils::GetHomePath()
 }
 
 #endif
+
+void PathUtils::EnsurePathExists(const boost::filesystem::path& path)
+{
+	typedef boost::filesystem::path PathType;
+	PathType buildPath;
+	for(PathType::iterator pathIterator(path.begin());
+		pathIterator != path.end(); pathIterator++)
+	{
+		buildPath /= (*pathIterator);
+		if(!boost::filesystem::exists(buildPath))
+		{
+			boost::filesystem::create_directory(buildPath);
+		}
+	}
+}

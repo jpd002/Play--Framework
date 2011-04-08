@@ -189,7 +189,7 @@ void CConfig::Load()
 
     try
     {
-        CStdStream configFile(m_path.file_string().c_str(), L"rb");
+        CStdStream configFile(m_path.wstring().c_str(), L"rb");
         pDocument = Xml::CParser::ParseDocument(&configFile);
     }
     catch(...)
@@ -247,7 +247,7 @@ void CConfig::Save()
 {
     try
     {
-        CStdStream stream(m_path.file_string().c_str(), L"wb");
+        CStdStream stream(m_path.wstring().c_str(), L"wb");
 
         Xml::CNode*	pConfig = new Xml::CNode("Config", true);
 
