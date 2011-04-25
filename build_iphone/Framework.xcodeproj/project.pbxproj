@@ -61,6 +61,7 @@
 		7E2722B81214FAB700C0DEBF /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722B31214FAB700C0DEBF /* Source.h */; };
 		7E2722BE1214FAD800C0DEBF /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722BD1214FAD800C0DEBF /* Config.cpp */; };
 		7E2722C01214FAE200C0DEBF /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722BF1214FAE200C0DEBF /* Config.h */; };
+		7ED9CC6F1364C943006FFC0E /* ObjCMemberFunctionPointer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED9CC6E1364C943006FFC0E /* ObjCMemberFunctionPointer.h */; };
 		AA747D9F0F9514B9006C5449 /* Framework_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* Framework_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -120,6 +121,7 @@
 		7E2722B31214FAB700C0DEBF /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Source.h; path = ../include/openal/Source.h; sourceTree = SOURCE_ROOT; };
 		7E2722BD1214FAD800C0DEBF /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Config.cpp; path = ../src/Config.cpp; sourceTree = SOURCE_ROOT; };
 		7E2722BF1214FAE200C0DEBF /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = ../include/Config.h; sourceTree = SOURCE_ROOT; };
+		7ED9CC6E1364C943006FFC0E /* ObjCMemberFunctionPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjCMemberFunctionPointer.h; path = ../include/ObjCMemberFunctionPointer.h; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* Framework_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Framework_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +177,7 @@
 				7E1C41BE1234238200BB4E9C /* IosOStream.h */,
 				7E2720AD1213AEC200C0DEBF /* MemStream.cpp */,
 				7E2720B51213AED800C0DEBF /* MemStream.h */,
+				7ED9CC6E1364C943006FFC0E /* ObjCMemberFunctionPointer.h */,
 				7E2722A61214FA9B00C0DEBF /* openal */,
 				7E2720AE1213AEC200C0DEBF /* PtrStream.cpp */,
 				7E2720B61213AED800C0DEBF /* PtrStream.h */,
@@ -293,6 +296,7 @@
 				7E1C41C61234238200BB4E9C /* string_cast_win1252.h in Headers */,
 				7E1C41C71234238200BB4E9C /* string_cast.h in Headers */,
 				7E1C41C81234238200BB4E9C /* Utf8.h in Headers */,
+				7ED9CC6F1364C943006FFC0E /* ObjCMemberFunctionPointer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +395,13 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Framework_Prefix.pch;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_THUMB_SUPPORT = NO;
+				HEADER_SEARCH_PATHS = (
+					"~/Libraries/boost_1_46_1/boost/tr1/tr1",
+					"~/Libraries/boost_1_46_1",
+					../include,
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = Framework;
 			};
@@ -405,6 +416,13 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Framework_Prefix.pch;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_THUMB_SUPPORT = NO;
+				HEADER_SEARCH_PATHS = (
+					"~/Libraries/boost_1_46_1/boost/tr1/tr1",
+					"~/Libraries/boost_1_46_1",
+					../include,
+				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = Framework;
 			};
