@@ -13,9 +13,11 @@ namespace Framework
 	    public:
 						    CMDIFrame();
 		    virtual         ~CMDIFrame();
-	    protected:
+
+		protected:
 		    virtual long    OnWndProc(unsigned int, WPARAM, LPARAM);
 		    void            CreateClient(HMENU);
+
 		    CMDIClient*     m_pMDIClient;
 	    };
     }

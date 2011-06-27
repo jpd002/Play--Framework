@@ -5,8 +5,9 @@ using namespace Framework;
 using namespace Framework::Win32;
 
 CMDIFrame::CMDIFrame()
+: m_pMDIClient(NULL)
 {
-	m_pMDIClient = NULL;
+
 }
 
 CMDIFrame::~CMDIFrame()

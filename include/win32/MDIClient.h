@@ -11,7 +11,9 @@ namespace Framework
 	    {
 	    public:
 					    CMDIClient(HWND, HMENU);
-					    ~CMDIClient();
+			virtual	    ~CMDIClient();
+
+			void		DestroyChild(HWND);
 		    void        Cascade();
 		    void        TileHorizontal();
 		    void        TileVertical();

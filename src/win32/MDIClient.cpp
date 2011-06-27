@@ -17,6 +17,11 @@ CMDIClient::~CMDIClient()
 
 }
 
+void CMDIClient::DestroyChild(HWND child)
+{
+	SendMessage(m_hWnd, WM_MDIDESTROY, reinterpret_cast<WPARAM>(child), 0);
+}
+
 void CMDIClient::Cascade()
 {
 	SendMessage(m_hWnd, WM_MDICASCADE, NULL, NULL);
