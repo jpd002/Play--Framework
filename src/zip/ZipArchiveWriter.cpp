@@ -1,5 +1,4 @@
 #include "zip/ZipArchiveWriter.h"
-#include "zip/ZipStoreStream.h"
 #include "zip/ZipDeflateStream.h"
 #include "zip/ZipDefs.h"
 #include <zlib.h>
@@ -55,7 +54,6 @@ void CZipArchiveWriter::Write(CStream& stream)
         stream.Write(fileName.c_str(), fileName.length());
 
         //Write body
-//        CZipStoreStream proxyStream(stream);
         CZipDeflateStream proxyStream(stream);
         file->Write(proxyStream);
         proxyStream.Flush();

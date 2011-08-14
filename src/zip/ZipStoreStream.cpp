@@ -2,13 +2,11 @@
 #include <zlib.h>
 #include <stdexcept>
 
-using namespace std;
 using namespace Framework;
 
-CZipStoreStream::CZipStoreStream(CStream& baseStream) :
-m_baseStream(baseStream),
-m_crc(0),
-m_length(0)
+CZipStoreStream::CZipStoreStream(CStream& baseStream, unsigned int length) 
+: m_baseStream(baseStream)
+, m_length(length)
 {
 
 }
@@ -18,40 +16,30 @@ CZipStoreStream::~CZipStoreStream()
 
 }
 
-uint32 CZipStoreStream::GetCrc() const
-{
-    return m_crc;
-}
-
-uint64 CZipStoreStream::GetLength() const
-{
-    return m_length;
-}
-
 void CZipStoreStream::Seek(int64, STREAM_SEEK_DIRECTION)
 {
-    throw runtime_error("Unsupported operation.");
+	throw std::runtime_error("Unsupported operation.");
 }
 
 uint64 CZipStoreStream::Tell()
 {
-    return m_baseStream.Tell();
+    throw std::runtime_error("Unsupported operation.");
 }
 
-uint64 CZipStoreStream::Read(void*, uint64)
+uint64 CZipStoreStream::Read(void* buffer, uint64 size)
 {
-    throw runtime_error("Unsupported operation.");
+	uint64 readSize = std::min<uint64>(size, m_length);
+	uint64 resultSize = m_baseStream.Read(buffer, size);
+	m_length -= static_cast<uint32>(resultSize);
+	return resultSize;
 }
 
 uint64 CZipStoreStream::Write(const void* buffer, uint64 size)
 {
-    m_length += size;
-    m_crc = crc32(m_crc, reinterpret_cast<const Bytef*>(buffer), static_cast<uInt>(size));
-    return m_baseStream.Write(buffer, size);
+    throw std::runtime_error("Unsupported operation.");
 }
 
 bool CZipStoreStream::IsEOF()
 {
-    return m_baseStream.IsEOF();
+	return (m_length == 0);
 }
-

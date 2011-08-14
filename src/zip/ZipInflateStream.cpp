@@ -4,7 +4,6 @@
 #include <assert.h>
 
 using namespace Framework;
-using namespace std;
 
 CZipInflateStream::CZipInflateStream(CStream& baseStream, unsigned int compressedLength) :
 m_baseStream(baseStream),
@@ -17,7 +16,7 @@ m_compressedLength(compressedLength)
     m_zStream.next_in = Z_NULL;
     if(inflateInit2(&m_zStream, -MAX_WBITS) != Z_OK)
     {
-        throw runtime_error("zlib stream initialization error.");
+		throw std::runtime_error("zlib stream initialization error.");
     }
 }
 
@@ -28,12 +27,12 @@ CZipInflateStream::~CZipInflateStream()
 
 void CZipInflateStream::Seek(int64, STREAM_SEEK_DIRECTION)
 {
-    throw runtime_error("Unsupported operation.");
+	throw std::runtime_error("Unsupported operation.");
 }
 
 uint64 CZipInflateStream::Tell()
 {
-    throw runtime_error("Unsupported operation.");
+    throw std::runtime_error("Unsupported operation.");
 }
 
 uint64 CZipInflateStream::Read(void* buffer, uint64 length)
@@ -53,7 +52,7 @@ uint64 CZipInflateStream::Read(void* buffer, uint64 length)
             FeedBuffer();
         }
 
-        int bufferSize = min<int>(BUFFERSIZE, static_cast<int>(sizeCounter));
+		int bufferSize = std::min<int>(BUFFERSIZE, static_cast<int>(sizeCounter));
         m_zStream.avail_out = bufferSize;
         m_zStream.next_out = outBuffer;
 
@@ -62,7 +61,7 @@ uint64 CZipInflateStream::Read(void* buffer, uint64 length)
         case Z_NEED_DICT:
         case Z_DATA_ERROR:
         case Z_MEM_ERROR:
-            throw runtime_error("Error occured while inflating.");
+			throw std::runtime_error("Error occured while inflating.");
             break;
         }
 
@@ -82,7 +81,7 @@ uint64 CZipInflateStream::Read(void* buffer, uint64 length)
 
 uint64 CZipInflateStream::Write(const void* buffer, uint64 size)
 {
-    throw runtime_error("Unsupported operation.");
+    throw std::runtime_error("Unsupported operation.");
 }
 
 bool CZipInflateStream::IsEOF()
@@ -93,7 +92,7 @@ bool CZipInflateStream::IsEOF()
 void CZipInflateStream::FeedBuffer()
 {
     assert(m_zStream.avail_in == 0);
-    unsigned int toRead = min<unsigned int>(BUFFERSIZE, m_compressedLength);
+	unsigned int toRead = std::min<unsigned int>(BUFFERSIZE, m_compressedLength);
     m_zStream.avail_in = static_cast<uInt>(m_baseStream.Read(m_inputBuffer, toRead));
     m_zStream.next_in = m_inputBuffer;
     m_compressedLength -= m_zStream.avail_in;

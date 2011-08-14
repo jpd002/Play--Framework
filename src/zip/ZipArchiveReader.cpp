@@ -5,14 +5,11 @@
 #include <boost/regex.hpp>
 #include "zip/ZipArchiveReader.h"
 #include "zip/ZipInflateStream.h"
+#include "zip/ZipStoreStream.h"
 #include "alloca_def.h"
 
 using namespace Framework;
-using namespace std;
-using namespace std::tr1;
-using namespace std::tr1::placeholders;
 using namespace Zip;
-using namespace boost;
 
 CZipArchiveReader::CZipArchiveReader(CStream& stream) :
 m_stream(stream),
@@ -40,59 +37,90 @@ CZipArchiveReader::StreamPtr CZipArchiveReader::BeginReadFile(const char* fileNa
 {
     if(m_readingLock)
     {
-        throw runtime_error("Stream already locked.");
+		throw std::runtime_error("Stream already locked.");
     }
-    FileHeaderList::const_iterator fileIterator(m_files.find(fileName));
-    if(fileIterator == m_files.end())
-    {
-        throw runtime_error("File not found.");
-    }
-    uint32 offset = fileIterator->second.fileStartOffset;
+
+	const ZIPDIRFILEHEADER* dirFileHeader = GetFileHeader(fileName);
+	if(dirFileHeader == NULL)
+	{
+		throw std::runtime_error("File not found.");
+	}
+
+	uint32 offset = dirFileHeader->fileStartOffset;
     m_stream.Seek(offset, STREAM_SEEK_SET);
 
     ZIPFILEHEADER fileHeader;
     m_stream.Read(&fileHeader, sizeof(ZIPFILEHEADER));
     if(fileHeader.signature != FILEHEADER_SIG)
     {
-        throw runtime_error("Error in zip archive.");
+		throw std::runtime_error("Error in zip archive.");
     }
     m_stream.Seek(fileHeader.fileNameLength, STREAM_SEEK_CUR);
     m_stream.Seek(fileHeader.extraFieldLength, STREAM_SEEK_CUR);
-    if(fileHeader.compressionMethod != 8)
+
+	StreamPtr resultStream;
+    if(fileHeader.compressionMethod == 8)
     {
-        throw runtime_error("Unsupported compression method.");
+		//Deflate
+		uint32 compressedSize = fileHeader.compressedSize;
+		if(compressedSize == 0)
+		{
+			compressedSize = dirFileHeader->compressedSize;
+		}
+		resultStream = StreamPtr(
+			new CZipInflateStream(m_stream, compressedSize),
+			std::tr1::bind(&CZipArchiveReader::EndReadFile, this, std::tr1::placeholders::_1));
     }
-    m_readingLock = true;
-    uint32 compressedSize = fileHeader.compressedSize;
-    if(compressedSize == 0)
-    {
-        compressedSize = fileIterator->second.compressedSize;
-    }
-    return StreamPtr(
-        new CZipInflateStream(m_stream, compressedSize),
-        bind(&CZipArchiveReader::EndReadFile, this, _1));
+	else if(fileHeader.compressionMethod == 0)
+	{
+		//Store
+		uint32 compressedSize = fileHeader.compressedSize;
+		if(compressedSize == 0)
+		{
+			compressedSize = dirFileHeader->compressedSize;
+		}
+		resultStream = StreamPtr(
+			new CZipStoreStream(m_stream, compressedSize),
+			std::tr1::bind(&CZipArchiveReader::EndReadFile, this, std::tr1::placeholders::_1));
+	}
+	else
+	{
+		throw std::runtime_error("Unsupported compression method.");
+	}
+	m_readingLock = true;
+	return resultStream;
 }
 
 void CZipArchiveReader::EndReadFile(CStream* stream)
 {
     if(!m_readingLock)
     {
-        throw runtime_error("Stream not locked.");
+		throw std::runtime_error("Stream not locked.");
     }
-    delete stream;
+	delete stream;
     m_readingLock = false;
+}
+
+const ZIPDIRFILEHEADER* CZipArchiveReader::GetFileHeader(const char* fileName) const
+{
+	FileHeaderList::const_iterator fileIterator(m_files.find(fileName));
+	if(fileIterator == m_files.end())
+	{
+		return NULL;
+	}
+	return &fileIterator->second;
 }
 
 CZipArchiveReader::FileNameList CZipArchiveReader::GetFileNameList(const char* regexString)
 {
     FileNameList result;
-    regex expression(regexString);
+	boost::regex expression(regexString);
     for(FileHeaderList::const_iterator fileIterator(m_files.begin());
         fileIterator != m_files.end(); fileIterator++)
     {
-        const string& fileName(fileIterator->first);
-        cmatch match;
-        if(regex_match(fileName.c_str(), match, expression))
+		const std::string& fileName(fileIterator->first);
+		boost::cmatch match;
+		if(boost::regex_match(fileName.c_str(), match, expression))
         {
             result.push_back(fileName);
         }
@@ -119,7 +147,7 @@ void CZipArchiveReader::Read(Framework::CStream& stream)
     }
     if(!found)
     {
-        throw runtime_error("No directory header found in stream.");
+		throw std::runtime_error("No directory header found in stream.");
     }
     ZIPDIRENDHEADER dirHeader;
     stream.Read(&dirHeader, sizeof(ZIPDIRENDHEADER));
@@ -128,17 +156,17 @@ void CZipArchiveReader::Read(Framework::CStream& stream)
     for(unsigned int i = 0; i < dirHeader.dirEntryCount; i++)
     {
         ZIPDIRFILEHEADER fileDirHeader;
-        string fileName;
+		std::string fileName;
         stream.Read(&fileDirHeader, sizeof(ZIPDIRFILEHEADER));
         if(fileDirHeader.signature != DIRFILEHEADER_SIG)
         {
-            throw runtime_error("Error while reading directory entry.");
+			throw std::runtime_error("Error while reading directory entry.");
         }
         if(fileDirHeader.fileNameLength != 0)
         {
             char* fileNameBuffer = reinterpret_cast<char*>(alloca(fileDirHeader.fileNameLength));
             stream.Read(fileNameBuffer, fileDirHeader.fileNameLength);
-            fileName = string(fileNameBuffer, fileNameBuffer + fileDirHeader.fileNameLength);
+			fileName = std::string(fileNameBuffer, fileNameBuffer + fileDirHeader.fileNameLength);
         }
         if(fileName.length() != 0)
         {

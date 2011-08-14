@@ -2,7 +2,6 @@
 #include <stdexcept>
 #include <assert.h>
 
-using namespace std;
 using namespace Framework;
 
 CZipDeflateStream::CZipDeflateStream(CStream& baseStream) :
@@ -17,7 +16,7 @@ m_compressedLength(0)
     if(deflateInit2(&m_zStream, Z_DEFAULT_COMPRESSION, 
         Z_DEFLATED, -15, 8, Z_DEFAULT_STRATEGY) != Z_OK)
     {
-        throw runtime_error("Error initializing deflate stream.");
+		throw std::runtime_error("Error initializing deflate stream.");
     }
 }
 
@@ -43,7 +42,7 @@ uint64 CZipDeflateStream::GetUncompressedLength() const
 
 void CZipDeflateStream::Seek(int64, STREAM_SEEK_DIRECTION)
 {
-    throw runtime_error("Unsupported operation.");
+    throw std::runtime_error("Unsupported operation.");
 }
 
 uint64 CZipDeflateStream::Tell()
@@ -53,7 +52,7 @@ uint64 CZipDeflateStream::Tell()
 
 uint64 CZipDeflateStream::Read(void*, uint64)
 {
-    throw runtime_error("Unsupported operation.");
+    throw std::runtime_error("Unsupported operation.");
 }
 
 uint64 CZipDeflateStream::Write(const void* buffer, uint64 size)

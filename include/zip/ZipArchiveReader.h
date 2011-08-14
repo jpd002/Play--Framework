@@ -18,22 +18,23 @@ namespace Framework
 		typedef std::tr1::shared_ptr<Framework::CStream> StreamPtr;
         typedef std::list<std::string> FileNameList;
 
-                                CZipArchiveReader(Framework::CStream&);
-        virtual                 ~CZipArchiveReader();
+										CZipArchiveReader(Framework::CStream&);
+        virtual							~CZipArchiveReader();
 		
-		FileHeaderIterator		GetFileHeadersBegin() const;
-		FileHeaderIterator		GetFileHeadersEnd() const;
+		FileHeaderIterator				GetFileHeadersBegin() const;
+		FileHeaderIterator				GetFileHeadersEnd() const;
 
-        StreamPtr               BeginReadFile(const char*);
-        FileNameList            GetFileNameList(const char*);
+        StreamPtr						BeginReadFile(const char*);
+		const Zip::ZIPDIRFILEHEADER*	GetFileHeader(const char*) const;
+        FileNameList					GetFileNameList(const char*);
 
     private:
-        void                    Read(Framework::CStream&);
-        void                    EndReadFile(Framework::CStream*);
+        void							Read(Framework::CStream&);
+        void							EndReadFile(Framework::CStream*);
 
-        Framework::CStream&     m_stream;
-        FileHeaderList          m_files;
-        bool                    m_readingLock;
+        Framework::CStream&				m_stream;
+        FileHeaderList					m_files;
+        bool							m_readingLock;
     };
 }
 
