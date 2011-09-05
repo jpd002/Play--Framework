@@ -19,12 +19,12 @@ namespace Framework
 		    unsigned int	AddTool(const RECT&, const TCHAR*);
             unsigned int    AddTrackTool(const TCHAR*);
             unsigned int	GetToolCount();
-            void            SetToolText(unsigned int, const TCHAR*);
+            void            SetToolText(UINT_PTR, const TCHAR*);
 		    void			DeleteTool(unsigned int);
 		    void			DeleteAllTools();
 
 	    private:
-            TOOLINFO        GetTool(unsigned int);
+            TOOLINFO        GetTool(UINT_PTR);
 		    HWND			m_hParent;
 	    };
     }

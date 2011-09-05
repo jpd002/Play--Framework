@@ -37,6 +37,17 @@ void CMenuItem::Enable(bool enabled)
 	EnableMenuItem(m_menu, m_position, MF_BYPOSITION | (enabled ? MF_ENABLED : MF_GRAYED));
 }
 
+void CMenuItem::SetText(const TCHAR* text)
+{
+	if(IsNull()) return;
+	MENUITEMINFO mii;
+	memset(&mii, 0, sizeof(MENUITEMINFO));
+	mii.cbSize		= sizeof(MENUITEMINFO);
+	mii.fMask		= MIIM_STRING;
+	mii.dwTypeData	= const_cast<TCHAR*>(text);
+	SetMenuItemInfo(m_menu, m_position, MF_BYPOSITION, &mii);
+}
+
 CMenuItem CMenuItem::FindById(HMENU hMenu, unsigned int id)
 {
 	CMenuItem result;

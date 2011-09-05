@@ -19,3 +19,13 @@ void CButton::ResetCheck()
 {
 	SetCheck(false);
 }
+
+void CButton::SetBitmap(HBITMAP bitmap)
+{
+	SendMessage(m_hWnd, BM_SETIMAGE, IMAGE_BITMAP, reinterpret_cast<LPARAM>(bitmap));
+}
+
+void CButton::SetIcon(HICON icon)
+{
+	SendMessage(m_hWnd, BM_SETIMAGE, IMAGE_ICON, reinterpret_cast<LPARAM>(icon));
+}

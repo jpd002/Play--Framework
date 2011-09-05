@@ -1,7 +1,6 @@
 #include "win32/ToolTip.h"
 
 using namespace Framework::Win32;
-using namespace std;
 
 CToolTip::CToolTip(HWND hParent)
 {
@@ -39,8 +38,9 @@ void CToolTip::AddTool(HWND hTool, const TCHAR* sDescription)
 	memset(&ti, 0, sizeof(TOOLINFO));
 	ti.cbSize	= sizeof(TOOLINFO);
 	ti.uFlags	= TTF_IDISHWND | TTF_SUBCLASS;
-	ti.uId		= (UINT_PTR)hTool;
-	ti.lpszText = (LPWSTR)sDescription;
+	ti.uId		= reinterpret_cast<UINT_PTR>(hTool);
+	ti.lpszText = reinterpret_cast<LPWSTR>(const_cast<TCHAR*>(sDescription));
+	ti.hwnd		= m_hParent;
 
 	SendMessage(m_hWnd, TTM_ADDTOOL, NULL, (LPARAM)&ti);
 }
@@ -80,11 +80,16 @@ unsigned int CToolTip::AddTrackTool(const TCHAR* sText)
     return nId;
 }
 
-void CToolTip::SetToolText(unsigned int nId, const TCHAR* sText)
+void CToolTip::SetToolText(UINT_PTR nId, const TCHAR* sText)
 {
-    TOOLINFO ti(GetTool(nId));
-    ti.lpszText = reinterpret_cast<LPWSTR>(const_cast<TCHAR*>(sText));
-    SendMessage(m_hWnd, TTM_SETTOOLINFO, NULL, reinterpret_cast<LPARAM>(&ti));
+	TOOLINFO ti;
+	memset(&ti, 0, sizeof(TOOLINFO));
+	ti.cbSize	= sizeof(TOOLINFO);
+	ti.uId		= nId;
+	ti.lpszText	= reinterpret_cast<LPWSTR>(const_cast<TCHAR*>(sText));
+	ti.hwnd		= m_hParent;
+
+	SendMessage(m_hWnd, TTM_UPDATETIPTEXT, NULL, reinterpret_cast<LPARAM>(&ti));
 }
 
 unsigned int CToolTip::GetToolCount()
@@ -109,17 +114,17 @@ void CToolTip::DeleteAllTools()
 	}
 }
 
-TOOLINFO CToolTip::GetTool(unsigned int nId)
+TOOLINFO CToolTip::GetTool(UINT_PTR nId)
 {
     TOOLINFO ti;
     memset(&ti, 0, sizeof(TOOLINFO));
-    ti.cbSize = sizeof(TOOLINFO);
-    ti.hwnd = m_hParent;
-    ti.uId  = nId;
+    ti.cbSize	= sizeof(TOOLINFO);
+    ti.hwnd		= m_hParent;
+    ti.uId		= nId;
 
     if(SendMessage(m_hWnd, TTM_GETTOOLINFO, NULL, reinterpret_cast<LPARAM>(&ti)) == FALSE)
     {
-        throw exception();
+		throw std::exception();
     }
 
     return ti;

@@ -13,6 +13,9 @@ namespace Framework
 						CButton(const TCHAR*, HWND, RECT*, unsigned long = 0);
 			void		SetCheck(bool = true);
 			void		ResetCheck();
+
+			void		SetBitmap(HBITMAP);
+			void		SetIcon(HICON);
 		};
 	}
 }

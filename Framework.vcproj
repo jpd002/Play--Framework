@@ -924,6 +924,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\win32\TaskBarList.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\TaskBarList.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\ToolBar.cpp"
 					>
 				</File>

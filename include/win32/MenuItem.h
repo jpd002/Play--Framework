@@ -17,6 +17,7 @@ namespace Framework
 
 			void				Check(bool);
 			void				Enable(bool);
+			void				SetText(const TCHAR*);
 			bool				IsNull() const;
 
 			static CMenuItem	FindById(HMENU, unsigned int);
