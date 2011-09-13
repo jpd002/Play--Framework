@@ -29,7 +29,7 @@ CWindow::~CWindow()
 
 }
 
-CWindow::operator HWND()
+CWindow::operator HWND() const
 {
 	return m_hWnd;
 }
@@ -79,6 +79,11 @@ void CWindow::SetClassPtr()
 void CWindow::ClearClassPtr()
 {
 	SetProp(m_hWnd, PROPNAME, NULL);
+}
+
+CWindow* CWindow::GetClassPtr(HWND hWnd)
+{
+	return reinterpret_cast<CWindow*>(GetProp(hWnd, PROPNAME));
 }
 
 void CWindow::SubClass()
@@ -326,14 +331,16 @@ CScrollBar CWindow::GetHorizontalScrollBar()
 
 LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LPARAM lParam)
 {
-	CWindow* pThis;
-	pThis = (CWindow*)GetProp(hWnd, PROPNAME);
+	CWindow* pThis = GetClassPtr(hWnd);
 	if(pThis == NULL)
 	{
 		return (long)DefWindowProc(hWnd, uiMsg, wParam, lParam);
 	}
 	switch(uiMsg)
 	{
+	case WM_CLOSE:
+		if(!pThis->OnClose()) return FALSE;
+		break;
 	case WM_SYSCOMMAND:
 		if(!pThis->OnSysCommand((unsigned int)wParam, lParam)) return FALSE;
 		break;
@@ -454,6 +461,11 @@ LRESULT WINAPI CWindow::SubClassWndProc(HWND hWnd, unsigned int uiMsg, WPARAM wP
 }
 
 long CWindow::OnWndProc(unsigned int uiMsg, WPARAM wParam, LPARAM lParam)
+{
+	return TRUE;
+}
+
+long CWindow::OnClose()
 {
 	return TRUE;
 }

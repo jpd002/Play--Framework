@@ -22,7 +22,7 @@ namespace Framework
 					                CWindow();
             virtual                 ~CWindow();
 
-					                operator HWND();
+					                operator HWND() const;
 
             static void             Initialize();
             static void             Release();
@@ -33,6 +33,7 @@ namespace Framework
             static int              MessageBoxFormat(HWND, unsigned int, const TCHAR*, const TCHAR*, ...);
             void                    SetClassPtr();
             void                    ClearClassPtr();
+			static CWindow*			GetClassPtr(HWND);
             void                    SubClass();
             long                    CallBaseWndProc(unsigned int, WPARAM, LPARAM);
             unsigned int            DoesWindowClassExist(const TCHAR*);
@@ -72,6 +73,7 @@ namespace Framework
             CScrollBar              GetHorizontalScrollBar();
 
 	    protected:
+			virtual long			OnClose();
             virtual long            OnCommand(unsigned short, unsigned short, HWND);
             virtual long            OnSysCommand(unsigned int, LPARAM);
             virtual long            OnNotify(WPARAM, NMHDR*);

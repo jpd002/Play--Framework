@@ -9,6 +9,11 @@
 
 using namespace Framework::Win32;
 
+CListView::CListView(HWND hWnd)
+{
+	m_hWnd = hWnd;
+}
+
 CListView::CListView(HWND hParent, RECT* pR, unsigned long nStyle, unsigned long nExStyle)
 {
 	InitCommonControls();

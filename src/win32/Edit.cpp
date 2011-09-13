@@ -4,9 +4,9 @@
 using namespace Framework;
 using namespace Framework::Win32;
 
-CEdit::CEdit(HWND hParent, unsigned int nID)
+CEdit::CEdit(HWND hWnd)
 {
-	m_hWnd = GetDlgItem(hParent, nID);
+	m_hWnd = hWnd;
 }
 
 CEdit::CEdit(HWND hParent, RECT* pR, const TCHAR* sText, unsigned long nStyle, unsigned long nStyleEx)

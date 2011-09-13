@@ -11,10 +11,11 @@ namespace Framework
 		{
 		public:
 			static HFONT		GetMessageFont();
+			static void			GetNonClientMetrics(NONCLIENTMETRICS&);
 
 		private:
 			static HFONT		CreateMessageFont();
-			static CFont		m_MessageFont;
+			static CFont		m_messageFont;
 		};
 	}
 }

@@ -716,6 +716,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\win32\Dialog.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\Dialog.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\Edit.cpp"
 					>
 				</File>

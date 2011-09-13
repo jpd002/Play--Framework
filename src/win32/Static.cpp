@@ -4,6 +4,11 @@
 using namespace Framework;
 using namespace Framework::Win32;
 
+CStatic::CStatic(HWND hWnd)
+{
+	m_hWnd = hWnd;
+}
+
 CStatic::CStatic(HWND hParent, RECT* pR, unsigned long nStyle)
 {
 	Create(NULL, _T("STATIC"), _T(""), WS_CHILD | WS_VISIBLE | nStyle, pR, hParent, NULL);

@@ -38,6 +38,7 @@ namespace Framework
                 LVITEM      m_Item;
             };
 
+							CListView(HWND);
 							CListView(HWND, RECT*, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
 			virtual			~CListView();
 
