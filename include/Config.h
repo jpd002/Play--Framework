@@ -16,7 +16,7 @@ namespace Framework
         typedef boost::filesystem::path PathType;
 
                                             CConfig(const PathType&);
-										    ~CConfig();
+		virtual								~CConfig();
 
         static std::string                  MakePreferenceName(const std::string&, const std::string& = "", const std::string& = "", const std::string& = "");
 
