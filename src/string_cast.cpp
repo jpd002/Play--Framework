@@ -5,16 +5,29 @@
 using namespace std;
 
 template <>
-string string_cast<string>(const wchar_t* sSource)
+string string_cast<string>(const wchar_t* src)
 {
-	char* sConvert;
-	size_t nSize;
+	unsigned int maxCharSize = MB_CUR_MAX;
 
-	nSize = wcslen(sSource) + 1;
-	sConvert = (char*)alloca(nSize);
-	wcstombs(sConvert, sSource, nSize);
+	size_t srcSize = wcslen(src);
+	char* dst = reinterpret_cast<char*>(alloca((srcSize * maxCharSize) + 1));
+	char* dstPtr = dst;
+	for(unsigned int i = 0; i < srcSize; i++)
+	{
+		int charSize = wctomb(dstPtr, src[i]);
+		if(charSize < 0)
+		{
+			(*dstPtr) = '?';
+			dstPtr++;
+		}
+		else
+		{
+			dstPtr += charSize;
+		}
+	}
+	(*dstPtr) = 0;
 
-	return string(sConvert);	
+	return string(dst);
 }
 
 template <>
