@@ -45,10 +45,8 @@ unsigned int CLayoutWindow::GetPreferredHeight()
 
 void CLayoutWindow::RefreshGeometry()
 {
-	unsigned int nWidth, nHeight;
-
-	nWidth = GetRight() - GetLeft();
-	nHeight = GetBottom() - GetTop();
+	unsigned int nWidth = GetRight() - GetLeft();
+	unsigned int nHeight = GetBottom() - GetTop();
 
 	if(m_nUseNoCopy)
 	{
