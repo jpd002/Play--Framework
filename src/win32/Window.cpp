@@ -331,10 +331,20 @@ CScrollBar CWindow::GetHorizontalScrollBar()
 
 LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LPARAM lParam)
 {
+	if(uiMsg == WM_NCCREATE)
+	{
+		CREATESTRUCT* createStruct(reinterpret_cast<CREATESTRUCT*>(lParam));
+		if(createStruct->lpCreateParams != NULL)
+		{
+			CWindow* window = reinterpret_cast<CWindow*>(createStruct->lpCreateParams);
+			window->m_hWnd = hWnd;
+			window->SetClassPtr();
+		}
+	}
 	CWindow* pThis = GetClassPtr(hWnd);
 	if(pThis == NULL)
 	{
-		return (long)DefWindowProc(hWnd, uiMsg, wParam, lParam);
+		return DefWindowProc(hWnd, uiMsg, wParam, lParam);
 	}
 	switch(uiMsg)
 	{
@@ -399,11 +409,14 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 	case WM_LBUTTONDBLCLK:
 		if(!pThis->OnLeftButtonDblClk(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam))) return FALSE;
 		break;
+	case WM_RBUTTONDOWN:
+		if(!pThis->OnRightButtonDown(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam))) return FALSE;
+		break;
 	case WM_RBUTTONUP:
 		if(!pThis->OnRightButtonUp(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam))) return FALSE;
 		break;
-	case 0x20A:
-		if(!pThis->OnMouseWheel((short)HIWORD(wParam))) return FALSE;
+	case WM_MOUSEWHEEL:
+		if(!pThis->OnMouseWheel(GET_WHEEL_DELTA_WPARAM(wParam))) return FALSE;
 		break;
 	case WM_MOUSELEAVE:
 		if(!pThis->OnMouseLeave()) return FALSE;
@@ -439,19 +452,30 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
         pThis->OnCopy();
         return TRUE;
         break;
+	case WM_NCCALCSIZE:
+		if(!pThis->OnNcCalcSize(wParam, lParam)) return FALSE;
+		break;
+	case WM_NCPAINT:
+		if(!pThis->OnNcPaint(wParam)) return FALSE;
+		break;
+	case WM_GETDLGCODE:
+		return pThis->OnGetDlgCode(wParam, lParam);
+		break;
+	case WM_THEMECHANGED:
+		if(!pThis->OnThemeChanged()) return FALSE;
+		break;
 	}
 	if(!pThis->OnWndProc(uiMsg, wParam, lParam)) return FALSE;
 	if(!pThis->m_nNoCallDef)
 	{
-		return (long)DefWindowProc(hWnd, uiMsg, wParam, lParam);
+		return DefWindowProc(hWnd, uiMsg, wParam, lParam);
 	}
 	return TRUE;
 }
 
 LRESULT WINAPI CWindow::SubClassWndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LPARAM lParam)
 {
-	CWindow* pThis;
-	pThis = (CWindow*)GetProp(hWnd, PROPNAME);
+	CWindow* pThis = GetClassPtr(hWnd);
 	if(pThis != NULL)
 	{
 		return pThis->OnWndProc(uiMsg, wParam, lParam);
@@ -511,6 +535,11 @@ long CWindow::OnLeftButtonUp(int nX, int nY)
 }
 
 long CWindow::OnLeftButtonDblClk(int nX, int nY)
+{
+	return TRUE;
+}
+
+long CWindow::OnRightButtonDown(int nX, int nY)
 {
 	return TRUE;
 }
@@ -608,4 +637,24 @@ long CWindow::OnDrawItem(unsigned int nId, LPDRAWITEMSTRUCT pDrawItem)
 long CWindow::OnCopy()
 {
     return TRUE;
+}
+
+long CWindow::OnNcCalcSize(WPARAM, LPARAM)
+{
+	return TRUE;
+}
+
+long CWindow::OnNcPaint(WPARAM)
+{
+	return TRUE;
+}
+
+long CWindow::OnGetDlgCode(WPARAM wParam, LPARAM lParam)
+{
+	return static_cast<long>(DefWindowProc(m_hWnd, WM_GETDLGCODE, wParam, lParam));
+}
+
+long CWindow::OnThemeChanged()
+{
+	return TRUE;
 }

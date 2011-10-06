@@ -157,8 +157,11 @@ CDialog::DIALOGTEMPLATE CDialog::ReadDialogTemplate(Framework::CStream& stream)
 	dialog.typeface		= ReadString(stream);
 
 	uint32 itemDataLength = static_cast<uint32>(stream.GetRemainingLength());
-	dialog.dialogItemData.resize(itemDataLength);
-	stream.Read(&dialog.dialogItemData[0], itemDataLength);
+	if(itemDataLength != 0)
+	{
+		dialog.dialogItemData.resize(itemDataLength);
+		stream.Read(&dialog.dialogItemData[0], itemDataLength);
+	}
 
 	return dialog;
 }
@@ -184,5 +187,8 @@ void CDialog::WriteDialogTemplate(DIALOGTEMPLATE& dialog, Framework::CStream& st
 	stream.Write8(dialog.charset);
 	WriteString(dialog.typeface, stream);
 
-	stream.Write(&dialog.dialogItemData[0], dialog.dialogItemData.size());
+	if(dialog.dialogItemData.size() != 0)
+	{
+		stream.Write(&dialog.dialogItemData[0], dialog.dialogItemData.size());
+	}
 }

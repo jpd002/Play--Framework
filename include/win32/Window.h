@@ -82,6 +82,7 @@ namespace Framework
             virtual long            OnLeftButtonUp(int, int);
             virtual long            OnLeftButtonDown(int, int);
             virtual long            OnLeftButtonDblClk(int, int);
+			virtual long			OnRightButtonDown(int, int);
             virtual long            OnRightButtonUp(int, int);
             virtual long            OnMouseMove(WPARAM, int, int);
             virtual long            OnMouseWheel(short);
@@ -97,6 +98,10 @@ namespace Framework
             virtual long            OnSetCursor(HWND, unsigned int, unsigned int);
             virtual long            OnDrawItem(unsigned int, LPDRAWITEMSTRUCT);
             virtual long            OnCopy();
+			virtual long			OnNcCalcSize(WPARAM, LPARAM);
+			virtual long			OnNcPaint(WPARAM);
+			virtual long			OnGetDlgCode(WPARAM, LPARAM);
+			virtual long			OnThemeChanged();
 
             //Add parameters for these
             virtual long            OnPaint();
