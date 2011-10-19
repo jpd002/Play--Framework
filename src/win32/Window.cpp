@@ -1,10 +1,3 @@
-/*
-
-	Framework - Window.cpp
-	File Version 1.0.000
-
-*/
-
 #include "win32/Window.h"
 #include <windowsx.h>
 #include <assert.h>
@@ -15,13 +8,12 @@ using namespace std;
 
 #define PROPNAME		_T("CWindow::this")
 
-ATOM			CWindow::m_nAtom;
-
 CWindow::CWindow()
+: m_hWnd(NULL)
+, m_pBaseWndProc(NULL)
+, m_nNoCallDef(0)
 {
-	m_nNoCallDef = 0;
-	m_hWnd = 0;
-    m_pBaseWndProc = NULL;
+
 }
 
 CWindow::~CWindow()
@@ -99,16 +91,6 @@ void CWindow::SubClass()
 long CWindow::CallBaseWndProc(unsigned int uiMsg, WPARAM wParam, LPARAM lParam)
 {
 	return (long)CallWindowProc(m_pBaseWndProc, m_hWnd, uiMsg, wParam, lParam);
-}
-
-void CWindow::Initialize()
-{
-	m_nAtom = GlobalAddAtom(PROPNAME);
-}
-
-void CWindow::Release()
-{
-	GlobalDeleteAtom(m_nAtom);
 }
 
 unsigned int CWindow::DoesWindowClassExist(const TCHAR* sClass)
@@ -333,10 +315,31 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 {
 	if(uiMsg == WM_NCCREATE)
 	{
-		CREATESTRUCT* createStruct(reinterpret_cast<CREATESTRUCT*>(lParam));
-		if(createStruct->lpCreateParams != NULL)
+		CWindow* window(NULL);
+		bool foundWnd = false;
+
+		HWND parentWnd = ::GetParent(hWnd);
+		if(parentWnd != NULL)
 		{
-			CWindow* window = reinterpret_cast<CWindow*>(createStruct->lpCreateParams);
+			TCHAR className[255];
+			GetClassName(parentWnd, className, 255);
+			if(!_tcsicmp(className, _T("MDIClient")))
+			{
+				CREATESTRUCT* createStruct(reinterpret_cast<CREATESTRUCT*>(lParam));
+				MDICREATESTRUCT* mdiCreateStruct(reinterpret_cast<MDICREATESTRUCT*>(createStruct->lpCreateParams));
+				window = reinterpret_cast<CWindow*>(mdiCreateStruct->lParam);
+				foundWnd = true;
+			}
+		}
+
+		if(!foundWnd)
+		{
+			CREATESTRUCT* createStruct(reinterpret_cast<CREATESTRUCT*>(lParam));
+			window = reinterpret_cast<CWindow*>(createStruct->lpCreateParams);
+		}
+
+		if(window != NULL)
+		{
 			window->m_hWnd = hWnd;
 			window->SetClassPtr();
 		}

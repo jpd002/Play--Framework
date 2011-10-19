@@ -1,10 +1,3 @@
-/*
-
-	Framework - Window.h
-	File Version 1.0.000
-
-*/
-
 #ifndef _WINDOW_H_
 #define _WINDOW_H_
 
@@ -24,8 +17,6 @@ namespace Framework
 
 					                operator HWND() const;
 
-            static void             Initialize();
-            static void             Release();
             static LRESULT WINAPI   WndProc(HWND, unsigned int, WPARAM, LPARAM);
             static LRESULT WINAPI   SubClassWndProc(HWND, unsigned int, WPARAM, LPARAM);
             static void             StdMsgLoop(CWindow*);
@@ -115,7 +106,6 @@ namespace Framework
             HWND                    m_hWnd;
             unsigned int            m_nNoCallDef;
             WNDPROC                 m_pBaseWndProc;
-            static ATOM             m_nAtom;
 	    };
     }
 };

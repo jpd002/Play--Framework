@@ -13,17 +13,15 @@ using namespace Framework;
 using namespace Framework::Win32;
 
 CInputBox::CInputBox(const TCHAR* sTitle, const TCHAR* sPrompt, const TCHAR* sValue)
+: m_pOk(NULL)
+, m_pCancel(NULL)
+, m_pValue(NULL)
+, m_nCancelled(false)
+, m_sTitle(sTitle)
+, m_sPrompt(sPrompt)
+, m_sValue((sValue != NULL) ? sValue : _T(""))
 {
-	m_pOk			= NULL;
-	m_pCancel		= NULL;
-	m_pValue		= NULL;
-	m_hWnd			= NULL;
 
-	m_nCancelled	= false;
-
-	m_sTitle		= sTitle;
-	m_sPrompt		= sPrompt;
-	m_sValue		= (sValue != NULL) ? sValue : _T("");
 }
 
 CInputBox::~CInputBox()
@@ -33,14 +31,9 @@ CInputBox::~CInputBox()
 
 const TCHAR* CInputBox::GetValue(HWND hParent)
 {
-	HFONT nFont;
-	RECT rc;
-	HACCEL hAccel;
-	MSG msg;
-
 	EnableWindow(GetActiveWindow(), FALSE);
 
-	nFont = CreateFont(-11, 0, 0, 0, 0, 0, 0, 0, ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, FF_DONTCARE, _T("Tahoma"));
+	HFONT nFont = CreateFont(-11, 0, 0, 0, 0, 0, 0, 0, ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, FF_DONTCARE, _T("Tahoma"));
 
 	if(!DoesWindowClassExist(CLSNAME))
 	{
@@ -55,6 +48,7 @@ const TCHAR* CInputBox::GetValue(HWND hParent)
 		RegisterClassEx(&wc);
 	}
 
+	RECT rc;
 	SetRect(&rc, 0, 0, 300, 108);
 	Create(WNDSTYLEEX, CLSNAME, m_sTitle.c_str(), WNDSTYLE, &rc, hParent, NULL);
 	SetClassPtr();
@@ -87,13 +81,14 @@ const TCHAR* CInputBox::GetValue(HWND hParent)
 
 	RefreshLayout();
 
-	hAccel = CreateAccelerators();
+	HACCEL hAccel = CreateAccelerators();
 
 	Center();
 	Show(SW_SHOW);
 
 	while(IsWindow())
 	{
+		MSG msg;
 		GetMessage(&msg, NULL, 0, 0);
 		if(!TranslateAccelerator(m_hWnd, hAccel, &msg))
 		{
