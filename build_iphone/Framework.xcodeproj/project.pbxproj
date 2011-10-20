@@ -61,6 +61,23 @@
 		7E2722B81214FAB700C0DEBF /* Source.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722B31214FAB700C0DEBF /* Source.h */; };
 		7E2722BE1214FAD800C0DEBF /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E2722BD1214FAD800C0DEBF /* Config.cpp */; };
 		7E2722C01214FAE200C0DEBF /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E2722BF1214FAE200C0DEBF /* Config.h */; };
+		7E644986144F60CE006D589E /* FlatLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E64497E144F60CE006D589E /* FlatLayout.cpp */; };
+		7E644987144F60CE006D589E /* GridLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E64497F144F60CE006D589E /* GridLayout.cpp */; };
+		7E644988144F60CE006D589E /* HorizontalLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E644980144F60CE006D589E /* HorizontalLayout.cpp */; };
+		7E644989144F60CE006D589E /* LayoutBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E644981144F60CE006D589E /* LayoutBase.cpp */; };
+		7E64498A144F60CE006D589E /* LayoutBaseItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E644982144F60CE006D589E /* LayoutBaseItem.cpp */; };
+		7E64498B144F60CE006D589E /* LayoutObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E644983144F60CE006D589E /* LayoutObject.cpp */; };
+		7E64498C144F60CE006D589E /* LayoutStretch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E644984144F60CE006D589E /* LayoutStretch.cpp */; };
+		7E64498D144F60CE006D589E /* VerticalLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E644985144F60CE006D589E /* VerticalLayout.cpp */; };
+		7E644997144F60D8006D589E /* FlatLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E64498E144F60D8006D589E /* FlatLayout.h */; };
+		7E644998144F60D8006D589E /* GridLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E64498F144F60D8006D589E /* GridLayout.h */; };
+		7E644999144F60D8006D589E /* HorizontalLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E644990144F60D8006D589E /* HorizontalLayout.h */; };
+		7E64499A144F60D8006D589E /* LayoutBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E644991144F60D8006D589E /* LayoutBase.h */; };
+		7E64499B144F60D8006D589E /* LayoutBaseItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E644992144F60D8006D589E /* LayoutBaseItem.h */; };
+		7E64499C144F60D8006D589E /* LayoutEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E644993144F60D8006D589E /* LayoutEngine.h */; };
+		7E64499D144F60D8006D589E /* LayoutObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E644994144F60D8006D589E /* LayoutObject.h */; };
+		7E64499E144F60D8006D589E /* LayoutStretch.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E644995144F60D8006D589E /* LayoutStretch.h */; };
+		7E64499F144F60D8006D589E /* VerticalLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E644996144F60D8006D589E /* VerticalLayout.h */; };
 		7ED9CC6F1364C943006FFC0E /* ObjCMemberFunctionPointer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7ED9CC6E1364C943006FFC0E /* ObjCMemberFunctionPointer.h */; };
 		AA747D9F0F9514B9006C5449 /* Framework_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* Framework_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
@@ -121,6 +138,23 @@
 		7E2722B31214FAB700C0DEBF /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Source.h; path = ../include/openal/Source.h; sourceTree = SOURCE_ROOT; };
 		7E2722BD1214FAD800C0DEBF /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Config.cpp; path = ../src/Config.cpp; sourceTree = SOURCE_ROOT; };
 		7E2722BF1214FAE200C0DEBF /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = ../include/Config.h; sourceTree = SOURCE_ROOT; };
+		7E64497E144F60CE006D589E /* FlatLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FlatLayout.cpp; path = ../src/layout/FlatLayout.cpp; sourceTree = "<group>"; };
+		7E64497F144F60CE006D589E /* GridLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GridLayout.cpp; path = ../src/layout/GridLayout.cpp; sourceTree = "<group>"; };
+		7E644980144F60CE006D589E /* HorizontalLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HorizontalLayout.cpp; path = ../src/layout/HorizontalLayout.cpp; sourceTree = "<group>"; };
+		7E644981144F60CE006D589E /* LayoutBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LayoutBase.cpp; path = ../src/layout/LayoutBase.cpp; sourceTree = "<group>"; };
+		7E644982144F60CE006D589E /* LayoutBaseItem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LayoutBaseItem.cpp; path = ../src/layout/LayoutBaseItem.cpp; sourceTree = "<group>"; };
+		7E644983144F60CE006D589E /* LayoutObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LayoutObject.cpp; path = ../src/layout/LayoutObject.cpp; sourceTree = "<group>"; };
+		7E644984144F60CE006D589E /* LayoutStretch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LayoutStretch.cpp; path = ../src/layout/LayoutStretch.cpp; sourceTree = "<group>"; };
+		7E644985144F60CE006D589E /* VerticalLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VerticalLayout.cpp; path = ../src/layout/VerticalLayout.cpp; sourceTree = "<group>"; };
+		7E64498E144F60D8006D589E /* FlatLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlatLayout.h; path = ../include/layout/FlatLayout.h; sourceTree = "<group>"; };
+		7E64498F144F60D8006D589E /* GridLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridLayout.h; path = ../include/layout/GridLayout.h; sourceTree = "<group>"; };
+		7E644990144F60D8006D589E /* HorizontalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HorizontalLayout.h; path = ../include/layout/HorizontalLayout.h; sourceTree = "<group>"; };
+		7E644991144F60D8006D589E /* LayoutBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutBase.h; path = ../include/layout/LayoutBase.h; sourceTree = "<group>"; };
+		7E644992144F60D8006D589E /* LayoutBaseItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutBaseItem.h; path = ../include/layout/LayoutBaseItem.h; sourceTree = "<group>"; };
+		7E644993144F60D8006D589E /* LayoutEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutEngine.h; path = ../include/layout/LayoutEngine.h; sourceTree = "<group>"; };
+		7E644994144F60D8006D589E /* LayoutObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutObject.h; path = ../include/layout/LayoutObject.h; sourceTree = "<group>"; };
+		7E644995144F60D8006D589E /* LayoutStretch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LayoutStretch.h; path = ../include/layout/LayoutStretch.h; sourceTree = "<group>"; };
+		7E644996144F60D8006D589E /* VerticalLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VerticalLayout.h; path = ../include/layout/VerticalLayout.h; sourceTree = "<group>"; };
 		7ED9CC6E1364C943006FFC0E /* ObjCMemberFunctionPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjCMemberFunctionPointer.h; path = ../include/ObjCMemberFunctionPointer.h; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* Framework_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Framework_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -175,6 +209,7 @@
 				7E1C41BD1234238200BB4E9C /* IosIStream.h */,
 				7E1C41B41234236D00BB4E9C /* IosOStream.cpp */,
 				7E1C41BE1234238200BB4E9C /* IosOStream.h */,
+				7E64497D144F60BA006D589E /* layout */,
 				7E2720AD1213AEC200C0DEBF /* MemStream.cpp */,
 				7E2720B51213AED800C0DEBF /* MemStream.h */,
 				7ED9CC6E1364C943006FFC0E /* ObjCMemberFunctionPointer.h */,
@@ -260,6 +295,30 @@
 			name = openal;
 			sourceTree = "<group>";
 		};
+		7E64497D144F60BA006D589E /* layout */ = {
+			isa = PBXGroup;
+			children = (
+				7E64497E144F60CE006D589E /* FlatLayout.cpp */,
+				7E64498E144F60D8006D589E /* FlatLayout.h */,
+				7E64497F144F60CE006D589E /* GridLayout.cpp */,
+				7E64498F144F60D8006D589E /* GridLayout.h */,
+				7E644980144F60CE006D589E /* HorizontalLayout.cpp */,
+				7E644990144F60D8006D589E /* HorizontalLayout.h */,
+				7E644981144F60CE006D589E /* LayoutBase.cpp */,
+				7E644991144F60D8006D589E /* LayoutBase.h */,
+				7E644982144F60CE006D589E /* LayoutBaseItem.cpp */,
+				7E644992144F60D8006D589E /* LayoutBaseItem.h */,
+				7E644993144F60D8006D589E /* LayoutEngine.h */,
+				7E644983144F60CE006D589E /* LayoutObject.cpp */,
+				7E644994144F60D8006D589E /* LayoutObject.h */,
+				7E644984144F60CE006D589E /* LayoutStretch.cpp */,
+				7E644995144F60D8006D589E /* LayoutStretch.h */,
+				7E644985144F60CE006D589E /* VerticalLayout.cpp */,
+				7E644996144F60D8006D589E /* VerticalLayout.h */,
+			);
+			name = layout;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -297,6 +356,15 @@
 				7E1C41C71234238200BB4E9C /* string_cast.h in Headers */,
 				7E1C41C81234238200BB4E9C /* Utf8.h in Headers */,
 				7ED9CC6F1364C943006FFC0E /* ObjCMemberFunctionPointer.h in Headers */,
+				7E644997144F60D8006D589E /* FlatLayout.h in Headers */,
+				7E644998144F60D8006D589E /* GridLayout.h in Headers */,
+				7E644999144F60D8006D589E /* HorizontalLayout.h in Headers */,
+				7E64499A144F60D8006D589E /* LayoutBase.h in Headers */,
+				7E64499B144F60D8006D589E /* LayoutBaseItem.h in Headers */,
+				7E64499C144F60D8006D589E /* LayoutEngine.h in Headers */,
+				7E64499D144F60D8006D589E /* LayoutObject.h in Headers */,
+				7E64499E144F60D8006D589E /* LayoutStretch.h in Headers */,
+				7E64499F144F60D8006D589E /* VerticalLayout.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +444,14 @@
 				7E1C41BB1234236D00BB4E9C /* string_cast.cpp in Sources */,
 				7E1C41BC1234236D00BB4E9C /* Utf8.cpp in Sources */,
 				7E1C41E21234240C00BB4E9C /* string_cast_win1252.cpp in Sources */,
+				7E644986144F60CE006D589E /* FlatLayout.cpp in Sources */,
+				7E644987144F60CE006D589E /* GridLayout.cpp in Sources */,
+				7E644988144F60CE006D589E /* HorizontalLayout.cpp in Sources */,
+				7E644989144F60CE006D589E /* LayoutBase.cpp in Sources */,
+				7E64498A144F60CE006D589E /* LayoutBaseItem.cpp in Sources */,
+				7E64498B144F60CE006D589E /* LayoutObject.cpp in Sources */,
+				7E64498C144F60CE006D589E /* LayoutStretch.cpp in Sources */,
+				7E64498D144F60CE006D589E /* VerticalLayout.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +462,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/Framework.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -411,7 +486,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DSTROOT = /tmp/Framework.dst;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
