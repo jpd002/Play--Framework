@@ -29,7 +29,7 @@ uint64 CZipStoreStream::Tell()
 uint64 CZipStoreStream::Read(void* buffer, uint64 size)
 {
 	uint64 readSize = std::min<uint64>(size, m_length);
-	uint64 resultSize = m_baseStream.Read(buffer, size);
+	uint64 resultSize = m_baseStream.Read(buffer, readSize);
 	m_length -= static_cast<uint32>(resultSize);
 	return resultSize;
 }
