@@ -19,14 +19,14 @@ namespace Framework
                 boost::archive::iterators::binary_from_base64<const char*>, 8, 6
             > binary_t;
 
-    std::string ToBase64(const void* pBuffer, size_t nSize)
+    static std::string ToBase64(const void* pBuffer, size_t nSize)
     {
         base64_t itBegin(reinterpret_cast<const char*>(pBuffer));
         base64_t itEnd(reinterpret_cast<const char*>(pBuffer) + nSize);
         return std::string(itBegin, itEnd);
     }
 
-    void FromBase64(void* pDst, size_t nSize, const char* pSrc)
+    static void FromBase64(void* pDst, size_t nSize, const char* pSrc)
     {
         binary_t itChar(pSrc);
         binary_t itEnd(pSrc + strlen(pSrc));
