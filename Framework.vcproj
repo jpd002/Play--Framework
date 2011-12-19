@@ -425,6 +425,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\include\StdStreamUtils.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\Stream.cpp"
 				>
 			</File>
