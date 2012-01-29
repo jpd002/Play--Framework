@@ -820,6 +820,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\win32\ListViewEx.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\win32\ListViewEx.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\win32\MDIChild.cpp"
 					>
 				</File>

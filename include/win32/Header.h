@@ -11,16 +11,22 @@ namespace Framework
 		class CHeader : public CWindow
 		{
 		public:
-                    CHeader(HWND);
+					CHeader(HWND);
 					CHeader(HWND, RECT*, unsigned long = 0, unsigned long = 0);
+
+			void	GetItem(unsigned int, HDITEM*);
+			void	SetItem(unsigned int, HDITEM*);
+
 			int		InsertItem(const TCHAR*);
 			int		InsertItem(const TCHAR*, unsigned int);
 			int		InsertItem(unsigned int, HDITEM*);
+
 			void	GetItemRect(unsigned int, RECT*);
 			int		GetItemCount();
-            void    SetItemWidth(unsigned int, unsigned int);
-            void    SetItemWidth(unsigned int, double);
-        };
+
+			void	SetItemWidth(unsigned int, unsigned int);
+			void	SetItemWidth(unsigned int, double);
+		};
 	}
 }
 

@@ -6,13 +6,23 @@ using namespace Framework::Win32;
 
 CHeader::CHeader(HWND hWnd)
 {
-    m_hWnd = hWnd;
+	m_hWnd = hWnd;
 }
 
 CHeader::CHeader(HWND hParent, RECT* pRect, unsigned long nStyle, unsigned long nExStyle)
 {
 	InitCommonControls();
 	Create(nExStyle, WC_HEADER, _T(""), WS_CHILD | WS_VISIBLE | nStyle, pRect, hParent, NULL);
+}
+
+void CHeader::GetItem(unsigned int index, HDITEM* item)
+{
+	Header_GetItem(m_hWnd, index, item);
+}
+
+void CHeader::SetItem(unsigned int index, HDITEM* item)
+{
+	Header_SetItem(m_hWnd, index, item);
 }
 
 int CHeader::InsertItem(const TCHAR* sText)
@@ -56,17 +66,17 @@ int CHeader::GetItemCount()
 
 void CHeader::SetItemWidth(unsigned int nItem, unsigned int nWidth)
 {
-    HDITEM Item;
+	HDITEM Item;
 
-    memset(&Item, 0, sizeof(HDITEM));
-    Item.mask   = HDI_WIDTH;
-    Item.cxy    = nWidth;
+	memset(&Item, 0, sizeof(HDITEM));
+	Item.mask	= HDI_WIDTH;
+	Item.cxy	= nWidth;
 
-    Header_SetItem(m_hWnd, nItem, &Item);
+	Header_SetItem(m_hWnd, nItem, &Item);
 }
 
 void CHeader::SetItemWidth(unsigned int nItem, double nWidth)
 {
-    RECT Rect(GetClientRect());
-    SetItemWidth(nItem, static_cast<unsigned int>(static_cast<double>(Rect.right) * nWidth));
+	RECT Rect(GetClientRect());
+	SetItemWidth(nItem, static_cast<unsigned int>(static_cast<double>(Rect.right) * nWidth));
 }

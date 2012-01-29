@@ -1,10 +1,3 @@
-/*
-
-	Framework - ListView.cpp
-	File Version 1.0.000
-
-*/
-
 #include "win32/ListView.h"
 
 using namespace Framework::Win32;
@@ -43,7 +36,7 @@ int CListView::FindItemData(unsigned long nData)
 
 void CListView::DeleteItem(unsigned int itemIdx)
 {
-    ListView_DeleteItem(m_hWnd, itemIdx);
+	ListView_DeleteItem(m_hWnd, itemIdx);
 }
 
 void CListView::DeleteAllItems()
@@ -58,7 +51,7 @@ int CListView::InsertItem(LVITEM* pI)
 
 int CListView::InsertItem(const LVITEM& Item)
 {
-    return InsertItem(const_cast<LVITEM*>(&Item));
+	return InsertItem(const_cast<LVITEM*>(&Item));
 }
 
 void CListView::SetColumnWidth(unsigned int nCol, unsigned int nCX)
@@ -110,23 +103,23 @@ void CListView::SetSelection(int nIndex)
 
 void CListView::EnableGroupView(bool enabled)
 {
-    ListView_EnableGroupView(m_hWnd, enabled);
+	ListView_EnableGroupView(m_hWnd, enabled);
 }
 
 int CListView::InsertGroup(const TCHAR* name, unsigned int id, unsigned int index)
 {
-    LVGROUP group;
-    memset(&group, 0, sizeof(group));
-    group.cbSize        = sizeof(LVGROUP);
-    group.mask          = LVGF_HEADER | LVGF_GROUPID;
-    group.pszHeader     = const_cast<TCHAR*>(name);
-    group.iGroupId      = id;
-    return ListView_InsertGroup(m_hWnd, index, &group);
+	LVGROUP group;
+	memset(&group, 0, sizeof(group));
+	group.cbSize		= sizeof(LVGROUP);
+	group.mask			= LVGF_HEADER | LVGF_GROUPID;
+	group.pszHeader		= const_cast<TCHAR*>(name);
+	group.iGroupId		= id;
+	return ListView_InsertGroup(m_hWnd, index, &group);
 }
 
 void CListView::RemoveAllGroups()
 {
-    ListView_RemoveAllGroups(m_hWnd);
+	ListView_RemoveAllGroups(m_hWnd);
 }
 
 void CListView::SetExtendedListViewStyle(unsigned long nStyle)
@@ -149,22 +142,19 @@ void CListView::EnsureItemVisible(unsigned int nItem, bool nPartialOk)
 	ListView_EnsureVisible(m_hWnd, nItem, nPartialOk);
 }
 
-void CListView::ProcessGetDisplayInfo(NMHDR* pHdr, GetDispInfoCallbackType Callback)
+void CListView::ProcessGetDisplayInfo(NMHDR* pHdr, const GetDispInfoCallbackType& Callback)
 {
 	if(pHdr->code != LVN_GETDISPINFO) return;
 	if(pHdr->hwndFrom != m_hWnd) return;
 
-	LV_DISPINFO* pDispInfo;
-
-	pDispInfo = reinterpret_cast<LV_DISPINFO*>(pHdr);
+	LV_DISPINFO* pDispInfo = reinterpret_cast<LV_DISPINFO*>(pHdr);
 	Callback(&pDispInfo->item);
 }
 
 HWND CListView::GetHeader()
 {
-    return ListView_GetHeader(m_hWnd);
+	return ListView_GetHeader(m_hWnd);
 }
-
 
 //////////////////////////////////////
 //CItem implementation
@@ -172,8 +162,8 @@ HWND CListView::GetHeader()
 
 CListView::CItem::CItem(const TCHAR* sText)
 {
-    memset(&m_Item, 0, sizeof(LVITEM));
-    SetText(sText);
+	memset(&m_Item, 0, sizeof(LVITEM));
+	SetText(sText);
 }
 
 CListView::CItem::~CItem()
@@ -183,17 +173,17 @@ CListView::CItem::~CItem()
 
 void CListView::CItem::SetText(const TCHAR* sText)
 {
-    m_Item.mask |= LVIF_TEXT;
-    m_Item.pszText = const_cast<TCHAR*>(sText);
+	m_Item.mask |= LVIF_TEXT;
+	m_Item.pszText = const_cast<TCHAR*>(sText);
 }
 
 void CListView::CItem::SetParam(LPARAM lParam)
 {
-    m_Item.mask |= LVIF_PARAM;
-    m_Item.lParam = lParam;
+	m_Item.mask |= LVIF_PARAM;
+	m_Item.lParam = lParam;
 }
 
 CListView::CItem::operator const LVITEMW&() const
 {
-    return m_Item;
+	return m_Item;
 }

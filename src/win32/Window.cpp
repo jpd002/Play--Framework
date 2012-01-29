@@ -26,29 +26,29 @@ CWindow::operator HWND() const
 	return m_hWnd;
 }
 
-void CWindow::StdMsgLoop(CWindow* pW)
+void CWindow::StdMsgLoop(CWindow& window)
 {
-	MSG m;
-	while(pW->IsWindow())
+	while(window.IsWindow())
 	{
+		MSG m;
 		GetMessage(&m, NULL, NULL, NULL);
 		TranslateMessage(&m);
 		DispatchMessage(&m);
 	}
 }
 
-void CWindow::DlgMsgLoop(CWindow& Window)
+void CWindow::DlgMsgLoop(CWindow& window)
 {
-    MSG Msg;
-    while(Window.IsWindow())
-    {
-        GetMessage(&Msg, NULL, NULL, NULL);
-        if(!IsDialogMessage(Window.m_hWnd, &Msg))
-        {
-            TranslateMessage(&Msg);
-            DispatchMessage(&Msg);
-        }
-    }
+	while(window.IsWindow())
+	{
+		MSG m;
+		GetMessage(&m, NULL, NULL, NULL);
+		if(!IsDialogMessage(window.m_hWnd, &m))
+		{
+			TranslateMessage(&m);
+			DispatchMessage(&m);
+		}
+	}
 }
 
 int CWindow::MessageBoxFormat(HWND hWnd, unsigned int nType, const TCHAR* sTitle, const TCHAR* sFormat, ...)
@@ -81,11 +81,7 @@ CWindow* CWindow::GetClassPtr(HWND hWnd)
 void CWindow::SubClass()
 {
 	SetClassPtr();
-#pragma warning(push)
-#pragma warning(disable : 4311)
-#pragma warning(disable : 4312)
-	m_pBaseWndProc = (WNDPROC)SetWindowLongPtr(m_hWnd, GWLP_WNDPROC, (LONG)SubClassWndProc);
-#pragma warning(pop)
+	m_pBaseWndProc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(m_hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(SubClassWndProc)));
 }
 
 long CWindow::CallBaseWndProc(unsigned int uiMsg, WPARAM wParam, LPARAM lParam)
@@ -129,7 +125,7 @@ WNDCLASSEX CWindow::MakeWndClass(const TCHAR* className)
 void CWindow::Create(unsigned long nStyleEx, const TCHAR* sClass, const TCHAR* sWindow, unsigned long nStyle, const RECT* pR, HWND hParent, void* pParam)
 {
 	m_hWnd = CreateWindowEx(nStyleEx, sClass, sWindow, nStyle, pR->left, pR->top, (pR->right - pR->left), (pR->bottom - pR->top), hParent, NULL, GetModuleHandle(NULL), pParam);
-    assert(m_hWnd != NULL);
+	assert(m_hWnd != NULL);
 }
 
 bool CWindow::IsWindow()
@@ -297,6 +293,7 @@ void CWindow::SetRedraw(bool nRedrawAllowed)
 {
 	SendMessage(m_hWnd, WM_SETREDRAW, (nRedrawAllowed) ? TRUE : FALSE, 0);
 }
+
 CScrollBar CWindow::GetVerticalScrollBar()
 {
     return CScrollBar(m_hWnd, SB_VERT);
