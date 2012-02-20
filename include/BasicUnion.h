@@ -2,12 +2,11 @@
 #define _BASICUNION_H_
 
 #include "Types.h"
-#include <boost/static_assert.hpp>
 
 template <typename FullType, typename HalfType>
 struct basic_union
 {
-	BOOST_STATIC_ASSERT(sizeof(FullType) == (2 * sizeof(HalfType)));
+	static_assert(sizeof(FullType) == (2 * sizeof(HalfType)), "Full type size isn't twice of half type size.");
 
 	basic_union() {}
 	basic_union(const FullType& f) : f(f) {}
