@@ -8,7 +8,7 @@
 namespace Framework
 {
     class CGridLayout;
-    typedef std::tr1::shared_ptr<CGridLayout> GridLayoutPtr;
+    typedef std::shared_ptr<CGridLayout> GridLayoutPtr;
 
     class CGridLayout : public CLayoutObject
     {

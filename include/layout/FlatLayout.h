@@ -32,7 +32,7 @@ namespace Framework
 
     };
 
-    typedef std::tr1::shared_ptr<CFlatLayout> FlatLayoutPtr;
+    typedef std::shared_ptr<CFlatLayout> FlatLayoutPtr;
 }
 
 #endif

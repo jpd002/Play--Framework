@@ -1,6 +1,7 @@
 #include "zip/ZipStoreStream.h"
 #include <zlib.h>
 #include <stdexcept>
+#include <algorithm>
 
 using namespace Framework;
 

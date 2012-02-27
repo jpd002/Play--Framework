@@ -9,7 +9,7 @@ namespace Framework
 {
 	class CLayoutBaseItem;
 
-    class CLayoutObject : public std::tr1::enable_shared_from_this<CLayoutObject>
+    class CLayoutObject : public std::enable_shared_from_this<CLayoutObject>
 	{
 	public:
 								CLayoutObject(unsigned int, unsigned int);
@@ -50,7 +50,7 @@ namespace Framework
 		unsigned int			m_nVerticalStretch;
 	};
 
-    typedef std::tr1::shared_ptr<CLayoutObject> LayoutObjectPtr;
+    typedef std::shared_ptr<CLayoutObject> LayoutObjectPtr;
 };
 
 #endif

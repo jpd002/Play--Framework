@@ -15,7 +15,7 @@ namespace Framework
     public:
         typedef std::map<std::string, Zip::ZIPDIRFILEHEADER> FileHeaderList;
 		typedef FileHeaderList::const_iterator FileHeaderIterator;
-		typedef std::tr1::shared_ptr<Framework::CStream> StreamPtr;
+		typedef std::shared_ptr<Framework::CStream> StreamPtr;
         typedef std::list<std::string> FileNameList;
 
 										CZipArchiveReader(Framework::CStream&);

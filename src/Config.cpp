@@ -8,8 +8,6 @@
 #include "xml/FilteringNodeIterator.h"
 
 using namespace Framework;
-using namespace std;
-using namespace boost;
 
 CConfig::CConfig(const PathType& path) :
 m_path(path)
@@ -27,9 +25,9 @@ CConfig::~CConfig()
     }
 }
 
-string CConfig::MakePreferenceName(const string& level0, const string& level1, const string& level2, const string& level3)
+std::string CConfig::MakePreferenceName(const std::string& level0, const std::string& level1, const std::string& level2, const std::string& level3)
 {
-    string result = level0;
+	std::string result = level0;
     if(level1.length())
     {
         result += "." + level1;
@@ -86,7 +84,7 @@ template <typename Type> Type* CConfig::FindPreference(const char* sName)
     CPreference* pRet = NULL;
 
     {
-        mutex::scoped_lock mutexLock(m_mutex);
+		boost::mutex::scoped_lock mutexLock(m_mutex);
         PreferenceMapType::iterator preferenceIterator(m_preferences.find(sName));
         if(preferenceIterator != m_preferences.end())
         {
@@ -279,7 +277,7 @@ void CConfig::Save()
 
 void CConfig::InsertPreference(CPreference* pPref)
 {
-    mutex::scoped_lock mutexLock(m_mutex);
+	boost::mutex::scoped_lock mutexLock(m_mutex);
     m_preferences[pPref->GetName()] = pPref;
 }
 
