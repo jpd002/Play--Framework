@@ -10,32 +10,30 @@
 
 namespace Framework
 {
-    class CZipArchiveReader
-    {
-    public:
-        typedef std::map<std::string, Zip::ZIPDIRFILEHEADER> FileHeaderList;
-		typedef FileHeaderList::const_iterator FileHeaderIterator;
+	class CZipArchiveReader
+	{
+	public:
+		typedef std::map<std::string, Zip::ZIPDIRFILEHEADER> FileHeaderList;
 		typedef std::shared_ptr<Framework::CStream> StreamPtr;
-        typedef std::list<std::string> FileNameList;
+		typedef std::list<std::string> FileNameList;
 
 										CZipArchiveReader(Framework::CStream&);
-        virtual							~CZipArchiveReader();
+		virtual							~CZipArchiveReader();
 		
-		FileHeaderIterator				GetFileHeadersBegin() const;
-		FileHeaderIterator				GetFileHeadersEnd() const;
+		const FileHeaderList&			GetFileHeaders() const;
 
-        StreamPtr						BeginReadFile(const char*);
+		StreamPtr						BeginReadFile(const char*);
 		const Zip::ZIPDIRFILEHEADER*	GetFileHeader(const char*) const;
-        FileNameList					GetFileNameList(const char*);
+		FileNameList					GetFileNameList(const char*);
 
-    private:
-        void							Read(Framework::CStream&);
-        void							EndReadFile(Framework::CStream*);
+	private:
+		void							Read(Framework::CStream&);
+		void							EndReadFile(Framework::CStream*);
 
-        Framework::CStream&				m_stream;
-        FileHeaderList					m_files;
-        bool							m_readingLock;
-    };
+		Framework::CStream&				m_stream;
+		FileHeaderList					m_files;
+		bool							m_readingLock;
+	};
 }
 
 #endif
