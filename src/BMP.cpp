@@ -9,7 +9,7 @@ void CBMP::WriteBitmap(const CBitmap& bitmap, CStream& stream)
 	unsigned int bitDepth = bitmap.GetBitsPerPixel();
 	if(bitDepth != 32 && bitDepth != 24)
 	{
-		throw std::runtime_error("Only 24 or 32-bits bitmaps supported.");	
+		throw std::runtime_error("Only 24 or 32-bits bitmaps supported.");
 	}
 
 	HEADER header;
