@@ -30,7 +30,7 @@ namespace Framework
 	class CBitmap
 	{
 	public:
-		typedef std::tr1::function< void (CBitmap&) > ConstructionFunctionType;
+		typedef std::function< void (CBitmap&) > ConstructionFunctionType;
 
 						CBitmap(unsigned int, unsigned int, unsigned int);
 						CBitmap(const ConstructionFunctionType&);

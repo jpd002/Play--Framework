@@ -15,7 +15,7 @@ namespace Framework
 		static void			WriteBitmap(const CBitmap&, CStream&);
 
 	private:
-		typedef std::tr1::function<void (CStream&, const CColor&)> PixelWriterFunction;
+		typedef std::function<void (CStream&, const CColor&)> PixelWriterFunction;
 
 #pragma pack(push, 1)
 		struct HEADER

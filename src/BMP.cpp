@@ -31,10 +31,8 @@ void CBMP::WriteBitmap(const CBitmap& bitmap, CStream& stream)
 
 	stream.Write(&header, sizeof(HEADER));
 
-	uint8* pixels = bitmap.GetPixels();
 	unsigned int width = bitmap.GetWidth();
 	unsigned int height = bitmap.GetHeight();
-	unsigned int pitch = bitmap.GetPitch();
 
 	PixelWriterFunction pixelWriter;
 	switch(bitDepth)

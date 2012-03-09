@@ -8,22 +8,22 @@ using namespace Framework;
 
 boost::filesystem::path PathUtils::GetPathFromCsidl(int csidl)
 {
-    wchar_t userPathString[MAX_PATH];
-    if(FAILED(SHGetFolderPathW(NULL, csidl, NULL, 0, userPathString)))
-    {
+	wchar_t userPathString[MAX_PATH];
+	if(FAILED(SHGetFolderPathW(NULL, csidl, NULL, 0, userPathString)))
+	{
 		throw std::runtime_error("Couldn't get path from csidl.");
-    }
+	}
 	return boost::filesystem::wpath(userPathString, boost::filesystem::native);
 }
 
 boost::filesystem::path PathUtils::GetRoamingDataPath()
 {
-    return GetPathFromCsidl(CSIDL_APPDATA);
+	return GetPathFromCsidl(CSIDL_APPDATA);
 }
 
 boost::filesystem::path PathUtils::GetPersonalDataPath()
 {
-    return GetPathFromCsidl(CSIDL_PERSONAL);
+	return GetPathFromCsidl(CSIDL_PERSONAL);
 }
 
 #endif
@@ -32,10 +32,10 @@ boost::filesystem::path PathUtils::GetPersonalDataPath()
 
 #include <pwd.h>
 
-filesystem::path PathUtils::GetHomePath()
+boost::filesystem::path PathUtils::GetHomePath()
 {
 	passwd* userInfo = getpwuid(getuid());
-    return filesystem::path(userInfo->pw_dir);
+	return boost::filesystem::path(userInfo->pw_dir);
 }
 
 #endif

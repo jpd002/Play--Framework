@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <stdexcept>
+#include <string.h>
 #include "PtrMacro.h"
 #include "Bitmap.h"
 
