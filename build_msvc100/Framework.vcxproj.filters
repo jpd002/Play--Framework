@@ -17,6 +17,12 @@
     <Filter Include="Source Files\zip">
       <UniqueIdentifier>{5f6d59aa-f586-4a0b-ac2a-f997802492fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\mpeg2">
+      <UniqueIdentifier>{163e56d0-07d5-4be9-96fe-c3e99a5b49cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\idct">
+      <UniqueIdentifier>{aeb1e385-19b0-42b7-9383-177edd9a16bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Bitmap.cpp">
@@ -261,6 +267,54 @@
     </ClCompile>
     <ClCompile Include="..\src\zip\ZipStoreStream.cpp">
       <Filter>Source Files\zip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mpeg2\CodedBlockPatternTable.cpp">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mpeg2\DcSizeChrominanceTable.cpp">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mpeg2\DcSizeLuminanceTable.cpp">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mpeg2\DctCoefficientTable.cpp">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mpeg2\DctCoefficientTable0.cpp">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mpeg2\DctCoefficientTable1.cpp">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mpeg2\InverseScanTable.cpp">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mpeg2\MacroblockAddressIncrementTable.cpp">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mpeg2\MacroblockTypeBTable.cpp">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mpeg2\MacroblockTypeITable.cpp">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mpeg2\MacroblockTypePTable.cpp">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mpeg2\MotionCodeTable.cpp">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mpeg2\QuantiserScaleTable.cpp">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mpeg2\VLCTable.cpp">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\idct\IEEE1180.cpp">
+      <Filter>Source Files\idct</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\idct\TrivialC.cpp">
+      <Filter>Source Files\idct</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -572,6 +626,57 @@
     </ClInclude>
     <ClInclude Include="..\include\zip\ZipStoreStream.h">
       <Filter>Source Files\zip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mpeg2\CodedBlockPatternTable.h">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mpeg2\DcSizeChrominanceTable.h">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mpeg2\DcSizeLuminanceTable.h">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mpeg2\DctCoefficientTable.h">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mpeg2\DctCoefficientTable0.h">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mpeg2\DctCoefficientTable1.h">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mpeg2\InverseScanTable.h">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mpeg2\MacroblockAddressIncrementTable.h">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mpeg2\MacroblockTypeBTable.h">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mpeg2\MacroblockTypeITable.h">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mpeg2\MacroblockTypePTable.h">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mpeg2\MotionCodeTable.h">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mpeg2\QuantiserScaleTable.h">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\mpeg2\VLCTable.h">
+      <Filter>Source Files\mpeg2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\idct\IEEE1180.h">
+      <Filter>Source Files\idct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\idct\Interface.h">
+      <Filter>Source Files\idct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\idct\TrivialC.h">
+      <Filter>Source Files\idct</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
