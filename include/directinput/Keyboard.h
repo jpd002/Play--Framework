@@ -3,16 +3,19 @@
 
 #include "Device.h"
 
-namespace DirectInput
+namespace Framework
 {
-    class CKeyboard : public CDevice
-    {
-    public:
-                                CKeyboard(LPDIRECTINPUTDEVICE8, HWND);
-        virtual                 ~CKeyboard();
+	namespace DirectInput
+	{
+		class CKeyboard : public CDevice
+		{
+		public:
+									CKeyboard(LPDIRECTINPUTDEVICE8, HWND);
+			virtual					~CKeyboard();
 
-        virtual void            ProcessEvents(const InputEventHandler&);
-    };
+			virtual void			ProcessEvents(const InputEventHandler&);
+		};
+	}
 }
 
 #endif

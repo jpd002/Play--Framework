@@ -4,24 +4,27 @@
 #include "DirectInput.h"
 #include "Device.h"
 
-namespace DirectInput
+namespace Framework
 {
-    class CJoystick : public CDevice
-    {
-    public:
-                                CJoystick(LPDIRECTINPUTDEVICE8, HWND);
-        virtual                 ~CJoystick();
+	namespace DirectInput
+	{
+		class CJoystick : public CDevice
+		{
+		public:
+									CJoystick(LPDIRECTINPUTDEVICE8, HWND);
+			virtual					~CJoystick();
 
-        int                     GetButtonCount() const;
-        virtual void            ProcessEvents(const InputEventHandler&);
+			int						GetButtonCount() const;
+			virtual void			ProcessEvents(const InputEventHandler&);
 
-    private:
-        static BOOL CALLBACK    EnumObjectsCallback(LPCDIDEVICEOBJECTINSTANCE, LPVOID);
-        BOOL                    EnumObjectsCallbackImpl(LPCDIDEVICEOBJECTINSTANCE);
+		private:
+			static BOOL CALLBACK	EnumObjectsCallback(LPCDIDEVICEOBJECTINSTANCE, LPVOID);
+			BOOL					EnumObjectsCallbackImpl(LPCDIDEVICEOBJECTINSTANCE);
 
-        GUID                    m_deviceGuid;
-        int                     m_buttonCount;
-    };
+			GUID					m_deviceGuid;
+			int						m_buttonCount;
+		};
+	}
 }
 
 #endif
