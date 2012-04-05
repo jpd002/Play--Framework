@@ -6,21 +6,54 @@
 using namespace Framework::DirectInput;
 
 CManager::CManager()
+: m_updateThreadHandle(NULL)
+, m_updateThreadOver(false)
+, m_nextInputEventHandlerId(1)
 {
 	if(FAILED(DirectInput8Create(GetModuleHandle(NULL), DIRECTINPUT_VERSION, IID_IDirectInput8, reinterpret_cast<void**>(&m_directInput), NULL)))
 	{
 		throw std::runtime_error("Couldn't create DirectInput8");
 	}
-	m_directInput->EnumDevices(DI8DEVCLASS_GAMECTRL, EnumDevicesCallback, this, DIEDFL_ATTACHEDONLY);
+	m_directInput->EnumDevices(DI8DEVCLASS_GAMECTRL, &CManager::EnumDevicesCallback, this, DIEDFL_ATTACHEDONLY);
+	{
+		DWORD threadId = 0;
+		InitializeCriticalSection(&m_updateMutex);
+		m_updateThreadHandle = CreateThread(NULL, NULL, &CManager::UpdateThreadProcStub, this, NULL, &threadId);
+	}
 }
 
 CManager::~CManager()
 {
+	m_updateThreadOver = true;
+	WaitForSingleObject(m_updateThreadHandle, INFINITE);
+	DeleteCriticalSection(&m_updateMutex);
 	m_devices.clear();
 	if(m_directInput != NULL)
 	{
 		m_directInput->Release();
 	}
+}
+
+uint32 CManager::RegisterInputEventHandler(const InputEventHandler& inputEventHandler)
+{
+	uint32 eventHandlerId = m_nextInputEventHandlerId++;
+	EnterCriticalSection(&m_updateMutex);
+	{
+		m_inputEventHandlers[eventHandlerId] = inputEventHandler;
+	}
+	LeaveCriticalSection(&m_updateMutex);
+	return eventHandlerId;
+}
+
+void CManager::UnregisterInputEventHandler(uint32 eventHandlerId)
+{
+	EnterCriticalSection(&m_updateMutex);
+	{
+		auto inputEventHandlerIterator = m_inputEventHandlers.find(eventHandlerId);
+		assert(inputEventHandlerIterator != std::end(m_inputEventHandlers));
+		m_inputEventHandlers.erase(inputEventHandlerIterator);
+	}
+	LeaveCriticalSection(&m_updateMutex);
 }
 
 void CManager::CreateKeyboard(HWND window)
@@ -30,7 +63,11 @@ void CManager::CreateKeyboard(HWND window)
 	{
 		throw std::runtime_error("Couldn't create device.");
 	}
-	m_devices[GUID_SysKeyboard] = DevicePtr(new CKeyboard(device, window));
+	EnterCriticalSection(&m_updateMutex);
+	{
+		m_devices[GUID_SysKeyboard] = DevicePtr(new CKeyboard(device, window));
+	}
+	LeaveCriticalSection(&m_updateMutex);
 }
 
 void CManager::CreateJoysticks(HWND window)
@@ -44,7 +81,11 @@ void CManager::CreateJoysticks(HWND window)
 		{
 			continue;
 		}
-		m_devices[deviceGuid] = DevicePtr(new CJoystick(device, window));
+		EnterCriticalSection(&m_updateMutex);
+		{
+			m_devices[deviceGuid] = DevicePtr(new CJoystick(device, window));
+		}
+		LeaveCriticalSection(&m_updateMutex);
 	}
 }
 
@@ -66,16 +107,6 @@ bool CManager::GetDeviceObjectInfo(const GUID& deviceId, uint32 id, DIDEVICEOBJE
 	return device->GetObjectInfo(id, objectInfo);
 }
 
-void CManager::ProcessEvents(const CDevice::InputEventHandler& eventHandler)
-{
-	for(auto deviceIterator(std::begin(m_devices));
-		deviceIterator != std::end(m_devices); deviceIterator++)
-	{
-		auto& device = deviceIterator->second;
-		device->ProcessEvents(eventHandler);
-	}
-}
-
 BOOL CALLBACK CManager::EnumDevicesCallback(LPCDIDEVICEINSTANCE lpddi, LPVOID pvRef)
 {
 	return static_cast<CManager*>(pvRef)->EnumDevicesCallbackImpl(lpddi);
@@ -85,4 +116,38 @@ BOOL CManager::EnumDevicesCallbackImpl(LPCDIDEVICEINSTANCE lpddi)
 {
 	m_joystickInstances.push_back(lpddi->guidInstance);
 	return DIENUM_CONTINUE;
+}
+
+void CManager::CallInputEventHandlers(const GUID& device, uint32 id, uint32 value)
+{
+	for(auto inputEventHandlerIterator(std::begin(m_inputEventHandlers));
+		inputEventHandlerIterator != std::end(m_inputEventHandlers); inputEventHandlerIterator++)
+	{
+		inputEventHandlerIterator->second(device, id, value);
+	}
+}
+
+DWORD CManager::UpdateThreadProc()
+{
+	auto inputEventHandler = std::bind(&CManager::CallInputEventHandlers, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+	while(!m_updateThreadOver)
+	{
+		EnterCriticalSection(&m_updateMutex);
+		{
+			for(auto deviceIterator(std::begin(m_devices));
+				deviceIterator != std::end(m_devices); deviceIterator++)
+			{
+				auto& device = deviceIterator->second;
+				device->ProcessEvents(inputEventHandler);
+			}
+		}
+		LeaveCriticalSection(&m_updateMutex);
+		Sleep(16);
+	}
+	return 0;
+}
+
+DWORD WINAPI CManager::UpdateThreadProcStub(void* param)
+{
+	return reinterpret_cast<CManager*>(param)->UpdateThreadProc();
 }

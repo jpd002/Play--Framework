@@ -1,6 +1,7 @@
 #include "directinput/Keyboard.h"
+#include <assert.h>
 
-#define DIBUFFERSIZE	(10)
+#define DIBUFFERSIZE	(0x80)
 
 using namespace Framework::DirectInput;
 
@@ -35,6 +36,7 @@ void CKeyboard::ProcessEvents(const InputEventHandler& eventHandler)
 	DIDEVICEOBJECTDATA deviceData[DIBUFFERSIZE];
 	DWORD elementCount = DIBUFFERSIZE;
 	HRESULT result = m_device->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), deviceData, &elementCount, 0);
+	assert(result != DI_BUFFEROVERFLOW);
 	if(FAILED(result))
 	{
 		m_device->Acquire();
