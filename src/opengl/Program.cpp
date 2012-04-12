@@ -29,7 +29,7 @@ void CProgram::DetachShader(unsigned int nShader)
 
 bool CProgram::Link()
 {
-	GLint nStatus;
+	GLint nStatus = GL_FALSE;
 
 	glLinkProgram(m_nHandle);
 	glGetProgramiv(m_nHandle, GL_LINK_STATUS, &nStatus);
@@ -39,21 +39,18 @@ bool CProgram::Link()
 
 void CProgram::SetUniformf(const char* sName, float nV1, float nV2)
 {
-	GLuint nUniform;
-	nUniform = glGetUniformLocation(m_nHandle, sName);
+	GLuint nUniform = glGetUniformLocation(m_nHandle, sName);
 	glUniform2f(nUniform, nV1, nV2);
 }
 
 void CProgram::SetUniformi(const char* sName, int nV1)
 {
-	GLuint nUniform;
-	nUniform = glGetUniformLocation(m_nHandle, sName);
+	GLuint nUniform = glGetUniformLocation(m_nHandle, sName);
 	glUniform1i(nUniform, nV1);
 }
 
 void CProgram::SetUniformi(const char* sName, int nV1, int nV2)
 {
-	GLuint nUniform;
-	nUniform = glGetUniformLocation(m_nHandle, sName);
+	GLuint nUniform = glGetUniformLocation(m_nHandle, sName);
 	glUniform2i(nUniform, nV1, nV2);
 }

@@ -19,7 +19,7 @@ CShader::operator unsigned int()
 
 void CShader::SetSource(const char* sSource, size_t nLength)
 {
-	GLint* pSize;
+	GLint* pSize(NULL);
 
 	if(nLength != 0)
 	{
@@ -35,7 +35,7 @@ void CShader::SetSource(const char* sSource, size_t nLength)
 
 bool CShader::Compile()
 {
-	GLint nStatus;
+	GLint nStatus = GL_FALSE;
 
 	glCompileShader(m_nHandle);
 	glGetShaderiv(m_nHandle, GL_COMPILE_STATUS, &nStatus);
