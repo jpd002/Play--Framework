@@ -5,23 +5,23 @@
 
 namespace Framework
 {
-    namespace Win32
-    {
-        class CModalWindow : public virtual CWindow
-        {
-        public:
-					        CModalWindow(HWND);
-	        virtual			~CModalWindow();
-	        void			DoModal();
+	namespace Win32
+	{
+		class CModalWindow : public virtual CWindow
+		{
+		public:
+							CModalWindow(HWND);
+			virtual			~CModalWindow();
+			void			DoModal();
 
-        protected:
+		protected:
 			virtual void	OnEscPressed();
 
-	        unsigned int	Destroy();
-	        long			OnSysCommand(unsigned int, LPARAM);
-	        void			UnModalWindow();
-        };
-    }
+			unsigned int	Destroy();
+			long			OnSysCommand(unsigned int, LPARAM);
+			void			UnModalWindow();
+		};
+	}
 }
 
 #endif

@@ -4,7 +4,6 @@
 
 using namespace Framework;
 using namespace Framework::Win32;
-using namespace std;
 
 #define PROPNAME		_T("CWindow::this")
 
@@ -97,12 +96,12 @@ unsigned int CWindow::DoesWindowClassExist(const TCHAR* sClass)
 
 bool CWindow::IsNotifySource(const CWindow* pWindow, const NMHDR* pHdr)
 {
-    return (pWindow != NULL) && (pWindow->m_hWnd == pHdr->hwndFrom);
+	return (pWindow != NULL) && (pWindow->m_hWnd == pHdr->hwndFrom);
 }
 
 bool CWindow::IsCommandSource(const CWindow* pWindow, HWND hWndFrom)
 {
-    return (pWindow != NULL) && (pWindow->m_hWnd == hWndFrom);
+	return (pWindow != NULL) && (pWindow->m_hWnd == hWndFrom);
 }
 
 WNDCLASSEX CWindow::MakeWndClass(const TCHAR* className)
@@ -156,13 +155,13 @@ unsigned int CWindow::Enable(unsigned int nEnable)
 	return EnableWindow(m_hWnd, nEnable);
 }
 
-tstring CWindow::GetText()
+std::tstring CWindow::GetText()
 {
-    TCHAR* sBuffer;
-    unsigned int nLength(GetTextLength() + 1);
-    sBuffer = reinterpret_cast<TCHAR*>(_alloca(sizeof(TCHAR) * nLength));
-    GetText(sBuffer, nLength);
-    return tstring(sBuffer);
+	TCHAR* sBuffer;
+	unsigned int nLength(GetTextLength() + 1);
+	sBuffer = reinterpret_cast<TCHAR*>(_alloca(sizeof(TCHAR) * nLength));
+	GetText(sBuffer, nLength);
+	return std::tstring(sBuffer);
 }
 
 int CWindow::GetText(TCHAR* sText, int nMax)
@@ -227,9 +226,9 @@ void CWindow::GetWindowRect(RECT* pR)
 
 RECT CWindow::GetClientRect()
 {
-    RECT Rect;
-    ::GetClientRect(m_hWnd, &Rect);
-    return Rect;
+	RECT Rect;
+	::GetClientRect(m_hWnd, &Rect);
+	return Rect;
 }
 
 void CWindow::Center(HWND hParent)
@@ -296,12 +295,12 @@ void CWindow::SetRedraw(bool nRedrawAllowed)
 
 CScrollBar CWindow::GetVerticalScrollBar()
 {
-    return CScrollBar(m_hWnd, SB_VERT);
+	return CScrollBar(m_hWnd, SB_VERT);
 }
 
 CScrollBar CWindow::GetHorizontalScrollBar()
 {
-    return CScrollBar(m_hWnd, SB_HORZ);
+	return CScrollBar(m_hWnd, SB_HORZ);
 }
 
 ///////////////////////////////////////////////////////////
@@ -367,10 +366,10 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 		if(!pThis->OnPaint()) return FALSE;
 		break;
 	case WM_ERASEBKGND:
-        {
-            long nRet = pThis->OnEraseBkgnd();
-            if(nRet != 0) return nRet;
-        }
+		{
+			long nRet = pThis->OnEraseBkgnd();
+			if(nRet != 0) return nRet;
+		}
 		break;
 	case WM_KEYDOWN:
 		if(!pThis->OnKeyDown((unsigned int)wParam)) return FALSE;
@@ -448,10 +447,10 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 	case WM_DRAWITEM:
 		if(pThis->OnDrawItem((unsigned int)wParam, (LPDRAWITEMSTRUCT)lParam)) return TRUE;
 		break;
-    case WM_COPY:
-        pThis->OnCopy();
-        return TRUE;
-        break;
+	case WM_COPY:
+		pThis->OnCopy();
+		return TRUE;
+		break;
 	case WM_NCCALCSIZE:
 		if(!pThis->OnNcCalcSize(wParam, lParam)) return FALSE;
 		break;
@@ -636,7 +635,7 @@ long CWindow::OnDrawItem(unsigned int nId, LPDRAWITEMSTRUCT pDrawItem)
 
 long CWindow::OnCopy()
 {
-    return TRUE;
+	return TRUE;
 }
 
 long CWindow::OnNcCalcSize(WPARAM, LPARAM)
