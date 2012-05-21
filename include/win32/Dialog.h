@@ -18,6 +18,11 @@ namespace Framework
 
 			HWND					GetItem(int);
 
+			void					DoModal();
+
+		protected:
+			unsigned int			Destroy();
+
 		private:
 			struct SZ_OR_ORD
 			{
@@ -62,6 +67,8 @@ namespace Framework
 
 			static DIALOGTEMPLATE	ReadDialogTemplate(CStream&);
 			static void				WriteDialogTemplate(DIALOGTEMPLATE&, CStream&);
+
+			bool					m_isModal;
 		};
 	};
 }

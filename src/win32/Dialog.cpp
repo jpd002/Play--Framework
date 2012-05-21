@@ -8,6 +8,7 @@ using namespace Framework;
 using namespace Framework::Win32;
 
 CDialog::CDialog(const TCHAR* resourceName, HWND parentWnd)
+: m_isModal(false)
 {
 	DIALOGTEMPLATE dialogTemplate;
 
@@ -44,6 +45,28 @@ CDialog::~CDialog()
 
 }
 
+void CDialog::DoModal()
+{
+	m_isModal = true;
+	HWND parentWnd = GetParent();
+	EnableWindow(parentWnd, FALSE);
+	Center(parentWnd);
+	Show(SW_SHOW);
+
+	while(IsWindow())
+	{
+		MSG m;
+		GetMessage(&m, NULL, NULL, NULL);
+		if(!IsDialogMessage(m_hWnd, &m))
+		{
+			TranslateMessage(&m);
+			DispatchMessage(&m);
+		}
+	}
+
+	m_isModal = false;
+}
+
 HWND CDialog::GetItem(int itemId)
 {
 	return GetDlgItem(m_hWnd, itemId);
@@ -70,12 +93,28 @@ INT_PTR WINAPI CDialog::DialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 	case WM_COMMAND:
 		if(!pThis->OnCommand(LOWORD(wParam), HIWORD(wParam), (HWND)lParam)) return FALSE;
 		break;
+	case WM_SYSCOMMAND:
+		if(!pThis->OnSysCommand(static_cast<unsigned int>(wParam), lParam)) return FALSE;
+		break;
 	case WM_NOTIFY:
 		return pThis->OnNotify(wParam, reinterpret_cast<NMHDR*>(lParam));
 		break;
 	}
 	if(!pThis->OnWndProc(msg, wParam, lParam)) return FALSE;
 	return FALSE;
+}
+
+unsigned int CDialog::Destroy()
+{
+	if(m_isModal)
+	{
+		if(GetParent() != NULL)
+		{
+			EnableWindow(GetParent(), TRUE);
+			SetForegroundWindow(GetParent());
+		}
+	}
+	return CWindow::Destroy();
 }
 
 std::wstring CDialog::ReadString(Framework::CStream& stream)
