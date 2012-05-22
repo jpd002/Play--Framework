@@ -6,9 +6,10 @@ using namespace Framework;
 using namespace Framework::Xml;
 
 CWriter::CWriter(CStream* pStream, CNode* pNode)
+: m_pStream(pStream)
+, m_pNode(pNode)
 {
-	m_pStream	= pStream;
-	m_pNode		= pNode;
+
 }
 
 CWriter::~CWriter()
@@ -18,9 +19,7 @@ CWriter::~CWriter()
 
 void CWriter::WriteDocument(CStream* pStream, CNode* pNode)
 {
-	CWriter* pWriter;
-	
-	pWriter = new CWriter(pStream, pNode);
+	CWriter* pWriter = new CWriter(pStream, pNode);
 	pWriter->WriteNode(0);
 	delete pWriter;
 }
