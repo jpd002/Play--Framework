@@ -6,41 +6,42 @@
 #include "xml/Parser.h"
 #include "xml/Utils.h"
 #include "xml/FilteringNodeIterator.h"
+#include "StdStreamUtils.h"
 
 using namespace Framework;
 
-CConfig::CConfig(const PathType& path) :
-m_path(path)
+CConfig::CConfig(const PathType& path)
+: m_path(path)
 {
 	Load();
 }
 
 CConfig::~CConfig()
 {
-    Save();
-    for(PreferenceMapType::iterator preferenceIterator(m_preferences.begin());
-        preferenceIterator != m_preferences.end(); preferenceIterator++)
-    {
-        delete preferenceIterator->second;
-    }
+	Save();
+	for(auto preferenceIterator(std::begin(m_preferences));
+		preferenceIterator != std::end(m_preferences); preferenceIterator++)
+	{
+		delete preferenceIterator->second;
+	}
 }
 
 std::string CConfig::MakePreferenceName(const std::string& level0, const std::string& level1, const std::string& level2, const std::string& level3)
 {
 	std::string result = level0;
-    if(level1.length())
-    {
-        result += "." + level1;
-        if(level2.length())
-        {
-            result += "." + level2;
-            if(level3.length())
-            {
-                result += "." + level3;
-            }
-        }
-    }
-    return result;
+	if(level1.length())
+	{
+		result += "." + level1;
+		if(level2.length())
+		{
+			result += "." + level2;
+			if(level3.length())
+			{
+				result += "." + level3;
+			}
+		}
+	}
+	return result;
 }
 
 namespace Framework {
@@ -81,21 +82,21 @@ template <> CConfig::CPreferenceString* CConfig::CastPreference<CConfig::CPrefer
 
 template <typename Type> Type* CConfig::FindPreference(const char* sName)
 {
-    CPreference* pRet = NULL;
+	CPreference* pRet = NULL;
 
-    {
+	{
 		boost::mutex::scoped_lock mutexLock(m_mutex);
-        PreferenceMapType::iterator preferenceIterator(m_preferences.find(sName));
-        if(preferenceIterator != m_preferences.end())
-        {
-            pRet = preferenceIterator->second;
-        }
-    }
+		PreferenceMapType::iterator preferenceIterator(m_preferences.find(sName));
+		if(preferenceIterator != m_preferences.end())
+		{
+			pRet = preferenceIterator->second;
+		}
+	}
 
-    if(pRet == NULL) return NULL;
+	if(pRet == NULL) return NULL;
 
-    Type* pPrefCast = CastPreference<Type>(pRet);
-    return pPrefCast;
+	Type* pPrefCast = CastPreference<Type>(pRet);
+	return pPrefCast;
 }
 
 void CConfig::RegisterPreferenceInteger(const char* sName, int nValue)
@@ -178,107 +179,107 @@ bool CConfig::SetPreferenceString(const char* sName, const char* sValue)
 
 CConfig::PathType CConfig::GetConfigPath() const
 {
-    return m_path;
+	return m_path;
 }
 
 void CConfig::Load()
 {
-    Xml::CNode* pDocument;
+	Xml::CNode* pDocument(nullptr);
 
-    try
-    {
-        CStdStream configFile(m_path.wstring().c_str(), L"rb");
-        pDocument = Xml::CParser::ParseDocument(&configFile);
-    }
-    catch(...)
-    {
-        return;
-    }
+	try
+	{
+		boost::scoped_ptr<CStdStream> configFile(CreateInputStdStream(m_path.native()));
+		pDocument = Xml::CParser::ParseDocument(configFile.get());
+	}
+	catch(...)
+	{
+		return;
+	}
 
-    Xml::CNode* pConfig = pDocument->Select("Config");
-    if(pConfig == NULL)
-    {
-        delete pDocument;
-        return;
-    }
+	Xml::CNode* pConfig = pDocument->Select("Config");
+	if(pConfig == NULL)
+	{
+		delete pDocument;
+		return;
+	}
 
-    for(Xml::CFilteringNodeIterator itNode(pConfig, "Preference"); !itNode.IsEnd(); itNode++)
-    {
-        Xml::CNode* pPref = (*itNode);
+	for(Xml::CFilteringNodeIterator itNode(pConfig, "Preference"); !itNode.IsEnd(); itNode++)
+	{
+		Xml::CNode* pPref = (*itNode);
 
-        const char* sType = pPref->GetAttribute("Type");
-        const char* sName = pPref->GetAttribute("Name");
+		const char* sType = pPref->GetAttribute("Type");
+		const char* sName = pPref->GetAttribute("Name");
 
-        if(sType == NULL) continue;
-        if(sName == NULL) continue;
+		if(sType == NULL) continue;
+		if(sName == NULL) continue;
 
-        if(!strcmp(sType, "integer"))
-        {
-            int nValue;
-            if(Xml::GetAttributeIntValue(pPref, "Value", &nValue))
-            {
-                RegisterPreferenceInteger(sName, nValue);
-            }
-        }
-        else if(!strcmp(sType, "boolean"))
-        {
-            bool nValue;
-            if(Xml::GetAttributeBoolValue(pPref, "Value", &nValue))
-            {
-	            RegisterPreferenceBoolean(sName, nValue);
-            }
-        }
-        else if(!strcmp(sType, "string"))
-        {
-            const char* sValue;
-            if(Xml::GetAttributeStringValue(pPref, "Value", &sValue))
-            {
-	            RegisterPreferenceString(sName, sValue);
-            }
-        }
-    }
+		if(!strcmp(sType, "integer"))
+		{
+			int nValue;
+			if(Xml::GetAttributeIntValue(pPref, "Value", &nValue))
+			{
+				RegisterPreferenceInteger(sName, nValue);
+			}
+		}
+		else if(!strcmp(sType, "boolean"))
+		{
+			bool nValue;
+			if(Xml::GetAttributeBoolValue(pPref, "Value", &nValue))
+			{
+				RegisterPreferenceBoolean(sName, nValue);
+			}
+		}
+		else if(!strcmp(sType, "string"))
+		{
+			const char* sValue;
+			if(Xml::GetAttributeStringValue(pPref, "Value", &sValue))
+			{
+				RegisterPreferenceString(sName, sValue);
+			}
+		}
+	}
 
-    delete pDocument;
+	delete pDocument;
 }
 
 void CConfig::Save()
 {
-    try
-    {
-        CStdStream stream(m_path.wstring().c_str(), L"wb");
+	try
+	{
+		boost::scoped_ptr<CStdStream> stream(CreateOutputStdStream(m_path.native()));		
 
-        Xml::CNode*	pConfig = new Xml::CNode("Config", true);
+		Xml::CNode*	pConfig = new Xml::CNode("Config", true);
 
-        for(PreferenceMapType::const_iterator preferenceIterator(m_preferences.begin());
-            preferenceIterator != m_preferences.end(); preferenceIterator++)
-        {
-            CPreference* pPref = (preferenceIterator->second);
+		for(PreferenceMapType::const_iterator preferenceIterator(m_preferences.begin());
+			preferenceIterator != m_preferences.end(); preferenceIterator++)
+		{
+			CPreference* pPref = (preferenceIterator->second);
 
-            Xml::CNode* pPrefNode = new Xml::CNode("Preference", true);
-            pPref->Serialize(pPrefNode);
+			Xml::CNode* pPrefNode = new Xml::CNode("Preference", true);
+			pPref->Serialize(pPrefNode);
 
-            pConfig->InsertNode(pPrefNode);
-        }
+			pConfig->InsertNode(pPrefNode);
+		}
 
-        {
-            Xml::CNode* pDocument = new Xml::CNode;
-            pDocument->InsertNode(pConfig);
+		{
+			Xml::CNode* pDocument = new Xml::CNode;
+			pDocument->InsertNode(pConfig);
 
-            Xml::CWriter::WriteDocument(&stream, pDocument);
+			Xml::CWriter::WriteDocument(stream.get(), pDocument);
 
-            delete pDocument;
-        }
-    }
-    catch(...)
-    {
-        return;
-    }
+			delete pDocument;
+		}
+	}
+	catch(...)
+	{
+		return;
+	}
 }
 
 void CConfig::InsertPreference(CPreference* pPref)
 {
 	boost::mutex::scoped_lock mutexLock(m_mutex);
-    m_preferences[pPref->GetName()] = pPref;
+	m_preferences[pPref->GetName()] = pPref;
 }
 
 /////////////////////////////////////////////////////////
