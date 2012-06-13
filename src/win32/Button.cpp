@@ -15,6 +15,11 @@ CButton::CButton(const TCHAR* sCaption, HWND hParent, RECT* pR, unsigned long nS
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 
+bool CButton::GetCheck()
+{
+	return (SendMessage(m_hWnd, BM_GETCHECK, 0, NULL) == BST_CHECKED);
+}
+
 void CButton::SetCheck(bool bChecked)
 {
 	SendMessage(m_hWnd, BM_SETCHECK, bChecked ? BST_CHECKED : BST_UNCHECKED, NULL);

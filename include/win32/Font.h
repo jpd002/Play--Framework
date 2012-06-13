@@ -5,10 +5,10 @@
 
 namespace Framework
 {
-    namespace Win32
-    {
-        HFONT CreateFont(const TCHAR*, unsigned int);
-    }
+	namespace Win32
+	{
+		HFONT CreateFont(const TCHAR*, unsigned int);
+	}
 }
 
 #endif

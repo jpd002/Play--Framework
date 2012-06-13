@@ -14,10 +14,10 @@ HFONT CDefaultFonts::GetMessageFont()
 void CDefaultFonts::GetNonClientMetrics(NONCLIENTMETRICS& metrics)
 {
 	memset(&metrics, 0, sizeof(NONCLIENTMETRICS));
-    //SDK 6.0 is broken... so we need to do that to make it work on previous Windows versions
-    metrics.cbSize = sizeof(NONCLIENTMETRICS) - sizeof(metrics.iPaddedBorderWidth);
+	//SDK 6.0 is broken... so we need to do that to make it work on previous Windows versions
+	metrics.cbSize = sizeof(NONCLIENTMETRICS) - sizeof(metrics.iPaddedBorderWidth);
 
-    assert(sizeof(NONCLIENTMETRICS) >= metrics.cbSize);
+	assert(sizeof(NONCLIENTMETRICS) >= metrics.cbSize);
 
 	SystemParametersInfo(SPI_GETNONCLIENTMETRICS, 0, &metrics, 0);
 }
