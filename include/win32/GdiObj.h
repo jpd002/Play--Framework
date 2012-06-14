@@ -10,28 +10,70 @@ namespace Framework
 		template <typename Type> class CGdiObj
 		{
 		public:
-			CGdiObj(Type nHandle)
+			CGdiObj(Type handle = NULL)
+				: m_handle(handle)
 			{
-				m_nHandle = nHandle;
+
+			}
+
+			CGdiObj(const CGdiObj&& src)
+			{
+				m_handle = src.m_handle;
+				src.m_handle = NULL;
 			}
 
 			virtual ~CGdiObj()
 			{
-				DeleteObject(m_nHandle);
+				Release();
 			}
 
-			operator HGDIOBJ()
+			CGdiObj& operator =(CGdiObj&& src)
 			{
-				return m_nHandle;
+				if(&src != this)
+				{
+					Release();
+					m_handle = src.m_handle;
+					src.m_handle = NULL;
+				}
+				return (*this);
 			}
 
-			operator Type()
+			bool IsValid() const
 			{
-				return m_nHandle;
+				return m_handle != NULL;
+			}
+
+			operator HGDIOBJ() const
+			{
+				return m_handle;
+			}
+
+			operator Type() const
+			{
+				return m_handle;
 			}
 
 		private:
-			Type		m_nHandle;
+			CGdiObj(const CGdiObj&)
+			{
+
+			}
+
+			CGdiObj& operator =(const CGdiObj&)
+			{
+				
+			}
+
+			void Release()
+			{
+				if(m_handle)
+				{
+					DeleteObject(m_handle);
+					m_handle = NULL;
+				}
+			}
+
+			Type m_handle;
 		};
 
 		typedef CGdiObj<HFONT>		CFont;
