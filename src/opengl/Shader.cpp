@@ -1,18 +1,30 @@
 #include "opengl/Shader.h"
+#include <algorithm>
+#include <assert.h>
 
 using namespace Framework::OpenGl;
 
-CShader::CShader(unsigned int nType)
+CShader::CShader(GLenum nType)
+: m_nHandle(0)
 {
 	m_nHandle = glCreateShader(nType);
 }
 
-CShader::~CShader()
+CShader::CShader(CShader&& src)
+: m_nHandle(0)
 {
-	glDeleteShader(m_nHandle);
+	std::swap(src.m_nHandle, m_nHandle);
 }
 
-CShader::operator unsigned int()
+CShader::~CShader()
+{
+	if(m_nHandle != 0)
+	{
+		glDeleteShader(m_nHandle);
+	}
+}
+
+CShader::operator GLuint() const
 {
 	return m_nHandle;
 }
@@ -39,6 +51,16 @@ bool CShader::Compile()
 
 	glCompileShader(m_nHandle);
 	glGetShaderiv(m_nHandle, GL_COMPILE_STATUS, &nStatus);
+
+	if(nStatus == GL_FALSE)
+	{
+		GLint length = 0;
+		glGetShaderiv(m_nHandle, GL_INFO_LOG_LENGTH, &length);
+		char* error = reinterpret_cast<char*>(alloca(length + 1));
+		glGetShaderInfoLog(m_nHandle, length + 1, &length, error);
+		error[length] = 0;
+		assert(0);
+	}
 
 	return (nStatus == GL_TRUE);
 }

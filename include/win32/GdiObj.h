@@ -16,7 +16,7 @@ namespace Framework
 
 			}
 
-			CGdiObj(const CGdiObj&& src)
+			CGdiObj(CGdiObj&& src)
 			{
 				m_handle = src.m_handle;
 				src.m_handle = NULL;

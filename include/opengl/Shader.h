@@ -11,15 +11,21 @@ namespace Framework
 		class CShader
 		{
 		public:
-						CShader(unsigned int);
+			explicit	CShader(GLenum);
+						CShader(CShader&&);
 						~CShader();
 
-			operator	unsigned int();
+			CShader&	operator =(CShader&&);
+
+			operator	GLuint() const;
 
 			void		SetSource(const char*, size_t = 0);
 			bool		Compile();
 
 		private:
+						CShader(const CShader&) {}
+						CShader& operator =(const CShader&) {}
+
 			GLuint		m_nHandle;
 		};
 	}

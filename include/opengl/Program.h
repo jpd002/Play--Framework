@@ -2,6 +2,7 @@
 #define _PROGRAM_H_
 
 #include "OpenGlDef.h"
+#include <memory>
 
 namespace Framework
 {
@@ -13,18 +14,23 @@ namespace Framework
 							CProgram();
 							~CProgram();
 
-			operator		unsigned int();
+			operator		GLuint() const;
 			
-			void			AttachShader(unsigned int);
-			void			DetachShader(unsigned int);
+			void			AttachShader(GLuint);
+			void			DetachShader(GLuint);
 			bool			Link();
 			void			SetUniformf(const char*, float, float);
 			void			SetUniformi(const char*, int);
 			void			SetUniformi(const char*, int, int);
 
 		private:
+							CProgram(const CProgram&) {}
+							CProgram& operator =(const CProgram&) {}
+
 			GLuint			m_nHandle;
 		};
+
+		typedef std::shared_ptr<CProgram> ProgramPtr;
 	}
 }
 
