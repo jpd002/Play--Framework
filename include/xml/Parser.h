@@ -13,11 +13,10 @@ namespace Framework
 		class CParser
 		{
 		public:
-            static CNode*               ParseDocument(const char*);
-			static CNode*				ParseDocument(CStream*);
+			static CNode*				ParseDocument(CStream&);
 
 		private:
-										CParser(CStream*, CNode*);
+										CParser(CStream&, CNode*);
 										~CParser();
 
 			bool						Parse();
@@ -37,15 +36,15 @@ namespace Framework
 				STATE_COMMENT,
 			};
 
-			CStream*					m_pStream;
-			CNode*						m_pNode;
-			std::string					m_sText;
-			std::string					m_sAttributeName;
-			std::string					m_sAttributeValue;
-			std::list<AttributeType>	m_Attributes;
-			STATE						m_nState;
-			bool						m_nIsTagEnd;
-			bool						m_nTagSpace;
+			CStream&					m_stream;
+			CNode*						m_node;
+			std::string					m_text;
+			std::string					m_attributeName;
+			std::string					m_attributeValue;
+			std::list<AttributeType>	m_attributes;
+			STATE						m_state;
+			bool						m_isTagEnd;
+			bool						m_tagSpace;
 		};
 	
 	}

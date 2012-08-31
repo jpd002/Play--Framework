@@ -7,16 +7,15 @@
 
 using namespace Framework;
 using namespace Framework::Xml;
-using namespace std;
 
-CParser::CParser(CStream* pStream, CNode* pRoot)
+CParser::CParser(CStream& stream, CNode* root)
+: m_stream(stream)
+, m_node(root)
+, m_state(STATE_TEXT)
+, m_isTagEnd(false)
+, m_tagSpace(false)
 {
-	m_pStream = pStream;
-	m_pNode = pRoot;
-	m_sText = "";
-	m_nState = STATE_TEXT;
-	m_nIsTagEnd = false;
-	m_nTagSpace = false;
+
 }
 
 CParser::~CParser()
@@ -26,13 +25,13 @@ CParser::~CParser()
 
 bool CParser::Parse()
 {
-	char nValue;
-	bool nRet;
+	char nValue = 0;
+	m_stream.Read(&nValue, 1);
 
-	m_pStream->Read(&nValue, 1);
-	while(!m_pStream->IsEOF())
+	while(!m_stream.IsEOF())
 	{
-		switch(m_nState)
+		bool nRet = false;
+		switch(m_state)
 		{
 		case STATE_TEXT:
 			nRet = ProcessChar_Text(nValue);
@@ -54,7 +53,7 @@ bool CParser::Parse()
 		{
 			return false;
 		}
-		m_pStream->Read(&nValue, 1);
+		m_stream.Read(&nValue, 1);
 	}
 	return true;
 }
@@ -65,29 +64,26 @@ bool CParser::ProcessChar_Text(char nChar)
 	{
 		//Tag is starting
 
-		if(m_sText.size() != 0)
+		if(m_text.size() != 0)
 		{
-			m_pNode->InsertNode(new CNode(UnescapeText(m_sText).c_str(), false));
-			m_sText = "";
+			m_node->InsertNode(new CNode(UnescapeText(m_text).c_str(), false));
+			m_text = "";
 		}
 
-		m_nState = STATE_TAG;
-		m_nIsTagEnd = false;
-		m_nTagSpace = false;
+		m_state = STATE_TAG;
+		m_isTagEnd = false;
+		m_tagSpace = false;
 		return true;
 	}
-	m_sText += nChar;
+	m_text += nChar;
 	return true;
 }
 
 bool CParser::ProcessChar_Tag(char nChar)
 {
-	CNode* pChild;
-	bool nHasSameName;
-
-	if((nChar == '!') && (m_sText.size() == 0))
+	if((nChar == '!') && (m_text.size() == 0))
 	{
-		m_nState = STATE_COMMENT;
+		m_state = STATE_COMMENT;
 		return true;
 	}
 	if(nChar == '<')
@@ -98,55 +94,55 @@ bool CParser::ProcessChar_Tag(char nChar)
 	if(nChar == '/')
 	{
 		//This is an end tag
-		m_nIsTagEnd = true;
+		m_isTagEnd = true;
 		return true;
 	}
 	if(nChar == ' ' || nChar == '\t' || nChar == '\r' || nChar == '\n')
 	{
 		//Attributes follow
-		m_nState = STATE_ATTRIBUTE_NAME;
-		m_sAttributeName = "";
+		m_state = STATE_ATTRIBUTE_NAME;
+		m_attributeName = "";
 		return true;
 	}
 	if(nChar == '>')
 	{
-		if(m_sText[0] != '?')
+		if(m_text[0] != '?')
 		{
 			//See if the tag name matches the current node's name
-			nHasSameName = stricmp(m_sText.c_str(), m_pNode->GetText()) == 0;
+			bool nHasSameName = stricmp(m_text.c_str(), m_node->GetText()) == 0;
 
-			if(m_nIsTagEnd && nHasSameName)
+			if(m_isTagEnd && nHasSameName)
 			{
 				//Walk up the tree
-				m_pNode = m_pNode->GetParent();
+				m_node = m_node->GetParent();
 			}
 			else
 			{
 				//Create a new node
-				pChild = new CNode(m_sText.c_str(), true);
-				m_pNode->InsertNode(pChild);
+				CNode* pChild = new CNode(m_text.c_str(), true);
+				m_node->InsertNode(pChild);
 
 				//Copy attributes
-				while(m_Attributes.size() != 0)
+				while(m_attributes.size() != 0)
 				{
-					pChild->InsertAttribute(*m_Attributes.rbegin());
-					m_Attributes.pop_back();
+					pChild->InsertAttribute(*m_attributes.rbegin());
+					m_attributes.pop_back();
 				}
 
 				//Go down if it's not an singleton
-				if(!m_nIsTagEnd)
+				if(!m_isTagEnd)
 				{
-					m_pNode = pChild;
+					m_node = pChild;
 				}
 			}
 		}
 
-		m_sText = "";
-		m_nState = STATE_TEXT;
+		m_text = "";
+		m_state = STATE_TEXT;
 		return true;
 	}
 
-	m_sText += nChar;
+	m_text += nChar;
 	return true;
 }
 
@@ -158,21 +154,21 @@ bool CParser::ProcessChar_AttributeName(char nChar)
 	}
 	if(nChar == ' ' || nChar == '\t' || nChar == '\r' || nChar == '\n')
 	{
-		if(m_sAttributeName.size() == 0) return true;
+		if(m_attributeName.size() == 0) return true;
 		return false;
 	}
 	if(nChar == '>' || nChar == '/')
 	{
-		m_nState = STATE_TAG;
+		m_state = STATE_TAG;
 		return ProcessChar_Tag(nChar);
 	}
 	if(nChar == '"')
 	{
-		m_nState = STATE_ATTRIBUTE_VALUE;
-		m_sAttributeValue = "";
+		m_state = STATE_ATTRIBUTE_VALUE;
+		m_attributeValue = "";
 		return true;
 	}
-	m_sAttributeName += nChar;
+	m_attributeName += nChar;
 	return true;
 }
 
@@ -180,13 +176,13 @@ bool CParser::ProcessChar_AttributeValue(char nChar)
 {
 	if(nChar == '"')
 	{
-		m_Attributes.push_back(AttributeType(m_sAttributeName, UnescapeText(m_sAttributeValue)));
+		m_attributes.push_back(AttributeType(m_attributeName, UnescapeText(m_attributeValue)));
 
-		m_nState = STATE_ATTRIBUTE_NAME;
-		m_sAttributeName = "";
+		m_state = STATE_ATTRIBUTE_NAME;
+		m_attributeName = "";
 		return true;
 	}
-	m_sAttributeValue += nChar;
+	m_attributeValue += nChar;
 	return true;
 }
 
@@ -194,41 +190,31 @@ bool CParser::ProcessChar_Comment(char nChar)
 {
 	if(nChar == '>')
 	{
-		if(!string(m_sText.end() - 2, m_sText.end()).compare("--"))
+		if(!std::string(m_text.end() - 2, m_text.end()).compare("--"))
 		{
 			//Comment end
-			m_sText = "";
-			m_nState = STATE_TEXT;
+			m_text = "";
+			m_state = STATE_TEXT;
 			return true;
 		}
 	}
 
-	m_sText += nChar;
+	m_text += nChar;
 	return true;
 }
 
-CNode* CParser::ParseDocument(CStream* pStream)
+CNode* CParser::ParseDocument(CStream& stream)
 {
-	CNode* pRoot;
-	bool nRet;
+	CNode* root = new CNode();
 
-	pRoot = new CNode();
-
-	CParser Parser(pStream, pRoot);
-	nRet = Parser.Parse();
+	CParser Parser(stream, root);
+	bool nRet = Parser.Parse();
 
 	if(!nRet)
 	{
-		delete pRoot;
+		delete root;
 		return NULL;
 	}
 
-	return pRoot;
-}
-
-CNode* CParser::ParseDocument(const char* sDocument)
-{
-    stringstream StringStream(sDocument);
-    CIosIStream Stream(StringStream);
-    return CParser::ParseDocument(&Stream);
+	return root;
 }
