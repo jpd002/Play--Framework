@@ -1,11 +1,3 @@
-/*
-
-	Framework - Stream.cpp
-	File Version 1.0.000
-	Provides the implementation of the CStream class
-
-*/
-
 #include "Stream.h"
 
 using namespace Framework;
@@ -65,18 +57,18 @@ void CStream::Write32(uint32 nValue)
 
 uint64 CStream::GetLength()
 {
-    uint64 position = Tell();
-    Seek(0, STREAM_SEEK_END);
-    uint64 size = Tell();
-    Seek(position, STREAM_SEEK_SET);
-    return size;
+	uint64 position = Tell();
+	Seek(0, STREAM_SEEK_END);
+	uint64 size = Tell();
+	Seek(position, STREAM_SEEK_SET);
+	return size;
 }
 
 uint64 CStream::GetRemainingLength()
 {
-    uint64 position = Tell();
-    Seek(0, STREAM_SEEK_END);
-    uint64 size = Tell();
-    Seek(position, STREAM_SEEK_SET);
-    return size - position;
+	uint64 position = Tell();
+	Seek(0, STREAM_SEEK_END);
+	uint64 size = Tell();
+	Seek(position, STREAM_SEEK_SET);
+	return size - position;
 }

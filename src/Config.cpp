@@ -188,8 +188,8 @@ void CConfig::Load()
 
 	try
 	{
-		boost::scoped_ptr<CStdStream> configFile(CreateInputStdStream(m_path.native()));
-		document = std::unique_ptr<Xml::CNode>(Xml::CParser::ParseDocument(configFile.get()));
+		Framework::CStdStream configFile(CreateInputStdStream(m_path.native()));
+		document = std::unique_ptr<Xml::CNode>(Xml::CParser::ParseDocument(configFile));
 	}
 	catch(...)
 	{
@@ -243,7 +243,7 @@ void CConfig::Save()
 {
 	try
 	{
-		boost::scoped_ptr<CStdStream> stream(CreateOutputStdStream(m_path.native()));		
+		Framework::CStdStream stream(CreateOutputStdStream(m_path.native()));
 
 		Xml::CNode*	pConfig = new Xml::CNode("Config", true);
 
@@ -261,7 +261,7 @@ void CConfig::Save()
 		{
 			auto document = std::unique_ptr<Xml::CNode>(new Xml::CNode);
 			document->InsertNode(pConfig);
-			Xml::CWriter::WriteDocument(stream.get(), document.get());
+			Xml::CWriter::WriteDocument(&stream, document.get());
 		}
 	}
 	catch(...)

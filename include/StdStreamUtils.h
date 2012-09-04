@@ -6,33 +6,33 @@
 namespace Framework
 {
 	template <typename StringType>
-	static CStdStream* CreateInputStdStream(const StringType&);
+	static CStdStream CreateInputStdStream(const StringType&);
 
 	template <typename StringType>
-	static CStdStream* CreateOutputStdStream(const StringType&);
+	static CStdStream CreateOutputStdStream(const StringType&);
 
 	template <>
-	static CStdStream* CreateInputStdStream(const std::wstring& path)
+	CStdStream CreateInputStdStream(const std::wstring& path)
 	{
-		return new CStdStream(path.c_str(), L"rb");
+		return CStdStream(path.c_str(), L"rb");
 	}
 
 	template <>
-	static CStdStream* CreateInputStdStream(const std::string& path)
+	CStdStream CreateInputStdStream(const std::string& path)
 	{
-		return new CStdStream(path.c_str(), "rb");
+		return CStdStream(path.c_str(), "rb");
 	}
 
 	template <>
-	static CStdStream* CreateOutputStdStream(const std::wstring& path)
+	CStdStream CreateOutputStdStream(const std::wstring& path)
 	{
-		return new CStdStream(path.c_str(), L"wb");
+		return CStdStream(path.c_str(), L"wb");
 	}
 
 	template <>
-	static CStdStream* CreateOutputStdStream(const std::string& path)
+	CStdStream CreateOutputStdStream(const std::string& path)
 	{
-		return new CStdStream(path.c_str(), "wb");
+		return CStdStream(path.c_str(), "wb");
 	}
 }
 

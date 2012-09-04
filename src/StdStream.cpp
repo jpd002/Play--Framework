@@ -1,46 +1,38 @@
-/*
-
-	Framework - StdStream.cpp
-	File Version 1.0.000
-
-*/
-
 #include "StdStream.h"
 #include <assert.h>
 #include <stdexcept>
 
 using namespace Framework;
-using namespace std;
 
 CStdStream::CStdStream(FILE* pFile)
 {
-    if(pFile == NULL)
-    {
-	    throw runtime_error("Invalid file handle.");
-    }
-    m_pFile = pFile;
+	if(pFile == NULL)
+	{
+		throw std::runtime_error("Invalid file handle.");
+	}
+	m_pFile = pFile;
 }
 
 CStdStream::CStdStream(const char* path, const char* options)
 {
-    m_pFile = fopen(path, options);
-    if(m_pFile == NULL)
-    {
-	    throw runtime_error("Invalid file handle.");
-    }
+	m_pFile = fopen(path, options);
+	if(m_pFile == NULL)
+	{
+		throw std::runtime_error("Invalid file handle.");
+	}
 }
 
 CStdStream::CStdStream(const wchar_t* path, const wchar_t* options)
 {
 #ifdef _MSC_VER
-    m_pFile = _wfopen(path, options);
+	m_pFile = _wfopen(path, options);
 #else
-    m_pFile = NULL;
+	m_pFile = NULL;
 #endif
-    if(m_pFile == NULL)
-    {
-	    throw runtime_error("Invalid file handle.");
-    }
+	if(m_pFile == NULL)
+	{
+		throw std::runtime_error("Invalid file handle.");
+	}
 }
 
 CStdStream::~CStdStream()
@@ -52,9 +44,9 @@ CStdStream::~CStdStream()
 	}
 }
 
-CStdStream::operator FILE*()
+CStdStream::operator FILE*() const
 {
-    return m_pFile;
+	return m_pFile;
 }
 
 void CStdStream::Seek(int64 nPosition, STREAM_SEEK_DIRECTION nDirection)
@@ -74,7 +66,7 @@ void CStdStream::Seek(int64 nPosition, STREAM_SEEK_DIRECTION nDirection)
 	}
 	assert(m_pFile != NULL);
 #ifdef WIN32
-    _fseeki64(m_pFile, nPosition, nDir);
+	fseeki64(m_pFile, nPosition, nDir);
 #else
 	fseek(m_pFile, nPosition, nDir);
 #endif
@@ -89,7 +81,7 @@ uint64 CStdStream::Tell()
 {
 	assert(m_pFile != NULL);
 #ifdef WIN32
-    return _ftelli64(m_pFile);
+	return _ftelli64(m_pFile);
 #else
 	return ftell(m_pFile);
 #endif
@@ -100,7 +92,7 @@ uint64 CStdStream::Read(void* pBuffer, uint64 nLength)
 	assert(m_pFile != NULL);
 	if(feof(m_pFile) || ferror(m_pFile))
 	{
-		throw runtime_error("Can't read after end of file.");
+		throw std::runtime_error("Can't read after end of file.");
 	}
 	return fread(pBuffer, 1, (size_t)nLength, m_pFile);
 }
