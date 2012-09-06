@@ -66,7 +66,7 @@ void CStdStream::Seek(int64 nPosition, STREAM_SEEK_DIRECTION nDirection)
 	}
 	assert(m_pFile != NULL);
 #ifdef WIN32
-	fseeki64(m_pFile, nPosition, nDir);
+	_fseeki64(m_pFile, nPosition, nDir);
 #else
 	fseek(m_pFile, nPosition, nDir);
 #endif
