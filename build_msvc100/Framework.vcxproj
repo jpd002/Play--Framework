@@ -38,6 +38,7 @@
     <ClCompile Include="..\src\layout\LayoutObject.cpp" />
     <ClCompile Include="..\src\layout\LayoutStretch.cpp" />
     <ClCompile Include="..\src\layout\VerticalLayout.cpp" />
+    <ClCompile Include="..\src\LzAri.cpp" />
     <ClCompile Include="..\src\MemStream.cpp" />
     <ClCompile Include="..\src\mpeg2\CodedBlockPatternTable.cpp" />
     <ClCompile Include="..\src\mpeg2\DcSizeChrominanceTable.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="..\include\layout\LayoutStretch.h" />
     <ClInclude Include="..\include\layout\VerticalLayout.h" />
     <ClInclude Include="..\include\lexical_cast_ex.h" />
+    <ClInclude Include="..\include\LzAri.h" />
     <ClInclude Include="..\include\MemStream.h" />
     <ClInclude Include="..\include\mpeg2\CodedBlockPatternTable.h" />
     <ClInclude Include="..\include\mpeg2\DcSizeChrominanceTable.h" />

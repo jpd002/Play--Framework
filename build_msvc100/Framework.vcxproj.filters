@@ -316,6 +316,9 @@
     <ClCompile Include="..\src\idct\TrivialC.cpp">
       <Filter>Source Files\idct</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\LzAri.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\alloca_def.h">
@@ -677,6 +680,9 @@
     </ClInclude>
     <ClInclude Include="..\include\idct\TrivialC.h">
       <Filter>Source Files\idct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\LzAri.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
