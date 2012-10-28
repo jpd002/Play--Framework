@@ -3,19 +3,16 @@
 #include "xml/Utils.h"
 
 using namespace Framework;
-using namespace std;
 
 bool Xml::GetNodeStringValue(Xml::CNode* pNode, const char* sPath, const char** pValue)
 {
-	const char* sText;
-	
 	pNode = pNode->Select(sPath);
 	if(pNode == NULL)
 	{
 		return false;
 	}
 	
-	sText = pNode->GetInnerText();
+	const char* sText = pNode->GetInnerText();
 	if(sText == NULL)
 	{
 		return false;
@@ -30,21 +27,20 @@ bool Xml::GetNodeStringValue(Xml::CNode* pNode, const char* sPath, const char** 
 	return true;
 }
 
-string Xml::GetNodeStringValue(Xml::CNode* pNode, const char* sPath)
+std::string Xml::GetNodeStringValue(Xml::CNode* pNode, const char* sPath)
 {
-    const char* sValue;
-    if(!GetNodeStringValue(pNode, sPath, &sValue))
-    {
-        throw exception();
-    }
+	const char* sValue(nullptr);
+	if(!GetNodeStringValue(pNode, sPath, &sValue))
+	{
+		throw std::exception();
+	}
 
-    return string(sValue);
+	return std::string(sValue);
 }
 
 bool Xml::GetNodeIntValue(Xml::CNode* pNode, const char* sPath, int* pValue)
 {
-	const char* sText;
-
+	const char* sText(nullptr);
 	if(!GetNodeStringValue(pNode, sPath, &sText))
 	{
 		return false;
@@ -61,8 +57,7 @@ bool Xml::GetNodeIntValue(Xml::CNode* pNode, const char* sPath, int* pValue)
 
 bool Xml::GetNodeBoolValue(Xml::CNode* pNode, const char* sPath, bool* pValue)
 {
-	const char* sText;
-
+	const char* sText(nullptr);
 	if(!GetNodeStringValue(pNode, sPath, &sText))
 	{
 		return false;
@@ -87,9 +82,7 @@ bool Xml::GetNodeBoolValue(Xml::CNode* pNode, const char* sPath, bool* pValue)
 
 bool Xml::GetAttributeStringValue(Xml::CNode* pNode, const char* sName, const char** pValue)
 {
-	const char* sText;
-	
-	sText = pNode->GetAttribute(sName);
+	const char* sText = pNode->GetAttribute(sName);
 	if(sText == NULL)
 	{
 		return false;
@@ -106,8 +99,7 @@ bool Xml::GetAttributeStringValue(Xml::CNode* pNode, const char* sName, const ch
 
 bool Xml::GetAttributeIntValue(Xml::CNode* pNode, const char* sName, int* pValue)
 {
-	const char* sText;
-
+	const char* sText(nullptr);
 	if(!GetAttributeStringValue(pNode, sName, &sText))
 	{
 		return false;
@@ -122,30 +114,29 @@ bool Xml::GetAttributeIntValue(Xml::CNode* pNode, const char* sName, int* pValue
 	return true;
 }
 
-string Xml::GetAttributeStringValue(Xml::CNode* pNode, const char* sName)
+std::string Xml::GetAttributeStringValue(Xml::CNode* pNode, const char* sName)
 {
-    const char* sValue;
-    if(!GetAttributeStringValue(pNode, sName, &sValue))
-    {
-        throw exception();
-    }
-    return sValue;
+	const char* sValue(nullptr);
+	if(!GetAttributeStringValue(pNode, sName, &sValue))
+	{
+		throw std::exception();
+	}
+	return sValue;
 }
 
 int Xml::GetAttributeIntValue(Xml::CNode* pNode, const char* sName)
 {
-    int nValue;
-    if(!GetAttributeIntValue(pNode, sName, &nValue))
-    {
-        throw exception();
-    }
-    return nValue;
+	int nValue = 0;
+	if(!GetAttributeIntValue(pNode, sName, &nValue))
+	{
+		throw std::exception();
+	}
+	return nValue;
 }
 
 bool Xml::GetAttributeBoolValue(Xml::CNode* pNode, const char* sName, bool* pValue)
 {
-	const char* sText;
-
+	const char* sText(nullptr);
 	if(!GetAttributeStringValue(pNode, sName, &sText))
 	{
 		return false;
@@ -170,20 +161,16 @@ bool Xml::GetAttributeBoolValue(Xml::CNode* pNode, const char* sName, bool* pVal
 
 Xml::CNode* Xml::CreateNodeStringValue(const char* sName, const char* sValue)
 {
-	Xml::CNode* pNode;
-
-	pNode = new Xml::CNode(sName, true);
+	Xml::CNode* pNode = new Xml::CNode(sName, true);
 	pNode->InsertNode(new Xml::CNode(sValue, false));
-
 	return pNode;
 }
 
 Xml::CNode* Xml::CreateNodeIntValue(const char* sName, int nValue)
 {
 	char sValue[256];
-	Xml::CNode* pNode;
 
-	pNode = new Xml::CNode(sName, true);
+	Xml::CNode* pNode = new Xml::CNode(sName, true);
 	sprintf(sValue, "%i", nValue);
 	pNode->InsertNode(new Xml::CNode(sValue, false));
 
@@ -192,11 +179,8 @@ Xml::CNode* Xml::CreateNodeIntValue(const char* sName, int nValue)
 
 Xml::CNode* Xml::CreateNodeBoolValue(const char* sName, bool nValue)
 {
-	const char* sValue;
-	Xml::CNode* pNode;
-
-	pNode = new Xml::CNode(sName, true);
-	sValue = nValue ? "true" : "false";
+	Xml::CNode* pNode = new Xml::CNode(sName, true);
+	const char* sValue = nValue ? "true" : "false";
 	pNode->InsertNode(new Xml::CNode(sValue, false));
 
 	return pNode;
@@ -210,9 +194,7 @@ Xml::AttributeType Xml::CreateAttributeStringValue(const char* sName, const char
 Xml::AttributeType Xml::CreateAttributeIntValue(const char* sName, int nValue)
 {
 	char sValue[256];
-
 	sprintf(sValue, "%i", nValue);
-
 	return AttributeType(sName, sValue);
 }
 
@@ -221,10 +203,10 @@ Xml::AttributeType Xml::CreateAttributeBoolValue(const char* sName, bool nValue)
 	return AttributeType(sName, nValue ? "true" : "false");
 }
 
-string Xml::EscapeText(const string& text)
+std::string Xml::EscapeText(const std::string& text)
 {
-	string result;
-	for(string::const_iterator charIterator(text.begin());
+	std::string result;
+	for(auto charIterator(text.begin());
 		charIterator != text.end(); charIterator++)
 	{
 		switch(*charIterator)
@@ -252,21 +234,21 @@ string Xml::EscapeText(const string& text)
 	return result;
 }
 
-string Xml::UnescapeText(const string& text)
+std::string Xml::UnescapeText(const std::string& text)
 {
-	string result;
-	for(string::const_iterator charIterator(text.begin());
+	std::string result;
+	for(auto charIterator(text.begin());
 		charIterator != text.end(); charIterator++)
 	{
 		if(*charIterator == '&')
 		{
-			string::size_type currentPos = charIterator - text.begin();
-			string::size_type endPos = text.find(';', currentPos);
+			std::string::size_type currentPos = charIterator - text.begin();
+			std::string::size_type endPos = text.find(';', currentPos);
 			if(endPos == -1)
 			{
 				return "";
 			}
-			string escapeName(text.substr(currentPos + 1, endPos - currentPos - 1));
+			std::string escapeName(text.substr(currentPos + 1, endPos - currentPos - 1));
 					if(!strcmp(escapeName.c_str(), "amp"))	result += '&';
 			else	if(!strcmp(escapeName.c_str(), "lt"))	result += '<';
 			else	if(!strcmp(escapeName.c_str(), "gt"))	result += '>';
