@@ -1,27 +1,13 @@
 #include "Utf8.h"
 
-using namespace std;
 using namespace Framework;
 
-wstring Utf8::ConvertFrom(const string& sString)
+std::wstring Utf8::ConvertFrom(const std::string& sString)
 {
-    return ConvertFrom(sString.begin(), sString.end());
+	return ConvertFrom(sString.begin(), sString.end());
 }
 
-wstring Utf8::ConvertFromSafe(const string& inputString)
+std::string Utf8::ConvertTo(const std::wstring& input)
 {
-	try
-	{
-		return ConvertFrom(inputString);
-	}
-	catch(...)
-	{
-
-	}
-	return wstring();
-}
-
-string Utf8::ConvertTo(const wstring& input)
-{
-    return ConvertTo(input.begin(), input.end());
+	return ConvertTo(input.begin(), input.end());
 }

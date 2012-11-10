@@ -6,100 +6,114 @@
 
 namespace Framework
 {
-    namespace Utf8
-    {
-        template <typename IteratorType>
-        std::wstring ConvertFrom(const IteratorType& itBegin, const IteratorType& itEnd)
-        {
-            std::wstring sTemp;
+	namespace Utf8
+	{
+		template <typename IteratorType>
+		std::wstring ConvertFrom(const IteratorType& itBegin, const IteratorType& itEnd)
+		{
+			std::wstring sTemp;
 
-            for(IteratorType itChar(itBegin); itChar != itEnd; itChar++)
-            {
-                char nChar(*itChar);
-                if((nChar & 0x80) == 0)
-                {
-                    sTemp += nChar;
-                }
-                else
-                {
+			for(IteratorType itChar(itBegin); itChar != itEnd; itChar++)
+			{
+				char nChar(*itChar);
+				if((nChar & 0x80) == 0)
+				{
+					sTemp += nChar;
+				}
+				else
+				{
 					if((nChar & 0xE0) == 0xC0)
 					{
-                        char nByte1(*(++itChar));
+						char nByte1(*(++itChar));
 
-                        if((nByte1 & 0xC0) != 0x80) throw std::runtime_error("Invalid UTF-8 character.");
+						bool valid = true;
+						if((nByte1 & 0xC0) != 0x80) valid = false;
 
-						wchar_t nWChar = ((nChar & 0x1F) << 6) | (nByte1 & 0x3F);
-                        sTemp += nWChar;
+						if(valid)
+						{
+							wchar_t nWChar = ((nChar & 0x1F) << 6) | (nByte1 & 0x3F);
+							sTemp += nWChar;
+						}
+						else
+						{
+							sTemp += '?';
+						}
 					}
-                    else if((nChar & 0xF0) == 0xE0)
-                    {
-                        char nByte1(*(++itChar));
-                        char nByte2(*(++itChar));
-                        
-                        if((nByte1 & 0xC0) != 0x80) throw std::runtime_error("Invalid UTF-8 character.");
-                        if((nByte2 & 0xC0) != 0x80) throw std::runtime_error("Invalid UTF-8 character.");
+					else if((nChar & 0xF0) == 0xE0)
+					{
+						char nByte1(*(++itChar));
+						char nByte2(*(++itChar));
 
-                        wchar_t nWChar = ((nChar & 0x0F) << 12) | ((nByte1 & 0x3F) << 6) | (nByte2 & 0x3F);
-                        sTemp += nWChar;
-                    }
-                    else
-                    {
-						throw std::runtime_error("Invalid UTF-8 character.");
-                    }
-                }
-            }
+						bool valid = true;
+						if((nByte1 & 0xC0) != 0x80) valid = false;
+						if((nByte2 & 0xC0) != 0x80) valid = false;
 
-            return sTemp;
-        }
+						if(valid)
+						{
+							wchar_t nWChar = ((nChar & 0x0F) << 12) | ((nByte1 & 0x3F) << 6) | (nByte2 & 0x3F);
+							sTemp += nWChar;
+						}
+						else
+						{
+							sTemp += '?';
+						}
+					}
+					else
+					{
+						sTemp += '?';
+					}
+				}
+			}
 
-        template <typename IteratorType>
-        std::string ConvertTo(const IteratorType& itBegin, const IteratorType& itEnd)
-        {
-            std::string result;
+			return sTemp;
+		}
 
-            for(IteratorType itChar(itBegin); itChar != itEnd; itChar++)
-            {
-                wchar_t ch = (*itChar);
-                if(ch <= 0x7F)
-                {
-                    result += static_cast<char>(ch);
-                }
-                else
-                {
-                    if(ch <= 0x7FF)
-                    {
-                        wchar_t byte1 = 0xC0 | ((ch & 0x700) >> 6) | ((ch & 0xC0) >> 6);
-                        wchar_t byte2 = 0x80 | (ch & 0x3F);
-                        result += static_cast<char>(byte1);
-                        result += static_cast<char>(byte2);
-                    }
-                    else
-                    {
-                        if(ch <= 0xFFFF)
-                        {
-                            wchar_t byte1 = 0xE0 | ((ch & 0xF000) >> 12);
-                            wchar_t byte2 = 0x80 | ((ch & 0x0F00) >> 6) | ((ch & 0xC0) >> 6);
-                            wchar_t byte3 = 0x80 | (ch & 0x3F);
-                            result += static_cast<char>(byte1);
-                            result += static_cast<char>(byte2);
-                            result += static_cast<char>(byte3);
-                        }
-                        else
-                        {
-                            throw std::exception();
-                        }
-                    }
-                }
-            }
+		template <typename IteratorType>
+		std::string ConvertTo(const IteratorType& itBegin, const IteratorType& itEnd)
+		{
+			std::string result;
 
-            return result;
-        }
+			for(IteratorType itChar(itBegin); itChar != itEnd; itChar++)
+			{
+				wchar_t ch = (*itChar);
+				if(ch <= 0x7F)
+				{
+					result += static_cast<char>(ch);
+				}
+				else
+				{
+					if(ch <= 0x7FF)
+					{
+						wchar_t byte1 = 0xC0 | ((ch & 0x700) >> 6) | ((ch & 0xC0) >> 6);
+						wchar_t byte2 = 0x80 | (ch & 0x3F);
+						result += static_cast<char>(byte1);
+						result += static_cast<char>(byte2);
+					}
+					else
+					{
+						if(ch <= 0xFFFF)
+						{
+							wchar_t byte1 = 0xE0 | ((ch & 0xF000) >> 12);
+							wchar_t byte2 = 0x80 | ((ch & 0x0F00) >> 6) | ((ch & 0xC0) >> 6);
+							wchar_t byte3 = 0x80 | (ch & 0x3F);
+							result += static_cast<char>(byte1);
+							result += static_cast<char>(byte2);
+							result += static_cast<char>(byte3);
+						}
+						else
+						{
+							throw std::exception();
+						}
+					}
+				}
+			}
 
-        std::wstring    ConvertFrom(const std::string&);
-		std::wstring    ConvertFromSafe(const std::string&);
+			return result;
+		}
 
-        std::string     ConvertTo(const std::wstring&);
-    };
+		std::wstring	ConvertFrom(const std::string&);
+		std::string		ConvertTo(const std::wstring&);
+	};
 }
 
 #endif
