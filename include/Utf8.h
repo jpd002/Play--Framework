@@ -24,14 +24,21 @@ namespace Framework
 				{
 					if((nChar & 0xE0) == 0xC0)
 					{
-						char nByte1(*(++itChar));
+						bool valid = false;
 
-						bool valid = true;
-						if((nByte1 & 0xC0) != 0x80) valid = false;
+						char byte1 = 0;
+						++itChar;
+						if(itChar != itEnd)
+						{
+							byte1 = (*itChar);
+							valid = true;
+						}
+
+						if((byte1 & 0xC0) != 0x80) valid = false;
 
 						if(valid)
 						{
-							wchar_t nWChar = ((nChar & 0x1F) << 6) | (nByte1 & 0x3F);
+							wchar_t nWChar = ((nChar & 0x1F) << 6) | (byte1 & 0x3F);
 							sTemp += nWChar;
 						}
 						else
@@ -41,16 +48,28 @@ namespace Framework
 					}
 					else if((nChar & 0xF0) == 0xE0)
 					{
-						char nByte1(*(++itChar));
-						char nByte2(*(++itChar));
+						bool valid = false;
 
-						bool valid = true;
-						if((nByte1 & 0xC0) != 0x80) valid = false;
-						if((nByte2 & 0xC0) != 0x80) valid = false;
+						char byte1 = 0;
+						char byte2 = 0;
+						++itChar;
+						if(itChar != itEnd)
+						{
+							byte1 = (*itChar);
+							++itChar;
+							if(itChar != itEnd)
+							{
+								byte2 = (*itChar);
+								valid = true;
+							}
+						}
+
+						if((byte1 & 0xC0) != 0x80) valid = false;
+						if((byte2 & 0xC0) != 0x80) valid = false;
 
 						if(valid)
 						{
-							wchar_t nWChar = ((nChar & 0x0F) << 12) | ((nByte1 & 0x3F) << 6) | (nByte2 & 0x3F);
+							wchar_t nWChar = ((nChar & 0x0F) << 12) | ((byte1 & 0x3F) << 6) | (byte2 & 0x3F);
 							sTemp += nWChar;
 						}
 						else
@@ -62,6 +81,12 @@ namespace Framework
 					{
 						sTemp += '?';
 					}
+				}
+
+				if(itChar == itEnd)
+				{
+					//Can get in here if we failed to fetch a character
+					break;
 				}
 			}
 
