@@ -477,7 +477,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
-					"~/Libraries/boost_1_49_0",
+					"~/Libraries/boost_1_50_0",
 					../include,
 				);
 				INSTALL_PATH = /usr/local/lib;
@@ -498,7 +498,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
-					"~/Libraries/boost_1_49_0",
+					"~/Libraries/boost_1_50_0",
 					../include,
 				);
 				INSTALL_PATH = /usr/local/lib;
