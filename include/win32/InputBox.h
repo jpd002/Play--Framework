@@ -17,6 +17,8 @@ namespace Framework
 										~CInputBox();
 			const TCHAR*				GetValue(HWND);
 
+			void						SetIsMultiline(bool);
+
 		protected:
 			long						OnCommand(unsigned short, unsigned short, HWND);
 			long						OnSysCommand(unsigned int, LPARAM);
@@ -33,10 +35,11 @@ namespace Framework
 			std::tstring				m_sValue;
 
 			bool						m_nCancelled;
+			bool						m_isMultiline;
 			CButton*					m_pOk;
 			CButton*					m_pCancel;
 			CEdit*						m_pValue;
-			FlatLayoutPtr               m_layout;
+			FlatLayoutPtr				m_layout;
 		};
 	}
 }

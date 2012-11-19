@@ -4,10 +4,14 @@
 #include "layout/LayoutStretch.h"
 #include "win32/Static.h"
 #include "win32/LayoutWindow.h"
+#include "win32/DefaultFonts.h"
+#include "win32/AcceleratorTableGenerator.h"
 
 #define CLSNAME		_T("CInputBox")
 #define WNDSTYLE	(WS_CAPTION | WS_POPUP | WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_SYSMENU)
 #define WNDSTYLEEX	(WS_EX_DLGMODALFRAME)
+
+#define IDC_SELECTALL	(0xBEEF)
 
 using namespace Framework;
 using namespace Framework::Win32;
@@ -20,6 +24,7 @@ CInputBox::CInputBox(const TCHAR* sTitle, const TCHAR* sPrompt, const TCHAR* sVa
 , m_sTitle(sTitle)
 , m_sPrompt(sPrompt)
 , m_sValue((sValue != NULL) ? sValue : _T(""))
+, m_isMultiline(false)
 {
 
 }
@@ -29,11 +34,16 @@ CInputBox::~CInputBox()
 
 }
 
+void CInputBox::SetIsMultiline(bool isMultiline)
+{
+	m_isMultiline = isMultiline;
+}
+
 const TCHAR* CInputBox::GetValue(HWND hParent)
 {
 	EnableWindow(GetActiveWindow(), FALSE);
 
-	HFONT nFont = CreateFont(-11, 0, 0, 0, 0, 0, 0, 0, ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, FF_DONTCARE, _T("Tahoma"));
+	HFONT nFont = CDefaultFonts::GetMessageFont();
 
 	if(!DoesWindowClassExist(CLSNAME))
 	{
@@ -49,7 +59,14 @@ const TCHAR* CInputBox::GetValue(HWND hParent)
 	}
 
 	RECT rc;
-	SetRect(&rc, 0, 0, 300, 108);
+	if(m_isMultiline)
+	{
+		SetRect(&rc, 0, 0, 300, 150);
+	}
+	else
+	{
+		SetRect(&rc, 0, 0, 300, 115);
+	}
 	Create(WNDSTYLEEX, CLSNAME, m_sTitle.c_str(), WNDSTYLE, &rc, hParent, NULL);
 	SetClassPtr();
 
@@ -62,22 +79,29 @@ const TCHAR* CInputBox::GetValue(HWND hParent)
 	m_pCancel = new CButton(_T("Cancel"), m_hWnd, &rc);
 	m_pCancel->SetFont(nFont);
 
-	m_pValue = new CEdit(m_hWnd, &rc, m_sValue.c_str());
+	m_pValue = new CEdit(m_hWnd, &rc, m_sValue.c_str(), m_isMultiline ? ES_MULTILINE : 0);
 	m_pValue->SetFont(nFont);
 	m_pValue->SetSelection(0, -1);
 	m_pValue->SetFocus();
 	
-    FlatLayoutPtr pSubLayout0 = CHorizontalLayout::Create();
-    pSubLayout0->InsertObject(CLayoutStretch::Create());
+	FlatLayoutPtr pSubLayout0 = CHorizontalLayout::Create();
+	pSubLayout0->InsertObject(CLayoutStretch::Create());
 	pSubLayout0->InsertObject(CLayoutWindow::CreateButtonBehavior(75, 23, m_pOk));
 	pSubLayout0->InsertObject(CLayoutWindow::CreateButtonBehavior(75, 23, m_pCancel));
 	pSubLayout0->SetVerticalStretch(0);
 
-    m_layout = CVerticalLayout::Create();
+	m_layout = CVerticalLayout::Create();
 	m_layout->InsertObject(CLayoutWindow::CreateTextBoxBehavior(100, 14, new CStatic(m_hWnd, m_sPrompt.c_str())));
-	m_layout->InsertObject(CLayoutWindow::CreateTextBoxBehavior(100, 20, m_pValue));
+	if(m_isMultiline)
+	{
+		m_layout->InsertObject(CLayoutWindow::CreateCustomBehavior(100, 20, 1, 1, m_pValue));
+	}
+	else
+	{
+		m_layout->InsertObject(CLayoutWindow::CreateTextBoxBehavior(100, 21, m_pValue));
+		m_layout->InsertObject(CLayoutStretch::Create());
+	}
 	m_layout->InsertObject(pSubLayout0);
-    m_layout->InsertObject(CLayoutStretch::Create());
 
 	RefreshLayout();
 
@@ -98,7 +122,6 @@ const TCHAR* CInputBox::GetValue(HWND hParent)
 	}
 
 	DestroyAcceleratorTable(hAccel);
-	DeleteObject(nFont);
 
 	return m_nCancelled ? NULL : m_sValue.c_str();
 }
@@ -146,17 +169,11 @@ void CInputBox::CancelDialog()
 
 HACCEL CInputBox::CreateAccelerators()
 {
-	ACCEL Accel[2];
-
-	Accel[0].cmd	= IDOK;
-	Accel[0].key	= VK_RETURN;
-	Accel[0].fVirt	= FVIRTKEY;
-
-	Accel[1].cmd	= IDCANCEL;
-	Accel[1].key	= VK_ESCAPE;
-	Accel[1].fVirt	= FVIRTKEY;
-
-	return CreateAcceleratorTable(Accel, sizeof(Accel) / sizeof(ACCEL));
+	CAcceleratorTableGenerator generator;
+	generator.Insert(IDOK,			VK_RETURN,	FVIRTKEY);
+	generator.Insert(IDCANCEL,		VK_ESCAPE,	FVIRTKEY);
+	generator.Insert(IDC_SELECTALL,	'A',		FVIRTKEY | FCONTROL);
+	return generator.Create();
 }
 
 long CInputBox::OnCommand(unsigned short nID, unsigned short nSubMsg, HWND hSender)
@@ -166,9 +183,18 @@ long CInputBox::OnCommand(unsigned short nID, unsigned short nSubMsg, HWND hSend
 		ConfirmDialog();
 		return FALSE;
 	}
-	if((hSender == m_pCancel->m_hWnd) || (nID == IDCANCEL))
+	else if((hSender == m_pCancel->m_hWnd) || (nID == IDCANCEL))
 	{
 		CancelDialog();
+		return FALSE;
+	}
+	else if(nID == IDC_SELECTALL)
+	{
+		HWND focusWnd = GetFocus();
+		if(focusWnd == m_pValue->m_hWnd)
+		{
+			SendMessage(m_pValue->m_hWnd, EM_SETSEL, 0, -1);
+		}
 		return FALSE;
 	}
 	return TRUE;
