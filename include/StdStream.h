@@ -10,6 +10,7 @@ namespace Framework
 	class CStdStream : public CStream
 	{
 	public:
+						CStdStream();
 						CStdStream(CStdStream&&);
 		explicit		CStdStream(FILE*);
 						CStdStream(const char*, const char*);
@@ -31,7 +32,9 @@ namespace Framework
 						CStdStream(const CStdStream&) {}
 		CStdStream&		operator =(const CStdStream&) { return *this; }
 		
-		FILE*			m_pFile;
+		void			Clear();
+		
+		FILE*			m_file;
 	};
 
 }

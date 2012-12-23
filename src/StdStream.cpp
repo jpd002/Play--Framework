@@ -4,19 +4,25 @@
 
 using namespace Framework;
 
-CStdStream::CStdStream(FILE* pFile)
+CStdStream::CStdStream()
+: m_file(NULL)
 {
-	if(pFile == NULL)
+	
+}
+
+CStdStream::CStdStream(FILE* file)
+{
+	if(file == NULL)
 	{
 		throw std::runtime_error("Invalid file handle.");
 	}
-	m_pFile = pFile;
+	m_file = file;
 }
 
 CStdStream::CStdStream(const char* path, const char* options)
 {
-	m_pFile = fopen(path, options);
-	if(m_pFile == NULL)
+	m_file = fopen(path, options);
+	if(m_file == NULL)
 	{
 		throw std::runtime_error("Invalid file handle.");
 	}
@@ -25,11 +31,11 @@ CStdStream::CStdStream(const char* path, const char* options)
 CStdStream::CStdStream(const wchar_t* path, const wchar_t* options)
 {
 #ifdef _MSC_VER
-	m_pFile = _wfopen(path, options);
+	m_file = _wfopen(path, options);
 #else
-	m_pFile = NULL;
+	m_file = NULL;
 #endif
-	if(m_pFile == NULL)
+	if(m_file == NULL)
 	{
 		throw std::runtime_error("Invalid file handle.");
 	}
@@ -37,16 +43,28 @@ CStdStream::CStdStream(const wchar_t* path, const wchar_t* options)
 
 CStdStream::~CStdStream()
 {
-	if(m_pFile != NULL)
+	Clear();
+}
+
+void CStdStream::Clear()
+{
+	if(m_file != NULL)
 	{
-		fclose(m_pFile);
-		m_pFile = NULL;
-	}
+		fclose(m_file);
+		m_file = NULL;
+	}	
 }
 
 CStdStream::operator FILE*() const
 {
-	return m_pFile;
+	return m_file;
+}
+
+CStdStream& CStdStream::operator =(CStdStream&& rhs)
+{
+	Clear();
+	std::swap(rhs.m_file, m_file);
+	return (*this);
 }
 
 void CStdStream::Seek(int64 nPosition, STREAM_SEEK_DIRECTION nDirection)
@@ -64,54 +82,54 @@ void CStdStream::Seek(int64 nPosition, STREAM_SEEK_DIRECTION nDirection)
 		nDir = SEEK_END;
 		break;
 	}
-	assert(m_pFile != NULL);
+	assert(m_file != NULL);
 #ifdef WIN32
-	_fseeki64(m_pFile, nPosition, nDir);
+	_fseeki64(m_file, nPosition, nDir);
 #else
-	fseek(m_pFile, nPosition, nDir);
+	fseek(m_file, nPosition, nDir);
 #endif
 }
 
 bool CStdStream::IsEOF()
 {
-	return (feof(m_pFile) != 0);
+	return (feof(m_file) != 0);
 }
 
 uint64 CStdStream::Tell()
 {
-	assert(m_pFile != NULL);
+	assert(m_file != NULL);
 #ifdef WIN32
-	return _ftelli64(m_pFile);
+	return _ftelli64(m_file);
 #else
-	return ftell(m_pFile);
+	return ftell(m_file);
 #endif
 }
 
 uint64 CStdStream::Read(void* pBuffer, uint64 nLength)
 {
-	assert(m_pFile != NULL);
-	if(feof(m_pFile) || ferror(m_pFile))
+	assert(m_file != NULL);
+	if(feof(m_file) || ferror(m_file))
 	{
 		throw std::runtime_error("Can't read after end of file.");
 	}
-	return fread(pBuffer, 1, (size_t)nLength, m_pFile);
+	return fread(pBuffer, 1, (size_t)nLength, m_file);
 }
 
 uint64 CStdStream::Write(const void* pBuffer, uint64 nLength)
 {
-	assert(m_pFile != NULL);
-	return fwrite(pBuffer, 1, (size_t)nLength, m_pFile);
+	assert(m_file != NULL);
+	return fwrite(pBuffer, 1, (size_t)nLength, m_file);
 }
 
 void CStdStream::Flush()
 {
-	assert(m_pFile != NULL);
-	fflush(m_pFile);
+	assert(m_file != NULL);
+	fflush(m_file);
 }
 
 void CStdStream::Close()
 {
-	assert(m_pFile != NULL);
-	fclose(m_pFile);
-	m_pFile = NULL;
+	assert(m_file != NULL);
+	fclose(m_file);
+	m_file = NULL;
 }
