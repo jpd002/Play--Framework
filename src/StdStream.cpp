@@ -10,6 +10,12 @@ CStdStream::CStdStream()
 	
 }
 
+CStdStream::CStdStream(CStdStream&& rhs)
+: m_file(NULL)
+{
+	std::swap(rhs.m_file, m_file);
+}
+
 CStdStream::CStdStream(FILE* file)
 {
 	if(file == NULL)
