@@ -19,45 +19,49 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\directinput\Device.cpp" />
-    <ClCompile Include="..\src\directinput\Joystick.cpp" />
-    <ClCompile Include="..\src\directinput\Keyboard.cpp" />
-    <ClCompile Include="..\src\directinput\Manager.cpp" />
+    <ClCompile Include="..\src\openal\Buffer.cpp" />
+    <ClCompile Include="..\src\openal\Context.cpp" />
+    <ClCompile Include="..\src\openal\Device.cpp" />
+    <ClCompile Include="..\src\openal\Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\directinput\Device.h" />
-    <ClInclude Include="..\include\directinput\DirectInput.h" />
-    <ClInclude Include="..\include\directinput\Joystick.h" />
-    <ClInclude Include="..\include\directinput\Keyboard.h" />
-    <ClInclude Include="..\include\directinput\Manager.h" />
+    <ClInclude Include="..\include\openal\Buffer.h" />
+    <ClInclude Include="..\include\openal\Context.h" />
+    <ClInclude Include="..\include\openal\Device.h" />
+    <ClInclude Include="..\include\openal\OpenAlDef.h" />
+    <ClInclude Include="..\include\openal\Source.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A286EAD1-ACEA-4132-ACDD-6520168BDEBB}</ProjectGuid>
+    <ProjectGuid>{18E959AA-ADB6-45F6-B0D2-B0B4AD9DACEF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>FrameworkDirectX</RootNamespace>
+    <RootNamespace>FrameworkOpenAl</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
