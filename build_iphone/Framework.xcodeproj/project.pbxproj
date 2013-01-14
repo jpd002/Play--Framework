@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		701A48D8169BE4F500B5C1FF /* Base64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 701A48D7169BE4F500B5C1FF /* Base64.cpp */; };
+		701A48DB169BE4FC00B5C1FF /* Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 701A48DA169BE4FC00B5C1FF /* Base64.h */; };
 		7E1C41B81234236D00BB4E9C /* IosIStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C41B31234236D00BB4E9C /* IosIStream.cpp */; };
 		7E1C41B91234236D00BB4E9C /* IosOStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C41B41234236D00BB4E9C /* IosOStream.cpp */; };
 		7E1C41BA1234236D00BB4E9C /* string_cast_sjis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C41B51234236D00BB4E9C /* string_cast_sjis.cpp */; };
@@ -84,6 +86,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		701A48D7169BE4F500B5C1FF /* Base64.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Base64.cpp; path = ../src/Base64.cpp; sourceTree = "<group>"; };
+		701A48DA169BE4FC00B5C1FF /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = ../include/Base64.h; sourceTree = "<group>"; };
 		7E1C41B31234236D00BB4E9C /* IosIStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosIStream.cpp; path = ../src/IosIStream.cpp; sourceTree = SOURCE_ROOT; };
 		7E1C41B41234236D00BB4E9C /* IosOStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosOStream.cpp; path = ../src/IosOStream.cpp; sourceTree = SOURCE_ROOT; };
 		7E1C41B51234236D00BB4E9C /* string_cast_sjis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = string_cast_sjis.cpp; path = ../src/string_cast_sjis.cpp; sourceTree = SOURCE_ROOT; };
@@ -203,6 +207,8 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				701A48D7169BE4F500B5C1FF /* Base64.cpp */,
+				701A48DA169BE4FC00B5C1FF /* Base64.h */,
 				7E2722BD1214FAD800C0DEBF /* Config.cpp */,
 				7E2722BF1214FAE200C0DEBF /* Config.h */,
 				7E1C41B31234236D00BB4E9C /* IosIStream.cpp */,
@@ -365,6 +371,7 @@
 				7E64499D144F60D8006D589E /* LayoutObject.h in Headers */,
 				7E64499E144F60D8006D589E /* LayoutStretch.h in Headers */,
 				7E64499F144F60D8006D589E /* VerticalLayout.h in Headers */,
+				701A48DB169BE4FC00B5C1FF /* Base64.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +462,7 @@
 				7E64498B144F60CE006D589E /* LayoutObject.cpp in Sources */,
 				7E64498C144F60CE006D589E /* LayoutStretch.cpp in Sources */,
 				7E64498D144F60CE006D589E /* VerticalLayout.cpp in Sources */,
+				701A48D8169BE4F500B5C1FF /* Base64.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
