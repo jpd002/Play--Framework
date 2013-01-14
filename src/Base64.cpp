@@ -10,7 +10,7 @@ static const uint8 g_encodeLookupTable[64] =
 	0x77, 0x78, 0x79, 0x7A, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x2B, 0x2F
 };
 
-static const uint8 g_decodeLookupTable[128] = 
+static const int8 g_decodeLookupTable[128] = 
 {
 	-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
 	-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,
@@ -82,8 +82,8 @@ std::vector<uint8> Framework::FromBase64(const char* source)
 				paddingCount++;
 				continue;
 			}
-			uint8 sourceValue = g_decodeLookupTable[sourceChar];
-			if(sourceValue == static_cast<uint8>(-1))
+			int8 sourceValue = g_decodeLookupTable[sourceChar];
+			if(sourceValue == -1)
 			{
 				throw std::runtime_error("Invalid base64 character.");
 			}
