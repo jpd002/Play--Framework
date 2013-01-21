@@ -12,17 +12,17 @@ namespace Framework
 		class CWriter
 		{
 		public:
-			static void			WriteDocument(CStream*, CNode*);
+			static void			WriteDocument(CStream&, CNode*);
 
 		private:
-								CWriter(CStream*, CNode*);
+								CWriter(CStream&, CNode*);
 								~CWriter();
 			void				WriteNode(unsigned int);
 			void				DumpString(const char*);
 			void				DumpTabs(unsigned int);
 			void				DumpAttributes(CNode*);
-			CNode*				m_pNode;
-			CStream*			m_pStream;
+			CNode*				m_node;
+			CStream&			m_stream;
 		};
 
 	}

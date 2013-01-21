@@ -261,7 +261,7 @@ void CConfig::Save()
 		{
 			auto document = std::unique_ptr<Xml::CNode>(new Xml::CNode);
 			document->InsertNode(pConfig);
-			Xml::CWriter::WriteDocument(&stream, document.get());
+			Xml::CWriter::WriteDocument(stream, document.get());
 		}
 	}
 	catch(...)
