@@ -16,8 +16,9 @@ namespace Framework
 #endif
 #if defined(__APPLE__)
 		boost::filesystem::path		GetSettingsPath();
+		boost::filesystem::path		GetRoamingDataPath();
+		boost::filesystem::path		GetPersonalDataPath();
 		boost::filesystem::path		GetAppResourcesPath();
-		boost::filesystem::path		GetPersonalDataPath();		
 #endif
 
 		void						EnsurePathExists(const boost::filesystem::path&);

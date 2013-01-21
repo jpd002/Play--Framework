@@ -42,8 +42,21 @@ boost::filesystem::path PathUtils::GetAppResourcesPath()
 boost::filesystem::path PathUtils::GetSettingsPath()
 {
 	NSArray* paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-	std::string libraryDirectory = [[paths objectAtIndex: 0] UTF8String];
-	return boost::filesystem::path(libraryDirectory);
+	std::string directory = [[paths objectAtIndex: 0] UTF8String];
+	return boost::filesystem::path(directory);
+}
+
+boost::filesystem::path PathUtils::GetRoamingDataPath()
+{
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	std::string directory = [[paths objectAtIndex: 0] UTF8String];
+	return boost::filesystem::path(directory);
+}
+
+boost::filesystem::path PathUtils::GetPersonalDataPath()
+{
+	passwd* userInfo = getpwuid(getuid());
+	return boost::filesystem::path(userInfo->pw_dir);
 }
 
 boost::filesystem::path PathUtils::GetAppResourcesPath()
@@ -51,12 +64,6 @@ boost::filesystem::path PathUtils::GetAppResourcesPath()
 	NSBundle* bundle = [NSBundle mainBundle];
 	NSString* bundlePath = [bundle resourcePath];
 	return boost::filesystem::path([bundlePath UTF8String]);
-}
-
-boost::filesystem::path PathUtils::GetPersonalDataPath()
-{
-	passwd* userInfo = getpwuid(getuid());
-	return boost::filesystem::path(userInfo->pw_dir);
 }
 
 #endif
