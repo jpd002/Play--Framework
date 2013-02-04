@@ -30,16 +30,20 @@ namespace Framework
 	class CBitmap
 	{
 	public:
-		typedef std::function< void (CBitmap&) > ConstructionFunctionType;
-
+						CBitmap();
+						CBitmap(const CBitmap&);
+						CBitmap(CBitmap&&);
 						CBitmap(unsigned int, unsigned int, unsigned int);
-						CBitmap(const ConstructionFunctionType&);
 						~CBitmap();
 
 		CBitmap&		operator =(const CBitmap&);
+		CBitmap&		operator =(CBitmap&&);
 
 		void			Allocate(unsigned int, unsigned int, unsigned int);
+		void			Reset();
+
 		bool			IsEmpty() const;
+
 		unsigned int	GetPixelSize() const;
 		unsigned int	GetPixelsSize() const;
 		unsigned int	GetPitch() const;
@@ -51,12 +55,12 @@ namespace Framework
 		void			Blit(const CBitmap&, unsigned int, unsigned int);
 
 	private:
-						CBitmap(const CBitmap&) {}
+		void			CopyFrom(const CBitmap&);
 
-		unsigned int	m_nWidth;
-		unsigned int	m_nHeight;
-		unsigned int	m_nBPP;
-		uint8*			m_pPixels;
+		unsigned int	m_width;
+		unsigned int	m_height;
+		unsigned int	m_bpp;
+		uint8*			m_pixels;
 	};
 
 }

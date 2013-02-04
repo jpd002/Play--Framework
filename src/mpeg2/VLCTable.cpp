@@ -82,27 +82,3 @@ void CVLCTable::ThrowError(int errorCode)
 		assert(0);
 	}
 }
-
-//uint32 CVLCTable::Decode(CBitStream* pStream)
-//{
-//	uint32 nValue = 0;
-//	
-//	for(unsigned int i = 0; i < m_nMaxBits; i++)
-//	{
-//		nValue <<= 1;
-//		nValue |= pStream->GetBits_LSBF(1);
-//
-//		for(unsigned int j = m_pIndexTable[i]; j < m_nEntryCount; j++)
-//		{
-//			VLCTABLEENTRY* pEntry = &m_pTableEntry[j];
-//			
-//			if(pEntry->nCodeLength != (i + 1)) break;
-//			if(pEntry->nCode != nValue) continue;
-//
-//			return pEntry->nValue;
-//		}
-//	}
-//
-//	//??
-//	return 0;
-//}
