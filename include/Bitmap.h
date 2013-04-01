@@ -56,6 +56,7 @@ namespace Framework
 
 	private:
 		void			CopyFrom(const CBitmap&);
+		void			MoveFrom(CBitmap&&);
 
 		unsigned int	m_width;
 		unsigned int	m_height;

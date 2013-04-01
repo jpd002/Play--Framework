@@ -25,6 +25,15 @@ CBitmap::CBitmap(const CBitmap& src)
 	CopyFrom(src);
 }
 
+CBitmap::CBitmap(CBitmap&& src)
+: m_pixels(nullptr)
+, m_width(0)
+, m_height(0)
+, m_bpp(0)
+{
+	MoveFrom(std::move(src));
+}
+
 CBitmap::CBitmap(unsigned int nWidth, unsigned int nHeight, unsigned int nBPP)
 : m_pixels(nullptr)
 , m_width(0)
@@ -54,12 +63,7 @@ CBitmap& CBitmap::operator =(const CBitmap& src)
 CBitmap& CBitmap::operator =(CBitmap&& src)
 {
 	Reset();
-
-	std::swap(src.m_pixels,	m_pixels);
-	std::swap(src.m_width,	m_width);
-	std::swap(src.m_height,	m_height);
-	std::swap(src.m_bpp,	m_bpp);
-
+	MoveFrom(std::move(src));
 	return (*this);
 }
 
@@ -205,4 +209,12 @@ void CBitmap::CopyFrom(const CBitmap& src)
 	m_bpp		= src.GetBitsPerPixel();
 
 	memcpy(m_pixels, src.GetPixels(), GetPixelsSize());
+}
+
+void CBitmap::MoveFrom(CBitmap&& src)
+{
+	std::swap(src.m_pixels,	m_pixels);
+	std::swap(src.m_width,	m_width);
+	std::swap(src.m_height,	m_height);
+	std::swap(src.m_bpp,	m_bpp);
 }

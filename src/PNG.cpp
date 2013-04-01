@@ -10,27 +10,35 @@
 
 using namespace Framework;
 
-CBitmap* CPNG::ReadBitmap(CStream& pStream)
+CBitmap CPNG::ReadBitmap(CStream& stream)
 {
-	CBitmap* pBitmap(NULL);
-	CPNG PNG(pStream, &pBitmap);
-	return pBitmap;
+	return CPNG().DoRead(stream);
 }
 
-CPNG::CPNG(CStream& pStream, CBitmap** pBitmap)
+CPNG::CPNG()
 {
-	(*pBitmap) = NULL;
 
-	pStream.Seek(0, STREAM_SEEK_END);
-	uint64 nLength = pStream.Tell();
-	pStream.Seek(0, STREAM_SEEK_SET);
+}
 
-	uint8 pHeader[8];
-	pStream.Read(pHeader, 8);
+CPNG::~CPNG()
+{
+	FREEPTR(m_pIDAT);
+}
 
-	if((pHeader[0] != 0x89) && (pHeader[1] != 'P') && (pHeader[2] != 'N') && (pHeader[3] != 'G'))
+CBitmap CPNG::DoRead(CStream& stream)
+{
+	CBitmap result;
+
+	stream.Seek(0, STREAM_SEEK_END);
+	uint64 nLength = stream.Tell();
+	stream.Seek(0, STREAM_SEEK_SET);
+
+	uint8 header[8];
+	stream.Read(header, 8);
+
+	if((header[0] != 0x89) && (header[1] != 'P') && (header[2] != 'N') && (header[3] != 'G'))
 	{
-		return;
+		throw std::runtime_error("Invalid PNG file.");
 	}
 
 	m_nIDATSize = 0;
@@ -39,17 +47,17 @@ CPNG::CPNG(CStream& pStream, CBitmap** pBitmap)
 	bool nDone = false;
 	while(!nDone)
 	{
-		if(pStream.Tell() >= nLength) break;
+		if(stream.Tell() >= nLength) break;
 
-		uint32 nChunkSize = FromMSBF32(pStream.Read32());
-		uint32 nChunkType = FromMSBF32(pStream.Read32());
+		uint32 nChunkSize = FromMSBF32(stream.Read32());
+		uint32 nChunkType = FromMSBF32(stream.Read32());
 
 		switch(nChunkType)
 		{
 		case 0x49484452:
 			//IHDR
 			{
-				m_IHDR.Unserialize(pStream);
+				m_IHDR.Unserialize(stream);
 				unsigned int nBufferSize = m_IHDR.CalculateNeededBufferSize();
 				m_pBuffer = reinterpret_cast<uint8*>(malloc(nBufferSize));
 			}
@@ -60,31 +68,28 @@ CPNG::CPNG(CStream& pStream, CBitmap** pBitmap)
 				unsigned int nIDATPos = m_nIDATSize;
 				m_nIDATSize += nChunkSize;
 				m_pIDAT = (uint8*)realloc(m_pIDAT, m_nIDATSize);
-				pStream.Read(m_pIDAT + nIDATPos, nChunkSize);
+				stream.Read(m_pIDAT + nIDATPos, nChunkSize);
 			}
 			break;
 		case 0x49454E44:
 			//IEND
 			UncompressIDAT();
-			(*pBitmap) = CreateBitmap();
+			result = CreateBitmap();
 			break;
 		case 0x504C5445:
 			//PLTE
-			pStream.Read(m_nPalette, nChunkSize);
+			stream.Read(m_nPalette, nChunkSize);
 			break;
 		default:
-			pStream.Seek(nChunkSize, STREAM_SEEK_CUR);
+			stream.Seek(nChunkSize, STREAM_SEEK_CUR);
 			break;
 		}
 
 		//Skip CRC
-		pStream.Seek(4, STREAM_SEEK_CUR);
+		stream.Seek(4, STREAM_SEEK_CUR);
 	}
-}
 
-CPNG::~CPNG()
-{
-	FREEPTR(m_pIDAT);
+	return result;
 }
 
 void CPNG::UncompressIDAT()
@@ -216,14 +221,14 @@ void CPNG::PaethFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline,
 	}
 }
 
-CBitmap* CPNG::CreateBitmap()
+CBitmap CPNG::CreateBitmap()
 {
 	unsigned int nBPP = m_IHDR.GetSamplesPerPixel() * m_IHDR.m_nDepth;
 
-	CBitmap* pBitmap = new CBitmap(m_IHDR.m_nWidth, m_IHDR.m_nHeight, nBPP);
+	CBitmap bitmap = CBitmap(m_IHDR.m_nWidth, m_IHDR.m_nHeight, nBPP);
 
 	uint8* pSrc = m_pBuffer;
-	uint8* pDst = pBitmap->GetPixels();
+	uint8* pDst = bitmap.GetPixels();
 
 	unsigned int nScanBits = nBPP * m_IHDR.m_nWidth;
 	unsigned int nScanSize = (nScanBits + 7) / 8;
@@ -258,38 +263,30 @@ CBitmap* CPNG::CreateBitmap()
 
 	if(m_IHDR.m_nColorType == 3)
 	{
-		pBitmap = ConvertTo32(pBitmap);
+		bitmap = ConvertTo32(bitmap);
 	}
 
-	return pBitmap;
+	return bitmap;
 }
 
-CBitmap* CPNG::ConvertTo32(CBitmap* pSrcBitmap)
+CBitmap CPNG::ConvertTo32(const CBitmap& srcBitmap) const
 {
-	CBitmap* pDstBitmap;
-	unsigned int nPixels, i, j;
-	unsigned int nColor;
-	uint8* pSrc;
-	uint8* pDst;
+	CBitmap dstBitmap = CBitmap(srcBitmap.GetWidth(), srcBitmap.GetHeight(), 32);
+	unsigned int nPixels = srcBitmap.GetWidth() * srcBitmap.GetHeight();
 
-	pDstBitmap = new CBitmap(pSrcBitmap->GetWidth(), pSrcBitmap->GetHeight(), 32);
-	nPixels = pSrcBitmap->GetWidth() * pSrcBitmap->GetHeight();
-
-	pDst = pDstBitmap->GetPixels();
-	pSrc = pSrcBitmap->GetPixels();
+	uint8* pDst = dstBitmap.GetPixels();
+	uint8* pSrc = srcBitmap.GetPixels();
 	
-	for(i = 0, j = 0; i < nPixels; i++, j += 4)
+	for(unsigned int i = 0, j = 0; i < nPixels; i++, j += 4)
 	{
-		nColor = pSrc[i] * 3;
+		unsigned int nColor = pSrc[i] * 3;
 		pDst[j + 0] = m_nPalette[nColor + 0];
 		pDst[j + 1] = m_nPalette[nColor + 1];
 		pDst[j + 2] = m_nPalette[nColor + 2];
 		pDst[j + 3] = 0;
 	}
 
-	delete pSrcBitmap;
-
-	return pDstBitmap;
+	return dstBitmap;
 }
 
 void CPNG::CIHDR::Unserialize(CStream& pStream)

@@ -11,10 +11,10 @@ namespace Framework
 	class CPNG
 	{
 	public:
-		static CBitmap*		ReadBitmap(CStream&);
+		static CBitmap		ReadBitmap(CStream&);
 
 	private:
-							CPNG(CStream&, CBitmap**);
+							CPNG();
 							~CPNG();
 
 		class CIHDR
@@ -33,14 +33,15 @@ namespace Framework
 			uint8			m_nInterlace;
 		};
 
+		CBitmap				DoRead(CStream&);
 		void				UncompressIDAT();
 		void				SubFilter(uint8*, unsigned int, unsigned int, unsigned int);
 		void				UpFilter(uint8*, unsigned int, unsigned int, unsigned int);
 		void				AverageFilter(uint8*, unsigned int, unsigned int, unsigned int);
 		void				PaethFilter(uint8*, unsigned int, unsigned int, unsigned int);
 		uint8				PaethPredictor(uint8, uint8, uint8);
-		CBitmap*			CreateBitmap();
-		CBitmap*			ConvertTo32(CBitmap*);
+		CBitmap				CreateBitmap();
+		CBitmap				ConvertTo32(const CBitmap&) const;
 
 		CIHDR				m_IHDR;
 		uint8				m_nPalette[0x300];
