@@ -687,5 +687,8 @@
     <ClInclude Include="..\include\LzAri.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\win32\ComPtr.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

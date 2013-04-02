@@ -197,6 +197,23 @@ void CBitmap::Blit(const CBitmap& Src, unsigned int nLeft, unsigned int nTop)
 	}
 }
 
+CBitmap CBitmap::AddAlphaChannel(uint8 alphaValue) const
+{
+	assert(m_bpp == 24);
+	CBitmap result(m_width, m_height, 32);
+
+	uint32 pixelCount = m_width * m_height;
+	for(uint32 i = 0; i < pixelCount; i++)
+	{
+		result.m_pixels[(i * 4) + 0] = m_pixels[(i * 3) + 0];
+		result.m_pixels[(i * 4) + 1] = m_pixels[(i * 3) + 1];
+		result.m_pixels[(i * 4) + 2] = m_pixels[(i * 3) + 2];
+		result.m_pixels[(i * 4) + 3] = alphaValue;
+	}
+
+	return result;
+}
+
 void CBitmap::CopyFrom(const CBitmap& src)
 {
 	if(src.GetPixelsSize() != GetPixelsSize())

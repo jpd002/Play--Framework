@@ -54,6 +54,8 @@ namespace Framework
 		uint8*			GetPixels() const;
 		void			Blit(const CBitmap&, unsigned int, unsigned int);
 
+		CBitmap			AddAlphaChannel(uint8 alphaValue) const;
+
 	private:
 		void			CopyFrom(const CBitmap&);
 		void			MoveFrom(CBitmap&&);
