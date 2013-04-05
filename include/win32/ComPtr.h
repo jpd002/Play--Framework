@@ -1,14 +1,13 @@
 #pragma once
 
 #include <Windows.h>
-#include <boost/utility.hpp>
 
 namespace Framework
 {
 	namespace Win32
 	{
 		template <typename PtrType>
-		class CComPtr : public boost::noncopyable
+		class CComPtr
 		{
 		public:
 			CComPtr()
@@ -17,12 +16,21 @@ namespace Framework
 
 			}
 
+			CComPtr(const CComPtr& rhs)
+			: m_ptr(nullptr)
+			{
+				CopyFrom(rhs);
+			}
+
+			CComPtr(CComPtr&& rhs)
+			: m_ptr(nullptr)
+			{
+				MoveFrom(std::move(rhs));
+			}
+
 			~CComPtr()
 			{
-				if(m_ptr)
-				{
-					m_ptr->Release();
-				}
+				Reset();
 			}
 
 			operator PtrType*()
@@ -33,6 +41,23 @@ namespace Framework
 			operator PtrType**()
 			{
 				return &m_ptr;
+			}
+
+			CComPtr& operator =(const CComPtr& rhs)
+			{
+				if(&rhs != this)
+				{
+					Reset();
+					CopyFrom(rhs);
+				}
+				return (*this);
+			}
+
+			CComPtr& operator =(CComPtr&& rhs)
+			{
+				Reset();
+				MoveFrom(std::move(rhs));
+				return (*this);
 			}
 
 			PtrType* operator ->()
@@ -52,13 +77,37 @@ namespace Framework
 				return result;
 			}
 
+			void Reset()
+			{
+				if(m_ptr != nullptr)
+				{
+					m_ptr->Release();
+					m_ptr = nullptr;
+				}
+			}
+
 			bool IsEmpty() const
 			{
 				return (m_ptr == nullptr);
 			}
 
 		private:
-			PtrType*		m_ptr;
+			void CopyFrom(const CComPtr& src)
+			{
+				assert(m_ptr == nullptr);
+				m_ptr = src.m_ptr;
+				if(m_ptr != nullptr)
+				{
+					m_ptr->AddRef();
+				}
+			}
+
+			void MoveFrom(CComPtr&& src)
+			{
+				std::swap(m_ptr, src.m_ptr);
+			}
+
+			PtrType* m_ptr;
 		};
 	};
 };
