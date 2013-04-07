@@ -102,9 +102,9 @@ void CPNG::UncompressIDAT()
 	}
 }
 
-void CPNG::SubFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline, unsigned int nBPP)
+void CPNG::SubFilter(uint8* pRaw, size_t nPitch, unsigned int nScanline, unsigned int nBPP)
 {
-	int nDist = (nBPP / 8);
+	size_t nDist = (nBPP / 8);
 
 	for(int i = 0; i < static_cast<int>(nPitch); i++)
 	{
@@ -121,7 +121,7 @@ void CPNG::SubFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline, u
 	}
 }
 
-void CPNG::UpFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline, unsigned int nBPP)
+void CPNG::UpFilter(uint8* pRaw, size_t nPitch, unsigned int nScanline, unsigned int nBPP)
 {
 	for(int i = 0; i < static_cast<int>(nPitch); i++)
 	{
@@ -138,9 +138,9 @@ void CPNG::UpFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline, un
 	}
 }
 
-void CPNG::AverageFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline, unsigned int nBPP)
+void CPNG::AverageFilter(uint8* pRaw, size_t nPitch, unsigned int nScanline, unsigned int nBPP)
 {
-	int nDist = (nBPP / 8);
+	size_t nDist = (nBPP / 8);
 
 	for(int i = 0; i < static_cast<int>(nPitch); i++)
 	{
@@ -181,9 +181,9 @@ uint8 CPNG::PaethPredictor(uint8 a, uint8 b, uint8 c)
 	return c;
 }
 
-void CPNG::PaethFilter(uint8* pRaw, unsigned int nPitch, unsigned int nScanline, unsigned int nBPP)
+void CPNG::PaethFilter(uint8* pRaw, size_t nPitch, unsigned int nScanline, unsigned int nBPP)
 {
-	int nDist = (nBPP / 8);
+	size_t nDist = (nBPP / 8);
 
 	for(int i = 0; i < static_cast<int>(nPitch); i++)
 	{
