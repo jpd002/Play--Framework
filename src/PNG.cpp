@@ -16,8 +16,11 @@ CBitmap CPNG::ReadBitmap(CStream& stream)
 }
 
 CPNG::CPNG()
+: m_pIDAT(nullptr)
+, m_pBuffer(nullptr)
+, m_nIDATSize(0)
 {
-
+	memset(&m_IHDR, 0, sizeof(m_IHDR));
 }
 
 CPNG::~CPNG()
