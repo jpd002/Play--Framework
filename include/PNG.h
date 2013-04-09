@@ -35,10 +35,10 @@ namespace Framework
 
 		CBitmap				DoRead(CStream&);
 		void				UncompressIDAT();
-		void				SubFilter(uint8*, size_t, unsigned int, unsigned int);
-		void				UpFilter(uint8*, size_t, unsigned int, unsigned int);
-		void				AverageFilter(uint8*, size_t, unsigned int, unsigned int);
-		void				PaethFilter(uint8*, size_t, unsigned int, unsigned int);
+		void				SubFilter(uint8*, int, unsigned int, unsigned int);
+		void				UpFilter(uint8*, int, unsigned int, unsigned int);
+		void				AverageFilter(uint8*, int, unsigned int, unsigned int);
+		void				PaethFilter(uint8*, int, unsigned int, unsigned int);
 		uint8				PaethPredictor(uint8, uint8, uint8);
 		CBitmap				CreateBitmap();
 		CBitmap				ConvertTo32(const CBitmap&) const;
