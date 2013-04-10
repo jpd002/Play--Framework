@@ -12,14 +12,16 @@ namespace Framework
 		bool			GetNodeIntValue(CNode*, const char*, int*);
 		bool			GetNodeBoolValue(CNode*, const char*, bool*);
 
-        std::string     GetNodeStringValue(CNode*, const char*);
+		std::string		GetNodeStringValue(CNode*, const char*);
 
 		bool			GetAttributeStringValue(CNode*, const char*, const char**);
 		bool			GetAttributeIntValue(CNode*, const char*, int*);
+		bool			GetAttributeFloatValue(CNode*, const char*, float*);
 		bool			GetAttributeBoolValue(CNode*, const char*, bool*);
 
-        std::string     GetAttributeStringValue(CNode*, const char*);
-        int             GetAttributeIntValue(CNode*, const char*);
+		std::string		GetAttributeStringValue(CNode*, const char*);
+		int				GetAttributeIntValue(CNode*, const char*);
+		float			GetAttributeFloatValue(CNode*, const char*);
 
 		Xml::CNode*		CreateNodeStringValue(const char*, const char*);
 		Xml::CNode*		CreateNodeIntValue(const char*, int);

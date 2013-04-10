@@ -114,24 +114,21 @@ bool Xml::GetAttributeIntValue(Xml::CNode* pNode, const char* sName, int* pValue
 	return true;
 }
 
-std::string Xml::GetAttributeStringValue(Xml::CNode* pNode, const char* sName)
+bool Xml::GetAttributeFloatValue(Xml::CNode* node, const char* name, float* value)
 {
-	const char* sValue(nullptr);
-	if(!GetAttributeStringValue(pNode, sName, &sValue))
+	const char* text(nullptr);
+	if(!GetAttributeStringValue(node, name, &text))
 	{
-		throw std::exception();
+		return false;
 	}
-	return sValue;
-}
 
-int Xml::GetAttributeIntValue(Xml::CNode* pNode, const char* sName)
-{
-	int nValue = 0;
-	if(!GetAttributeIntValue(pNode, sName, &nValue))
+	if(value == nullptr)
 	{
-		throw std::exception();
+		return false;
 	}
-	return nValue;
+
+	(*value) = static_cast<float>(atof(text));
+	return true;
 }
 
 bool Xml::GetAttributeBoolValue(Xml::CNode* pNode, const char* sName, bool* pValue)
@@ -157,6 +154,36 @@ bool Xml::GetAttributeBoolValue(Xml::CNode* pNode, const char* sName, bool* pVal
 	}
 
 	return true;
+}
+
+std::string Xml::GetAttributeStringValue(Xml::CNode* pNode, const char* sName)
+{
+	const char* sValue(nullptr);
+	if(!GetAttributeStringValue(pNode, sName, &sValue))
+	{
+		throw std::exception();
+	}
+	return sValue;
+}
+
+int Xml::GetAttributeIntValue(Xml::CNode* pNode, const char* sName)
+{
+	int nValue = 0;
+	if(!GetAttributeIntValue(pNode, sName, &nValue))
+	{
+		throw std::exception();
+	}
+	return nValue;
+}
+
+float Xml::GetAttributeFloatValue(Xml::CNode* node, const char* name)
+{
+	float value = 0;
+	if(!GetAttributeFloatValue(node, name, &value))
+	{
+		throw std::exception();
+	}
+	return value;
 }
 
 Xml::CNode* Xml::CreateNodeStringValue(const char* sName, const char* sValue)
