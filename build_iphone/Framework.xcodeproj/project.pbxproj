@@ -499,6 +499,7 @@
 				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = Framework;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -521,6 +522,7 @@
 				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = Framework;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
