@@ -64,6 +64,7 @@
     <ClCompile Include="..\src\string_cast.cpp" />
     <ClCompile Include="..\src\string_cast_sjis.cpp" />
     <ClCompile Include="..\src\string_cast_win1252.cpp" />
+    <ClCompile Include="..\src\ThreadPool.cpp" />
     <ClCompile Include="..\src\Utf8.cpp" />
     <ClCompile Include="..\src\win32\AcceleratorTableGenerator.cpp" />
     <ClCompile Include="..\src\win32\Button.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="..\include\string_cast_sjis.h" />
     <ClInclude Include="..\include\string_cast_win1252.h" />
     <ClInclude Include="..\include\tcharx.h" />
+    <ClInclude Include="..\include\ThreadPool.h" />
     <ClInclude Include="..\include\Types.h" />
     <ClInclude Include="..\include\Utf8.h" />
     <ClInclude Include="..\include\win32\AcceleratorTableGenerator.h" />
