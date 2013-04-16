@@ -31,6 +31,7 @@
     <ClCompile Include="..\src\idct\TrivialC.cpp" />
     <ClCompile Include="..\src\IosIStream.cpp" />
     <ClCompile Include="..\src\IosOStream.cpp" />
+    <ClCompile Include="..\src\JPEG.cpp" />
     <ClCompile Include="..\src\layout\FlatLayout.cpp" />
     <ClCompile Include="..\src\layout\GridLayout.cpp" />
     <ClCompile Include="..\src\layout\HorizontalLayout.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="..\include\idct\TrivialC.h" />
     <ClInclude Include="..\include\IosIStream.h" />
     <ClInclude Include="..\include\IosOStream.h" />
+    <ClInclude Include="..\include\JPEG.h" />
     <ClInclude Include="..\include\layout\FlatLayout.h" />
     <ClInclude Include="..\include\layout\GridLayout.h" />
     <ClInclude Include="..\include\layout\HorizontalLayout.h" />
