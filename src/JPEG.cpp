@@ -387,7 +387,7 @@ void CJPEG::Draw8x8Block(unsigned int nX, unsigned int nY, uint8 *pReMap, uint8*
 			if(xofs >= m_Frame.nCX) continue;
 			if(yofs >= m_Frame.nCY) continue;
 
-			pImage[(yofs * m_Frame.nCX) + xofs] = (nB << 16) | (nG << 8) | (nR);
+			pImage[(yofs * m_Frame.nCX) + xofs] = 0xFF000000 | (nB << 16) | (nG << 8) | (nR);
 		}
 	}
 }
