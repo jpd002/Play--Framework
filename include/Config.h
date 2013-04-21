@@ -2,10 +2,10 @@
 #define _CONFIG_H_
 
 #include <string>
-#include <boost/thread.hpp>
 #include <boost/utility.hpp>
 #include <boost/filesystem/path.hpp>
 #include <map>
+#include <mutex>
 #include "xml/Node.h"
 
 namespace Framework
@@ -105,7 +105,7 @@ namespace Framework
 		void								InsertPreference(CPreference*);
 
 		PreferenceMapType					m_preferences;
-		boost::mutex						m_mutex;
+		std::mutex							m_mutex;
 		PathType							m_path;
 	};
 }

@@ -85,7 +85,7 @@ template <typename Type> Type* CConfig::FindPreference(const char* sName)
 	CPreference* pRet = NULL;
 
 	{
-		boost::mutex::scoped_lock mutexLock(m_mutex);
+		std::unique_lock<std::mutex> mutexLock(m_mutex);
 		PreferenceMapType::iterator preferenceIterator(m_preferences.find(sName));
 		if(preferenceIterator != m_preferences.end())
 		{
@@ -272,7 +272,7 @@ void CConfig::Save()
 
 void CConfig::InsertPreference(CPreference* pPref)
 {
-	boost::mutex::scoped_lock mutexLock(m_mutex);
+	std::unique_lock<std::mutex> mutexLock(m_mutex);
 	m_preferences[pPref->GetName()] = pPref;
 }
 
