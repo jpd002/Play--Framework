@@ -20,9 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Base64.cpp" />
-    <ClCompile Include="..\src\Bitmap.cpp" />
+    <ClCompile Include="..\src\bitmap\Bitmap.cpp" />
+    <ClCompile Include="..\src\bitmap\BMP.cpp" />
+    <ClCompile Include="..\src\bitmap\JPEG.cpp" />
+    <ClCompile Include="..\src\bitmap\PNG.cpp" />
     <ClCompile Include="..\src\BitStream.cpp" />
-    <ClCompile Include="..\src\BMP.cpp" />
     <ClCompile Include="..\src\Config.cpp" />
     <ClCompile Include="..\src\Deflate.cpp" />
     <ClCompile Include="..\src\Endian.cpp" />
@@ -31,7 +33,6 @@
     <ClCompile Include="..\src\idct\TrivialC.cpp" />
     <ClCompile Include="..\src\IosIStream.cpp" />
     <ClCompile Include="..\src\IosOStream.cpp" />
-    <ClCompile Include="..\src\JPEG.cpp" />
     <ClCompile Include="..\src\layout\FlatLayout.cpp" />
     <ClCompile Include="..\src\layout\GridLayout.cpp" />
     <ClCompile Include="..\src\layout\HorizontalLayout.cpp" />
@@ -57,7 +58,6 @@
     <ClCompile Include="..\src\mpeg2\QuantiserScaleTable.cpp" />
     <ClCompile Include="..\src\mpeg2\VLCTable.cpp" />
     <ClCompile Include="..\src\PathUtils.cpp" />
-    <ClCompile Include="..\src\PNG.cpp" />
     <ClCompile Include="..\src\PtrStream.cpp" />
     <ClCompile Include="..\src\StdStream.cpp" />
     <ClCompile Include="..\src\Stream.cpp" />
@@ -125,9 +125,11 @@
     <ClInclude Include="..\include\alloca_def.h" />
     <ClInclude Include="..\include\Base64.h" />
     <ClInclude Include="..\include\BasicUnion.h" />
-    <ClInclude Include="..\include\Bitmap.h" />
+    <ClInclude Include="..\include\bitmap\Bitmap.h" />
+    <ClInclude Include="..\include\bitmap\BMP.h" />
+    <ClInclude Include="..\include\bitmap\JPEG.h" />
+    <ClInclude Include="..\include\bitmap\PNG.h" />
     <ClInclude Include="..\include\BitStream.h" />
-    <ClInclude Include="..\include\BMP.h" />
     <ClInclude Include="..\include\Config.h" />
     <ClInclude Include="..\include\Convertible.h" />
     <ClInclude Include="..\include\countof.h" />
@@ -139,7 +141,6 @@
     <ClInclude Include="..\include\idct\TrivialC.h" />
     <ClInclude Include="..\include\IosIStream.h" />
     <ClInclude Include="..\include\IosOStream.h" />
-    <ClInclude Include="..\include\JPEG.h" />
     <ClInclude Include="..\include\layout\FlatLayout.h" />
     <ClInclude Include="..\include\layout\GridLayout.h" />
     <ClInclude Include="..\include\layout\HorizontalLayout.h" />
@@ -170,7 +171,6 @@
     <ClInclude Include="..\include\offsetof_def.h" />
     <ClInclude Include="..\include\PathUtils.h" />
     <ClInclude Include="..\include\placeholder_def.h" />
-    <ClInclude Include="..\include\PNG.h" />
     <ClInclude Include="..\include\PtrMacro.h" />
     <ClInclude Include="..\include\PtrStream.h" />
     <ClInclude Include="..\include\Singleton.h" />

@@ -1,5 +1,4 @@
-#ifndef _BMP_H_
-#define _BMP_H_
+#pragma once
 
 #include <functional>
 #include "Stream.h"
@@ -11,7 +10,7 @@ namespace Framework
 	class CBMP
 	{
 	public:
-		static CBitmap*		ReadBitmap(CStream&);
+		static CBitmap		ReadBitmap(CStream&);
 		static void			WriteBitmap(const CBitmap&, CStream&);
 
 	private:
@@ -43,5 +42,3 @@ namespace Framework
 	};
 
 }
-
-#endif

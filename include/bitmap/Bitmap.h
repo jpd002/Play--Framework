@@ -1,5 +1,4 @@
-#ifndef _BITMAP_H_
-#define _BITMAP_H_
+#pragma once
 
 #include "Types.h"
 #include <functional>
@@ -67,5 +66,3 @@ namespace Framework
 	};
 
 }
-
-#endif

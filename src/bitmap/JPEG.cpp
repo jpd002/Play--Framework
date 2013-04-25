@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include "JPEG.h"
+#include "bitmap/JPEG.h"
 #include "idct/TrivialC.h"
 #include "idct/IEEE1180.h"
 #include "StreamBitStream.h"

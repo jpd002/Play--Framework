@@ -23,15 +23,12 @@
     <Filter Include="Source Files\idct">
       <UniqueIdentifier>{aeb1e385-19b0-42b7-9383-177edd9a16bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\bitmap">
+      <UniqueIdentifier>{bf2919bb-b2b5-4dab-a011-9de8fff37cd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\Bitmap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\BitStream.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\BMP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Config.cpp">
@@ -56,9 +53,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\PathUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\PNG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\PtrStream.cpp">
@@ -325,8 +319,17 @@
     <ClCompile Include="..\src\ThreadPool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\JPEG.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\src\bitmap\Bitmap.cpp">
+      <Filter>Source Files\bitmap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\bitmap\BMP.cpp">
+      <Filter>Source Files\bitmap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\bitmap\JPEG.cpp">
+      <Filter>Source Files\bitmap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\bitmap\PNG.cpp">
+      <Filter>Source Files\bitmap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -339,13 +342,7 @@
     <ClInclude Include="..\include\BasicUnion.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Bitmap.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\BitStream.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\BMP.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Config.h">
@@ -388,9 +385,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\placeholder_def.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\PNG.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\PtrMacro.h">
@@ -699,8 +693,17 @@
     <ClInclude Include="..\include\ThreadPool.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\JPEG.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="..\include\bitmap\Bitmap.h">
+      <Filter>Source Files\bitmap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bitmap\BMP.h">
+      <Filter>Source Files\bitmap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bitmap\JPEG.h">
+      <Filter>Source Files\bitmap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bitmap\PNG.h">
+      <Filter>Source Files\bitmap</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

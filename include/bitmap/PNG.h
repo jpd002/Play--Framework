@@ -1,5 +1,4 @@
-#ifndef _PNG_H_
-#define _PNG_H_
+#pragma once
 
 #include "Types.h"
 #include "Stream.h"
@@ -51,5 +50,3 @@ namespace Framework
 	};
 
 }
-
-#endif

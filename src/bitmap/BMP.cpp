@@ -1,8 +1,7 @@
 #include <stdexcept>
-#include "BMP.h"
+#include "bitmap/BMP.h"
 
 using namespace Framework;
-using namespace std;
 
 void CBMP::WriteBitmap(const CBitmap& bitmap, CStream& stream)
 {
@@ -62,7 +61,7 @@ void CBMP::WriteBitmap(const CBitmap& bitmap, CStream& stream)
 	}
 }
 
-CBitmap* CBMP::ReadBitmap(CStream& Stream)
+CBitmap CBMP::ReadBitmap(CStream& Stream)
 {
 	HEADER Header;
 	Stream.Read(&Header, sizeof(HEADER));
@@ -82,8 +81,8 @@ CBitmap* CBMP::ReadBitmap(CStream& Stream)
 
 	Stream.Seek(Header.nDataOffset, STREAM_SEEK_SET);
 
-	CBitmap* result(new CBitmap(nWidth, nHeight, Header.nBPP));
-	uint8* pPixels = result->GetPixels();
+	CBitmap result(nWidth, nHeight, Header.nBPP);
+	uint8* pPixels = result.GetPixels();
 	for(int i = (nHeight - 1); i >= 0; i--)
 	{
 		Stream.Read(pPixels + (i * nWidth), nWidth);

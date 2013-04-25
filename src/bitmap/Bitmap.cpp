@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <string.h>
 #include "PtrMacro.h"
-#include "Bitmap.h"
+#include "bitmap/Bitmap.h"
 
 using namespace Framework;
 
