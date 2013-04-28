@@ -1,5 +1,6 @@
 #include "win32/ClientDeviceContext.h"
 #include "win32/Splitter.h"
+#include <commctrl.h>
 
 #define CLSNAME		_T("CSplitter")
 
@@ -24,7 +25,7 @@ CSplitter::CSplitter(HWND hParent, const RECT& Rect, HCURSOR nCursor, unsigned i
 		w.hbrBackground	= (HBRUSH)GetSysColorBrush(COLOR_BTNFACE);
 		w.hInstance		= GetModuleHandle(NULL);
 		w.hCursor		= LoadCursor(NULL, IDC_ARROW);
-        w.style         = CS_VREDRAW | CS_HREDRAW;
+		w.style			= CS_VREDRAW | CS_HREDRAW;
 		RegisterClassEx(&w);
 	}
 
@@ -45,12 +46,9 @@ void CSplitter::SetChild(unsigned int nIndex, HWND hWnd)
 
 void CSplitter::SetEdgePosition(double nFraction)
 {
-	short nX, nY;
-	RECT ClientRect;
-
-	GetClientRect(&ClientRect);
-	nX = (short)((double)ClientRect.right * nFraction);
-	nY = (short)((double)ClientRect.bottom * nFraction);
+	RECT clientRect = GetClientRect();
+	short nX = (short)((double)clientRect.right * nFraction);
+	short nY = (short)((double)clientRect.bottom * nFraction);
 
 	UpdateEdgePosition(nX, nY);
 
@@ -73,6 +71,9 @@ long CSplitter::OnMouseMove(WPARAM wParam, int nX, int nY)
 
 		ResizeChild(0);
 		ResizeChild(1);
+
+		//Just send a generic message to our parent if it wants to update stuff while the edge is moving
+		SendMessage(GetParent(), WM_COMMAND, MAKEWPARAM(0, 0), reinterpret_cast<LPARAM>(m_hWnd));
 	}
 
 	SetCursor(m_nCursor);

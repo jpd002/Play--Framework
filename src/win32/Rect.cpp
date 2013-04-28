@@ -7,9 +7,9 @@ CRect::CRect(int nLeft, int nTop, int nRight, int nBottom)
 	SetRect(&m_Rect, nLeft, nTop, nRight, nBottom);
 }
 
-CRect::CRect(RECT Source)
+CRect::CRect(const RECT& Source)
 {
-    CopyRect(&m_Rect, &Source);
+	CopyRect(&m_Rect, &Source);
 }
 
 CRect::~CRect()
@@ -24,27 +24,27 @@ CRect::operator RECT*()
 
 CRect::operator RECT&()
 {
-    return m_Rect;
+	return m_Rect;
 }
 
 int CRect::Left() const
 {
-    return m_Rect.left;
+	return m_Rect.left;
 }
 
 int CRect::Top() const
 {
-    return m_Rect.top;
+	return m_Rect.top;
 }
 
 int CRect::Right() const
 {
-    return m_Rect.right;
+	return m_Rect.right;
 }
 
 int CRect::Bottom() const
 {
-    return m_Rect.bottom;
+	return m_Rect.bottom;
 }
 
 CRect& CRect::Adjust(uint32 nStyle, bool nMenu)
@@ -55,14 +55,14 @@ CRect& CRect::Adjust(uint32 nStyle, bool nMenu)
 
 CRect& CRect::Inflate(int nDx, int nDy)
 {
-    InflateRect(&m_Rect, nDx, nDy);
-    return (*this);
+	InflateRect(&m_Rect, nDx, nDy);
+	return (*this);
 }
 
 bool CRect::PtIn(int nX, int nY)
 {
-    POINT Pt;
-    Pt.x = nX;
-    Pt.y = nY;
-    return PtInRect(&m_Rect, Pt) != 0;
+	POINT Pt;
+	Pt.x = nX;
+	Pt.y = nY;
+	return PtInRect(&m_Rect, Pt) != 0;
 }

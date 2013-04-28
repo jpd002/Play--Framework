@@ -9,9 +9,9 @@ CStatic::CStatic(HWND hWnd)
 	m_hWnd = hWnd;
 }
 
-CStatic::CStatic(HWND hParent, RECT* pR, unsigned long nStyle)
+CStatic::CStatic(HWND hParent, const RECT& rect, unsigned long nStyle)
 {
-	Create(NULL, _T("STATIC"), _T(""), WS_CHILD | WS_VISIBLE | nStyle, pR, hParent, NULL);
+	Create(NULL, _T("STATIC"), _T(""), WS_CHILD | WS_VISIBLE | nStyle, &rect, hParent, NULL);
 }
 
 CStatic::CStatic(HWND hParent, const TCHAR* sText, unsigned long nStyle)
