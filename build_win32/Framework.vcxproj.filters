@@ -705,5 +705,8 @@
     <ClInclude Include="..\include\bitmap\PNG.h">
       <Filter>Source Files\bitmap</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\make_unique.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

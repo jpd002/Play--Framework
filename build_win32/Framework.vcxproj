@@ -152,6 +152,7 @@
     <ClInclude Include="..\include\layout\VerticalLayout.h" />
     <ClInclude Include="..\include\lexical_cast_ex.h" />
     <ClInclude Include="..\include\LzAri.h" />
+    <ClInclude Include="..\include\make_unique.h" />
     <ClInclude Include="..\include\MemStream.h" />
     <ClInclude Include="..\include\mpeg2\CodedBlockPatternTable.h" />
     <ClInclude Include="..\include\mpeg2\DcSizeChrominanceTable.h" />
