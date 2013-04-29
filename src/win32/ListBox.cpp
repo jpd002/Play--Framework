@@ -9,9 +9,9 @@ CListBox::CListBox(HWND hWnd)
 	m_hWnd = hWnd;
 }
 
-CListBox::CListBox(HWND hParent, RECT* pR, unsigned long nStyle, unsigned long nStyleEx)
+CListBox::CListBox(HWND hParent, const RECT& rect, unsigned long nStyle, unsigned long nStyleEx)
 {
-	Create(nStyleEx, _T("LISTBOX"), _T(""), WS_VISIBLE | WS_CHILD | nStyle, pR, hParent, NULL);
+	Create(nStyleEx, _T("LISTBOX"), _T(""), WS_VISIBLE | WS_CHILD | nStyle, rect, hParent, NULL);
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 

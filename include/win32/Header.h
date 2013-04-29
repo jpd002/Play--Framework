@@ -12,7 +12,7 @@ namespace Framework
 		{
 		public:
 					CHeader(HWND);
-					CHeader(HWND, RECT*, unsigned long = 0, unsigned long = 0);
+					CHeader(HWND, const RECT&, unsigned long = 0, unsigned long = 0);
 
 			void	GetItem(unsigned int, HDITEM*);
 			void	SetItem(unsigned int, HDITEM*);

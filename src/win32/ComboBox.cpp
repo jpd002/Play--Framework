@@ -4,9 +4,9 @@
 using namespace Framework;
 using namespace Framework::Win32;
 
-CComboBox::CComboBox(HWND hParent, RECT* pR, unsigned long nStyle)
+CComboBox::CComboBox(HWND hParent, const RECT& rect, unsigned long nStyle)
 {
-	Create(NULL, _T("ComboBox"), _T(""), WS_VISIBLE | WS_CHILD | WS_VSCROLL | nStyle, pR, hParent, NULL);
+	Create(NULL, _T("ComboBox"), _T(""), WS_VISIBLE | WS_CHILD | WS_VSCROLL | nStyle, rect, hParent, NULL);
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 
@@ -55,12 +55,11 @@ int CComboBox::FindItemData(uint32 nValue)
 
 void CComboBox::FixHeight(unsigned int nHeight)
 {
-	RECT rc;
-	GetClientRect(&rc);
+	RECT rc = GetClientRect();
 	SetSize(rc.right - rc.left, nHeight);
 }
 
 void CComboBox::ResetContent()
 {
-    SendMessage(m_hWnd, CB_RESETCONTENT, 0, 0);
+	SendMessage(m_hWnd, CB_RESETCONTENT, 0, 0);
 }

@@ -5,10 +5,10 @@ using namespace Framework;
 using namespace Framework::Win32;
 using namespace std;
 
-CTreeView::CTreeView(HWND hParent, RECT* pR, unsigned long nStyle, unsigned long nExStyle)
+CTreeView::CTreeView(HWND hParent, const RECT& rect, unsigned long nStyle, unsigned long nExStyle)
 {
 	InitCommonControls();
-	Create(nExStyle, WC_TREEVIEW, _T(""), WS_CHILD | WS_VISIBLE | nStyle, pR, hParent, NULL);
+	Create(nExStyle, WC_TREEVIEW, _T(""), WS_CHILD | WS_VISIBLE | nStyle, rect, hParent, NULL);
 }
 
 HTREEITEM CTreeView::InsertItem(TVINSERTSTRUCT* pI)

@@ -11,7 +11,7 @@ namespace Framework
 		{
 		public:
 						CButton(HWND);
-						CButton(const TCHAR*, HWND, RECT*, unsigned long = 0);
+						CButton(const TCHAR*, HWND, const RECT&, unsigned long = 0);
 
 			bool		GetCheck();
 			void		SetCheck(bool = true);

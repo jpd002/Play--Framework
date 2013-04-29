@@ -4,6 +4,7 @@
 #include <windows.h>
 #include "tcharx.h"
 #include "ScrollBar.h"
+#include "Rect.h"
 
 namespace Framework
 {
@@ -33,7 +34,7 @@ namespace Framework
 			static WNDCLASSEX		MakeWndClass(const TCHAR*);
 
 			//Helpers
-			void					Create(unsigned long, const TCHAR*, const TCHAR*, unsigned long, const RECT*, HWND, void*);  
+			void					Create(unsigned long, const TCHAR*, const TCHAR*, unsigned long, const RECT&, HWND, void*);
 			unsigned int			Destroy();
 			unsigned int			Show(int);
 			unsigned int			Enable(unsigned int);
@@ -51,11 +52,10 @@ namespace Framework
 			void					SetFocus();
 			void					SetSize(unsigned int, unsigned int);
 			void					SetPosition(unsigned int, unsigned int);
-			void					SetSizePosition(RECT*);
+			void					SetSizePosition(const RECT&);
 			void					Center(HWND = 0);
-			void					GetClientRect(RECT*);
-			void					GetWindowRect(RECT*);
 			RECT					GetClientRect();
+			RECT					GetWindowRect();
 			HWND					GetParent();
 			void					Redraw();
 			void					ModifyStyleOr(unsigned long);

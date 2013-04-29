@@ -1,4 +1,5 @@
 #include "win32/TrayIconServer.h"
+#include "win32/Rect.h"
 
 #define CLSNAME _T("TrayIconServer")
 #define WM_TRAY (WM_USER)
@@ -9,9 +10,7 @@ using namespace Framework::Win32;
 CTrayIconServer::CTrayIconServer()
 : m_taskBarCreatedMessage(0)
 {
-    m_taskBarCreatedMessage = RegisterWindowMessage(_T("TaskbarCreated"));
-
-    RECT rc;
+	m_taskBarCreatedMessage = RegisterWindowMessage(_T("TaskbarCreated"));
 
 	if(!DoesWindowClassExist(CLSNAME))
 	{
@@ -24,9 +23,7 @@ CTrayIconServer::CTrayIconServer()
 		RegisterClassEx(&wc);
 	}
 
-	SetRect(&rc, 0, 0, 0, 0);
-
-	Create(NULL, CLSNAME, _T(""), NULL, &rc, NULL, NULL);
+	Create(NULL, CLSNAME, _T(""), NULL, Framework::Win32::CRect(0, 0, 0, 0), NULL, NULL);
 	SetClassPtr();
 }
 

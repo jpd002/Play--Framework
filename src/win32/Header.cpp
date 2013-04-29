@@ -9,10 +9,10 @@ CHeader::CHeader(HWND hWnd)
 	m_hWnd = hWnd;
 }
 
-CHeader::CHeader(HWND hParent, RECT* pRect, unsigned long nStyle, unsigned long nExStyle)
+CHeader::CHeader(HWND hParent, const RECT& rect, unsigned long nStyle, unsigned long nExStyle)
 {
 	InitCommonControls();
-	Create(nExStyle, WC_HEADER, _T(""), WS_CHILD | WS_VISIBLE | nStyle, pRect, hParent, NULL);
+	Create(nExStyle, WC_HEADER, _T(""), WS_CHILD | WS_VISIBLE | nStyle, rect, hParent, NULL);
 }
 
 void CHeader::GetItem(unsigned int index, HDITEM* item)

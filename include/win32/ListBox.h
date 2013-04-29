@@ -11,7 +11,7 @@ namespace Framework
 		{
 		public:
 							CListBox(HWND);
-							CListBox(HWND, RECT*, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
+							CListBox(HWND, const RECT&, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
 
 			unsigned int	AddString(const TCHAR*);
 			void			ResetContent();

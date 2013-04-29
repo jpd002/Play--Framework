@@ -32,7 +32,7 @@ namespace Framework
 			};
 
 							CListView(HWND);
-							CListView(HWND, RECT*, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
+							CListView(HWND, const RECT&, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
 			virtual			~CListView();
 
 			int				GetItemCount();

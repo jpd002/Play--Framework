@@ -58,28 +58,28 @@ const TCHAR* CInputBox::GetValue(HWND hParent)
 		RegisterClassEx(&wc);
 	}
 
-	RECT rc;
-	if(m_isMultiline)
 	{
-		SetRect(&rc, 0, 0, 300, 150);
+		RECT rc;
+		if(m_isMultiline)
+		{
+			SetRect(&rc, 0, 0, 300, 150);
+		}
+		else
+		{
+			SetRect(&rc, 0, 0, 300, 115);
+		}
+		Create(WNDSTYLEEX, CLSNAME, m_sTitle.c_str(), WNDSTYLE, rc, hParent, NULL);
+		SetClassPtr();
 	}
-	else
-	{
-		SetRect(&rc, 0, 0, 300, 115);
-	}
-	Create(WNDSTYLEEX, CLSNAME, m_sTitle.c_str(), WNDSTYLE, &rc, hParent, NULL);
-	SetClassPtr();
 
-	SetRect(&rc, 0, 0, 0, 0);
-
-	m_pOk = new CButton(_T("OK"), m_hWnd, &rc);
+	m_pOk = new CButton(_T("OK"), m_hWnd, CRect(0, 0, 0, 0));
 	m_pOk->SetFont(nFont);
 	m_pOk->ModifyStyleOr(BS_DEFPUSHBUTTON);
 
-	m_pCancel = new CButton(_T("Cancel"), m_hWnd, &rc);
+	m_pCancel = new CButton(_T("Cancel"), m_hWnd, CRect(0, 0, 0, 0));
 	m_pCancel->SetFont(nFont);
 
-	m_pValue = new CEdit(m_hWnd, &rc, m_sValue.c_str(), m_isMultiline ? ES_MULTILINE : 0);
+	m_pValue = new CEdit(m_hWnd, CRect(0, 0, 0, 0), m_sValue.c_str(), m_isMultiline ? ES_MULTILINE : 0);
 	m_pValue->SetFont(nFont);
 	m_pValue->SetSelection(0, -1);
 	m_pValue->SetFocus();
@@ -128,8 +128,7 @@ const TCHAR* CInputBox::GetValue(HWND hParent)
 
 void CInputBox::RefreshLayout()
 {
-	RECT rc;
-	GetClientRect(&rc);
+	RECT rc = GetClientRect();
 	
 	rc.left		+= 10;
 	rc.right	-= 10;

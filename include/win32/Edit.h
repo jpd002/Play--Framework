@@ -11,7 +11,7 @@ namespace Framework
 		{
 		public:
 					CEdit(HWND);
-					CEdit(HWND, RECT*, const TCHAR* = _T(""), unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
+					CEdit(HWND, const RECT&, const TCHAR* = _T(""), unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
 			void	SetSelection(int, int);
 			void	ReplaceSelectionA(bool, const char*);
 			void	SetTextLimit(int);

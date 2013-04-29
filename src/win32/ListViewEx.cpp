@@ -9,8 +9,8 @@ CListViewEx::CListViewEx(HWND hWnd)
 	SubClass();
 }
 
-CListViewEx::CListViewEx(HWND hParent, RECT* pR, unsigned long nStyle, unsigned long nExStyle)
-: CListView(hParent, pR, nStyle, nExStyle)
+CListViewEx::CListViewEx(HWND hParent, const RECT& rect, unsigned long nStyle, unsigned long nExStyle)
+: CListView(hParent, rect, nStyle, nExStyle)
 {
 	SubClass();
 }

@@ -1,7 +1,6 @@
-#ifndef _RECT_H_
-#define _RECT_H_
+#pragma once
 
-#include "Window.h"
+#include <Windows.h>
 #include "Types.h"
 
 namespace Framework
@@ -28,9 +27,7 @@ namespace Framework
 			bool		PtIn(int, int);
 
 		private:
-			RECT		m_Rect;
+			RECT		m_rect;
 		};
 	}
 }
-
-#endif

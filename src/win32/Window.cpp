@@ -121,9 +121,9 @@ WNDCLASSEX CWindow::MakeWndClass(const TCHAR* className)
 //Window Message Helpers
 ///////////////////////////////////////////////////////////
 
-void CWindow::Create(unsigned long nStyleEx, const TCHAR* sClass, const TCHAR* sWindow, unsigned long nStyle, const RECT* pR, HWND hParent, void* pParam)
+void CWindow::Create(unsigned long nStyleEx, const TCHAR* sClass, const TCHAR* sWindow, unsigned long nStyle, const RECT& rect, HWND hParent, void* pParam)
 {
-	m_hWnd = CreateWindowEx(nStyleEx, sClass, sWindow, nStyle, pR->left, pR->top, (pR->right - pR->left), (pR->bottom - pR->top), hParent, NULL, GetModuleHandle(NULL), pParam);
+	m_hWnd = CreateWindowEx(nStyleEx, sClass, sWindow, nStyle, rect.left, rect.top, (rect.right - rect.left), (rect.bottom - rect.top), hParent, NULL, GetModuleHandle(NULL), pParam);
 	assert(m_hWnd != NULL);
 }
 
@@ -214,29 +214,25 @@ HWND CWindow::GetParent()
 	return ::GetParent(m_hWnd);
 }
 
-void CWindow::GetClientRect(RECT* pR)
-{
-	::GetClientRect(m_hWnd, pR);
-}
-
-void CWindow::GetWindowRect(RECT* pR)
-{
-	::GetWindowRect(m_hWnd, pR);
-}
-
 RECT CWindow::GetClientRect()
 {
-	RECT Rect;
-	::GetClientRect(m_hWnd, &Rect);
-	return Rect;
+	RECT rect;
+	::GetClientRect(m_hWnd, &rect);
+	return rect;
+}
+
+RECT CWindow::GetWindowRect()
+{
+	RECT rect;
+	::GetWindowRect(m_hWnd, &rect);
+	return rect;
 }
 
 void CWindow::Center(HWND hParent)
 {
 	RECT rParent;
-	RECT rWindow;
 
-	GetWindowRect(&rWindow);
+	RECT rWindow = GetWindowRect();
 	if(hParent == NULL)
 	{
 		SetRect(&rParent, 0, 0, GetDeviceCaps(GetDC(NULL), HORZRES), GetDeviceCaps(GetDC(NULL), VERTRES));
@@ -273,9 +269,9 @@ void CWindow::SetPosition(unsigned int nX, unsigned int nY)
 	SetWindowPos(m_hWnd, NULL, nX, nY, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 }
 
-void CWindow::SetSizePosition(RECT* pRect)
+void CWindow::SetSizePosition(const RECT& rect)
 {
-	SetWindowPos(m_hWnd, NULL, pRect->left, pRect->top, pRect->right - pRect->left, pRect->bottom - pRect->top, SWP_NOZORDER);
+	SetWindowPos(m_hWnd, NULL, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, SWP_NOZORDER);
 }
 
 void CWindow::Redraw()

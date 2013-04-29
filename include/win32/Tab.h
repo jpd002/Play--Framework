@@ -1,31 +1,28 @@
-#ifndef _TAB_H_
-#define _TAB_H_
+#pragma once
 
 #include "win32/Window.h"
 #include <commctrl.h>
 
 namespace Framework
 {
-    namespace Win32
-    {
-        class CTab : public CWindow
-        {
-        public:
-                            CTab(HWND, RECT*, unsigned long = 0, unsigned long = 0);
-            virtual         ~CTab();
+	namespace Win32
+	{
+		class CTab : public CWindow
+		{
+		public:
+							CTab(HWND, const RECT&, unsigned long = 0, unsigned long = 0);
+			virtual			~CTab();
 
-            int             InsertTab(const TCHAR*);
-            std::tstring    GetTabText(int);
-            void            SetTabText(int, const TCHAR*);
-            int             GetSelection();
-            void            SetSelection(int);
-            unsigned int    GetItemCount();
-            RECT            GetDisplayAreaRect();
+			int				InsertTab(const TCHAR*);
+			std::tstring	GetTabText(int);
+			void			SetTabText(int, const TCHAR*);
+			int				GetSelection();
+			void			SetSelection(int);
+			unsigned int	GetItemCount();
+			RECT			GetDisplayAreaRect();
 
-        private:
+		private:
 
-        };
-    }
+		};
+	}
 }
-
-#endif

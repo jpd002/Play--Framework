@@ -23,15 +23,12 @@ void CStatusBar::SetText(unsigned int nPanelIdx, const TCHAR* sText)
 
 void CStatusBar::SetParts(unsigned int nCount, const double* nSizesRelative)
 {
-	unsigned int* nSizes;
-	RECT ClientRect;
-
-	nSizes = reinterpret_cast<unsigned int*>(_alloca(sizeof(unsigned int) * nCount));
-	GetClientRect(&ClientRect);
+	unsigned int* nSizes = reinterpret_cast<unsigned int*>(_alloca(sizeof(unsigned int) * nCount));
+	RECT clientRect = GetClientRect();
 
 	for(unsigned int i = 0; i < nCount; i++)
 	{
-		nSizes[i] = static_cast<unsigned int>(nSizesRelative[i] * static_cast<double>(ClientRect.right));
+		nSizes[i] = static_cast<unsigned int>(nSizesRelative[i] * static_cast<double>(clientRect.right));
 		if(i != 0) nSizes[i] += nSizes[i - 1];
 	}
 
@@ -45,14 +42,14 @@ void CStatusBar::RefreshGeometry()
 
 unsigned int CStatusBar::GetHeight()
 {
-	RECT Rect;
-	GetRect(&Rect);
-	return Rect.bottom - Rect.top;
+	RECT rect = GetRect();
+	return rect.bottom - rect.top;
 }
 
-void CStatusBar::GetRect(RECT* pR)
+RECT CStatusBar::GetRect()
 {
-	GetWindowRect(pR);
-	ScreenToClient(GetParent(), reinterpret_cast<POINT*>(pR) + 0);
-	ScreenToClient(GetParent(), reinterpret_cast<POINT*>(pR) + 1);
+	RECT rect = GetWindowRect();
+	ScreenToClient(GetParent(), reinterpret_cast<POINT*>(&rect) + 0);
+	ScreenToClient(GetParent(), reinterpret_cast<POINT*>(&rect) + 1);
+	return rect;
 }

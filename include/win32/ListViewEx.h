@@ -10,7 +10,7 @@ namespace Framework
 		class CListViewEx : public CListView
 		{
 		public:
-							CListViewEx(HWND, RECT*, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
+							CListViewEx(HWND, const RECT&, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
 							CListViewEx(HWND);
 			virtual			~CListViewEx();
 

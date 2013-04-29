@@ -4,12 +4,12 @@ using namespace Framework::Win32;
 
 CRect::CRect(int nLeft, int nTop, int nRight, int nBottom)
 {
-	SetRect(&m_Rect, nLeft, nTop, nRight, nBottom);
+	SetRect(&m_rect, nLeft, nTop, nRight, nBottom);
 }
 
 CRect::CRect(const RECT& Source)
 {
-	CopyRect(&m_Rect, &Source);
+	CopyRect(&m_rect, &Source);
 }
 
 CRect::~CRect()
@@ -19,50 +19,50 @@ CRect::~CRect()
 
 CRect::operator RECT*()
 {
-	return &m_Rect;
+	return &m_rect;
 }
 
 CRect::operator RECT&()
 {
-	return m_Rect;
+	return m_rect;
 }
 
 int CRect::Left() const
 {
-	return m_Rect.left;
+	return m_rect.left;
 }
 
 int CRect::Top() const
 {
-	return m_Rect.top;
+	return m_rect.top;
 }
 
 int CRect::Right() const
 {
-	return m_Rect.right;
+	return m_rect.right;
 }
 
 int CRect::Bottom() const
 {
-	return m_Rect.bottom;
+	return m_rect.bottom;
 }
 
 CRect& CRect::Adjust(uint32 nStyle, bool nMenu)
 {
-	AdjustWindowRect(&m_Rect, nStyle, (nMenu) ? TRUE : FALSE);
+	AdjustWindowRect(&m_rect, nStyle, (nMenu) ? TRUE : FALSE);
 	return (*this);
 }
 
 CRect& CRect::Inflate(int nDx, int nDy)
 {
-	InflateRect(&m_Rect, nDx, nDy);
+	InflateRect(&m_rect, nDx, nDy);
 	return (*this);
 }
 
 bool CRect::PtIn(int nX, int nY)
 {
-	POINT Pt;
-	Pt.x = nX;
-	Pt.y = nY;
-	return PtInRect(&m_Rect, Pt) != 0;
+	POINT pt;
+	pt.x = nX;
+	pt.y = nY;
+	return PtInRect(&m_rect, pt) != 0;
 }

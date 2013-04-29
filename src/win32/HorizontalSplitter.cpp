@@ -10,35 +10,29 @@ CSplitter(hParent, Rect, LoadCursor(NULL, IDC_SIZEWE), ((Rect.right - Rect.left)
 
 void CHorizontalSplitter::GetEdgeRect(RECT* pEdgeRect)
 {
-	RECT ClientRect;
-
-	GetClientRect(&ClientRect);
-	SetRect(pEdgeRect, m_nEdgePosition, 0, m_nEdgePosition + EDGESIZE, ClientRect.bottom);
+	RECT clientRect = GetClientRect();
+	SetRect(pEdgeRect, m_nEdgePosition, 0, m_nEdgePosition + EDGESIZE, clientRect.bottom);
 }
 
 void CHorizontalSplitter::GetPaneRect(RECT* pPaneRect, unsigned int nIndex)
 {
-	RECT ClientRect;
-
-	GetClientRect(&ClientRect);
+	RECT clientRect = GetClientRect();
 
 	if(nIndex == 0)
 	{
-		SetRect(pPaneRect, 0, 0, m_nEdgePosition, ClientRect.bottom);
+		SetRect(pPaneRect, 0, 0, m_nEdgePosition, clientRect.bottom);
 	}
 	else if(nIndex == 1)
 	{
-		SetRect(pPaneRect, m_nEdgePosition + EDGESIZE, 0, ClientRect.right, ClientRect.bottom);
+		SetRect(pPaneRect, m_nEdgePosition + EDGESIZE, 0, clientRect.right, clientRect.bottom);
 	}
 }
 
 void CHorizontalSplitter::UpdateEdgePosition(int nX, int nY)
 {
-	RECT ClientRect;
+	RECT clientRect = GetClientRect();
 
-	GetClientRect(&ClientRect);
-
-	if((nX > EDGESIZE) && (nX < ClientRect.right - EDGESIZE))
+	if((nX > EDGESIZE) && (nX < clientRect.right - EDGESIZE))
 	{
 		m_nEdgePosition = nX;
 	}

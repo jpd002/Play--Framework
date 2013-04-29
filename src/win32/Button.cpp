@@ -9,9 +9,9 @@ CButton::CButton(HWND hWnd)
 	m_hWnd = hWnd;
 }
 
-CButton::CButton(const TCHAR* sCaption, HWND hParent, RECT* pR, unsigned long nStyle)
+CButton::CButton(const TCHAR* sCaption, HWND hParent, const RECT& rect, unsigned long nStyle)
 {
-	Create(NULL, _T("BUTTON"), sCaption, WS_VISIBLE | WS_CHILD | nStyle, pR, hParent, NULL);
+	Create(NULL, _T("BUTTON"), sCaption, WS_VISIBLE | WS_CHILD | nStyle, rect, hParent, NULL);
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 

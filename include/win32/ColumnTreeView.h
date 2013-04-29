@@ -14,29 +14,29 @@ namespace Framework
 		class CColumnTreeView : public CWindow
 		{
 		public:
-            struct MESSAGE : public NMHDR
-            {
-                NMHDR* pOriginalMsg;
-            };
-                                            CColumnTreeView(HWND, RECT*, unsigned long = 0);
-			virtual                         ~CColumnTreeView();
-			CHeader*                        GetHeader();
-			CTreeView*                      GetTreeView();
+			struct MESSAGE : public NMHDR
+			{
+				NMHDR* pOriginalMsg;
+			};
+											CColumnTreeView(HWND, const RECT&, unsigned long = 0);
+			virtual							~CColumnTreeView();
+			CHeader*						GetHeader();
+			CTreeView*						GetTreeView();
 
 		protected:
-			long                            OnSize(unsigned int, unsigned int, unsigned int);
-			long                            OnEraseBkgnd();
-			long                            OnNotify(WPARAM, NMHDR*);
+			long							OnSize(unsigned int, unsigned int, unsigned int);
+			long							OnEraseBkgnd();
+			long							OnNotify(WPARAM, NMHDR*);
 
 		private:
-			void                            UpdateLayout();
-			void                            ComputeHeaderHeight();
-			void                            DrawColumnLines(HDC);
-			void                            DrawItem(NMTVCUSTOMDRAW*);
+			void							UpdateLayout();
+			void							ComputeHeaderHeight();
+			void							DrawColumnLines(HDC);
+			void							DrawItem(NMTVCUSTOMDRAW*);
 
-			unsigned int	                m_nHeaderHeight;
+			unsigned int					m_nHeaderHeight;
 			CDblBufferedCtrl<CTreeView>*	m_pTreeView;
-			CHeader*                        m_pHeader;
+			CHeader*						m_pHeader;
 		};
 
 	}

@@ -11,7 +11,7 @@ namespace Framework
 		class CComboBox : public CWindow
 		{
 		public:
-							CComboBox(HWND, RECT*, unsigned long = 0);
+							CComboBox(HWND, const RECT&, unsigned long = 0);
 			unsigned int	AddString(const TCHAR*);
 			int				GetSelection();
 			void			SetSelection(int);
@@ -20,7 +20,7 @@ namespace Framework
 			uint32			GetItemData(unsigned int);
 			int				FindItemData(uint32);
 			void			FixHeight(unsigned int);
-            void            ResetContent();
+			void			ResetContent();
 		};
 	}
 }

@@ -20,7 +20,7 @@ namespace Framework
 			void			RefreshGeometry();
 
 			unsigned int	GetHeight();
-			void			GetRect(RECT*);
+			RECT			GetRect();
 		};
 	}
 

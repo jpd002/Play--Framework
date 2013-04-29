@@ -9,11 +9,10 @@
 using namespace Framework;
 using namespace Framework::Win32;
 
-CColumnTreeView::CColumnTreeView(HWND hParent, RECT* pRect, unsigned long nTreeViewStyle)
+CColumnTreeView::CColumnTreeView(HWND hParent, const RECT& rect, unsigned long nTreeViewStyle)
+: m_pHeader(nullptr)
+, m_pTreeView(nullptr)
 {
-	m_pHeader = NULL;
-	m_pTreeView = NULL;
-
 	if(!DoesWindowClassExist(CLSNAME))
 	{
 		WNDCLASSEX wc;
@@ -28,11 +27,11 @@ CColumnTreeView::CColumnTreeView(HWND hParent, RECT* pRect, unsigned long nTreeV
 		RegisterClassEx(&wc);
 	}
 
-	Create(WS_EX_CLIENTEDGE, CLSNAME, _T(""), WS_VISIBLE | WS_CHILD | WS_CLIPCHILDREN, pRect, hParent, NULL);
+	Create(WS_EX_CLIENTEDGE, CLSNAME, _T(""), WS_VISIBLE | WS_CHILD | WS_CLIPCHILDREN, rect, hParent, NULL);
 	SetClassPtr();
 
-	m_pHeader = new CHeader(m_hWnd, pRect, HDS_FULLDRAG | HDS_HOTTRACK);
-	m_pTreeView = new CDblBufferedCtrl<CTreeView>(new CTreeView(m_hWnd, pRect, nTreeViewStyle, 0));
+	m_pHeader = new CHeader(m_hWnd, rect, HDS_FULLDRAG | HDS_HOTTRACK);
+	m_pTreeView = new CDblBufferedCtrl<CTreeView>(new CTreeView(m_hWnd, rect, nTreeViewStyle, 0));
 
 	m_pHeader->SetFont(m_pTreeView->GetFont());
 
@@ -70,7 +69,7 @@ long CColumnTreeView::OnEraseBkgnd()
 
 long CColumnTreeView::OnNotify(WPARAM nId, NMHDR* pHdr)
 {
-    bool nRelay = true;
+	bool nRelay = true;
 
 	if(m_pTreeView != NULL)
 	{
@@ -80,9 +79,9 @@ long CColumnTreeView::OnNotify(WPARAM nId, NMHDR* pHdr)
 			{
 				NMTVCUSTOMDRAW* pCustomDraw;
 				pCustomDraw	= reinterpret_cast<NMTVCUSTOMDRAW*>(pHdr);
-                nRelay = false;
+				nRelay = false;
 
-                switch(pCustomDraw->nmcd.dwDrawStage)
+				switch(pCustomDraw->nmcd.dwDrawStage)
 				{
 				case CDDS_PREPAINT:
 					DrawColumnLines(pCustomDraw->nmcd.hdc);
@@ -113,37 +112,35 @@ long CColumnTreeView::OnNotify(WPARAM nId, NMHDR* pHdr)
 		}
 	}
 
-    if(nRelay)
-    {
-        MESSAGE Msg;
-        Msg.hwndFrom        = m_hWnd;
-        Msg.idFrom          = 0;
-        Msg.code            = pHdr->code;
-        Msg.pOriginalMsg    = pHdr;
-    	return static_cast<long>(SendMessage(GetParent(), WM_NOTIFY, nId, reinterpret_cast<LPARAM>(&Msg)));
-    }
-    else
-    {
-        return FALSE;
-    }
+	if(nRelay)
+	{
+		MESSAGE Msg;
+		Msg.hwndFrom		= m_hWnd;
+		Msg.idFrom			= 0;
+		Msg.code			= pHdr->code;
+		Msg.pOriginalMsg	= pHdr;
+		return static_cast<long>(SendMessage(GetParent(), WM_NOTIFY, nId, reinterpret_cast<LPARAM>(&Msg)));
+	}
+	else
+	{
+		return FALSE;
+	}
 }
 
 void CColumnTreeView::UpdateLayout()
 {
-	RECT ClientRect;
-
-	GetClientRect(&ClientRect);
+	RECT clientRect = GetClientRect();
 
 	if(m_pHeader != NULL)
 	{
 		m_pHeader->SetPosition(0, 0);
-		m_pHeader->SetSize(ClientRect.right, m_nHeaderHeight);
+		m_pHeader->SetSize(clientRect.right, m_nHeaderHeight);
 	}
 
 	if(m_pTreeView != NULL)
 	{
 		m_pTreeView->SetPosition(0, m_nHeaderHeight);
-		m_pTreeView->SetSize(ClientRect.right, ClientRect.bottom - m_nHeaderHeight);
+		m_pTreeView->SetSize(clientRect.right, clientRect.bottom - m_nHeaderHeight);
 	}
 }
 
@@ -240,19 +237,17 @@ void CColumnTreeView::DrawColumnLines(HDC hDC)
 {
 	return;
 
-	RECT ClientRect;
-	unsigned int nColCount;
 	CDeviceContext DeviceContext(hDC);
 
-	m_pTreeView->GetClientRect(&ClientRect);
-	nColCount = m_pHeader->GetItemCount();
+	RECT clientRect = m_pTreeView->GetClientRect();
+	unsigned int nColCount = m_pHeader->GetItemCount();
 
 	for(unsigned int i = 0; i < nColCount; i++)
 	{
 		RECT ColumnRect;
 		m_pHeader->GetItemRect(i, &ColumnRect);
 		ColumnRect.top		= 0;
-		ColumnRect.bottom	= ClientRect.bottom;
+		ColumnRect.bottom	= clientRect.bottom;
 		ColumnRect.right--;
 		DrawEdge(DeviceContext, &ColumnRect, BDR_SUNKENINNER, BF_RIGHT);
 	}

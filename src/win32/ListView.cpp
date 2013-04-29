@@ -7,10 +7,10 @@ CListView::CListView(HWND hWnd)
 	m_hWnd = hWnd;
 }
 
-CListView::CListView(HWND hParent, RECT* pR, unsigned long nStyle, unsigned long nExStyle)
+CListView::CListView(HWND hParent, const RECT& rect, unsigned long nStyle, unsigned long nExStyle)
 {
 	InitCommonControls();
-	Create(nExStyle, WC_LISTVIEW, _T(""), WS_CHILD | WS_VISIBLE | nStyle, pR, hParent, NULL);
+	Create(nExStyle, WC_LISTVIEW, _T(""), WS_CHILD | WS_VISIBLE | nStyle, rect, hParent, NULL);
 }
 
 CListView::~CListView()
