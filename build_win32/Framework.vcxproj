@@ -183,6 +183,7 @@
     <ClInclude Include="..\include\string_cast.h" />
     <ClInclude Include="..\include\string_cast_sjis.h" />
     <ClInclude Include="..\include\string_cast_win1252.h" />
+    <ClInclude Include="..\include\string_format.h" />
     <ClInclude Include="..\include\tcharx.h" />
     <ClInclude Include="..\include\ThreadPool.h" />
     <ClInclude Include="..\include\Types.h" />

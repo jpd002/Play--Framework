@@ -708,5 +708,8 @@
     <ClInclude Include="..\include\make_unique.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\string_format.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
