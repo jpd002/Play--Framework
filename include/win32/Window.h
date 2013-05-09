@@ -5,6 +5,7 @@
 #include "tcharx.h"
 #include "ScrollBar.h"
 #include "Rect.h"
+#include "DefaultWndClass.h"
 
 namespace Framework
 {
@@ -28,10 +29,9 @@ namespace Framework
 			static CWindow*			GetClassPtr(HWND);
 			void					SubClass();
 			long					CallBaseWndProc(unsigned int, WPARAM, LPARAM);
-			unsigned int			DoesWindowClassExist(const TCHAR*);
+			static bool				DoesWindowClassExist(const TCHAR*);
 			static bool				IsNotifySource(const CWindow*, const NMHDR*);
 			static bool				IsCommandSource(const CWindow*, HWND);
-			static WNDCLASSEX		MakeWndClass(const TCHAR*);
 
 			//Helpers
 			void					Create(unsigned long, const TCHAR*, const TCHAR*, unsigned long, const RECT&, HWND, void*);

@@ -88,10 +88,10 @@ long CWindow::CallBaseWndProc(unsigned int uiMsg, WPARAM wParam, LPARAM lParam)
 	return (long)CallWindowProc(m_pBaseWndProc, m_hWnd, uiMsg, wParam, lParam);
 }
 
-unsigned int CWindow::DoesWindowClassExist(const TCHAR* sClass)
+bool CWindow::DoesWindowClassExist(const TCHAR* className)
 {
 	WNDCLASS wc;
-	return GetClassInfo(GetModuleHandle(NULL), sClass, &wc);
+	return GetClassInfo(GetModuleHandle(NULL), className, &wc) != 0;
 }
 
 bool CWindow::IsNotifySource(const CWindow* pWindow, const NMHDR* pHdr)
@@ -102,19 +102,6 @@ bool CWindow::IsNotifySource(const CWindow* pWindow, const NMHDR* pHdr)
 bool CWindow::IsCommandSource(const CWindow* pWindow, HWND hWndFrom)
 {
 	return (pWindow != NULL) && (pWindow->m_hWnd == hWndFrom);
-}
-
-WNDCLASSEX CWindow::MakeWndClass(const TCHAR* className)
-{
-	WNDCLASSEX w;
-	memset(&w, 0, sizeof(WNDCLASSEX));
-	w.cbSize		= sizeof(WNDCLASSEX);
-	w.lpfnWndProc	= CWindow::WndProc;
-	w.lpszClassName	= className;
-	w.hbrBackground	= (HBRUSH)GetSysColorBrush(COLOR_BTNFACE);
-	w.hInstance		= GetModuleHandle(NULL);
-	w.hCursor		= LoadCursor(NULL, IDC_ARROW);
-	return w;
 }
 
 ///////////////////////////////////////////////////////////

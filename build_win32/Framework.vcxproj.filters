@@ -331,6 +331,9 @@
     <ClCompile Include="..\src\bitmap\PNG.cpp">
       <Filter>Source Files\bitmap</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\win32\DefaultWndClass.cpp">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\alloca_def.h">
@@ -710,6 +713,9 @@
     </ClInclude>
     <ClInclude Include="..\include\string_format.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\win32\DefaultWndClass.h">
+      <Filter>Source Files\win32</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

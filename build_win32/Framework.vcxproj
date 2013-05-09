@@ -74,6 +74,7 @@
     <ClCompile Include="..\src\win32\ComboBox.cpp" />
     <ClCompile Include="..\src\win32\CustomDrawn.cpp" />
     <ClCompile Include="..\src\win32\DefaultFonts.cpp" />
+    <ClCompile Include="..\src\win32\DefaultWndClass.cpp" />
     <ClCompile Include="..\src\win32\DeviceContext.cpp" />
     <ClCompile Include="..\src\win32\Dialog.cpp" />
     <ClCompile Include="..\src\win32\Edit.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="..\include\win32\CustomDrawn.h" />
     <ClInclude Include="..\include\win32\DblBufferedCtrl.h" />
     <ClInclude Include="..\include\win32\DefaultFonts.h" />
+    <ClInclude Include="..\include\win32\DefaultWndClass.h" />
     <ClInclude Include="..\include\win32\DeviceContext.h" />
     <ClInclude Include="..\include\win32\Dialog.h" />
     <ClInclude Include="..\include\win32\Edit.h" />
