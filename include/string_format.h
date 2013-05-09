@@ -3,7 +3,7 @@
 #include <string>
 #include <varargs.h>
 
-std::string string_format(const char* format, ...)
+static std::string string_format(const char* format, ...)
 {
 	int size = 256;
 	std::string result;

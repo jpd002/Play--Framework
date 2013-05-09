@@ -16,6 +16,12 @@ namespace Framework
 
 			}
 
+			explicit CComPtr(PtrType* ptr)
+			: m_ptr(ptr)
+			{
+
+			}
+
 			CComPtr(const CComPtr& rhs)
 			: m_ptr(nullptr)
 			{
@@ -67,6 +73,8 @@ namespace Framework
 
 			PtrType** operator &()
 			{
+				//Usually used for creation, must be empty
+				assert(m_ptr == nullptr);
 				return &m_ptr;
 			}
 
