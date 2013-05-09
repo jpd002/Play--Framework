@@ -6,7 +6,7 @@ using namespace Framework::Win32;
 CTab::CTab(HWND hParent, const RECT& rect, unsigned long nStyle, unsigned long nExStyle)
 {
 	InitCommonControls();
-	Create(nExStyle, WC_TABCONTROL, _T(""), WS_CHILD | WS_VISIBLE | nStyle, rect, hParent, NULL);
+	Create(nExStyle, WC_TABCONTROL, _T(""), WS_CHILD | WS_VISIBLE | WS_CLIPCHILDREN | WS_CLIPSIBLINGS | nStyle, rect, hParent, NULL);
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 
