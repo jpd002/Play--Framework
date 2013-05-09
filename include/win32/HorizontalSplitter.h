@@ -6,19 +6,19 @@
 
 namespace Framework
 {
-    namespace Win32
-    {
-	    class CHorizontalSplitter : public CSplitter
-	    {
-	    public:
-						    CHorizontalSplitter(HWND, const RECT&);
+	namespace Win32
+	{
+		class CHorizontalSplitter : public CSplitter
+		{
+		public:
+							CHorizontalSplitter(HWND, const RECT&);
 
-	    protected:
-		    virtual void	GetEdgeRect(RECT*);
-		    virtual void	GetPaneRect(RECT*, unsigned int);
-		    virtual void	UpdateEdgePosition(int, int);
-	    };
-    }
+		protected:
+			virtual RECT	GetEdgeRect() override;
+			virtual RECT	GetPaneRect(unsigned int) override;
+			virtual void	UpdateEdgePosition(int, int) override;
+		};
+	}
 }
 
 #endif

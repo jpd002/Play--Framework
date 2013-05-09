@@ -8,23 +8,27 @@ CSplitter(hParent, Rect, LoadCursor(NULL, IDC_SIZENS), ((Rect.bottom - Rect.top)
 	
 }
 
-void CVerticalSplitter::GetEdgeRect(RECT* pEdgeRect)
+RECT CVerticalSplitter::GetEdgeRect()
 {
 	RECT clientRect = GetClientRect();
-	SetRect(pEdgeRect, 0, m_nEdgePosition, clientRect.right, m_nEdgePosition + EDGESIZE);
+	RECT result = {};
+	SetRect(&result, 0, m_nEdgePosition, clientRect.right, m_nEdgePosition + EDGESIZE);
+	return result;
 }
 
-void CVerticalSplitter::GetPaneRect(RECT* pPaneRect, unsigned int nIndex)
+RECT CVerticalSplitter::GetPaneRect(unsigned int nIndex)
 {
 	RECT clientRect = GetClientRect();
+	RECT result = {};
 	if(nIndex == 0)
 	{
-		SetRect(pPaneRect, 0, 0, clientRect.right, m_nEdgePosition);
+		SetRect(&result, 0, 0, clientRect.right, m_nEdgePosition);
 	}
 	else if(nIndex == 1)
 	{
-		SetRect(pPaneRect, 0, m_nEdgePosition + EDGESIZE, clientRect.right, clientRect.bottom);
+		SetRect(&result, 0, m_nEdgePosition + EDGESIZE, clientRect.right, clientRect.bottom);
 	}
+	return result;
 }
 
 void CVerticalSplitter::UpdateEdgePosition(int nX, int nY)

@@ -24,6 +24,7 @@ namespace Framework
 
 			CRect&		Adjust(uint32, bool = false);
 			CRect&		Inflate(int, int);
+			CRect&		ScreenToClient(HWND);
 			bool		PtIn(int, int);
 
 		private:

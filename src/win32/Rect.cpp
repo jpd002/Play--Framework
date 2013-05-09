@@ -59,6 +59,13 @@ CRect& CRect::Inflate(int nDx, int nDy)
 	return (*this);
 }
 
+CRect& CRect::ScreenToClient(HWND window)
+{
+	::ScreenToClient(window, reinterpret_cast<LPPOINT>(&m_rect) + 0);
+	::ScreenToClient(window, reinterpret_cast<LPPOINT>(&m_rect) + 1);
+	return (*this);
+}
+
 bool CRect::PtIn(int nX, int nY)
 {
 	POINT pt;

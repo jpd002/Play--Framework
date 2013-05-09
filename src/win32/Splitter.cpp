@@ -76,14 +76,25 @@ long CSplitter::OnMouseMove(WPARAM wParam, int nX, int nY)
 		SendMessage(GetParent(), WM_COMMAND, MAKEWPARAM(0, 0), reinterpret_cast<LPARAM>(m_hWnd));
 	}
 
-	SetCursor(m_nCursor);
+	Framework::Win32::CRect edgeRect = GetEdgeRect();
+
+	if(edgeRect.PtIn(nX, nY))
+	{
+		SetCursor(m_nCursor);
+	}
+
 	return TRUE;
 }
 
 long CSplitter::OnLeftButtonDown(int nX, int nY)
 {
-	SetCapture(m_hWnd);
-	SetCursor(m_nCursor);
+	Framework::Win32::CRect edgeRect = GetEdgeRect();
+
+	if(edgeRect.PtIn(nX, nY))
+	{
+		SetCapture(m_hWnd);
+		SetCursor(m_nCursor);
+	}
 
 	return TRUE;
 }
@@ -103,12 +114,10 @@ void CSplitter::ResizeChild(unsigned int nIndex)
 {
 	if(m_nChild[nIndex] == NULL) return;
 
-	RECT PaneRect;
+	RECT paneRect = GetPaneRect(nIndex);
 
-	GetPaneRect(&PaneRect, nIndex);
-
-	SetWindowPos(m_nChild[nIndex], NULL, PaneRect.left, PaneRect.top,
-		PaneRect.right - PaneRect.left,
-		PaneRect.bottom - PaneRect.top,
+	SetWindowPos(m_nChild[nIndex], NULL, paneRect.left, paneRect.top,
+		paneRect.right - paneRect.left,
+		paneRect.bottom - paneRect.top,
 		SWP_NOZORDER);
 }
