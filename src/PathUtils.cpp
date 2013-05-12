@@ -4,6 +4,16 @@ using namespace Framework;
 
 #ifdef _WIN32
 
+#if WINAPI_FAMILY_PARTITION(WINAPI_FAMILY_APP)
+
+boost::filesystem::path PathUtils::GetPersonalDataPath()
+{
+	auto localFolder = Windows::Storage::ApplicationData::Current->LocalFolder;
+	return boost::filesystem::path(localFolder->Path->Data());
+}
+
+#else	// !WINAPI_PARTITION_APP
+
 #include <shlobj.h>
 
 boost::filesystem::path PathUtils::GetPathFromCsidl(int csidl)
@@ -31,7 +41,9 @@ boost::filesystem::path PathUtils::GetAppResourcesPath()
 	return boost::filesystem::path(".");
 }
 
-#endif
+#endif	// !WINAPI_PARTITION_APP
+
+#endif	// _WIN32
 
 #if defined(__APPLE__)
 
@@ -76,7 +88,20 @@ void PathUtils::EnsurePathExists(const boost::filesystem::path& path)
 		pathIterator != path.end(); pathIterator++)
 	{
 		buildPath /= (*pathIterator);
-		if(!boost::filesystem::exists(buildPath))
+		boost::system::error_code existsErrorCode;
+		bool exists = boost::filesystem::exists(buildPath, existsErrorCode);
+		if(existsErrorCode)
+		{
+#ifdef WIN32
+			if(existsErrorCode.value() == ERROR_ACCESS_DENIED)
+			{
+				//No problem, it exists, but we just don't have access
+				continue;
+			}
+#endif
+			throw std::runtime_error("Couldn't ensure that path exists.");
+		}
+		if(!exists)
 		{
 			boost::filesystem::create_directory(buildPath);
 		}
