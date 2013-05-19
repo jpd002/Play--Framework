@@ -398,7 +398,7 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 		if(!pThis->OnRightButtonUp(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam))) return FALSE;
 		break;
 	case WM_MOUSEWHEEL:
-		if(!pThis->OnMouseWheel(GET_WHEEL_DELTA_WPARAM(wParam))) return FALSE;
+		if(!pThis->OnMouseWheel(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam), GET_WHEEL_DELTA_WPARAM(wParam))) return FALSE;
 		break;
 	case WM_MOUSELEAVE:
 		if(!pThis->OnMouseLeave()) return FALSE;
@@ -462,7 +462,7 @@ LRESULT WINAPI CWindow::SubClassWndProc(HWND hWnd, unsigned int uiMsg, WPARAM wP
 	{
 		return pThis->OnWndProc(uiMsg, wParam, lParam);
 	}
-	//Probably isn't good if we get there...
+	//Probably isn't good if we get here...
 	return DefWindowProc(hWnd, uiMsg, wParam, lParam);
 }
 
@@ -531,7 +531,7 @@ long CWindow::OnRightButtonUp(int nX, int nY)
 	return TRUE;
 }
 
-long CWindow::OnMouseWheel(short nZ)
+long CWindow::OnMouseWheel(int x, int y, short z)
 {
 	return TRUE;
 }

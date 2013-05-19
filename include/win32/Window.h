@@ -76,7 +76,7 @@ namespace Framework
 			virtual long			OnRightButtonDown(int, int);
 			virtual long			OnRightButtonUp(int, int);
 			virtual long			OnMouseMove(WPARAM, int, int);
-			virtual long			OnMouseWheel(short);
+			virtual long			OnMouseWheel(int, int, short);
 			virtual long			OnVScroll(unsigned int, unsigned int);
 			virtual long			OnHScroll(unsigned int, unsigned int);
 			virtual long			OnSysKeyDown(unsigned int);

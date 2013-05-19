@@ -11,7 +11,7 @@ CButton::CButton(HWND hWnd)
 
 CButton::CButton(const TCHAR* sCaption, HWND hParent, const RECT& rect, unsigned long nStyle)
 {
-	Create(NULL, _T("BUTTON"), sCaption, WS_VISIBLE | WS_CHILD | nStyle, rect, hParent, NULL);
+	Create(NULL, _T("BUTTON"), sCaption, WS_VISIBLE | WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS | nStyle, rect, hParent, NULL);
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 

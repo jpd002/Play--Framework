@@ -20,13 +20,6 @@
 		(p) = NULL;		\
 	}
 
-#define FREECOM(p)		\
-	if((p) != NULL)		\
-	{					\
-		(p)->Release();	\
-		(p) = NULL;		\
-	}
-
 #define DELETEPTR(p)	\
 	if((p) != NULL)		\
 	{					\
