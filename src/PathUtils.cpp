@@ -98,8 +98,15 @@ void PathUtils::EnsurePathExists(const boost::filesystem::path& path)
 				//No problem, it exists, but we just don't have access
 				continue;
 			}
+			else if(existsErrorCode.value() == ERROR_FILE_NOT_FOUND)
+			{
+				exists = false;
+			}
+			else
 #endif
-			throw std::runtime_error("Couldn't ensure that path exists.");
+			{
+				throw std::runtime_error("Couldn't ensure that path exists.");
+			}
 		}
 		if(!exists)
 		{
