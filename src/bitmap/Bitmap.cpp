@@ -2,7 +2,6 @@
 #include <assert.h>
 #include <stdexcept>
 #include <string.h>
-#include "PtrMacro.h"
 #include "bitmap/Bitmap.h"
 
 using namespace Framework;
@@ -74,16 +73,13 @@ void CBitmap::Allocate(unsigned int width, unsigned int height, unsigned int bpp
 	m_width		= width;
 	m_height	= height;
 	m_bpp		= bpp;
-	m_pixels	= reinterpret_cast<uint8*>(malloc(GetPixelsSize()));
+	m_pixels	= new uint8[GetPixelsSize()];
 }
 
 void CBitmap::Reset()
 {
-	if(m_pixels != nullptr)
-	{
-		FREEPTR(m_pixels);
-		m_pixels = nullptr;
-	}
+	delete [] m_pixels;
+	m_pixels = nullptr;
 
 	m_width = 0;
 	m_height = 0;
@@ -214,6 +210,55 @@ CBitmap CBitmap::AddAlphaChannel(uint8 alphaValue) const
 	return result;
 }
 
+CBitmap CBitmap::Resize(unsigned int newWidth, unsigned int newHeight) const
+{
+	CBitmap result(newWidth, newHeight, m_bpp);
+
+	unsigned int srcPitch = GetPitch();
+	unsigned int dstPitch = result.GetPitch();
+	unsigned int pixelSize = GetPixelSize();
+
+	auto dstPtr = result.m_pixels;
+	for(unsigned int y = 0; y < newHeight; y++)
+	{
+		unsigned int sampleY = (y * m_height) / newHeight;
+		for(unsigned int x = 0; x < newWidth; x++)
+		{
+			unsigned int sampleX = (x * m_width) / newWidth;
+
+			for(unsigned int i = 0; i < pixelSize; i++)
+			{
+				uint8 pixelSrc = m_pixels[(sampleX * pixelSize) + (sampleY * srcPitch) + i];
+				dstPtr[(x * pixelSize) + i] = pixelSrc;
+			}
+		}
+		dstPtr += dstPitch;
+	}
+
+	return result;
+}
+
+CBitmap CBitmap::ResizeCanvas(unsigned int newWidth, unsigned int newHeight) const
+{
+	CBitmap result(newWidth, newHeight, m_bpp);
+
+	unsigned int srcPitch = GetPitch();
+	unsigned int dstPitch = result.GetPitch();
+	unsigned int copyPitch = std::min<unsigned int>(srcPitch, dstPitch);
+	unsigned int copyHeight = std::min<unsigned int>(newHeight, m_height);
+
+	auto srcPtr = m_pixels;
+	auto dstPtr = result.m_pixels;
+	for(unsigned int y = 0; y < copyHeight; y++)
+	{
+		memcpy(dstPtr, srcPtr, copyPitch);
+		srcPtr += srcPitch;
+		dstPtr += dstPitch;
+	}
+
+	return result;
+}
+
 void CBitmap::CopyFrom(const CBitmap& src)
 {
 	if(src.GetPixelsSize() != GetPixelsSize())
@@ -225,7 +270,10 @@ void CBitmap::CopyFrom(const CBitmap& src)
 	m_height	= src.GetHeight();
 	m_bpp		= src.GetBitsPerPixel();
 
-	memcpy(m_pixels, src.GetPixels(), GetPixelsSize());
+	if(GetPixelsSize() != 0)
+	{
+		memcpy(m_pixels, src.GetPixels(), GetPixelsSize());
+	}
 }
 
 void CBitmap::MoveFrom(CBitmap&& src)

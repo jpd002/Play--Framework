@@ -54,6 +54,8 @@ namespace Framework
 		void			Blit(const CBitmap&, unsigned int, unsigned int);
 
 		CBitmap			AddAlphaChannel(uint8 alphaValue) const;
+		CBitmap			Resize(unsigned int, unsigned int) const;
+		CBitmap			ResizeCanvas(unsigned int, unsigned int) const;
 
 	private:
 		void			CopyFrom(const CBitmap&);
