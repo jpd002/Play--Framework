@@ -22,6 +22,9 @@ namespace Framework
 			int			Right() const;
 			int			Bottom() const;
 
+			int			Width() const;
+			int			Height() const;
+
 			CRect&		Adjust(uint32, bool = false);
 			CRect&		Inflate(int, int);
 			CRect&		ScreenToClient(HWND);

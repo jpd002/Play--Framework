@@ -47,6 +47,16 @@ int CRect::Bottom() const
 	return m_rect.bottom;
 }
 
+int CRect::Width() const
+{
+	return m_rect.right - m_rect.left;
+}
+
+int CRect::Height() const
+{
+	return m_rect.bottom - m_rect.top;
+}
+
 CRect& CRect::Adjust(uint32 nStyle, bool nMenu)
 {
 	AdjustWindowRect(&m_rect, nStyle, (nMenu) ? TRUE : FALSE);

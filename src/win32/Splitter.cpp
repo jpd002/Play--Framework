@@ -8,12 +8,11 @@ using namespace Framework;
 using namespace Framework::Win32;
 
 CSplitter::CSplitter(HWND hParent, const RECT& rect, HCURSOR nCursor, unsigned int nEdgePosition)
+: m_nCursor(nCursor)
+, m_nEdgePosition(nEdgePosition)
 {
 	m_nChild[0] = NULL;
 	m_nChild[1] = NULL;
-
-	m_nCursor		= nCursor;
-	m_nEdgePosition = nEdgePosition;
 
 	if(!DoesWindowClassExist(CLSNAME))
 	{
@@ -29,7 +28,7 @@ CSplitter::CSplitter(HWND hParent, const RECT& rect, HCURSOR nCursor, unsigned i
 		RegisterClassEx(&w);
 	}
 
-	Create(NULL, CLSNAME, _T(""), WS_VISIBLE | WS_CHILD | WS_CLIPCHILDREN, rect, hParent, NULL);
+	Create(NULL, CLSNAME, _T(""), WS_VISIBLE | WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS, rect, hParent, NULL);
 	SetClassPtr();
 }
 
@@ -71,9 +70,6 @@ long CSplitter::OnMouseMove(WPARAM wParam, int nX, int nY)
 
 		ResizeChild(0);
 		ResizeChild(1);
-
-		//Just send a generic message to our parent if it wants to update stuff while the edge is moving
-		SendMessage(GetParent(), WM_COMMAND, MAKEWPARAM(0, 0), reinterpret_cast<LPARAM>(m_hWnd));
 	}
 
 	Framework::Win32::CRect edgeRect = GetEdgeRect();
@@ -120,4 +116,6 @@ void CSplitter::ResizeChild(unsigned int nIndex)
 		paneRect.right - paneRect.left,
 		paneRect.bottom - paneRect.top,
 		SWP_NOZORDER);
+
+	SendMessage(GetParent(), WM_COMMAND, MAKEWPARAM(0, 0), reinterpret_cast<LPARAM>(m_hWnd));
 }
