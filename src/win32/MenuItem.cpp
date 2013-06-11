@@ -3,9 +3,9 @@
 using namespace Framework;
 using namespace Framework::Win32;
 
-CMenuItem::CMenuItem(HMENU menu, int position) :
-m_menu(menu),
-m_position(position)
+CMenuItem::CMenuItem(HMENU menu, int position)
+: m_menu(menu)
+, m_position(position)
 {
 
 }
@@ -17,29 +17,29 @@ CMenuItem::~CMenuItem()
 
 CMenuItem::operator HMENU() const
 {
-    return m_menu;
+	return m_menu;
 }
 
-bool CMenuItem::IsNull() const
+bool CMenuItem::IsEmpty() const
 {
 	return (m_menu == NULL);
 }
 
 void CMenuItem::Check(bool checked)
 {
-	if(IsNull()) return;
+	if(IsEmpty()) return;
 	CheckMenuItem(m_menu, m_position, MF_BYPOSITION | (checked ? MF_CHECKED : MF_UNCHECKED));
 }
 
 void CMenuItem::Enable(bool enabled)
 {
-	if(IsNull()) return;
+	if(IsEmpty()) return;
 	EnableMenuItem(m_menu, m_position, MF_BYPOSITION | (enabled ? MF_ENABLED : MF_GRAYED));
 }
 
 void CMenuItem::SetText(const TCHAR* text)
 {
-	if(IsNull()) return;
+	if(IsEmpty()) return;
 	MENUITEMINFO mii;
 	memset(&mii, 0, sizeof(MENUITEMINFO));
 	mii.cbSize		= sizeof(MENUITEMINFO);
@@ -63,7 +63,7 @@ CMenuItem CMenuItem::FindById(HMENU hMenu, unsigned int id)
 		if(menuItemId == -1)
 		{
 			result = FindById(GetSubMenu(hMenu, i), id);
-			if(!result.IsNull()) break;
+			if(!result.IsEmpty()) break;
 		}
 	}
 	return result;

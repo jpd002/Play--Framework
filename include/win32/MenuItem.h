@@ -13,12 +13,12 @@ namespace Framework
 								CMenuItem(HMENU = NULL, int = 0);
 			virtual				~CMenuItem();
 
-                                operator HMENU() const;
+								operator HMENU() const;
 
 			void				Check(bool);
 			void				Enable(bool);
 			void				SetText(const TCHAR*);
-			bool				IsNull() const;
+			bool				IsEmpty() const;
 
 			static CMenuItem	FindById(HMENU, unsigned int);
 
