@@ -212,6 +212,8 @@ CBitmap CBitmap::AddAlphaChannel(uint8 alphaValue) const
 
 CBitmap CBitmap::Resize(unsigned int newWidth, unsigned int newHeight) const
 {
+	if(IsEmpty()) return CBitmap();
+
 	CBitmap result(newWidth, newHeight, m_bpp);
 
 	unsigned int srcPitch = GetPitch();
@@ -240,6 +242,8 @@ CBitmap CBitmap::Resize(unsigned int newWidth, unsigned int newHeight) const
 
 CBitmap CBitmap::ResizeCanvas(unsigned int newWidth, unsigned int newHeight) const
 {
+	if(IsEmpty()) return CBitmap();
+
 	CBitmap result(newWidth, newHeight, m_bpp);
 
 	unsigned int srcPitch = GetPitch();
