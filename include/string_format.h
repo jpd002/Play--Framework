@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <varargs.h>
+#include <stdarg.h>
 
 static std::string string_format(const char* format, ...)
 {
