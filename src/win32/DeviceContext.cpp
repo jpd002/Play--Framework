@@ -5,9 +5,10 @@
 using namespace Framework;
 using namespace Framework::Win32;
 
-CDeviceContext::CDeviceContext(HDC nDC)
+CDeviceContext::CDeviceContext(HDC dc)
+: m_dc(dc)
 {
-	m_nDC = nDC;
+
 }
 
 CDeviceContext::~CDeviceContext()
@@ -17,52 +18,57 @@ CDeviceContext::~CDeviceContext()
 
 CDeviceContext::operator HDC()
 {
-	return m_nDC;
+	return m_dc;
 }
 
-SIZE CDeviceContext::GetFontSize(HFONT nFont)
+SIZE CDeviceContext::GetFontSize(HFONT font)
 {
+	HGDIOBJ prevFont = SelectObject(font);
+
 	SIZE s;
-	HGDIOBJ nPrevFont;
+	GetTextExtentPoint32(m_dc, _T("0"), 1, &s);
 
-	nPrevFont = SelectObject(nFont);
-	GetTextExtentPoint32(m_nDC, _T("0"), 1, &s);
-	SelectObject(nPrevFont);
-
+	SelectObject(prevFont);
 	return s;
 }
 
 unsigned int CDeviceContext::GetFontHeight(HFONT nFont)
 {
-    return GetFontSize(nFont).cy;
+	return GetFontSize(nFont).cy;
 }
 
 void CDeviceContext::FillRect(RECT* pRect, COLORREF nColor)
 {
 	assert(pRect != NULL);
 	CBrush Brush(CreateSolidBrush(nColor));
-	::FillRect(m_nDC, pRect, Brush);
+	::FillRect(m_dc, pRect, Brush);
 }
 
 void CDeviceContext::DrawLine(int nX1, int nY1, int nX2, int nY2)
 {
-	MoveToEx(m_nDC, nX1, nY1, NULL);
-	LineTo(m_nDC, nX2, nY2);
+	MoveToEx(m_dc, nX1, nY1, NULL);
+	LineTo(m_dc, nX2, nY2);
 }
 
 void CDeviceContext::DrawLine(int nX1, int nY1, int nX2, int nY2, COLORREF nColor)
 {
-	CPen Pen(CreatePen(PS_SOLID, 0, nColor));
-	SelectObject(Pen);
+	CPen pen(CreatePen(PS_SOLID, 0, nColor));
+	SelectObject(pen);
 	DrawLine(nX1, nY1, nX2, nY2);
 }
 
-void CDeviceContext::TextOut(int nX, int nY, const TCHAR* sText)
+void CDeviceContext::TextOut(int x, int y, const TCHAR* text)
 {
-	::TextOut(m_nDC, nX, nY, sText, static_cast<int>(_tcslen(sText)));
+	::TextOut(m_dc, x, y, text, static_cast<int>(_tcslen(text)));
+}
+
+void CDeviceContext::TextOut(int x, int y, const TCHAR* text, COLORREF color)
+{
+	SetTextColor(m_dc, color);
+	TextOut(x, y, text);
 }
 
 HGDIOBJ CDeviceContext::SelectObject(HGDIOBJ hObject)
 {
-	return ::SelectObject(m_nDC, hObject);
+	return ::SelectObject(m_dc, hObject);
 }

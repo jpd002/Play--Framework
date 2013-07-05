@@ -3,13 +3,14 @@
 using namespace Framework;
 using namespace Framework::Win32;
 
-CClientDeviceContext::CClientDeviceContext(HWND nWnd) :
-CDeviceContext(GetDC(nWnd))
+CClientDeviceContext::CClientDeviceContext(HWND wnd)
+: CDeviceContext(GetDC(wnd))
+, m_wnd(wnd)
 {
-	m_nWnd = nWnd;
+
 }
 
 CClientDeviceContext::~CClientDeviceContext()
 {
-	ReleaseDC(m_nWnd, m_nDC);
+	ReleaseDC(m_wnd, m_dc);
 }

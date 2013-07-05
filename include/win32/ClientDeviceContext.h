@@ -14,7 +14,7 @@ namespace Framework
 			virtual		~CClientDeviceContext();
 
 		private:
-			HWND		m_nWnd;
+			HWND		m_wnd;
 		};
 	}
 }

@@ -3,13 +3,13 @@
 using namespace Framework;
 using namespace Framework::Win32;
 
-CMemoryDeviceContext::CMemoryDeviceContext(HDC hDC) :
-CDeviceContext(CreateCompatibleDC(hDC))
+CMemoryDeviceContext::CMemoryDeviceContext(HDC dc) :
+CDeviceContext(CreateCompatibleDC(dc))
 {
 
 }
 
 CMemoryDeviceContext::~CMemoryDeviceContext()
 {
-	DeleteDC(m_nDC);
+	DeleteDC(m_dc);
 }

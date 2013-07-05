@@ -12,18 +12,20 @@ namespace Framework
 		public:
 							CDeviceContext(HDC);
 			virtual			~CDeviceContext();
+
 							operator HDC();
 
-            SIZE            GetFontSize(HFONT);
+			SIZE			GetFontSize(HFONT);
 			unsigned int	GetFontHeight(HFONT);
 			void			FillRect(RECT*, COLORREF);
 			void			DrawLine(int, int, int, int);
 			void			DrawLine(int, int, int, int, COLORREF);
 			void			TextOut(int, int, const TCHAR*);
+			void			TextOut(int, int, const TCHAR*, COLORREF);
 			HGDIOBJ			SelectObject(HGDIOBJ);
 
 		protected:
-			HDC				m_nDC;
+			HDC				m_dc;
 		};
 	}
 }
