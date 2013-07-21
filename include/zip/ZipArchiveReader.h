@@ -1,5 +1,4 @@
-#ifndef _ZIPARCHIVEREADER_H_
-#define _ZIPARCHIVEREADER_H_
+#pragma once
 
 #include <map>
 #include <list>
@@ -35,5 +34,3 @@ namespace Framework
 		bool							m_readingLock;
 	};
 }
-
-#endif

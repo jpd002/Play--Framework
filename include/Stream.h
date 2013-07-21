@@ -1,7 +1,7 @@
-#ifndef _STREAM_H_
-#define _STREAM_H_
+#pragma once
 
 #include "Types.h"
+#include <string>
 
 namespace Framework
 {
@@ -30,12 +30,11 @@ namespace Framework
 		uint16			Read16();
 		uint32			Read32();
 		uint64			Read64();
+		std::string		ReadString(size_t);
+
 		void			Write8(uint8);
 		void			Write16(uint16);
-		void			Write32(uint32);		
+		void			Write32(uint32);
 	};
 
 }
-
-
-#endif

@@ -150,19 +150,13 @@ void CZipArchiveReader::Read(Framework::CStream& stream)
 	for(unsigned int i = 0; i < dirHeader.dirEntryCount; i++)
 	{
 		ZIPDIRFILEHEADER fileDirHeader;
-		std::string fileName;
 		stream.Read(&fileDirHeader, sizeof(ZIPDIRFILEHEADER));
 		if(fileDirHeader.signature != DIRFILEHEADER_SIG)
 		{
 			throw std::runtime_error("Error while reading directory entry.");
 		}
-		if(fileDirHeader.fileNameLength != 0)
-		{
-			char* fileNameBuffer = reinterpret_cast<char*>(alloca(fileDirHeader.fileNameLength));
-			stream.Read(fileNameBuffer, fileDirHeader.fileNameLength);
-			fileName = std::string(fileNameBuffer, fileNameBuffer + fileDirHeader.fileNameLength);
-		}
-		if(fileName.length() != 0)
+		auto fileName = stream.ReadString(fileDirHeader.fileNameLength);
+		if(!fileName.empty())
 		{
 			m_files[fileName] = fileDirHeader;
 		}
