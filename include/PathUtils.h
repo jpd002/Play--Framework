@@ -14,12 +14,14 @@ namespace Framework
 		boost::filesystem::path		GetPersonalDataPath();
 		boost::filesystem::path		GetAppResourcesPath();
 #endif
+#if defined(_POSIX_VERSION)
 #if defined(__APPLE__)
 		boost::filesystem::path		GetSettingsPath();
 		boost::filesystem::path		GetRoamingDataPath();
-		boost::filesystem::path		GetPersonalDataPath();
 		boost::filesystem::path		GetAppResourcesPath();
-#endif
+#endif	// DEFINED(__APPLE__)
+		boost::filesystem::path		GetPersonalDataPath();
+#endif	// DEFINED(_POSIX_VERSION)
 
 		void						EnsurePathExists(const boost::filesystem::path&);
 	};

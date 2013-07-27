@@ -45,9 +45,10 @@ boost::filesystem::path PathUtils::GetAppResourcesPath()
 
 #endif	// _WIN32
 
+#if defined(_POSIX_VERSION)
+
 #if defined(__APPLE__)
 
-#include <pwd.h>
 #include <CoreFoundation/CoreFoundation.h>
 #include <Foundation/Foundation.h>
 
@@ -65,17 +66,21 @@ boost::filesystem::path PathUtils::GetRoamingDataPath()
 	return boost::filesystem::path(directory);
 }
 
-boost::filesystem::path PathUtils::GetPersonalDataPath()
-{
-	passwd* userInfo = getpwuid(getuid());
-	return boost::filesystem::path(userInfo->pw_dir);
-}
-
 boost::filesystem::path PathUtils::GetAppResourcesPath()
 {
 	NSBundle* bundle = [NSBundle mainBundle];
 	NSString* bundlePath = [bundle resourcePath];
 	return boost::filesystem::path([bundlePath UTF8String]);
+}
+
+#endif	// DEFINED(__APPLE__)
+
+#include <pwd.h>
+
+boost::filesystem::path PathUtils::GetPersonalDataPath()
+{
+	passwd* userInfo = getpwuid(getuid());
+	return boost::filesystem::path(userInfo->pw_dir);
 }
 
 #endif
