@@ -160,5 +160,9 @@ void CZipArchiveReader::Read(Framework::CStream& stream)
 		{
 			m_files[fileName] = fileDirHeader;
 		}
+		if(fileDirHeader.extraFieldLength != 0)
+		{
+			stream.Seek(fileDirHeader.extraFieldLength, Framework::STREAM_SEEK_CUR);
+		}
 	}
 }
