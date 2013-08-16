@@ -1,4 +1,5 @@
 #include "Stream.h"
+#include "alloca_def.h"
 
 using namespace Framework;
 
