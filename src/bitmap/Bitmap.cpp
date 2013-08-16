@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <stdexcept>
 #include <string.h>
+#include <algorithm>
 #include "bitmap/Bitmap.h"
 
 using namespace Framework;
