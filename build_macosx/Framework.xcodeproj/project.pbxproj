@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		703093A217BE54A2009662A1 /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7030939A17BE5456009662A1 /* Bitmap.cpp */; };
+		703093A317BE54A2009662A1 /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 7030939E17BE5463009662A1 /* Bitmap.h */; };
+		703093A417BE54A2009662A1 /* BMP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7030939B17BE5456009662A1 /* BMP.cpp */; };
+		703093A517BE54A2009662A1 /* BMP.h in Headers */ = {isa = PBXBuildFile; fileRef = 7030939F17BE5463009662A1 /* BMP.h */; };
+		703093A617BE54A2009662A1 /* JPEG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7030939C17BE5456009662A1 /* JPEG.cpp */; };
+		703093A717BE54A2009662A1 /* JPEG.h in Headers */ = {isa = PBXBuildFile; fileRef = 703093A017BE5463009662A1 /* JPEG.h */; };
+		703093A817BE54A2009662A1 /* PNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7030939D17BE5456009662A1 /* PNG.cpp */; };
+		703093A917BE54A2009662A1 /* PNG.h in Headers */ = {isa = PBXBuildFile; fileRef = 703093A117BE5463009662A1 /* PNG.h */; };
 		7E70288B1508786A00D9BC91 /* IEEE1180.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E70288A1508786A00D9BC91 /* IEEE1180.cpp */; };
 		7E70288E1508787D00D9BC91 /* IEEE1180.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E70288C1508787D00D9BC91 /* IEEE1180.h */; };
 		7E70288F1508787D00D9BC91 /* Interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E70288D1508787D00D9BC91 /* Interface.h */; };
-		7E7236D01506E64B00F3259A /* Bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236BC1506E64B00F3259A /* Bitmap.cpp */; };
 		7E7236D11506E64B00F3259A /* BitStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236BD1506E64B00F3259A /* BitStream.cpp */; };
-		7E7236D21506E64B00F3259A /* BMP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236BE1506E64B00F3259A /* BMP.cpp */; };
 		7E7236D31506E64B00F3259A /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236BF1506E64B00F3259A /* Config.cpp */; };
 		7E7236D41506E64B00F3259A /* Deflate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236C01506E64B00F3259A /* Deflate.cpp */; };
 		7E7236D51506E64B00F3259A /* Endian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236C11506E64B00F3259A /* Endian.cpp */; };
@@ -21,7 +27,6 @@
 		7E7236D81506E64B00F3259A /* IosOStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236C41506E64B00F3259A /* IosOStream.cpp */; };
 		7E7236D91506E64B00F3259A /* MemStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236C51506E64B00F3259A /* MemStream.cpp */; };
 		7E7236DA1506E64B00F3259A /* PathUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236C61506E64B00F3259A /* PathUtils.cpp */; };
-		7E7236DB1506E64B00F3259A /* PNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236C71506E64B00F3259A /* PNG.cpp */; };
 		7E7236DC1506E64B00F3259A /* PtrStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236C81506E64B00F3259A /* PtrStream.cpp */; };
 		7E7236DD1506E64B00F3259A /* StdStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236C91506E64B00F3259A /* StdStream.cpp */; };
 		7E7236DE1506E64B00F3259A /* Stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236CA1506E64B00F3259A /* Stream.cpp */; };
@@ -33,9 +38,7 @@
 		7E7237071506E67C00F3259A /* alloca_def.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236E41506E67C00F3259A /* alloca_def.h */; };
 		7E7237081506E67C00F3259A /* Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236E51506E67C00F3259A /* Base64.h */; };
 		7E7237091506E67C00F3259A /* BasicUnion.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236E61506E67C00F3259A /* BasicUnion.h */; };
-		7E72370A1506E67C00F3259A /* Bitmap.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236E71506E67C00F3259A /* Bitmap.h */; };
 		7E72370B1506E67C00F3259A /* BitStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236E81506E67C00F3259A /* BitStream.h */; };
-		7E72370C1506E67C00F3259A /* BMP.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236E91506E67C00F3259A /* BMP.h */; };
 		7E72370D1506E67C00F3259A /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236EA1506E67C00F3259A /* Config.h */; };
 		7E72370E1506E67C00F3259A /* Convertible.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236EB1506E67C00F3259A /* Convertible.h */; };
 		7E72370F1506E67C00F3259A /* countof.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236EC1506E67C00F3259A /* countof.h */; };
@@ -50,7 +53,6 @@
 		7E7237181506E67C00F3259A /* offsetof_def.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236F51506E67C00F3259A /* offsetof_def.h */; };
 		7E7237191506E67C00F3259A /* PathUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236F61506E67C00F3259A /* PathUtils.h */; };
 		7E72371A1506E67C00F3259A /* placeholder_def.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236F71506E67C00F3259A /* placeholder_def.h */; };
-		7E72371B1506E67C00F3259A /* PNG.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236F81506E67C00F3259A /* PNG.h */; };
 		7E72371C1506E67C00F3259A /* PtrMacro.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236F91506E67C00F3259A /* PtrMacro.h */; };
 		7E72371D1506E67C00F3259A /* PtrStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236FA1506E67C00F3259A /* PtrStream.h */; };
 		7E72371E1506E67C00F3259A /* Singleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236FB1506E67C00F3259A /* Singleton.h */; };
@@ -124,12 +126,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7030939A17BE5456009662A1 /* Bitmap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Bitmap.cpp; path = ../src/bitmap/Bitmap.cpp; sourceTree = "<group>"; };
+		7030939B17BE5456009662A1 /* BMP.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BMP.cpp; path = ../src/bitmap/BMP.cpp; sourceTree = "<group>"; };
+		7030939C17BE5456009662A1 /* JPEG.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = JPEG.cpp; path = ../src/bitmap/JPEG.cpp; sourceTree = "<group>"; };
+		7030939D17BE5456009662A1 /* PNG.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PNG.cpp; path = ../src/bitmap/PNG.cpp; sourceTree = "<group>"; };
+		7030939E17BE5463009662A1 /* Bitmap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Bitmap.h; path = ../include/bitmap/Bitmap.h; sourceTree = "<group>"; };
+		7030939F17BE5463009662A1 /* BMP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BMP.h; path = ../include/bitmap/BMP.h; sourceTree = "<group>"; };
+		703093A017BE5463009662A1 /* JPEG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JPEG.h; path = ../include/bitmap/JPEG.h; sourceTree = "<group>"; };
+		703093A117BE5463009662A1 /* PNG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PNG.h; path = ../include/bitmap/PNG.h; sourceTree = "<group>"; };
 		7E70288A1508786A00D9BC91 /* IEEE1180.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IEEE1180.cpp; path = ../src/idct/IEEE1180.cpp; sourceTree = "<group>"; };
 		7E70288C1508787D00D9BC91 /* IEEE1180.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEEE1180.h; path = ../include/idct/IEEE1180.h; sourceTree = "<group>"; };
 		7E70288D1508787D00D9BC91 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Interface.h; path = ../include/idct/Interface.h; sourceTree = "<group>"; };
-		7E7236BC1506E64B00F3259A /* Bitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Bitmap.cpp; path = ../src/Bitmap.cpp; sourceTree = "<group>"; };
 		7E7236BD1506E64B00F3259A /* BitStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BitStream.cpp; path = ../src/BitStream.cpp; sourceTree = "<group>"; };
-		7E7236BE1506E64B00F3259A /* BMP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BMP.cpp; path = ../src/BMP.cpp; sourceTree = "<group>"; };
 		7E7236BF1506E64B00F3259A /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Config.cpp; path = ../src/Config.cpp; sourceTree = "<group>"; };
 		7E7236C01506E64B00F3259A /* Deflate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Deflate.cpp; path = ../src/Deflate.cpp; sourceTree = "<group>"; };
 		7E7236C11506E64B00F3259A /* Endian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Endian.cpp; path = ../src/Endian.cpp; sourceTree = "<group>"; };
@@ -138,7 +146,6 @@
 		7E7236C41506E64B00F3259A /* IosOStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosOStream.cpp; path = ../src/IosOStream.cpp; sourceTree = "<group>"; };
 		7E7236C51506E64B00F3259A /* MemStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MemStream.cpp; path = ../src/MemStream.cpp; sourceTree = "<group>"; };
 		7E7236C61506E64B00F3259A /* PathUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PathUtils.cpp; path = ../src/PathUtils.cpp; sourceTree = "<group>"; };
-		7E7236C71506E64B00F3259A /* PNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PNG.cpp; path = ../src/PNG.cpp; sourceTree = "<group>"; };
 		7E7236C81506E64B00F3259A /* PtrStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PtrStream.cpp; path = ../src/PtrStream.cpp; sourceTree = "<group>"; };
 		7E7236C91506E64B00F3259A /* StdStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StdStream.cpp; path = ../src/StdStream.cpp; sourceTree = "<group>"; };
 		7E7236CA1506E64B00F3259A /* Stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Stream.cpp; path = ../src/Stream.cpp; sourceTree = "<group>"; };
@@ -150,9 +157,7 @@
 		7E7236E41506E67C00F3259A /* alloca_def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = alloca_def.h; path = ../include/alloca_def.h; sourceTree = "<group>"; };
 		7E7236E51506E67C00F3259A /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = ../include/Base64.h; sourceTree = "<group>"; };
 		7E7236E61506E67C00F3259A /* BasicUnion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicUnion.h; path = ../include/BasicUnion.h; sourceTree = "<group>"; };
-		7E7236E71506E67C00F3259A /* Bitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bitmap.h; path = ../include/Bitmap.h; sourceTree = "<group>"; };
 		7E7236E81506E67C00F3259A /* BitStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BitStream.h; path = ../include/BitStream.h; sourceTree = "<group>"; };
-		7E7236E91506E67C00F3259A /* BMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BMP.h; path = ../include/BMP.h; sourceTree = "<group>"; };
 		7E7236EA1506E67C00F3259A /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = ../include/Config.h; sourceTree = "<group>"; };
 		7E7236EB1506E67C00F3259A /* Convertible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Convertible.h; path = ../include/Convertible.h; sourceTree = "<group>"; };
 		7E7236EC1506E67C00F3259A /* countof.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = countof.h; path = ../include/countof.h; sourceTree = "<group>"; };
@@ -167,7 +172,6 @@
 		7E7236F51506E67C00F3259A /* offsetof_def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = offsetof_def.h; path = ../include/offsetof_def.h; sourceTree = "<group>"; };
 		7E7236F61506E67C00F3259A /* PathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathUtils.h; path = ../include/PathUtils.h; sourceTree = "<group>"; };
 		7E7236F71506E67C00F3259A /* placeholder_def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = placeholder_def.h; path = ../include/placeholder_def.h; sourceTree = "<group>"; };
-		7E7236F81506E67C00F3259A /* PNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PNG.h; path = ../include/PNG.h; sourceTree = "<group>"; };
 		7E7236F91506E67C00F3259A /* PtrMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PtrMacro.h; path = ../include/PtrMacro.h; sourceTree = "<group>"; };
 		7E7236FA1506E67C00F3259A /* PtrStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PtrStream.h; path = ../include/PtrStream.h; sourceTree = "<group>"; };
 		7E7236FB1506E67C00F3259A /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = ../include/Singleton.h; sourceTree = "<group>"; };
@@ -265,6 +269,7 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				7030939917BE5443009662A1 /* Bitmap */,
 				7EE362C70D5FA37700C21032 /* Idct */,
 				7E898A380D08C64A0077F9ED /* Mpeg2 */,
 				7EB9762A0EFE15C300CFB457 /* OpenAl */,
@@ -274,12 +279,8 @@
 				7E7236E41506E67C00F3259A /* alloca_def.h */,
 				7E7236E51506E67C00F3259A /* Base64.h */,
 				7E7236E61506E67C00F3259A /* BasicUnion.h */,
-				7E7236BC1506E64B00F3259A /* Bitmap.cpp */,
-				7E7236E71506E67C00F3259A /* Bitmap.h */,
 				7E7236BD1506E64B00F3259A /* BitStream.cpp */,
 				7E7236E81506E67C00F3259A /* BitStream.h */,
-				7E7236BE1506E64B00F3259A /* BMP.cpp */,
-				7E7236E91506E67C00F3259A /* BMP.h */,
 				7E7236BF1506E64B00F3259A /* Config.cpp */,
 				7E7236EA1506E67C00F3259A /* Config.h */,
 				7E7236EB1506E67C00F3259A /* Convertible.h */,
@@ -302,8 +303,6 @@
 				7E7236C61506E64B00F3259A /* PathUtils.cpp */,
 				7E7236F61506E67C00F3259A /* PathUtils.h */,
 				7E7236F71506E67C00F3259A /* placeholder_def.h */,
-				7E7236C71506E64B00F3259A /* PNG.cpp */,
-				7E7236F81506E67C00F3259A /* PNG.h */,
 				7E7236F91506E67C00F3259A /* PtrMacro.h */,
 				7E7236C81506E64B00F3259A /* PtrStream.cpp */,
 				7E7236FA1506E67C00F3259A /* PtrStream.h */,
@@ -336,6 +335,21 @@
 				D2AAC046055464E500DB518D /* libFramework.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		7030939917BE5443009662A1 /* Bitmap */ = {
+			isa = PBXGroup;
+			children = (
+				7030939A17BE5456009662A1 /* Bitmap.cpp */,
+				7030939E17BE5463009662A1 /* Bitmap.h */,
+				7030939B17BE5456009662A1 /* BMP.cpp */,
+				7030939F17BE5463009662A1 /* BMP.h */,
+				7030939C17BE5456009662A1 /* JPEG.cpp */,
+				703093A017BE5463009662A1 /* JPEG.h */,
+				7030939D17BE5456009662A1 /* PNG.cpp */,
+				703093A117BE5463009662A1 /* PNG.h */,
+			);
+			name = Bitmap;
 			sourceTree = "<group>";
 		};
 		7E898A010D08C4F00077F9ED /* Xml */ = {
@@ -456,10 +470,9 @@
 				7E7237071506E67C00F3259A /* alloca_def.h in Headers */,
 				7E7237081506E67C00F3259A /* Base64.h in Headers */,
 				7E7237091506E67C00F3259A /* BasicUnion.h in Headers */,
-				7E72370A1506E67C00F3259A /* Bitmap.h in Headers */,
 				7E72370B1506E67C00F3259A /* BitStream.h in Headers */,
-				7E72370C1506E67C00F3259A /* BMP.h in Headers */,
 				7E72370D1506E67C00F3259A /* Config.h in Headers */,
+				703093A917BE54A2009662A1 /* PNG.h in Headers */,
 				7E72370E1506E67C00F3259A /* Convertible.h in Headers */,
 				7E72370F1506E67C00F3259A /* countof.h in Headers */,
 				7E7237101506E67C00F3259A /* Deflate.h in Headers */,
@@ -473,7 +486,6 @@
 				7E7237181506E67C00F3259A /* offsetof_def.h in Headers */,
 				7E7237191506E67C00F3259A /* PathUtils.h in Headers */,
 				7E72371A1506E67C00F3259A /* placeholder_def.h in Headers */,
-				7E72371B1506E67C00F3259A /* PNG.h in Headers */,
 				7E72371C1506E67C00F3259A /* PtrMacro.h in Headers */,
 				7E72371D1506E67C00F3259A /* PtrStream.h in Headers */,
 				7E72371E1506E67C00F3259A /* Singleton.h in Headers */,
@@ -492,9 +504,11 @@
 				7E7237431507348200F3259A /* ZipArchiveWriter.h in Headers */,
 				7E7237441507348200F3259A /* ZipDeflateStream.h in Headers */,
 				7E7237451507348200F3259A /* ZipDefs.h in Headers */,
+				703093A717BE54A2009662A1 /* JPEG.h in Headers */,
 				7E7237461507348200F3259A /* ZipFile.h in Headers */,
 				7E7237471507348200F3259A /* ZipInflateStream.h in Headers */,
 				7E7237481507348200F3259A /* ZipStoreStream.h in Headers */,
+				703093A517BE54A2009662A1 /* BMP.h in Headers */,
 				7E7237641507351000F3259A /* FilteringNodeIterator.h in Headers */,
 				7E7237651507351000F3259A /* Node.h in Headers */,
 				7E7237661507351000F3259A /* Parser.h in Headers */,
@@ -515,6 +529,7 @@
 				7E7237831507355C00F3259A /* QuantiserScaleTable.h in Headers */,
 				7E7237841507355C00F3259A /* VLCTable.h in Headers */,
 				7E7237A8150735F900F3259A /* OpenGlDef.h in Headers */,
+				703093A317BE54A2009662A1 /* Bitmap.h in Headers */,
 				7E7237A9150735F900F3259A /* Program.h in Headers */,
 				7E7237AA150735F900F3259A /* Shader.h in Headers */,
 				7E70288E1508787D00D9BC91 /* IEEE1180.h in Headers */,
@@ -571,22 +586,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E7236D01506E64B00F3259A /* Bitmap.cpp in Sources */,
 				7E7236D11506E64B00F3259A /* BitStream.cpp in Sources */,
-				7E7236D21506E64B00F3259A /* BMP.cpp in Sources */,
 				7E7236D31506E64B00F3259A /* Config.cpp in Sources */,
+				703093A217BE54A2009662A1 /* Bitmap.cpp in Sources */,
 				7E7236D41506E64B00F3259A /* Deflate.cpp in Sources */,
 				7E7236D51506E64B00F3259A /* Endian.cpp in Sources */,
 				7E7236D61506E64B00F3259A /* GZipStream.cpp in Sources */,
 				7E7236D71506E64B00F3259A /* IosIStream.cpp in Sources */,
 				7E7236D81506E64B00F3259A /* IosOStream.cpp in Sources */,
+				703093A417BE54A2009662A1 /* BMP.cpp in Sources */,
 				7E7236D91506E64B00F3259A /* MemStream.cpp in Sources */,
 				7E7236DA1506E64B00F3259A /* PathUtils.cpp in Sources */,
-				7E7236DB1506E64B00F3259A /* PNG.cpp in Sources */,
 				7E7236DC1506E64B00F3259A /* PtrStream.cpp in Sources */,
 				7E7236DD1506E64B00F3259A /* StdStream.cpp in Sources */,
 				7E7236DE1506E64B00F3259A /* Stream.cpp in Sources */,
 				7E7236DF1506E64B00F3259A /* StreamBitStream.cpp in Sources */,
+				703093A617BE54A2009662A1 /* JPEG.cpp in Sources */,
 				7E7236E01506E64B00F3259A /* string_cast_sjis.cpp in Sources */,
 				7E7236E11506E64B00F3259A /* string_cast_win1252.cpp in Sources */,
 				7E7236E21506E64B00F3259A /* string_cast.cpp in Sources */,
@@ -602,6 +617,7 @@
 				7E72375C1507350200F3259A /* Parser.cpp in Sources */,
 				7E72375D1507350200F3259A /* Utils.cpp in Sources */,
 				7E72375E1507350200F3259A /* Writer.cpp in Sources */,
+				703093A817BE54A2009662A1 /* PNG.cpp in Sources */,
 				7E7237931507356B00F3259A /* CodedBlockPatternTable.cpp in Sources */,
 				7E7237941507356B00F3259A /* DcSizeChrominanceTable.cpp in Sources */,
 				7E7237951507356B00F3259A /* DcSizeLuminanceTable.cpp in Sources */,
