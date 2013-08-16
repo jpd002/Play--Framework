@@ -30,6 +30,10 @@ namespace Framework
 		uint16			Read16();
 		uint32			Read32();
 		uint64			Read64();
+
+		uint32			Read32_MSBF();
+
+		std::string		ReadString();
 		std::string		ReadString(size_t);
 
 		void			Write8(uint8);

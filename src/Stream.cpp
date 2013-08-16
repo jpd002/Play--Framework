@@ -14,30 +14,55 @@ void CStream::Flush()
 
 uint8 CStream::Read8()
 {
-	uint8 nValue;
-	Read(&nValue, 1);
-	return nValue;
+	uint8 value = 0;
+	Read(&value, 1);
+	return value;
 }
 
 uint16 CStream::Read16()
 {
-	uint16 nValue;
-	Read(&nValue, 2);
-	return nValue;
+	uint16 value = 0;
+	Read(&value, 2);
+	return value;
 }
 
 uint32 CStream::Read32()
 {
-	uint32 nValue;
-	Read(&nValue, 4);
-	return nValue;
+	uint32 value = 0;
+	Read(&value, 4);
+	return value;
 }
 
 uint64 CStream::Read64()
 {
-	uint64 value;
+	uint64 value = 0;
 	Read(&value, 8);
 	return value;
+}
+
+uint32 CStream::Read32_MSBF()
+{
+	uint32 value = 0;
+	Read(&value, 4);
+	value = 
+		(((value & 0xFF000000) >> 24) <<  0) |
+		(((value & 0x00FF0000) >> 16) <<  8) |
+		(((value & 0x0000FF00) >>  8) << 16) |
+		(((value & 0x000000FF) >>  0) << 24);
+	return value;
+}
+
+std::string CStream::ReadString()
+{
+	std::string result;
+	while(1)
+	{
+		char next = Read8();
+		if(IsEOF()) break;
+		if(next == 0) break;
+		result += next;
+	}
+	return result;
 }
 
 std::string CStream::ReadString(size_t length)
