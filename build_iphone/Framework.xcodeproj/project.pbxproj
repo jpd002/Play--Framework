@@ -480,7 +480,6 @@
 		1DEB921F08733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
@@ -493,10 +492,6 @@
 				GCC_PREFIX_HEADER = Framework_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_THUMB_SUPPORT = NO;
-				HEADER_SEARCH_PATHS = (
-					"~/Libraries/boost_1_50_0",
-					../include,
-				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = Framework;
 				SKIP_INSTALL = YES;
@@ -506,7 +501,6 @@
 		1DEB922008733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				DSTROOT = /tmp/Framework.dst;
@@ -516,10 +510,6 @@
 				GCC_PREFIX_HEADER = Framework_Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_THUMB_SUPPORT = NO;
-				HEADER_SEARCH_PATHS = (
-					"~/Libraries/boost_1_50_0",
-					../include,
-				);
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = Framework;
 				SKIP_INSTALL = YES;
@@ -535,8 +525,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"~/Libraries/boost_1_42_0/boost/tr1/tr1",
-					"~/Libraries/boost_1_42_0",
+					/Users/jpd002/Libraries/boost_1_50_0,
 					../include,
 				);
 				OTHER_CFLAGS = "-fvisibility=hidden";
@@ -553,8 +542,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"~/Libraries/boost_1_42_0/boost/tr1/tr1",
-					"~/Libraries/boost_1_42_0",
+					/Users/jpd002/Libraries/boost_1_50_0,
 					../include,
 				);
 				OTHER_CFLAGS = "-fvisibility=hidden";

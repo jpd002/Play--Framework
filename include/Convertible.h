@@ -1,10 +1,10 @@
 #ifndef _CONVERTIBLE_H_
 #define _CONVERTIBLE_H_
 
-template<typename IntegerType>
+template<typename IntType>
 struct convertible
 {
-	typedef IntegerType IntegerType;
+	typedef IntType IntegerType;
 
 	operator IntegerType() const
 	{
