@@ -15,6 +15,10 @@
 		703093A717BE54A2009662A1 /* JPEG.h in Headers */ = {isa = PBXBuildFile; fileRef = 703093A017BE5463009662A1 /* JPEG.h */; };
 		703093A817BE54A2009662A1 /* PNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7030939D17BE5456009662A1 /* PNG.cpp */; };
 		703093A917BE54A2009662A1 /* PNG.h in Headers */ = {isa = PBXBuildFile; fileRef = 703093A117BE5463009662A1 /* PNG.h */; };
+		70D317AB17C0D87A00CCA3A4 /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D317A717C0D87A00CCA3A4 /* Buffer.cpp */; };
+		70D317AC17C0D87A00CCA3A4 /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D317A817C0D87A00CCA3A4 /* Context.cpp */; };
+		70D317AD17C0D87A00CCA3A4 /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D317A917C0D87A00CCA3A4 /* Device.cpp */; };
+		70D317AE17C0D87A00CCA3A4 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D317AA17C0D87A00CCA3A4 /* Source.cpp */; };
 		7E70288B1508786A00D9BC91 /* IEEE1180.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E70288A1508786A00D9BC91 /* IEEE1180.cpp */; };
 		7E70288E1508787D00D9BC91 /* IEEE1180.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E70288C1508787D00D9BC91 /* IEEE1180.h */; };
 		7E70288F1508787D00D9BC91 /* Interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E70288D1508787D00D9BC91 /* Interface.h */; };
@@ -134,6 +138,15 @@
 		7030939F17BE5463009662A1 /* BMP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BMP.h; path = ../include/bitmap/BMP.h; sourceTree = "<group>"; };
 		703093A017BE5463009662A1 /* JPEG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JPEG.h; path = ../include/bitmap/JPEG.h; sourceTree = "<group>"; };
 		703093A117BE5463009662A1 /* PNG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PNG.h; path = ../include/bitmap/PNG.h; sourceTree = "<group>"; };
+		70D317A717C0D87A00CCA3A4 /* Buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Buffer.cpp; path = ../src/openal/Buffer.cpp; sourceTree = "<group>"; };
+		70D317A817C0D87A00CCA3A4 /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Context.cpp; path = ../src/openal/Context.cpp; sourceTree = "<group>"; };
+		70D317A917C0D87A00CCA3A4 /* Device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Device.cpp; path = ../src/openal/Device.cpp; sourceTree = "<group>"; };
+		70D317AA17C0D87A00CCA3A4 /* Source.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Source.cpp; path = ../src/openal/Source.cpp; sourceTree = "<group>"; };
+		70D317AF17C0D89D00CCA3A4 /* Buffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Buffer.h; path = ../include/openal/Buffer.h; sourceTree = "<group>"; };
+		70D317B017C0D89D00CCA3A4 /* Context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Context.h; path = ../include/openal/Context.h; sourceTree = "<group>"; };
+		70D317B117C0D89D00CCA3A4 /* Device.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Device.h; path = ../include/openal/Device.h; sourceTree = "<group>"; };
+		70D317B217C0D89D00CCA3A4 /* OpenAlDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OpenAlDef.h; path = ../include/openal/OpenAlDef.h; sourceTree = "<group>"; };
+		70D317B317C0D89D00CCA3A4 /* Source.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Source.h; path = ../include/openal/Source.h; sourceTree = "<group>"; };
 		7E70288A1508786A00D9BC91 /* IEEE1180.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IEEE1180.cpp; path = ../src/idct/IEEE1180.cpp; sourceTree = "<group>"; };
 		7E70288C1508787D00D9BC91 /* IEEE1180.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEEE1180.h; path = ../include/idct/IEEE1180.h; sourceTree = "<group>"; };
 		7E70288D1508787D00D9BC91 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Interface.h; path = ../include/idct/Interface.h; sourceTree = "<group>"; };
@@ -427,6 +440,15 @@
 		7EB9762A0EFE15C300CFB457 /* OpenAl */ = {
 			isa = PBXGroup;
 			children = (
+				70D317A717C0D87A00CCA3A4 /* Buffer.cpp */,
+				70D317AF17C0D89D00CCA3A4 /* Buffer.h */,
+				70D317A817C0D87A00CCA3A4 /* Context.cpp */,
+				70D317B017C0D89D00CCA3A4 /* Context.h */,
+				70D317A917C0D87A00CCA3A4 /* Device.cpp */,
+				70D317B117C0D89D00CCA3A4 /* Device.h */,
+				70D317B217C0D89D00CCA3A4 /* OpenAlDef.h */,
+				70D317AA17C0D87A00CCA3A4 /* Source.cpp */,
+				70D317B317C0D89D00CCA3A4 /* Source.h */,
 			);
 			name = OpenAl;
 			sourceTree = "<group>";
@@ -594,6 +616,7 @@
 				7E7236D61506E64B00F3259A /* GZipStream.cpp in Sources */,
 				7E7236D71506E64B00F3259A /* IosIStream.cpp in Sources */,
 				7E7236D81506E64B00F3259A /* IosOStream.cpp in Sources */,
+				70D317AE17C0D87A00CCA3A4 /* Source.cpp in Sources */,
 				703093A417BE54A2009662A1 /* BMP.cpp in Sources */,
 				7E7236D91506E64B00F3259A /* MemStream.cpp in Sources */,
 				7E7236DA1506E64B00F3259A /* PathUtils.cpp in Sources */,
@@ -605,11 +628,13 @@
 				7E7236E01506E64B00F3259A /* string_cast_sjis.cpp in Sources */,
 				7E7236E11506E64B00F3259A /* string_cast_win1252.cpp in Sources */,
 				7E7236E21506E64B00F3259A /* string_cast.cpp in Sources */,
+				70D317AD17C0D87A00CCA3A4 /* Device.cpp in Sources */,
 				7E7236E31506E64B00F3259A /* Utf8.cpp in Sources */,
 				7E72374F1507349200F3259A /* ZipArchiveReader.cpp in Sources */,
 				7E7237501507349200F3259A /* ZipArchiveWriter.cpp in Sources */,
 				7E7237511507349200F3259A /* ZipDeflateStream.cpp in Sources */,
 				7E7237521507349200F3259A /* ZipFile.cpp in Sources */,
+				70D317AC17C0D87A00CCA3A4 /* Context.cpp in Sources */,
 				7E7237531507349200F3259A /* ZipInflateStream.cpp in Sources */,
 				7E7237541507349200F3259A /* ZipStoreStream.cpp in Sources */,
 				7E72375A1507350200F3259A /* FilteringNodeIterator.cpp in Sources */,
@@ -627,6 +652,7 @@
 				7E7237991507356B00F3259A /* InverseScanTable.cpp in Sources */,
 				7E72379A1507356B00F3259A /* MacroblockAddressIncrementTable.cpp in Sources */,
 				7E72379B1507356B00F3259A /* MacroblockTypeBTable.cpp in Sources */,
+				70D317AB17C0D87A00CCA3A4 /* Buffer.cpp in Sources */,
 				7E72379C1507356B00F3259A /* MacroblockTypeITable.cpp in Sources */,
 				7E72379D1507356B00F3259A /* MacroblockTypePTable.cpp in Sources */,
 				7E72379E1507356B00F3259A /* MotionCodeTable.cpp in Sources */,
