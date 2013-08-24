@@ -13,9 +13,11 @@ namespace OpenAl
 
 						operator ALuint() const;
 
+		ALint			GetState();
+
 		void			Play();
 		void			Stop();
-
+		
 		void			QueueBuffer(ALuint);
 		int				GetBuffersProcessed() const;
 
