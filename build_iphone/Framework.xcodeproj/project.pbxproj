@@ -92,6 +92,7 @@
 		701A48DA169BE4FC00B5C1FF /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Base64.h; path = ../include/Base64.h; sourceTree = "<group>"; };
 		701A48F316AD196200B5C1FF /* PathUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PathUtils.cpp; path = ../src/PathUtils.cpp; sourceTree = "<group>"; };
 		701A48F616AD197600B5C1FF /* PathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathUtils.h; path = ../include/PathUtils.h; sourceTree = "<group>"; };
+		704DFAED17D5CB22003AB959 /* alloca_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = alloca_def.h; path = ../include/alloca_def.h; sourceTree = "<group>"; };
 		7E1C41B31234236D00BB4E9C /* IosIStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosIStream.cpp; path = ../src/IosIStream.cpp; sourceTree = SOURCE_ROOT; };
 		7E1C41B41234236D00BB4E9C /* IosOStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosOStream.cpp; path = ../src/IosOStream.cpp; sourceTree = SOURCE_ROOT; };
 		7E1C41B51234236D00BB4E9C /* string_cast_sjis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = string_cast_sjis.cpp; path = ../src/string_cast_sjis.cpp; sourceTree = SOURCE_ROOT; };
@@ -211,6 +212,7 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				704DFAED17D5CB22003AB959 /* alloca_def.h */,
 				701A48D7169BE4F500B5C1FF /* Base64.cpp */,
 				701A48DA169BE4FC00B5C1FF /* Base64.h */,
 				7E2722BD1214FAD800C0DEBF /* Config.cpp */,

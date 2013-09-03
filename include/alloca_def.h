@@ -4,7 +4,7 @@
 #ifdef _MSC_VER
 #include <malloc.h>
 #else
-#include <alloca.h>
+#include <stdlib.h>
 #endif
 
 #endif
