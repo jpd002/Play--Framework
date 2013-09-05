@@ -2,14 +2,14 @@
 #include <stdexcept>
 
 using namespace OpenAl;
-using namespace std;
 
 CSource::CSource()
 {
 	alGenSources(1, &m_name);
-	if(alGetError())
+	ALuint errorCode = alGetError();
+	if(errorCode != AL_NO_ERROR)
 	{
-		throw runtime_error("Couldn't create source.");
+		throw std::runtime_error("Couldn't create source.");
 	}
 }
 
