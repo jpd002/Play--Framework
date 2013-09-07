@@ -717,5 +717,8 @@
     <ClInclude Include="..\include\win32\DefaultWndClass.h">
       <Filter>Source Files\win32</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\win32\Win32Defs.h">
+      <Filter>Source Files\win32</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

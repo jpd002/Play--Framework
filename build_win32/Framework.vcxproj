@@ -237,6 +237,7 @@
     <ClInclude Include="..\include\win32\TrayIconServer.h" />
     <ClInclude Include="..\include\win32\TreeView.h" />
     <ClInclude Include="..\include\win32\VerticalSplitter.h" />
+    <ClInclude Include="..\include\win32\Win32Defs.h" />
     <ClInclude Include="..\include\win32\Window.h" />
     <ClInclude Include="..\include\xml\FilteringNodeIterator.h" />
     <ClInclude Include="..\include\xml\Node.h" />
