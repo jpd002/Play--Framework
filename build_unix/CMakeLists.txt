@@ -7,6 +7,7 @@ include_directories(../include /usr/local/include)
 
 add_library(Framework 
 	../src/Base64.cpp
+	../src/Config.cpp
 	../src/Stream.cpp 
 	../src/StdStream.cpp 
 	../src/MemStream.cpp
