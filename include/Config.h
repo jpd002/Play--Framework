@@ -1,5 +1,4 @@
-#ifndef _CONFIG_H_
-#define _CONFIG_H_
+#pragma once
 
 #include <string>
 #include <boost/utility.hpp>
@@ -15,7 +14,7 @@ namespace Framework
 	public:
 		typedef boost::filesystem::path PathType;
 
-											CConfig(const PathType&);
+											CConfig(const PathType&, bool readonly = false);
 		virtual								~CConfig();
 
 		static std::string					MakePreferenceName(const std::string&, const std::string& = "", const std::string& = "", const std::string& = "");
@@ -54,8 +53,8 @@ namespace Framework
 			virtual	void					Serialize(Framework::Xml::CNode*) const;
 
 		private:
-			std::string						m_sName;
-			PREFERENCE_TYPE					m_nType;
+			std::string						m_name;
+			PREFERENCE_TYPE					m_type;
 		};
 
 		class CPreferenceInteger : public CPreference
@@ -68,7 +67,7 @@ namespace Framework
 			virtual void					Serialize(Framework::Xml::CNode*) const;
 
 		private:
-			int								m_nValue;
+			int								m_value;
 		};
 
 		class CPreferenceBoolean : public CPreference
@@ -81,7 +80,7 @@ namespace Framework
 			virtual void					Serialize(Framework::Xml::CNode*) const;
 
 		private:
-			bool							m_nValue;
+			bool							m_value;
 		};
 
 		class CPreferenceString : public CPreference
@@ -94,20 +93,21 @@ namespace Framework
 			virtual void					Serialize(Framework::Xml::CNode*) const;
 
 		private:
-			std::string						m_sValue;
+			std::string						m_value;
 		};
 
-		typedef std::map<std::string, CPreference*> PreferenceMapType;
+		typedef std::shared_ptr<CPreference> PreferencePtr;
+		typedef std::map<std::string, PreferencePtr> PreferenceMapType;
 
 		void								Load();
-		template <typename Type> Type*		FindPreference(const char*);
-		template <typename Type> Type*		CastPreference(CPreference*);
-		void								InsertPreference(CPreference*);
+		void								InsertPreference(const PreferencePtr&);
+
+		template <typename Type> std::shared_ptr<Type>			FindPreference(const char*);
+		template <typename Type> static std::shared_ptr<Type>	CastPreference(const PreferencePtr&);
 
 		PreferenceMapType					m_preferences;
 		std::mutex							m_mutex;
 		PathType							m_path;
+		bool								m_readonly;
 	};
 }
-
-#endif

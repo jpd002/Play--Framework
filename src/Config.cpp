@@ -10,19 +10,18 @@
 
 using namespace Framework;
 
-CConfig::CConfig(const PathType& path)
+CConfig::CConfig(const PathType& path, bool readonly)
 : m_path(path)
+, m_readonly(readonly)
 {
 	Load();
 }
 
 CConfig::~CConfig()
 {
-	Save();
-	for(auto preferenceIterator(std::begin(m_preferences));
-		preferenceIterator != std::end(m_preferences); preferenceIterator++)
+	if(!m_readonly)
 	{
-		delete preferenceIterator->second;
+		Save();
 	}
 }
 
@@ -46,134 +45,137 @@ std::string CConfig::MakePreferenceName(const std::string& level0, const std::st
 
 namespace Framework {
 	
-template <> CConfig::CPreference* CConfig::CastPreference<CConfig::CPreference>(CPreference* pPreference)
+template <> std::shared_ptr<CConfig::CPreference> CConfig::CastPreference<CConfig::CPreference>(const PreferencePtr& preference)
 {
-	return pPreference;
+	return preference;
 }
 
-template <> CConfig::CPreferenceInteger* CConfig::CastPreference<CConfig::CPreferenceInteger>(CPreference* pPreference)
+template <> std::shared_ptr<CConfig::CPreferenceInteger> CConfig::CastPreference<CConfig::CPreferenceInteger>(const PreferencePtr& preference)
 {
-	if(pPreference->GetType() != TYPE_INTEGER)
+	if(preference->GetType() != TYPE_INTEGER)
 	{
-		return NULL;
+		return std::shared_ptr<CConfig::CPreferenceInteger>();
 	}
-	return (CPreferenceInteger*)pPreference;
+	return std::static_pointer_cast<CConfig::CPreferenceInteger>(preference);
 }
 
-template <> CConfig::CPreferenceBoolean* CConfig::CastPreference<CConfig::CPreferenceBoolean>(CPreference* pPreference)
+template <> std::shared_ptr<CConfig::CPreferenceBoolean> CConfig::CastPreference<CConfig::CPreferenceBoolean>(const PreferencePtr& preference)
 {
-	if(pPreference->GetType() != TYPE_BOOLEAN)
+	if(preference->GetType() != TYPE_BOOLEAN)
 	{
-		return NULL;
+		return std::shared_ptr<CConfig::CPreferenceBoolean>();
 	}
-	return (CPreferenceBoolean*)pPreference;
+	return std::static_pointer_cast<CConfig::CPreferenceBoolean>(preference);
 }
 
-template <> CConfig::CPreferenceString* CConfig::CastPreference<CConfig::CPreferenceString>(CPreference* pPreference)
+template <> std::shared_ptr<CConfig::CPreferenceString> CConfig::CastPreference<CConfig::CPreferenceString>(const PreferencePtr& preference)
 {
-	if(pPreference->GetType() != TYPE_STRING)
+	if(preference->GetType() != TYPE_STRING)
 	{
-		return NULL;
+		return std::shared_ptr<CConfig::CPreferenceString>();
 	}
-	return (CPreferenceString*)pPreference;
+	return std::static_pointer_cast<CConfig::CPreferenceString>(preference);
 }
 
 }
 
-template <typename Type> Type* CConfig::FindPreference(const char* sName)
+template <typename Type> std::shared_ptr<Type> CConfig::FindPreference(const char* name)
 {
-	CPreference* pRet = NULL;
+	PreferencePtr basePref;
 
 	{
 		std::unique_lock<std::mutex> mutexLock(m_mutex);
-		PreferenceMapType::iterator preferenceIterator(m_preferences.find(sName));
+		auto preferenceIterator(m_preferences.find(name));
 		if(preferenceIterator != m_preferences.end())
 		{
-			pRet = preferenceIterator->second;
+			basePref = preferenceIterator->second;
 		}
 	}
 
-	if(pRet == NULL) return NULL;
+	if(!basePref) return std::shared_ptr<Type>();
 
-	Type* pPrefCast = CastPreference<Type>(pRet);
-	return pPrefCast;
+	auto pref = CastPreference<Type>(basePref);
+	return pref;
 }
 
-void CConfig::RegisterPreferenceInteger(const char* sName, int nValue)
+void CConfig::RegisterPreferenceInteger(const char* name, int value)
 {
-	if(FindPreference<CPreference>(sName) != NULL)
+	if(FindPreference<CPreference>(name))
 	{
 		return;
 	}
 
-	CPreferenceInteger* pPref = new CPreferenceInteger(sName, nValue);
-	InsertPreference(pPref);
+	auto preference = std::make_shared<CPreferenceInteger>(name, value);
+	InsertPreference(preference);
 }
 
-void CConfig::RegisterPreferenceBoolean(const char* sName, bool nValue)
+void CConfig::RegisterPreferenceBoolean(const char* name, bool value)
 {
-	if(FindPreference<CPreference>(sName) != NULL)
+	if(FindPreference<CPreference>(name))
 	{
 		return;
 	}
 
-	CPreferenceBoolean* pPref = new CPreferenceBoolean(sName, nValue);
-	InsertPreference(pPref);
+	auto preference = std::make_shared<CPreferenceBoolean>(name, value);
+	InsertPreference(preference);
 }
 
-void CConfig::RegisterPreferenceString(const char* sName, const char* sValue)
+void CConfig::RegisterPreferenceString(const char* name, const char* value)
 {
-	if(FindPreference<CPreference>(sName) != NULL)
+	if(FindPreference<CPreference>(name))
 	{
 		return;
 	}
 
-	CPreferenceString* pPref = new CPreferenceString(sName, sValue);
-	InsertPreference(pPref);
+	auto preference = std::make_shared<CPreferenceString>(name, value);
+	InsertPreference(preference);
 }
 
-int CConfig::GetPreferenceInteger(const char* sName)
+int CConfig::GetPreferenceInteger(const char* name)
 {
-	CPreferenceInteger* pPref = FindPreference<CPreferenceInteger>(sName);
-	if(pPref == NULL) return 0;
-	return pPref->GetValue();
+	auto preference = FindPreference<CPreferenceInteger>(name);
+	if(!preference) return 0;
+	return preference->GetValue();
 }
 
-bool CConfig::GetPreferenceBoolean(const char* sName)
+bool CConfig::GetPreferenceBoolean(const char* name)
 {
-	CPreferenceBoolean* pPref = FindPreference<CPreferenceBoolean>(sName);
-	if(pPref == NULL) return false;
-	return pPref->GetValue();
+	auto preference = FindPreference<CPreferenceBoolean>(name);
+	if(!preference) return false;
+	return preference->GetValue();
 }
 
-const char* CConfig::GetPreferenceString(const char* sName)
+const char* CConfig::GetPreferenceString(const char* name)
 {
-	CPreferenceString* pPref = FindPreference<CPreferenceString>(sName);
-	if(pPref == NULL) return "";
-	return pPref->GetValue();
+	auto preference = FindPreference<CPreferenceString>(name);
+	if(!preference) return "";
+	return preference->GetValue();
 }
 
-bool CConfig::SetPreferenceInteger(const char* sName, int nValue)
+bool CConfig::SetPreferenceInteger(const char* name, int value)
 {
-	CPreferenceInteger* pPref = FindPreference<CPreferenceInteger>(sName);
-	if(pPref == NULL) return false;
-	pPref->SetValue(nValue);
+	if(m_readonly) throw std::runtime_error("Setting preference on read-only config is illegal.");
+	auto preference = FindPreference<CPreferenceInteger>(name);
+	if(!preference) return false;
+	preference->SetValue(value);
 	return true;
 }
 
-bool CConfig::SetPreferenceBoolean(const char* sName, bool nValue)
+bool CConfig::SetPreferenceBoolean(const char* name, bool value)
 {
-	CPreferenceBoolean* pPref = FindPreference<CPreferenceBoolean>(sName);
-	if(pPref == NULL) return false;
-	pPref->SetValue(nValue);
+	if(m_readonly) throw std::runtime_error("Setting preference on read-only config is illegal.");
+	auto preference = FindPreference<CPreferenceBoolean>(name);
+	if(!preference) return false;
+	preference->SetValue(value);
 	return true;
 }
 
-bool CConfig::SetPreferenceString(const char* sName, const char* sValue)
+bool CConfig::SetPreferenceString(const char* name, const char* value)
 {
-	CPreferenceString* pPref = FindPreference<CPreferenceString>(sName);
-	if(pPref == NULL) return false;
-	pPref->SetValue(sValue);
+	if(m_readonly) throw std::runtime_error("Setting preference on read-only config is illegal.");
+	auto preference = FindPreference<CPreferenceString>(name);
+	if(!preference) return false;
+	preference->SetValue(value);
 	return true;
 }
 
@@ -207,33 +209,33 @@ void CConfig::Load()
 		Xml::CNode* pPref = (*itNode);
 
 		const char* sType = pPref->GetAttribute("Type");
-		const char* sName = pPref->GetAttribute("Name");
+		const char* name = pPref->GetAttribute("Name");
 
 		if(sType == NULL) continue;
-		if(sName == NULL) continue;
+		if(name == NULL) continue;
 
 		if(!strcmp(sType, "integer"))
 		{
-			int nValue;
-			if(Xml::GetAttributeIntValue(pPref, "Value", &nValue))
+			int value;
+			if(Xml::GetAttributeIntValue(pPref, "Value", &value))
 			{
-				RegisterPreferenceInteger(sName, nValue);
+				RegisterPreferenceInteger(name, value);
 			}
 		}
 		else if(!strcmp(sType, "boolean"))
 		{
-			bool nValue;
-			if(Xml::GetAttributeBoolValue(pPref, "Value", &nValue))
+			bool value;
+			if(Xml::GetAttributeBoolValue(pPref, "Value", &value))
 			{
-				RegisterPreferenceBoolean(sName, nValue);
+				RegisterPreferenceBoolean(name, value);
 			}
 		}
 		else if(!strcmp(sType, "string"))
 		{
-			const char* sValue;
-			if(Xml::GetAttributeStringValue(pPref, "Value", &sValue))
+			const char* value;
+			if(Xml::GetAttributeStringValue(pPref, "Value", &value))
 			{
-				RegisterPreferenceString(sName, sValue);
+				RegisterPreferenceString(name, value);
 			}
 		}
 	}
@@ -241,26 +243,29 @@ void CConfig::Load()
 
 void CConfig::Save()
 {
+	if(m_readonly)
+	{
+		throw std::runtime_error("Config marked as read-only but save has been requested.");
+	}
+
 	try
 	{
 		Framework::CStdStream stream(CreateOutputStdStream(m_path.native()));
 
-		Xml::CNode*	pConfig = new Xml::CNode("Config", true);
+		Xml::CNode*	configNode = new Xml::CNode("Config", true);
 
-		for(PreferenceMapType::const_iterator preferenceIterator(m_preferences.begin());
-			preferenceIterator != m_preferences.end(); preferenceIterator++)
+		for(const auto& preferencePair : m_preferences)
 		{
-			CPreference* pPref = (preferenceIterator->second);
+			const auto& preference = preferencePair.second;
 
-			Xml::CNode* pPrefNode = new Xml::CNode("Preference", true);
-			pPref->Serialize(pPrefNode);
-
-			pConfig->InsertNode(pPrefNode);
+			Xml::CNode* preferenceNode = new Xml::CNode("Preference", true);
+			preference->Serialize(preferenceNode);
+			configNode->InsertNode(preferenceNode);
 		}
 
 		{
 			auto document = std::unique_ptr<Xml::CNode>(new Xml::CNode);
-			document->InsertNode(pConfig);
+			document->InsertNode(configNode);
 			Xml::CWriter::WriteDocument(stream, document.get());
 		}
 	}
@@ -270,19 +275,19 @@ void CConfig::Save()
 	}
 }
 
-void CConfig::InsertPreference(CPreference* pPref)
+void CConfig::InsertPreference(const PreferencePtr& preference)
 {
 	std::unique_lock<std::mutex> mutexLock(m_mutex);
-	m_preferences[pPref->GetName()] = pPref;
+	m_preferences[preference->GetName()] = preference;
 }
 
 /////////////////////////////////////////////////////////
 //CPreference implementation
 /////////////////////////////////////////////////////////
 
-CConfig::CPreference::CPreference(const char* sName, PREFERENCE_TYPE nType)
-: m_sName(sName)
-, m_nType(nType)
+CConfig::CPreference::CPreference(const char* name, PREFERENCE_TYPE nType)
+: m_name(name)
+, m_type(nType)
 {
 	
 }
@@ -294,17 +299,17 @@ CConfig::CPreference::~CPreference()
 
 const char* CConfig::CPreference::GetName() const
 {
-	return m_sName.c_str();
+	return m_name.c_str();
 }
 
 CConfig::PREFERENCE_TYPE CConfig::CPreference::GetType() const
 {
-	return m_nType;
+	return m_type;
 }
 
 const char* CConfig::CPreference::GetTypeString() const
 {
-	switch(m_nType)
+	switch(m_type)
 	{
 	case TYPE_INTEGER:
 		return "integer";
@@ -321,7 +326,7 @@ const char* CConfig::CPreference::GetTypeString() const
 
 void CConfig::CPreference::Serialize(Xml::CNode* pNode) const
 {
-	pNode->InsertAttribute(Xml::CreateAttributeStringValue("Name", m_sName.c_str()));
+	pNode->InsertAttribute(Xml::CreateAttributeStringValue("Name", m_name.c_str()));
 	pNode->InsertAttribute(Xml::CreateAttributeStringValue("Type", GetTypeString()));
 }
 
@@ -329,9 +334,9 @@ void CConfig::CPreference::Serialize(Xml::CNode* pNode) const
 //CPreferenceInteger implementation
 /////////////////////////////////////////////////////////
 
-CConfig::CPreferenceInteger::CPreferenceInteger(const char* sName, int nValue)
-: CPreference(sName, TYPE_INTEGER)
-, m_nValue(nValue)
+CConfig::CPreferenceInteger::CPreferenceInteger(const char* name, int value)
+: CPreference(name, TYPE_INTEGER)
+, m_value(value)
 {
 	
 }
@@ -343,28 +348,28 @@ CConfig::CPreferenceInteger::~CPreferenceInteger()
 
 int CConfig::CPreferenceInteger::GetValue() const
 {
-	return m_nValue;
+	return m_value;
 }
 
-void CConfig::CPreferenceInteger::SetValue(int nValue)
+void CConfig::CPreferenceInteger::SetValue(int value)
 {
-	m_nValue = nValue;
+	m_value = value;
 }
 
 void CConfig::CPreferenceInteger::Serialize(Xml::CNode* pNode) const
 {
 	CPreference::Serialize(pNode);
 
-	pNode->InsertAttribute(Xml::CreateAttributeIntValue("Value", m_nValue));
+	pNode->InsertAttribute(Xml::CreateAttributeIntValue("Value", m_value));
 }
 
 /////////////////////////////////////////////////////////
 //CPreferenceBoolean implementation
 /////////////////////////////////////////////////////////
 
-CConfig::CPreferenceBoolean::CPreferenceBoolean(const char* sName, bool nValue)
-: CPreference(sName, TYPE_BOOLEAN)
-, m_nValue(nValue)
+CConfig::CPreferenceBoolean::CPreferenceBoolean(const char* name, bool value)
+: CPreference(name, TYPE_BOOLEAN)
+, m_value(value)
 {
 	
 }
@@ -376,28 +381,28 @@ CConfig::CPreferenceBoolean::~CPreferenceBoolean()
 
 bool CConfig::CPreferenceBoolean::GetValue() const
 {
-	return m_nValue;
+	return m_value;
 }
 
-void CConfig::CPreferenceBoolean::SetValue(bool nValue)
+void CConfig::CPreferenceBoolean::SetValue(bool value)
 {
-	m_nValue = nValue;
+	m_value = value;
 }
 
 void CConfig::CPreferenceBoolean::Serialize(Xml::CNode* pNode) const
 {
 	CPreference::Serialize(pNode);
 
-	pNode->InsertAttribute(Xml::CreateAttributeBoolValue("Value", m_nValue));
+	pNode->InsertAttribute(Xml::CreateAttributeBoolValue("Value", m_value));
 }
 
 /////////////////////////////////////////////////////////
 //CPreferenceString implementation
 /////////////////////////////////////////////////////////
 
-CConfig::CPreferenceString::CPreferenceString(const char* sName, const char* sValue)
-: CPreference(sName, TYPE_STRING)
-, m_sValue(sValue)
+CConfig::CPreferenceString::CPreferenceString(const char* name, const char* value)
+: CPreference(name, TYPE_STRING)
+, m_value(value)
 {
 	
 }
@@ -409,17 +414,17 @@ CConfig::CPreferenceString::~CPreferenceString()
 
 const char* CConfig::CPreferenceString::GetValue() const
 {
-	return m_sValue.c_str();
+	return m_value.c_str();
 }
 
-void CConfig::CPreferenceString::SetValue(const char* sValue)
+void CConfig::CPreferenceString::SetValue(const char* value)
 {
-	m_sValue = sValue;
+	m_value = value;
 }
 
 void CConfig::CPreferenceString::Serialize(Xml::CNode* pNode) const
 {
 	CPreference::Serialize(pNode);
 
-	pNode->InsertAttribute(Xml::CreateAttributeStringValue("Value", m_sValue.c_str()));
+	pNode->InsertAttribute(Xml::CreateAttributeStringValue("Value", m_value.c_str()));
 }
