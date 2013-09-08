@@ -16,5 +16,6 @@ add_library(Framework
 	../src/xml/Parser.cpp
 	../src/xml/Utils.cpp
 	../src/xml/FilteringNodeIterator.cpp
+	../src/xml/Writer.cpp
 )
 
