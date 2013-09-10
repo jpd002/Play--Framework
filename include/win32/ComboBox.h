@@ -1,5 +1,4 @@
-#ifndef _COMBOBOX_H_
-#define _COMBOBOX_H_
+#pragma once
 
 #include "Window.h"
 #include "Types.h"
@@ -11,6 +10,7 @@ namespace Framework
 		class CComboBox : public CWindow
 		{
 		public:
+							CComboBox(HWND = 0);
 							CComboBox(HWND, const RECT&, unsigned long = 0);
 			unsigned int	AddString(const TCHAR*);
 			int				GetSelection();
@@ -24,5 +24,3 @@ namespace Framework
 		};
 	}
 }
-
-#endif

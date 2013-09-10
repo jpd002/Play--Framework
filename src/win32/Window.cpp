@@ -407,15 +407,16 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 		if(!pThis->OnDestroy()) return FALSE;
 		break;
 	case WM_CTLCOLORSTATIC:
-		long nBrush;
-		nBrush = pThis->OnCtlColorStatic((HDC)wParam, (HWND)lParam);
-		if(!nBrush)
 		{
-			return (long)DefWindowProc(hWnd, uiMsg, wParam, lParam);
-		}
-		else
-		{
-			return nBrush;
+			long nBrush = pThis->OnCtlColorStatic((HDC)wParam, (HWND)lParam);
+			if(!nBrush)
+			{
+				return (long)DefWindowProc(hWnd, uiMsg, wParam, lParam);
+			}
+			else
+			{
+				return nBrush;
+			}
 		}
 		break;
 	case WM_ACTIVATE:

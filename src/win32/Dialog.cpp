@@ -84,6 +84,9 @@ INT_PTR WINAPI CDialog::DialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 	case WM_CLOSE:
 		if(!pThis->OnClose()) return FALSE;
 		break;
+	case WM_CTLCOLORSTATIC:
+		return pThis->OnCtlColorStatic((HDC)wParam, (HWND)lParam);
+		break;
 	case WM_SIZE:
 		if(!pThis->OnSize(static_cast<unsigned int>(wParam), LOWORD(lParam), HIWORD(lParam))) return FALSE;
 		break;
