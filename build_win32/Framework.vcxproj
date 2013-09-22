@@ -68,6 +68,7 @@
     <ClCompile Include="..\src\ThreadPool.cpp" />
     <ClCompile Include="..\src\Utf8.cpp" />
     <ClCompile Include="..\src\win32\AcceleratorTableGenerator.cpp" />
+    <ClCompile Include="..\src\win32\ActiveXHost.cpp" />
     <ClCompile Include="..\src\win32\Button.cpp" />
     <ClCompile Include="..\src\win32\ClientDeviceContext.cpp" />
     <ClCompile Include="..\src\win32\ColumnTreeView.cpp" />
@@ -109,6 +110,7 @@
     <ClCompile Include="..\src\win32\TrayIconServer.cpp" />
     <ClCompile Include="..\src\win32\TreeView.cpp" />
     <ClCompile Include="..\src\win32\VerticalSplitter.cpp" />
+    <ClCompile Include="..\src\win32\WebBrowser.cpp" />
     <ClCompile Include="..\src\win32\Window.cpp" />
     <ClCompile Include="..\src\xml\FilteringNodeIterator.cpp" />
     <ClCompile Include="..\src\xml\Node.cpp" />
@@ -190,6 +192,7 @@
     <ClInclude Include="..\include\Types.h" />
     <ClInclude Include="..\include\Utf8.h" />
     <ClInclude Include="..\include\win32\AcceleratorTableGenerator.h" />
+    <ClInclude Include="..\include\win32\ActiveXHost.h" />
     <ClInclude Include="..\include\win32\Button.h" />
     <ClInclude Include="..\include\win32\ClientDeviceContext.h" />
     <ClInclude Include="..\include\win32\ColumnTreeView.h" />
@@ -237,6 +240,7 @@
     <ClInclude Include="..\include\win32\TrayIconServer.h" />
     <ClInclude Include="..\include\win32\TreeView.h" />
     <ClInclude Include="..\include\win32\VerticalSplitter.h" />
+    <ClInclude Include="..\include\win32\WebBrowser.h" />
     <ClInclude Include="..\include\win32\Win32Defs.h" />
     <ClInclude Include="..\include\win32\Window.h" />
     <ClInclude Include="..\include\xml\FilteringNodeIterator.h" />

@@ -45,7 +45,7 @@ long CListViewEx::OnWndProc(unsigned int nMsg, WPARAM wParam, LPARAM lParam)
 
 			FillRect(hDC, &rwin, reinterpret_cast<HBRUSH>(GetStockObject(WHITE_BRUSH)));
 
-			CallWindowProc(m_pBaseWndProc, m_hWnd, WM_PAINT, (WPARAM)hDC, 0);
+			CallWindowProc(m_baseWndProc, m_hWnd, WM_PAINT, (WPARAM)hDC, 0);
 
 			BitBlt(hWDC, 0, 0, rwin.right, rwin.bottom, hDC, 0, 0, SRCCOPY);
 
@@ -68,5 +68,5 @@ long CListViewEx::OnWndProc(unsigned int nMsg, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 
-	return static_cast<long>(CallWindowProc(m_pBaseWndProc, m_hWnd, nMsg, wParam, lParam));
+	return static_cast<long>(CallWindowProc(m_baseWndProc, m_hWnd, nMsg, wParam, lParam));
 }

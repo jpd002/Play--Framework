@@ -334,6 +334,12 @@
     <ClCompile Include="..\src\win32\DefaultWndClass.cpp">
       <Filter>Source Files\win32</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\win32\ActiveXHost.cpp">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\win32\WebBrowser.cpp">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\alloca_def.h">
@@ -690,9 +696,6 @@
     <ClInclude Include="..\include\LzAri.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\win32\ComPtr.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\ThreadPool.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -718,6 +721,15 @@
       <Filter>Source Files\win32</Filter>
     </ClInclude>
     <ClInclude Include="..\include\win32\Win32Defs.h">
+      <Filter>Source Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\win32\ActiveXHost.h">
+      <Filter>Source Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\win32\WebBrowser.h">
+      <Filter>Source Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\win32\ComPtr.h">
       <Filter>Source Files\win32</Filter>
     </ClInclude>
   </ItemGroup>

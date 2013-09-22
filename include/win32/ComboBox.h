@@ -12,6 +12,9 @@ namespace Framework
 		public:
 							CComboBox(HWND = 0);
 							CComboBox(HWND, const RECT&, unsigned long = 0);
+			
+			CComboBox&		operator =(CComboBox&&);
+
 			unsigned int	AddString(const TCHAR*);
 			int				GetSelection();
 			void			SetSelection(int);

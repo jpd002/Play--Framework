@@ -15,6 +15,13 @@ CEdit::CEdit(HWND hParent, const RECT& rect, const TCHAR* sText, unsigned long n
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 
+CEdit& CEdit::operator =(CEdit&& rhs)
+{
+	CWindow::Reset();
+	CWindow::MoveFrom(std::move(rhs));
+	return (*this);
+}
+
 void CEdit::SetSelection(int nStart, int nEnd)
 {
 	SendMessage(m_hWnd, EM_SETSEL, nStart, nEnd);

@@ -102,6 +102,10 @@ INT_PTR WINAPI CDialog::DialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 	case WM_NOTIFY:
 		return pThis->OnNotify(wParam, reinterpret_cast<NMHDR*>(lParam));
 		break;
+	case WM_NCDESTROY:
+		pThis->m_hWnd = NULL;
+		return FALSE;
+		break;
 	}
 	if(!pThis->OnWndProc(msg, wParam, lParam)) return FALSE;
 	return FALSE;

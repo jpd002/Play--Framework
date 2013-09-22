@@ -64,6 +64,9 @@ namespace Framework
 			CScrollBar				GetHorizontalScrollBar();
 
 		protected:
+			void					Reset();
+			void					MoveFrom(CWindow&&);
+
 			virtual long			OnClose();
 			virtual long			OnCommand(unsigned short, unsigned short, HWND);
 			virtual long			OnSysCommand(unsigned int, LPARAM);
@@ -102,10 +105,15 @@ namespace Framework
 			virtual long			OnSetFocus();
 			virtual long			OnKillFocus();
 
+		private:
+									CWindow(const CWindow&);
+			CWindow&				operator =(const CWindow&);
+
 		public:
 			HWND					m_hWnd;
-			unsigned int			m_nNoCallDef;
-			WNDPROC					m_pBaseWndProc;
+			bool					m_hasClassPtr;
+			bool					m_noCallDef;
+			WNDPROC					m_baseWndProc;
 		};
 	}
 };

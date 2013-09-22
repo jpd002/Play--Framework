@@ -9,6 +9,13 @@ CComboBox::CComboBox(HWND hWnd)
 	m_hWnd = hWnd;
 }
 
+CComboBox& CComboBox::operator =(CComboBox&& rhs)
+{
+	CWindow::Reset();
+	CWindow::MoveFrom(std::move(rhs));
+	return (*this);
+}
+
 CComboBox::CComboBox(HWND hParent, const RECT& rect, unsigned long nStyle)
 {
 	Create(NULL, _T("ComboBox"), _T(""), WS_VISIBLE | WS_CHILD | WS_VSCROLL | nStyle, rect, hParent, NULL);

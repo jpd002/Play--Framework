@@ -20,6 +20,13 @@ CStatic::CStatic(HWND hParent, const TCHAR* sText, unsigned long nStyle)
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 
+CStatic& CStatic::operator =(CStatic&& rhs)
+{
+	CWindow::Reset();
+	CWindow::MoveFrom(std::move(rhs));
+	return (*this);
+}
+
 void CStatic::SetIcon(HANDLE hIcon)
 {
 	SendMessage(m_hWnd, STM_SETIMAGE, IMAGE_ICON, (LPARAM)hIcon);

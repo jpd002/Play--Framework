@@ -52,7 +52,7 @@ namespace Framework
 		                hBM = CreateCompatibleBitmap(hWDC, rwin.right, rwin.bottom);
 		                SelectObject(hDC, hBM);
 
-		                CallWindowProc(m_pBaseWndProc, m_hWnd, WM_PRINT, (WPARAM)hDC, PRF_CLIENT | PRF_ERASEBKGND);
+		                CallWindowProc(m_baseWndProc, m_hWnd, WM_PRINT, (WPARAM)hDC, PRF_CLIENT | PRF_ERASEBKGND);
 
 		                BitBlt(hWDC, 0, 0, rwin.right, rwin.bottom, hDC, 0, 0, SRCCOPY);
 
@@ -67,7 +67,7 @@ namespace Framework
 		            break;
 	            }
 
-	            return static_cast<long>(CallWindowProc(m_pBaseWndProc, m_hWnd, nMsg, wParam, lParam));
+	            return static_cast<long>(CallWindowProc(m_baseWndProc, m_hWnd, nMsg, wParam, lParam));
             }
 
         private:

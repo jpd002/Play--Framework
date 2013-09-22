@@ -9,8 +9,9 @@ using namespace Framework::Win32;
 
 CWindow::CWindow()
 : m_hWnd(NULL)
-, m_pBaseWndProc(NULL)
-, m_nNoCallDef(0)
+, m_baseWndProc(nullptr)
+, m_noCallDef(false)
+, m_hasClassPtr(false)
 {
 
 }
@@ -18,6 +19,31 @@ CWindow::CWindow()
 CWindow::~CWindow()
 {
 
+}
+
+void CWindow::Reset()
+{
+	if(m_hWnd && m_hasClassPtr)
+	{
+		ClearClassPtr();
+	}
+	m_hWnd = NULL;
+	m_baseWndProc = nullptr;
+	m_hasClassPtr = false;
+	m_noCallDef = false;
+}
+
+void CWindow::MoveFrom(CWindow&& rhs)
+{
+	assert(m_hWnd == NULL);
+	std::swap(m_hWnd, rhs.m_hWnd);
+	std::swap(m_baseWndProc, rhs.m_baseWndProc);
+	std::swap(m_hasClassPtr, rhs.m_hasClassPtr);
+	std::swap(m_noCallDef, rhs.m_noCallDef);
+	if(m_hasClassPtr)
+	{
+		SetClassPtr();
+	}
 }
 
 CWindow::operator HWND() const
@@ -65,11 +91,14 @@ int CWindow::MessageBoxFormat(HWND hWnd, unsigned int nType, const TCHAR* sTitle
 void CWindow::SetClassPtr()
 {
 	SetProp(m_hWnd, PROPNAME, this);
+	m_hasClassPtr = true;
 }
 
 void CWindow::ClearClassPtr()
 {
+	assert(m_hasClassPtr == true);
 	SetProp(m_hWnd, PROPNAME, NULL);
+	m_hasClassPtr = false;
 }
 
 CWindow* CWindow::GetClassPtr(HWND hWnd)
@@ -80,12 +109,12 @@ CWindow* CWindow::GetClassPtr(HWND hWnd)
 void CWindow::SubClass()
 {
 	SetClassPtr();
-	m_pBaseWndProc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(m_hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(SubClassWndProc)));
+	m_baseWndProc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(m_hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(SubClassWndProc)));
 }
 
 long CWindow::CallBaseWndProc(unsigned int uiMsg, WPARAM wParam, LPARAM lParam)
 {
-	return (long)CallWindowProc(m_pBaseWndProc, m_hWnd, uiMsg, wParam, lParam);
+	return (long)CallWindowProc(m_baseWndProc, m_hWnd, uiMsg, wParam, lParam);
 }
 
 bool CWindow::DoesWindowClassExist(const TCHAR* className)
@@ -406,6 +435,10 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 	case WM_DESTROY:
 		if(!pThis->OnDestroy()) return FALSE;
 		break;
+	case WM_NCDESTROY:
+		//Window Handle not valid after this
+		pThis->m_hWnd = NULL;
+		break;
 	case WM_CTLCOLORSTATIC:
 		{
 			long nBrush = pThis->OnCtlColorStatic((HDC)wParam, (HWND)lParam);
@@ -449,7 +482,7 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 		break;
 	}
 	if(!pThis->OnWndProc(uiMsg, wParam, lParam)) return FALSE;
-	if(!pThis->m_nNoCallDef)
+	if(!pThis->m_noCallDef)
 	{
 		return DefWindowProc(hWnd, uiMsg, wParam, lParam);
 	}
