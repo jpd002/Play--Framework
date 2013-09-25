@@ -2,11 +2,11 @@
 
 using namespace Framework::MySql;
 
-CAccessInfo::CAccessInfo(const char* sHostName, const char* sUserName, const char* sPassWord, const char* sDataBase) :
-sHostName(sHostName),
-sUserName(sUserName),
-sPassWord(sPassWord),
-sDataBase(sDataBase)
+CAccessInfo::CAccessInfo(const char* address, const char* userName, const char* password, const char* databaseName)
+: address(address)
+, userName(userName)
+, password(password)
+, databaseName(databaseName)
 {
 
 }

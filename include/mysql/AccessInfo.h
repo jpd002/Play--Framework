@@ -1,23 +1,20 @@
-#ifndef _MYSQL_ACCESSINFO_H_
-#define _MYSQL_ACCESSINFO_H_
+#pragma once
 
 #include <string>
 
 namespace Framework
 {
-    namespace MySql
-    {
-        class CAccessInfo
-        {
-        public:
-            CAccessInfo(const char* = "", const char* = "", const char* = "", const char* = "");
+	namespace MySql
+	{
+		class CAccessInfo
+		{
+		public:
+			CAccessInfo(const char* = "", const char* = "", const char* = "", const char* = "");
 
-            std::string sHostName;
-            std::string sUserName;
-            std::string sPassWord;
-            std::string sDataBase;
-        };
-    }
+			std::string address;
+			std::string userName;
+			std::string password;
+			std::string databaseName;
+		};
+	}
 }
-
-#endif

@@ -1,29 +1,62 @@
 #include <exception>
+#include <algorithm>
 #include "mysql/Result.h"
 
 using namespace Framework::MySql;
-using namespace std;
 
-CResult::CResult(MYSQL_RES* pResult)
+CResult::CResult(MYSQL_RES* result)
+: m_result(nullptr)
 {
-	if(pResult == NULL)
+	if(result == nullptr)
 	{
-		throw exception();
+		throw std::exception();
 	}
-	m_pResult = pResult;
+	m_result = result;
+}
+
+CResult::CResult(CResult&& src)
+: m_result(nullptr)
+{
+	MoveFrom(std::move(src));
 }
 
 CResult::~CResult()
 {
-	mysql_free_result(m_pResult);
+	Reset();
+}
+
+void CResult::Reset()
+{
+	if(m_result)
+	{
+		mysql_free_result(m_result);
+		m_result = nullptr;
+	}
+}
+
+CResult& CResult::operator =(CResult&& rhs)
+{
+	Reset();
+	MoveFrom(std::move(rhs));
+	return (*this);
+}
+
+void CResult::MoveFrom(CResult&& src)
+{
+	std::swap(m_result, src.m_result);
 }
 
 MYSQL_ROW CResult::FetchRow()
 {
-	return mysql_fetch_row(m_pResult);
+	return mysql_fetch_row(m_result);
+}
+
+unsigned int CResult::GetRowCount()
+{
+	return static_cast<unsigned int>(mysql_num_rows(m_result));
 }
 
 unsigned int CResult::GetFieldCount()
 {
-	return mysql_num_fields(m_pResult);
+	return mysql_num_fields(m_result);
 }

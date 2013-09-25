@@ -1,7 +1,6 @@
-#ifndef _MYSQL_RESULT_H_
-#define _MYSQL_RESULT_H_
+#pragma once
 
-#include "Client.h"
+#include "MySqlDefs.h"
 
 namespace Framework
 {
@@ -11,15 +10,24 @@ namespace Framework
 		{
 		public:
 							CResult(MYSQL_RES*);
+							CResult(CResult&&);
 			virtual			~CResult();
 
+			void			Reset();
+			bool			IsEmpty() const;
+			CResult&		operator =(CResult&&);
+
 			MYSQL_ROW		FetchRow();
+			unsigned int	GetRowCount();
 			unsigned int	GetFieldCount();
 
 		private:
-			MYSQL_RES*		m_pResult;
+							CResult(const CResult&);
+			CResult&		operator =(const CResult&);
+
+			void			MoveFrom(CResult&&);
+
+			MYSQL_RES*		m_result;
 		};
 	};
 }
-
-#endif

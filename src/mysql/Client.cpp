@@ -2,36 +2,71 @@
 #include "mysql/Client.h"
 
 using namespace Framework::MySql;
-using namespace std;
 
-CClient::CClient(const char* sHostName, const char* sUserName, const char* sPassword, const char* sDatabase)
+CClient::CClient()
+: m_connection(nullptr)
 {
-	m_pConnection = mysql_init(NULL);
-	if(m_pConnection == NULL)
+
+}
+
+CClient::CClient(CClient&& src)
+: m_connection(nullptr)
+{
+	MoveFrom(std::move(src));
+}
+
+CClient::CClient(const char* hostName, const char* userName, const char* password, const char* database)
+: m_connection(nullptr)
+{
+	m_connection = mysql_init(NULL);
+	if(!m_connection)
 	{
-		throw exception();
+		throw std::exception();
 	}
 
-	if(mysql_real_connect(m_pConnection, sHostName, sUserName, sPassword, sDatabase, 0, NULL, 0) == NULL)
+	if(mysql_real_connect(m_connection, hostName, userName, password, database, 0, NULL, 0) == NULL)
 	{
-		throw runtime_error(mysql_error(m_pConnection));
+		throw std::runtime_error(mysql_error(m_connection));
 	}
 }
 
 CClient::~CClient()
 {
-	mysql_close(m_pConnection);
+	Reset();
 }
 
-void CClient::Query(const char* sQuery)
+void CClient::Reset()
 {
-	if(mysql_query(m_pConnection, sQuery) != 0)
-    {
-        throw runtime_error(mysql_error(m_pConnection));
-    }
+	if(m_connection)
+	{
+		mysql_close(m_connection);
+		m_connection = nullptr;
+	}
 }
 
-MYSQL_RES* CClient::StoreResult()
+bool CClient::IsEmpty() const
 {
-	return mysql_store_result(m_pConnection);
+	return (m_connection == nullptr);
+}
+
+CClient& CClient::operator =(CClient&& rhs)
+{
+	Reset();
+	MoveFrom(std::move(rhs));
+	return (*this);
+}
+
+void CClient::MoveFrom(CClient&& src)
+{
+	std::swap(m_connection, src.m_connection);
+}
+
+CResult CClient::Query(const char* query)
+{
+	if(mysql_query(m_connection, query) != 0)
+	{
+		throw std::runtime_error(mysql_error(m_connection));
+	}
+	auto result = CResult(mysql_store_result(m_connection));
+	return result;
 }

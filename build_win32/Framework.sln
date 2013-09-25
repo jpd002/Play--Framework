@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FrameworkDirectX", "Framewo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FrameworkOpenGl", "FrameworkOpenGl.vcxproj", "{482892BB-6D81-4CA4-BFD5-01A756C21292}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FrameworkMySql", "FrameworkMySql.vcxproj", "{DE7EC936-F8A7-4A7A-85E2-5D0439365F21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -49,6 +51,14 @@ Global
 		{482892BB-6D81-4CA4-BFD5-01A756C21292}.Release|Win32.Build.0 = Release|Win32
 		{482892BB-6D81-4CA4-BFD5-01A756C21292}.Release|x64.ActiveCfg = Release|x64
 		{482892BB-6D81-4CA4-BFD5-01A756C21292}.Release|x64.Build.0 = Release|x64
+		{DE7EC936-F8A7-4A7A-85E2-5D0439365F21}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DE7EC936-F8A7-4A7A-85E2-5D0439365F21}.Debug|Win32.Build.0 = Debug|Win32
+		{DE7EC936-F8A7-4A7A-85E2-5D0439365F21}.Debug|x64.ActiveCfg = Debug|x64
+		{DE7EC936-F8A7-4A7A-85E2-5D0439365F21}.Debug|x64.Build.0 = Debug|x64
+		{DE7EC936-F8A7-4A7A-85E2-5D0439365F21}.Release|Win32.ActiveCfg = Release|Win32
+		{DE7EC936-F8A7-4A7A-85E2-5D0439365F21}.Release|Win32.Build.0 = Release|Win32
+		{DE7EC936-F8A7-4A7A-85E2-5D0439365F21}.Release|x64.ActiveCfg = Release|x64
+		{DE7EC936-F8A7-4A7A-85E2-5D0439365F21}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

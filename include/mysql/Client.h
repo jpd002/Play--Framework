@@ -1,27 +1,33 @@
-#ifndef _MYSQL_CLIENT_H_
-#define _MYSQL_CLIENT_H_
+#pragma once
+
+#include "MySqlDefs.h"
+#include "Result.h"
 
 namespace Framework
 {
 	namespace MySql
 	{
-		#include "my_global.h"
-		#include "mysql.h"
-
 		class CClient
 		{
 		public:
-							CClient(const char*, const char*, const char*, const char*);
+							CClient();
+							CClient(CClient&&);
+							CClient(const char* hostName, const char* userName, const char* password, const char* database);
 			virtual			~CClient();
-			void			Query(const char*);
-			MYSQL_RES*		StoreResult();
+
+			void			Reset();
+			bool			IsEmpty() const;
+			CClient&		operator =(CClient&&);
+
+			CResult			Query(const char*);
 
 		private:
-			MYSQL*			m_pConnection;
+							CClient(const CClient&);
+			CClient&		operator =(const CClient&);
+
+			void			MoveFrom(CClient&&);
+
+			MYSQL*			m_connection;
 		};
 	}
 }
-
-#undef bool
-
-#endif
