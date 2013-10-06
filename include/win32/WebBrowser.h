@@ -61,6 +61,8 @@ namespace Framework
 				HWND					m_browserWnd;
 			};
 
+			static void							EnsureIE9ModeIsActivated();
+
 			static LRESULT CALLBACK				MsgFilterHook(int, WPARAM, LPARAM);
 			static void							RegisterFilterHook(CWindow*);
 			static void							UnregisterFilterHook(CWindow*);

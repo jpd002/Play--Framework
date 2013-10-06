@@ -1,6 +1,7 @@
 #include "win32/WebBrowser.h"
 #include <assert.h>
 #include <ExDispid.h>
+#include <boost/filesystem.hpp>
 
 using namespace Framework;
 using namespace Framework::Win32;
@@ -12,7 +13,7 @@ std::set<CWindow*>	CWebBrowser::g_hookListeners;
 CWebBrowser::CWebBrowser()
 : m_adviseCookie(0)
 {
-
+	EnsureIE9ModeIsActivated();
 }
 
 CWebBrowser::CWebBrowser(HWND parentWnd, const RECT& rect)
@@ -98,6 +99,29 @@ void CWebBrowser::Stop()
 {
 	HRESULT result = m_webBrowser->Stop();
 	assert(SUCCEEDED(result));
+}
+
+void CWebBrowser::EnsureIE9ModeIsActivated()
+{
+	HKEY emulationKey = 0;
+	auto result = RegOpenKeyEx(HKEY_CURRENT_USER, _T("SOFTWARE\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\FEATURE_BROWSER_EMULATION"), 0, KEY_SET_VALUE, &emulationKey);
+	if(result != ERROR_SUCCESS)
+	{
+		return;
+	}
+	boost::filesystem::path modulePath = 
+		[]()
+		{
+			TCHAR modulePath[MAX_PATH + 1];
+			GetModuleFileName(NULL, modulePath, MAX_PATH);
+			modulePath[MAX_PATH] = 0;
+			return boost::filesystem::path(modulePath);
+		}();
+	auto moduleFileName = modulePath.leaf().native();
+	DWORD emulationValue = 9000;
+	result = RegSetValueEx(emulationKey, moduleFileName.c_str(), 0, REG_DWORD, reinterpret_cast<BYTE*>(&emulationValue), sizeof(emulationValue));
+	assert(result == ERROR_SUCCESS);
+	RegCloseKey(emulationKey);
 }
 
 LRESULT CALLBACK CWebBrowser::MsgFilterHook(int code, WPARAM wparam, LPARAM lparam)
