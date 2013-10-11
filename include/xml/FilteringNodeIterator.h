@@ -10,18 +10,19 @@ namespace Framework
 		class CFilteringNodeIterator
 		{
 		public:
-										CFilteringNodeIterator(CNode*, const char*);
-			virtual						~CFilteringNodeIterator();
+												CFilteringNodeIterator(CNode*, const char*);
+			virtual								~CFilteringNodeIterator();
 
-			CNode*						operator *();
-			CFilteringNodeIterator&		operator ++(int);
-			bool						IsEnd() const;
+			CNode*								operator *();
+			CFilteringNodeIterator&				operator ++(int);
+			bool								IsEnd() const;
 
 		private:
-			void						SeekToNext();
-			CNode::NodeIterator			m_itNode;
-			CNode*						m_pNode;
-			const char*					m_sFilter;
+			void								SeekToNext();
+
+			CNode::NodeList::const_iterator		m_nodeIterator;
+			CNode*								m_node;
+			const char*							m_filter;
 		};
 	}
 }

@@ -3,11 +3,11 @@
 
 using namespace Framework::Xml;
 
-CFilteringNodeIterator::CFilteringNodeIterator(CNode* pNode, const char* sFilter) :
-m_itNode(pNode->GetChildrenBegin())
+CFilteringNodeIterator::CFilteringNodeIterator(CNode* node, const char* filter)
+: m_nodeIterator(std::begin(node->GetChildren()))
+, m_node(node)
+, m_filter(filter)
 {
-	m_sFilter = sFilter;
-	m_pNode = pNode;
 	SeekToNext();
 }
 
@@ -18,30 +18,29 @@ CFilteringNodeIterator::~CFilteringNodeIterator()
 
 CNode* CFilteringNodeIterator::operator *()
 {
-	if(m_itNode == m_pNode->GetChildrenEnd()) return NULL;
-	return (*m_itNode);
+	if(m_nodeIterator == std::end(m_node->GetChildren())) return nullptr;
+	return (*m_nodeIterator);
 }
 
 CFilteringNodeIterator& CFilteringNodeIterator::operator ++(int nAmount)
 {
-	m_itNode++;
+	m_nodeIterator++;
 	SeekToNext();
 	return (*this);
 }
 
 bool CFilteringNodeIterator::IsEnd() const
 {
-	return (m_itNode == m_pNode->GetChildrenEnd());
+	return (m_nodeIterator == std::end(m_node->GetChildren()));
 }
 
 void CFilteringNodeIterator::SeekToNext()
 {
-	for(; m_itNode != m_pNode->GetChildrenEnd(); m_itNode++)
+	for(; m_nodeIterator != std::end(m_node->GetChildren()); m_nodeIterator++)
 	{
-		const CNode* pNode;
-		pNode = (*m_itNode);
-		if(!pNode->IsTag()) continue;
-		if(stricmp(pNode->GetText(), m_sFilter)) continue;
+		const CNode* node = (*m_nodeIterator);
+		if(!node->IsTag()) continue;
+		if(stricmp(node->GetText(), m_filter)) continue;
 		break;
 	}
 }

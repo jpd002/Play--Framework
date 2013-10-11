@@ -6,199 +6,184 @@
 
 using namespace Framework;
 using namespace Framework::Xml;
-using namespace std;
 
 CNode::CNode()
+: m_parent(nullptr)
 {
-	m_pParent = NULL;
+
 }
 
-CNode::CNode(const char* sText, bool nIsTag)
+CNode::CNode(const char* text, bool isTag)
+: m_text(text)
+, m_isTag(isTag)
+, m_parent(nullptr)
 {
-	m_pParent = NULL;
-	m_sText = sText;
-	m_nIsTag = nIsTag;
+
 }
 
 CNode::~CNode()
 {
-	while(m_Children.size() != 0)
+	while(m_children.size() != 0)
 	{
-		delete (*m_Children.rbegin());
-		m_Children.pop_back();
+		delete (*m_children.rbegin());
+		m_children.pop_back();
 	}
 }
 
-CNode* CNode::InsertNode(CNode* pNode)
+CNode* CNode::InsertNode(CNode* node)
 {
-	assert(pNode->m_pParent == NULL);
-	pNode->m_pParent = this;
-	m_Children.push_back(pNode);
-    return pNode;
+	assert(node->m_parent == nullptr);
+	node->m_parent = this;
+	m_children.push_back(node);
+	return node;
 }
 
-CNode* CNode::InsertTextNode(const char* sText)
+CNode* CNode::InsertTextNode(const char* text)
 {
-    return InsertNode(new CNode(sText, false));
+	return InsertNode(new CNode(text, false));
 }
 
-CNode* CNode::InsertTagNode(const char* sName)
+CNode* CNode::InsertTagNode(const char* name)
 {
-    return InsertNode(new CNode(sName, true));
+	return InsertNode(new CNode(name, true));
 }
 
-void CNode::InsertNodeAt(CNode* pNode, NodeIterator& itPosition)
+void CNode::InsertNodeAt(CNode* node, NodeIterator& itPosition)
 {
-	assert(pNode->m_pParent == NULL);
-	pNode->m_pParent = this;
-	m_Children.insert(itPosition, pNode);
+	assert(node->m_parent == nullptr);
+	node->m_parent = this;
+	m_children.insert(itPosition, node);
 }
 
 const char* CNode::GetText() const
 {
-	return m_sText.c_str();
+	return m_text.c_str();
 }
 
 const char* CNode::GetInnerText() const
 {
-	if(m_Children.size() != 1) return NULL;
-	return (*m_Children.begin())->GetText();
+	if(m_children.size() != 1) return NULL;
+	return (*m_children.begin())->GetText();
 }
 
 bool CNode::IsTag() const
 {
-	return m_nIsTag;
+	return m_isTag;
 }
 
-CNode* CNode::InsertAttribute(const AttributeType& Attribute)
+CNode* CNode::InsertAttribute(const AttributeType& attribute)
 {
-	m_Attributes[Attribute.first] = Attribute.second;
-    return this;
+	m_attributes.insert(attribute);
+	return this;
 }
 
-CNode* CNode::InsertAttribute(const char* sName, const char* sValue)
+CNode* CNode::InsertAttribute(const char* name, const char* value)
 {
-    return InsertAttribute(AttributeType(sName, sValue));
+	return InsertAttribute(AttributeType(name, value));
 }
 
-CNode* CNode::GetParent()
+CNode* CNode::GetParent() const
 {
-	return m_pParent;
+	return m_parent;
 }
 
 unsigned int CNode::GetChildCount() const
 {
-	return static_cast<unsigned int>(m_Children.size());
+	return static_cast<unsigned int>(m_children.size());
 }
 
 CNode* CNode::GetFirstChild()
 {
-	assert(m_Children.size() > 0);
-	return *m_Children.begin();
+	assert(!m_children.empty());
+	return *m_children.begin();
 }
 
-CNode::NodeIterator CNode::GetChildrenBegin()
+const CNode::NodeList& CNode::GetChildren() const
 {
-	return m_Children.begin();
+	return m_children;
 }
 
-CNode::NodeIterator CNode::GetChildrenEnd()
+void CNode::RemoveChild(NodeIterator nodeIterator)
 {
-	return m_Children.end();
+	m_children.erase(nodeIterator);
 }
 
-void CNode::RemoveChild(NodeIterator itNode)
+const char* CNode::GetAttribute(const char* name) const
 {
-	m_Children.erase(itNode);
-}
-
-const char* CNode::GetAttribute(const char* sName) const
-{
-	AttributeList::const_iterator itAttribute;
-	itAttribute = m_Attributes.find(sName);
-
-	return (itAttribute == m_Attributes.end()) ? NULL : (*itAttribute).second.c_str();
+	auto attributeIterator = m_attributes.find(name);
+	return (attributeIterator == m_attributes.end()) ? nullptr : (*attributeIterator).second.c_str();
 }
 
 unsigned int CNode::GetAttributeCount() const
 {
-	return static_cast<unsigned int>(m_Attributes.size());
+	return static_cast<unsigned int>(m_attributes.size());
 }
 
-CNode::AttributeIterator CNode::GetAttributesBegin()
+const CNode::AttributeList& CNode::GetAttributes() const
 {
-	return m_Attributes.begin();
+	return m_attributes;
 }
 
-CNode::AttributeIterator CNode::GetAttributesEnd()
+CNode* CNode::Search(const char* name)
 {
-	return m_Attributes.end();
-}
-
-CNode* CNode::Search(const char* sName)
-{
-	for(NodeList::iterator itNode(m_Children.begin()); itNode != m_Children.end(); itNode++)
+	for(const auto& node : m_children)
 	{
-		CNode* pNode;
-		pNode = (*itNode);
-
-		if(!pNode->IsTag()) continue;
-		if(!stricmp(pNode->GetText(), sName))
+		if(!node->IsTag()) continue;
+		if(!stricmp(node->GetText(), name))
 		{
-			return pNode;
+			return node;
 		}
 	}
-
-	return NULL;
+	return nullptr;
 }
 
 template <bool nSingle>
 CNode::NodeList CNode::SelectNodesImpl(const char* sPath)
 {
-	CNode* pNode(this);
-    string sCurr(sPath);
+	CNode* node(this);
+	std::string sCurr(sPath);
 
-    while(1)
-    {
-        //Check if we're at the end of an expression
-        size_t nPosition;
-        nPosition = sCurr.find('/');
-        if(nPosition == string::npos)
-        {
-            //We are.
-            break;
-        }
+	while(1)
+	{
+		//Check if we're at the end of an expression
+		size_t nPosition;
+		nPosition = sCurr.find('/');
+		if(nPosition == std::string::npos)
+		{
+			//We are.
+			break;
+		}
 
-        string sNext(sCurr.begin(), sCurr.begin() + nPosition);
-        pNode = pNode->Search(sNext.c_str());
+		std::string sNext(sCurr.begin(), sCurr.begin() + nPosition);
+		node = node->Search(sNext.c_str());
 
-        if(pNode == NULL)
-        {
-            return NodeList();
-        }
+		if(node == nullptr)
+		{
+			return NodeList();
+		}
 
-        sCurr = string(sCurr.begin() + nPosition + 1, sCurr.end());
-    }
+		sCurr = std::string(sCurr.begin() + nPosition + 1, sCurr.end());
+	}
 
-    NodeList TempList;
+	NodeList TempList;
 
-    for(CFilteringNodeIterator itNode(pNode, sCurr.c_str()); !itNode.IsEnd(); itNode++)
-    {
-        TempList.push_back(*itNode);
-        if(nSingle) break;
-    }
+	for(CFilteringNodeIterator itNode(node, sCurr.c_str()); !itNode.IsEnd(); itNode++)
+	{
+		TempList.push_back(*itNode);
+		if(nSingle) break;
+	}
 
-    return TempList;
+	return TempList;
 }
 
 CNode* CNode::Select(const char* sPath)
 {
-    NodeList Nodes(SelectNodesImpl<true>(sPath));
-    if(Nodes.size() == 0) return NULL;
-    return *Nodes.begin();
+	auto nodes(SelectNodesImpl<true>(sPath));
+	if(nodes.size() == 0) return nullptr;
+	return *nodes.begin();
 }
 
 CNode::NodeList CNode::SelectNodes(const char* sPath)
 {
-    return SelectNodesImpl<false>(sPath);
+	return SelectNodesImpl<false>(sPath);
 }

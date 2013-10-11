@@ -5,9 +5,8 @@
 using namespace Framework;
 using namespace Framework::Xml;
 
-CWriter::CWriter(CStream& stream, CNode* node)
+CWriter::CWriter(CStream& stream)
 : m_stream(stream)
-, m_node(node)
 {
 
 }
@@ -19,78 +18,70 @@ CWriter::~CWriter()
 
 void CWriter::WriteDocument(CStream& stream, CNode* node)
 {
-	CWriter writer(stream, node);
-	writer.WriteNode(0);
+	CWriter writer(stream);
+	writer.WriteNode(node, 0);
 }
 
-void CWriter::WriteNode(unsigned int nLevel)
+void CWriter::WriteNode(CNode* currentNode, unsigned int level)
 {
-	if(strcmp(m_node->GetText(), "") == 0)
+	if(strcmp(currentNode->GetText(), "") == 0)
 	{
-		if(m_node->GetChildCount() == 1)
+		if(currentNode->GetChildCount() == 1)
 		{
-			m_node = m_node->GetFirstChild();
-			WriteNode(nLevel);
+			WriteNode(currentNode->GetFirstChild(), level);
 			return;
 		}
 	}
 
-	if(m_node->GetChildCount() == 0)
+	if(currentNode->GetChildCount() == 0)
 	{
-		if(m_node->IsTag())
+		if(currentNode->IsTag())
 		{
-			DumpTabs(nLevel);
+			DumpTabs(level);
 			DumpString("<");
-			DumpString(m_node->GetText());
-			DumpAttributes(m_node);
+			DumpString(currentNode->GetText());
+			DumpAttributes(currentNode);
 			DumpString(" />\r\n");
 		}
-		m_node = m_node->GetParent();
 		return;
 	}
 
-	if(m_node->GetChildCount() == 1)
+	if(currentNode->GetChildCount() == 1)
 	{
-		if(!m_node->GetFirstChild()->IsTag())
+		if(!currentNode->GetFirstChild()->IsTag())
 		{
-			DumpTabs(nLevel);
+			DumpTabs(level);
 
 			DumpString("<");
-			DumpString(m_node->GetText());
-			DumpAttributes(m_node);
+			DumpString(currentNode->GetText());
+			DumpAttributes(currentNode);
 			DumpString(">");
 
-			DumpString(EscapeText(m_node->GetInnerText()).c_str());
+			DumpString(EscapeText(currentNode->GetInnerText()).c_str());
 
 			DumpString("</");
-			DumpString(m_node->GetText());
+			DumpString(currentNode->GetText());
 			DumpString(">\r\n");
-
-			m_node = m_node->GetParent();
 
 			return;
 		}
 	}
 
-	DumpTabs(nLevel);
+	DumpTabs(level);
 	DumpString("<");
-	DumpString(m_node->GetText());
-	DumpAttributes(m_node);
+	DumpString(currentNode->GetText());
+	DumpAttributes(currentNode);
 	DumpString(">\r\n");
 
-	for(CNode::NodeIterator itNode(m_node->GetChildrenBegin()); 
-		itNode != m_node->GetChildrenEnd(); itNode++)
+	for(const auto& node : currentNode->GetChildren())
 	{
-		m_node = (*itNode);
-		WriteNode(nLevel + 1);
+		WriteNode(node, level + 1);
 	}
 
-	DumpTabs(nLevel);
+	DumpTabs(level);
 	DumpString("</");
-	DumpString(m_node->GetText());
+	DumpString(currentNode->GetText());
 	DumpString(">\r\n");
-
-	m_node = m_node->GetParent();
 }
 
 void CWriter::DumpString(const char* sString)
@@ -107,17 +98,14 @@ void CWriter::DumpTabs(unsigned int nCount)
 	}
 }
 
-void CWriter::DumpAttributes(CNode* pNode)
+void CWriter::DumpAttributes(CNode* node)
 {
-	for(CNode::AttributeIterator itAttr(pNode->GetAttributesBegin());
-		itAttr != pNode->GetAttributesEnd(); itAttr++)
+	for(const auto& attribute : node->GetAttributes())
 	{
-		const AttributeType& Attribute(*itAttr);
-
 		DumpString(" ");
-		DumpString(Attribute.first.c_str());
+		DumpString(attribute.first.c_str());
 		DumpString("=\"");
-		DumpString(EscapeText(Attribute.second).c_str());
+		DumpString(EscapeText(attribute.second).c_str());
 		DumpString("\"");
 	}
 }
