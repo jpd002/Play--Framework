@@ -340,6 +340,9 @@
     <ClCompile Include="..\src\win32\WebBrowser.cpp">
       <Filter>Source Files\win32</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\bitmap\TGA.cpp">
+      <Filter>Source Files\bitmap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\alloca_def.h">
@@ -731,6 +734,9 @@
     </ClInclude>
     <ClInclude Include="..\include\win32\ComPtr.h">
       <Filter>Source Files\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\bitmap\TGA.h">
+      <Filter>Source Files\bitmap</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

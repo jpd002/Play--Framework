@@ -24,6 +24,7 @@
     <ClCompile Include="..\src\bitmap\BMP.cpp" />
     <ClCompile Include="..\src\bitmap\JPEG.cpp" />
     <ClCompile Include="..\src\bitmap\PNG.cpp" />
+    <ClCompile Include="..\src\bitmap\TGA.cpp" />
     <ClCompile Include="..\src\BitStream.cpp" />
     <ClCompile Include="..\src\Config.cpp" />
     <ClCompile Include="..\src\Deflate.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="..\include\bitmap\BMP.h" />
     <ClInclude Include="..\include\bitmap\JPEG.h" />
     <ClInclude Include="..\include\bitmap\PNG.h" />
+    <ClInclude Include="..\include\bitmap\TGA.h" />
     <ClInclude Include="..\include\BitStream.h" />
     <ClInclude Include="..\include\Config.h" />
     <ClInclude Include="..\include\Convertible.h" />
