@@ -96,6 +96,7 @@
     <ClCompile Include="..\src\win32\MemoryDeviceContext.cpp" />
     <ClCompile Include="..\src\win32\MenuItem.cpp" />
     <ClCompile Include="..\src\win32\ModalWindow.cpp" />
+    <ClCompile Include="..\src\win32\Progress.cpp" />
     <ClCompile Include="..\src\win32\Rect.cpp" />
     <ClCompile Include="..\src\win32\RegistryTraits.cpp" />
     <ClCompile Include="..\src\win32\RichTextEdit.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="..\include\layout\LayoutStretch.h" />
     <ClInclude Include="..\include\layout\VerticalLayout.h" />
     <ClInclude Include="..\include\lexical_cast_ex.h" />
+    <ClInclude Include="..\include\LockFreeQueue.h" />
     <ClInclude Include="..\include\LzAri.h" />
     <ClInclude Include="..\include\make_unique.h" />
     <ClInclude Include="..\include\MemStream.h" />
@@ -226,6 +228,7 @@
     <ClInclude Include="..\include\win32\MemoryDeviceContext.h" />
     <ClInclude Include="..\include\win32\MenuItem.h" />
     <ClInclude Include="..\include\win32\ModalWindow.h" />
+    <ClInclude Include="..\include\win32\Progress.h" />
     <ClInclude Include="..\include\win32\Rect.h" />
     <ClInclude Include="..\include\win32\RegistryTraits.h" />
     <ClInclude Include="..\include\win32\RegistryValue.h" />

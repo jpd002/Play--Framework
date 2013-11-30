@@ -15,6 +15,13 @@ CButton::CButton(const TCHAR* sCaption, HWND hParent, const RECT& rect, unsigned
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 
+CButton& CButton::operator =(CButton&& rhs)
+{
+	CWindow::Reset();
+	CWindow::MoveFrom(std::move(rhs));
+	return (*this);
+}
+
 bool CButton::GetCheck()
 {
 	return (SendMessage(m_hWnd, BM_GETCHECK, 0, NULL) == BST_CHECKED);

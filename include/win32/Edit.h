@@ -1,5 +1,4 @@
-#ifndef _EDIT_H_
-#define _EDIT_H_
+#pragma once
 
 #include "Window.h"
 
@@ -22,5 +21,3 @@ namespace Framework
 		};
 	}
 }
-
-#endif
