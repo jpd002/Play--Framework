@@ -98,7 +98,6 @@
     <ClCompile Include="..\src\win32\ModalWindow.cpp" />
     <ClCompile Include="..\src\win32\Progress.cpp" />
     <ClCompile Include="..\src\win32\Rect.cpp" />
-    <ClCompile Include="..\src\win32\RegistryTraits.cpp" />
     <ClCompile Include="..\src\win32\RichTextEdit.cpp" />
     <ClCompile Include="..\src\win32\ScrollBar.cpp" />
     <ClCompile Include="..\src\win32\Splitter.cpp" />
@@ -230,8 +229,6 @@
     <ClInclude Include="..\include\win32\ModalWindow.h" />
     <ClInclude Include="..\include\win32\Progress.h" />
     <ClInclude Include="..\include\win32\Rect.h" />
-    <ClInclude Include="..\include\win32\RegistryTraits.h" />
-    <ClInclude Include="..\include\win32\RegistryValue.h" />
     <ClInclude Include="..\include\win32\RichTextEdit.h" />
     <ClInclude Include="..\include\win32\ScrollBar.h" />
     <ClInclude Include="..\include\win32\Splitter.h" />

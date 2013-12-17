@@ -160,9 +160,6 @@
     <ClCompile Include="..\src\win32\Rect.cpp">
       <Filter>Source Files\win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\win32\RegistryTraits.cpp">
-      <Filter>Source Files\win32</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\win32\RichTextEdit.cpp">
       <Filter>Source Files\win32</Filter>
     </ClCompile>
@@ -535,12 +532,6 @@
       <Filter>Source Files\win32</Filter>
     </ClInclude>
     <ClInclude Include="..\include\win32\Rect.h">
-      <Filter>Source Files\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\win32\RegistryTraits.h">
-      <Filter>Source Files\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\win32\RegistryValue.h">
       <Filter>Source Files\win32</Filter>
     </ClInclude>
     <ClInclude Include="..\include\win32\RichTextEdit.h">
