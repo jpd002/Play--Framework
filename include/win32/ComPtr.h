@@ -45,6 +45,11 @@ namespace Framework
 				return m_ptr;
 			}
 
+			operator PtrType*() const
+			{
+				return m_ptr;
+			}
+
 			operator PtrType**()
 			{
 				return &m_ptr;
