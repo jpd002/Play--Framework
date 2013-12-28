@@ -41,6 +41,16 @@ uint64 CStream::Read64()
 	return value;
 }
 
+uint16 CStream::Read16_MSBF()
+{
+	uint16 value = 0;
+	Read(&value, 2);
+	value = 
+		(((value & 0xFF00) >>  8) <<  0) |
+		(((value & 0x00FF) >>  0) <<  8);
+	return value;
+}
+
 uint32 CStream::Read32_MSBF()
 {
 	uint32 value = 0;

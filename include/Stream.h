@@ -31,6 +31,7 @@ namespace Framework
 		uint32			Read32();
 		uint64			Read64();
 
+		uint16			Read16_MSBF();
 		uint32			Read32_MSBF();
 
 		std::string		ReadString();
