@@ -73,7 +73,12 @@ boost::filesystem::path PathUtils::GetAppResourcesPath()
 	return boost::filesystem::path([bundlePath UTF8String]);
 }
 
-#endif	// DEFINED(__APPLE__)
+boost::filesystem::path PathUtils::GetPersonalDataPath()
+{
+	return GetRoamingDataPath();
+}
+
+#else	// DEFINED(__APPLE__)
 
 #include <pwd.h>
 
@@ -83,7 +88,9 @@ boost::filesystem::path PathUtils::GetPersonalDataPath()
 	return boost::filesystem::path(userInfo->pw_dir);
 }
 
-#endif
+#endif	// !DEFINED(__APPLE__)
+
+#endif	// !DEFINED(_POSIX_VERSION)
 
 void PathUtils::EnsurePathExists(const boost::filesystem::path& path)
 {
@@ -104,6 +111,11 @@ void PathUtils::EnsurePathExists(const boost::filesystem::path& path)
 				continue;
 			}
 			else if(existsErrorCode.value() == ERROR_FILE_NOT_FOUND)
+			{
+				exists = false;
+			}
+#else
+			if(existsErrorCode.value() == ENOENT)
 			{
 				exists = false;
 			}
