@@ -119,8 +119,8 @@ void PathUtils::EnsurePathExists(const boost::filesystem::path& path)
 			{
 				exists = false;
 			}
-			else
 #endif
+			else
 			{
 				throw std::runtime_error("Couldn't ensure that path exists.");
 			}
