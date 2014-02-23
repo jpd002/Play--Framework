@@ -138,10 +138,9 @@ std::wstring CDialog::ReadString(Framework::CStream& stream)
 
 void CDialog::WriteString(const std::wstring& str, Framework::CStream& stream)
 {
-	for(std::wstring::const_iterator charIterator(str.begin());
-		charIterator != str.end(); charIterator++)
+	for(wchar_t character : str)
 	{
-		stream.Write16(*charIterator);
+		stream.Write16(character);
 	}
 	stream.Write16(0);
 }
@@ -193,14 +192,33 @@ CDialog::DIALOGTEMPLATE CDialog::ReadDialogTemplate(Framework::CStream& stream)
 	dialog.y			= stream.Read16();
 	dialog.cx			= stream.Read16();
 	dialog.cy			= stream.Read16();
+	
+	assert((stream.Tell() & 0x01) == 0);
 	dialog.menu			= ReadSzOrOrd(stream);
+	
+	assert((stream.Tell() & 0x01) == 0);
 	dialog.windowClass	= ReadSzOrOrd(stream);
+	
+	assert((stream.Tell() & 0x01) == 0);
 	dialog.title		= ReadString(stream);
+	
 	dialog.pointsize	= stream.Read16();
 	dialog.weight		= stream.Read16();
 	dialog.italic		= stream.Read8();
 	dialog.charset		= stream.Read8();
+
+	assert((stream.Tell() & 0x01) == 0);
 	dialog.typeface		= ReadString(stream);
+
+	//Struct has padding for alignment to DWORD boundary
+	{
+		auto currentBytePos = stream.Tell() & 0x3;
+		if(currentBytePos != 0)
+		{
+			stream.Seek(4 - currentBytePos, Framework::STREAM_SEEK_CUR);
+		}
+		assert((stream.Tell() & 0x03) == 0);
+	}
 
 	uint32 itemDataLength = static_cast<uint32>(stream.GetRemainingLength());
 	if(itemDataLength != 0)
@@ -233,8 +251,21 @@ void CDialog::WriteDialogTemplate(DIALOGTEMPLATE& dialog, Framework::CStream& st
 	stream.Write8(dialog.charset);
 	WriteString(dialog.typeface, stream);
 
-	if(dialog.dialogItemData.size() != 0)
+	//Pad struct for alignment to DWORD boundary
 	{
-		stream.Write(&dialog.dialogItemData[0], dialog.dialogItemData.size());
+		auto currentBytePos = stream.Tell() & 0x3;
+		if(currentBytePos != 0)
+		{
+			for(unsigned int i = 0; i < (4 - currentBytePos); i++)
+			{
+				stream.Write8(0);
+			}
+		}
+		assert((stream.Tell() & 0x03) == 0);
+	}
+
+	if(!dialog.dialogItemData.empty())
+	{
+		stream.Write(dialog.dialogItemData.data(), dialog.dialogItemData.size());
 	}
 }
