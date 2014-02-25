@@ -104,7 +104,8 @@ void CWebBrowser::Stop()
 void CWebBrowser::EnsureIE9ModeIsActivated()
 {
 	HKEY emulationKey = 0;
-	auto result = RegOpenKeyEx(HKEY_CURRENT_USER, _T("SOFTWARE\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\FEATURE_BROWSER_EMULATION"), 0, KEY_SET_VALUE, &emulationKey);
+	auto result = RegCreateKeyEx(HKEY_CURRENT_USER, _T("SOFTWARE\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\FEATURE_BROWSER_EMULATION"), 
+		0, NULL, 0, KEY_SET_VALUE, NULL, &emulationKey, NULL);
 	if(result != ERROR_SUCCESS)
 	{
 		return;
