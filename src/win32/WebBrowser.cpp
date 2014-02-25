@@ -17,7 +17,7 @@ CWebBrowser::CWebBrowser()
 }
 
 CWebBrowser::CWebBrowser(HWND parentWnd, const RECT& rect)
-: CActiveXHost(parentWnd, rect, CLSID_WebBrowser)
+: CActiveXHost(parentWnd, rect, CLSID_WebBrowser, &WebBrowserClientSiteFactory)
 , m_adviseCookie(0)
 {
 	m_eventSink = CComPtr<CEventSink>(new CEventSink(m_hWnd));
@@ -124,6 +124,11 @@ void CWebBrowser::EnsureIE9ModeIsActivated()
 	RegCloseKey(emulationKey);
 }
 
+CActiveXHost::UnknownPtr CWebBrowser::WebBrowserClientSiteFactory(HWND hWnd)
+{
+	return UnknownPtr(new CWebBrowserClientSite(hWnd));
+}
+
 LRESULT CALLBACK CWebBrowser::MsgFilterHook(int code, WPARAM wparam, LPARAM lparam)
 {
 	if(code < 0)
@@ -203,6 +208,146 @@ void CWebBrowser::ExchangeFilterHook(CWindow* listen1, CWindow* listen2)
 		//Both are already in, no need to do anything
 	}
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+//CWebBrowserClientSite
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+CWebBrowser::CWebBrowserClientSite::CWebBrowserClientSite(HWND window)
+: m_refCount(1)
+{
+	m_clientSite = CComPtr<CClientSite>(new CClientSite(window, this));
+}
+
+CWebBrowser::CWebBrowserClientSite::~CWebBrowserClientSite()
+{
+
+}
+
+ULONG CWebBrowser::CWebBrowserClientSite::AddRef()
+{
+	InterlockedIncrement(&m_refCount);
+	return m_refCount;
+}
+
+ULONG CWebBrowser::CWebBrowserClientSite::Release()
+{
+	InterlockedDecrement(&m_refCount);
+	if(m_refCount == 0)
+	{
+		delete this;
+		return 0;
+	}
+	else
+	{
+		return m_refCount;
+	}
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::QueryInterface(const IID& iid, void** intrf)
+{
+	(*intrf) = NULL;
+	if(iid == IID_IOleClientSite)
+	{
+		(*intrf) = static_cast<IOleClientSite*>(m_clientSite);
+	}
+	if(iid == IID_IOleInPlaceSite)
+	{
+		(*intrf) = static_cast<IOleInPlaceSite*>(m_clientSite);
+	}
+	if(iid == IID_IDocHostUIHandler)
+	{
+		(*intrf) = static_cast<IDocHostUIHandler*>(this);
+	}
+
+	if(*intrf)
+	{
+		AddRef();
+		return S_OK;
+	}
+	else
+	{
+		return E_NOINTERFACE;
+	}
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::ShowContextMenu(DWORD, POINT*, IUnknown*, IDispatch*)
+{
+	return S_OK;
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::GetHostInfo(DOCHOSTUIINFO* docHostUiInfo)
+{
+	docHostUiInfo->dwFlags |= DOCHOSTUIFLAG_DPI_AWARE;
+	docHostUiInfo->dwFlags |= DOCHOSTUIFLAG_THEME;
+	return S_OK;
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::ShowUI(DWORD, IOleInPlaceActiveObject*, IOleCommandTarget*, IOleInPlaceFrame*, IOleInPlaceUIWindow*)
+{
+	return S_OK;
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::HideUI()
+{
+	return S_OK;
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::UpdateUI()
+{
+	return S_OK;
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::EnableModeless(BOOL)
+{
+	return S_OK;
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::OnDocWindowActivate(BOOL)
+{
+	return S_OK;
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::OnFrameWindowActivate(BOOL)
+{
+	return S_OK;
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::ResizeBorder(LPCRECT, IOleInPlaceUIWindow*, BOOL)
+{
+	return S_OK;
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::TranslateAccelerator(LPMSG, const GUID*, DWORD)
+{
+	return S_FALSE;
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::GetOptionKeyPath(LPOLESTR*, DWORD)
+{
+	return S_OK;
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::GetDropTarget(IDropTarget*, IDropTarget**)
+{
+	return S_OK;
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::GetExternal(IDispatch**)
+{
+	return S_OK;
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::TranslateUrl(DWORD, LPWSTR, LPWSTR*)
+{
+	return S_OK;
+}
+
+HRESULT CWebBrowser::CWebBrowserClientSite::FilterDataObject(IDataObject*, IDataObject**)
+{
+	return S_OK;
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //CEventSink

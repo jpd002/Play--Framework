@@ -9,23 +9,27 @@ CActiveXHost::CActiveXHost()
 	m_hWnd = NULL;
 }
 
-CActiveXHost::CActiveXHost(HWND parentWnd, const RECT& rect, const CLSID& clsid)
+CActiveXHost::CActiveXHost(HWND parentWnd, const RECT& rect, const CLSID& clsid, const ClientSiteFactory& clientSiteFactory)
 {
 	Create(WS_EX_CONTROLPARENT, CDefaultWndClass::GetName(), _T("ActiveXHost"), WS_VISIBLE | WS_CHILD, rect, parentWnd, NULL);
 	SetClassPtr();
 
-	m_clientSite = CComPtr<CClientSite>(new CClientSite(m_hWnd));
+	m_clientSite = clientSiteFactory(m_hWnd);
 
 	HRESULT result = StgCreateDocfile(NULL, STGM_READWRITE | STGM_SHARE_EXCLUSIVE | STGM_DIRECT | STGM_CREATE, NULL, &m_storage);
 	assert(SUCCEEDED(result));
 
-	result = OleCreate(clsid, IID_IOleObject, OLERENDER_DRAW, NULL, m_clientSite, m_storage, reinterpret_cast<void**>(&m_oleObject));
+	CComPtr<IOleClientSite> oleClientSite;
+	result = m_clientSite->QueryInterface<IOleClientSite>(oleClientSite);
+	assert(SUCCEEDED(result));
+
+	result = OleCreate(clsid, IID_IOleObject, OLERENDER_DRAW, NULL, oleClientSite, m_storage, reinterpret_cast<void**>(&m_oleObject));
 	assert(SUCCEEDED(result));
 
 	result = OleSetContainedObject(m_oleObject, TRUE);
 	assert(SUCCEEDED(result));
 
-	result = m_oleObject->DoVerb(OLEIVERB_INPLACEACTIVATE, 0, m_clientSite, 0, m_hWnd, &rect);
+	result = m_oleObject->DoVerb(OLEIVERB_INPLACEACTIVATE, 0, oleClientSite, 0, m_hWnd, &rect);
 	assert(SUCCEEDED(result));
 }
 
@@ -80,9 +84,15 @@ long CActiveXHost::OnSize(unsigned int type, unsigned int width, unsigned int he
 	return FALSE;
 }
 
-CActiveXHost::CClientSite::CClientSite(HWND window)
+CActiveXHost::UnknownPtr CActiveXHost::DefaultClientSiteFactory(HWND hWnd)
+{
+	return UnknownPtr(reinterpret_cast<IUnknown*>(new CClientSite(hWnd, nullptr)));
+}
+
+CActiveXHost::CClientSite::CClientSite(HWND window, IUnknown* outerUnk)
 : m_refCount(1)
 , m_window(window)
+, m_outerUnk(outerUnk)
 {
 
 }
@@ -94,48 +104,65 @@ CActiveXHost::CClientSite::~CClientSite()
 
 ULONG CActiveXHost::CClientSite::AddRef()
 {
-	InterlockedIncrement(&m_refCount);
-	return m_refCount;
+	if(m_outerUnk)
+	{
+		return m_outerUnk->AddRef();
+	}
+	else
+	{
+		InterlockedIncrement(&m_refCount);
+		return m_refCount;
+	}
 }
 
 ULONG CActiveXHost::CClientSite::Release()
 {
-	InterlockedDecrement(&m_refCount);
-	if(m_refCount == 0)
+	if(m_outerUnk)
 	{
-		delete this;
-		return 0;
+		return m_outerUnk->Release();
 	}
 	else
 	{
-		return m_refCount;
+		InterlockedDecrement(&m_refCount);
+		if(m_refCount == 0)
+		{
+			delete this;
+			return 0;
+		}
+		else
+		{
+			return m_refCount;
+		}
 	}
 }
 
 HRESULT CActiveXHost::CClientSite::QueryInterface(const IID& iid, void** intrf)
 {
-	(*intrf) = NULL;
-	if(iid == IID_IOleInPlaceSite)
+	if(m_outerUnk)
 	{
-		(*intrf) = static_cast<IOleInPlaceSite*>(this);
-	}
-	else if(iid == IID_IDispatch)
-	{
-//		(*intrf) = static_cast<IDispatch*>(this);
-	}
-	else if(iid == IID_IAdviseSink)
-	{
-//		(*intrf) = static_cast<IAdviseSink*>(this);
-	}
-
-	if(*intrf)
-	{
-		AddRef();
-		return S_OK;
+		return m_outerUnk->QueryInterface(iid, intrf);
 	}
 	else
 	{
-		return E_NOINTERFACE;
+		(*intrf) = NULL;
+		if(iid == IID_IOleClientSite)
+		{
+			(*intrf) = static_cast<IOleClientSite*>(this);
+		}
+		if(iid == IID_IOleInPlaceSite)
+		{
+			(*intrf) = static_cast<IOleInPlaceSite*>(this);
+		}
+
+		if(*intrf)
+		{
+			AddRef();
+			return S_OK;
+		}
+		else
+		{
+			return E_NOINTERFACE;
+		}
 	}
 }
 

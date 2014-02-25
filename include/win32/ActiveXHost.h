@@ -2,6 +2,7 @@
 
 #include "win32/Window.h"
 #include "win32/ComPtr.h"
+#include <functional>
 
 namespace Framework
 {
@@ -10,24 +11,11 @@ namespace Framework
 		class CActiveXHost : public Framework::Win32::CWindow
 		{
 		public:
-									CActiveXHost();
-									CActiveXHost(HWND, const RECT&, const CLSID&);
-			virtual					~CActiveXHost();
-
-		protected:
-			void					Reset();
-			void					MoveFrom(CActiveXHost&&);
-
-			long					OnSize(unsigned int, unsigned int, unsigned int) override;
-
-			CComPtr<IOleObject>		m_oleObject;
-
-		private:
-			class CClientSite : public IOleClientSite, public IOleInPlaceSite, public IDispatch, 
+			class CClientSite : public IOleClientSite, public IOleInPlaceSite, public IDispatch,
 				public IAdviseSink, public IOleInPlaceFrame
 			{
 			public:
-										CClientSite(HWND);
+										CClientSite(HWND, IUnknown*);
 				virtual					~CClientSite();
 
 				//IUnknown
@@ -83,11 +71,30 @@ namespace Framework
 				STDMETHODIMP_(void)		OnClose();
 
 			private:
+				IUnknown*				m_outerUnk;
 				ULONG					m_refCount;
 				HWND					m_window;
 			};
+			typedef CComPtr<IUnknown> UnknownPtr;
+			typedef std::function<UnknownPtr (HWND)> ClientSiteFactory;
 
-			CComPtr<CClientSite>	m_clientSite;
+									CActiveXHost();
+									CActiveXHost(HWND, const RECT&, const CLSID&, 
+										const ClientSiteFactory& = &DefaultClientSiteFactory);
+			virtual					~CActiveXHost();
+
+		protected:
+			void					Reset();
+			void					MoveFrom(CActiveXHost&&);
+
+			long					OnSize(unsigned int, unsigned int, unsigned int) override;
+
+			CComPtr<IOleObject>		m_oleObject;
+
+		private:
+			static UnknownPtr		DefaultClientSiteFactory(HWND);
+
+			UnknownPtr				m_clientSite;
 			CComPtr<IStorage>		m_storage;
 		};
 	}
