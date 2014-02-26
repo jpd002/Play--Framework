@@ -217,7 +217,7 @@ void CWebBrowser::ExchangeFilterHook(CWindow* listen1, CWindow* listen2)
 CWebBrowser::CWebBrowserClientSite::CWebBrowserClientSite(HWND window)
 : m_refCount(1)
 {
-	m_clientSite = CComPtr<CClientSite>(new CClientSite(window, this));
+	m_clientSite = CClientSite::Create(window, this);
 }
 
 CWebBrowser::CWebBrowserClientSite::~CWebBrowserClientSite()
@@ -233,6 +233,7 @@ ULONG CWebBrowser::CWebBrowserClientSite::AddRef()
 
 ULONG CWebBrowser::CWebBrowserClientSite::Release()
 {
+	assert(m_refCount != 0);
 	InterlockedDecrement(&m_refCount);
 	if(m_refCount == 0)
 	{
@@ -250,11 +251,11 @@ HRESULT CWebBrowser::CWebBrowserClientSite::QueryInterface(const IID& iid, void*
 	(*intrf) = NULL;
 	if(iid == IID_IOleClientSite)
 	{
-		(*intrf) = static_cast<IOleClientSite*>(m_clientSite);
+		return m_clientSite->QueryInterface(iid, intrf);
 	}
 	if(iid == IID_IOleInPlaceSite)
 	{
-		(*intrf) = static_cast<IOleInPlaceSite*>(m_clientSite);
+		return m_clientSite->QueryInterface(iid, intrf);
 	}
 	if(iid == IID_IDocHostUIHandler)
 	{
@@ -263,7 +264,7 @@ HRESULT CWebBrowser::CWebBrowserClientSite::QueryInterface(const IID& iid, void*
 
 	if(*intrf)
 	{
-		AddRef();
+		reinterpret_cast<IUnknown*>(*intrf)->AddRef();
 		return S_OK;
 	}
 	else

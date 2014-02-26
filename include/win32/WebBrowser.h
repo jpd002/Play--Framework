@@ -65,7 +65,7 @@ namespace Framework
 				STDMETHODIMP			FilterDataObject(IDataObject*, IDataObject**);
 
 			private:
-				CComPtr<CClientSite>	m_clientSite;
+				CComPtr<IUnknown>		m_clientSite;
 				ULONG					m_refCount;
 			};
 

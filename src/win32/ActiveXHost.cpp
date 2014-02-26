@@ -86,15 +86,30 @@ long CActiveXHost::OnSize(unsigned int type, unsigned int width, unsigned int he
 
 CActiveXHost::UnknownPtr CActiveXHost::DefaultClientSiteFactory(HWND hWnd)
 {
-	return UnknownPtr(reinterpret_cast<IUnknown*>(new CClientSite(hWnd, nullptr)));
+	return CClientSite::Create(hWnd, nullptr);
+}
+
+CComPtr<IUnknown> CActiveXHost::CClientSite::Create(HWND window, IUnknown* outerUnk)
+{
+	auto clientSite = new CClientSite(window, outerUnk);
+
+	CComPtr<IUnknown> result;
+	clientSite->NonDelegatingQueryInterface(IID_IUnknown, reinterpret_cast<void**>(&result));
+	return result;
 }
 
 CActiveXHost::CClientSite::CClientSite(HWND window, IUnknown* outerUnk)
-: m_refCount(1)
+: m_refCount(0)
 , m_window(window)
-, m_outerUnk(outerUnk)
 {
-
+	if(outerUnk)
+	{
+		m_outerUnk = outerUnk;
+	}
+	else
+	{
+		m_outerUnk = reinterpret_cast<IUnknown*>(static_cast<INonDelegatingUnknown*>(this));
+	}
 }
 
 CActiveXHost::CClientSite::~CClientSite()
@@ -104,65 +119,64 @@ CActiveXHost::CClientSite::~CClientSite()
 
 ULONG CActiveXHost::CClientSite::AddRef()
 {
-	if(m_outerUnk)
-	{
-		return m_outerUnk->AddRef();
-	}
-	else
-	{
-		InterlockedIncrement(&m_refCount);
-		return m_refCount;
-	}
+	return m_outerUnk->AddRef();
 }
 
 ULONG CActiveXHost::CClientSite::Release()
 {
-	if(m_outerUnk)
-	{
-		return m_outerUnk->Release();
-	}
-	else
-	{
-		InterlockedDecrement(&m_refCount);
-		if(m_refCount == 0)
-		{
-			delete this;
-			return 0;
-		}
-		else
-		{
-			return m_refCount;
-		}
-	}
+	return m_outerUnk->Release();
 }
 
 HRESULT CActiveXHost::CClientSite::QueryInterface(const IID& iid, void** intrf)
 {
-	if(m_outerUnk)
+	return m_outerUnk->QueryInterface(iid, intrf);
+}
+
+ULONG CActiveXHost::CClientSite::NonDelegatingAddRef()
+{
+	InterlockedIncrement(&m_refCount);
+	return m_refCount;
+}
+
+ULONG CActiveXHost::CClientSite::NonDelegatingRelease()
+{
+	assert(m_refCount != 0);
+	InterlockedDecrement(&m_refCount);
+	if(m_refCount == 0)
 	{
-		return m_outerUnk->QueryInterface(iid, intrf);
+		delete this;
+		return 0;
 	}
 	else
 	{
-		(*intrf) = NULL;
-		if(iid == IID_IOleClientSite)
-		{
-			(*intrf) = static_cast<IOleClientSite*>(this);
-		}
-		if(iid == IID_IOleInPlaceSite)
-		{
-			(*intrf) = static_cast<IOleInPlaceSite*>(this);
-		}
+		return m_refCount;
+	}
+}
 
-		if(*intrf)
-		{
-			AddRef();
-			return S_OK;
-		}
-		else
-		{
-			return E_NOINTERFACE;
-		}
+HRESULT CActiveXHost::CClientSite::NonDelegatingQueryInterface(const IID& iid, void** intrf)
+{
+	(*intrf) = NULL;
+	if(iid == IID_IUnknown)
+	{
+		(*intrf) = static_cast<INonDelegatingUnknown*>(this);
+	}
+	if(iid == IID_IOleClientSite)
+	{
+		(*intrf) = static_cast<IOleClientSite*>(this);
+	}
+	if(iid == IID_IOleInPlaceSite)
+	{
+		(*intrf) = static_cast<IOleInPlaceSite*>(this);
+	}
+
+	if(*intrf)
+	{
+		reinterpret_cast<IUnknown*>(*intrf)->AddRef();
+		return S_OK;
+	}
+	else
+	{
+		return E_NOINTERFACE;
 	}
 }
 
