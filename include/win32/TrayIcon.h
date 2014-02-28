@@ -1,37 +1,34 @@
-#ifndef _TRAYICON_H_
-#define _TRAYICON_H_
+#pragma once
 
 #include "win32/Window.h"
 
 namespace Framework
 {
-    namespace Win32
-    {
-	    class CTrayIcon
-	    {
-	    public:
-						    CTrayIcon(HWND, unsigned int);
-						    ~CTrayIcon();
-		    void			SetTip(const TCHAR*);
-		    void			SetIcon(HICON);
-		    void			SetMessage(unsigned int);
-		    unsigned int	GetID();
-            void            Rebuild();
+	namespace Win32
+	{
+		class CTrayIcon
+		{
+		public:
+							CTrayIcon(HWND, unsigned int);
+			virtual			~CTrayIcon();
 
-	    private:
-		    void			Add();
-		    void			Delete();
-		    void			InitStructure(NOTIFYICONDATA*);
+			void			SetTip(const TCHAR*);
+			void			SetIcon(HICON);
+			void			SetMessage(unsigned int);
+			unsigned int	GetID() const;
+			void			Rebuild();
 
-            std::tstring    m_tip;
-            HICON           m_icon;
-            unsigned int    m_message;
+		private:
+			void			Add();
+			void			Delete();
+			void			InitStructure(NOTIFYICONDATA*);
 
-		    HWND			m_hWnd;
-		    unsigned int	m_nID;
-	    };
-    }
+			std::tstring	m_tip;
+			HICON			m_icon;
+			unsigned int	m_message;
+
+			HWND			m_wnd;
+			unsigned int	m_id;
+		};
+	}
 }
-
-
-#endif
