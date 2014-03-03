@@ -2,8 +2,8 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <ZLIB_PATH>C:\Components\zlib-1.2.8</ZLIB_PATH>
-    <BOOST_PATH>C:\Components\boost_trunk</BOOST_PATH>
+    <ZLIB_PATH>path_to\zlib-1.2.8</ZLIB_PATH>
+    <BOOST_PATH>path_to\boost-trunk</BOOST_PATH>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup>
