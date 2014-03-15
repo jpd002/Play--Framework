@@ -93,6 +93,7 @@
 		701A48F316AD196200B5C1FF /* PathUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PathUtils.cpp; path = ../src/PathUtils.cpp; sourceTree = "<group>"; };
 		701A48F616AD197600B5C1FF /* PathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathUtils.h; path = ../include/PathUtils.h; sourceTree = "<group>"; };
 		704DFAED17D5CB22003AB959 /* alloca_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = alloca_def.h; path = ../include/alloca_def.h; sourceTree = "<group>"; };
+		708661E618D44B1900B4E9CE /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		7E1C41B31234236D00BB4E9C /* IosIStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosIStream.cpp; path = ../src/IosIStream.cpp; sourceTree = SOURCE_ROOT; };
 		7E1C41B41234236D00BB4E9C /* IosOStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosOStream.cpp; path = ../src/IosOStream.cpp; sourceTree = SOURCE_ROOT; };
 		7E1C41B51234236D00BB4E9C /* string_cast_sjis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = string_cast_sjis.cpp; path = ../src/string_cast_sjis.cpp; sourceTree = SOURCE_ROOT; };
@@ -193,6 +194,7 @@
 		0867D691FE84028FC02AAC07 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				708661E618D44B1900B4E9CE /* Config.xcconfig */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
@@ -481,19 +483,13 @@
 /* Begin XCBuildConfiguration section */
 		1DEB921F08733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 708661E618D44B1900B4E9CE /* Config.xcconfig */;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/Framework.dst;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Framework_Prefix.pch;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_THUMB_SUPPORT = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = Framework;
 				SKIP_INSTALL = YES;
@@ -502,16 +498,11 @@
 		};
 		1DEB922008733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 708661E618D44B1900B4E9CE /* Config.xcconfig */;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				CLANG_CXX_LIBRARY = "libc++";
 				DSTROOT = /tmp/Framework.dst;
-				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Framework_Prefix.pch;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_THUMB_SUPPORT = NO;
 				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = Framework;
 				SKIP_INSTALL = YES;
@@ -521,34 +512,14 @@
 		1DEB922308733DC00010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					/Users/jpd002/Libraries/boost_1_55_0,
-					../include,
-				);
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "-fvisibility=hidden";
-				OTHER_LDFLAGS = "-ObjC";
-				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
 		1DEB922408733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					/Users/jpd002/Libraries/boost_1_55_0,
-					../include,
-				);
-				OTHER_CFLAGS = "-fvisibility=hidden";
-				OTHER_LDFLAGS = "-ObjC";
-				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
