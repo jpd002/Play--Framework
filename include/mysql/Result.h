@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MySqlDefs.h"
+#include <unordered_map>
 
 namespace Framework
 {
@@ -9,6 +10,8 @@ namespace Framework
 		class CResult
 		{
 		public:
+			typedef std::unordered_map<std::string, int> FieldIndexMap;
+
 							CResult(MYSQL_RES*);
 							CResult(CResult&&);
 			virtual			~CResult();
@@ -20,6 +23,7 @@ namespace Framework
 			MYSQL_ROW		FetchRow();
 			unsigned int	GetRowCount();
 			unsigned int	GetFieldCount();
+			FieldIndexMap	GetFieldIndices();
 
 		private:
 							CResult(const CResult&);
