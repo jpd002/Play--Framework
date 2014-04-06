@@ -2,6 +2,7 @@
 
 #include "MySqlDefs.h"
 #include <unordered_map>
+#include <string>
 
 namespace Framework
 {
