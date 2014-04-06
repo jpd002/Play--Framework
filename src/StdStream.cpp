@@ -5,20 +5,18 @@
 using namespace Framework;
 
 CStdStream::CStdStream()
-: m_file(NULL)
 {
 	
 }
 
 CStdStream::CStdStream(CStdStream&& rhs)
-: m_file(NULL)
 {
 	std::swap(rhs.m_file, m_file);
 }
 
 CStdStream::CStdStream(FILE* file)
 {
-	if(file == NULL)
+	if(file == nullptr)
 	{
 		throw std::runtime_error("Invalid file handle.");
 	}
@@ -28,7 +26,7 @@ CStdStream::CStdStream(FILE* file)
 CStdStream::CStdStream(const char* path, const char* options)
 {
 	m_file = fopen(path, options);
-	if(m_file == NULL)
+	if(m_file == nullptr)
 	{
 		throw std::runtime_error("Invalid file handle.");
 	}
@@ -39,9 +37,9 @@ CStdStream::CStdStream(const wchar_t* path, const wchar_t* options)
 #ifdef _MSC_VER
 	m_file = _wfopen(path, options);
 #else
-	m_file = NULL;
+	m_file = nullptr;
 #endif
-	if(m_file == NULL)
+	if(m_file == nullptr)
 	{
 		throw std::runtime_error("Invalid file handle.");
 	}
@@ -54,11 +52,16 @@ CStdStream::~CStdStream()
 
 void CStdStream::Clear()
 {
-	if(m_file != NULL)
+	if(m_file != nullptr)
 	{
 		fclose(m_file);
-		m_file = NULL;
-	}	
+		m_file = nullptr;
+	}
+}
+
+bool CStdStream::IsEmpty() const
+{
+	return (m_file == nullptr);
 }
 
 CStdStream::operator FILE*() const
@@ -88,7 +91,7 @@ void CStdStream::Seek(int64 nPosition, STREAM_SEEK_DIRECTION nDirection)
 		nDir = SEEK_END;
 		break;
 	}
-	assert(m_file != NULL);
+	assert(m_file != nullptr);
 #ifdef WIN32
 	_fseeki64(m_file, nPosition, nDir);
 #else
@@ -103,7 +106,7 @@ bool CStdStream::IsEOF()
 
 uint64 CStdStream::Tell()
 {
-	assert(m_file != NULL);
+	assert(m_file != nullptr);
 #ifdef WIN32
 	return _ftelli64(m_file);
 #else
@@ -113,7 +116,7 @@ uint64 CStdStream::Tell()
 
 uint64 CStdStream::Read(void* pBuffer, uint64 nLength)
 {
-	assert(m_file != NULL);
+	assert(m_file != nullptr);
 	if(feof(m_file) || ferror(m_file))
 	{
 		throw std::runtime_error("Can't read after end of file.");
@@ -123,19 +126,18 @@ uint64 CStdStream::Read(void* pBuffer, uint64 nLength)
 
 uint64 CStdStream::Write(const void* pBuffer, uint64 nLength)
 {
-	assert(m_file != NULL);
+	assert(m_file != nullptr);
 	return fwrite(pBuffer, 1, (size_t)nLength, m_file);
 }
 
 void CStdStream::Flush()
 {
-	assert(m_file != NULL);
+	assert(m_file != nullptr);
 	fflush(m_file);
 }
 
 void CStdStream::Close()
 {
-	assert(m_file != NULL);
-	fclose(m_file);
-	m_file = NULL;
+	assert(m_file != nullptr);
+	Clear();
 }

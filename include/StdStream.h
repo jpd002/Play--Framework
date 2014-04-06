@@ -17,6 +17,9 @@ namespace Framework
 						CStdStream(const wchar_t*, const wchar_t*);
 		virtual			~CStdStream();
 		
+		void			Clear();
+		bool			IsEmpty() const;
+
 						operator FILE*() const;
 		CStdStream&		operator =(CStdStream&&);
 		
@@ -32,9 +35,7 @@ namespace Framework
 						CStdStream(const CStdStream&) {}
 		CStdStream&		operator =(const CStdStream&) { return *this; }
 		
-		void			Clear();
-		
-		FILE*			m_file;
+		FILE*			m_file = nullptr;
 	};
 
 }
