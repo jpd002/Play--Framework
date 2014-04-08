@@ -36,22 +36,22 @@ uint64 CMemStream::Tell()
 
 void CMemStream::Seek(int64 position, STREAM_SEEK_DIRECTION dir)
 {
-    switch(dir)
-    {
-    case STREAM_SEEK_SET:
+	switch(dir)
+	{
+	case STREAM_SEEK_SET:
 		if(position > m_size) throw std::runtime_error("Invalid position.");
-        m_position = static_cast<unsigned int>(position);
+		m_position = static_cast<unsigned int>(position);
 		m_isEof = false;
 		break;
-    case STREAM_SEEK_CUR:
-        m_position += static_cast<int>(position);
+	case STREAM_SEEK_CUR:
+		m_position += static_cast<int>(position);
 		m_isEof = false;
-        break;
-    case STREAM_SEEK_END:
-        m_position = m_size;
+		break;
+	case STREAM_SEEK_END:
+		m_position = m_size;
 		m_isEof = true;
-        break;
-    }
+		break;
+	}
 }
 
 uint64 CMemStream::Read(void* data, uint64 size)
@@ -69,21 +69,21 @@ uint64 CMemStream::Read(void* data, uint64 size)
 
 uint64 CMemStream::Write(const void* data, uint64 size)
 {
-    if((m_position + size) > m_grow)
-    {
-        m_grow += ((static_cast<unsigned int>(size) + GROWSIZE - 1) / GROWSIZE) * GROWSIZE;
-        m_data = reinterpret_cast<uint8*>(realloc(m_data, m_grow));
-    }
-    memcpy(m_data + m_position, data, static_cast<uint32>(size));
-    m_position += static_cast<unsigned int>(size);
+	if((m_position + size) > m_grow)
+	{
+		m_grow += ((static_cast<unsigned int>(size) + GROWSIZE - 1) / GROWSIZE) * GROWSIZE;
+		m_data = reinterpret_cast<uint8*>(realloc(m_data, m_grow));
+	}
+	memcpy(m_data + m_position, data, static_cast<uint32>(size));
+	m_position += static_cast<unsigned int>(size);
 	m_size = std::max<unsigned int>(m_size, m_position);
-    return size;
+	return size;
 }
 
 void CMemStream::Allocate(unsigned int size)
 {
 	assert(size >= m_size);
-    m_data = reinterpret_cast<uint8*>(realloc(m_data, size));
+	m_data = reinterpret_cast<uint8*>(realloc(m_data, size));
 	m_size = size;
 }
 

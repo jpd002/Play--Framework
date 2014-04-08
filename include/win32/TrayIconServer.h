@@ -1,38 +1,38 @@
-#ifndef _TRAYICONSERVER_H_
-#define _TRAYICONSERVER_H_
+#pragma once
 
 #include "TrayIcon.h"
-#include <boost/ptr_container/ptr_map.hpp>
 #include <functional>
-#include <boost/signal.hpp>
+#include <memory>
+#include <map>
+#include <boost/signals2.hpp>
 
 namespace Framework
 {
-    namespace Win32
-    {
-	    class CTrayIconServer : public CWindow
-	    {
-	    public:
-            typedef std::tr1::function<void (CTrayIcon*, LPARAM)> IconEventHandlerType;
+	namespace Win32
+	{
+		class CTrayIconServer : public CWindow
+		{
+		public:
+			typedef std::function<void (CTrayIcon*, LPARAM)> IconEventHandlerType;
 
-							                                    CTrayIconServer();
-							                                    ~CTrayIconServer();
+									CTrayIconServer();
+			virtual					~CTrayIconServer();
 
-		    CTrayIcon*			                                Insert();
+			CTrayIcon*				Insert();
 
-		    void				                                RegisterHandler(const IconEventHandlerType&);
+			void					RegisterHandler(const IconEventHandlerType&);
 
-	    protected:
-		    long				                                OnWndProc(unsigned int, WPARAM, LPARAM);
+		protected:
+			long					OnWndProc(unsigned int, WPARAM, LPARAM);
 
-	    private:
-            typedef boost::ptr_map<unsigned int, CTrayIcon> TrayIconMapType;
+		private:
+			typedef std::map<unsigned int, std::unique_ptr<CTrayIcon>> TrayIconMapType;
+			typedef boost::signals2::signal<void (CTrayIcon*, LPARAM)> IconEventSignalType;
 
-		    TrayIconMapType	                                    m_Icons;
-            boost::signal<void (CTrayIcon*, LPARAM)>            m_IconEventSignal;
-            unsigned int                                        m_taskBarCreatedMessage;
-        };
-    }
+			TrayIconMapType			m_icons;
+			IconEventSignalType		m_iconEventSignal;
+			unsigned int			m_nextIconId = 1;
+			unsigned int			m_taskBarCreatedMessage = 0;
+		};
+	}
 }
-
-#endif

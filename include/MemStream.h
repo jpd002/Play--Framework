@@ -1,5 +1,4 @@
-#ifndef _MEMSTREAM_H_
-#define _MEMSTREAM_H_
+#pragma once
 
 #include "Stream.h"
 
@@ -31,6 +30,3 @@ namespace Framework
 	};
 
 }
-
-
-#endif

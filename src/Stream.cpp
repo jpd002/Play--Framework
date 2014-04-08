@@ -63,6 +63,13 @@ uint32 CStream::Read32_MSBF()
 	return value;
 }
 
+float CStream::ReadFloat32()
+{
+	float value = 0;
+	Read(&value, sizeof(float));
+	return value;
+}
+
 std::string CStream::ReadString()
 {
 	std::string result;

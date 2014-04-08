@@ -3,6 +3,7 @@
 #include "ActiveXHost.h"
 #include <ExDisp.h>
 #include <MsHTML.h>
+#include <MsHtmHst.h>
 #include <set>
 
 namespace Framework
@@ -35,6 +36,39 @@ namespace Framework
 			void						Stop();
 
 		protected:
+			class CWebBrowserClientSite : public IDocHostUIHandler
+			{
+			public:
+										CWebBrowserClientSite(HWND);
+				virtual					~CWebBrowserClientSite();
+
+				//IUnknown
+				STDMETHODIMP			QueryInterface(const IID&, void**);
+				STDMETHODIMP_(ULONG)	AddRef();
+				STDMETHODIMP_(ULONG)	Release();
+
+				//IDocHostUIHandler
+				STDMETHODIMP			ShowContextMenu(DWORD, POINT*, IUnknown*, IDispatch*);
+				STDMETHODIMP			GetHostInfo(DOCHOSTUIINFO*);
+				STDMETHODIMP			ShowUI(DWORD, IOleInPlaceActiveObject*, IOleCommandTarget*, IOleInPlaceFrame*, IOleInPlaceUIWindow*);
+				STDMETHODIMP			HideUI();
+				STDMETHODIMP			UpdateUI();
+				STDMETHODIMP			EnableModeless(BOOL);
+				STDMETHODIMP			OnDocWindowActivate(BOOL);
+				STDMETHODIMP			OnFrameWindowActivate(BOOL);
+				STDMETHODIMP			ResizeBorder(LPCRECT, IOleInPlaceUIWindow*, BOOL);
+				STDMETHODIMP			TranslateAccelerator(LPMSG, const GUID*, DWORD);
+				STDMETHODIMP			GetOptionKeyPath(LPOLESTR*, DWORD);
+				STDMETHODIMP			GetDropTarget(IDropTarget*, IDropTarget**);
+				STDMETHODIMP			GetExternal(IDispatch**);
+				STDMETHODIMP			TranslateUrl(DWORD, LPWSTR, LPWSTR*);
+				STDMETHODIMP			FilterDataObject(IDataObject*, IDataObject**);
+
+			private:
+				CComPtr<IUnknown>		m_clientSite;
+				ULONG					m_refCount;
+			};
+
 			void						Reset();
 			void						MoveFrom(CWebBrowser&&);
 
@@ -62,6 +96,7 @@ namespace Framework
 			};
 
 			static void							EnsureIE9ModeIsActivated();
+			static UnknownPtr					WebBrowserClientSiteFactory(HWND);
 
 			static LRESULT CALLBACK				MsgFilterHook(int, WPARAM, LPARAM);
 			static void							RegisterFilterHook(CWindow*);

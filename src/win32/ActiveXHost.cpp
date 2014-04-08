@@ -9,23 +9,27 @@ CActiveXHost::CActiveXHost()
 	m_hWnd = NULL;
 }
 
-CActiveXHost::CActiveXHost(HWND parentWnd, const RECT& rect, const CLSID& clsid)
+CActiveXHost::CActiveXHost(HWND parentWnd, const RECT& rect, const CLSID& clsid, const ClientSiteFactory& clientSiteFactory)
 {
 	Create(WS_EX_CONTROLPARENT, CDefaultWndClass::GetName(), _T("ActiveXHost"), WS_VISIBLE | WS_CHILD, rect, parentWnd, NULL);
 	SetClassPtr();
 
-	m_clientSite = CComPtr<CClientSite>(new CClientSite(m_hWnd));
+	m_clientSite = clientSiteFactory(m_hWnd);
 
 	HRESULT result = StgCreateDocfile(NULL, STGM_READWRITE | STGM_SHARE_EXCLUSIVE | STGM_DIRECT | STGM_CREATE, NULL, &m_storage);
 	assert(SUCCEEDED(result));
 
-	result = OleCreate(clsid, IID_IOleObject, OLERENDER_DRAW, NULL, m_clientSite, m_storage, reinterpret_cast<void**>(&m_oleObject));
+	CComPtr<IOleClientSite> oleClientSite;
+	result = m_clientSite->QueryInterface<IOleClientSite>(oleClientSite);
+	assert(SUCCEEDED(result));
+
+	result = OleCreate(clsid, IID_IOleObject, OLERENDER_DRAW, NULL, oleClientSite, m_storage, reinterpret_cast<void**>(&m_oleObject));
 	assert(SUCCEEDED(result));
 
 	result = OleSetContainedObject(m_oleObject, TRUE);
 	assert(SUCCEEDED(result));
 
-	result = m_oleObject->DoVerb(OLEIVERB_INPLACEACTIVATE, 0, m_clientSite, 0, m_hWnd, &rect);
+	result = m_oleObject->DoVerb(OLEIVERB_INPLACEACTIVATE, 0, oleClientSite, 0, m_hWnd, &rect);
 	assert(SUCCEEDED(result));
 }
 
@@ -80,11 +84,32 @@ long CActiveXHost::OnSize(unsigned int type, unsigned int width, unsigned int he
 	return FALSE;
 }
 
-CActiveXHost::CClientSite::CClientSite(HWND window)
-: m_refCount(1)
+CActiveXHost::UnknownPtr CActiveXHost::DefaultClientSiteFactory(HWND hWnd)
+{
+	return CClientSite::Create(hWnd, nullptr);
+}
+
+CComPtr<IUnknown> CActiveXHost::CClientSite::Create(HWND window, IUnknown* outerUnk)
+{
+	auto clientSite = new CClientSite(window, outerUnk);
+
+	CComPtr<IUnknown> result;
+	clientSite->NonDelegatingQueryInterface(IID_IUnknown, reinterpret_cast<void**>(&result));
+	return result;
+}
+
+CActiveXHost::CClientSite::CClientSite(HWND window, IUnknown* outerUnk)
+: m_refCount(0)
 , m_window(window)
 {
-
+	if(outerUnk)
+	{
+		m_outerUnk = outerUnk;
+	}
+	else
+	{
+		m_outerUnk = reinterpret_cast<IUnknown*>(static_cast<INonDelegatingUnknown*>(this));
+	}
 }
 
 CActiveXHost::CClientSite::~CClientSite()
@@ -94,12 +119,28 @@ CActiveXHost::CClientSite::~CClientSite()
 
 ULONG CActiveXHost::CClientSite::AddRef()
 {
-	InterlockedIncrement(&m_refCount);
-	return m_refCount;
+	return m_outerUnk->AddRef();
 }
 
 ULONG CActiveXHost::CClientSite::Release()
 {
+	return m_outerUnk->Release();
+}
+
+HRESULT CActiveXHost::CClientSite::QueryInterface(const IID& iid, void** intrf)
+{
+	return m_outerUnk->QueryInterface(iid, intrf);
+}
+
+ULONG CActiveXHost::CClientSite::NonDelegatingAddRef()
+{
+	InterlockedIncrement(&m_refCount);
+	return m_refCount;
+}
+
+ULONG CActiveXHost::CClientSite::NonDelegatingRelease()
+{
+	assert(m_refCount != 0);
 	InterlockedDecrement(&m_refCount);
 	if(m_refCount == 0)
 	{
@@ -112,25 +153,25 @@ ULONG CActiveXHost::CClientSite::Release()
 	}
 }
 
-HRESULT CActiveXHost::CClientSite::QueryInterface(const IID& iid, void** intrf)
+HRESULT CActiveXHost::CClientSite::NonDelegatingQueryInterface(const IID& iid, void** intrf)
 {
 	(*intrf) = NULL;
+	if(iid == IID_IUnknown)
+	{
+		(*intrf) = static_cast<INonDelegatingUnknown*>(this);
+	}
+	if(iid == IID_IOleClientSite)
+	{
+		(*intrf) = static_cast<IOleClientSite*>(this);
+	}
 	if(iid == IID_IOleInPlaceSite)
 	{
 		(*intrf) = static_cast<IOleInPlaceSite*>(this);
 	}
-	else if(iid == IID_IDispatch)
-	{
-//		(*intrf) = static_cast<IDispatch*>(this);
-	}
-	else if(iid == IID_IAdviseSink)
-	{
-//		(*intrf) = static_cast<IAdviseSink*>(this);
-	}
 
 	if(*intrf)
 	{
-		AddRef();
+		reinterpret_cast<IUnknown*>(*intrf)->AddRef();
 		return S_OK;
 	}
 	else

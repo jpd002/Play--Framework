@@ -3,12 +3,12 @@
 using namespace Framework;
 using namespace Framework::Win32;
 
-CTrayIcon::CTrayIcon(HWND hWnd, unsigned int nID)
+CTrayIcon::CTrayIcon(HWND wnd, unsigned int id)
 : m_message(0)
 , m_icon(NULL)
+, m_wnd(wnd)
+, m_id(id)
 {
-	m_hWnd = hWnd;
-	m_nID = nID;
 	Add();
 }
 
@@ -20,9 +20,9 @@ CTrayIcon::~CTrayIcon()
 void CTrayIcon::InitStructure(NOTIFYICONDATA* pD)
 {
 	memset(pD, 0, sizeof(NOTIFYICONDATA));
-    pD->cbSize  = sizeof(NOTIFYICONDATA);
-	pD->hWnd    = m_hWnd;
-	pD->uID     = m_nID;
+	pD->cbSize	= sizeof(NOTIFYICONDATA);
+	pD->hWnd	= m_wnd;
+	pD->uID		= m_id;
 }
 
 void CTrayIcon::Add()
@@ -41,58 +41,58 @@ void CTrayIcon::Delete()
 
 void CTrayIcon::Rebuild()
 {
-    Add();
+	Add();
 
-    if(m_icon != NULL)
-    {
-        SetIcon(m_icon);
-    }
+	if(m_icon != NULL)
+	{
+		SetIcon(m_icon);
+	}
 
-    if(m_message != 0)
-    {
-        SetMessage(m_message);
-    }
+	if(m_message != 0)
+	{
+		SetMessage(m_message);
+	}
 
-    if(m_tip.length() != 0)
-    {
-        SetTip(m_tip.c_str());
-    }
+	if(m_tip.length() != 0)
+	{
+		SetTip(m_tip.c_str());
+	}
 }
 
-void CTrayIcon::SetMessage(unsigned int nMessage)
+void CTrayIcon::SetMessage(unsigned int message)
 {
 	NOTIFYICONDATA d;
 	InitStructure(&d);
-	d.uCallbackMessage = nMessage;
+	d.uCallbackMessage = message;
 	d.uFlags = NIF_MESSAGE;
 	Shell_NotifyIcon(NIM_MODIFY, &d);
 
-    m_message = nMessage;
+	m_message = message;
 }
 
-void CTrayIcon::SetTip(const TCHAR* sTip)
+void CTrayIcon::SetTip(const TCHAR* tip)
 {
 	NOTIFYICONDATA d;
 	InitStructure(&d);
-    _tcsncpy(d.szTip, sTip, sizeof(d.szTip) / sizeof(TCHAR));
+	_tcsncpy(d.szTip, tip, sizeof(d.szTip) / sizeof(TCHAR));
 	d.uFlags = NIF_TIP;
 	Shell_NotifyIcon(NIM_MODIFY, &d);
-
-    m_tip = sTip;
+	
+	m_tip = tip;
 }
 
-void CTrayIcon::SetIcon(HICON hIcon)
+void CTrayIcon::SetIcon(HICON icon)
 {
 	NOTIFYICONDATA d;
 	InitStructure(&d);
-	d.hIcon     = hIcon;
-	d.uFlags    = NIF_ICON;
+	d.hIcon		= icon;
+	d.uFlags	= NIF_ICON;
 	Shell_NotifyIcon(NIM_MODIFY, &d);
 
-    m_icon = hIcon;
+	m_icon = icon;
 }
 
-unsigned int CTrayIcon::GetID()
+unsigned int CTrayIcon::GetID() const
 {
-	return m_nID;
+	return m_id;
 }

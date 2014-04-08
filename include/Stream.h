@@ -34,6 +34,8 @@ namespace Framework
 		uint16			Read16_MSBF();
 		uint32			Read32_MSBF();
 
+		float			ReadFloat32();
+
 		std::string		ReadString();
 		std::string		ReadString(size_t);
 
