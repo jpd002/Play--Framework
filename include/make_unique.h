@@ -1,5 +1,8 @@
 #pragma once
 
+// Visual Studio 2013 has make_unique
+#if (_MSC_VER >= 1500 && _MSC_VER < 1800)
+
 #include <memory> // brings in TEMPLATE macros.
 
 namespace std 
@@ -17,3 +20,5 @@ _VARIADIC_EXPAND_0X(_MAKE_UNIQUE, , , , )
 #undef _MAKE_UNIQUE
 
 }
+
+#endif
