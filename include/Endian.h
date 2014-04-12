@@ -5,8 +5,12 @@
 
 namespace Framework
 {
-	uint32		FromMSBF32(uint32);
-	uint32		FromLSBF32(uint32);
+	class CEndian
+	{
+	public:
+		static uint32		FromMSBF32(uint32);
+		static uint32		FromLSBF32(uint32);
+	};
 }
 
 #endif
