@@ -1,14 +1,17 @@
 cmake_minimum_required(VERSION 2.6)
 project(Framework)
 
-set (CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++ -Wno-warn-absolute-paths")
+set(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++ -Wno-warn-absolute-paths")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_DEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")
+
+set(BOOST_ROOT /Users/jpd002/Libraries/boost_1_55_0)
+set(ZLIB_ROOT /Users/jpd002/Libraries/zlib-1.2.8)
 
 include_directories(
 	../include 
-	/usr/local/include 
-	/usr/local/include/c++/v1 
-	/usr/local/include/mysql 
-	/Users/jpd002/Libraries/boost_1_55_0
+	${BOOST_ROOT}
+	${ZLIB_ROOT}
 )
 
 add_library(Framework 
@@ -34,9 +37,3 @@ add_library(Framework
 	../src/xml/FilteringNodeIterator.cpp
 	../src/xml/Writer.cpp
 )
-
-# add_library(Framework_MySql
-# 	../src/mysql/Client.cpp
-# 	../src/mysql/Result.cpp
-# 	../src/mysql/AccessInfo.cpp
-# )
