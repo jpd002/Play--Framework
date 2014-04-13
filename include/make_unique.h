@@ -1,6 +1,10 @@
 #pragma once
 
-#include <memory> // brings in TEMPLATE macros.
+#include <memory>
+
+#ifdef _MSC_VER
+
+#if (_MSC_VER < 1800)		//Visual C++ 2013 already has make_unique, Visual C++ 2010/2012 need a special hack
 
 namespace std 
 {
@@ -17,3 +21,18 @@ _VARIADIC_EXPAND_0X(_MAKE_UNIQUE, , , , )
 #undef _MAKE_UNIQUE
 
 }
+
+#endif //(_MSC_VER < 1800)
+
+#else
+
+namespace std
+{
+	template<typename T, typename ...Args>
+	unique_ptr<T> make_unique( Args&& ...args )
+	{
+		return std::unique_ptr<T>( new T( std::forward<Args>(args)... ) );
+	}
+}
+
+#endif

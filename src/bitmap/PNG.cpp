@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <string.h>
 #include <assert.h>
 #include <math.h>
@@ -52,8 +53,8 @@ CBitmap CPNG::DoRead(CStream& stream)
 	{
 		if(stream.Tell() >= nLength) break;
 
-		uint32 nChunkSize = FromMSBF32(stream.Read32());
-		uint32 nChunkType = FromMSBF32(stream.Read32());
+		uint32 nChunkSize = CEndian::FromMSBF32(stream.Read32());
+		uint32 nChunkType = CEndian::FromMSBF32(stream.Read32());
 
 		switch(nChunkType)
 		{
@@ -294,8 +295,8 @@ CBitmap CPNG::ConvertTo32(const CBitmap& srcBitmap) const
 
 void CPNG::CIHDR::Unserialize(CStream& pStream)
 {
-	m_nWidth = FromMSBF32(pStream.Read32());
-	m_nHeight = FromMSBF32(pStream.Read32());
+	m_nWidth = CEndian::FromMSBF32(pStream.Read32());
+	m_nHeight = CEndian::FromMSBF32(pStream.Read32());
 	pStream.Read(&m_nDepth, 1);
 	pStream.Read(&m_nColorType, 1);
 	pStream.Read(&m_nCompression, 1);

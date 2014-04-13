@@ -60,3 +60,15 @@ unsigned int CResult::GetFieldCount()
 {
 	return mysql_num_fields(m_result);
 }
+
+CResult::FieldIndexMap CResult::GetFieldIndices()
+{
+	FieldIndexMap result;
+	unsigned int fieldCount = mysql_num_fields(m_result);
+	MYSQL_FIELD* fields = mysql_fetch_fields(m_result);
+	for(unsigned int i = 0; i < fieldCount; i++)
+	{
+		result.insert(std::make_pair(fields[i].name, i));
+	}
+	return result;
+}
