@@ -123,6 +123,31 @@ CColor CBitmap::GetPixel(unsigned int x, unsigned int y) const
 	}
 }
 
+void CBitmap::SetPixel(unsigned int x, unsigned int y, const CColor& color)
+{
+	if(m_pixels == nullptr)
+	{
+		return;
+	}
+
+	if(x > m_width) return;
+	if(y > m_height) return;
+
+	uint8* pixelPtr = (m_pixels + (GetPitch() * y) + (GetPixelSize() * x));
+	switch(m_bpp)
+	{
+	case 32:
+		pixelPtr[0] = color.r;
+		pixelPtr[1] = color.g;
+		pixelPtr[2] = color.b;
+		pixelPtr[3] = color.a;
+		break;
+	default:
+		throw std::runtime_error("Unknown bit depth.");
+		break;
+	}
+}
+
 unsigned int CBitmap::GetWidth() const
 {
 	return m_width;
