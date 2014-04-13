@@ -49,7 +49,10 @@ namespace Framework
 		unsigned int	GetWidth() const;
 		unsigned int	GetHeight() const;
 		unsigned int	GetBitsPerPixel() const;
+
 		CColor			GetPixel(unsigned int, unsigned int) const;
+		void			SetPixel(unsigned int, unsigned int, const CColor&);
+
 		uint8*			GetPixels() const;
 		void			Blit(const CBitmap&, unsigned int, unsigned int);
 
