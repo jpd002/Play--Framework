@@ -30,10 +30,14 @@ add_library(Framework
 	../src/StdStream.cpp 
 	../src/MemStream.cpp
 	../src/PathUtils.cpp
+	../src/PtrStream.cpp
 	../src/Utf8.cpp
 	../src/xml/Node.cpp 
 	../src/xml/Parser.cpp
 	../src/xml/Utils.cpp
 	../src/xml/FilteringNodeIterator.cpp
 	../src/xml/Writer.cpp
+	../src/zip/ZipArchiveReader.cpp
+	../src/zip/ZipInflateStream.cpp
+	../src/zip/ZipStoreStream.cpp
 )
