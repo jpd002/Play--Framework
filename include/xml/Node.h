@@ -54,8 +54,8 @@ namespace Framework
 			template <bool> NodeList	SelectNodesImpl(const char*);
 
 			std::string					m_text;
-			CNode*						m_parent;
-			bool						m_isTag;
+			CNode*						m_parent = nullptr;
+			bool						m_isTag = false;
 			NodeList					m_children;
 			AttributeList				m_attributes;
 		};

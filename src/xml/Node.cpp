@@ -8,7 +8,6 @@ using namespace Framework;
 using namespace Framework::Xml;
 
 CNode::CNode()
-: m_parent(nullptr)
 {
 
 }
@@ -16,7 +15,6 @@ CNode::CNode()
 CNode::CNode(const char* text, bool isTag)
 : m_text(text)
 , m_isTag(isTag)
-, m_parent(nullptr)
 {
 
 }
