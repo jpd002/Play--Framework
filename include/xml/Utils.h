@@ -13,8 +13,10 @@ namespace Framework
 		bool			GetNodeBoolValue(CNode*, const char*, bool*);
 
 		std::string		GetNodeStringValue(CNode*, const char*);
+		int				GetNodeIntValue(CNode*, const char*);
 
 		bool			GetAttributeStringValue(CNode*, const char*, const char**);
+		bool			GetAttributeStringValue(CNode*, const char*, std::string*);
 		bool			GetAttributeIntValue(CNode*, const char*, int*);
 		bool			GetAttributeFloatValue(CNode*, const char*, float*);
 		bool			GetAttributeBoolValue(CNode*, const char*, bool*);

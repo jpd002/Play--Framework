@@ -28,17 +28,6 @@ bool Xml::GetNodeStringValue(Xml::CNode* pNode, const char* sPath, const char** 
 	return true;
 }
 
-std::string Xml::GetNodeStringValue(Xml::CNode* pNode, const char* sPath)
-{
-	const char* sValue(nullptr);
-	if(!GetNodeStringValue(pNode, sPath, &sValue))
-	{
-		throw std::exception();
-	}
-
-	return std::string(sValue);
-}
-
 bool Xml::GetNodeIntValue(Xml::CNode* pNode, const char* sPath, int* pValue)
 {
 	const char* sText(nullptr);
@@ -81,6 +70,27 @@ bool Xml::GetNodeBoolValue(Xml::CNode* pNode, const char* sPath, bool* pValue)
 	return true;
 }
 
+std::string Xml::GetNodeStringValue(Xml::CNode* pNode, const char* sPath)
+{
+	const char* sValue(nullptr);
+	if(!GetNodeStringValue(pNode, sPath, &sValue))
+	{
+		throw std::exception();
+	}
+
+	return std::string(sValue);
+}
+
+int Xml::GetNodeIntValue(Xml::CNode* node, const char* path)
+{
+	int value = 0;
+	if(!GetNodeIntValue(node, path, &value))
+	{
+		throw std::exception();
+	}
+	return value;
+}
+
 bool Xml::GetAttributeStringValue(Xml::CNode* pNode, const char* sName, const char** pValue)
 {
 	const char* sText = pNode->GetAttribute(sName);
@@ -95,6 +105,23 @@ bool Xml::GetAttributeStringValue(Xml::CNode* pNode, const char* sName, const ch
 	}
 
 	(*pValue) = sText;
+	return true;
+}
+
+bool Xml::GetAttributeStringValue(Xml::CNode* node, const char* name, std::string* value)
+{
+	const char* text = node->GetAttribute(name);
+	if(text == nullptr)
+	{
+		return false;
+	}
+
+	if(value == nullptr)
+	{
+		return false;
+	}
+
+	(*value) = text;
 	return true;
 }
 
