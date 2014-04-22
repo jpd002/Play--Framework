@@ -83,8 +83,8 @@ namespace Framework
 			virtual long			OnVScroll(unsigned int, unsigned int);
 			virtual long			OnHScroll(unsigned int, unsigned int);
 			virtual long			OnSysKeyDown(unsigned int);
-			virtual long			OnKeyDown(unsigned int);
-			virtual long			OnKeyUp(unsigned int);
+			virtual long			OnKeyDown(WPARAM, LPARAM);
+			virtual long			OnKeyUp(WPARAM, LPARAM);
 			virtual long			OnDestroy();
 			virtual long			OnCtlColorStatic(HDC, HWND);
 			virtual long			OnActivate(unsigned int, bool, HWND);

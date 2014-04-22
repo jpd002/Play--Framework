@@ -384,10 +384,10 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 		}
 		break;
 	case WM_KEYDOWN:
-		if(!pThis->OnKeyDown((unsigned int)wParam)) return FALSE;
+		if(!pThis->OnKeyDown(wParam, lParam)) return FALSE;
 		break;
 	case WM_KEYUP:
-		if(!pThis->OnKeyUp((unsigned int)wParam)) return FALSE;
+		if(!pThis->OnKeyUp(wParam, lParam)) return FALSE;
 		break;
 	case WM_SYSKEYDOWN:
 		if(!pThis->OnSysKeyDown((unsigned int)wParam)) return FALSE;
@@ -605,12 +605,12 @@ long CWindow::OnSysKeyDown(unsigned int nKey)
 	return TRUE;
 }
 
-long CWindow::OnKeyDown(unsigned int nKey)
+long CWindow::OnKeyDown(WPARAM, LPARAM)
 {
 	return TRUE;
 }
 
-long CWindow::OnKeyUp(unsigned int nKey)
+long CWindow::OnKeyUp(WPARAM, LPARAM)
 {
 	return TRUE;
 }
