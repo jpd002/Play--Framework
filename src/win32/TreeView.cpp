@@ -3,7 +3,6 @@
 
 using namespace Framework;
 using namespace Framework::Win32;
-using namespace std;
 
 CTreeView::CTreeView(HWND hParent, const RECT& rect, unsigned long nStyle, unsigned long nExStyle)
 {
@@ -39,7 +38,7 @@ bool CTreeView::GetItem(HTREEITEM hItem, TVITEM* pI)
 
 HTREEITEM CTreeView::GetItemParent(HTREEITEM hItem)
 {
-    return TreeView_GetParent(m_hWnd, hItem);
+	return TreeView_GetParent(m_hWnd, hItem);
 }
 
 void CTreeView::GetItemText(HTREEITEM hItem, TCHAR* sText, size_t nCount)
@@ -54,23 +53,23 @@ void CTreeView::GetItemText(HTREEITEM hItem, TCHAR* sText, size_t nCount)
 	GetItem(hItem, &Item);
 }
 
-tstring CTreeView::GetItemText(HTREEITEM hItem)
+std::tstring CTreeView::GetItemText(HTREEITEM hItem)
 {
-    TCHAR sString[260];
-    GetItemText(hItem, sString, _countof(sString));
-    return tstring(sString);
+	TCHAR sString[260];
+	GetItemText(hItem, sString, _countof(sString));
+	return std::tstring(sString);
 }
 
 void* CTreeView::GetItemParam(HTREEITEM hItem)
 {
-    TVITEM Item;
+	TVITEM Item;
 
-    memset(&Item, 0, sizeof(TVITEM));
-    Item.mask       = TVIF_PARAM;
+	memset(&Item, 0, sizeof(TVITEM));
+	Item.mask		= TVIF_PARAM;
 
-    GetItem(hItem, &Item);
+	GetItem(hItem, &Item);
 
-    return reinterpret_cast<void*>(Item.lParam);
+	return reinterpret_cast<void*>(Item.lParam);
 }
 
 void CTreeView::GetItemLabelRect(HTREEITEM hItem, RECT* pRect)
@@ -82,45 +81,45 @@ void CTreeView::GetItemLabelRect(HTREEITEM hItem, RECT* pRect)
 void CTreeView::SetItem(HTREEITEM hItem, TVITEM* pI)
 {
 	pI->hItem = hItem;
-    TreeView_SetItem(m_hWnd, pI);
+	TreeView_SetItem(m_hWnd, pI);
 }
 
 void CTreeView::SetItemText(HTREEITEM hItem, const TCHAR* sText)
 {
-    TVITEM Item;
+	TVITEM Item;
 
-    memset(&Item, 0, sizeof(TVITEM));
-    Item.mask       = TVIF_TEXT;
-    Item.pszText    = const_cast<TCHAR*>(sText);
+	memset(&Item, 0, sizeof(TVITEM));
+	Item.mask		= TVIF_TEXT;
+	Item.pszText	= const_cast<TCHAR*>(sText);
 
-    SetItem(hItem, &Item);
+	SetItem(hItem, &Item);
 }
 
 void CTreeView::SetItemParam(HTREEITEM hItem, void* pParam)
 {
-    TVITEM Item;
+	TVITEM Item;
 
-    memset(&Item, 0, sizeof(TVITEM));
-    Item.mask       = TVIF_PARAM;
-    Item.lParam     = reinterpret_cast<LPARAM>(pParam);
+	memset(&Item, 0, sizeof(TVITEM));
+	Item.mask		= TVIF_PARAM;
+	Item.lParam		= reinterpret_cast<LPARAM>(pParam);
 
-    SetItem(hItem, &Item);
+	SetItem(hItem, &Item);
 }
 
 void CTreeView::SetImageList(HIMAGELIST hImageList)
 {
-    TreeView_SetImageList(m_hWnd, hImageList, 0);
+	TreeView_SetImageList(m_hWnd, hImageList, 0);
 }
 
 void CTreeView::SetItemParam(HTREEITEM hItem, unsigned int nParam)
 {
-    TVITEM Item;
+	TVITEM Item;
 
-    memset(&Item, 0, sizeof(TVITEM));
-    Item.mask       = TVIF_PARAM;
-    Item.lParam     = nParam;
+	memset(&Item, 0, sizeof(TVITEM));
+	Item.mask		= TVIF_PARAM;
+	Item.lParam		= nParam;
 
-    SetItem(hItem, &Item);
+	SetItem(hItem, &Item);
 }
 
 HTREEITEM CTreeView::GetRoot()
@@ -130,12 +129,12 @@ HTREEITEM CTreeView::GetRoot()
 
 HTREEITEM CTreeView::GetChild(HTREEITEM hItem)
 {
-    return TreeView_GetChild(m_hWnd, hItem);
+	return TreeView_GetChild(m_hWnd, hItem);
 }
 
 HTREEITEM CTreeView::GetNextSibling(HTREEITEM hItem)
 {
-    return TreeView_GetNextSibling(m_hWnd, hItem);
+	return TreeView_GetNextSibling(m_hWnd, hItem);
 }
 
 bool CTreeView::SetSelection(HTREEITEM hItem)
@@ -150,14 +149,14 @@ bool CTreeView::Expand(HTREEITEM hItem, unsigned int nFlags)
 
 void CTreeView::DeleteChildren(HTREEITEM hItem)
 {
-    HTREEITEM hChild(TreeView_GetChild(m_hWnd, hItem));
+	HTREEITEM hChild(TreeView_GetChild(m_hWnd, hItem));
 
-    while(hChild != NULL)
-    {
-        HTREEITEM hNext(TreeView_GetNextSibling(m_hWnd, hChild));
-        TreeView_DeleteItem(m_hWnd, hChild);
-        hChild = hNext;
-    }
+	while(hChild != NULL)
+	{
+		HTREEITEM hNext(TreeView_GetNextSibling(m_hWnd, hChild));
+		TreeView_DeleteItem(m_hWnd, hChild);
+		hChild = hNext;
+	}
 }
 
 bool CTreeView::DeleteAllItems()
@@ -167,5 +166,5 @@ bool CTreeView::DeleteAllItems()
 
 void CTreeView::SortChildren(HTREEITEM item, bool recurse)
 {
-    TreeView_SortChildren(m_hWnd, item, recurse);
+	TreeView_SortChildren(m_hWnd, item, recurse);
 }
