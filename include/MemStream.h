@@ -9,7 +9,11 @@ namespace Framework
 	{
 	public:
 							CMemStream();
+							CMemStream(const CMemStream&);
 		virtual				~CMemStream();
+
+		CMemStream&			operator =(const CMemStream&) = delete;
+
 		uint64				Read(void*, uint64);
 		uint64				Write(const void*, uint64);
 		uint64				Tell();
@@ -22,11 +26,13 @@ namespace Framework
 		unsigned int		GetSize() const;
 
 	private:
-		unsigned int		m_size;
-		unsigned int		m_grow;
-		unsigned int		m_position;
-		uint8*				m_data;
-		bool				m_isEof;
+		void				CopyFrom(const CMemStream&);
+
+		unsigned int		m_size = 0;
+		unsigned int		m_grow = 0;
+		unsigned int		m_position = 0;
+		uint8*				m_data = nullptr;
+		bool				m_isEof = false;
 	};
 
 }

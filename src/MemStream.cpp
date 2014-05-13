@@ -11,17 +11,31 @@
 using namespace Framework;
 
 CMemStream::CMemStream() 
-: m_position(0)
-, m_isEof(false)
 {
-	m_size = 0;
-	m_grow = 0;
-	m_data = NULL;
+
+}
+
+CMemStream::CMemStream(const CMemStream& src)
+{
+	CopyFrom(src);
 }
 
 CMemStream::~CMemStream()
 {
 	FREEPTR(m_data);
+}
+
+void CMemStream::CopyFrom(const CMemStream& src)
+{
+	assert(m_data == nullptr);
+	m_size = src.m_size;
+	m_grow = src.m_grow;
+	m_position = src.m_position;
+	assert(m_grow >= m_size);
+	assert(m_position <= m_size);
+	m_data = reinterpret_cast<uint8*>(malloc(m_grow));
+	memcpy(m_data, src.m_data, m_size);
+	m_isEof = src.m_isEof;
 }
 
 bool CMemStream::IsEOF()
@@ -71,6 +85,7 @@ uint64 CMemStream::Write(const void* data, uint64 size)
 {
 	if((m_position + size) > m_grow)
 	{
+		assert(m_grow >= m_size);
 		m_grow += ((static_cast<unsigned int>(size) + GROWSIZE - 1) / GROWSIZE) * GROWSIZE;
 		m_data = reinterpret_cast<uint8*>(realloc(m_data, m_grow));
 	}
@@ -84,6 +99,7 @@ void CMemStream::Allocate(unsigned int size)
 {
 	assert(size >= m_size);
 	m_data = reinterpret_cast<uint8*>(realloc(m_data, size));
+	m_grow = size;
 	m_size = size;
 }
 
