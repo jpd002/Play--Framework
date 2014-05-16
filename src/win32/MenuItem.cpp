@@ -48,6 +48,11 @@ void CMenuItem::SetText(const TCHAR* text)
 	SetMenuItemInfo(m_menu, m_position, MF_BYPOSITION, &mii);
 }
 
+CMenuItem CMenuItem::FindById(unsigned int id)
+{
+	return FindById(m_menu, id);
+}
+
 CMenuItem CMenuItem::FindById(HMENU hMenu, unsigned int id)
 {
 	CMenuItem result;

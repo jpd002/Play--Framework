@@ -20,6 +20,7 @@ namespace Framework
 			void				SetText(const TCHAR*);
 			bool				IsEmpty() const;
 
+			CMenuItem			FindById(unsigned int);
 			static CMenuItem	FindById(HMENU, unsigned int);
 
 		private:
