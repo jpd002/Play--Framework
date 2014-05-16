@@ -1,5 +1,4 @@
-#ifndef _HORIZONTALSPLITTER_H_
-#define _HORIZONTALSPLITTER_H_
+#pragma once
 
 #include "win32/Splitter.h"
 #include "win32/Window.h"
@@ -20,5 +19,3 @@ namespace Framework
 		};
 	}
 }
-
-#endif
