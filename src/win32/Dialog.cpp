@@ -210,7 +210,8 @@ CDialog::DIALOGTEMPLATE CDialog::ReadDialogTemplate(Framework::CStream& stream)
 	assert((stream.Tell() & 0x01) == 0);
 	dialog.typeface		= ReadString(stream);
 
-	//Struct has padding for alignment to DWORD boundary
+	//Struct has padding for alignment to DWORD boundary (only if there's other items to read)
+	if(stream.GetRemainingLength() != 0)
 	{
 		auto currentBytePos = stream.Tell() & 0x3;
 		if(currentBytePos != 0)
