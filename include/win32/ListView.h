@@ -1,50 +1,34 @@
-#ifndef _LISTVIEW_H_
-#define _LISTVIEW_H_
+#pragma once
 
 #include "Window.h"
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x501
 #endif
 #include <commctrl.h>
-#include <functional>
 
 namespace Framework
 {
 	namespace Win32
 	{
-		class CListView : public virtual CWindow
+		class CListView : public CWindow
 		{
 		public:
-			typedef std::tr1::function<void (LVITEM*)> GetDispInfoCallbackType;
-
-			class CItem
-			{
-			public:
-							CItem(const TCHAR*);
-				virtual		~CItem();
-
-				void		SetText(const TCHAR*);
-				void		SetParam(LPARAM);
-				operator	const LVITEM&() const;
-
-			private:
-				LVITEM		m_Item;
-			};
-
-							CListView(HWND);
+							CListView(HWND = 0);
 							CListView(HWND, const RECT&, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
 			virtual			~CListView();
+
+			CListView&		operator =(CListView&&);
 
 			int				GetItemCount();
 			int				FindItemData(unsigned long);
 			void			DeleteItem(unsigned int);
+			bool			DeleteColumn(unsigned int);
 			void			DeleteAllItems();
-			int				InsertItem(LVITEM*);
 			int				InsertItem(const LVITEM&);
-			void			InsertColumn(unsigned int, LVCOLUMN*);
+			void			InsertColumn(unsigned int, const LVCOLUMN&);
 
+			std::tstring	GetItemText(unsigned int, unsigned int);
 			void			SetItemText(unsigned int, unsigned int, const TCHAR*);
-			void			GetItemText(unsigned int, unsigned int, TCHAR*, unsigned int);
 
 			void			SetItemState(unsigned int, unsigned int, unsigned int);
 
@@ -66,11 +50,7 @@ namespace Framework
 
 			void			EnsureItemVisible(unsigned int, bool);
 			
-			void			ProcessGetDisplayInfo(NMHDR*, const GetDispInfoCallbackType&);
-
 			HWND			GetHeader();
 		};
 	}
 }
-
-#endif

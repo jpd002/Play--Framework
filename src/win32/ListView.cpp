@@ -18,6 +18,13 @@ CListView::~CListView()
 
 }
 
+CListView& CListView::operator =(CListView&& rhs)
+{
+	CWindow::Reset();
+	CWindow::MoveFrom(std::move(rhs));
+	return (*this);
+}
+
 int CListView::GetItemCount()
 {
 	return ListView_GetItemCount(m_hWnd);
@@ -39,19 +46,19 @@ void CListView::DeleteItem(unsigned int itemIdx)
 	ListView_DeleteItem(m_hWnd, itemIdx);
 }
 
+bool CListView::DeleteColumn(unsigned int itemIdx)
+{
+	return ListView_DeleteColumn(m_hWnd, itemIdx) != FALSE;
+}
+
 void CListView::DeleteAllItems()
 {
 	ListView_DeleteAllItems(m_hWnd);
 }
 
-int CListView::InsertItem(LVITEM* pI)
+int CListView::InsertItem(const LVITEM& item)
 {
-	return ListView_InsertItem(m_hWnd, pI);
-}
-
-int CListView::InsertItem(const LVITEM& Item)
-{
-	return InsertItem(const_cast<LVITEM*>(&Item));
+	return ListView_InsertItem(m_hWnd, &item);
 }
 
 void CListView::SetColumnWidth(unsigned int nCol, unsigned int nCX)
@@ -59,14 +66,30 @@ void CListView::SetColumnWidth(unsigned int nCol, unsigned int nCX)
 	ListView_SetColumnWidth(m_hWnd, nCol, nCX);
 }
 
-void CListView::InsertColumn(unsigned int nCol, LVCOLUMN* pC)
+void CListView::InsertColumn(unsigned int index, const LVCOLUMN& column)
 {
-	ListView_InsertColumn(m_hWnd, nCol, pC);
+	ListView_InsertColumn(m_hWnd, index, &column);
 }
 
-void CListView::GetItemText(unsigned int nItem, unsigned int nSubItem, TCHAR* sText, unsigned int nCount)
+std::tstring CListView::GetItemText(unsigned int itemIndex, unsigned int subItemIndex)
 {
-	ListView_GetItemText(m_hWnd, nItem, nSubItem, sText, nCount);
+	int size = 0x100;
+	std::tstring result;
+	while(1)
+	{
+		result.resize(size);
+		LV_ITEM item = {};
+		item.cchTextMax	= result.size();
+		item.pszText	= const_cast<TCHAR*>(result.data());
+		item.iSubItem	= subItemIndex;
+		int n = SendMessage(m_hWnd, LVM_GETITEMTEXT, itemIndex, reinterpret_cast<LPARAM>(&item));
+		if((n + 1) != size)
+		{
+			result.resize(n);
+			return result;
+		}
+		size *= 2;
+	}
 }
 
 unsigned long CListView::GetItemData(unsigned int nItem)
@@ -142,48 +165,7 @@ void CListView::EnsureItemVisible(unsigned int nItem, bool nPartialOk)
 	ListView_EnsureVisible(m_hWnd, nItem, nPartialOk);
 }
 
-void CListView::ProcessGetDisplayInfo(NMHDR* pHdr, const GetDispInfoCallbackType& Callback)
-{
-	if(pHdr->code != LVN_GETDISPINFO) return;
-	if(pHdr->hwndFrom != m_hWnd) return;
-
-	LV_DISPINFO* pDispInfo = reinterpret_cast<LV_DISPINFO*>(pHdr);
-	Callback(&pDispInfo->item);
-}
-
 HWND CListView::GetHeader()
 {
 	return ListView_GetHeader(m_hWnd);
-}
-
-//////////////////////////////////////
-//CItem implementation
-//////////////////////////////////////
-
-CListView::CItem::CItem(const TCHAR* sText)
-{
-	memset(&m_Item, 0, sizeof(LVITEM));
-	SetText(sText);
-}
-
-CListView::CItem::~CItem()
-{
-
-}
-
-void CListView::CItem::SetText(const TCHAR* sText)
-{
-	m_Item.mask |= LVIF_TEXT;
-	m_Item.pszText = const_cast<TCHAR*>(sText);
-}
-
-void CListView::CItem::SetParam(LPARAM lParam)
-{
-	m_Item.mask |= LVIF_PARAM;
-	m_Item.lParam = lParam;
-}
-
-CListView::CItem::operator const LVITEMW&() const
-{
-	return m_Item;
 }
