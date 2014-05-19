@@ -136,9 +136,6 @@
     <ClCompile Include="..\src\win32\ListView.cpp">
       <Filter>Source Files\win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\win32\ListViewEx.cpp">
-      <Filter>Source Files\win32</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\win32\MDIChild.cpp">
       <Filter>Source Files\win32</Filter>
     </ClCompile>
@@ -508,9 +505,6 @@
       <Filter>Source Files\win32</Filter>
     </ClInclude>
     <ClInclude Include="..\include\win32\ListView.h">
-      <Filter>Source Files\win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\win32\ListViewEx.h">
       <Filter>Source Files\win32</Filter>
     </ClInclude>
     <ClInclude Include="..\include\win32\MDIChild.h">

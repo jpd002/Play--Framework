@@ -89,7 +89,6 @@
     <ClCompile Include="..\src\win32\LayoutWindow.cpp" />
     <ClCompile Include="..\src\win32\ListBox.cpp" />
     <ClCompile Include="..\src\win32\ListView.cpp" />
-    <ClCompile Include="..\src\win32\ListViewEx.cpp" />
     <ClCompile Include="..\src\win32\MDIChild.cpp" />
     <ClCompile Include="..\src\win32\MDIClient.cpp" />
     <ClCompile Include="..\src\win32\MDIFrame.cpp" />
@@ -220,7 +219,6 @@
     <ClInclude Include="..\include\win32\LayoutWindow.h" />
     <ClInclude Include="..\include\win32\ListBox.h" />
     <ClInclude Include="..\include\win32\ListView.h" />
-    <ClInclude Include="..\include\win32\ListViewEx.h" />
     <ClInclude Include="..\include\win32\MDIChild.h" />
     <ClInclude Include="..\include\win32\MDIClient.h" />
     <ClInclude Include="..\include\win32\MDIFrame.h" />
