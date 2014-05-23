@@ -12,6 +12,7 @@
 #define WNDSTYLEEX	(WS_EX_DLGMODALFRAME)
 
 #define IDC_SELECTALL	(0xBEEF)
+#define SCALE(x)		MulDiv(x, ydpi, 96)
 
 using namespace Framework;
 using namespace Framework::Win32;
@@ -58,15 +59,17 @@ const TCHAR* CInputBox::GetValue(HWND hParent)
 		RegisterClassEx(&wc);
 	}
 
+	int ydpi = GetDeviceCaps(GetDC(NULL), LOGPIXELSY);
+
 	{
 		RECT rc;
 		if(m_isMultiline)
 		{
-			SetRect(&rc, 0, 0, 300, 150);
+			SetRect(&rc, 0, 0, SCALE(300), SCALE(150));
 		}
 		else
 		{
-			SetRect(&rc, 0, 0, 300, 115);
+			SetRect(&rc, 0, 0, SCALE(300), SCALE(115));
 		}
 		Create(WNDSTYLEEX, CLSNAME, m_sTitle.c_str(), WNDSTYLE, rc, hParent, NULL);
 		SetClassPtr();
@@ -86,19 +89,19 @@ const TCHAR* CInputBox::GetValue(HWND hParent)
 	
 	FlatLayoutPtr pSubLayout0 = CHorizontalLayout::Create();
 	pSubLayout0->InsertObject(CLayoutStretch::Create());
-	pSubLayout0->InsertObject(CLayoutWindow::CreateButtonBehavior(75, 23, m_pOk));
-	pSubLayout0->InsertObject(CLayoutWindow::CreateButtonBehavior(75, 23, m_pCancel));
+	pSubLayout0->InsertObject(CLayoutWindow::CreateButtonBehavior(SCALE(75), SCALE(23), m_pOk));
+	pSubLayout0->InsertObject(CLayoutWindow::CreateButtonBehavior(SCALE(75), SCALE(23), m_pCancel));
 	pSubLayout0->SetVerticalStretch(0);
 
 	m_layout = CVerticalLayout::Create();
-	m_layout->InsertObject(CLayoutWindow::CreateTextBoxBehavior(100, 14, new CStatic(m_hWnd, m_sPrompt.c_str())));
+	m_layout->InsertObject(CLayoutWindow::CreateTextBoxBehavior(SCALE(100), SCALE(14), new CStatic(m_hWnd, m_sPrompt.c_str())));
 	if(m_isMultiline)
 	{
-		m_layout->InsertObject(CLayoutWindow::CreateCustomBehavior(100, 20, 1, 1, m_pValue));
+		m_layout->InsertObject(CLayoutWindow::CreateCustomBehavior(SCALE(100), SCALE(20), 1, 1, m_pValue));
 	}
 	else
 	{
-		m_layout->InsertObject(CLayoutWindow::CreateTextBoxBehavior(100, 21, m_pValue));
+		m_layout->InsertObject(CLayoutWindow::CreateTextBoxBehavior(SCALE(100), SCALE(21), m_pValue));
 		m_layout->InsertObject(CLayoutStretch::Create());
 	}
 	m_layout->InsertObject(pSubLayout0);
