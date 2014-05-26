@@ -22,6 +22,10 @@ std::wstring string_cast_win1252(const std::string& input)
 	CFStringEncoding srcEncoding = kCFStringEncodingWindowsLatin1;
 	CFStringEncoding dstEncoding = kCFStringEncodingUTF32;
 	CFStringRef stringRef = CFStringCreateWithBytes(NULL, reinterpret_cast<const UInt8*>(input.c_str()), input.length(), srcEncoding, false);
+	if(stringRef == NULL)
+	{
+		return std::wstring(L"(cast failed)");
+	}
 	CFIndex length = CFStringGetLength(stringRef);
 	CFIndex bufferSize = length * sizeof(wchar_t);
 	wchar_t* output = reinterpret_cast<wchar_t*>(alloca((length + 1) * sizeof(wchar_t)));
