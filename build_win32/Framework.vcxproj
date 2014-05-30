@@ -74,6 +74,7 @@
     <ClCompile Include="..\src\win32\ClientDeviceContext.cpp" />
     <ClCompile Include="..\src\win32\ColumnTreeView.cpp" />
     <ClCompile Include="..\src\win32\ComboBox.cpp" />
+    <ClCompile Include="..\src\win32\ComStreamAdapter.cpp" />
     <ClCompile Include="..\src\win32\CustomDrawn.cpp" />
     <ClCompile Include="..\src\win32\DefaultFonts.cpp" />
     <ClCompile Include="..\src\win32\DefaultWndClass.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="..\include\win32\ColumnTreeView.h" />
     <ClInclude Include="..\include\win32\ComboBox.h" />
     <ClInclude Include="..\include\win32\ComPtr.h" />
+    <ClInclude Include="..\include\win32\ComStreamAdapter.h" />
     <ClInclude Include="..\include\win32\CustomDrawn.h" />
     <ClInclude Include="..\include\win32\DblBufferedCtrl.h" />
     <ClInclude Include="..\include\win32\DefaultFonts.h" />

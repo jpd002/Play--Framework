@@ -340,6 +340,9 @@
     <ClCompile Include="..\src\win32\Progress.cpp">
       <Filter>Source Files\win32</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\win32\ComStreamAdapter.cpp">
+      <Filter>Source Files\win32</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\alloca_def.h">
@@ -731,6 +734,9 @@
     </ClInclude>
     <ClInclude Include="..\include\LockFreeQueue.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\win32\ComStreamAdapter.h">
+      <Filter>Source Files\win32</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
