@@ -137,9 +137,10 @@ bool CWindow::IsCommandSource(const CWindow* pWindow, HWND hWndFrom)
 //Window Message Helpers
 ///////////////////////////////////////////////////////////
 
-void CWindow::Create(unsigned long nStyleEx, const TCHAR* sClass, const TCHAR* sWindow, unsigned long nStyle, const RECT& rect, HWND hParent, void* pParam)
+void CWindow::Create(unsigned long nStyleEx, const TCHAR* sClass, const TCHAR* sWindow, unsigned long nStyle, const CRect& rect, HWND hParent, void* pParam)
 {
-	m_hWnd = CreateWindowEx(nStyleEx, sClass, sWindow, nStyle, rect.left, rect.top, (rect.right - rect.left), (rect.bottom - rect.top), hParent, NULL, GetModuleHandle(NULL), pParam);
+	m_hWnd = CreateWindowEx(nStyleEx, sClass, sWindow, nStyle, rect.Left(), rect.Top(), rect.Width(), rect.Height(), 
+		hParent, NULL, GetModuleHandle(NULL), pParam);
 	assert(m_hWnd != NULL);
 }
 
@@ -230,14 +231,14 @@ HWND CWindow::GetParent()
 	return ::GetParent(m_hWnd);
 }
 
-RECT CWindow::GetClientRect()
+CRect CWindow::GetClientRect()
 {
 	RECT rect;
 	::GetClientRect(m_hWnd, &rect);
 	return rect;
 }
 
-RECT CWindow::GetWindowRect()
+CRect CWindow::GetWindowRect()
 {
 	RECT rect;
 	::GetWindowRect(m_hWnd, &rect);
@@ -285,9 +286,9 @@ void CWindow::SetPosition(unsigned int nX, unsigned int nY)
 	SetWindowPos(m_hWnd, NULL, nX, nY, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
 }
 
-void CWindow::SetSizePosition(const RECT& rect)
+void CWindow::SetSizePosition(const CRect& rect)
 {
-	SetWindowPos(m_hWnd, NULL, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, SWP_NOZORDER);
+	SetWindowPos(m_hWnd, NULL, rect.Left(), rect.Top(), rect.Width(), rect.Height(), SWP_NOZORDER);
 }
 
 void CWindow::Redraw()

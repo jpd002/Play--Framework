@@ -34,7 +34,7 @@ namespace Framework
 			static bool				IsCommandSource(const CWindow*, HWND);
 
 			//Helpers
-			void					Create(unsigned long, const TCHAR*, const TCHAR*, unsigned long, const RECT&, HWND, void*);
+			void					Create(unsigned long, const TCHAR*, const TCHAR*, unsigned long, const CRect&, HWND, void*);
 			unsigned int			Destroy();
 			unsigned int			Show(int);
 			unsigned int			Enable(unsigned int);
@@ -52,10 +52,10 @@ namespace Framework
 			void					SetFocus();
 			void					SetSize(unsigned int, unsigned int);
 			void					SetPosition(unsigned int, unsigned int);
-			void					SetSizePosition(const RECT&);
+			void					SetSizePosition(const CRect&);
 			void					Center(HWND = 0);
-			RECT					GetClientRect();
-			RECT					GetWindowRect();
+			CRect					GetClientRect();
+			CRect					GetWindowRect();
 			HWND					GetParent();
 			void					Redraw();
 			void					ModifyStyleOr(unsigned long);
