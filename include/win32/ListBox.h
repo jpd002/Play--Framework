@@ -1,5 +1,4 @@
-#ifndef _LISTBOX_H_
-#define _LISTBOX_H_
+#pragma once
 
 #include "Window.h"
 
@@ -10,8 +9,10 @@ namespace Framework
 		class CListBox : public CWindow
 		{
 		public:
-							CListBox(HWND);
+							CListBox(HWND = 0);
 							CListBox(HWND, const RECT&, unsigned long = 0, unsigned long = WS_EX_CLIENTEDGE);
+
+			CListBox&		operator =(CListBox&&);
 
 			unsigned int	AddString(const TCHAR*);
 			void			ResetContent();
@@ -24,5 +25,3 @@ namespace Framework
 		};
 	}
 }
-
-#endif

@@ -15,6 +15,13 @@ CListBox::CListBox(HWND hParent, const RECT& rect, unsigned long nStyle, unsigne
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 
+CListBox& CListBox::operator =(CListBox&& rhs)
+{
+	CWindow::Reset();
+	CWindow::MoveFrom(std::move(rhs));
+	return (*this);
+}
+
 unsigned int CListBox::AddString(const TCHAR* sValue)
 {
 	return static_cast<unsigned int>(SendMessage(m_hWnd, LB_ADDSTRING, NULL, (LPARAM)sValue));
