@@ -3,6 +3,11 @@
 
 using namespace Framework::Win32;
 
+CTab::CTab(HWND hWnd)
+{
+	m_hWnd = hWnd;
+}
+
 CTab::CTab(HWND hParent, const RECT& rect, unsigned long nStyle, unsigned long nExStyle)
 {
 	InitCommonControls();
@@ -15,38 +20,58 @@ CTab::~CTab()
 
 }
 
-int CTab::InsertTab(const TCHAR* sText)
+CTab& CTab::operator =(CTab&& rhs)
 {
-	TC_ITEM Item;
-	memset(&Item, 0, sizeof(TC_ITEM));
-	Item.mask		= TCIF_TEXT;
-	Item.pszText	= const_cast<TCHAR*>(sText);
-
-	return TabCtrl_InsertItem(m_hWnd, GetItemCount(), &Item);
+	CWindow::Reset();
+	CWindow::MoveFrom(std::move(rhs));
+	return (*this);
 }
 
-std::tstring CTab::GetTabText(int nTab)
+int CTab::InsertTab(const TCHAR* text)
 {
-	TCHAR sText[_MAX_PATH];
+	TC_ITEM item = {};
+	item.mask		= TCIF_TEXT;
+	item.pszText	= const_cast<TCHAR*>(text);
 
-	TC_ITEM Item;
-	memset(&Item, 0, sizeof(TC_ITEM));
-	Item.mask		= TCIF_TEXT;
-	Item.pszText	= sText;
-	Item.cchTextMax	= countof(sText);
-
-	TabCtrl_GetItem(m_hWnd, nTab, &Item);
-
-	return std::tstring(sText);
+	return TabCtrl_InsertItem(m_hWnd, GetItemCount(), &item);
 }
 
-void CTab::SetTabText(int nTab, const TCHAR* sText)
+std::tstring CTab::GetTabText(int tab)
 {
-	TC_ITEM Item;
-	memset(&Item, 0, sizeof(TC_ITEM));
-	Item.mask		= TCIF_TEXT;
-	Item.pszText	= const_cast<TCHAR*>(sText);
-	TabCtrl_SetItem(m_hWnd, nTab, &Item);
+	TCHAR text[_MAX_PATH];
+
+	TC_ITEM item = {};
+	item.mask		= TCIF_TEXT;
+	item.pszText	= text;
+	item.cchTextMax	= countof(text);
+
+	TabCtrl_GetItem(m_hWnd, tab, &item);
+
+	return std::tstring(text);
+}
+
+void CTab::SetTabText(int tab, const TCHAR* text)
+{
+	TC_ITEM item = {};
+	item.mask		= TCIF_TEXT;
+	item.pszText	= const_cast<TCHAR*>(text);
+	TabCtrl_SetItem(m_hWnd, tab, &item);
+}
+
+LPARAM CTab::GetTabData(int tab)
+{
+	TC_ITEM item = {};
+	item.mask		= TCIF_PARAM;
+	TabCtrl_GetItem(m_hWnd, tab, &item);
+	return item.lParam;
+}
+
+void CTab::SetTabData(int tab, LPARAM param)
+{
+	TC_ITEM item = {};
+	item.mask		= TCIF_PARAM;
+	item.lParam		= param;
+	TabCtrl_SetItem(m_hWnd, tab, &item);
 }
 
 int CTab::GetSelection()
@@ -64,10 +89,9 @@ unsigned int CTab::GetItemCount()
 	return TabCtrl_GetItemCount(m_hWnd);
 }
 
-RECT CTab::GetDisplayAreaRect()
+Framework::Win32::CRect CTab::GetDisplayAreaRect()
 {
-	RECT Rect;
-	Rect = GetClientRect();
-	TabCtrl_AdjustRect(m_hWnd, FALSE, &Rect);
-	return Rect;
+	RECT rect = GetClientRect();
+	TabCtrl_AdjustRect(m_hWnd, FALSE, &rect);
+	return rect;
 }
