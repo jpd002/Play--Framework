@@ -47,6 +47,26 @@ int CRect::Bottom() const
 	return m_rect.bottom;
 }
 
+void CRect::SetLeft(int left)
+{
+	m_rect.left = left;
+}
+
+void CRect::SetTop(int top)
+{
+	m_rect.top = top;
+}
+
+void CRect::SetRight(int right)
+{
+	m_rect.right = right;
+}
+
+void CRect::SetBottom(int bottom)
+{
+	m_rect.bottom = bottom;
+}
+
 int CRect::Width() const
 {
 	return m_rect.right - m_rect.left;
@@ -73,6 +93,13 @@ CRect& CRect::ScreenToClient(HWND window)
 {
 	::ScreenToClient(window, reinterpret_cast<LPPOINT>(&m_rect) + 0);
 	::ScreenToClient(window, reinterpret_cast<LPPOINT>(&m_rect) + 1);
+	return (*this);
+}
+
+CRect& CRect::ClientToScreen(HWND window)
+{
+	::ClientToScreen(window, reinterpret_cast<LPPOINT>(&m_rect) + 0);
+	::ClientToScreen(window, reinterpret_cast<LPPOINT>(&m_rect) + 1);
 	return (*this);
 }
 

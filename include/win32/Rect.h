@@ -22,12 +22,18 @@ namespace Framework
 			int			Right() const;
 			int			Bottom() const;
 
+			void		SetLeft(int);
+			void		SetTop(int);
+			void		SetRight(int);
+			void		SetBottom(int);
+
 			int			Width() const;
 			int			Height() const;
 
 			CRect&		Adjust(uint32, bool = false);
 			CRect&		Inflate(int, int);
 			CRect&		ScreenToClient(HWND);
+			CRect&		ClientToScreen(HWND);
 			bool		PtIn(int, int);
 
 		private:
