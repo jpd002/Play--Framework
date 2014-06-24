@@ -28,7 +28,7 @@ CSplitter::CSplitter(HWND hParent, const RECT& rect, HCURSOR nCursor, unsigned i
 		RegisterClassEx(&w);
 	}
 
-	Create(NULL, CLSNAME, _T(""), WS_VISIBLE | WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS, rect, hParent, NULL);
+	Create(WS_EX_CONTROLPARENT, CLSNAME, _T(""), WS_VISIBLE | WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS, rect, hParent, NULL);
 	SetClassPtr();
 }
 
