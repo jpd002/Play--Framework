@@ -1,5 +1,4 @@
-#ifndef _VERTICALSPLITTER_H_
-#define _VERTICALSPLITTER_H_
+#pragma once
 
 #include "win32/Splitter.h"
 
@@ -13,11 +12,9 @@ namespace Framework
 							CVerticalSplitter(HWND, const RECT&);
 
 		protected:
-			virtual RECT	GetEdgeRect() override;
-			virtual RECT	GetPaneRect(unsigned int) override;
+			virtual CRect	GetEdgeRect() override;
+			virtual CRect	GetPaneRect(unsigned int) override;
 			virtual void	UpdateEdgePosition(int, int) override;
 		};
 	}
 }
-
-#endif

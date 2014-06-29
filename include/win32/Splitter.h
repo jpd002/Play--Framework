@@ -13,7 +13,10 @@ namespace Framework
 			virtual			~CSplitter();
 
 			void			SetChild(unsigned int, HWND);
+			void			SetMasterChild(unsigned int);
+
 			void			SetEdgePosition(double);
+			void			SetFixed(bool);
 
 		protected:
 			long			OnSize(unsigned int, unsigned int, unsigned int);
@@ -22,12 +25,13 @@ namespace Framework
 			long			OnLeftButtonUp(int, int);
 			long			OnNotify(WPARAM, NMHDR*);
 
-			virtual RECT	GetPaneRect(unsigned int) = 0;
-			virtual RECT	GetEdgeRect() = 0;
+			virtual CRect	GetPaneRect(unsigned int) = 0;
+			virtual CRect	GetEdgeRect() = 0;
 			virtual void	UpdateEdgePosition(int, int) = 0;
 
-			unsigned int	m_nEdgePosition;
-			HWND			m_nChild[2];
+			unsigned int	m_edgePosition = 0;
+			unsigned int	m_masterChild = 0;
+			HWND			m_child[2];
 
 			enum EDGESIZE
 			{
@@ -37,7 +41,8 @@ namespace Framework
 		private:
 			void			ResizeChild(unsigned int);
 
-			HCURSOR			m_nCursor;
+			HCURSOR			m_cursor;
+			bool			m_fixed = false;
 		};
 	}
 }

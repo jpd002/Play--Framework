@@ -1,18 +1,17 @@
-#include "win32/ClientDeviceContext.h"
 #include "win32/Splitter.h"
-#include <commctrl.h>
+#include <cassert>
 
 #define CLSNAME		_T("CSplitter")
 
 using namespace Framework;
 using namespace Framework::Win32;
 
-CSplitter::CSplitter(HWND hParent, const RECT& rect, HCURSOR nCursor, unsigned int nEdgePosition)
-: m_nCursor(nCursor)
-, m_nEdgePosition(nEdgePosition)
+CSplitter::CSplitter(HWND parentWnd, const RECT& rect, HCURSOR cursor, unsigned int edgePosition)
+: m_cursor(cursor)
+, m_edgePosition(edgePosition)
 {
-	m_nChild[0] = NULL;
-	m_nChild[1] = NULL;
+	m_child[0] = nullptr;
+	m_child[1] = nullptr;
 
 	if(!DoesWindowClassExist(CLSNAME))
 	{
@@ -28,7 +27,7 @@ CSplitter::CSplitter(HWND hParent, const RECT& rect, HCURSOR nCursor, unsigned i
 		RegisterClassEx(&w);
 	}
 
-	Create(WS_EX_CONTROLPARENT, CLSNAME, _T(""), WS_VISIBLE | WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS, rect, hParent, NULL);
+	Create(WS_EX_CONTROLPARENT, CLSNAME, _T(""), WS_VISIBLE | WS_CHILD | WS_CLIPCHILDREN | WS_CLIPSIBLINGS, rect, parentWnd, NULL);
 	SetClassPtr();
 }
 
@@ -37,22 +36,33 @@ CSplitter::~CSplitter()
 
 }
 
-void CSplitter::SetChild(unsigned int nIndex, HWND hWnd)
+void CSplitter::SetChild(unsigned int index, HWND hWnd)
 {
-	m_nChild[nIndex] = hWnd;
-	ResizeChild(nIndex);
+	m_child[index] = hWnd;
+	ResizeChild(index);
 }
 
-void CSplitter::SetEdgePosition(double nFraction)
+void CSplitter::SetMasterChild(unsigned int masterChild)
+{
+	assert(masterChild == 0 || masterChild == 1);
+	m_masterChild = masterChild;
+}
+
+void CSplitter::SetEdgePosition(double fraction)
 {
 	RECT clientRect = GetClientRect();
-	short nX = (short)((double)clientRect.right * nFraction);
-	short nY = (short)((double)clientRect.bottom * nFraction);
+	short x = (short)((double)clientRect.right * fraction);
+	short y = (short)((double)clientRect.bottom * fraction);
 
-	UpdateEdgePosition(nX, nY);
+	UpdateEdgePosition(x, y);
 
 	ResizeChild(0);
 	ResizeChild(1);
+}
+
+void CSplitter::SetFixed(bool fixed)
+{
+	m_fixed = fixed;
 }
 
 long CSplitter::OnSize(unsigned int nX, unsigned int nY, unsigned int nType)
@@ -72,11 +82,11 @@ long CSplitter::OnMouseMove(WPARAM wParam, int nX, int nY)
 		ResizeChild(1);
 	}
 
-	Framework::Win32::CRect edgeRect = GetEdgeRect();
+	auto edgeRect = GetEdgeRect();
 
-	if(edgeRect.PtIn(nX, nY))
+	if(!m_fixed && edgeRect.PtIn(nX, nY))
 	{
-		SetCursor(m_nCursor);
+		SetCursor(m_cursor);
 	}
 
 	return TRUE;
@@ -84,12 +94,12 @@ long CSplitter::OnMouseMove(WPARAM wParam, int nX, int nY)
 
 long CSplitter::OnLeftButtonDown(int nX, int nY)
 {
-	Framework::Win32::CRect edgeRect = GetEdgeRect();
+	auto edgeRect = GetEdgeRect();
 
-	if(edgeRect.PtIn(nX, nY))
+	if(!m_fixed && edgeRect.PtIn(nX, nY))
 	{
 		SetCapture(m_hWnd);
-		SetCursor(m_nCursor);
+		SetCursor(m_cursor);
 	}
 
 	return TRUE;
@@ -106,16 +116,12 @@ long CSplitter::OnNotify(WPARAM wParam, NMHDR* pH)
 	return (long)SendMessage(GetParent(), WM_NOTIFY, wParam, (LPARAM)pH);
 }
 
-void CSplitter::ResizeChild(unsigned int nIndex)
+void CSplitter::ResizeChild(unsigned int index)
 {
-	if(m_nChild[nIndex] == NULL) return;
+	if(m_child[index] == nullptr) return;
 
-	RECT paneRect = GetPaneRect(nIndex);
-
-	SetWindowPos(m_nChild[nIndex], NULL, paneRect.left, paneRect.top,
-		paneRect.right - paneRect.left,
-		paneRect.bottom - paneRect.top,
-		SWP_NOZORDER);
-
+	auto paneRect = GetPaneRect(index);
+	SetWindowPos(m_child[index], NULL, paneRect.Left(), paneRect.Top(), paneRect.Width(), paneRect.Height(), SWP_NOZORDER);
+	
 	SendMessage(GetParent(), WM_COMMAND, MAKEWPARAM(0, 0), reinterpret_cast<LPARAM>(m_hWnd));
 }
