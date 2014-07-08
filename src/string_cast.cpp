@@ -57,6 +57,12 @@ string string_cast<string>(const wstring& sSource)
 }
 
 template <>
+string string_cast<string>(wchar_t* const& source)
+{
+	return string_cast<string, wchar_t>(source);
+}
+
+template <>
 wstring string_cast<wstring>(const string& sSource)
 {
 	return string_cast<wstring, char>(sSource.c_str());
