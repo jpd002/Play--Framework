@@ -1,5 +1,4 @@
-#ifndef _GDIOBJ_H_
-#define _GDIOBJ_H_
+#pragma once
 
 #include "win32/Window.h"
 
@@ -15,6 +14,8 @@ namespace Framework
 			{
 
 			}
+			
+			CGdiObj(const CGdiObj&) = delete;
 
 			CGdiObj(CGdiObj&& src)
 			{
@@ -26,6 +27,8 @@ namespace Framework
 			{
 				Release();
 			}
+
+			CGdiObj& operator =(const CGdiObj&) = delete;
 
 			CGdiObj& operator =(CGdiObj&& src)
 			{
@@ -54,16 +57,6 @@ namespace Framework
 			}
 
 		private:
-			CGdiObj(const CGdiObj&)
-			{
-
-			}
-
-			CGdiObj& operator =(const CGdiObj&)
-			{
-				
-			}
-
 			void Release()
 			{
 				if(m_handle)
@@ -82,5 +75,3 @@ namespace Framework
 		typedef CGdiObj<HPEN>		CPen;
 	}
 }
-
-#endif
