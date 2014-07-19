@@ -24,6 +24,25 @@ CToolBar::~CToolBar()
 
 }
 
+CToolBar& CToolBar::operator =(CToolBar&& rhs)
+{
+	Reset();
+	MoveFrom(std::move(rhs));
+	return (*this);
+}
+
+void CToolBar::Reset()
+{
+	m_buttonToolTips.clear();
+	CWindow::Reset();
+}
+
+void CToolBar::MoveFrom(CToolBar&& rhs)
+{
+	m_buttonToolTips = std::move(rhs.m_buttonToolTips);
+	CWindow::MoveFrom(std::move(rhs));
+}
+
 void CToolBar::InsertImageButton(unsigned int nBitmapId, unsigned int nCommandId)
 {
 	TBBUTTON Button;
@@ -68,26 +87,35 @@ HWND CToolBar::GetToolTips()
 
 void CToolBar::SetButtonToolTipText(unsigned int nId, const TCHAR* sText)
 {
-	m_ButtonToolTips[nId] = sText;
+	m_buttonToolTips[nId] = sText;
 }
 
-void CToolBar::ProcessNotify(WPARAM wParam, NMHDR* pHdr)
+void CToolBar::SetButtonChecked(unsigned int id, bool checked)
 {
-	if(pHdr->hwndFrom != GetToolTips()) return;
+	TBBUTTONINFO buttonInfo = {};
+	buttonInfo.cbSize		= sizeof(TBBUTTONINFO);
+	buttonInfo.idCommand	= id;
+	buttonInfo.fsState		= TBSTATE_ENABLED | (checked ? TBSTATE_CHECKED : 0);
+	buttonInfo.dwMask		= TBIF_STATE;
 
-	switch(pHdr->code)
+	SendMessage(m_hWnd, TB_SETBUTTONINFO, id, reinterpret_cast<LPARAM>(&buttonInfo));
+}
+
+void CToolBar::ProcessNotify(WPARAM wparam, NMHDR* hdr)
+{
+	if(hdr->hwndFrom != GetToolTips()) return;
+
+	switch(hdr->code)
 	{
 	case TTN_GETDISPINFO:
 		{
-			LPTOOLTIPTEXT pToolTipText(reinterpret_cast<LPTOOLTIPTEXT>(pHdr));
-				
-			ButtonToolTipMap::iterator itToolTip;
-			itToolTip = m_ButtonToolTips.find(static_cast<unsigned int>(pHdr->idFrom));
+			LPTOOLTIPTEXT toolTipText(reinterpret_cast<LPTOOLTIPTEXT>(hdr));
 
-			if(itToolTip == m_ButtonToolTips.end()) return;
+			auto toolTipIterator = m_buttonToolTips.find(static_cast<unsigned int>(hdr->idFrom));
+			if(toolTipIterator == m_buttonToolTips.end()) return;
 
-			pToolTipText->hinst		= GetModuleHandle(NULL);
-			pToolTipText->lpszText	= const_cast<LPWSTR>((*itToolTip).second.c_str());
+			toolTipText->hinst		= GetModuleHandle(NULL);
+			toolTipText->lpszText	= const_cast<LPWSTR>((*toolTipIterator).second.c_str());
 		}
 		break;
 	}
