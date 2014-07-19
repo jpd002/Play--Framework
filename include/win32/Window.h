@@ -1,5 +1,4 @@
-#ifndef _WINDOW_H_
-#define _WINDOW_H_
+#pragma once
 
 #include <windows.h>
 #include "tcharx.h"
@@ -15,8 +14,10 @@ namespace Framework
 		{
 		public:
 									CWindow();
+									CWindow(const CWindow&) = delete;
 			virtual					~CWindow();
 
+			CWindow&				operator =(const CWindow&) = delete;
 									operator HWND() const;
 
 			static LRESULT WINAPI	WndProc(HWND, unsigned int, WPARAM, LPARAM);
@@ -105,10 +106,6 @@ namespace Framework
 			virtual long			OnSetFocus();
 			virtual long			OnKillFocus();
 
-		private:
-									CWindow(const CWindow&);
-			CWindow&				operator =(const CWindow&);
-
 		public:
 			HWND					m_hWnd;
 			bool					m_hasClassPtr;
@@ -117,5 +114,3 @@ namespace Framework
 		};
 	}
 };
-
-#endif
