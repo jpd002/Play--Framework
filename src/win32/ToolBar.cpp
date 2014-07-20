@@ -1,21 +1,21 @@
 #include "win32/ToolBar.h"
-#include <commctrl.h>
 
 using namespace Framework::Win32;
 
+CToolBar::CToolBar()
+{
+
+}
+
 CToolBar::CToolBar(HWND hParent, unsigned int nBitmapNumber, HINSTANCE hInstance, unsigned int nBitmapId, unsigned int nButtonWidth, unsigned int nButtonHeight)
 {
-	InitCommonControls();
-
 	m_hWnd = CreateToolbarEx(hParent, WS_VISIBLE | TBSTYLE_TOOLTIPS, NULL, 
 		nBitmapNumber, hInstance, nBitmapId, NULL, 0, nButtonWidth, nButtonHeight, nButtonWidth, nButtonHeight, sizeof(TBBUTTON));
 }
 
-CToolBar::CToolBar(HWND hParent)
+CToolBar::CToolBar(HWND parentWnd, DWORD style)
 {
-	InitCommonControls();
-
-	m_hWnd = CreateWindowEx(NULL, TOOLBARCLASSNAME, NULL, WS_VISIBLE | WS_CHILD | TBSTYLE_TOOLTIPS, 0, 0, 1, 1, hParent, NULL, GetModuleHandle(NULL), NULL);
+	m_hWnd = CreateWindowEx(NULL, TOOLBARCLASSNAME, NULL, WS_VISIBLE | WS_CHILD | style, 0, 0, 1, 1, parentWnd, NULL, GetModuleHandle(NULL), NULL);
 	SendMessage(m_hWnd, TB_BUTTONSTRUCTSIZE, sizeof(TBBUTTON), 0);
 }
 
@@ -43,31 +43,31 @@ void CToolBar::MoveFrom(CToolBar&& rhs)
 	CWindow::MoveFrom(std::move(rhs));
 }
 
-void CToolBar::InsertImageButton(unsigned int nBitmapId, unsigned int nCommandId)
+void CToolBar::InsertImageButton(unsigned int bitmapId, unsigned int commandId)
 {
-	TBBUTTON Button;
+	TBBUTTON button;
 
-	memset(&Button, 0, sizeof(TBBUTTON));
-	Button.iBitmap		= nBitmapId;
-	Button.idCommand	= nCommandId;
-	Button.fsState		= TBSTATE_ENABLED;
-	Button.fsStyle		= TBSTYLE_BUTTON;
+	memset(&button, 0, sizeof(TBBUTTON));
+	button.iBitmap		= bitmapId;
+	button.idCommand	= commandId;
+	button.fsState		= TBSTATE_ENABLED;
+	button.fsStyle		= TBSTYLE_BUTTON;
 
-	SendMessage(m_hWnd, TB_ADDBUTTONS, 1, reinterpret_cast<LPARAM>(&Button));
+	SendMessage(m_hWnd, TB_ADDBUTTONS, 1, reinterpret_cast<LPARAM>(&button));
 }
 
-void CToolBar::InsertTextButton(const TCHAR* sText, unsigned int nCommandId)
+void CToolBar::InsertTextButton(const TCHAR* text, unsigned int commandId)
 {
-	TBBUTTON Button;
+	TBBUTTON button;
 
-	memset(&Button, 0, sizeof(TBBUTTON));
-	Button.iBitmap		= I_IMAGENONE;
-	Button.idCommand	= nCommandId;
-	Button.fsState		= TBSTATE_ENABLED;
-	Button.fsStyle		= TBSTYLE_BUTTON | TBSTYLE_AUTOSIZE;
-	Button.iString		= reinterpret_cast<INT_PTR>(sText);
+	memset(&button, 0, sizeof(TBBUTTON));
+	button.iBitmap		= I_IMAGENONE;
+	button.idCommand	= commandId;
+	button.fsState		= TBSTATE_ENABLED;
+	button.fsStyle		= BTNS_BUTTON | BTNS_AUTOSIZE;
+	button.iString		= reinterpret_cast<INT_PTR>(text);
 
-	SendMessage(m_hWnd, TB_ADDBUTTONS, 1, reinterpret_cast<LPARAM>(&Button));
+	SendMessage(m_hWnd, TB_ADDBUTTONS, 1, reinterpret_cast<LPARAM>(&button));
 }
 
 void CToolBar::LoadStandardImageList(unsigned int nIndex)

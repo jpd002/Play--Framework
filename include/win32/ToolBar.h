@@ -2,6 +2,7 @@
 
 #include <map>
 #include "win32/Window.h"
+#include <commctrl.h>
 
 namespace Framework
 {
@@ -10,8 +11,9 @@ namespace Framework
 		class CToolBar : public CWindow
 		{
 		public:
+								CToolBar();
 								CToolBar(HWND, unsigned int, HINSTANCE, unsigned int, unsigned int, unsigned int);
-								CToolBar(HWND = 0);
+								CToolBar(HWND, DWORD style = TBSTYLE_TOOLTIPS);
 								CToolBar(const CToolBar&) = delete;
 			virtual				~CToolBar();
 
