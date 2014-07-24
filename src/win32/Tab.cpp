@@ -36,6 +36,11 @@ int CTab::InsertTab(const TCHAR* text)
 	return TabCtrl_InsertItem(m_hWnd, GetItemCount(), &item);
 }
 
+void CTab::DeleteTab(int tab)
+{
+	TabCtrl_DeleteItem(m_hWnd, tab);
+}
+
 std::tstring CTab::GetTabText(int tab)
 {
 	TCHAR text[_MAX_PATH];
@@ -87,6 +92,14 @@ void CTab::SetSelection(int nSelection)
 unsigned int CTab::GetItemCount()
 {
 	return TabCtrl_GetItemCount(m_hWnd);
+}
+
+int CTab::HitTest(int x, int y)
+{
+	TCHITTESTINFO hitTestInfo = {};
+	hitTestInfo.pt.x = x;
+	hitTestInfo.pt.y = y;
+	return TabCtrl_HitTest(m_hWnd, &hitTestInfo);
 }
 
 Framework::Win32::CRect CTab::GetDisplayAreaRect()

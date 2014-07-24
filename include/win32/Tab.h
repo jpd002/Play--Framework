@@ -17,6 +17,7 @@ namespace Framework
 			CTab&					operator =(CTab&&);
 
 			int						InsertTab(const TCHAR*);
+			void					DeleteTab(int);
 
 			std::tstring			GetTabText(int);
 			void					SetTabText(int, const TCHAR*);
@@ -27,6 +28,9 @@ namespace Framework
 			int						GetSelection();
 			void					SetSelection(int);
 			unsigned int			GetItemCount();
+
+			int						HitTest(int, int);
+
 			Framework::Win32::CRect	GetDisplayAreaRect();
 
 		private:
