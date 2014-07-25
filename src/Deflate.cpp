@@ -151,7 +151,7 @@ void CDeflate::GenerateTreeFromTables(unsigned short* pLenght, unsigned long nCo
 
 	pH->pCode = (unsigned short*)malloc(2 * nCount);
 
-	memset(pH->nL,		0,		16 * 2);
+	memset(pH->nL, 0, 16);
 
 	for(i = 0; i < nCount; i++)
 	{
@@ -291,7 +291,7 @@ void CDeflate::GenerateFixedTrees(HUFFMANTREE* pLitt, HUFFMANTREE* pDist)
 	int i, j;
 	unsigned short nStartCode;
 
-	memset(pLitt->nL, 0, 16 * 2);
+	memset(pLitt->nL, 0, 16);
 	pLitt->pCode	= (unsigned short*)malloc(288 * 2);
 	pLitt->pV[6]	= (unsigned short*)malloc( 24 * 2);
 	pLitt->pV[7]	= (unsigned short*)malloc(152 * 2);
@@ -331,7 +331,7 @@ void CDeflate::GenerateFixedTrees(HUFFMANTREE* pLitt, HUFFMANTREE* pDist)
 	}
 
 
-	memset(pDist->nL, 0, 16 * 2);
+	memset(pDist->nL, 0, 16);
 	pDist->pCode	= (unsigned short*)malloc(32 * 2);
 	pDist->pV[4]	= (unsigned short*)malloc(32 * 2);
 
