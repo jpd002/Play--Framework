@@ -27,7 +27,6 @@
     <ClCompile Include="..\src\bitmap\TGA.cpp" />
     <ClCompile Include="..\src\BitStream.cpp" />
     <ClCompile Include="..\src\Config.cpp" />
-    <ClCompile Include="..\src\Deflate.cpp" />
     <ClCompile Include="..\src\Endian.cpp" />
     <ClCompile Include="..\src\GZipStream.cpp" />
     <ClCompile Include="..\src\idct\IEEE1180.cpp" />
@@ -138,7 +137,6 @@
     <ClInclude Include="..\include\Config.h" />
     <ClInclude Include="..\include\Convertible.h" />
     <ClInclude Include="..\include\countof.h" />
-    <ClInclude Include="..\include\Deflate.h" />
     <ClInclude Include="..\include\Endian.h" />
     <ClInclude Include="..\include\GZipStream.h" />
     <ClInclude Include="..\include\idct\IEEE1180.h" />

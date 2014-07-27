@@ -34,9 +34,6 @@
     <ClCompile Include="..\src\Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Deflate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Endian.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -364,9 +361,6 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\countof.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Deflate.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Endian.h">
