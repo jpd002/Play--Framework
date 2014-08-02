@@ -1,14 +1,14 @@
-#ifndef _MPEG2_DCTCOEFFICIENTTABLE_H_
-#define _MPEG2_DCTCOEFFICIENTTABLE_H_
+#pragma once
 
 #include "BitStream.h"
+#include "VLCTable.h"
 
 namespace MPEG2
 {
 	struct RUNLEVELPAIR
 	{
-		unsigned int				nRun;
-		unsigned int				nLevel;
+		unsigned int				run;
+		unsigned int				level;
 	};
 
 	enum RUNSPECIAL
@@ -16,18 +16,26 @@ namespace MPEG2
 		RUN_ESCAPE	= 102,
 	};
 
-	class CDctCoefficientTable
+	class CDctCoefficientTable : protected CVLCTable
 	{
 	public:
-		virtual				~CDctCoefficientTable() {}
-		virtual void		GetRunLevelPair(Framework::CBitStream*, RUNLEVELPAIR*, bool) = 0;
-		virtual void		GetRunLevelPairDc(Framework::CBitStream*, RUNLEVELPAIR*, bool) = 0;
-		virtual bool		IsEndOfBlock(Framework::CBitStream*) = 0;
-		virtual void		SkipEndOfBlock(Framework::CBitStream*) = 0;
+		virtual					~CDctCoefficientTable() {}
+
+		virtual DECODE_STATUS	TryGetRunLevelPair(Framework::CBitStream*, RUNLEVELPAIR*, bool) = 0;
+		virtual DECODE_STATUS	TryGetRunLevelPairDc(Framework::CBitStream*, RUNLEVELPAIR*, bool) = 0;
+
+		virtual DECODE_STATUS	TryIsEndOfBlock(Framework::CBitStream*, bool&) = 0;
+		virtual DECODE_STATUS	TrySkipEndOfBlock(Framework::CBitStream*) = 0;
+
+		void					GetRunLevelPair(Framework::CBitStream*, RUNLEVELPAIR*, bool);
+		void					GetRunLevelPairDc(Framework::CBitStream*, RUNLEVELPAIR*, bool);
+
+		bool					IsEndOfBlock(Framework::CBitStream*);
+		void					SkipEndOfBlock(Framework::CBitStream*);
 
 	protected:
-		static uint32		TryGetValueOfs(Framework::CBitStream*, uint8, uint8&);
+								CDctCoefficientTable(unsigned int, VLCTABLEENTRY*, unsigned int, unsigned int*);
+
+		static bool				TryPeekValueOfs(Framework::CBitStream*, uint8, uint8&, uint32&);
 	};
 };
-
-#endif

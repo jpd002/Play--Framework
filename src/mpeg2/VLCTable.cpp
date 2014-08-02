@@ -4,12 +4,13 @@
 using namespace MPEG2;
 using namespace Framework;
 
-CVLCTable::CVLCTable(unsigned int nMaxBits, VLCTABLEENTRY* pTableEntry, unsigned int nEntryCount, unsigned int* pIndexTable)
+CVLCTable::CVLCTable(unsigned int maxBits, VLCTABLEENTRY* tableEntry, unsigned int entryCount, unsigned int* indexTable)
+: m_maxBits(maxBits)
+, m_tableEntry(tableEntry)
+, m_entryCount(entryCount)
+, m_indexTable(indexTable)
 {
-	m_nMaxBits		= nMaxBits;
-	m_pTableEntry	= pTableEntry;
-	m_nEntryCount	= nEntryCount;
-	m_pIndexTable	= pIndexTable;
+
 }
 
 CVLCTable::~CVLCTable()
@@ -17,40 +18,52 @@ CVLCTable::~CVLCTable()
 
 }
 
-int CVLCTable::TryPeekSymbol(CBitStream* stream, const VLCTABLEENTRY*& result)
+CVLCTable::DECODE_STATUS CVLCTable::TryPeekSymbol(CBitStream* stream, const VLCTABLEENTRY*& result)
 {
 	result = NULL;
 
-	for(unsigned int i = 0; i < m_nMaxBits; i++)
+	for(unsigned int i = 0; i < m_maxBits; i++)
 	{
 		uint32 value = 0;
 		if(!stream->TryPeekBits_MSBF(i + 1, value))
 		{
-			return DECODE_ERROR_NOTENOUGHDATA;
+			return DECODE_STATUS_NOTENOUGHDATA;
 		}
 
-		for(unsigned int j = m_pIndexTable[i]; j < m_nEntryCount; j++)
+		for(unsigned int j = m_indexTable[i]; j < m_entryCount; j++)
 		{
-			VLCTABLEENTRY* entry = &m_pTableEntry[j];
+			auto entry = &m_tableEntry[j];
 			
-			if(entry->nCodeLength != (i + 1)) break;
-			if(entry->nCode != value) continue;
+			if(entry->codeLength != (i + 1)) break;
+			if(entry->code != value) continue;
 
 			result = entry;
 
-			return 0;
+			return DECODE_STATUS_SUCCESS;
 		}
 	}
 
-	return DECODE_ERROR_SYMBOLNOTFOUND;
+	return DECODE_STATUS_SYMBOLNOTFOUND;
 }
 
-int CVLCTable::TryGetSymbol(CBitStream* stream, const VLCTABLEENTRY*& result)
+CVLCTable::DECODE_STATUS CVLCTable::TryGetSymbol(CBitStream* stream, const VLCTABLEENTRY*& result)
 {
-	int opResult = TryPeekSymbol(stream, result);
-	if(opResult == 0)
+	auto opResult = TryPeekSymbol(stream, result);
+	if(opResult == DECODE_STATUS_SUCCESS)
 	{
-		stream->Advance(result->nCodeLength);
+		stream->Advance(result->codeLength);
+	}
+	return opResult;
+}
+
+CVLCTable::DECODE_STATUS CVLCTable::TryGetSymbol(CBitStream* stream, uint32& result)
+{
+	const VLCTABLEENTRY* tableEntry(nullptr);
+	auto opResult = TryPeekSymbol(stream, tableEntry);
+	if(opResult == DECODE_STATUS_SUCCESS)
+	{
+		stream->Advance(tableEntry->codeLength);
+		result = tableEntry->value;
 	}
 	return opResult;
 }
@@ -58,22 +71,22 @@ int CVLCTable::TryGetSymbol(CBitStream* stream, const VLCTABLEENTRY*& result)
 uint32 CVLCTable::GetSymbol(CBitStream* stream)
 {
 	const VLCTABLEENTRY* tableEntry = NULL;
-	int result = TryGetSymbol(stream, tableEntry);
-	if(result < 0)
+	auto result = TryGetSymbol(stream, tableEntry);
+	if(result != DECODE_STATUS_SUCCESS)
 	{
 		ThrowError(result);
 	}
-	return tableEntry->nValue;
+	return tableEntry->value;
 }
 
-void CVLCTable::ThrowError(int errorCode)
+void CVLCTable::ThrowError(DECODE_STATUS errorCode)
 {
-	assert(errorCode != 0);
-	if(errorCode == DECODE_ERROR_NOTENOUGHDATA)
+	assert(errorCode != DECODE_STATUS_SUCCESS);
+	if(errorCode == DECODE_STATUS_NOTENOUGHDATA)
 	{
 		throw CBitStream::CBitStreamException();
 	}
-	else if(errorCode == DECODE_ERROR_SYMBOLNOTFOUND)
+	else if(errorCode == DECODE_STATUS_SYMBOLNOTFOUND)
 	{
 		throw CVLCTableException();
 	}

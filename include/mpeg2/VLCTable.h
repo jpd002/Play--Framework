@@ -1,5 +1,4 @@
-#ifndef _MPEG2_VLCTABLE_H_
-#define _MPEG2_VLCTABLE_H_
+#pragma once
 
 #include "BitStream.h"
 
@@ -7,9 +6,9 @@ namespace MPEG2
 {
 	struct VLCTABLEENTRY
 	{
-		uint32				nCode;
-		unsigned int		nCodeLength;
-		uint32				nValue;
+		uint32				code;
+		unsigned int		codeLength;
+		uint32				value;
 	};
 
 	class CVLCTable
@@ -20,31 +19,31 @@ namespace MPEG2
 
 		};
 
-		enum DECODE_ERROR
+		enum DECODE_STATUS
 		{
-			DECODE_ERROR_NOTENOUGHDATA = -1,
-			DECODE_ERROR_SYMBOLNOTFOUND = -2,
+			DECODE_STATUS_SUCCESS = 0,
+			DECODE_STATUS_NOTENOUGHDATA = -1,
+			DECODE_STATUS_SYMBOLNOTFOUND = -2,
 		};
 
 		virtual			~CVLCTable();
 
-		int				TryPeekSymbol(Framework::CBitStream*, const VLCTABLEENTRY*&);
-		int				TryGetSymbol(Framework::CBitStream*, const VLCTABLEENTRY*&);
+		DECODE_STATUS	TryPeekSymbol(Framework::CBitStream*, const VLCTABLEENTRY*&);
+		DECODE_STATUS	TryGetSymbol(Framework::CBitStream*, const VLCTABLEENTRY*&);
+		DECODE_STATUS	TryGetSymbol(Framework::CBitStream*, uint32&);
 
 		uint32			GetSymbol(Framework::CBitStream*);
 		
 	protected:
 						CVLCTable(unsigned int, VLCTABLEENTRY*, unsigned int, unsigned int*);
 
-		void			ThrowError(int);
+		void			ThrowError(DECODE_STATUS);
 
 	private:
-		unsigned int	m_nMaxBits;
-		VLCTABLEENTRY*	m_pTableEntry;
-		unsigned int	m_nEntryCount;
-		unsigned int*	m_pIndexTable;
+		unsigned int	m_maxBits;
+		VLCTABLEENTRY*	m_tableEntry;
+		unsigned int	m_entryCount;
+		unsigned int*	m_indexTable;
 	};
 
 };
-
-#endif

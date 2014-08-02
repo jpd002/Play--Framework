@@ -5,7 +5,7 @@
 using namespace MPEG2;
 using namespace Framework;
 
-RUNLEVELPAIR CDctCoefficientTable0::m_pRunLevelTable[ENTRYCOUNT] = 
+RUNLEVELPAIR CDctCoefficientTable0::m_runLevelTable[ENTRYCOUNT] = 
 {
 	//Page 130
 	{ 0,			1	},
@@ -128,7 +128,7 @@ RUNLEVELPAIR CDctCoefficientTable0::m_pRunLevelTable[ENTRYCOUNT] =
 	{ 31,			1	},
 };
 
-VLCTABLEENTRY CDctCoefficientTable0::m_pVLCTable[ENTRYCOUNT] =
+VLCTABLEENTRY CDctCoefficientTable0::m_vlcTable[ENTRYCOUNT] =
 {
 	//Page 130
 	{ 0x0003,		2,			0	},
@@ -251,7 +251,7 @@ VLCTABLEENTRY CDctCoefficientTable0::m_pVLCTable[ENTRYCOUNT] =
 	{ 0x001B,		16,			111	},
 };
 
-unsigned int CDctCoefficientTable0::m_pIndexTable[MAXBITS] =
+unsigned int CDctCoefficientTable0::m_indexTable[MAXBITS] =
 {
 	0,
 	0,
@@ -271,127 +271,161 @@ unsigned int CDctCoefficientTable0::m_pIndexTable[MAXBITS] =
 	96,
 };
 
-CDctCoefficientTable0* CDctCoefficientTable0::m_pInstance = NULL;
-
 CDctCoefficientTable0::CDctCoefficientTable0() :
-CVLCTable(MAXBITS, m_pVLCTable, ENTRYCOUNT, m_pIndexTable)
+CDctCoefficientTable(MAXBITS, m_vlcTable, ENTRYCOUNT, m_indexTable)
 {
 
 }
 
-CDctCoefficientTable0* CDctCoefficientTable0::GetInstance()
+CVLCTable::DECODE_STATUS CDctCoefficientTable0::TryIsEndOfBlock(CBitStream* stream, bool& result)
 {
-	if(m_pInstance == NULL)
+	uint32 eobCode = 0;
+	if(!stream->TryPeekBits_MSBF(2, eobCode))
 	{
-		m_pInstance = new CDctCoefficientTable0();
+		return DECODE_STATUS_NOTENOUGHDATA;
+	}
+	result = (eobCode == 2);
+	return DECODE_STATUS_SUCCESS;
+}
+
+CVLCTable::DECODE_STATUS CDctCoefficientTable0::TrySkipEndOfBlock(CBitStream* stream)
+{
+	uint32 eobCode = 0;
+	if(!stream->TryGetBits_MSBF(2, eobCode))
+	{
+		return DECODE_STATUS_NOTENOUGHDATA;
+	}
+	return DECODE_STATUS_SUCCESS;
+}
+
+CVLCTable::DECODE_STATUS CDctCoefficientTable0::TryGetRunLevelPair(CBitStream* stream, RUNLEVELPAIR* pairDst, bool isMpeg2)
+{
+	const VLCTABLEENTRY* entry(nullptr);
+
+	auto result = TryPeekSymbol(stream, entry);
+	if(result != DECODE_STATUS_SUCCESS)
+	{
+		return result;
 	}
 
-	return m_pInstance;
-}
+	uint8 bitCount = entry->codeLength;
+	uint32 index = entry->value;
+	RUNLEVELPAIR* pair = &m_runLevelTable[index];
 
-bool CDctCoefficientTable0::IsEndOfBlock(CBitStream* pStream)
-{
-	return (pStream->PeekBits_MSBF(2) == 2);
-}
-
-void CDctCoefficientTable0::SkipEndOfBlock(CBitStream* pStream)
-{
-	pStream->GetBits_MSBF(2);
-}
-
-void CDctCoefficientTable0::GetRunLevelPair(CBitStream* pStream, RUNLEVELPAIR* pPairDst, bool nIsMPEG2)
-{
-	const VLCTABLEENTRY* entry(NULL);
-	uint8 bitCount = 0;
-
-	int result = TryPeekSymbol(pStream, entry);
-	if(result != 0)
+	if(pair->run == RUN_ESCAPE)
 	{
-		ThrowError(result);
-	}
-
-	bitCount += entry->nCodeLength;
-	uint32 index = entry->nValue;
-	RUNLEVELPAIR* pPair = &m_pRunLevelTable[index];
-
-	if(pPair->nRun == RUN_ESCAPE)
-	{
-		pPairDst->nRun		= TryGetValueOfs(pStream, 6, bitCount);
-
-		if(!nIsMPEG2)
+		uint32 run = 0;
+		if(!TryPeekValueOfs(stream, 6, bitCount, run))
 		{
-			pPairDst->nLevel	= TryGetValueOfs(pStream, 8, bitCount);
+			return DECODE_STATUS_NOTENOUGHDATA;
+		}
+		pairDst->run = run;
+
+		if(!isMpeg2)
+		{
+			uint32 level = 0;
+			if(!TryPeekValueOfs(stream, 8, bitCount, level))
+			{
+				return DECODE_STATUS_NOTENOUGHDATA;
+			}
 			
-			if(pPairDst->nLevel == 0)
+			if(level == 0)
 			{
-				pPairDst->nLevel = TryGetValueOfs(pStream, 8, bitCount);
+				if(!TryPeekValueOfs(stream, 8, bitCount, level))
+				{
+					return DECODE_STATUS_NOTENOUGHDATA;
+				}
 			}
-			else if(static_cast<uint8>(pPairDst->nLevel) == 128)
+			else if(static_cast<uint8>(level) == 128)
 			{
-				pPairDst->nLevel = (TryGetValueOfs(pStream, 8, bitCount) - 256);
+				if(!TryPeekValueOfs(stream, 8, bitCount, level))
+				{
+					return DECODE_STATUS_NOTENOUGHDATA;
+				}
+				level = (level - 256);
 			}
-			else if(pPairDst->nLevel > 128)
+			else if(level > 128)
 			{
-				pPairDst->nLevel -= 256;
+				level -= 256;
 			}
 
+			pairDst->level = level;
 		}
 		else
 		{
-			pPairDst->nLevel	= TryGetValueOfs(pStream, 12, bitCount); 
-
-			if(pPairDst->nLevel & 0x800)
+			uint32 level = 0;
+			if(!TryPeekValueOfs(stream, 12, bitCount, level))
 			{
-				pPairDst->nLevel |= 0xF000;
-				pPairDst->nLevel = (int16)pPairDst->nLevel;
+				return DECODE_STATUS_NOTENOUGHDATA;
 			}
-		}
 
+			if(level & 0x800)
+			{
+				level |= 0xF000;
+				level = static_cast<int16>(level);
+			}
+
+			pairDst->level = level;
+		}
 	}
 	else
 	{
-		uint8 nSign = static_cast<uint8>(TryGetValueOfs(pStream, 1, bitCount));
-
-		if(pPairDst != NULL)
+		uint32 sign = 0;
+		if(!TryPeekValueOfs(stream, 1, bitCount, sign))
 		{
-			pPairDst->nRun			= pPair->nRun;
+			return DECODE_STATUS_NOTENOUGHDATA;
+		}
 
-			if(nSign == 1)
+		if(pairDst)
+		{
+			pairDst->run = pair->run;
+
+			if(sign == 1)
 			{
-				pPairDst->nLevel	= 0 - pPair->nLevel;
+				pairDst->level = 0 - pair->level;
 			}
 			else
 			{
-				pPairDst->nLevel	= pPair->nLevel;
+				pairDst->level = pair->level;
 			}
 		}
 	}
 
-	pStream->Advance(bitCount);
+	stream->Advance(bitCount);
+	return DECODE_STATUS_SUCCESS;
 }
 
-void CDctCoefficientTable0::GetRunLevelPairDc(CBitStream* pStream, RUNLEVELPAIR* pPairDst, bool nIsMPEG2)
+CVLCTable::DECODE_STATUS CDctCoefficientTable0::TryGetRunLevelPairDc(CBitStream* stream, RUNLEVELPAIR* pairDst, bool isMpeg2)
 {
-	//Special case
-	if(pStream->PeekBits_MSBF(1) == 1)
+	uint32 isSpecialCase = 0;
+	if(!stream->TryPeekBits_MSBF(1, isSpecialCase))
 	{
-		uint8 nSign = (uint8)(pStream->GetBits_MSBF(2) & 0x01);
+		return DECODE_STATUS_NOTENOUGHDATA;
+	}
 
-		pPairDst->nRun = 0;
-
-		if(nSign == 1)
+	if(isSpecialCase)
+	{
+		uint32 sign = 0;
+		if(!stream->TryGetBits_MSBF(2, sign))
 		{
-			pPairDst->nLevel = 0 - 1;
+			return DECODE_STATUS_NOTENOUGHDATA;
+		}
+
+		pairDst->run = 0;
+
+		if((sign & 0x01) != 0)
+		{
+			pairDst->level = 0 - 1;
 		}
 		else
 		{
-			pPairDst->nLevel = 1;
+			pairDst->level = 1;
 		}
 
-		return;
+		return DECODE_STATUS_SUCCESS;
 	}
 	else
 	{
-		GetRunLevelPair(pStream, pPairDst, nIsMPEG2);
+		return TryGetRunLevelPair(stream, pairDst, isMpeg2);
 	}
 }
