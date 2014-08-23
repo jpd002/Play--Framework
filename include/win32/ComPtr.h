@@ -72,7 +72,7 @@ namespace Framework
 				return (*this);
 			}
 
-			PtrType* operator ->()
+			PtrType* operator ->() const
 			{
 				return m_ptr;
 			}
