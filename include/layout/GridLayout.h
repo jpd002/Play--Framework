@@ -1,5 +1,4 @@
-#ifndef _GRIDLAYOUT_H_
-#define _GRIDLAYOUT_H_
+#pragma once
 
 #include "LayoutObject.h"
 #include "LayoutBase.h"
@@ -7,41 +6,37 @@
 
 namespace Framework
 {
-    class CGridLayout;
-    typedef std::shared_ptr<CGridLayout> GridLayoutPtr;
+	class CGridLayout;
+	typedef std::shared_ptr<CGridLayout> GridLayoutPtr;
 
-    class CGridLayout : public CLayoutObject
-    {
-    public:
-        virtual                 ~CGridLayout();
+	class CGridLayout : public CLayoutObject
+	{
+	public:
+								CGridLayout(unsigned int, unsigned int, unsigned int);
+		virtual					~CGridLayout();
 
-        static GridLayoutPtr    Create(unsigned int, unsigned int, unsigned int = LAYOUT_DEFAULT_SPACING);
+		static GridLayoutPtr	Create(unsigned int, unsigned int, unsigned int = LAYOUT_DEFAULT_SPACING);
 
-        unsigned int            GetPreferredWidth();
-        unsigned int            GetPreferredHeight();
-        void                    RefreshGeometry();
+		unsigned int			GetPreferredWidth() override;
+		unsigned int			GetPreferredHeight() override;
+		void					RefreshGeometry() override;
 
-        void                    SetObject(unsigned int, unsigned int, const LayoutObjectPtr&);
+		void					SetObject(unsigned int, unsigned int, const LayoutObjectPtr&);
 
-    private:
-        typedef boost::multi_array<LayoutObjectPtr, 2> GridArray;
+	private:
+		typedef boost::multi_array<LayoutObjectPtr, 2> GridArray;
 
-                                CGridLayout(unsigned int, unsigned int, unsigned int);
+		void					RebuildLayouts();
+		CLayoutBaseItem			CreateColLayoutBaseItem(unsigned int) const;
+		CLayoutBaseItem			CreateRowLayoutBaseItem(unsigned int) const;
 
-        void                    RebuildLayouts();
-        CLayoutBaseItem*        CreateColLayoutBaseItem(unsigned int);
-        CLayoutBaseItem*        CreateRowLayoutBaseItem(unsigned int);
+		unsigned int			m_cols;
+		unsigned int			m_rows;
+		unsigned int			m_spacing;
 
-        unsigned int            m_nCols;
-        unsigned int            m_nRows;
-        unsigned int            m_nSpacing;
+		GridArray				m_objects;
 
-        GridArray               m_objects;
-
-        CLayoutBase             m_HorzLayout;
-        CLayoutBase             m_VertLayout;
-
-    };
+		CLayoutBase				m_horzLayout;
+		CLayoutBase				m_vertLayout;
+	};
 }
-
-#endif

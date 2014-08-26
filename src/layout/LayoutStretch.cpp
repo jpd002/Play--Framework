@@ -2,15 +2,15 @@
 
 using namespace Framework;
 
-CLayoutStretch::CLayoutStretch(unsigned int nHorzStretch, unsigned int nVertStretch) : 
-CLayoutObject(nHorzStretch, nVertStretch)
+CLayoutStretch::CLayoutStretch(unsigned int horzStretch, unsigned int vertStretch)
+: CLayoutObject(horzStretch, vertStretch)
 {
 
 }
 
 LayoutObjectPtr CLayoutStretch::Create(unsigned int horzStretch, unsigned int vertStretch)
 {
-    return LayoutObjectPtr(new CLayoutStretch(horzStretch, vertStretch));
+	return std::make_shared<CLayoutStretch>(horzStretch, vertStretch);
 }
 
 unsigned int CLayoutStretch::GetPreferredWidth()

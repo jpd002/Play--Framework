@@ -3,15 +3,14 @@
 #include "PtrMacro.h"
 
 using namespace Framework;
-using namespace boost;
 
-CGridLayout::CGridLayout(unsigned int nCols, unsigned int nRows, unsigned int nSpacing) :
-CLayoutObject(1, 1),
-m_objects(extents[nCols][nRows])
+CGridLayout::CGridLayout(unsigned int cols, unsigned int rows, unsigned int spacing) 
+: CLayoutObject(1, 1)
+, m_objects(boost::extents[cols][rows])
 {
-    m_nCols = nCols;
-    m_nRows = nRows;
-    m_nSpacing = nSpacing;
+	m_cols = cols;
+	m_rows = rows;
+	m_spacing = spacing;
 }
 
 CGridLayout::~CGridLayout()
@@ -21,149 +20,133 @@ CGridLayout::~CGridLayout()
 
 GridLayoutPtr CGridLayout::Create(unsigned int cols, unsigned int rows, unsigned int spacing)
 {
-    return GridLayoutPtr(new CGridLayout(cols, rows, spacing));
+	return std::make_shared<CGridLayout>(cols, rows, spacing);
 }
 
 unsigned int CGridLayout::GetPreferredWidth()
 {
-	return m_HorzLayout.GetPreferredSize();
+	return m_horzLayout.GetPreferredSize();
 }
 
 unsigned int CGridLayout::GetPreferredHeight()
 {
-	return m_VertLayout.GetPreferredSize();
+	return m_vertLayout.GetPreferredSize();
 }
 
-void CGridLayout::SetObject(unsigned int nCol, unsigned int nRow, const LayoutObjectPtr& object)
+void CGridLayout::SetObject(unsigned int col, unsigned int row, const LayoutObjectPtr& object)
 {
-    assert(nCol < m_nCols);
-    assert(nRow < m_nRows);
-    assert(!m_objects[nCol][nRow]);
+	assert(col < m_cols);
+	assert(row < m_rows);
+	assert(!m_objects[col][row]);
 
-    m_objects[nCol][nRow] = object;
-    RebuildLayouts();
+	m_objects[col][row] = object;
+	RebuildLayouts();
 }
 
 void CGridLayout::RebuildLayouts()
 {
-    m_HorzLayout.Clear();
-    m_VertLayout.Clear();
+	m_horzLayout.Clear();
+	m_vertLayout.Clear();
 
-    for(unsigned int i = 0; i < m_nCols; i++)
-    {
-        m_HorzLayout.InsertItem(CreateColLayoutBaseItem(i));
-        if(i != (m_nCols - 1))
-        {
-            if(m_nSpacing != 0)
-            {
-                m_HorzLayout.InsertItem(new CLayoutBaseItem(m_nSpacing, 0, -1));
-            }
-        }
-    }
-    for(unsigned int i = 0; i < m_nRows; i++)
-    {
-        m_VertLayout.InsertItem(CreateRowLayoutBaseItem(i));
-        if(i != (m_nRows - 1))
-        {
-            if(m_nSpacing != 0)
-            {
-                m_VertLayout.InsertItem(new CLayoutBaseItem(m_nSpacing, 0, -1));
-            }
-        }
-    }
+	for(unsigned int i = 0; i < m_cols; i++)
+	{
+		m_horzLayout.InsertItem(CreateColLayoutBaseItem(i));
+		if(i != (m_cols - 1))
+		{
+			if(m_spacing != 0)
+			{
+				m_horzLayout.InsertItem(CLayoutBaseItem(m_spacing, 0, -1));
+			}
+		}
+	}
+	for(unsigned int i = 0; i < m_rows; i++)
+	{
+		m_vertLayout.InsertItem(CreateRowLayoutBaseItem(i));
+		if(i != (m_rows - 1))
+		{
+			if(m_spacing != 0)
+			{
+				m_vertLayout.InsertItem(CLayoutBaseItem(m_spacing, 0, -1));
+			}
+		}
+	}
 }
 
-CLayoutBaseItem* CGridLayout::CreateColLayoutBaseItem(unsigned int nCol)
+CLayoutBaseItem CGridLayout::CreateColLayoutBaseItem(unsigned int col) const
 {
-    unsigned int nMaxWidth = 0;
-    unsigned int nMaxStretch = 0;
+	unsigned int maxWidth = 0;
+	unsigned int maxStretch = 0;
 
-    for(unsigned int i = 0; i < m_nRows; i++)
-    {
-        const LayoutObjectPtr& object = m_objects[nCol][i];
-        if(!object) continue;
-        if(object->GetPreferredWidth() > nMaxWidth)
-        {
-            nMaxWidth = object->GetPreferredWidth();
-        }
-        if(object->GetHorizontalStretch() > nMaxStretch)
-        {
-            nMaxStretch = object->GetHorizontalStretch();
-        }
-    }
+	for(unsigned int i = 0; i < m_rows; i++)
+	{
+		const auto& object = m_objects[col][i];
+		if(!object) continue;
+		maxWidth = std::max(object->GetPreferredWidth(), maxWidth);
+		maxStretch = std::max(object->GetHorizontalStretch(), maxStretch);
+	}
 
-    return new CLayoutBaseItem(nMaxWidth, nMaxStretch, nCol);
+	return CLayoutBaseItem(maxWidth, maxStretch, col);
 }
 
-CLayoutBaseItem* CGridLayout::CreateRowLayoutBaseItem(unsigned int nRow)
+CLayoutBaseItem CGridLayout::CreateRowLayoutBaseItem(unsigned int row) const
 {
-    unsigned int nMaxHeight = 0;
-    unsigned int nMaxStretch = 0;
+	unsigned int maxHeight = 0;
+	unsigned int maxStretch = 0;
 
-    for(unsigned int i = 0; i < m_nCols; i++)
-    {
-        const LayoutObjectPtr& object = m_objects[i][nRow];
-        if(!object) continue;
-        if(object->GetPreferredHeight() > nMaxHeight)
-        {
-            nMaxHeight = object->GetPreferredHeight();
-        }
-        if(object->GetVerticalStretch() > nMaxStretch)
-        {
-            nMaxStretch = object->GetVerticalStretch();
-        }
-    }
+	for(unsigned int i = 0; i < m_cols; i++)
+	{
+		const LayoutObjectPtr& object = m_objects[i][row];
+		if(!object) continue;
+		maxHeight = std::max(object->GetPreferredHeight(), maxHeight);
+		maxStretch = std::max(object->GetVerticalStretch(), maxStretch);
+	}
 
-    return new CLayoutBaseItem(nMaxHeight, nMaxStretch, nRow);
+	return CLayoutBaseItem(maxHeight, maxStretch, row);
 }
 
 void CGridLayout::RefreshGeometry()
 {
-    unsigned int nWidth = GetRight() - GetLeft();
-    unsigned int nHeight = GetBottom() - GetTop();
+	unsigned int width = GetRight() - GetLeft();
+	unsigned int height = GetBottom() - GetTop();
 
-    m_HorzLayout.ComputeRanges(nWidth);
-    m_VertLayout.ComputeRanges(nHeight);
+	m_horzLayout.ComputeRanges(width);
+	m_vertLayout.ComputeRanges(height);
 
-    for(CLayoutBase::ItemIterator itemIterator(m_HorzLayout.GetItemsBegin());
-        itemIterator != m_HorzLayout.GetItemsEnd(); itemIterator++)
-    {
-        const CLayoutBaseItem& item(*itemIterator);
-        unsigned int nIndex = item.GetKey();
-        if(nIndex == -1) continue;
+	for(const auto& item : m_horzLayout.GetItems())
+	{
+		unsigned int nIndex = item.GetKey();
+		if(nIndex == -1) continue;
 
-        for(unsigned int i = 0; i < m_nRows; i++)
-        {
-            const LayoutObjectPtr& object = m_objects[nIndex][i];
-            if(!object) continue;
-            object->SetLeft(GetLeft() + item.GetRangeStart());
-            object->SetRight(GetLeft() + item.GetRangeEnd());
-        }
-    }
+		for(unsigned int i = 0; i < m_rows; i++)
+		{
+			const auto& object = m_objects[nIndex][i];
+			if(!object) continue;
+			object->SetLeft(GetLeft() + item.GetRangeStart());
+			object->SetRight(GetLeft() + item.GetRangeEnd());
+		}
+	}
 
-    for(CLayoutBase::ItemIterator itemIterator(m_VertLayout.GetItemsBegin());
-        itemIterator != m_VertLayout.GetItemsEnd(); itemIterator++)
-    {
-        const CLayoutBaseItem& item(*itemIterator);
-        unsigned int nIndex = item.GetKey();
-        if(nIndex == -1) continue;
+	for(const auto& item : m_vertLayout.GetItems())
+	{
+		unsigned int nIndex = item.GetKey();
+		if(nIndex == -1) continue;
 
-        for(unsigned int i = 0; i < m_nCols; i++)
-        {
-            const LayoutObjectPtr& object = m_objects[i][nIndex];
-            if(!object) continue;
-            object->SetTop(GetTop() + item.GetRangeStart());
-            object->SetBottom(GetTop() + item.GetRangeEnd());
-        }
-    }
+		for(unsigned int i = 0; i < m_cols; i++)
+		{
+			const auto& object = m_objects[i][nIndex];
+			if(!object) continue;
+			object->SetTop(GetTop() + item.GetRangeStart());
+			object->SetBottom(GetTop() + item.GetRangeEnd());
+		}
+	}
 
-    for(unsigned int i = 0; i < m_nCols; i++)
-    {
-        for(unsigned int j = 0; j < m_nRows; j++)
-        {
-            const LayoutObjectPtr& object = m_objects[i][j];
-            if(!object) continue;
-            object->RefreshGeometry();
-        }
-    }
+	for(unsigned int i = 0; i < m_cols; i++)
+	{
+		for(unsigned int j = 0; j < m_rows; j++)
+		{
+			const auto& object = m_objects[i][j];
+			if(!object) continue;
+			object->RefreshGeometry();
+		}
+	}
 }
