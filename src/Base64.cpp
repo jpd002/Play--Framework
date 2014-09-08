@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "Base64.h"
 
 using namespace Framework;
