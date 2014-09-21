@@ -19,12 +19,12 @@
 		70D317AC17C0D87A00CCA3A4 /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D317A817C0D87A00CCA3A4 /* Context.cpp */; };
 		70D317AD17C0D87A00CCA3A4 /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D317A917C0D87A00CCA3A4 /* Device.cpp */; };
 		70D317AE17C0D87A00CCA3A4 /* Source.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D317AA17C0D87A00CCA3A4 /* Source.cpp */; };
+		70F6D79219CE8B890087C371 /* Framework_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 70F6D79119CE8B890087C371 /* Framework_Prefix.pch */; };
 		7E70288B1508786A00D9BC91 /* IEEE1180.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E70288A1508786A00D9BC91 /* IEEE1180.cpp */; };
 		7E70288E1508787D00D9BC91 /* IEEE1180.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E70288C1508787D00D9BC91 /* IEEE1180.h */; };
 		7E70288F1508787D00D9BC91 /* Interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E70288D1508787D00D9BC91 /* Interface.h */; };
 		7E7236D11506E64B00F3259A /* BitStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236BD1506E64B00F3259A /* BitStream.cpp */; };
 		7E7236D31506E64B00F3259A /* Config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236BF1506E64B00F3259A /* Config.cpp */; };
-		7E7236D41506E64B00F3259A /* Deflate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236C01506E64B00F3259A /* Deflate.cpp */; };
 		7E7236D51506E64B00F3259A /* Endian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236C11506E64B00F3259A /* Endian.cpp */; };
 		7E7236D61506E64B00F3259A /* GZipStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236C21506E64B00F3259A /* GZipStream.cpp */; };
 		7E7236D71506E64B00F3259A /* IosIStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E7236C31506E64B00F3259A /* IosIStream.cpp */; };
@@ -46,7 +46,6 @@
 		7E72370D1506E67C00F3259A /* Config.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236EA1506E67C00F3259A /* Config.h */; };
 		7E72370E1506E67C00F3259A /* Convertible.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236EB1506E67C00F3259A /* Convertible.h */; };
 		7E72370F1506E67C00F3259A /* countof.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236EC1506E67C00F3259A /* countof.h */; };
-		7E7237101506E67C00F3259A /* Deflate.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236ED1506E67C00F3259A /* Deflate.h */; };
 		7E7237111506E67C00F3259A /* Endian.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236EE1506E67C00F3259A /* Endian.h */; };
 		7E7237121506E67C00F3259A /* GZipStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236EF1506E67C00F3259A /* GZipStream.h */; };
 		7E7237131506E67C00F3259A /* IosIStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E7236F01506E67C00F3259A /* IosIStream.h */; };
@@ -147,12 +146,16 @@
 		70D317B117C0D89D00CCA3A4 /* Device.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Device.h; path = ../include/openal/Device.h; sourceTree = "<group>"; };
 		70D317B217C0D89D00CCA3A4 /* OpenAlDef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OpenAlDef.h; path = ../include/openal/OpenAlDef.h; sourceTree = "<group>"; };
 		70D317B317C0D89D00CCA3A4 /* Source.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Source.h; path = ../include/openal/Source.h; sourceTree = "<group>"; };
+		70F6D78E19CE8A120087C371 /* GeneralSettings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GeneralSettings.xcconfig; sourceTree = "<group>"; };
+		70F6D78F19CE8B080087C371 /* GeneralSettingsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GeneralSettingsDebug.xcconfig; sourceTree = "<group>"; };
+		70F6D79019CE8B080087C371 /* GeneralSettingsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GeneralSettingsRelease.xcconfig; sourceTree = "<group>"; };
+		70F6D79119CE8B890087C371 /* Framework_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Framework_Prefix.pch; sourceTree = "<group>"; };
+		70F6D79419CF8BC50087C371 /* ExternalDependencies.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = ExternalDependencies.xcconfig; sourceTree = "<group>"; };
 		7E70288A1508786A00D9BC91 /* IEEE1180.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IEEE1180.cpp; path = ../src/idct/IEEE1180.cpp; sourceTree = "<group>"; };
 		7E70288C1508787D00D9BC91 /* IEEE1180.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEEE1180.h; path = ../include/idct/IEEE1180.h; sourceTree = "<group>"; };
 		7E70288D1508787D00D9BC91 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Interface.h; path = ../include/idct/Interface.h; sourceTree = "<group>"; };
 		7E7236BD1506E64B00F3259A /* BitStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BitStream.cpp; path = ../src/BitStream.cpp; sourceTree = "<group>"; };
 		7E7236BF1506E64B00F3259A /* Config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Config.cpp; path = ../src/Config.cpp; sourceTree = "<group>"; };
-		7E7236C01506E64B00F3259A /* Deflate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Deflate.cpp; path = ../src/Deflate.cpp; sourceTree = "<group>"; };
 		7E7236C11506E64B00F3259A /* Endian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Endian.cpp; path = ../src/Endian.cpp; sourceTree = "<group>"; };
 		7E7236C21506E64B00F3259A /* GZipStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GZipStream.cpp; path = ../src/GZipStream.cpp; sourceTree = "<group>"; };
 		7E7236C31506E64B00F3259A /* IosIStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosIStream.cpp; path = ../src/IosIStream.cpp; sourceTree = "<group>"; };
@@ -174,7 +177,6 @@
 		7E7236EA1506E67C00F3259A /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Config.h; path = ../include/Config.h; sourceTree = "<group>"; };
 		7E7236EB1506E67C00F3259A /* Convertible.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Convertible.h; path = ../include/Convertible.h; sourceTree = "<group>"; };
 		7E7236EC1506E67C00F3259A /* countof.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = countof.h; path = ../include/countof.h; sourceTree = "<group>"; };
-		7E7236ED1506E67C00F3259A /* Deflate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Deflate.h; path = ../include/Deflate.h; sourceTree = "<group>"; };
 		7E7236EE1506E67C00F3259A /* Endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Endian.h; path = ../include/Endian.h; sourceTree = "<group>"; };
 		7E7236EF1506E67C00F3259A /* GZipStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GZipStream.h; path = ../include/GZipStream.h; sourceTree = "<group>"; };
 		7E7236F01506E67C00F3259A /* IosIStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IosIStream.h; path = ../include/IosIStream.h; sourceTree = "<group>"; };
@@ -272,8 +274,8 @@
 		08FB7794FE84155DC02AAC07 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				70F6D79319CE8BA50087C371 /* Config */,
 				08FB7795FE84155DC02AAC07 /* Source */,
-				C6A0FF2B0290797F04C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = Framework;
@@ -282,28 +284,22 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				7030939917BE5443009662A1 /* Bitmap */,
-				7EE362C70D5FA37700C21032 /* Idct */,
-				7E898A380D08C64A0077F9ED /* Mpeg2 */,
-				7EB9762A0EFE15C300CFB457 /* OpenAl */,
-				7EE203290D0B5158002D2B72 /* OpenGl */,
-				7E898A010D08C4F00077F9ED /* Xml */,
-				7E8BEEC40D171BB500CBEDE8 /* Zip */,
 				7E7236E41506E67C00F3259A /* alloca_def.h */,
 				7E7236E51506E67C00F3259A /* Base64.h */,
 				7E7236E61506E67C00F3259A /* BasicUnion.h */,
+				7030939917BE5443009662A1 /* Bitmap */,
 				7E7236BD1506E64B00F3259A /* BitStream.cpp */,
 				7E7236E81506E67C00F3259A /* BitStream.h */,
 				7E7236BF1506E64B00F3259A /* Config.cpp */,
 				7E7236EA1506E67C00F3259A /* Config.h */,
 				7E7236EB1506E67C00F3259A /* Convertible.h */,
 				7E7236EC1506E67C00F3259A /* countof.h */,
-				7E7236C01506E64B00F3259A /* Deflate.cpp */,
-				7E7236ED1506E67C00F3259A /* Deflate.h */,
 				7E7236C11506E64B00F3259A /* Endian.cpp */,
 				7E7236EE1506E67C00F3259A /* Endian.h */,
+				70F6D79119CE8B890087C371 /* Framework_Prefix.pch */,
 				7E7236C21506E64B00F3259A /* GZipStream.cpp */,
 				7E7236EF1506E67C00F3259A /* GZipStream.h */,
+				7EE362C70D5FA37700C21032 /* Idct */,
 				7E7236C31506E64B00F3259A /* IosIStream.cpp */,
 				7E7236F01506E67C00F3259A /* IosIStream.h */,
 				7E7236C41506E64B00F3259A /* IosOStream.cpp */,
@@ -311,8 +307,11 @@
 				7E7236F21506E67C00F3259A /* lexical_cast_ex.h */,
 				7E7236C51506E64B00F3259A /* MemStream.cpp */,
 				7E7236F31506E67C00F3259A /* MemStream.h */,
+				7E898A380D08C64A0077F9ED /* Mpeg2 */,
 				7E7236F41506E67C00F3259A /* ObjCMemberFunctionPointer.h */,
 				7E7236F51506E67C00F3259A /* offsetof_def.h */,
+				7EB9762A0EFE15C300CFB457 /* OpenAl */,
+				7EE203290D0B5158002D2B72 /* OpenGl */,
 				7E7236C61506E64B00F3259A /* PathUtils.cpp */,
 				7E7236F61506E67C00F3259A /* PathUtils.h */,
 				7E7236F71506E67C00F3259A /* placeholder_def.h */,
@@ -338,6 +337,8 @@
 				7E7237051506E67C00F3259A /* Types.h */,
 				7E7236CF1506E64B00F3259A /* Utf8.cpp */,
 				7E7237061506E67C00F3259A /* Utf8.h */,
+				7E898A010D08C4F00077F9ED /* Xml */,
+				7E8BEEC40D171BB500CBEDE8 /* Zip */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -363,6 +364,17 @@
 				703093A117BE5463009662A1 /* PNG.h */,
 			);
 			name = Bitmap;
+			sourceTree = "<group>";
+		};
+		70F6D79319CE8BA50087C371 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				70F6D79419CF8BC50087C371 /* ExternalDependencies.xcconfig */,
+				70F6D78E19CE8A120087C371 /* GeneralSettings.xcconfig */,
+				70F6D78F19CE8B080087C371 /* GeneralSettingsDebug.xcconfig */,
+				70F6D79019CE8B080087C371 /* GeneralSettingsRelease.xcconfig */,
+			);
+			name = Config;
 			sourceTree = "<group>";
 		};
 		7E898A010D08C4F00077F9ED /* Xml */ = {
@@ -475,13 +487,6 @@
 			name = Idct;
 			sourceTree = "<group>";
 		};
-		C6A0FF2B0290797F04C91782 /* Documentation */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Documentation;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -497,7 +502,6 @@
 				703093A917BE54A2009662A1 /* PNG.h in Headers */,
 				7E72370E1506E67C00F3259A /* Convertible.h in Headers */,
 				7E72370F1506E67C00F3259A /* countof.h in Headers */,
-				7E7237101506E67C00F3259A /* Deflate.h in Headers */,
 				7E7237111506E67C00F3259A /* Endian.h in Headers */,
 				7E7237121506E67C00F3259A /* GZipStream.h in Headers */,
 				7E7237131506E67C00F3259A /* IosIStream.h in Headers */,
@@ -554,6 +558,7 @@
 				703093A317BE54A2009662A1 /* Bitmap.h in Headers */,
 				7E7237A9150735F900F3259A /* Program.h in Headers */,
 				7E7237AA150735F900F3259A /* Shader.h in Headers */,
+				70F6D79219CE8B890087C371 /* Framework_Prefix.pch in Headers */,
 				7E70288E1508787D00D9BC91 /* IEEE1180.h in Headers */,
 				7E70288F1508787D00D9BC91 /* Interface.h in Headers */,
 			);
@@ -585,7 +590,7 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0600;
 			};
 			buildConfigurationList = 1DEB91EF08733DB70010E9CD /* Build configuration list for PBXProject "Framework" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -611,7 +616,6 @@
 				7E7236D11506E64B00F3259A /* BitStream.cpp in Sources */,
 				7E7236D31506E64B00F3259A /* Config.cpp in Sources */,
 				703093A217BE54A2009662A1 /* Bitmap.cpp in Sources */,
-				7E7236D41506E64B00F3259A /* Deflate.cpp in Sources */,
 				7E7236D51506E64B00F3259A /* Endian.cpp in Sources */,
 				7E7236D61506E64B00F3259A /* GZipStream.cpp in Sources */,
 				7E7236D71506E64B00F3259A /* IosIStream.cpp in Sources */,
@@ -669,79 +673,33 @@
 /* Begin XCBuildConfiguration section */
 		1DEB91EC08733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 70F6D78F19CE8B080087C371 /* GeneralSettingsDebug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				CLANG_CXX_LIBRARY = "libc++";
 				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					_DEBUG,
-					"DEBUG=1",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = (
-					"~/Libraries/boost_1_50_0/",
-					"~/Projects/Framework/include",
-				);
-				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = Framework;
-				SDKROOT = macosx;
-				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};
 		1DEB91ED08733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 70F6D79019CE8B080087C371 /* GeneralSettingsRelease.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
-				GCC_MODEL_TUNING = G5;
-				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = (
-					"~/Libraries/boost_1_50_0/",
-					"~/Projects/Framework/include",
-				);
-				INSTALL_PATH = /usr/local/lib;
 				PRODUCT_NAME = Framework;
-				SDKROOT = macosx;
 			};
 			name = Release;
 		};
 		1DEB91F008733DB70010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = MACOSX;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"/usr/local/include/boost-1_37/boost/tr1/tr1/",
-					"/usr/local/include/boost-1_37/",
-					"~/Projects/Framework/include",
-				);
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
 		1DEB91F108733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH)";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"/usr/local/include/boost-1_37/boost/tr1/tr1/",
-					"/usr/local/include/boost-1_37/",
-					"~/Projects/Framework/include",
-				);
 			};
 			name = Release;
 		};
