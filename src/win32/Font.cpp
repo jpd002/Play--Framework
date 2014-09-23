@@ -1,4 +1,5 @@
 #include "win32/Font.h"
+#include "win32/ClientDeviceContext.h"
 
 using namespace Framework;
 
@@ -21,4 +22,14 @@ HFONT Win32::CreateFont(const TCHAR* faceName, unsigned int height)
 	_tcsncpy(font.lfFaceName, faceName, LF_FACESIZE);
 	return CreateFontIndirect(&font);
 }
+
+SIZE Win32::GetFontSize(HFONT font)
+{
+	Framework::Win32::CClientDeviceContext dc(NULL);
+
+	dc.SelectObject(font);
+
+	SIZE s = { 0, 0 };
+	GetTextExtentPoint32(dc, _T("0"), 1, &s);
+	return s;
 }
