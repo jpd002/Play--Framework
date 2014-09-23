@@ -23,7 +23,7 @@ HFONT Win32::CreateFont(const TCHAR* faceName, unsigned int height)
 	return CreateFontIndirect(&font);
 }
 
-SIZE Win32::GetFontSize(HFONT font)
+SIZE Win32::GetFixedFontSize(HFONT font)
 {
 	Framework::Win32::CClientDeviceContext dc(NULL);
 
