@@ -1,5 +1,4 @@
-#ifndef _FONT_H_
-#define _FONT_H_
+#pragma once
 
 #include "win32/Window.h"
 
@@ -10,5 +9,3 @@ namespace Framework
 		HFONT CreateFont(const TCHAR*, unsigned int);
 	}
 }
-
-#endif
