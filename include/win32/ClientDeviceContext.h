@@ -1,5 +1,4 @@
-#ifndef _CLIENTDEVICECONTEXT_H_
-#define _CLIENTDEVICECONTEXT_H_
+#pragma once
 
 #include "win32/DeviceContext.h"
 
@@ -18,5 +17,3 @@ namespace Framework
 		};
 	}
 }
-
-#endif
