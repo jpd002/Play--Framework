@@ -40,5 +40,7 @@ namespace Framework
 		private:
 			RECT		m_rect;
 		};
+
+		CRect MakeRectPositionSize(int, int, int, int);
 	}
 }

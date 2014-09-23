@@ -121,3 +121,8 @@ bool CRect::PtIn(int nX, int nY) const
 	pt.y = nY;
 	return PtInRect(&m_rect, pt) != 0;
 }
+
+CRect Framework::Win32::MakeRectPositionSize(int left, int top, int width, int height)
+{
+	return CRect(left, top, left + width, top + height);
+}
