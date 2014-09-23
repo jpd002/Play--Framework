@@ -34,7 +34,7 @@ namespace Framework
 			CRect&		Inflate(int, int);
 			CRect&		ScreenToClient(HWND);
 			CRect&		ClientToScreen(HWND);
-			bool		PtIn(int, int);
+			bool		PtIn(int, int) const;
 
 		private:
 			RECT		m_rect;

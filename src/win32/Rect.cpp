@@ -103,7 +103,7 @@ CRect& CRect::ClientToScreen(HWND window)
 	return (*this);
 }
 
-bool CRect::PtIn(int nX, int nY)
+bool CRect::PtIn(int nX, int nY) const
 {
 	POINT pt;
 	pt.x = nX;
