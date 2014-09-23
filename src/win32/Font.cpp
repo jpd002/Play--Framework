@@ -13,7 +13,7 @@ HFONT Win32::CreateFont(const TCHAR* sFaceName, unsigned int nHeight)
 	Font.lfItalic			= FALSE;
 	Font.lfUnderline		= FALSE;
 	Font.lfStrikeOut		= FALSE;
-	Font.lfCharSet			= OEM_CHARSET;
+	Font.lfCharSet			= DEFAULT_CHARSET;
 	Font.lfOutPrecision		= OUT_DEFAULT_PRECIS;
 	Font.lfClipPrecision	= CLIP_DEFAULT_PRECIS;
 	Font.lfQuality			= DEFAULT_QUALITY;
