@@ -1,4 +1,5 @@
 #include "bitmap/TGA.h"
+#include <stdexcept>
 #include <assert.h>
 
 using namespace Framework;

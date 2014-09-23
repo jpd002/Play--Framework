@@ -1,5 +1,4 @@
-#ifndef _LAYOUTSTRETCH_H_
-#define _LAYOUTSTRETCH_H_
+#pragma once
 
 #include "LayoutObject.h"
 
@@ -9,18 +8,13 @@ namespace Framework
 	class CLayoutStretch : public CLayoutObject
 	{
 	public:
-							        CLayoutStretch(unsigned int, unsigned int);
+									CLayoutStretch(unsigned int, unsigned int);
 
-        static LayoutObjectPtr      Create(unsigned int = 1, unsigned int = 1);
+		static LayoutObjectPtr		Create(unsigned int = 1, unsigned int = 1);
 
-		unsigned int                GetPreferredWidth();
-		unsigned int                GetPreferredHeight();
-		void				        RefreshGeometry();
-
-	private:
-
+		unsigned int				GetPreferredWidth() override;
+		unsigned int				GetPreferredHeight() override;
+		void						RefreshGeometry() override;
 	};
 
 }
-
-#endif

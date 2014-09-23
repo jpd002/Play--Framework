@@ -1,16 +1,17 @@
+#include <algorithm>
 #include "layout/HorizontalLayout.h"
 
 using namespace Framework;
 
-CHorizontalLayout::CHorizontalLayout(unsigned int nSpacing) :
-CFlatLayout(1, 0, nSpacing)
+CHorizontalLayout::CHorizontalLayout(unsigned int spacing)
+: CFlatLayout(1, 0, spacing)
 {
 
 }
 
 FlatLayoutPtr CHorizontalLayout::Create(unsigned int spacing)
 {
-    return FlatLayoutPtr(new CHorizontalLayout(spacing));
+	return std::make_shared<CHorizontalLayout>(spacing);
 }
 
 unsigned int CHorizontalLayout::GetPreferredWidth()
@@ -20,36 +21,30 @@ unsigned int CHorizontalLayout::GetPreferredWidth()
 
 unsigned int CHorizontalLayout::GetPreferredHeight()
 {
-    unsigned int nHeight = 0;
-    for(ObjectList::iterator objectIterator(m_objects.begin()); 
-        objectIterator != m_objects.end(); objectIterator++)
-    {
-        const LayoutObjectPtr& object(*objectIterator);
-        if(object->GetPreferredHeight() > nHeight)
-        {
-            nHeight = object->GetPreferredHeight();
-        }
-    }
-
-    return nHeight;
+	unsigned int height = 0;
+	for(const auto& object : m_objects)
+	{
+		height = std::max(object->GetPreferredHeight(), height);
+	}
+	return height;
 }
 
-CLayoutBaseItem* CHorizontalLayout::CreateLayoutBaseItem(const LayoutObjectPtr& pObject)
+CLayoutBaseItem CHorizontalLayout::CreateLayoutBaseItem(const LayoutObjectPtr& object)
 {
-	return pObject->CreateHorizontalBaseLayoutItem();
+	return object->CreateHorizontalBaseLayoutItem();
 }
 
-void CHorizontalLayout::SetObjectRange(const LayoutObjectPtr& pObject, unsigned int nStart, unsigned int nEnd)
+void CHorizontalLayout::SetObjectRange(const LayoutObjectPtr& object, unsigned int start, unsigned int end)
 {
-	pObject->SetLeft(GetLeft() + nStart);
-	pObject->SetRight(GetLeft() + nEnd);
-	pObject->SetTop(GetTop());
-	pObject->SetBottom(GetBottom());
+	object->SetLeft(GetLeft() + start);
+	object->SetRight(GetLeft() + end);
+	object->SetTop(GetTop());
+	object->SetBottom(GetBottom());
 }
 
-unsigned int CHorizontalLayout::GetObjectPreferredSize(const LayoutObjectPtr& pObject)
+unsigned int CHorizontalLayout::GetObjectPreferredSize(const LayoutObjectPtr& object)
 {
-	return pObject->GetPreferredWidth();
+	return object->GetPreferredWidth();
 }
 
 unsigned int CHorizontalLayout::GetLayoutSize()

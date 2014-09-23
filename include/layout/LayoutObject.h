@@ -1,5 +1,4 @@
-#ifndef _LAYOUTOBJECT_H_
-#define _LAYOUTOBJECT_H_
+#pragma once
 
 #include <memory>
 
@@ -8,8 +7,8 @@
 namespace Framework
 {
 	class CLayoutBaseItem;
-
-    class CLayoutObject : public std::enable_shared_from_this<CLayoutObject>
+	
+	class CLayoutObject : public std::enable_shared_from_this<CLayoutObject>
 	{
 	public:
 								CLayoutObject(unsigned int, unsigned int);
@@ -36,21 +35,19 @@ namespace Framework
 		unsigned int			GetTop()		const;
 		unsigned int			GetBottom()		const;
 
-		CLayoutBaseItem*		CreateHorizontalBaseLayoutItem();
-		CLayoutBaseItem*		CreateVerticalBaseLayoutItem();
+		CLayoutBaseItem			CreateHorizontalBaseLayoutItem();
+		CLayoutBaseItem			CreateVerticalBaseLayoutItem();
 
 	private:
 
-		unsigned int			m_nLeft;
-		unsigned int			m_nRight;
-		unsigned int			m_nTop;
-		unsigned int			m_nBottom;
+		unsigned int			m_left = 0;
+		unsigned int			m_right = 0;
+		unsigned int			m_top = 0;
+		unsigned int			m_bottom = 0;
 
-		unsigned int			m_nHorizontalStretch;
-		unsigned int			m_nVerticalStretch;
+		unsigned int			m_horizontalStretch = 0;
+		unsigned int			m_verticalStretch = 0;
 	};
 
-    typedef std::shared_ptr<CLayoutObject> LayoutObjectPtr;
+	typedef std::shared_ptr<CLayoutObject> LayoutObjectPtr;
 };
-
-#endif

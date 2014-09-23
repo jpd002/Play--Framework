@@ -137,6 +137,8 @@
 		704DFAED17D5CB22003AB959 /* alloca_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = alloca_def.h; path = ../include/alloca_def.h; sourceTree = "<group>"; };
 		708661E618D44B1900B4E9CE /* GeneralSettings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = GeneralSettings.xcconfig; sourceTree = "<group>"; };
 		709C3B1D18D4BF02006DAF2C /* GeneralSettingsDebug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = GeneralSettingsDebug.xcconfig; sourceTree = "<group>"; };
+		70F6D79519CF95870087C371 /* ExternalDependencies.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = ExternalDependencies.xcconfig; sourceTree = "<group>"; };
+		70F6D79619CF95870087C371 /* GeneralSettingsRelease.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = GeneralSettingsRelease.xcconfig; sourceTree = "<group>"; };
 		7E1C41B31234236D00BB4E9C /* IosIStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosIStream.cpp; path = ../src/IosIStream.cpp; sourceTree = SOURCE_ROOT; };
 		7E1C41B41234236D00BB4E9C /* IosOStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosOStream.cpp; path = ../src/IosOStream.cpp; sourceTree = SOURCE_ROOT; };
 		7E1C41B51234236D00BB4E9C /* string_cast_sjis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = string_cast_sjis.cpp; path = ../src/string_cast_sjis.cpp; sourceTree = SOURCE_ROOT; };
@@ -333,8 +335,10 @@
 		709C3B1C18D4BD3A006DAF2C /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				70F6D79519CF95870087C371 /* ExternalDependencies.xcconfig */,
 				708661E618D44B1900B4E9CE /* GeneralSettings.xcconfig */,
 				709C3B1D18D4BF02006DAF2C /* GeneralSettingsDebug.xcconfig */,
+				70F6D79619CF95870087C371 /* GeneralSettingsRelease.xcconfig */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -596,7 +600,7 @@
 		};
 		1DEB922008733DC00010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 708661E618D44B1900B4E9CE /* GeneralSettings.xcconfig */;
+			baseConfigurationReference = 70F6D79619CF95870087C371 /* GeneralSettingsRelease.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/Framework.dst;
 				INSTALL_PATH = /usr/local/lib;

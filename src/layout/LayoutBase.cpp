@@ -9,135 +9,124 @@ CLayoutBase::~CLayoutBase()
 
 void CLayoutBase::Clear()
 {
-    m_items.clear();
+	m_items.clear();
 }
 
-void CLayoutBase::InsertItem(CLayoutBaseItem* pItem)
+void CLayoutBase::InsertItem(const CLayoutBaseItem& item)
 {
-    m_items.push_back(pItem);
+	m_items.push_back(item);
 }
 
-CLayoutBase::ItemIterator CLayoutBase::GetItemsBegin() const
+const CLayoutBase::ItemList& CLayoutBase::GetItems() const
 {
-    return m_items.begin();
-}
-
-CLayoutBase::ItemIterator CLayoutBase::GetItemsEnd() const
-{
-    return m_items.end();
+	return m_items;
 }
 
 unsigned int CLayoutBase::GetPreferredSize() const
 {
-    unsigned int nSize = 0;
+	unsigned int size = 0;
 
-    for(ItemIterator itemIterator(m_items.begin());
-        itemIterator != m_items.end(); itemIterator++)
-    {
-        const CLayoutBaseItem& item(*itemIterator);
-        nSize += item.GetPreferredSize();
-    }
+	for(const auto& item : m_items)
+	{
+		size += item.GetPreferredSize();
+	}
 
-    return nSize;
+	return size;
 }
 
 unsigned int CLayoutBase::GetTotalStretchUnits() const
 {
-    unsigned int nUnits = 0;
+	unsigned int units = 0;
 
-    for(ItemIterator itemIterator(m_items.begin());
-        itemIterator != m_items.end(); itemIterator++)
-    {
-        const CLayoutBaseItem& item(*itemIterator);
-        nUnits += item.GetStretch();
-    }
+	for(const auto& item : m_items)
+	{
+		units += item.GetStretch();
+	}
 
-    return nUnits;
+	return units;
 }
 
 bool CLayoutBase::HasOnlyNonStretchable() const
 {
-    for(ItemIterator itemIterator(m_items.begin());
-        itemIterator != m_items.end(); itemIterator++)
-    {
-        const CLayoutBaseItem& item(*itemIterator);
+	for(const auto& item : m_items)
+	{
 		if(item.GetStretch() != 0) return false;
 	}
 
 	return true;
 }
 
-void CLayoutBase::ComputeRanges(unsigned int nSize)
+void CLayoutBase::ComputeRanges(unsigned int size)
 {
-    unsigned int nSizeTotal = GetPreferredSize();
-    int nRest = static_cast<int>(nSize) - static_cast<int>(nSizeTotal);
+	unsigned int sizeTotal = GetPreferredSize();
+	int rest = static_cast<int>(size) - static_cast<int>(sizeTotal);
 
-    if(HasOnlyNonStretchable())
-    {
-        unsigned int nDim0 = 0, nDim1 = 0, i = 0;
-        for(ItemList::iterator itemIterator(m_items.begin());
-            m_items.end() != itemIterator; itemIterator++, i++)
-        {
-            CLayoutBaseItem& item(*itemIterator);
-            nDim1 = nDim0 + item.GetPreferredSize() + ((int)nRest / static_cast<int>(m_items.size()));
-            if(i == (m_items.size() - 1))
-            {
-                nDim1 = nSize;
-            }
-            item.SetRange(nDim0, nDim1);
-            nDim0 = nDim1;
-        }
-    }
-    else
-    {
-        if(nSize >= nSizeTotal)
-        {
-            unsigned int nStretchUnits = GetTotalStretchUnits();
-            unsigned int nDim0 = 0, nDim1 = 0, i = 0;
-            for(ItemList::iterator itemIterator(m_items.begin());
-                m_items.end() != itemIterator; itemIterator++, i++)
-            {
-                CLayoutBaseItem& item(*itemIterator);
-                if(item.GetStretch())
-                {
-                    nDim1 = nDim0 + ((item.GetStretch() * nRest) / (nStretchUnits)) + item.GetPreferredSize();
-                }
-                else 
-                {
-                    nDim1 = nDim0 + item.GetPreferredSize();
-                }
-                if(i == (m_items.size() - 1))
-                {
-                    nDim1 = nSize;
-                }
-                item.SetRange(nDim0, nDim1);
-                nDim0 = nDim1;
-            }
-        }
-        else
-        {
-            unsigned int nDim0 = 0, nDim1 = 0, i = 0;
-            for(ItemList::iterator itemIterator(m_items.begin());
-                m_items.end() != itemIterator; itemIterator++, i++)
-            {
-                CLayoutBaseItem& item(*itemIterator);
-                if(item.GetPreferredSize() != 0)
-                {
-                    int availableSize = (((int)nRest * (int)item.GetPreferredSize()) / (int)nSizeTotal);
-//                    assert(availableSize >= 0);
-                    nDim1 = nDim0 + item.GetPreferredSize() + availableSize;
-                    if(i == (m_items.size() - 1))
-                    {
-                        nDim1 = nSize;
-                    }
-                    item.SetRange(nDim0, nDim1);
-                }
-                else
-                {
-                    nDim1 = nDim0;
-                }
-                nDim0 = nDim1;
-            }
-        }
-    }
+	if(HasOnlyNonStretchable())
+	{
+		unsigned int dim0 = 0, dim1 = 0, i = 0;
+		for(auto itemIterator(m_items.begin());
+			m_items.end() != itemIterator; itemIterator++, i++)
+		{
+			auto& item(*itemIterator);
+			dim1 = dim0 + item.GetPreferredSize() + ((int)rest / static_cast<int>(m_items.size()));
+			if(i == (m_items.size() - 1))
+			{
+				dim1 = size;
+			}
+			item.SetRange(dim0, dim1);
+			dim0 = dim1;
+		}
+	}
+	else
+	{
+		if(size >= sizeTotal)
+		{
+			unsigned int stretchUnits = GetTotalStretchUnits();
+			unsigned int dim0 = 0, dim1 = 0, i = 0;
+			for(auto itemIterator(m_items.begin());
+				m_items.end() != itemIterator; itemIterator++, i++)
+			{
+				auto& item(*itemIterator);
+				if(item.GetStretch())
+				{
+					dim1 = dim0 + ((item.GetStretch() * rest) / (stretchUnits)) + item.GetPreferredSize();
+				}
+				else 
+				{
+					dim1 = dim0 + item.GetPreferredSize();
+				}
+				if(i == (m_items.size() - 1))
+				{
+					dim1 = size;
+				}
+				item.SetRange(dim0, dim1);
+				dim0 = dim1;
+			}
+		}
+		else
+		{
+			unsigned int dim0 = 0, dim1 = 0, i = 0;
+			for(auto itemIterator(m_items.begin());
+				m_items.end() != itemIterator; itemIterator++, i++)
+			{
+				auto& item(*itemIterator);
+				if(item.GetPreferredSize() != 0)
+				{
+					int availableSize = (((int)rest * (int)item.GetPreferredSize()) / (int)sizeTotal);
+					//assert(availableSize >= 0);
+					dim1 = dim0 + item.GetPreferredSize() + availableSize;
+					if(i == (m_items.size() - 1))
+					{
+						dim1 = size;
+					}
+					item.SetRange(dim0, dim1);
+				}
+				else
+				{
+					dim1 = dim0;
+				}
+				dim0 = dim1;
+			}
+		}
+	}
 }

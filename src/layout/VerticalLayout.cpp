@@ -1,32 +1,27 @@
+#include <algorithm>
 #include "layout/VerticalLayout.h"
 
 using namespace Framework;
 
-CVerticalLayout::CVerticalLayout(unsigned int nSpacing) :
-CFlatLayout(0, 1, nSpacing)
+CVerticalLayout::CVerticalLayout(unsigned int spacing)
+: CFlatLayout(0, 1, spacing)
 {
 
 }
 
 FlatLayoutPtr CVerticalLayout::Create(unsigned int spacing)
 {
-    return FlatLayoutPtr(new CVerticalLayout(spacing));
+	return std::make_shared<CVerticalLayout>(spacing);
 }
 
 unsigned int CVerticalLayout::GetPreferredWidth()
 {
-    unsigned int nWidth = 0;
-    for(ObjectList::iterator objectIterator(m_objects.begin()); 
-        objectIterator != m_objects.end(); objectIterator++)
-    {
-        const LayoutObjectPtr& object(*objectIterator);
-        if(object->GetPreferredWidth() > nWidth)
-        {
-            nWidth = object->GetPreferredWidth();
-        }
-    }
-
-    return nWidth;
+	unsigned int width = 0;
+	for(const auto& object : m_objects)
+	{
+		width = std::max(object->GetPreferredWidth(), width);
+	}
+	return width;
 }
 
 unsigned int CVerticalLayout::GetPreferredHeight()
@@ -34,22 +29,22 @@ unsigned int CVerticalLayout::GetPreferredHeight()
 	return GetPreferredSize();
 }
 
-CLayoutBaseItem* CVerticalLayout::CreateLayoutBaseItem(const LayoutObjectPtr& pObject)
+CLayoutBaseItem CVerticalLayout::CreateLayoutBaseItem(const LayoutObjectPtr& object)
 {
-	return pObject->CreateVerticalBaseLayoutItem();
+	return object->CreateVerticalBaseLayoutItem();
 }
 
-void CVerticalLayout::SetObjectRange(const LayoutObjectPtr& pObject, unsigned int nStart, unsigned int nEnd)
+void CVerticalLayout::SetObjectRange(const LayoutObjectPtr& object, unsigned int start, unsigned int end)
 {
-	pObject->SetLeft(GetLeft());
-	pObject->SetRight(GetRight());
-	pObject->SetTop(GetTop() + nStart);
-	pObject->SetBottom(GetTop() + nEnd);
+	object->SetLeft(GetLeft());
+	object->SetRight(GetRight());
+	object->SetTop(GetTop() + start);
+	object->SetBottom(GetTop() + end);
 }
 
-unsigned int CVerticalLayout::GetObjectPreferredSize(const LayoutObjectPtr& pObject)
+unsigned int CVerticalLayout::GetObjectPreferredSize(const LayoutObjectPtr& object)
 {
-	return pObject->GetPreferredHeight();
+	return object->GetPreferredHeight();
 }
 
 unsigned int CVerticalLayout::GetLayoutSize()

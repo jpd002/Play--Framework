@@ -1,5 +1,4 @@
-#ifndef _HORIZONTALLAYOUT_H_
-#define _HORIZONTALLAYOUT_H_
+#pragma once
 
 #include "FlatLayout.h"
 
@@ -8,20 +7,18 @@ namespace Framework
 
 	class CHorizontalLayout : public CFlatLayout
 	{
-	public:	
-        static FlatLayoutPtr    Create(unsigned int = LAYOUT_DEFAULT_SPACING); 
-		unsigned int		    GetPreferredWidth();
-		unsigned int		    GetPreferredHeight();
+	public:
+								CHorizontalLayout(unsigned int);
+
+		static FlatLayoutPtr	Create(unsigned int = LAYOUT_DEFAULT_SPACING);
+		unsigned int			GetPreferredWidth() override;
+		unsigned int			GetPreferredHeight() override;
 
 	protected:
-							    CHorizontalLayout(unsigned int);
-		CLayoutBaseItem*	    CreateLayoutBaseItem(const LayoutObjectPtr&);
-		void				    SetObjectRange(const LayoutObjectPtr&, unsigned int, unsigned int);
-		unsigned int		    GetObjectPreferredSize(const LayoutObjectPtr&);
-		unsigned int		    GetLayoutSize();
+		CLayoutBaseItem			CreateLayoutBaseItem(const LayoutObjectPtr&) override;
+		void					SetObjectRange(const LayoutObjectPtr&, unsigned int, unsigned int) override;
+		unsigned int			GetObjectPreferredSize(const LayoutObjectPtr&) override;
+		unsigned int			GetLayoutSize() override;
 	};
 
 }
-
-
-#endif

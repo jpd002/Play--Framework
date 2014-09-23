@@ -2,10 +2,11 @@
 
 using namespace Framework;
 
-CFlatLayout::CFlatLayout(unsigned int nStretchX, unsigned int nStretchY, unsigned int nSpacing) :
-CLayoutObject(nStretchX, nStretchY)
+CFlatLayout::CFlatLayout(unsigned int stretchX, unsigned int stretchY, unsigned int spacing) 
+: CLayoutObject(stretchX, stretchY)
+, m_spacing(spacing)
 {
-	m_nSpacing = nSpacing;
+
 }
 
 CFlatLayout::~CFlatLayout()
@@ -15,33 +16,30 @@ CFlatLayout::~CFlatLayout()
 
 void CFlatLayout::InsertObject(const LayoutObjectPtr& object)
 {
-    if(m_objects.size() != 0)
+	if(m_objects.size() != 0)
 	{
-		if(m_nSpacing != 0)
+		if(m_spacing != 0)
 		{
-			m_LayoutBase.InsertItem(new CLayoutBaseItem(m_nSpacing, 0));
+			m_layoutBase.InsertItem(CLayoutBaseItem(m_spacing, 0));
 		}
 	}
 	m_objects.push_back(object);
-	m_LayoutBase.InsertItem(CreateLayoutBaseItem(object));
+	m_layoutBase.InsertItem(CreateLayoutBaseItem(object));
 }
 
 unsigned int CFlatLayout::GetPreferredSize() const
 {
-	return m_LayoutBase.GetPreferredSize();
+	return m_layoutBase.GetPreferredSize();
 }
 
 void CFlatLayout::RefreshGeometry()
 {
-	m_LayoutBase.ComputeRanges(GetLayoutSize());
-
-    for(CLayoutBase::ItemIterator itemIterator(m_LayoutBase.GetItemsBegin());
-        itemIterator != m_LayoutBase.GetItemsEnd(); itemIterator++)
-    {
-		const CLayoutBaseItem& item(*itemIterator);
-        LayoutObjectPtr object = item.GetObject();
-        if(!object) continue;
-        SetObjectRange(object, item.GetRangeStart(), item.GetRangeEnd());
-        object->RefreshGeometry();
-    }
+	m_layoutBase.ComputeRanges(GetLayoutSize());
+	for(const auto& item : m_layoutBase.GetItems())
+	{
+		const auto& object = item.GetObject();
+		if(!object) continue;
+		SetObjectRange(object, item.GetRangeStart(), item.GetRangeEnd());
+		object->RefreshGeometry();
+	}
 }
