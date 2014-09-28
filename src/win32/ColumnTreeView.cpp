@@ -3,6 +3,7 @@
 
 #include "win32/ColumnTreeView.h"
 #include "win32/ClientDeviceContext.h"
+#include "win32/Font.h"
 
 #define CLSNAME						_T("CColumnTreeView")
 
@@ -146,9 +147,8 @@ void CColumnTreeView::UpdateLayout()
 
 void CColumnTreeView::ComputeHeaderHeight()
 {
-	CClientDeviceContext DeviceContext(m_hWnd);
-
-	m_nHeaderHeight = DeviceContext.GetFontHeight(m_pHeader->GetFont()) + 7;
+	auto fontSize = Win32::GetFixedFontSize(m_pHeader->GetFont());
+	m_nHeaderHeight = fontSize.cy + 7;
 }
 
 void CColumnTreeView::DrawItem(NMTVCUSTOMDRAW* pCustomDraw)

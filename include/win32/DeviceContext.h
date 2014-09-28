@@ -15,8 +15,6 @@ namespace Framework
 
 							operator HDC();
 
-			SIZE			GetFontSize(HFONT);
-			unsigned int	GetFontHeight(HFONT);
 			void			FillRect(RECT*, COLORREF);
 			void			DrawLine(int, int, int, int);
 			void			DrawLine(int, int, int, int, COLORREF);
