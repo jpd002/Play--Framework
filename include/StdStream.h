@@ -1,5 +1,4 @@
-#ifndef _STDSTREAM_H_
-#define _STDSTREAM_H_
+#pragma once
 
 #include "Stream.h"
 #include <stdio.h>
@@ -23,12 +22,12 @@ namespace Framework
 						operator FILE*() const;
 		CStdStream&		operator =(CStdStream&&);
 		
-		void			Seek(int64, STREAM_SEEK_DIRECTION);
-		uint64			Tell();
-		uint64			Read(void*, uint64);
-		uint64			Write(const void*, uint64);
-		bool			IsEOF();
-		void			Flush();
+		void			Seek(int64, STREAM_SEEK_DIRECTION) override;
+		uint64			Tell() override;
+		uint64			Read(void*, uint64) override;
+		uint64			Write(const void*, uint64) override;
+		bool			IsEOF() override;
+		void			Flush() override;
 		void			Close();
 		
 	private:
@@ -39,5 +38,3 @@ namespace Framework
 	};
 
 }
-
-#endif
