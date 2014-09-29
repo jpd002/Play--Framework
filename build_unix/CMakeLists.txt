@@ -8,6 +8,7 @@ include_directories(../include /usr/local/include /usr/local/include/c++/v1 /usr
 add_library(Framework 
 	../src/Base64.cpp
 	../src/Config.cpp
+	../src/Endian.cpp
 	../src/Stream.cpp 
 	../src/StdStream.cpp 
 	../src/MemStream.cpp
