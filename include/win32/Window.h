@@ -74,6 +74,7 @@ namespace Framework
 			virtual long			OnNotify(WPARAM, NMHDR*);
 			virtual long			OnWndProc(unsigned int, WPARAM, LPARAM);
 			virtual long			OnSize(unsigned int, unsigned int, unsigned int);
+			virtual long			OnMove(int, int);
 			virtual long			OnLeftButtonUp(int, int);
 			virtual long			OnLeftButtonDown(int, int);
 			virtual long			OnLeftButtonDblClk(int, int);

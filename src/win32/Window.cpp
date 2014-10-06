@@ -369,6 +369,9 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 	case WM_SIZE:
 		if(!pThis->OnSize((unsigned int)wParam, LOWORD(lParam), HIWORD(lParam))) return FALSE;
 		break;
+	case WM_MOVE:
+		if(!pThis->OnMove(LOWORD(lParam), HIWORD(lParam))) return FALSE;
+		break;
 	case WM_SETFOCUS:
 		pThis->OnSetFocus();
 		break;
@@ -527,6 +530,11 @@ long CWindow::OnNotify(WPARAM wParam, NMHDR* pHDR)
 }
 
 long CWindow::OnSize(unsigned int nType, unsigned int nWidth, unsigned int nHeight)
+{
+	return TRUE;
+}
+
+long CWindow::OnMove(int x, int y)
 {
 	return TRUE;
 }
