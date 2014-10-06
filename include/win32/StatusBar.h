@@ -1,5 +1,4 @@
-#ifndef _WIN32_STATUSBAR_H_
-#define _WIN32_STATUSBAR_H_
+#pragma once
 
 #include "win32/Window.h"
 
@@ -11,8 +10,10 @@ namespace Framework
 		class CStatusBar : public CWindow
 		{
 		public:
-							CStatusBar(HWND);
+							CStatusBar(HWND = 0);
 			virtual			~CStatusBar();
+
+			CStatusBar&		operator =(CStatusBar&&);
 
 			void			SetText(unsigned int, const TCHAR*);
 			void			SetParts(unsigned int, const double*);
@@ -25,5 +26,3 @@ namespace Framework
 	}
 
 }
-
-#endif

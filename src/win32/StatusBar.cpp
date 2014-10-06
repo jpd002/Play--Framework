@@ -16,6 +16,13 @@ CStatusBar::~CStatusBar()
 
 }
 
+CStatusBar& CStatusBar::operator =(CStatusBar&& rhs)
+{
+	CWindow::Reset();
+	CWindow::MoveFrom(std::move(rhs));
+	return (*this);
+}
+
 void CStatusBar::SetText(unsigned int nPanelIdx, const TCHAR* sText)
 {
 	SendMessage(m_hWnd, SB_SETTEXT, nPanelIdx, reinterpret_cast<LPARAM>(sText));
