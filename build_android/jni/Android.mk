@@ -1,8 +1,8 @@
 LOCAL_PATH:= $(call my-dir)
 
-include $(CLEAR_VARS)
+include $(LOCAL_PATH)/ExternalDependencies.mk
 
-BOOST_PATH			:= /cygdrive/c/Components/boost_trunk
+include $(CLEAR_VARS)
 
 LOCAL_MODULE		:= libFramework
 LOCAL_SRC_FILES		:= 	../../src/Base64.cpp \
