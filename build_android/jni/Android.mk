@@ -22,6 +22,7 @@ LOCAL_SRC_FILES		:= 	../../src/Base64.cpp \
 						../../src/layout/LayoutObject.cpp \
 						../../src/layout/LayoutStretch.cpp \
 						../../src/layout/VerticalLayout.cpp \
+						../../src/MemStream.cpp \
 						../../src/PtrStream.cpp \
 						../../src/Stream.cpp \
 						../../src/StreamBitStream.cpp \
