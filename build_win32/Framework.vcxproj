@@ -256,6 +256,9 @@
     <ClInclude Include="..\include\zip\ZipInflateStream.h" />
     <ClInclude Include="..\include\zip\ZipStoreStream.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{553CE050-A97E-4E6E-AE84-057A1F0FA45D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -307,7 +310,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="GeneralSettings.props" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="UserMacros">
+    <NuGetPackageImportStamp>69171fb0</NuGetPackageImportStamp>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)$(PlatformName)\$(Configuration)\</OutDir>
     <IntDir>$(PlatformName)\$(ProjectName)\$(Configuration)\</IntDir>
@@ -386,5 +391,16 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\..\play\build_win32\packages\zlib.redist.1.2.8.7\build\native\zlib.redist.targets" Condition="Exists('..\..\play\build_win32\packages\zlib.redist.1.2.8.7\build\native\zlib.redist.targets')" />
+    <Import Project="..\..\play\build_win32\packages\zlib.1.2.8.7\build\native\zlib.targets" Condition="Exists('..\..\play\build_win32\packages\zlib.1.2.8.7\build\native\zlib.targets')" />
+    <Import Project="..\..\play\build_win32\packages\boost.1.57.0.0\build\native\boost.targets" Condition="Exists('..\..\play\build_win32\packages\boost.1.57.0.0\build\native\boost.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\play\build_win32\packages\zlib.redist.1.2.8.7\build\native\zlib.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\play\build_win32\packages\zlib.redist.1.2.8.7\build\native\zlib.redist.targets'))" />
+    <Error Condition="!Exists('..\..\play\build_win32\packages\zlib.1.2.8.7\build\native\zlib.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\play\build_win32\packages\zlib.1.2.8.7\build\native\zlib.targets'))" />
+    <Error Condition="!Exists('..\..\play\build_win32\packages\boost.1.57.0.0\build\native\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\play\build_win32\packages\boost.1.57.0.0\build\native\boost.targets'))" />
+  </Target>
 </Project>

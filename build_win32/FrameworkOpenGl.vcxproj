@@ -27,6 +27,9 @@
     <ClInclude Include="..\include\opengl\Program.h" />
     <ClInclude Include="..\include\opengl\Shader.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{482892BB-6D81-4CA4-BFD5-01A756C21292}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -78,7 +81,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="GeneralSettingsOpenGl.props" />
   </ImportGroup>
-  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="UserMacros">
+    <NuGetPackageImportStamp>368c6c49</NuGetPackageImportStamp>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)$(PlatformName)\$(Configuration)\</OutDir>
     <IntDir>$(PlatformName)\$(ProjectName)\$(Configuration)\</IntDir>
@@ -101,7 +106,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -114,7 +119,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -129,7 +134,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,7 +151,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -157,5 +162,14 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\..\play\build_win32\packages\rxd_glew.redist.1.10.0.1\build\native\rxd_glew.redist.targets" Condition="Exists('..\..\play\build_win32\packages\rxd_glew.redist.1.10.0.1\build\native\rxd_glew.redist.targets')" />
+    <Import Project="..\..\play\build_win32\packages\rxd_glew.1.10.0.1\build\native\rxd_glew.targets" Condition="Exists('..\..\play\build_win32\packages\rxd_glew.1.10.0.1\build\native\rxd_glew.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\play\build_win32\packages\rxd_glew.redist.1.10.0.1\build\native\rxd_glew.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\play\build_win32\packages\rxd_glew.redist.1.10.0.1\build\native\rxd_glew.redist.targets'))" />
+    <Error Condition="!Exists('..\..\play\build_win32\packages\rxd_glew.1.10.0.1\build\native\rxd_glew.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\play\build_win32\packages\rxd_glew.1.10.0.1\build\native\rxd_glew.targets'))" />
+  </Target>
 </Project>

@@ -9,7 +9,7 @@
     <ClCompile />
     <Link />
     <ClCompile>
-      <AdditionalIncludeDirectories>$(GLEW_PATH)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
 </Project>
