@@ -3,3 +3,4 @@ Debug
 Release
 *.ipch
 *.userprops
+build_win32/packages/
