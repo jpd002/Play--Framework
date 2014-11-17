@@ -67,19 +67,19 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="GeneralSettingsOpenGl.props" />
+    <Import Project="GeneralSettings.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="GeneralSettingsOpenGl.props" />
+    <Import Project="GeneralSettings.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="GeneralSettingsOpenGl.props" />
+    <Import Project="GeneralSettings.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="GeneralSettingsOpenGl.props" />
+    <Import Project="GeneralSettings.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros">
     <NuGetPackageImportStamp>368c6c49</NuGetPackageImportStamp>
@@ -162,14 +162,12 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\..\play\build_win32\packages\rxd_glew.redist.1.10.0.1\build\native\rxd_glew.redist.targets" Condition="Exists('..\..\play\build_win32\packages\rxd_glew.redist.1.10.0.1\build\native\rxd_glew.redist.targets')" />
-    <Import Project="..\..\play\build_win32\packages\rxd_glew.1.10.0.1\build\native\rxd_glew.targets" Condition="Exists('..\..\play\build_win32\packages\rxd_glew.1.10.0.1\build\native\rxd_glew.targets')" />
+    <Import Project="..\..\NuGetPackages\rxd_glew.1.10.0.1\build\native\rxd_glew.targets" Condition="Exists('..\..\NuGetPackages\rxd_glew.1.10.0.1\build\native\rxd_glew.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\play\build_win32\packages\rxd_glew.redist.1.10.0.1\build\native\rxd_glew.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\play\build_win32\packages\rxd_glew.redist.1.10.0.1\build\native\rxd_glew.redist.targets'))" />
-    <Error Condition="!Exists('..\..\play\build_win32\packages\rxd_glew.1.10.0.1\build\native\rxd_glew.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\play\build_win32\packages\rxd_glew.1.10.0.1\build\native\rxd_glew.targets'))" />
+    <Error Condition="!Exists('..\..\NuGetPackages\rxd_glew.1.10.0.1\build\native\rxd_glew.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\NuGetPackages\rxd_glew.1.10.0.1\build\native\rxd_glew.targets'))" />
   </Target>
 </Project>
