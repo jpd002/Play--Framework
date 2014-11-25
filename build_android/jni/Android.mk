@@ -12,6 +12,7 @@ LOCAL_SRC_FILES		:= 	../../src/Base64.cpp \
 						../../src/bitmap/PNG.cpp \
 						../../src/bitmap/TGA.cpp \
 						../../src/BitStream.cpp \
+						../../src/Config.cpp \
 						../../src/Endian.cpp \
 						../../src/idct/IEEE1180.cpp \
 						../../src/layout/FlatLayout.cpp \
@@ -23,6 +24,20 @@ LOCAL_SRC_FILES		:= 	../../src/Base64.cpp \
 						../../src/layout/LayoutStretch.cpp \
 						../../src/layout/VerticalLayout.cpp \
 						../../src/MemStream.cpp \
+						../../src/mpeg2/CodedBlockPatternTable.cpp \
+						../../src/mpeg2/DcSizeChrominanceTable.cpp \
+						../../src/mpeg2/DcSizeLuminanceTable.cpp \
+						../../src/mpeg2/DctCoefficientTable.cpp \
+						../../src/mpeg2/DctCoefficientTable0.cpp \
+						../../src/mpeg2/DctCoefficientTable1.cpp \
+						../../src/mpeg2/InverseScanTable.cpp \
+						../../src/mpeg2/MacroblockAddressIncrementTable.cpp \
+						../../src/mpeg2/MacroblockTypeBTable.cpp \
+						../../src/mpeg2/MacroblockTypeITable.cpp \
+						../../src/mpeg2/MacroblockTypePTable.cpp \
+						../../src/mpeg2/MotionCodeTable.cpp \
+						../../src/mpeg2/QuantiserScaleTable.cpp \
+						../../src/mpeg2/VLCTable.cpp \
 						../../src/PathUtils.cpp \
 						../../src/PtrStream.cpp \
 						../../src/Stream.cpp \
@@ -33,7 +48,14 @@ LOCAL_SRC_FILES		:= 	../../src/Base64.cpp \
 						../../src/xml/Node.cpp \
 						../../src/xml/Parser.cpp \
 						../../src/xml/Utils.cpp \
-						../../src/xml/Writer.cpp
+						../../src/xml/Writer.cpp \
+						../../src/zip/ZipArchiveReader.cpp \
+						../../src/zip/ZipArchiveWriter.cpp \
+						../../src/zip/ZipDeflateStream.cpp \
+						../../src/zip/ZipFile.cpp \
+						../../src/zip/ZipInflateStream.cpp \
+						../../src/zip/ZipStoreStream.cpp
+LOCAL_CFLAGS			:= -Wno-extern-c-compat
 LOCAL_C_INCLUDES		:= $(BOOST_PATH) $(LOCAL_PATH)/../../include
 LOCAL_CPP_FEATURES		:= exceptions rtti
 
