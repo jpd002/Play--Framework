@@ -78,7 +78,25 @@ boost::filesystem::path PathUtils::GetPersonalDataPath()
 	return GetRoamingDataPath();
 }
 
-#else	// DEFINED(__APPLE__)
+#elif defined(__ANDROID__)
+
+boost::filesystem::path PathUtils::GetAppResourcesPath()
+{
+	//This won't work for Android
+	return boost::filesystem::path();
+}
+
+boost::filesystem::path PathUtils::GetRoamingDataPath()
+{
+	return boost::filesystem::path();
+}
+
+boost::filesystem::path PathUtils::GetPersonalDataPath()
+{
+	return GetRoamingDataPath();
+}
+
+#else	// !DEFINED(__ANDROID__) || !DEFINED(__APPLE__)
 
 #include <pwd.h>
 
