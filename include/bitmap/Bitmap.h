@@ -60,6 +60,8 @@ namespace Framework
 		CBitmap			Resize(unsigned int, unsigned int) const;
 		CBitmap			ResizeCanvas(unsigned int, unsigned int) const;
 
+		void			DrawLine(int x1, int y1, int x2, int y2, const CColor&);
+
 	private:
 		void			CopyFrom(const CBitmap&);
 		void			MoveFrom(CBitmap&&);

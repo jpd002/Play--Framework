@@ -289,6 +289,81 @@ CBitmap CBitmap::ResizeCanvas(unsigned int newWidth, unsigned int newHeight) con
 	return result;
 }
 
+void CBitmap::DrawLine(int x1, int y1, int x2, int y2, const CColor& color)
+{
+	uint32 convertedColor = (color.r << 0) | (color.g << 8) | (color.b << 16) | (color.a << 24);
+
+	assert(m_bpp == 32);
+
+	if((x1 < 0) && (x2 < 0)) return;
+	if((x1 >= m_width) && (x2 >= m_width)) return;
+
+	if((y1 < 0) && (y2 < 0)) return;
+	if((y1 >= m_height) && (y2 >= m_height)) return;
+
+	int dx = x2 - x1;
+	int dy = y2 - y1;
+
+	if((dx == 0) && (dy == 0)) return;
+
+	float error = 0;
+
+	if(abs(dy) < abs(dx))
+	{
+		float deltaErr = fabs(static_cast<float>(dy) / static_cast<float>(dx));
+		if(x1 > x2) 
+		{
+			std::swap(x1, x2);
+			std::swap(y1, y2);
+			dy = -dy;
+		}
+		int y = y1;
+		for(int x = x1; x <= x2; x++)
+		{
+			if(
+				(x >= 0) && (x < m_width) &&
+				(y >= 0) && (y < m_height)
+				)
+			{
+				reinterpret_cast<uint32*>(m_pixels)[x + (y * m_width)] = convertedColor;
+			}
+			error = error + deltaErr;
+			if(error >= 0.5)
+			{
+				y += (dy >= 0) ? 1 : -1;
+				error -= 1.0f;
+			}
+		}
+	}
+	else
+	{
+		float deltaErr = fabs(static_cast<float>(dx) / static_cast<float>(dy));
+		if(y1 > y2) 
+		{
+			std::swap(x1, x2);
+			std::swap(y1, y2);
+			dx = -dx;
+		}
+		int x = x1;
+		for(int y = y1; y <= y2; y++)
+		{
+			if(
+				(x >= 0) && (x < m_width) &&
+				(y >= 0) && (y < m_height)
+				)
+			{
+				reinterpret_cast<uint32*>(m_pixels)[x + (y * m_width)] = convertedColor;
+			}
+			error = error + deltaErr;
+			if(error >= 0.5)
+			{
+				x += (dx >= 0) ? 1 : -1;
+				error -= 1.0f;
+			}
+		}
+	}
+}
+
 void CBitmap::CopyFrom(const CBitmap& src)
 {
 	if(src.GetPixelsSize() != GetPixelsSize())
