@@ -80,6 +80,8 @@ boost::filesystem::path PathUtils::GetPersonalDataPath()
 
 #elif defined(__ANDROID__)
 
+static boost::filesystem::path s_filesDirPath;
+
 boost::filesystem::path PathUtils::GetAppResourcesPath()
 {
 	//This won't work for Android
@@ -88,12 +90,17 @@ boost::filesystem::path PathUtils::GetAppResourcesPath()
 
 boost::filesystem::path PathUtils::GetRoamingDataPath()
 {
-	return boost::filesystem::path();
+	return s_filesDirPath;
 }
 
 boost::filesystem::path PathUtils::GetPersonalDataPath()
 {
-	return GetRoamingDataPath();
+	return s_filesDirPath;
+}
+
+void PathUtils::SetFilesDirPath(const char* filesDirPath)
+{
+	s_filesDirPath = filesDirPath;
 }
 
 #else	// !DEFINED(__ANDROID__) || !DEFINED(__APPLE__)

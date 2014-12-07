@@ -1,8 +1,6 @@
-#ifndef _PATHUTILS_H_
-#define _PATHUTILS_H_
+#pragma once
 
-#include <boost/filesystem/path.hpp>
-#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem.hpp>
 
 namespace Framework
 {
@@ -14,13 +12,14 @@ namespace Framework
 		
 #ifdef _WIN32
 		boost::filesystem::path		GetPathFromCsidl(int);
-#endif
+#endif	//WIN32
 #if defined(__APPLE__)
 		boost::filesystem::path		GetSettingsPath();
 #endif // DEFINED(__APPLE__)
+#if defined(__ANDROID__)
+		void						SetFilesDirPath(const char*);
+#endif
 
 		void						EnsurePathExists(const boost::filesystem::path&);
 	};
 };
-
-#endif
