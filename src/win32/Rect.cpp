@@ -12,11 +12,6 @@ CRect::CRect(const RECT& Source)
 	CopyRect(&m_rect, &Source);
 }
 
-CRect::~CRect()
-{
-
-}
-
 CRect::operator RECT*()
 {
 	return &m_rect;

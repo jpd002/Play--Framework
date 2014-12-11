@@ -12,7 +12,6 @@ namespace Framework
 		public:
 						CRect(int, int, int, int);
 						CRect(const RECT&);
-			virtual		~CRect();
 
 						operator RECT*();
 						operator RECT&();
