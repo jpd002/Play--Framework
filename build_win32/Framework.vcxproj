@@ -97,6 +97,9 @@
     <ClCompile Include="..\src\win32\MenuItem.cpp" />
     <ClCompile Include="..\src\win32\ModalWindow.cpp" />
     <ClCompile Include="..\src\win32\Progress.cpp" />
+    <ClCompile Include="..\src\win32\PropertyGrid.cpp" />
+    <ClCompile Include="..\src\win32\PropertyGridEdit.cpp" />
+    <ClCompile Include="..\src\win32\PropertyGridListBox.cpp" />
     <ClCompile Include="..\src\win32\Rect.cpp" />
     <ClCompile Include="..\src\win32\RichTextEdit.cpp" />
     <ClCompile Include="..\src\win32\ScrollBar.cpp" />
@@ -228,6 +231,9 @@
     <ClInclude Include="..\include\win32\MenuItem.h" />
     <ClInclude Include="..\include\win32\ModalWindow.h" />
     <ClInclude Include="..\include\win32\Progress.h" />
+    <ClInclude Include="..\include\win32\PropertyGrid.h" />
+    <ClInclude Include="..\include\win32\PropertyGridEdit.h" />
+    <ClInclude Include="..\include\win32\PropertyGridListBox.h" />
     <ClInclude Include="..\include\win32\Rect.h" />
     <ClInclude Include="..\include\win32\RichTextEdit.h" />
     <ClInclude Include="..\include\win32\ScrollBar.h" />
