@@ -1,5 +1,6 @@
 #include "win32/Edit.h"
 #include "win32/DefaultFonts.h"
+#include <CommCtrl.h>
 
 using namespace Framework;
 using namespace Framework::Win32;
@@ -11,7 +12,7 @@ CEdit::CEdit(HWND hWnd)
 
 CEdit::CEdit(HWND hParent, const RECT& rect, const TCHAR* sText, unsigned long nStyle, unsigned long nStyleEx)
 {
-	Create(nStyleEx, _T("EDIT"), sText, WS_VISIBLE | WS_CHILD | nStyle, rect, hParent, NULL);
+	Create(nStyleEx, WC_EDIT, sText, WS_VISIBLE | WS_CHILD | nStyle, rect, hParent, NULL);
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 
