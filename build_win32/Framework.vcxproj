@@ -79,6 +79,7 @@
     <ClCompile Include="..\src\win32\DefaultWndClass.cpp" />
     <ClCompile Include="..\src\win32\DeviceContext.cpp" />
     <ClCompile Include="..\src\win32\Dialog.cpp" />
+    <ClCompile Include="..\src\win32\DpiUtils.cpp" />
     <ClCompile Include="..\src\win32\Edit.cpp" />
     <ClCompile Include="..\src\win32\FileDialog.cpp" />
     <ClCompile Include="..\src\win32\FindFile.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="..\include\win32\DefaultWndClass.h" />
     <ClInclude Include="..\include\win32\DeviceContext.h" />
     <ClInclude Include="..\include\win32\Dialog.h" />
+    <ClInclude Include="..\include\win32\DpiUtils.h" />
     <ClInclude Include="..\include\win32\Edit.h" />
     <ClInclude Include="..\include\win32\FileDialog.h" />
     <ClInclude Include="..\include\win32\FindFile.h" />
