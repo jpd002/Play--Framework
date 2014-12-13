@@ -1,5 +1,6 @@
 #include "win32/ListBox.h"
 #include "win32/DefaultFonts.h"
+#include <CommCtrl.h>
 
 using namespace Framework;
 using namespace Framework::Win32;
@@ -11,7 +12,7 @@ CListBox::CListBox(HWND hWnd)
 
 CListBox::CListBox(HWND hParent, const RECT& rect, unsigned long nStyle, unsigned long nStyleEx)
 {
-	Create(nStyleEx, _T("LISTBOX"), _T(""), WS_VISIBLE | WS_CHILD | nStyle, rect, hParent, NULL);
+	Create(nStyleEx, WC_LISTBOX, _T(""), WS_VISIBLE | WS_CHILD | nStyle, rect, hParent, NULL);
 	SetFont(CDefaultFonts::GetMessageFont());
 }
 
@@ -50,4 +51,11 @@ INT_PTR CListBox::GetItemData(unsigned int index)
 void CListBox::SetItemData(unsigned int index, INT_PTR itemData)
 {
 	SendMessage(m_hWnd, LB_SETITEMDATA, index, itemData);
+}
+
+CRect CListBox::GetItemRect(unsigned int index)
+{
+	CRect result(0, 0, 0, 0);
+	SendMessage(m_hWnd, LB_GETITEMRECT, index, reinterpret_cast<LPARAM>(&result));
+	return result;
 }

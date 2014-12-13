@@ -22,6 +22,8 @@ namespace Framework
 
 			INT_PTR			GetItemData(unsigned int);
 			void			SetItemData(unsigned int, INT_PTR);
+
+			CRect			GetItemRect(unsigned int);
 		};
 	}
 }
