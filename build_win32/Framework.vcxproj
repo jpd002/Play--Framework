@@ -42,6 +42,7 @@
     <ClCompile Include="..\src\layout\LayoutStretch.cpp" />
     <ClCompile Include="..\src\layout\VerticalLayout.cpp" />
     <ClCompile Include="..\src\LzAri.cpp" />
+    <ClCompile Include="..\src\math\MathStringUtils.cpp" />
     <ClCompile Include="..\src\MemStream.cpp" />
     <ClCompile Include="..\src\mpeg2\CodedBlockPatternTable.cpp" />
     <ClCompile Include="..\src\mpeg2\DcSizeChrominanceTable.cpp" />
@@ -161,6 +162,17 @@
     <ClInclude Include="..\include\LockFreeQueue.h" />
     <ClInclude Include="..\include\LzAri.h" />
     <ClInclude Include="..\include\make_unique.h" />
+    <ClInclude Include="..\include\math\MathDef.h" />
+    <ClInclude Include="..\include\math\MathOps.h" />
+    <ClInclude Include="..\include\math\MathStringUtils.h" />
+    <ClInclude Include="..\include\math\Matrix4.h" />
+    <ClInclude Include="..\include\math\Plane.h" />
+    <ClInclude Include="..\include\math\Quaternion.h" />
+    <ClInclude Include="..\include\math\Ray.h" />
+    <ClInclude Include="..\include\math\Sphere.h" />
+    <ClInclude Include="..\include\math\Vector2.h" />
+    <ClInclude Include="..\include\math\Vector3.h" />
+    <ClInclude Include="..\include\math\Vector4.h" />
     <ClInclude Include="..\include\MemStream.h" />
     <ClInclude Include="..\include\mpeg2\CodedBlockPatternTable.h" />
     <ClInclude Include="..\include\mpeg2\DcSizeChrominanceTable.h" />
