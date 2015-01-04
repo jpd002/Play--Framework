@@ -32,6 +32,18 @@
 		70271ACD18D4E45900777C53 /* StreamBitStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 70271ACC18D4E45900777C53 /* StreamBitStream.h */; };
 		70271ACF18D4E47000777C53 /* Endian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70271ACE18D4E47000777C53 /* Endian.cpp */; };
 		70271AD118D4E47900777C53 /* Endian.h in Headers */ = {isa = PBXBuildFile; fileRef = 70271AD018D4E47900777C53 /* Endian.h */; };
+		70C0EF8C1A59E55E00227442 /* MathStringUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70C0EF8B1A59E55E00227442 /* MathStringUtils.cpp */; };
+		70C0EF981A59E56C00227442 /* MathDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0EF8D1A59E56C00227442 /* MathDef.h */; };
+		70C0EF991A59E56C00227442 /* MathOps.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0EF8E1A59E56C00227442 /* MathOps.h */; };
+		70C0EF9A1A59E56C00227442 /* MathStringUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0EF8F1A59E56C00227442 /* MathStringUtils.h */; };
+		70C0EF9B1A59E56C00227442 /* Matrix4.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0EF901A59E56C00227442 /* Matrix4.h */; };
+		70C0EF9C1A59E56C00227442 /* Plane.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0EF911A59E56C00227442 /* Plane.h */; };
+		70C0EF9D1A59E56C00227442 /* Quaternion.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0EF921A59E56C00227442 /* Quaternion.h */; };
+		70C0EF9E1A59E56C00227442 /* Ray.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0EF931A59E56C00227442 /* Ray.h */; };
+		70C0EF9F1A59E56C00227442 /* Sphere.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0EF941A59E56C00227442 /* Sphere.h */; };
+		70C0EFA01A59E56C00227442 /* Vector2.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0EF951A59E56C00227442 /* Vector2.h */; };
+		70C0EFA11A59E56C00227442 /* Vector3.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0EF961A59E56C00227442 /* Vector3.h */; };
+		70C0EFA21A59E56C00227442 /* Vector4.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0EF971A59E56C00227442 /* Vector4.h */; };
 		7E1C41B81234236D00BB4E9C /* IosIStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C41B31234236D00BB4E9C /* IosIStream.cpp */; };
 		7E1C41B91234236D00BB4E9C /* IosOStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C41B41234236D00BB4E9C /* IosOStream.cpp */; };
 		7E1C41BA1234236D00BB4E9C /* string_cast_sjis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C41B51234236D00BB4E9C /* string_cast_sjis.cpp */; };
@@ -137,6 +149,18 @@
 		704DFAED17D5CB22003AB959 /* alloca_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = alloca_def.h; path = ../include/alloca_def.h; sourceTree = "<group>"; };
 		708661E618D44B1900B4E9CE /* GeneralSettings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = GeneralSettings.xcconfig; sourceTree = "<group>"; };
 		709C3B1D18D4BF02006DAF2C /* GeneralSettingsDebug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = GeneralSettingsDebug.xcconfig; sourceTree = "<group>"; };
+		70C0EF8B1A59E55E00227442 /* MathStringUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MathStringUtils.cpp; path = ../src/math/MathStringUtils.cpp; sourceTree = "<group>"; };
+		70C0EF8D1A59E56C00227442 /* MathDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MathDef.h; path = ../include/math/MathDef.h; sourceTree = "<group>"; };
+		70C0EF8E1A59E56C00227442 /* MathOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MathOps.h; path = ../include/math/MathOps.h; sourceTree = "<group>"; };
+		70C0EF8F1A59E56C00227442 /* MathStringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MathStringUtils.h; path = ../include/math/MathStringUtils.h; sourceTree = "<group>"; };
+		70C0EF901A59E56C00227442 /* Matrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Matrix4.h; path = ../include/math/Matrix4.h; sourceTree = "<group>"; };
+		70C0EF911A59E56C00227442 /* Plane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Plane.h; path = ../include/math/Plane.h; sourceTree = "<group>"; };
+		70C0EF921A59E56C00227442 /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Quaternion.h; path = ../include/math/Quaternion.h; sourceTree = "<group>"; };
+		70C0EF931A59E56C00227442 /* Ray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ray.h; path = ../include/math/Ray.h; sourceTree = "<group>"; };
+		70C0EF941A59E56C00227442 /* Sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Sphere.h; path = ../include/math/Sphere.h; sourceTree = "<group>"; };
+		70C0EF951A59E56C00227442 /* Vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector2.h; path = ../include/math/Vector2.h; sourceTree = "<group>"; };
+		70C0EF961A59E56C00227442 /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector3.h; path = ../include/math/Vector3.h; sourceTree = "<group>"; };
+		70C0EF971A59E56C00227442 /* Vector4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector4.h; path = ../include/math/Vector4.h; sourceTree = "<group>"; };
 		70F6D79519CF95870087C371 /* ExternalDependencies.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = ExternalDependencies.xcconfig; sourceTree = "<group>"; };
 		70F6D79619CF95870087C371 /* GeneralSettingsRelease.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = GeneralSettingsRelease.xcconfig; sourceTree = "<group>"; };
 		7E1C41B31234236D00BB4E9C /* IosIStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosIStream.cpp; path = ../src/IosIStream.cpp; sourceTree = SOURCE_ROOT; };
@@ -275,6 +299,7 @@
 				7E1C41B41234236D00BB4E9C /* IosOStream.cpp */,
 				7E1C41BE1234238200BB4E9C /* IosOStream.h */,
 				7E64497D144F60BA006D589E /* layout */,
+				70C0EF8A1A59E55000227442 /* math */,
 				7E2720AD1213AEC200C0DEBF /* MemStream.cpp */,
 				7E2720B51213AED800C0DEBF /* MemStream.h */,
 				7ED9CC6E1364C943006FFC0E /* ObjCMemberFunctionPointer.h */,
@@ -289,12 +314,12 @@
 				7E2720B81213AED800C0DEBF /* Stream.h */,
 				70271ACA18D4E44F00777C53 /* StreamBitStream.cpp */,
 				70271ACC18D4E45900777C53 /* StreamBitStream.h */,
-				7E1C41B61234236D00BB4E9C /* string_cast.cpp */,
-				7E1C41C11234238200BB4E9C /* string_cast.h */,
 				7E1C41B51234236D00BB4E9C /* string_cast_sjis.cpp */,
 				7E1C41BF1234238200BB4E9C /* string_cast_sjis.h */,
 				7E1C41E11234240C00BB4E9C /* string_cast_win1252.cpp */,
 				7E1C41C01234238200BB4E9C /* string_cast_win1252.h */,
+				7E1C41B61234236D00BB4E9C /* string_cast.cpp */,
+				7E1C41C11234238200BB4E9C /* string_cast.h */,
 				7E1C41B71234236D00BB4E9C /* Utf8.cpp */,
 				7E1C41C21234238200BB4E9C /* Utf8.h */,
 				7E2722321214F93C00C0DEBF /* xml */,
@@ -341,6 +366,25 @@
 				70F6D79619CF95870087C371 /* GeneralSettingsRelease.xcconfig */,
 			);
 			name = Config;
+			sourceTree = "<group>";
+		};
+		70C0EF8A1A59E55000227442 /* math */ = {
+			isa = PBXGroup;
+			children = (
+				70C0EF8D1A59E56C00227442 /* MathDef.h */,
+				70C0EF8E1A59E56C00227442 /* MathOps.h */,
+				70C0EF8B1A59E55E00227442 /* MathStringUtils.cpp */,
+				70C0EF8F1A59E56C00227442 /* MathStringUtils.h */,
+				70C0EF901A59E56C00227442 /* Matrix4.h */,
+				70C0EF911A59E56C00227442 /* Plane.h */,
+				70C0EF921A59E56C00227442 /* Quaternion.h */,
+				70C0EF931A59E56C00227442 /* Ray.h */,
+				70C0EF941A59E56C00227442 /* Sphere.h */,
+				70C0EF951A59E56C00227442 /* Vector2.h */,
+				70C0EF961A59E56C00227442 /* Vector3.h */,
+				70C0EF971A59E56C00227442 /* Vector4.h */,
+			);
+			name = math;
 			sourceTree = "<group>";
 		};
 		7E2722321214F93C00C0DEBF /* xml */ = {
@@ -427,6 +471,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70C0EF9B1A59E56C00227442 /* Matrix4.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* Framework_Prefix.pch in Headers */,
 				70271AB718D4E3B500777C53 /* BMP.h in Headers */,
 				70271AC718D4E41F00777C53 /* IEEE1180.h in Headers */,
@@ -435,6 +480,7 @@
 				7E2720BB1213AED800C0DEBF /* StdStream.h in Headers */,
 				7E2720BC1213AED800C0DEBF /* Stream.h in Headers */,
 				7E2722421214F95800C0DEBF /* FilteringNodeIterator.h in Headers */,
+				70C0EF981A59E56C00227442 /* MathDef.h in Headers */,
 				7E2722431214F95800C0DEBF /* Node.h in Headers */,
 				7E2722441214F95800C0DEBF /* Parser.h in Headers */,
 				7E2722451214F95800C0DEBF /* Utils.h in Headers */,
@@ -453,6 +499,8 @@
 				7E27226D1214F9AD00C0DEBF /* ZipStoreStream.h in Headers */,
 				7E2722B41214FAB700C0DEBF /* Buffer.h in Headers */,
 				7E2722B51214FAB700C0DEBF /* Context.h in Headers */,
+				70C0EFA01A59E56C00227442 /* Vector2.h in Headers */,
+				70C0EFA21A59E56C00227442 /* Vector4.h in Headers */,
 				7E2722B61214FAB700C0DEBF /* Device.h in Headers */,
 				7E2722B71214FAB700C0DEBF /* OpenAlDef.h in Headers */,
 				7E2722B81214FAB700C0DEBF /* Source.h in Headers */,
@@ -463,16 +511,23 @@
 				7E1C41C51234238200BB4E9C /* string_cast_sjis.h in Headers */,
 				7E1C41C61234238200BB4E9C /* string_cast_win1252.h in Headers */,
 				70271ABA18D4E3B500777C53 /* TGA.h in Headers */,
+				70C0EF9D1A59E56C00227442 /* Quaternion.h in Headers */,
 				7E1C41C71234238200BB4E9C /* string_cast.h in Headers */,
+				70C0EF9C1A59E56C00227442 /* Plane.h in Headers */,
 				7E1C41C81234238200BB4E9C /* Utf8.h in Headers */,
 				7ED9CC6F1364C943006FFC0E /* ObjCMemberFunctionPointer.h in Headers */,
 				7E644997144F60D8006D589E /* FlatLayout.h in Headers */,
 				7E644998144F60D8006D589E /* GridLayout.h in Headers */,
 				7E644999144F60D8006D589E /* HorizontalLayout.h in Headers */,
+				70C0EF991A59E56C00227442 /* MathOps.h in Headers */,
 				70271ABE18D4E3E200777C53 /* BitStream.h in Headers */,
+				70C0EFA11A59E56C00227442 /* Vector3.h in Headers */,
+				70C0EF9A1A59E56C00227442 /* MathStringUtils.h in Headers */,
 				7E64499A144F60D8006D589E /* LayoutBase.h in Headers */,
 				7E64499B144F60D8006D589E /* LayoutBaseItem.h in Headers */,
+				70C0EF9E1A59E56C00227442 /* Ray.h in Headers */,
 				7E64499C144F60D8006D589E /* LayoutEngine.h in Headers */,
+				70C0EF9F1A59E56C00227442 /* Sphere.h in Headers */,
 				7E64499D144F60D8006D589E /* LayoutObject.h in Headers */,
 				7E64499E144F60D8006D589E /* LayoutStretch.h in Headers */,
 				70271ACD18D4E45900777C53 /* StreamBitStream.h in Headers */,
@@ -553,6 +608,7 @@
 				70271AAF18D4E3AC00777C53 /* PNG.cpp in Sources */,
 				70271AAD18D4E3AC00777C53 /* BMP.cpp in Sources */,
 				7E27225B1214F99500C0DEBF /* ZipFile.cpp in Sources */,
+				70C0EF8C1A59E55E00227442 /* MathStringUtils.cpp in Sources */,
 				70271AAE18D4E3AC00777C53 /* JPEG.cpp in Sources */,
 				7E27225C1214F99500C0DEBF /* ZipInflateStream.cpp in Sources */,
 				7E27225D1214F99500C0DEBF /* ZipStoreStream.cpp in Sources */,
@@ -593,6 +649,7 @@
 			buildSettings = {
 				DSTROOT = /tmp/Framework.dst;
 				INSTALL_PATH = /usr/local/lib;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Framework;
 				SKIP_INSTALL = YES;
 			};
