@@ -275,8 +275,8 @@
 			isa = PBXGroup;
 			children = (
 				70F6D79319CE8BA50087C371 /* Config */,
-				08FB7795FE84155DC02AAC07 /* Source */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
+				08FB7795FE84155DC02AAC07 /* Source */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
