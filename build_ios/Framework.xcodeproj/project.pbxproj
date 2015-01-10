@@ -649,7 +649,6 @@
 			buildSettings = {
 				DSTROOT = /tmp/Framework.dst;
 				INSTALL_PATH = /usr/local/lib;
-				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Framework;
 				SKIP_INSTALL = YES;
 			};
