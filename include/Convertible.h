@@ -1,5 +1,4 @@
-#ifndef _CONVERTIBLE_H_
-#define _CONVERTIBLE_H_
+#pragma once
 
 template<typename IntType>
 struct convertible
@@ -26,5 +25,3 @@ ConvertibleType make_convertible(typename ConvertibleType::IntegerType value)
 	*reinterpret_cast<typename ConvertibleType::IntegerType*>(&result) = value;
 	return result;
 }
-
-#endif
