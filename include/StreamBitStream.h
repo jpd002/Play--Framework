@@ -1,5 +1,4 @@
-#ifndef _STREAMBITSTREAM_H_
-#define _STREAMBITSTREAM_H_
+#pragma once
 
 #include <stdexcept>
 #include "Types.h"
@@ -15,11 +14,11 @@ namespace Framework
 								CStreamBitStream(Framework::CStream&);
 		virtual					~CStreamBitStream();
 
-		virtual void			Advance(uint8);
-		virtual uint8			GetBitIndex() const;
+		virtual void			Advance(uint8) override;
+		virtual uint8			GetBitIndex() const override;
 
-		virtual bool			TryPeekBits_LSBF(uint8, uint32&);
-		virtual bool			TryPeekBits_MSBF(uint8, uint32&);
+		virtual bool			TryPeekBits_LSBF(uint8, uint32&) override;
+		virtual bool			TryPeekBits_MSBF(uint8, uint32&) override;
 
 	private:
 		enum
@@ -34,5 +33,3 @@ namespace Framework
 		Framework::CStream&		m_stream;
 	};
 }
-
-#endif
