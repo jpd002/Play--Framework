@@ -19,7 +19,7 @@ boost::filesystem::path PathUtils::GetPersonalDataPath()
 boost::filesystem::path PathUtils::GetPathFromCsidl(int csidl)
 {
 	wchar_t userPathString[MAX_PATH];
-	if(FAILED(SHGetFolderPathW(NULL, csidl, NULL, 0, userPathString)))
+	if(FAILED(SHGetFolderPathW(NULL, csidl | CSIDL_FLAG_CREATE, NULL, 0, userPathString)))
 	{
 		throw std::runtime_error("Couldn't get path from csidl.");
 	}
