@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <string.h>
 #include <algorithm>
+#include <cmath>
 #include "bitmap/Bitmap.h"
 
 using namespace Framework;
