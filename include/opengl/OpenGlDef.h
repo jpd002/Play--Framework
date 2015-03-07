@@ -4,6 +4,7 @@
 #ifdef WIN32
 #include <windows.h>
 #include <GL/glew.h>
+#include <GL/wglew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #else
