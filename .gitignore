@@ -1,5 +1,9 @@
-*.sdf
+build_android/libs
+build_android/obj
 Debug
 Release
 *.ipch
+*.sdf
+*.suo
+*.user
 *.userprops
