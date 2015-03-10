@@ -39,6 +39,8 @@ LOCAL_SRC_FILES		:= 	../../src/Base64.cpp \
 						../../src/mpeg2/MotionCodeTable.cpp \
 						../../src/mpeg2/QuantiserScaleTable.cpp \
 						../../src/mpeg2/VLCTable.cpp \
+						../../src/opengl/Program.cpp \
+						../../src/opengl/Shader.cpp \
 						../../src/PathUtils.cpp \
 						../../src/PtrStream.cpp \
 						../../src/Stream.cpp \

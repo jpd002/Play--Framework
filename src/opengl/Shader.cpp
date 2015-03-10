@@ -1,6 +1,7 @@
-#include "opengl/Shader.h"
 #include <algorithm>
-#include <assert.h>
+#include <cassert>
+#include "alloca_def.h"
+#include "opengl/Shader.h"
 
 using namespace Framework::OpenGl;
 

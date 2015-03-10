@@ -1,7 +1,6 @@
 #pragma once
 
 #include "OpenGlDef.h"
-#include <stdlib.h>
 
 namespace Framework
 {

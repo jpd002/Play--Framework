@@ -1,3 +1,5 @@
+#include <cassert>
+#include "alloca_def.h"
 #include "opengl/Program.h"
 
 using namespace Framework::OpenGl;
@@ -33,6 +35,16 @@ bool CProgram::Link()
 
 	glLinkProgram(m_nHandle);
 	glGetProgramiv(m_nHandle, GL_LINK_STATUS, &nStatus);
+
+	if(nStatus == GL_FALSE)
+	{
+		GLint length = 0;
+		glGetProgramiv(m_nHandle, GL_INFO_LOG_LENGTH, &length);
+		char* error = reinterpret_cast<char*>(alloca(length + 1));
+		glGetProgramInfoLog(m_nHandle, length + 1, &length, error);
+		error[length] = 0;
+		assert(0);
+	}
 
 	return (nStatus == GL_TRUE);
 }
