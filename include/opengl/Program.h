@@ -20,6 +20,7 @@ namespace Framework
 			void			AttachShader(GLuint);
 			void			DetachShader(GLuint);
 			bool			Link();
+			bool			Validate();
 			void			SetUniformf(const char*, float, float);
 			void			SetUniformi(const char*, int);
 			void			SetUniformi(const char*, int, int);

@@ -49,6 +49,26 @@ bool CProgram::Link()
 	return (nStatus == GL_TRUE);
 }
 
+bool CProgram::Validate()
+{
+	GLint status = GL_FALSE;
+
+	glValidateProgram(m_nHandle);
+	glGetProgramiv(m_nHandle, GL_VALIDATE_STATUS, &status);
+
+	if(status == GL_FALSE)
+	{
+		GLint length = 0;
+		glGetProgramiv(m_nHandle, GL_INFO_LOG_LENGTH, &length);
+		char* error = reinterpret_cast<char*>(alloca(length + 1));
+		glGetProgramInfoLog(m_nHandle, length + 1, &length, error);
+		error[length] = 0;
+		assert(0);
+	}
+
+	return (status == GL_TRUE);
+}
+
 void CProgram::SetUniformf(const char* sName, float nV1, float nV2)
 {
 	GLuint nUniform = glGetUniformLocation(m_nHandle, sName);
