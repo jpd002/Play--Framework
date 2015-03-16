@@ -25,6 +25,7 @@
   <ItemGroup>
     <ClInclude Include="..\include\opengl\OpenGlDef.h" />
     <ClInclude Include="..\include\opengl\Program.h" />
+    <ClInclude Include="..\include\opengl\Resource.h" />
     <ClInclude Include="..\include\opengl\Shader.h" />
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,9 @@
     <ClInclude Include="..\include\opengl\Shader.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\opengl\Resource.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
