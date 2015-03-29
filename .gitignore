@@ -7,3 +7,5 @@ Release
 *.suo
 *.user
 *.userprops
+xcuserdata
+
