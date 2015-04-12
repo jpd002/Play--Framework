@@ -9,8 +9,9 @@
 #elif defined(__ANDROID__)
 #include <EGL/egl.h>
 #include <GLES3/gl3.h>
-#else
-#include <OpenGL/gl.h>
+#elif defined(__APPLE__)
+//TODO: Use separate includes for iOS
+#include <OpenGL/gl3.h>
 #include <OpenGL/glu.h>
 #include <OpenGL/OpenGL.h>
 #endif
