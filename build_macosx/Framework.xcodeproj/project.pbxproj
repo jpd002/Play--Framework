@@ -15,6 +15,7 @@
 		703093A717BE54A2009662A1 /* JPEG.h in Headers */ = {isa = PBXBuildFile; fileRef = 703093A017BE5463009662A1 /* JPEG.h */; };
 		703093A817BE54A2009662A1 /* PNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7030939D17BE5456009662A1 /* PNG.cpp */; };
 		703093A917BE54A2009662A1 /* PNG.h in Headers */ = {isa = PBXBuildFile; fileRef = 703093A117BE5463009662A1 /* PNG.h */; };
+		70C0C84C1ADC967D00492241 /* Resource.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0C84B1ADC967D00492241 /* Resource.h */; };
 		70D317AB17C0D87A00CCA3A4 /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D317A717C0D87A00CCA3A4 /* Buffer.cpp */; };
 		70D317AC17C0D87A00CCA3A4 /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D317A817C0D87A00CCA3A4 /* Context.cpp */; };
 		70D317AD17C0D87A00CCA3A4 /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D317A917C0D87A00CCA3A4 /* Device.cpp */; };
@@ -137,6 +138,7 @@
 		7030939F17BE5463009662A1 /* BMP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BMP.h; path = ../include/bitmap/BMP.h; sourceTree = "<group>"; };
 		703093A017BE5463009662A1 /* JPEG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JPEG.h; path = ../include/bitmap/JPEG.h; sourceTree = "<group>"; };
 		703093A117BE5463009662A1 /* PNG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PNG.h; path = ../include/bitmap/PNG.h; sourceTree = "<group>"; };
+		70C0C84B1ADC967D00492241 /* Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Resource.h; path = ../include/opengl/Resource.h; sourceTree = "<group>"; };
 		70D317A717C0D87A00CCA3A4 /* Buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Buffer.cpp; path = ../src/openal/Buffer.cpp; sourceTree = "<group>"; };
 		70D317A817C0D87A00CCA3A4 /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Context.cpp; path = ../src/openal/Context.cpp; sourceTree = "<group>"; };
 		70D317A917C0D87A00CCA3A4 /* Device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Device.cpp; path = ../src/openal/Device.cpp; sourceTree = "<group>"; };
@@ -468,11 +470,12 @@
 		7EE203290D0B5158002D2B72 /* OpenGl */ = {
 			isa = PBXGroup;
 			children = (
+				7E7237A5150735F900F3259A /* OpenGlDef.h */,
 				7E7237A1150735E700F3259A /* Program.cpp */,
 				7E7237A6150735F900F3259A /* Program.h */,
+				70C0C84B1ADC967D00492241 /* Resource.h */,
 				7E7237A2150735E700F3259A /* Shader.cpp */,
 				7E7237A7150735F900F3259A /* Shader.h */,
-				7E7237A5150735F900F3259A /* OpenGlDef.h */,
 			);
 			name = OpenGl;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 				7E7237231506E67C00F3259A /* stricmp.h in Headers */,
 				7E7237241506E67C00F3259A /* string_cast_sjis.h in Headers */,
 				7E7237251506E67C00F3259A /* string_cast_win1252.h in Headers */,
+				70C0C84C1ADC967D00492241 /* Resource.h in Headers */,
 				7E7237261506E67C00F3259A /* string_cast.h in Headers */,
 				7E7237271506E67C00F3259A /* tcharx.h in Headers */,
 				7E7237281506E67C00F3259A /* Types.h in Headers */,
