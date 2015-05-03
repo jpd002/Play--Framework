@@ -795,6 +795,9 @@
     <ClInclude Include="..\include\math\Vector4.h">
       <Filter>Source Files\math</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\BitManip.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

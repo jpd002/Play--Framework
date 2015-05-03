@@ -133,6 +133,7 @@
     <ClInclude Include="..\include\alloca_def.h" />
     <ClInclude Include="..\include\Base64.h" />
     <ClInclude Include="..\include\BasicUnion.h" />
+    <ClInclude Include="..\include\BitManip.h" />
     <ClInclude Include="..\include\bitmap\Bitmap.h" />
     <ClInclude Include="..\include\bitmap\BMP.h" />
     <ClInclude Include="..\include\bitmap\JPEG.h" />
