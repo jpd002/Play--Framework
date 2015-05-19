@@ -798,6 +798,9 @@
     <ClInclude Include="..\include\BitManip.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\AlignedAlloc.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

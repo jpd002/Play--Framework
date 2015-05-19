@@ -130,6 +130,7 @@
     <ClCompile Include="..\src\zip\ZipStoreStream.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\AlignedAlloc.h" />
     <ClInclude Include="..\include\alloca_def.h" />
     <ClInclude Include="..\include\Base64.h" />
     <ClInclude Include="..\include\BasicUnion.h" />
