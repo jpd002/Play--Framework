@@ -1,7 +1,10 @@
 #pragma once
 
+#ifdef _MSC_VER
 #include <malloc.h>
+#else
 #include <stdlib.h>
+#endif
 
 static void* framework_aligned_alloc(size_t allocSize, size_t alignment)
 {
