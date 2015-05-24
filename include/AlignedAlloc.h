@@ -10,7 +10,7 @@ static void* framework_aligned_alloc(size_t allocSize, size_t alignment)
 {
 #if defined(_MSC_VER)
 	return _aligned_malloc(allocSize, alignment);
-#elif defined(__ANDROID__)
+#elif defined(__ANDROID__) || defined(__APPLE__)
 	void* result = nullptr;
 	if(posix_memalign(&result, alignment, allocSize) != 0)
 	{
