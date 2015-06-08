@@ -2,9 +2,22 @@
 
 #ifdef _MSC_VER
 #include <malloc.h>
+#include <Windows.h>
 #else
 #include <stdlib.h>
+#include <unistd.h>
 #endif
+
+static size_t framework_getpagesize()
+{
+#if defined(_MSC_VER)
+	SYSTEM_INFO si;
+	GetSystemInfo(&si);
+	return si.dwPageSize;
+#else
+	return sysconf(_SC_PAGESIZE);
+#endif
+}
 
 static void* framework_aligned_alloc(size_t allocSize, size_t alignment)
 {
