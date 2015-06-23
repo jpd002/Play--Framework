@@ -32,6 +32,42 @@
 		70271ACD18D4E45900777C53 /* StreamBitStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 70271ACC18D4E45900777C53 /* StreamBitStream.h */; };
 		70271ACF18D4E47000777C53 /* Endian.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70271ACE18D4E47000777C53 /* Endian.cpp */; };
 		70271AD118D4E47900777C53 /* Endian.h in Headers */ = {isa = PBXBuildFile; fileRef = 70271AD018D4E47900777C53 /* Endian.h */; };
+		704E1C3C1B391D9C00C0ACE3 /* Program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 704E1C3A1B391D9C00C0ACE3 /* Program.cpp */; };
+		704E1C3D1B391D9C00C0ACE3 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 704E1C3B1B391D9C00C0ACE3 /* Shader.cpp */; };
+		70834CB41B1BD7B100E8D5C6 /* CodedBlockPatternTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CA61B1BD7B100E8D5C6 /* CodedBlockPatternTable.cpp */; };
+		70834CB51B1BD7B100E8D5C6 /* DcSizeChrominanceTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CA71B1BD7B100E8D5C6 /* DcSizeChrominanceTable.cpp */; };
+		70834CB61B1BD7B100E8D5C6 /* DcSizeLuminanceTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CA81B1BD7B100E8D5C6 /* DcSizeLuminanceTable.cpp */; };
+		70834CB71B1BD7B100E8D5C6 /* DctCoefficientTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CA91B1BD7B100E8D5C6 /* DctCoefficientTable.cpp */; };
+		70834CB81B1BD7B100E8D5C6 /* DctCoefficientTable0.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CAA1B1BD7B100E8D5C6 /* DctCoefficientTable0.cpp */; };
+		70834CB91B1BD7B100E8D5C6 /* DctCoefficientTable1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CAB1B1BD7B100E8D5C6 /* DctCoefficientTable1.cpp */; };
+		70834CBA1B1BD7B100E8D5C6 /* InverseScanTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CAC1B1BD7B100E8D5C6 /* InverseScanTable.cpp */; };
+		70834CBB1B1BD7B100E8D5C6 /* MacroblockAddressIncrementTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CAD1B1BD7B100E8D5C6 /* MacroblockAddressIncrementTable.cpp */; };
+		70834CBC1B1BD7B100E8D5C6 /* MacroblockTypeBTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CAE1B1BD7B100E8D5C6 /* MacroblockTypeBTable.cpp */; };
+		70834CBD1B1BD7B100E8D5C6 /* MacroblockTypeITable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CAF1B1BD7B100E8D5C6 /* MacroblockTypeITable.cpp */; };
+		70834CBE1B1BD7B100E8D5C6 /* MacroblockTypePTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CB01B1BD7B100E8D5C6 /* MacroblockTypePTable.cpp */; };
+		70834CBF1B1BD7B100E8D5C6 /* MotionCodeTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CB11B1BD7B100E8D5C6 /* MotionCodeTable.cpp */; };
+		70834CC01B1BD7B100E8D5C6 /* QuantiserScaleTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CB21B1BD7B100E8D5C6 /* QuantiserScaleTable.cpp */; };
+		70834CC11B1BD7B100E8D5C6 /* VLCTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CB31B1BD7B100E8D5C6 /* VLCTable.cpp */; };
+		70834CD01B1BD7BF00E8D5C6 /* CodedBlockPatternTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 70834CC21B1BD7BF00E8D5C6 /* CodedBlockPatternTable.h */; };
+		70834CD11B1BD7BF00E8D5C6 /* DcSizeChrominanceTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 70834CC31B1BD7BF00E8D5C6 /* DcSizeChrominanceTable.h */; };
+		70834CD21B1BD7BF00E8D5C6 /* DcSizeLuminanceTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 70834CC41B1BD7BF00E8D5C6 /* DcSizeLuminanceTable.h */; };
+		70834CD31B1BD7BF00E8D5C6 /* DctCoefficientTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 70834CC51B1BD7BF00E8D5C6 /* DctCoefficientTable.h */; };
+		70834CD41B1BD7BF00E8D5C6 /* DctCoefficientTable0.h in Headers */ = {isa = PBXBuildFile; fileRef = 70834CC61B1BD7BF00E8D5C6 /* DctCoefficientTable0.h */; };
+		70834CD51B1BD7BF00E8D5C6 /* DctCoefficientTable1.h in Headers */ = {isa = PBXBuildFile; fileRef = 70834CC71B1BD7BF00E8D5C6 /* DctCoefficientTable1.h */; };
+		70834CD61B1BD7BF00E8D5C6 /* InverseScanTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 70834CC81B1BD7BF00E8D5C6 /* InverseScanTable.h */; };
+		70834CD71B1BD7BF00E8D5C6 /* MacroblockAddressIncrementTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 70834CC91B1BD7BF00E8D5C6 /* MacroblockAddressIncrementTable.h */; };
+		70834CD81B1BD7BF00E8D5C6 /* MacroblockTypeBTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 70834CCA1B1BD7BF00E8D5C6 /* MacroblockTypeBTable.h */; };
+		70834CD91B1BD7BF00E8D5C6 /* MacroblockTypeITable.h in Headers */ = {isa = PBXBuildFile; fileRef = 70834CCB1B1BD7BF00E8D5C6 /* MacroblockTypeITable.h */; };
+		70834CDA1B1BD7BF00E8D5C6 /* MacroblockTypePTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 70834CCC1B1BD7BF00E8D5C6 /* MacroblockTypePTable.h */; };
+		70834CDB1B1BD7BF00E8D5C6 /* MotionCodeTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 70834CCD1B1BD7BF00E8D5C6 /* MotionCodeTable.h */; };
+		70834CDC1B1BD7BF00E8D5C6 /* QuantiserScaleTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 70834CCE1B1BD7BF00E8D5C6 /* QuantiserScaleTable.h */; };
+		70834CDD1B1BD7BF00E8D5C6 /* VLCTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 70834CCF1B1BD7BF00E8D5C6 /* VLCTable.h */; };
+		70AD236E1B38F81500137AA0 /* OpenGlDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 70AD236A1B38F81500137AA0 /* OpenGlDef.h */; };
+		70AD236F1B38F81500137AA0 /* Program.h in Headers */ = {isa = PBXBuildFile; fileRef = 70AD236B1B38F81500137AA0 /* Program.h */; };
+		70AD23701B38F81500137AA0 /* Resource.h in Headers */ = {isa = PBXBuildFile; fileRef = 70AD236C1B38F81500137AA0 /* Resource.h */; };
+		70AD23711B38F81500137AA0 /* Shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 70AD236D1B38F81500137AA0 /* Shader.h */; };
+		70AD23991B3919D700137AA0 /* LzAri.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70AD23981B3919D700137AA0 /* LzAri.cpp */; };
+		70AD239B1B3919E300137AA0 /* LzAri.h in Headers */ = {isa = PBXBuildFile; fileRef = 70AD239A1B3919E300137AA0 /* LzAri.h */; };
 		70C0EF8C1A59E55E00227442 /* MathStringUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70C0EF8B1A59E55E00227442 /* MathStringUtils.cpp */; };
 		70C0EF981A59E56C00227442 /* MathDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0EF8D1A59E56C00227442 /* MathDef.h */; };
 		70C0EF991A59E56C00227442 /* MathOps.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0EF8E1A59E56C00227442 /* MathOps.h */; };
@@ -147,8 +183,44 @@
 		70271ACE18D4E47000777C53 /* Endian.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Endian.cpp; path = ../src/Endian.cpp; sourceTree = "<group>"; };
 		70271AD018D4E47900777C53 /* Endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Endian.h; path = ../include/Endian.h; sourceTree = "<group>"; };
 		704DFAED17D5CB22003AB959 /* alloca_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = alloca_def.h; path = ../include/alloca_def.h; sourceTree = "<group>"; };
+		704E1C3A1B391D9C00C0ACE3 /* Program.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Program.cpp; path = ../src/opengl/Program.cpp; sourceTree = "<group>"; };
+		704E1C3B1B391D9C00C0ACE3 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Shader.cpp; path = ../src/opengl/Shader.cpp; sourceTree = "<group>"; };
+		70834CA61B1BD7B100E8D5C6 /* CodedBlockPatternTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CodedBlockPatternTable.cpp; path = ../src/mpeg2/CodedBlockPatternTable.cpp; sourceTree = "<group>"; };
+		70834CA71B1BD7B100E8D5C6 /* DcSizeChrominanceTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DcSizeChrominanceTable.cpp; path = ../src/mpeg2/DcSizeChrominanceTable.cpp; sourceTree = "<group>"; };
+		70834CA81B1BD7B100E8D5C6 /* DcSizeLuminanceTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DcSizeLuminanceTable.cpp; path = ../src/mpeg2/DcSizeLuminanceTable.cpp; sourceTree = "<group>"; };
+		70834CA91B1BD7B100E8D5C6 /* DctCoefficientTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DctCoefficientTable.cpp; path = ../src/mpeg2/DctCoefficientTable.cpp; sourceTree = "<group>"; };
+		70834CAA1B1BD7B100E8D5C6 /* DctCoefficientTable0.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DctCoefficientTable0.cpp; path = ../src/mpeg2/DctCoefficientTable0.cpp; sourceTree = "<group>"; };
+		70834CAB1B1BD7B100E8D5C6 /* DctCoefficientTable1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DctCoefficientTable1.cpp; path = ../src/mpeg2/DctCoefficientTable1.cpp; sourceTree = "<group>"; };
+		70834CAC1B1BD7B100E8D5C6 /* InverseScanTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InverseScanTable.cpp; path = ../src/mpeg2/InverseScanTable.cpp; sourceTree = "<group>"; };
+		70834CAD1B1BD7B100E8D5C6 /* MacroblockAddressIncrementTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MacroblockAddressIncrementTable.cpp; path = ../src/mpeg2/MacroblockAddressIncrementTable.cpp; sourceTree = "<group>"; };
+		70834CAE1B1BD7B100E8D5C6 /* MacroblockTypeBTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MacroblockTypeBTable.cpp; path = ../src/mpeg2/MacroblockTypeBTable.cpp; sourceTree = "<group>"; };
+		70834CAF1B1BD7B100E8D5C6 /* MacroblockTypeITable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MacroblockTypeITable.cpp; path = ../src/mpeg2/MacroblockTypeITable.cpp; sourceTree = "<group>"; };
+		70834CB01B1BD7B100E8D5C6 /* MacroblockTypePTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MacroblockTypePTable.cpp; path = ../src/mpeg2/MacroblockTypePTable.cpp; sourceTree = "<group>"; };
+		70834CB11B1BD7B100E8D5C6 /* MotionCodeTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MotionCodeTable.cpp; path = ../src/mpeg2/MotionCodeTable.cpp; sourceTree = "<group>"; };
+		70834CB21B1BD7B100E8D5C6 /* QuantiserScaleTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = QuantiserScaleTable.cpp; path = ../src/mpeg2/QuantiserScaleTable.cpp; sourceTree = "<group>"; };
+		70834CB31B1BD7B100E8D5C6 /* VLCTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VLCTable.cpp; path = ../src/mpeg2/VLCTable.cpp; sourceTree = "<group>"; };
+		70834CC21B1BD7BF00E8D5C6 /* CodedBlockPatternTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CodedBlockPatternTable.h; path = ../include/mpeg2/CodedBlockPatternTable.h; sourceTree = "<group>"; };
+		70834CC31B1BD7BF00E8D5C6 /* DcSizeChrominanceTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DcSizeChrominanceTable.h; path = ../include/mpeg2/DcSizeChrominanceTable.h; sourceTree = "<group>"; };
+		70834CC41B1BD7BF00E8D5C6 /* DcSizeLuminanceTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DcSizeLuminanceTable.h; path = ../include/mpeg2/DcSizeLuminanceTable.h; sourceTree = "<group>"; };
+		70834CC51B1BD7BF00E8D5C6 /* DctCoefficientTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DctCoefficientTable.h; path = ../include/mpeg2/DctCoefficientTable.h; sourceTree = "<group>"; };
+		70834CC61B1BD7BF00E8D5C6 /* DctCoefficientTable0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DctCoefficientTable0.h; path = ../include/mpeg2/DctCoefficientTable0.h; sourceTree = "<group>"; };
+		70834CC71B1BD7BF00E8D5C6 /* DctCoefficientTable1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DctCoefficientTable1.h; path = ../include/mpeg2/DctCoefficientTable1.h; sourceTree = "<group>"; };
+		70834CC81B1BD7BF00E8D5C6 /* InverseScanTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InverseScanTable.h; path = ../include/mpeg2/InverseScanTable.h; sourceTree = "<group>"; };
+		70834CC91B1BD7BF00E8D5C6 /* MacroblockAddressIncrementTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacroblockAddressIncrementTable.h; path = ../include/mpeg2/MacroblockAddressIncrementTable.h; sourceTree = "<group>"; };
+		70834CCA1B1BD7BF00E8D5C6 /* MacroblockTypeBTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacroblockTypeBTable.h; path = ../include/mpeg2/MacroblockTypeBTable.h; sourceTree = "<group>"; };
+		70834CCB1B1BD7BF00E8D5C6 /* MacroblockTypeITable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacroblockTypeITable.h; path = ../include/mpeg2/MacroblockTypeITable.h; sourceTree = "<group>"; };
+		70834CCC1B1BD7BF00E8D5C6 /* MacroblockTypePTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MacroblockTypePTable.h; path = ../include/mpeg2/MacroblockTypePTable.h; sourceTree = "<group>"; };
+		70834CCD1B1BD7BF00E8D5C6 /* MotionCodeTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MotionCodeTable.h; path = ../include/mpeg2/MotionCodeTable.h; sourceTree = "<group>"; };
+		70834CCE1B1BD7BF00E8D5C6 /* QuantiserScaleTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QuantiserScaleTable.h; path = ../include/mpeg2/QuantiserScaleTable.h; sourceTree = "<group>"; };
+		70834CCF1B1BD7BF00E8D5C6 /* VLCTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VLCTable.h; path = ../include/mpeg2/VLCTable.h; sourceTree = "<group>"; };
 		708661E618D44B1900B4E9CE /* GeneralSettings.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = GeneralSettings.xcconfig; sourceTree = "<group>"; };
 		709C3B1D18D4BF02006DAF2C /* GeneralSettingsDebug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = GeneralSettingsDebug.xcconfig; sourceTree = "<group>"; };
+		70AD236A1B38F81500137AA0 /* OpenGlDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OpenGlDef.h; path = ../include/opengl/OpenGlDef.h; sourceTree = "<group>"; };
+		70AD236B1B38F81500137AA0 /* Program.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Program.h; path = ../include/opengl/Program.h; sourceTree = "<group>"; };
+		70AD236C1B38F81500137AA0 /* Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Resource.h; path = ../include/opengl/Resource.h; sourceTree = "<group>"; };
+		70AD236D1B38F81500137AA0 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shader.h; path = ../include/opengl/Shader.h; sourceTree = "<group>"; };
+		70AD23981B3919D700137AA0 /* LzAri.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LzAri.cpp; path = ../src/LzAri.cpp; sourceTree = "<group>"; };
+		70AD239A1B3919E300137AA0 /* LzAri.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LzAri.h; path = ../include/LzAri.h; sourceTree = "<group>"; };
 		70C0EF8B1A59E55E00227442 /* MathStringUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MathStringUtils.cpp; path = ../src/math/MathStringUtils.cpp; sourceTree = "<group>"; };
 		70C0EF8D1A59E56C00227442 /* MathDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MathDef.h; path = ../include/math/MathDef.h; sourceTree = "<group>"; };
 		70C0EF8E1A59E56C00227442 /* MathOps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MathOps.h; path = ../include/math/MathOps.h; sourceTree = "<group>"; };
@@ -299,11 +371,15 @@
 				7E1C41B41234236D00BB4E9C /* IosOStream.cpp */,
 				7E1C41BE1234238200BB4E9C /* IosOStream.h */,
 				7E64497D144F60BA006D589E /* layout */,
+				70AD23981B3919D700137AA0 /* LzAri.cpp */,
+				70AD239A1B3919E300137AA0 /* LzAri.h */,
 				70C0EF8A1A59E55000227442 /* math */,
 				7E2720AD1213AEC200C0DEBF /* MemStream.cpp */,
 				7E2720B51213AED800C0DEBF /* MemStream.h */,
+				70834CA51B1BD79E00E8D5C6 /* mpeg2 */,
 				7ED9CC6E1364C943006FFC0E /* ObjCMemberFunctionPointer.h */,
 				7E2722A61214FA9B00C0DEBF /* openal */,
+				70AD23691B38F7EF00137AA0 /* opengl */,
 				701A48F316AD196200B5C1FF /* PathUtils.cpp */,
 				701A48F616AD197600B5C1FF /* PathUtils.h */,
 				7E2720AE1213AEC200C0DEBF /* PtrStream.cpp */,
@@ -357,6 +433,41 @@
 			name = idct;
 			sourceTree = "<group>";
 		};
+		70834CA51B1BD79E00E8D5C6 /* mpeg2 */ = {
+			isa = PBXGroup;
+			children = (
+				70834CA61B1BD7B100E8D5C6 /* CodedBlockPatternTable.cpp */,
+				70834CC21B1BD7BF00E8D5C6 /* CodedBlockPatternTable.h */,
+				70834CA71B1BD7B100E8D5C6 /* DcSizeChrominanceTable.cpp */,
+				70834CC31B1BD7BF00E8D5C6 /* DcSizeChrominanceTable.h */,
+				70834CA81B1BD7B100E8D5C6 /* DcSizeLuminanceTable.cpp */,
+				70834CC41B1BD7BF00E8D5C6 /* DcSizeLuminanceTable.h */,
+				70834CA91B1BD7B100E8D5C6 /* DctCoefficientTable.cpp */,
+				70834CC51B1BD7BF00E8D5C6 /* DctCoefficientTable.h */,
+				70834CAA1B1BD7B100E8D5C6 /* DctCoefficientTable0.cpp */,
+				70834CC61B1BD7BF00E8D5C6 /* DctCoefficientTable0.h */,
+				70834CAB1B1BD7B100E8D5C6 /* DctCoefficientTable1.cpp */,
+				70834CC71B1BD7BF00E8D5C6 /* DctCoefficientTable1.h */,
+				70834CAC1B1BD7B100E8D5C6 /* InverseScanTable.cpp */,
+				70834CC81B1BD7BF00E8D5C6 /* InverseScanTable.h */,
+				70834CAD1B1BD7B100E8D5C6 /* MacroblockAddressIncrementTable.cpp */,
+				70834CC91B1BD7BF00E8D5C6 /* MacroblockAddressIncrementTable.h */,
+				70834CAE1B1BD7B100E8D5C6 /* MacroblockTypeBTable.cpp */,
+				70834CCA1B1BD7BF00E8D5C6 /* MacroblockTypeBTable.h */,
+				70834CAF1B1BD7B100E8D5C6 /* MacroblockTypeITable.cpp */,
+				70834CCB1B1BD7BF00E8D5C6 /* MacroblockTypeITable.h */,
+				70834CB01B1BD7B100E8D5C6 /* MacroblockTypePTable.cpp */,
+				70834CCC1B1BD7BF00E8D5C6 /* MacroblockTypePTable.h */,
+				70834CB11B1BD7B100E8D5C6 /* MotionCodeTable.cpp */,
+				70834CCD1B1BD7BF00E8D5C6 /* MotionCodeTable.h */,
+				70834CB21B1BD7B100E8D5C6 /* QuantiserScaleTable.cpp */,
+				70834CCE1B1BD7BF00E8D5C6 /* QuantiserScaleTable.h */,
+				70834CB31B1BD7B100E8D5C6 /* VLCTable.cpp */,
+				70834CCF1B1BD7BF00E8D5C6 /* VLCTable.h */,
+			);
+			name = mpeg2;
+			sourceTree = "<group>";
+		};
 		709C3B1C18D4BD3A006DAF2C /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +477,19 @@
 				70F6D79619CF95870087C371 /* GeneralSettingsRelease.xcconfig */,
 			);
 			name = Config;
+			sourceTree = "<group>";
+		};
+		70AD23691B38F7EF00137AA0 /* opengl */ = {
+			isa = PBXGroup;
+			children = (
+				70AD236A1B38F81500137AA0 /* OpenGlDef.h */,
+				704E1C3A1B391D9C00C0ACE3 /* Program.cpp */,
+				70AD236B1B38F81500137AA0 /* Program.h */,
+				70AD236C1B38F81500137AA0 /* Resource.h */,
+				704E1C3B1B391D9C00C0ACE3 /* Shader.cpp */,
+				70AD236D1B38F81500137AA0 /* Shader.h */,
+			);
+			name = opengl;
 			sourceTree = "<group>";
 		};
 		70C0EF8A1A59E55000227442 /* math */ = {
@@ -471,9 +595,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70AD23711B38F81500137AA0 /* Shader.h in Headers */,
 				70C0EF9B1A59E56C00227442 /* Matrix4.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* Framework_Prefix.pch in Headers */,
 				70271AB718D4E3B500777C53 /* BMP.h in Headers */,
+				70834CD51B1BD7BF00E8D5C6 /* DctCoefficientTable1.h in Headers */,
 				70271AC718D4E41F00777C53 /* IEEE1180.h in Headers */,
 				7E2720B91213AED800C0DEBF /* MemStream.h in Headers */,
 				7E2720BA1213AED800C0DEBF /* PtrStream.h in Headers */,
@@ -485,27 +611,36 @@
 				7E2722441214F95800C0DEBF /* Parser.h in Headers */,
 				7E2722451214F95800C0DEBF /* Utils.h in Headers */,
 				7E2722461214F95800C0DEBF /* Writer.h in Headers */,
+				70834CDB1B1BD7BF00E8D5C6 /* MotionCodeTable.h in Headers */,
 				7E2722671214F9AD00C0DEBF /* ZipArchiveReader.h in Headers */,
 				70271AB918D4E3B500777C53 /* PNG.h in Headers */,
 				70271AC818D4E41F00777C53 /* Interface.h in Headers */,
+				70834CD71B1BD7BF00E8D5C6 /* MacroblockAddressIncrementTable.h in Headers */,
 				7E2722681214F9AD00C0DEBF /* ZipArchiveWriter.h in Headers */,
+				70834CDD1B1BD7BF00E8D5C6 /* VLCTable.h in Headers */,
+				70834CD61B1BD7BF00E8D5C6 /* InverseScanTable.h in Headers */,
 				7E2722691214F9AD00C0DEBF /* ZipDeflateStream.h in Headers */,
 				70271AD118D4E47900777C53 /* Endian.h in Headers */,
 				70271AB818D4E3B500777C53 /* JPEG.h in Headers */,
 				70271AB618D4E3B500777C53 /* Bitmap.h in Headers */,
 				7E27226A1214F9AD00C0DEBF /* ZipDefs.h in Headers */,
 				7E27226B1214F9AD00C0DEBF /* ZipFile.h in Headers */,
+				70834CDA1B1BD7BF00E8D5C6 /* MacroblockTypePTable.h in Headers */,
 				7E27226C1214F9AD00C0DEBF /* ZipInflateStream.h in Headers */,
 				7E27226D1214F9AD00C0DEBF /* ZipStoreStream.h in Headers */,
 				7E2722B41214FAB700C0DEBF /* Buffer.h in Headers */,
 				7E2722B51214FAB700C0DEBF /* Context.h in Headers */,
+				70AD239B1B3919E300137AA0 /* LzAri.h in Headers */,
+				70834CD31B1BD7BF00E8D5C6 /* DctCoefficientTable.h in Headers */,
 				70C0EFA01A59E56C00227442 /* Vector2.h in Headers */,
 				70C0EFA21A59E56C00227442 /* Vector4.h in Headers */,
 				7E2722B61214FAB700C0DEBF /* Device.h in Headers */,
 				7E2722B71214FAB700C0DEBF /* OpenAlDef.h in Headers */,
 				7E2722B81214FAB700C0DEBF /* Source.h in Headers */,
+				70834CD11B1BD7BF00E8D5C6 /* DcSizeChrominanceTable.h in Headers */,
 				7E2722C01214FAE200C0DEBF /* Config.h in Headers */,
 				7E1C41C31234238200BB4E9C /* IosIStream.h in Headers */,
+				70834CD21B1BD7BF00E8D5C6 /* DcSizeLuminanceTable.h in Headers */,
 				70271AC918D4E41F00777C53 /* TrivialC.h in Headers */,
 				7E1C41C41234238200BB4E9C /* IosOStream.h in Headers */,
 				7E1C41C51234238200BB4E9C /* string_cast_sjis.h in Headers */,
@@ -514,7 +649,10 @@
 				70C0EF9D1A59E56C00227442 /* Quaternion.h in Headers */,
 				7E1C41C71234238200BB4E9C /* string_cast.h in Headers */,
 				70C0EF9C1A59E56C00227442 /* Plane.h in Headers */,
+				70834CD41B1BD7BF00E8D5C6 /* DctCoefficientTable0.h in Headers */,
+				70834CD91B1BD7BF00E8D5C6 /* MacroblockTypeITable.h in Headers */,
 				7E1C41C81234238200BB4E9C /* Utf8.h in Headers */,
+				70AD236F1B38F81500137AA0 /* Program.h in Headers */,
 				7ED9CC6F1364C943006FFC0E /* ObjCMemberFunctionPointer.h in Headers */,
 				7E644997144F60D8006D589E /* FlatLayout.h in Headers */,
 				7E644998144F60D8006D589E /* GridLayout.h in Headers */,
@@ -524,15 +662,20 @@
 				70C0EFA11A59E56C00227442 /* Vector3.h in Headers */,
 				70C0EF9A1A59E56C00227442 /* MathStringUtils.h in Headers */,
 				7E64499A144F60D8006D589E /* LayoutBase.h in Headers */,
+				70834CDC1B1BD7BF00E8D5C6 /* QuantiserScaleTable.h in Headers */,
 				7E64499B144F60D8006D589E /* LayoutBaseItem.h in Headers */,
+				70834CD81B1BD7BF00E8D5C6 /* MacroblockTypeBTable.h in Headers */,
 				70C0EF9E1A59E56C00227442 /* Ray.h in Headers */,
 				7E64499C144F60D8006D589E /* LayoutEngine.h in Headers */,
 				70C0EF9F1A59E56C00227442 /* Sphere.h in Headers */,
 				7E64499D144F60D8006D589E /* LayoutObject.h in Headers */,
+				70AD23701B38F81500137AA0 /* Resource.h in Headers */,
 				7E64499E144F60D8006D589E /* LayoutStretch.h in Headers */,
 				70271ACD18D4E45900777C53 /* StreamBitStream.h in Headers */,
+				70AD236E1B38F81500137AA0 /* OpenGlDef.h in Headers */,
 				7E64499F144F60D8006D589E /* VerticalLayout.h in Headers */,
 				701A48DB169BE4FC00B5C1FF /* Base64.h in Headers */,
+				70834CD01B1BD7BF00E8D5C6 /* CodedBlockPatternTable.h in Headers */,
 				701A48F716AD197600B5C1FF /* PathUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -592,7 +735,9 @@
 			files = (
 				70271AAC18D4E3AC00777C53 /* Bitmap.cpp in Sources */,
 				7E2720B11213AEC200C0DEBF /* MemStream.cpp in Sources */,
+				70834CBF1B1BD7B100E8D5C6 /* MotionCodeTable.cpp in Sources */,
 				7E2720B21213AEC200C0DEBF /* PtrStream.cpp in Sources */,
+				70834CB81B1BD7B100E8D5C6 /* DctCoefficientTable0.cpp in Sources */,
 				7E2720B31213AEC200C0DEBF /* StdStream.cpp in Sources */,
 				7E2720B41213AEC200C0DEBF /* Stream.cpp in Sources */,
 				7E2722381214F94D00C0DEBF /* FilteringNodeIterator.cpp in Sources */,
@@ -603,8 +748,10 @@
 				7E27223C1214F94D00C0DEBF /* Writer.cpp in Sources */,
 				7E2722581214F99500C0DEBF /* ZipArchiveReader.cpp in Sources */,
 				7E2722591214F99500C0DEBF /* ZipArchiveWriter.cpp in Sources */,
+				70834CBE1B1BD7B100E8D5C6 /* MacroblockTypePTable.cpp in Sources */,
 				7E27225A1214F99500C0DEBF /* ZipDeflateStream.cpp in Sources */,
 				70271ACF18D4E47000777C53 /* Endian.cpp in Sources */,
+				704E1C3D1B391D9C00C0ACE3 /* Shader.cpp in Sources */,
 				70271AAF18D4E3AC00777C53 /* PNG.cpp in Sources */,
 				70271AAD18D4E3AC00777C53 /* BMP.cpp in Sources */,
 				7E27225B1214F99500C0DEBF /* ZipFile.cpp in Sources */,
@@ -614,16 +761,26 @@
 				7E27225D1214F99500C0DEBF /* ZipStoreStream.cpp in Sources */,
 				7E2722AB1214FAAA00C0DEBF /* Buffer.cpp in Sources */,
 				7E2722AC1214FAAA00C0DEBF /* Context.cpp in Sources */,
+				70834CBD1B1BD7B100E8D5C6 /* MacroblockTypeITable.cpp in Sources */,
+				70834CC01B1BD7B100E8D5C6 /* QuantiserScaleTable.cpp in Sources */,
 				7E2722AD1214FAAA00C0DEBF /* Device.cpp in Sources */,
+				704E1C3C1B391D9C00C0ACE3 /* Program.cpp in Sources */,
+				70834CBA1B1BD7B100E8D5C6 /* InverseScanTable.cpp in Sources */,
 				7E2722AE1214FAAA00C0DEBF /* Source.cpp in Sources */,
 				7E2722BE1214FAD800C0DEBF /* Config.cpp in Sources */,
+				70834CB61B1BD7B100E8D5C6 /* DcSizeLuminanceTable.cpp in Sources */,
+				70834CB41B1BD7B100E8D5C6 /* CodedBlockPatternTable.cpp in Sources */,
 				70271ABC18D4E3D900777C53 /* BitStream.cpp in Sources */,
 				7E1C41B81234236D00BB4E9C /* IosIStream.cpp in Sources */,
 				70271AC318D4E41200777C53 /* TrivialC.cpp in Sources */,
+				70834CBC1B1BD7B100E8D5C6 /* MacroblockTypeBTable.cpp in Sources */,
 				7E1C41B91234236D00BB4E9C /* IosOStream.cpp in Sources */,
 				7E1C41BA1234236D00BB4E9C /* string_cast_sjis.cpp in Sources */,
 				7E1C41BB1234236D00BB4E9C /* string_cast.cpp in Sources */,
 				7E1C41BC1234236D00BB4E9C /* Utf8.cpp in Sources */,
+				70834CB51B1BD7B100E8D5C6 /* DcSizeChrominanceTable.cpp in Sources */,
+				70AD23991B3919D700137AA0 /* LzAri.cpp in Sources */,
+				70834CC11B1BD7B100E8D5C6 /* VLCTable.cpp in Sources */,
 				7E1C41E21234240C00BB4E9C /* string_cast_win1252.cpp in Sources */,
 				7E644986144F60CE006D589E /* FlatLayout.cpp in Sources */,
 				7E644987144F60CE006D589E /* GridLayout.cpp in Sources */,
@@ -634,9 +791,12 @@
 				7E64498A144F60CE006D589E /* LayoutBaseItem.cpp in Sources */,
 				7E64498B144F60CE006D589E /* LayoutObject.cpp in Sources */,
 				7E64498C144F60CE006D589E /* LayoutStretch.cpp in Sources */,
+				70834CBB1B1BD7B100E8D5C6 /* MacroblockAddressIncrementTable.cpp in Sources */,
 				7E64498D144F60CE006D589E /* VerticalLayout.cpp in Sources */,
+				70834CB71B1BD7B100E8D5C6 /* DctCoefficientTable.cpp in Sources */,
 				701A48D8169BE4F500B5C1FF /* Base64.cpp in Sources */,
 				701A48F416AD196200B5C1FF /* PathUtils.cpp in Sources */,
+				70834CB91B1BD7B100E8D5C6 /* DctCoefficientTable1.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
