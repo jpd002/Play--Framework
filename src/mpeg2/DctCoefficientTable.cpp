@@ -1,5 +1,5 @@
 #include <assert.h>
-#include "MPEG2/DctCoefficientTable.h"
+#include "mpeg2/DctCoefficientTable.h"
 
 using namespace Framework;
 using namespace MPEG2;
