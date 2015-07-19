@@ -1,3 +1,3 @@
 #!/bin/bash
 set -e
-$ANDROID_NDK_ROOT/ndk-build
+$ANT_HOME/bin/ant -Dndk.debug=0
