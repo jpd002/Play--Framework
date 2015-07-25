@@ -12,25 +12,25 @@ namespace Framework
 	static CStdStream CreateOutputStdStream(const StringType&);
 
 	template <>
-	static CStdStream CreateInputStdStream(const std::wstring& path)
+	CStdStream CreateInputStdStream(const std::wstring& path)
 	{
 		return CStdStream(path.c_str(), L"rb");
 	}
 
 	template <>
-	static CStdStream CreateInputStdStream(const std::string& path)
+	CStdStream CreateInputStdStream(const std::string& path)
 	{
 		return CStdStream(path.c_str(), "rb");
 	}
 
 	template <>
-	static CStdStream CreateOutputStdStream(const std::wstring& path)
+	CStdStream CreateOutputStdStream(const std::wstring& path)
 	{
 		return CStdStream(path.c_str(), L"wb");
 	}
 
 	template <>
-	static CStdStream CreateOutputStdStream(const std::string& path)
+	CStdStream CreateOutputStdStream(const std::string& path)
 	{
 		return CStdStream(path.c_str(), "wb");
 	}
