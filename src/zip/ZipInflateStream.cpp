@@ -1,6 +1,7 @@
 #include "zip/ZipInflateStream.h"
 #include <stdexcept>
 #include <algorithm>
+#include <string.h>
 #include <assert.h>
 
 using namespace Framework;

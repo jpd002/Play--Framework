@@ -3,19 +3,12 @@
 
 #ifdef WIN32
 #define stricmp _stricmp
-#else
-#define stricmp strcasecmp
-#endif
-
-#ifdef WIN32
 #define strnicmp _strnicmp
-#else
-#define strnicmp strncasecmp
-#endif
-
-#ifdef WIN32
 #define wcsicmp _wcsicmp
 #else
+#include <strings.h> // POSIX
+#define stricmp strcasecmp
+#define strnicmp strncasecmp
 #define wcsicmp wcscasecmp
 #endif
 

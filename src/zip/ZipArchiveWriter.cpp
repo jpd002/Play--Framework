@@ -1,3 +1,4 @@
+#include <string.h>
 #include "zip/ZipArchiveWriter.h"
 #include "zip/ZipDeflateStream.h"
 #include "zip/ZipDefs.h"

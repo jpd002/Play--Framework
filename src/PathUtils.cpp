@@ -103,7 +103,25 @@ void PathUtils::SetFilesDirPath(const char* filesDirPath)
 	s_filesDirPath = filesDirPath;
 }
 
-#else	// !DEFINED(__ANDROID__) || !DEFINED(__APPLE__)
+#elif defined(__linux)
+
+// TODO: is this an appropriate translation?
+boost::filesystem::path PathUtils::GetAppResourcesPath()
+{
+	return boost::filesystem::path(getenv("HOME")) / ".local/share";
+}
+
+boost::filesystem::path PathUtils::GetRoamingDataPath()
+{
+	return boost::filesystem::path(getenv("HOME")) / ".local/share";
+}
+
+boost::filesystem::path PathUtils::GetPersonalDataPath()
+{
+	return boost::filesystem::path(getenv("HOME")) / ".local/share";
+}
+
+#else	// !DEFINED(__ANDROID__) || !DEFINED(__APPLE__) || !DEFINED(__linux)
 
 #include <pwd.h>
 

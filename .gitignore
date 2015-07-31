@@ -1,5 +1,6 @@
 build_android/libs
 build_android/obj
+build_unix/build
 Debug
 Release
 *.ipch
