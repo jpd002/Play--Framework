@@ -358,6 +358,9 @@
     <ClCompile Include="..\src\math\MathStringUtils.cpp">
       <Filter>Source Files\math</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\StdStreamUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\alloca_def.h">
