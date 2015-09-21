@@ -47,6 +47,7 @@ LOCAL_SRC_FILES		:= 	../../src/Base64.cpp \
 						../../src/Stream.cpp \
 						../../src/StreamBitStream.cpp \
 						../../src/StdStream.cpp \
+						../../src/StdStreamUtils.cpp \
 						../../src/Utf8.cpp \
 						../../src/xml/FilteringNodeIterator.cpp \
 						../../src/xml/Node.cpp \

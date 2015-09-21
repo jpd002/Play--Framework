@@ -34,6 +34,7 @@
 		70271AD118D4E47900777C53 /* Endian.h in Headers */ = {isa = PBXBuildFile; fileRef = 70271AD018D4E47900777C53 /* Endian.h */; };
 		704E1C3C1B391D9C00C0ACE3 /* Program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 704E1C3A1B391D9C00C0ACE3 /* Program.cpp */; };
 		704E1C3D1B391D9C00C0ACE3 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 704E1C3B1B391D9C00C0ACE3 /* Shader.cpp */; };
+		7054CA261B99B0AD0029E3A3 /* StdStreamUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7054CA251B99B0AD0029E3A3 /* StdStreamUtils.cpp */; };
 		70834CB41B1BD7B100E8D5C6 /* CodedBlockPatternTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CA61B1BD7B100E8D5C6 /* CodedBlockPatternTable.cpp */; };
 		70834CB51B1BD7B100E8D5C6 /* DcSizeChrominanceTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CA71B1BD7B100E8D5C6 /* DcSizeChrominanceTable.cpp */; };
 		70834CB61B1BD7B100E8D5C6 /* DcSizeLuminanceTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70834CA81B1BD7B100E8D5C6 /* DcSizeLuminanceTable.cpp */; };
@@ -185,6 +186,7 @@
 		704DFAED17D5CB22003AB959 /* alloca_def.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = alloca_def.h; path = ../include/alloca_def.h; sourceTree = "<group>"; };
 		704E1C3A1B391D9C00C0ACE3 /* Program.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Program.cpp; path = ../src/opengl/Program.cpp; sourceTree = "<group>"; };
 		704E1C3B1B391D9C00C0ACE3 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Shader.cpp; path = ../src/opengl/Shader.cpp; sourceTree = "<group>"; };
+		7054CA251B99B0AD0029E3A3 /* StdStreamUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StdStreamUtils.cpp; path = ../src/StdStreamUtils.cpp; sourceTree = "<group>"; };
 		70834CA61B1BD7B100E8D5C6 /* CodedBlockPatternTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CodedBlockPatternTable.cpp; path = ../src/mpeg2/CodedBlockPatternTable.cpp; sourceTree = "<group>"; };
 		70834CA71B1BD7B100E8D5C6 /* DcSizeChrominanceTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DcSizeChrominanceTable.cpp; path = ../src/mpeg2/DcSizeChrominanceTable.cpp; sourceTree = "<group>"; };
 		70834CA81B1BD7B100E8D5C6 /* DcSizeLuminanceTable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DcSizeLuminanceTable.cpp; path = ../src/mpeg2/DcSizeLuminanceTable.cpp; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				7E2720B61213AED800C0DEBF /* PtrStream.h */,
 				7E2720AF1213AEC200C0DEBF /* StdStream.cpp */,
 				7E2720B71213AED800C0DEBF /* StdStream.h */,
+				7054CA251B99B0AD0029E3A3 /* StdStreamUtils.cpp */,
 				7E2720B01213AEC200C0DEBF /* Stream.cpp */,
 				7E2720B81213AED800C0DEBF /* Stream.h */,
 				70271ACA18D4E44F00777C53 /* StreamBitStream.cpp */,
@@ -750,6 +753,7 @@
 				7E2722591214F99500C0DEBF /* ZipArchiveWriter.cpp in Sources */,
 				70834CBE1B1BD7B100E8D5C6 /* MacroblockTypePTable.cpp in Sources */,
 				7E27225A1214F99500C0DEBF /* ZipDeflateStream.cpp in Sources */,
+				7054CA261B99B0AD0029E3A3 /* StdStreamUtils.cpp in Sources */,
 				70271ACF18D4E47000777C53 /* Endian.cpp in Sources */,
 				704E1C3D1B391D9C00C0ACE3 /* Shader.cpp in Sources */,
 				70271AAF18D4E3AC00777C53 /* PNG.cpp in Sources */,

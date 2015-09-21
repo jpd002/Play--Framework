@@ -8,5 +8,6 @@ Release
 *.suo
 *.user
 *.userprops
+*.xccheckout
 xcuserdata
 

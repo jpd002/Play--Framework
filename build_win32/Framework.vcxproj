@@ -61,6 +61,7 @@
     <ClCompile Include="..\src\PathUtils.cpp" />
     <ClCompile Include="..\src\PtrStream.cpp" />
     <ClCompile Include="..\src\StdStream.cpp" />
+    <ClCompile Include="..\src\StdStreamUtils.cpp" />
     <ClCompile Include="..\src\Stream.cpp" />
     <ClCompile Include="..\src\StreamBitStream.cpp" />
     <ClCompile Include="..\src\string_cast.cpp" />

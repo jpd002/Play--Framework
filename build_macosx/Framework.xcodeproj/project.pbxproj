@@ -15,6 +15,7 @@
 		703093A717BE54A2009662A1 /* JPEG.h in Headers */ = {isa = PBXBuildFile; fileRef = 703093A017BE5463009662A1 /* JPEG.h */; };
 		703093A817BE54A2009662A1 /* PNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7030939D17BE5456009662A1 /* PNG.cpp */; };
 		703093A917BE54A2009662A1 /* PNG.h in Headers */ = {isa = PBXBuildFile; fileRef = 703093A117BE5463009662A1 /* PNG.h */; };
+		7054CA281B99B2930029E3A3 /* StdStreamUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7054CA271B99B2930029E3A3 /* StdStreamUtils.cpp */; };
 		70C0C84C1ADC967D00492241 /* Resource.h in Headers */ = {isa = PBXBuildFile; fileRef = 70C0C84B1ADC967D00492241 /* Resource.h */; };
 		70D317AB17C0D87A00CCA3A4 /* Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D317A717C0D87A00CCA3A4 /* Buffer.cpp */; };
 		70D317AC17C0D87A00CCA3A4 /* Context.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 70D317A817C0D87A00CCA3A4 /* Context.cpp */; };
@@ -138,6 +139,7 @@
 		7030939F17BE5463009662A1 /* BMP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BMP.h; path = ../include/bitmap/BMP.h; sourceTree = "<group>"; };
 		703093A017BE5463009662A1 /* JPEG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JPEG.h; path = ../include/bitmap/JPEG.h; sourceTree = "<group>"; };
 		703093A117BE5463009662A1 /* PNG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PNG.h; path = ../include/bitmap/PNG.h; sourceTree = "<group>"; };
+		7054CA271B99B2930029E3A3 /* StdStreamUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StdStreamUtils.cpp; path = ../src/StdStreamUtils.cpp; sourceTree = "<group>"; };
 		70C0C84B1ADC967D00492241 /* Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Resource.h; path = ../include/opengl/Resource.h; sourceTree = "<group>"; };
 		70D317A717C0D87A00CCA3A4 /* Buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Buffer.cpp; path = ../src/openal/Buffer.cpp; sourceTree = "<group>"; };
 		70D317A817C0D87A00CCA3A4 /* Context.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Context.cpp; path = ../src/openal/Context.cpp; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 				7E7236FB1506E67C00F3259A /* Singleton.h */,
 				7E7236C91506E64B00F3259A /* StdStream.cpp */,
 				7E7236FC1506E67C00F3259A /* StdStream.h */,
+				7054CA271B99B2930029E3A3 /* StdStreamUtils.cpp */,
 				7E7236FD1506E67C00F3259A /* StdStreamUtils.h */,
 				7E7236CA1506E64B00F3259A /* Stream.cpp */,
 				7E7236FE1506E67C00F3259A /* Stream.h */,
@@ -648,6 +651,7 @@
 				7E72375A1507350200F3259A /* FilteringNodeIterator.cpp in Sources */,
 				7E72375B1507350200F3259A /* Node.cpp in Sources */,
 				7E72375C1507350200F3259A /* Parser.cpp in Sources */,
+				7054CA281B99B2930029E3A3 /* StdStreamUtils.cpp in Sources */,
 				7E72375D1507350200F3259A /* Utils.cpp in Sources */,
 				7E72375E1507350200F3259A /* Writer.cpp in Sources */,
 				703093A817BE54A2009662A1 /* PNG.cpp in Sources */,
