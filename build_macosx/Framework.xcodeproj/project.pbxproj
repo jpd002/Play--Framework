@@ -154,7 +154,6 @@
 		70F6D78F19CE8B080087C371 /* GeneralSettingsDebug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GeneralSettingsDebug.xcconfig; sourceTree = "<group>"; };
 		70F6D79019CE8B080087C371 /* GeneralSettingsRelease.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = GeneralSettingsRelease.xcconfig; sourceTree = "<group>"; };
 		70F6D79119CE8B890087C371 /* Framework_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Framework_Prefix.pch; sourceTree = "<group>"; };
-		70F6D79419CF8BC50087C371 /* ExternalDependencies.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = ExternalDependencies.xcconfig; sourceTree = "<group>"; };
 		7E70288A1508786A00D9BC91 /* IEEE1180.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IEEE1180.cpp; path = ../src/idct/IEEE1180.cpp; sourceTree = "<group>"; };
 		7E70288C1508787D00D9BC91 /* IEEE1180.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IEEE1180.h; path = ../include/idct/IEEE1180.h; sourceTree = "<group>"; };
 		7E70288D1508787D00D9BC91 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Interface.h; path = ../include/idct/Interface.h; sourceTree = "<group>"; };
@@ -374,7 +373,6 @@
 		70F6D79319CE8BA50087C371 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				70F6D79419CF8BC50087C371 /* ExternalDependencies.xcconfig */,
 				70F6D78E19CE8A120087C371 /* GeneralSettings.xcconfig */,
 				70F6D78F19CE8B080087C371 /* GeneralSettingsDebug.xcconfig */,
 				70F6D79019CE8B080087C371 /* GeneralSettingsRelease.xcconfig */,
