@@ -32,7 +32,7 @@
 
 #endif
 
-#elif defined(__linux)
+#elif defined(__linux__) || defined(__FreeBSD__)
 
 #include <GL/glew.h>
 #include <GL/gl.h>
