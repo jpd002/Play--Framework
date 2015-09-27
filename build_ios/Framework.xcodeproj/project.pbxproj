@@ -235,7 +235,6 @@
 		70C0EF951A59E56C00227442 /* Vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector2.h; path = ../include/math/Vector2.h; sourceTree = "<group>"; };
 		70C0EF961A59E56C00227442 /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector3.h; path = ../include/math/Vector3.h; sourceTree = "<group>"; };
 		70C0EF971A59E56C00227442 /* Vector4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector4.h; path = ../include/math/Vector4.h; sourceTree = "<group>"; };
-		70F6D79519CF95870087C371 /* ExternalDependencies.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = ExternalDependencies.xcconfig; sourceTree = "<group>"; };
 		70F6D79619CF95870087C371 /* GeneralSettingsRelease.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = GeneralSettingsRelease.xcconfig; sourceTree = "<group>"; };
 		7E1C41B31234236D00BB4E9C /* IosIStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosIStream.cpp; path = ../src/IosIStream.cpp; sourceTree = SOURCE_ROOT; };
 		7E1C41B41234236D00BB4E9C /* IosOStream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IosOStream.cpp; path = ../src/IosOStream.cpp; sourceTree = SOURCE_ROOT; };
@@ -474,7 +473,6 @@
 		709C3B1C18D4BD3A006DAF2C /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				70F6D79519CF95870087C371 /* ExternalDependencies.xcconfig */,
 				708661E618D44B1900B4E9CE /* GeneralSettings.xcconfig */,
 				709C3B1D18D4BF02006DAF2C /* GeneralSettingsDebug.xcconfig */,
 				70F6D79619CF95870087C371 /* GeneralSettingsRelease.xcconfig */,
