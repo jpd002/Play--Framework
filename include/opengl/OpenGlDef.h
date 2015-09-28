@@ -32,7 +32,13 @@
 
 #endif
 
-#endif // defined(__APPLE__)
+#elif defined(__linux__) || defined(__FreeBSD__)
+
+#include <GL/glew.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+
+#endif
 
 #ifdef _DEBUG
 #define CHECKGLERROR() { auto errorCode = glGetError(); assert(errorCode == GL_NO_ERROR); }
