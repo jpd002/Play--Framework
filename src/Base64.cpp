@@ -1,3 +1,4 @@
+#include <string.h>
 #include <stdexcept>
 #include "Base64.h"
 

@@ -1,5 +1,7 @@
 #include <cassert>
 #include <stdexcept>
+#include <sys/types.h>
+#include <unistd.h>
 #include "PosixFileStream.h"
 
 using namespace Framework;
