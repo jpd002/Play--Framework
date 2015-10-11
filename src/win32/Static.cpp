@@ -4,6 +4,11 @@
 using namespace Framework;
 using namespace Framework::Win32;
 
+CStatic::CStatic(CStatic&& rhs)
+{
+	CWindow::MoveFrom(std::move(rhs));
+}
+
 CStatic::CStatic(HWND hWnd)
 {
 	m_hWnd = hWnd;
