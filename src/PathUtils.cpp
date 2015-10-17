@@ -103,7 +103,7 @@ void PathUtils::SetFilesDirPath(const char* filesDirPath)
 	s_filesDirPath = filesDirPath;
 }
 
-#elif defined(__linux)
+#elif defined(__linux__) || defined(__FreeBSD__)
 
 // TODO: is this an appropriate translation?
 boost::filesystem::path PathUtils::GetAppResourcesPath()
@@ -121,7 +121,7 @@ boost::filesystem::path PathUtils::GetPersonalDataPath()
 	return boost::filesystem::path(getenv("HOME")) / ".local/share";
 }
 
-#else	// !DEFINED(__ANDROID__) || !DEFINED(__APPLE__) || !DEFINED(__linux)
+#else	// !DEFINED(__ANDROID__) || !DEFINED(__APPLE__) || !DEFINED(__linux__) || !DEFINED(__FreeBSD__)
 
 #include <pwd.h>
 
