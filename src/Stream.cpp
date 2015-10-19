@@ -106,6 +106,11 @@ void CStream::Write32(uint32 nValue)
 	Write(&nValue, 4);
 }
 
+void CStream::Write64(uint64 value)
+{
+	Write(&value, 8);
+}
+
 uint64 CStream::GetLength()
 {
 	uint64 position = Tell();

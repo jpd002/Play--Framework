@@ -42,6 +42,7 @@ namespace Framework
 		void			Write8(uint8);
 		void			Write16(uint16);
 		void			Write32(uint32);
+		void			Write64(uint64);
 	};
 
 }
