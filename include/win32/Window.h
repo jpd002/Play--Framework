@@ -90,6 +90,7 @@ namespace Framework
 			virtual long			OnDestroy();
 			virtual long			OnCtlColorStatic(HDC, HWND);
 			virtual long			OnActivate(unsigned int, bool, HWND);
+			virtual long			OnMouseActivate(WPARAM, LPARAM);
 			virtual long			OnActivateApp(bool, unsigned long);
 			virtual long			OnSetCursor(HWND, unsigned int, unsigned int);
 			virtual long			OnDrawItem(unsigned int, LPDRAWITEMSTRUCT);

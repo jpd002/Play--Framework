@@ -459,6 +459,9 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 	case WM_ACTIVATE:
 		if(!pThis->OnActivate(LOWORD(wParam), HIWORD(wParam) != 0, (HWND)lParam)) return FALSE;
 		break;
+	case WM_MOUSEACTIVATE:
+		return pThis->OnMouseActivate(wParam, lParam);
+		break;
 	case WM_ACTIVATEAPP:
 		if(!pThis->OnActivateApp(LOWORD(wParam) != 0, (unsigned long)lParam)) return FALSE;
 		break;
@@ -642,6 +645,11 @@ long CWindow::OnCtlColorStatic(HDC hDC, HWND hWnd)
 long CWindow::OnActivate(unsigned int nType, bool bMinimized, HWND hWnd)
 {
 	return TRUE;
+}
+
+long CWindow::OnMouseActivate(WPARAM wParam, LPARAM lParam)
+{
+	return static_cast<long>(DefWindowProc(m_hWnd, WM_MOUSEACTIVATE, wParam, lParam));
 }
 
 long CWindow::OnActivateApp(bool nActive, DWORD nThreadId)
