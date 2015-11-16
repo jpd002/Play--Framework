@@ -74,6 +74,10 @@ HWND CDialog::GetItem(int itemId)
 
 INT_PTR WINAPI CDialog::DialogProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	if(msg == WM_INITDIALOG)
+	{
+		return TRUE;
+	}
 	CDialog* pThis = static_cast<CDialog*>(GetClassPtr(hWnd));
 	if(pThis == NULL)
 	{
