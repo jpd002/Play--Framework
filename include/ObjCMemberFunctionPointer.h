@@ -1,5 +1,4 @@
-#ifndef _OBJCMEMBERFUNCTIONPOINTER_H_
-#define _OBJCMEMBERFUNCTIONPOINTER_H_
+#pragma once
 
 #import <objc/message.h>
 
@@ -19,9 +18,6 @@ public:
 	}
 	
 private:
-	
-	id	m_object;
-	SEL m_sel;
+	id	m_object = nil;
+	SEL m_sel = nil;
 };
-
-#endif
