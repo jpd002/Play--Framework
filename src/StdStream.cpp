@@ -95,9 +95,9 @@ void CStdStream::Seek(int64 nPosition, STREAM_SEEK_DIRECTION nDirection)
 #ifdef WIN32
 	_fseeki64(m_file, nPosition, nDir);
 #else
-	int result = fseek(m_file, nPosition, nDir);
+	int result = fseeko(m_file, nPosition, nDir);
 	assert(result == 0);
-	assert((nDirection != STREAM_SEEK_SET) || (ftell(m_file) == nPosition));
+	assert((nDirection != STREAM_SEEK_SET) || (ftello(m_file) == nPosition));
 #endif
 }
 
@@ -112,7 +112,7 @@ uint64 CStdStream::Tell()
 #ifdef WIN32
 	return _ftelli64(m_file);
 #else
-	return ftell(m_file);
+	return ftello(m_file);
 #endif
 }
 
