@@ -89,7 +89,35 @@ namespace Framework
 			}
 		};
 
+		struct TextureTraits
+		{
+			static void Creator(GLsizei amount, GLuint* values)
+			{
+				glGenTextures(amount, values);
+			}
+
+			static void Deletor(GLsizei amount, GLuint* values)
+			{
+				glDeleteTextures(amount, values);
+			}
+		};
+
+		struct FramebufferTraits
+		{
+			static void Creator(GLsizei amount, GLuint* values)
+			{
+				glGenFramebuffers(amount, values);
+			}
+
+			static void Deletor(GLsizei amount, GLuint* values)
+			{
+				glDeleteFramebuffers(amount, values);
+			}
+		};
+
 		typedef CResource<BufferTraits> CBuffer;
 		typedef CResource<VertexArrayTraits> CVertexArray;
+		typedef CResource<TextureTraits> CTexture;
+		typedef CResource<FramebufferTraits> CFramebuffer;
 	}
 };
