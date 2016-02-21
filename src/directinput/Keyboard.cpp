@@ -9,7 +9,7 @@ CKeyboard::CKeyboard(LPDIRECTINPUTDEVICE8 device, HWND window)
 : CDevice(device)
 {
 	m_device->SetDataFormat(&c_dfDIKeyboard);
-	m_device->SetCooperativeLevel(window, DISCL_BACKGROUND | DISCL_NONEXCLUSIVE);
+	m_device->SetCooperativeLevel(window, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
 
 	{
 		DIPROPDWORD p;

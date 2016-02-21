@@ -15,7 +15,7 @@ CJoystick::CJoystick(LPDIRECTINPUTDEVICE8 device, HWND ownerWindow)
 	{
 		throw std::runtime_error("Couldn't SetDataFormat.");
 	}
-	if(FAILED(m_device->SetCooperativeLevel(ownerWindow, DISCL_BACKGROUND | DISCL_NONEXCLUSIVE)))
+	if(FAILED(m_device->SetCooperativeLevel(ownerWindow, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE)))
 	{
 		throw std::runtime_error("Couldn't SetCooperativeLevel.");
 	}
