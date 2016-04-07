@@ -27,6 +27,7 @@
 
 //OSX
 #include <OpenGL/gl3.h>
+#include <OpenGL/gl3ext.h>
 #include <OpenGL/glu.h>
 #include <OpenGL/OpenGL.h>
 
