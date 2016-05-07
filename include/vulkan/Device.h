@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vulkan/vulkan.h>
 #include <functional>
+#include "VulkanDef.h"
 #include "Instance.h"
 
 #define DECLARE_FUNCTION(functionName) PFN_##functionName functionName = nullptr;

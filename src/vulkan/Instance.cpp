@@ -51,6 +51,13 @@ void CInstance::Create(const VkInstanceCreateInfo& instanceCreateInfo)
 	SET_PROC_ADDR(vkGetPhysicalDeviceSurfaceFormatsKHR);
 	SET_PROC_ADDR(vkGetPhysicalDeviceSurfacePresentModesKHR);
 	SET_PROC_ADDR(vkGetPhysicalDeviceSurfaceSupportKHR);
+
+	SET_PROC_ADDR(vkCreateDebugReportCallbackEXT);
 	
+#if defined(__ANDROID__)
 	SET_PROC_ADDR(vkCreateAndroidSurfaceKHR);
+#endif
+#if defined(__linux__)
+	SET_PROC_ADDR(vkCreateXcbSurfaceKHR);
+#endif
 }

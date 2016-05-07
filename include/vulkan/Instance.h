@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vulkan/vulkan.h>
+#include "VulkanDef.h"
 
 #define DECLARE_FUNCTION(functionName) PFN_##functionName functionName = nullptr;
 
@@ -42,9 +42,14 @@ namespace Framework
 			DECLARE_FUNCTION(vkGetPhysicalDeviceSurfacePresentModesKHR)
 			DECLARE_FUNCTION(vkGetPhysicalDeviceSurfaceSupportKHR)
 			
+#if defined(__ANDROID__)
 			//VK_KHR_android_surface
 			DECLARE_FUNCTION(vkCreateAndroidSurfaceKHR)
-			
+#endif
+#if defined(__linux__)
+			//VK_KHR_xcb_surface
+			DECLARE_FUNCTION(vkCreateXcbSurfaceKHR)
+#endif
 		private:
 			void    Create(const VkInstanceCreateInfo&);
 			
