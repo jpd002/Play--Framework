@@ -42,11 +42,11 @@ namespace Framework
 			DECLARE_FUNCTION(vkGetPhysicalDeviceSurfacePresentModesKHR)
 			DECLARE_FUNCTION(vkGetPhysicalDeviceSurfaceSupportKHR)
 			
-#if defined(__ANDROID__)
+#if defined(VK_USE_PLATFORM_ANDROID_KHR)
 			//VK_KHR_android_surface
 			DECLARE_FUNCTION(vkCreateAndroidSurfaceKHR)
 #endif
-#if defined(__linux__)
+#if defined(VK_USE_PLATFORM_XCB_KHR)
 			//VK_KHR_xcb_surface
 			DECLARE_FUNCTION(vkCreateXcbSurfaceKHR)
 #endif

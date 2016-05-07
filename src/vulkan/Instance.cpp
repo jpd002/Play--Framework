@@ -54,10 +54,10 @@ void CInstance::Create(const VkInstanceCreateInfo& instanceCreateInfo)
 
 	SET_PROC_ADDR(vkCreateDebugReportCallbackEXT);
 	
-#if defined(__ANDROID__)
+#if defined(VK_USE_PLATFORM_ANDROID_KHR)
 	SET_PROC_ADDR(vkCreateAndroidSurfaceKHR);
 #endif
-#if defined(__linux__)
+#if defined(VK_USE_PLATFORM_XCB_KHR)
 	SET_PROC_ADDR(vkCreateXcbSurfaceKHR);
 #endif
 }

@@ -8,9 +8,7 @@
 #ifndef VK_USE_PLATFORM_ANDROID_KHR
 #define VK_USE_PLATFORM_ANDROID_KHR
 #endif
-#endif
-
-#if defined(__linux__)
+#elif defined(__linux__)
 #ifndef VK_USE_PLATFORM_XCB_KHR
 #define VK_USE_PLATFORM_XCB_KHR
 #endif
