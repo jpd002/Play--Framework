@@ -64,4 +64,8 @@ LOCAL_CFLAGS			:= -Wno-extern-c-compat
 LOCAL_C_INCLUDES		:= $(BOOST_PATH) $(LOCAL_PATH)/../../include
 LOCAL_CPP_FEATURES		:= exceptions rtti
 
+ifeq ($(APP_OPTIM),debug)
+LOCAL_CFLAGS			+= -D_DEBUG
+endif
+
 include $(BUILD_STATIC_LIBRARY)
