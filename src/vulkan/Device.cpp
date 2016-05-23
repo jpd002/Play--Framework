@@ -60,6 +60,7 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	SET_PROC_ADDR(vkCreateFramebuffer);
 	SET_PROC_ADDR(vkCreateImageView);
 	SET_PROC_ADDR(vkCreateRenderPass);
+	SET_PROC_ADDR(vkCreateShaderModule);
 	
 	SET_PROC_ADDR(vkCreateSemaphore);
 	SET_PROC_ADDR(vkDestroySemaphore);

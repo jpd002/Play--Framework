@@ -47,6 +47,7 @@ namespace Framework
 			DECLARE_FUNCTION(vkCreateFramebuffer)
 			DECLARE_FUNCTION(vkCreateImageView)
 			DECLARE_FUNCTION(vkCreateRenderPass)
+			DECLARE_FUNCTION(vkCreateShaderModule)
 			
 			DECLARE_FUNCTION(vkCreateSemaphore)
 			DECLARE_FUNCTION(vkDestroySemaphore)
