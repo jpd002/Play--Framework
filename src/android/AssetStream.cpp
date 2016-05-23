@@ -8,9 +8,15 @@ using namespace Framework::Android;
 CAssetStream::CAssetStream(const char* path)
 {
 	auto assetManager = CAssetManager::GetInstance().GetAssetManager();
-	assert(assetManager != nullptr);
+	if(assetManager == nullptr)
+	{
+		throw std::runtime_error("Asset manager not set.");
+	}
 	m_asset = AAssetManager_open(assetManager, path, AASSET_MODE_UNKNOWN);
-	assert(m_asset != nullptr);
+	if(m_asset == nullptr)
+	{
+		throw std::runtime_error("Failed to open asset.");
+	}
 }
 
 CAssetStream::~CAssetStream()
