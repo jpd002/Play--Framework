@@ -51,6 +51,9 @@ LOCAL_SRC_FILES		:= 	../../src/Android/AssetManager.cpp \
 						../../src/StdStream.cpp \
 						../../src/StdStreamUtils.cpp \
 						../../src/Utf8.cpp \
+						../../src/vulkan/Device.cpp \
+						../../src/vulkan/Instance.cpp \
+						../../src/vulkan/Loader.cpp \
 						../../src/xml/FilteringNodeIterator.cpp \
 						../../src/xml/Node.cpp \
 						../../src/xml/Parser.cpp \
@@ -63,7 +66,7 @@ LOCAL_SRC_FILES		:= 	../../src/Android/AssetManager.cpp \
 						../../src/zip/ZipInflateStream.cpp \
 						../../src/zip/ZipStoreStream.cpp
 LOCAL_CFLAGS			:= -Wno-extern-c-compat
-LOCAL_C_INCLUDES		:= $(BOOST_PATH) $(LOCAL_PATH)/../../include
+LOCAL_C_INCLUDES		:= $(BOOST_PATH) $(LOCAL_PATH)/../../include $(VULKAN_PATH)
 LOCAL_CPP_FEATURES		:= exceptions rtti
 
 ifeq ($(APP_OPTIM),debug)

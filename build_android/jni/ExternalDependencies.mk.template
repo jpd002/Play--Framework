@@ -1,1 +1,2 @@
-BOOST_PATH	:= /path/to/boost
+BOOST_PATH  := /path/to/boost
+VULKAN_PATH := /path/to/vulkan
