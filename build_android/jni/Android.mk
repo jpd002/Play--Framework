@@ -5,7 +5,9 @@ include $(LOCAL_PATH)/ExternalDependencies.mk
 include $(CLEAR_VARS)
 
 LOCAL_MODULE		:= libFramework
-LOCAL_SRC_FILES		:= 	../../src/Base64.cpp \
+LOCAL_SRC_FILES		:= 	../../src/Android/AssetManager.cpp \
+						../../src/Android/AssetStream.cpp \
+						../../src/Base64.cpp \
 						../../src/bitmap/Bitmap.cpp \
 						../../src/bitmap/BMP.cpp \
 						../../src/bitmap/JPEG.cpp \
