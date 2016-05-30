@@ -21,8 +21,10 @@ namespace Framework
 			virtual ~CDevice();
 			
 			void    Reset();
+			bool    IsEmpty() const;
 			
 			CDevice& operator =(const CDevice&) = delete;
+			CDevice& operator =(CDevice&&);
 			         operator VkDevice() const;
 			
 			DECLARE_FUNCTION(vkAllocateCommandBuffers)

@@ -19,8 +19,10 @@ namespace Framework
 			virtual ~CInstance();
 			
 			void    Reset();
+			bool    IsEmpty() const;
 			
 			CInstance& operator =(const CInstance&) = delete;
+			CInstance& operator =(CInstance&&);
 			           operator VkInstance() const;
 			
 			DECLARE_FUNCTION(vkDestroyInstance)

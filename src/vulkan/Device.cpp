@@ -16,14 +16,94 @@ CDevice::~CDevice()
 	Reset();
 }
 
+bool CDevice::IsEmpty() const
+{
+	return (m_handle == VK_NULL_HANDLE);
+}
+
 void CDevice::Reset()
 {
-	if(m_handle != nullptr)
+	if(m_handle != VK_NULL_HANDLE)
 	{
 		assert(m_instance != nullptr);
 		m_instance->vkDestroyDevice(m_handle, nullptr);
-		m_handle = nullptr;
+		m_handle = VK_NULL_HANDLE;
+		m_instance = nullptr;
 	}
+	
+	vkAllocateCommandBuffers = nullptr;
+	vkFreeCommandBuffers = nullptr;
+	
+	vkBeginCommandBuffer = nullptr;
+	vkEndCommandBuffer = nullptr;
+	
+	vkCmdBeginRenderPass = nullptr;
+	vkCmdClearColorImage = nullptr;
+	vkCmdEndRenderPass = nullptr;
+	vkCmdPipelineBarrier = nullptr;
+	vkCmdSetScissor = nullptr;
+	vkCmdSetViewport = nullptr;
+	
+	vkGetDeviceQueue = nullptr;
+	
+	vkQueueSubmit = nullptr;
+	vkQueueWaitIdle = nullptr;
+	
+	vkCreateCommandPool = nullptr;
+	vkCreateFramebuffer = nullptr;
+	vkCreateImageView = nullptr;
+	vkCreateRenderPass = nullptr;
+	vkCreateShaderModule = nullptr;
+	
+	vkCreateSemaphore = nullptr;
+	vkDestroySemaphore = nullptr;
+	
+	vkAcquireNextImageKHR = nullptr;
+	vkCreateSwapchainKHR = nullptr;
+	vkGetSwapchainImagesKHR = nullptr;
+	vkQueuePresentKHR = nullptr;
+}
+
+CDevice& CDevice::operator =(CDevice&& rhs)
+{
+	Reset();
+	
+	std::swap(m_handle, rhs.m_handle);
+	std::swap(m_instance, rhs.m_instance);
+	
+	std::swap(vkAllocateCommandBuffers, rhs.vkAllocateCommandBuffers);
+	std::swap(vkFreeCommandBuffers, rhs.vkFreeCommandBuffers);
+	
+	std::swap(vkBeginCommandBuffer, rhs.vkBeginCommandBuffer);
+	std::swap(vkEndCommandBuffer, rhs.vkEndCommandBuffer);
+	
+	std::swap(vkCmdBeginRenderPass, rhs.vkCmdBeginRenderPass);
+	std::swap(vkCmdClearColorImage, rhs.vkCmdClearColorImage);
+	std::swap(vkCmdEndRenderPass, rhs.vkCmdEndRenderPass);
+	std::swap(vkCmdPipelineBarrier, rhs.vkCmdPipelineBarrier);
+	std::swap(vkCmdSetScissor, rhs.vkCmdSetScissor);
+	std::swap(vkCmdSetViewport, rhs.vkCmdSetViewport);
+	
+	std::swap(vkGetDeviceQueue, rhs.vkGetDeviceQueue);
+	
+	std::swap(vkQueueSubmit, rhs.vkQueueSubmit);
+	std::swap(vkQueueWaitIdle, rhs.vkQueueWaitIdle);
+	
+	std::swap(vkCreateCommandPool, rhs.vkCreateCommandPool);
+	std::swap(vkCreateFramebuffer, rhs.vkCreateFramebuffer);
+	std::swap(vkCreateImageView, rhs.vkCreateImageView);
+	std::swap(vkCreateRenderPass, rhs.vkCreateRenderPass);
+	std::swap(vkCreateShaderModule, rhs.vkCreateShaderModule);
+	
+	std::swap(vkCreateSemaphore, rhs.vkCreateSemaphore);
+	std::swap(vkDestroySemaphore, rhs.vkDestroySemaphore);
+	
+	std::swap(vkAcquireNextImageKHR, rhs.vkAcquireNextImageKHR);
+	std::swap(vkCreateSwapchainKHR, rhs.vkCreateSwapchainKHR);
+	std::swap(vkGetSwapchainImagesKHR, rhs.vkGetSwapchainImagesKHR);
+	std::swap(vkQueuePresentKHR, rhs.vkQueuePresentKHR);
+	
+	return (*this);
 }
 
 CDevice::operator VkDevice() const
