@@ -34,7 +34,10 @@ namespace Framework
 			DECLARE_FUNCTION(vkEndCommandBuffer)
 			
 			DECLARE_FUNCTION(vkCmdBeginRenderPass)
+			DECLARE_FUNCTION(vkCmdBindPipeline)
+			DECLARE_FUNCTION(vkCmdBindVertexBuffers)
 			DECLARE_FUNCTION(vkCmdClearColorImage)
+			DECLARE_FUNCTION(vkCmdDraw)
 			DECLARE_FUNCTION(vkCmdEndRenderPass)
 			DECLARE_FUNCTION(vkCmdPipelineBarrier)
 			DECLARE_FUNCTION(vkCmdSetScissor)
@@ -49,10 +52,38 @@ namespace Framework
 			DECLARE_FUNCTION(vkCreateFramebuffer)
 			DECLARE_FUNCTION(vkCreateImageView)
 			DECLARE_FUNCTION(vkCreateRenderPass)
-			DECLARE_FUNCTION(vkCreateShaderModule)
 			
+			//Buffer
+			DECLARE_FUNCTION(vkCreateBuffer)
+			DECLARE_FUNCTION(vkBindBufferMemory)
+			DECLARE_FUNCTION(vkDestroyBuffer)
+			DECLARE_FUNCTION(vkGetBufferMemoryRequirements)
+			
+			//Memory
+			DECLARE_FUNCTION(vkAllocateMemory)
+			DECLARE_FUNCTION(vkFreeMemory)
+			DECLARE_FUNCTION(vkMapMemory)
+			DECLARE_FUNCTION(vkUnmapMemory)
+			
+			//Pipeline
+			DECLARE_FUNCTION(vkCreateGraphicsPipelines)
+			DECLARE_FUNCTION(vkDestroyPipeline)
+			
+			//Pipeline Cache
+			DECLARE_FUNCTION(vkCreatePipelineCache)
+			DECLARE_FUNCTION(vkDestroyPipelineCache)
+			
+			//Pipeline Layout
+			DECLARE_FUNCTION(vkCreatePipelineLayout)
+			DECLARE_FUNCTION(vkDestroyPipelineLayout)
+			
+			//Semaphore
 			DECLARE_FUNCTION(vkCreateSemaphore)
 			DECLARE_FUNCTION(vkDestroySemaphore)
+			
+			//Shader Module
+			DECLARE_FUNCTION(vkCreateShaderModule)
+			DECLARE_FUNCTION(vkDestroyShaderModule)
 			
 			//VK_KHR_swapchain
 			DECLARE_FUNCTION(vkAcquireNextImageKHR)

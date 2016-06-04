@@ -32,6 +32,7 @@ namespace Framework
 			
 			DECLARE_FUNCTION(vkEnumeratePhysicalDevices)
 			DECLARE_FUNCTION(vkGetDeviceProcAddr)
+			DECLARE_FUNCTION(vkGetPhysicalDeviceMemoryProperties)
 			DECLARE_FUNCTION(vkGetPhysicalDeviceProperties)
 			DECLARE_FUNCTION(vkGetPhysicalDeviceQueueFamilyProperties)
 			

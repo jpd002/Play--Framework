@@ -38,7 +38,10 @@ void CDevice::Reset()
 	vkEndCommandBuffer = nullptr;
 	
 	vkCmdBeginRenderPass = nullptr;
+	vkCmdBindPipeline = nullptr;
+	vkCmdBindVertexBuffers = nullptr;
 	vkCmdClearColorImage = nullptr;
+	vkCmdDraw = nullptr;
 	vkCmdEndRenderPass = nullptr;
 	vkCmdPipelineBarrier = nullptr;
 	vkCmdSetScissor = nullptr;
@@ -53,10 +56,31 @@ void CDevice::Reset()
 	vkCreateFramebuffer = nullptr;
 	vkCreateImageView = nullptr;
 	vkCreateRenderPass = nullptr;
-	vkCreateShaderModule = nullptr;
+	
+	vkCreateBuffer = nullptr;
+	vkBindBufferMemory = nullptr;
+	vkDestroyBuffer = nullptr;
+	vkGetBufferMemoryRequirements = nullptr;
+	
+	vkAllocateMemory = nullptr;
+	vkFreeMemory = nullptr;
+	vkMapMemory = nullptr;
+	vkUnmapMemory = nullptr;
+	
+	vkCreateGraphicsPipelines = nullptr;
+	vkDestroyPipeline = nullptr;
+	
+	vkCreatePipelineCache = nullptr;
+	vkDestroyPipelineCache = nullptr;
+	
+	vkCreatePipelineLayout = nullptr;
+	vkDestroyPipelineLayout = nullptr;
 	
 	vkCreateSemaphore = nullptr;
 	vkDestroySemaphore = nullptr;
+	
+	vkCreateShaderModule = nullptr;
+	vkDestroyShaderModule = nullptr;
 	
 	vkAcquireNextImageKHR = nullptr;
 	vkCreateSwapchainKHR = nullptr;
@@ -78,7 +102,10 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(vkEndCommandBuffer, rhs.vkEndCommandBuffer);
 	
 	std::swap(vkCmdBeginRenderPass, rhs.vkCmdBeginRenderPass);
+	std::swap(vkCmdBindPipeline, rhs.vkCmdBindPipeline);
+	std::swap(vkCmdBindVertexBuffers, rhs.vkCmdBindVertexBuffers);
 	std::swap(vkCmdClearColorImage, rhs.vkCmdClearColorImage);
+	std::swap(vkCmdDraw, rhs.vkCmdDraw);
 	std::swap(vkCmdEndRenderPass, rhs.vkCmdEndRenderPass);
 	std::swap(vkCmdPipelineBarrier, rhs.vkCmdPipelineBarrier);
 	std::swap(vkCmdSetScissor, rhs.vkCmdSetScissor);
@@ -93,10 +120,31 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(vkCreateFramebuffer, rhs.vkCreateFramebuffer);
 	std::swap(vkCreateImageView, rhs.vkCreateImageView);
 	std::swap(vkCreateRenderPass, rhs.vkCreateRenderPass);
-	std::swap(vkCreateShaderModule, rhs.vkCreateShaderModule);
+	
+	std::swap(vkCreateBuffer, rhs.vkCreateBuffer);
+	std::swap(vkBindBufferMemory, rhs.vkBindBufferMemory);
+	std::swap(vkDestroyBuffer, rhs.vkDestroyBuffer);
+	std::swap(vkGetBufferMemoryRequirements, rhs.vkGetBufferMemoryRequirements);
+	
+	std::swap(vkAllocateMemory, rhs.vkAllocateMemory);
+	std::swap(vkFreeMemory, rhs.vkFreeMemory);
+	std::swap(vkMapMemory, rhs.vkMapMemory);
+	std::swap(vkUnmapMemory, rhs.vkUnmapMemory);
+	
+	std::swap(vkCreateGraphicsPipelines, rhs.vkCreateGraphicsPipelines);
+	std::swap(vkDestroyPipeline, rhs.vkDestroyPipeline);
+	
+	std::swap(vkCreatePipelineCache, rhs.vkCreatePipelineCache);
+	std::swap(vkDestroyPipelineCache, rhs.vkDestroyPipelineCache);
+	
+	std::swap(vkCreatePipelineLayout, rhs.vkCreatePipelineLayout);
+	std::swap(vkDestroyPipelineLayout, rhs.vkDestroyPipelineLayout);
 	
 	std::swap(vkCreateSemaphore, rhs.vkCreateSemaphore);
 	std::swap(vkDestroySemaphore, rhs.vkDestroySemaphore);
+	
+	std::swap(vkCreateShaderModule, rhs.vkCreateShaderModule);
+	std::swap(vkDestroyShaderModule, rhs.vkDestroyShaderModule);
 	
 	std::swap(vkAcquireNextImageKHR, rhs.vkAcquireNextImageKHR);
 	std::swap(vkCreateSwapchainKHR, rhs.vkCreateSwapchainKHR);
@@ -125,7 +173,10 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	SET_PROC_ADDR(vkEndCommandBuffer);
 	
 	SET_PROC_ADDR(vkCmdBeginRenderPass);
+	SET_PROC_ADDR(vkCmdBindPipeline);
+	SET_PROC_ADDR(vkCmdBindVertexBuffers);
 	SET_PROC_ADDR(vkCmdClearColorImage);
+	SET_PROC_ADDR(vkCmdDraw);
 	SET_PROC_ADDR(vkCmdEndRenderPass);
 	SET_PROC_ADDR(vkCmdPipelineBarrier);
 	SET_PROC_ADDR(vkCmdSetScissor);
@@ -140,10 +191,31 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	SET_PROC_ADDR(vkCreateFramebuffer);
 	SET_PROC_ADDR(vkCreateImageView);
 	SET_PROC_ADDR(vkCreateRenderPass);
-	SET_PROC_ADDR(vkCreateShaderModule);
+	
+	SET_PROC_ADDR(vkCreateBuffer);
+	SET_PROC_ADDR(vkBindBufferMemory);
+	SET_PROC_ADDR(vkDestroyBuffer);
+	SET_PROC_ADDR(vkGetBufferMemoryRequirements);
+	
+	SET_PROC_ADDR(vkAllocateMemory);
+	SET_PROC_ADDR(vkFreeMemory);
+	SET_PROC_ADDR(vkMapMemory);
+	SET_PROC_ADDR(vkUnmapMemory);
+	
+	SET_PROC_ADDR(vkCreateGraphicsPipelines);
+	SET_PROC_ADDR(vkDestroyPipeline);
+	
+	SET_PROC_ADDR(vkCreatePipelineCache);
+	SET_PROC_ADDR(vkDestroyPipelineCache);
+	
+	SET_PROC_ADDR(vkCreatePipelineLayout);
+	SET_PROC_ADDR(vkDestroyPipelineLayout);
 	
 	SET_PROC_ADDR(vkCreateSemaphore);
 	SET_PROC_ADDR(vkDestroySemaphore);
+	
+	SET_PROC_ADDR(vkCreateShaderModule);
+	SET_PROC_ADDR(vkDestroyShaderModule);
 	
 	SET_PROC_ADDR(vkAcquireNextImageKHR);
 	SET_PROC_ADDR(vkCreateSwapchainKHR);
