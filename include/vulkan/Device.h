@@ -20,8 +20,8 @@ namespace Framework
 			
 			virtual ~CDevice();
 			
-			void    Reset();
 			bool    IsEmpty() const;
+			void    Reset();
 			
 			CDevice& operator =(const CDevice&) = delete;
 			CDevice& operator =(CDevice&&);

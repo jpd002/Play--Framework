@@ -18,8 +18,8 @@ namespace Framework
 			
 			virtual ~CInstance();
 			
-			void    Reset();
 			bool    IsEmpty() const;
+			void    Reset();
 			
 			CInstance& operator =(const CInstance&) = delete;
 			CInstance& operator =(CInstance&&);

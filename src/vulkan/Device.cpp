@@ -27,8 +27,8 @@ void CDevice::Reset()
 	{
 		assert(m_instance != nullptr);
 		m_instance->vkDestroyDevice(m_handle, nullptr);
-		m_handle = VK_NULL_HANDLE;
 		m_instance = nullptr;
+		m_handle = VK_NULL_HANDLE;
 	}
 	
 	vkAllocateCommandBuffers = nullptr;
