@@ -54,6 +54,7 @@ LOCAL_SRC_FILES		:= 	../../src/Android/AssetManager.cpp \
 						../../src/vulkan/Device.cpp \
 						../../src/vulkan/Instance.cpp \
 						../../src/vulkan/Loader.cpp \
+						../../src/vulkan/ShaderModule.cpp \
 						../../src/xml/FilteringNodeIterator.cpp \
 						../../src/xml/Node.cpp \
 						../../src/xml/Parser.cpp \
