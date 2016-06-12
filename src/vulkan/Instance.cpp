@@ -46,6 +46,7 @@ void CInstance::Reset()
 	vkGetPhysicalDeviceSurfaceSupportKHR = nullptr;
 	
 	vkCreateDebugReportCallbackEXT = nullptr;
+	vkDestroyDebugReportCallbackEXT = nullptr;
 	
 #if defined(VK_USE_PLATFORM_ANDROID_KHR)
 	vkCreateAndroidSurfaceKHR = nullptr;
@@ -78,6 +79,7 @@ CInstance& CInstance::operator =(CInstance&& rhs)
 	std::swap(vkGetPhysicalDeviceSurfaceSupportKHR, rhs.vkGetPhysicalDeviceSurfaceSupportKHR);
 	
 	std::swap(vkCreateDebugReportCallbackEXT, rhs.vkCreateDebugReportCallbackEXT);
+	std::swap(vkDestroyDebugReportCallbackEXT, rhs.vkDestroyDebugReportCallbackEXT);
 	
 #if defined(VK_USE_PLATFORM_ANDROID_KHR)
 	std::swap(vkCreateAndroidSurfaceKHR, rhs.vkCreateAndroidSurfaceKHR);
@@ -118,6 +120,7 @@ void CInstance::Create(const VkInstanceCreateInfo& instanceCreateInfo)
 	SET_PROC_ADDR(vkGetPhysicalDeviceSurfaceSupportKHR);
 	
 	SET_PROC_ADDR(vkCreateDebugReportCallbackEXT);
+	SET_PROC_ADDR(vkDestroyDebugReportCallbackEXT);
 	
 #if defined(VK_USE_PLATFORM_ANDROID_KHR)
 	SET_PROC_ADDR(vkCreateAndroidSurfaceKHR);
