@@ -10,9 +10,9 @@ namespace Framework
 		class CShaderModule
 		{
 		public:
-			        CShaderModule(Framework::Vulkan::CDevice&, Framework::CStream&);
+			        CShaderModule(CDevice&, Framework::CStream&);
 			        CShaderModule(const CShaderModule&) = delete;
-			virtual ~CShaderModule() = default;
+			virtual ~CShaderModule();
 			
 			bool IsEmpty() const;
 			void Reset();

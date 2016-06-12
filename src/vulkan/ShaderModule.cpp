@@ -3,10 +3,15 @@
 
 using namespace Framework::Vulkan;
 
-CShaderModule::CShaderModule(Framework::Vulkan::CDevice& device, Framework::CStream& stream)
+CShaderModule::CShaderModule(CDevice& device, Framework::CStream& stream)
 : m_device(&device)
 {
 	Create(stream);
+}
+
+CShaderModule::~CShaderModule()
+{
+	Reset();
 }
 
 bool CShaderModule::IsEmpty() const
