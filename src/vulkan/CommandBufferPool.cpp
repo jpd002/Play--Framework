@@ -42,6 +42,8 @@ CCommandBufferPool& CCommandBufferPool::operator =(CCommandBufferPool&& rhs)
 	
 	std::swap(m_buffers, rhs.m_buffers);
 	std::swap(m_bufferIndex, rhs.m_bufferIndex);
+	
+	return (*this);
 }
 
 VkCommandBuffer CCommandBufferPool::AllocateBuffer()
