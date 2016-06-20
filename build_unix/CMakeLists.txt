@@ -53,6 +53,10 @@ add_library(Framework
 	../src/mpeg2/MotionCodeTable.cpp
 	../src/mpeg2/QuantiserScaleTable.cpp
 	../src/mpeg2/VLCTable.cpp
+	../src/openal/Buffer.cpp
+	../src/openal/Context.cpp
+	../src/openal/Device.cpp
+	../src/openal/Source.cpp
 	../src/opengl/Program.cpp
 	../src/opengl/Shader.cpp
 	../src/PathUtils.cpp
