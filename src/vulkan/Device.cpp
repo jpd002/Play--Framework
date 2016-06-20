@@ -31,9 +31,6 @@ void CDevice::Reset()
 		m_handle = VK_NULL_HANDLE;
 	}
 	
-	vkAllocateCommandBuffers = nullptr;
-	vkFreeCommandBuffers = nullptr;
-	
 	vkBeginCommandBuffer = nullptr;
 	vkEndCommandBuffer = nullptr;
 	
@@ -52,7 +49,6 @@ void CDevice::Reset()
 	vkQueueSubmit = nullptr;
 	vkQueueWaitIdle = nullptr;
 	
-	vkCreateCommandPool = nullptr;
 	vkCreateFramebuffer = nullptr;
 	vkCreateImageView = nullptr;
 	vkCreateRenderPass = nullptr;
@@ -62,6 +58,13 @@ void CDevice::Reset()
 	vkDestroyBuffer = nullptr;
 	vkGetBufferMemoryRequirements = nullptr;
 	
+	vkAllocateCommandBuffers = nullptr;
+	vkFreeCommandBuffers = nullptr;
+	vkResetCommandBuffer = nullptr;
+	
+	vkCreateCommandPool = nullptr;
+	vkDestroyCommandPool = nullptr;
+
 	vkAllocateMemory = nullptr;
 	vkFreeMemory = nullptr;
 	vkMapMemory = nullptr;
@@ -95,9 +98,6 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(m_handle, rhs.m_handle);
 	std::swap(m_instance, rhs.m_instance);
 	
-	std::swap(vkAllocateCommandBuffers, rhs.vkAllocateCommandBuffers);
-	std::swap(vkFreeCommandBuffers, rhs.vkFreeCommandBuffers);
-	
 	std::swap(vkBeginCommandBuffer, rhs.vkBeginCommandBuffer);
 	std::swap(vkEndCommandBuffer, rhs.vkEndCommandBuffer);
 	
@@ -116,7 +116,6 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(vkQueueSubmit, rhs.vkQueueSubmit);
 	std::swap(vkQueueWaitIdle, rhs.vkQueueWaitIdle);
 	
-	std::swap(vkCreateCommandPool, rhs.vkCreateCommandPool);
 	std::swap(vkCreateFramebuffer, rhs.vkCreateFramebuffer);
 	std::swap(vkCreateImageView, rhs.vkCreateImageView);
 	std::swap(vkCreateRenderPass, rhs.vkCreateRenderPass);
@@ -126,6 +125,13 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(vkDestroyBuffer, rhs.vkDestroyBuffer);
 	std::swap(vkGetBufferMemoryRequirements, rhs.vkGetBufferMemoryRequirements);
 	
+	std::swap(vkAllocateCommandBuffers, rhs.vkAllocateCommandBuffers);
+	std::swap(vkFreeCommandBuffers, rhs.vkFreeCommandBuffers);
+	std::swap(vkResetCommandBuffer, rhs.vkResetCommandBuffer);
+	
+	std::swap(vkCreateCommandPool, rhs.vkCreateCommandPool);
+	std::swap(vkDestroyCommandPool, rhs.vkDestroyCommandPool);
+
 	std::swap(vkAllocateMemory, rhs.vkAllocateMemory);
 	std::swap(vkFreeMemory, rhs.vkFreeMemory);
 	std::swap(vkMapMemory, rhs.vkMapMemory);
@@ -166,9 +172,6 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	auto result = m_instance->vkCreateDevice(physicalDevice, &deviceCreateInfo, nullptr, &m_handle);
 	CHECKVULKANERROR(result);
 	
-	SET_PROC_ADDR(vkAllocateCommandBuffers);
-	SET_PROC_ADDR(vkFreeCommandBuffers);
-	
 	SET_PROC_ADDR(vkBeginCommandBuffer);
 	SET_PROC_ADDR(vkEndCommandBuffer);
 	
@@ -187,7 +190,6 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	SET_PROC_ADDR(vkQueueSubmit);
 	SET_PROC_ADDR(vkQueueWaitIdle);
 	
-	SET_PROC_ADDR(vkCreateCommandPool);
 	SET_PROC_ADDR(vkCreateFramebuffer);
 	SET_PROC_ADDR(vkCreateImageView);
 	SET_PROC_ADDR(vkCreateRenderPass);
@@ -197,6 +199,13 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	SET_PROC_ADDR(vkDestroyBuffer);
 	SET_PROC_ADDR(vkGetBufferMemoryRequirements);
 	
+	SET_PROC_ADDR(vkAllocateCommandBuffers);
+	SET_PROC_ADDR(vkFreeCommandBuffers);
+	SET_PROC_ADDR(vkResetCommandBuffer);
+	
+	SET_PROC_ADDR(vkCreateCommandPool);
+	SET_PROC_ADDR(vkDestroyCommandPool);
+
 	SET_PROC_ADDR(vkAllocateMemory);
 	SET_PROC_ADDR(vkFreeMemory);
 	SET_PROC_ADDR(vkMapMemory);

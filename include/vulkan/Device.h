@@ -27,9 +27,6 @@ namespace Framework
 			CDevice& operator =(CDevice&&);
 			         operator VkDevice() const;
 			
-			DECLARE_FUNCTION(vkAllocateCommandBuffers)
-			DECLARE_FUNCTION(vkFreeCommandBuffers)
-			
 			DECLARE_FUNCTION(vkBeginCommandBuffer)
 			DECLARE_FUNCTION(vkEndCommandBuffer)
 			
@@ -48,7 +45,6 @@ namespace Framework
 			DECLARE_FUNCTION(vkQueueSubmit);
 			DECLARE_FUNCTION(vkQueueWaitIdle);
 			
-			DECLARE_FUNCTION(vkCreateCommandPool)
 			DECLARE_FUNCTION(vkCreateFramebuffer)
 			DECLARE_FUNCTION(vkCreateImageView)
 			DECLARE_FUNCTION(vkCreateRenderPass)
@@ -59,6 +55,15 @@ namespace Framework
 			DECLARE_FUNCTION(vkDestroyBuffer)
 			DECLARE_FUNCTION(vkGetBufferMemoryRequirements)
 			
+			//Command Buffer
+			DECLARE_FUNCTION(vkAllocateCommandBuffers)
+			DECLARE_FUNCTION(vkFreeCommandBuffers)
+			DECLARE_FUNCTION(vkResetCommandBuffer)
+			
+			//Command Pool
+			DECLARE_FUNCTION(vkCreateCommandPool)
+			DECLARE_FUNCTION(vkDestroyCommandPool)
+
 			//Memory
 			DECLARE_FUNCTION(vkAllocateMemory)
 			DECLARE_FUNCTION(vkFreeMemory)
