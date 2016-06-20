@@ -5,9 +5,8 @@
 #include <al.h>
 #include <alc.h>
 #elif defined(__linux__) || defined(__FreeBSD__)
-#include<AL/al.h>
-#include<AL/alc.h>
-#include<AL/alut.h>
+#include <AL/al.h>
+#include <AL/alc.h>
 #else
 #include <OpenAL/al.h>
 #include <OpenAL/alc.h>
