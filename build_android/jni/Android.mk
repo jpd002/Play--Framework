@@ -51,6 +51,7 @@ LOCAL_SRC_FILES		:= 	../../src/Android/AssetManager.cpp \
 						../../src/StdStream.cpp \
 						../../src/StdStreamUtils.cpp \
 						../../src/Utf8.cpp \
+						../../src/vulkan/CommandBufferPool.cpp \
 						../../src/vulkan/Device.cpp \
 						../../src/vulkan/Instance.cpp \
 						../../src/vulkan/Loader.cpp \
