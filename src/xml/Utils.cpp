@@ -282,6 +282,12 @@ std::string Xml::EscapeText(const std::string& text)
 		case '\"':
 			result += "&quot;";
 			break;
+		case '\n':
+			result += "&#x0A;";
+			break;
+		case '\r':
+			result += "&#x0D;";
+			break;
 		default:
 			result += *charIterator;
 			break;
@@ -310,6 +316,15 @@ std::string Xml::UnescapeText(const std::string& text)
 			else	if(!strcmp(escapeName.c_str(), "gt"))	result += '>';
 			else	if(!strcmp(escapeName.c_str(), "apos"))	result += '\'';
 			else	if(!strcmp(escapeName.c_str(), "quot"))	result += '\"';
+			else	if(escapeName.find("#x") == 0)
+			{
+				//TODO: Handle this better (ie.: handle encoding and such)
+				char value = static_cast<char>(strtol(escapeName.c_str() + 2, nullptr, 16));
+				if(value != 0)
+				{
+					result += value;
+				}
+			}
 			else
 			{
 				return "";
