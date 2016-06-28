@@ -37,6 +37,7 @@ namespace Framework
 			DECLARE_FUNCTION(vkCmdDraw)
 			DECLARE_FUNCTION(vkCmdEndRenderPass)
 			DECLARE_FUNCTION(vkCmdPipelineBarrier)
+			DECLARE_FUNCTION(vkCmdPushConstants)
 			DECLARE_FUNCTION(vkCmdSetScissor)
 			DECLARE_FUNCTION(vkCmdSetViewport)
 			
