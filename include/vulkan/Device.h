@@ -34,6 +34,7 @@ namespace Framework
 			DECLARE_FUNCTION(vkCmdBindPipeline)
 			DECLARE_FUNCTION(vkCmdBindVertexBuffers)
 			DECLARE_FUNCTION(vkCmdClearColorImage)
+			DECLARE_FUNCTION(vkCmdCopyBufferToImage)
 			DECLARE_FUNCTION(vkCmdDraw)
 			DECLARE_FUNCTION(vkCmdEndRenderPass)
 			DECLARE_FUNCTION(vkCmdPipelineBarrier)
@@ -47,12 +48,11 @@ namespace Framework
 			DECLARE_FUNCTION(vkQueueWaitIdle);
 			
 			DECLARE_FUNCTION(vkCreateFramebuffer)
-			DECLARE_FUNCTION(vkCreateImageView)
 			DECLARE_FUNCTION(vkCreateRenderPass)
 			
 			//Buffer
-			DECLARE_FUNCTION(vkCreateBuffer)
 			DECLARE_FUNCTION(vkBindBufferMemory)
+			DECLARE_FUNCTION(vkCreateBuffer)
 			DECLARE_FUNCTION(vkDestroyBuffer)
 			DECLARE_FUNCTION(vkGetBufferMemoryRequirements)
 			
@@ -64,7 +64,17 @@ namespace Framework
 			//Command Pool
 			DECLARE_FUNCTION(vkCreateCommandPool)
 			DECLARE_FUNCTION(vkDestroyCommandPool)
-
+			
+			//Image
+			DECLARE_FUNCTION(vkBindImageMemory)
+			DECLARE_FUNCTION(vkCreateImage)
+			DECLARE_FUNCTION(vkDestroyImage)
+			DECLARE_FUNCTION(vkGetImageMemoryRequirements)
+			
+			//Image View
+			DECLARE_FUNCTION(vkCreateImageView)
+			DECLARE_FUNCTION(vkDestroyImageView)
+			
 			//Memory
 			DECLARE_FUNCTION(vkAllocateMemory)
 			DECLARE_FUNCTION(vkFreeMemory)
