@@ -31,6 +31,7 @@ namespace Framework
 			DECLARE_FUNCTION(vkEndCommandBuffer)
 			
 			DECLARE_FUNCTION(vkCmdBeginRenderPass)
+			DECLARE_FUNCTION(vkCmdBindDescriptorSets)
 			DECLARE_FUNCTION(vkCmdBindPipeline)
 			DECLARE_FUNCTION(vkCmdBindVertexBuffers)
 			DECLARE_FUNCTION(vkCmdClearColorImage)
@@ -65,6 +66,18 @@ namespace Framework
 			DECLARE_FUNCTION(vkCreateCommandPool)
 			DECLARE_FUNCTION(vkDestroyCommandPool)
 			
+			//Descriptor Pool
+			DECLARE_FUNCTION(vkCreateDescriptorPool)
+			DECLARE_FUNCTION(vkDestroyDescriptorPool)
+			
+			//Descriptor Set
+			DECLARE_FUNCTION(vkAllocateDescriptorSets)
+			DECLARE_FUNCTION(vkUpdateDescriptorSets)
+			
+			//Descriptor Set Layout
+			DECLARE_FUNCTION(vkCreateDescriptorSetLayout)
+			DECLARE_FUNCTION(vkDestroyDescriptorSetLayout)
+			
 			//Image
 			DECLARE_FUNCTION(vkBindImageMemory)
 			DECLARE_FUNCTION(vkCreateImage)
@@ -92,6 +105,10 @@ namespace Framework
 			//Pipeline Layout
 			DECLARE_FUNCTION(vkCreatePipelineLayout)
 			DECLARE_FUNCTION(vkDestroyPipelineLayout)
+			
+			//Sampler
+			DECLARE_FUNCTION(vkCreateSampler)
+			DECLARE_FUNCTION(vkDestroySampler)
 			
 			//Semaphore
 			DECLARE_FUNCTION(vkCreateSemaphore)
