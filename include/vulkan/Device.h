@@ -32,11 +32,13 @@ namespace Framework
 			
 			DECLARE_FUNCTION(vkCmdBeginRenderPass)
 			DECLARE_FUNCTION(vkCmdBindDescriptorSets)
+			DECLARE_FUNCTION(vkCmdBindIndexBuffer)
 			DECLARE_FUNCTION(vkCmdBindPipeline)
 			DECLARE_FUNCTION(vkCmdBindVertexBuffers)
 			DECLARE_FUNCTION(vkCmdClearColorImage)
 			DECLARE_FUNCTION(vkCmdCopyBufferToImage)
 			DECLARE_FUNCTION(vkCmdDraw)
+			DECLARE_FUNCTION(vkCmdDrawIndexed)
 			DECLARE_FUNCTION(vkCmdEndRenderPass)
 			DECLARE_FUNCTION(vkCmdPipelineBarrier)
 			DECLARE_FUNCTION(vkCmdPushConstants)

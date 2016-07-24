@@ -36,11 +36,13 @@ void CDevice::Reset()
 	
 	vkCmdBeginRenderPass = nullptr;
 	vkCmdBindDescriptorSets = nullptr;
+	vkCmdBindIndexBuffer = nullptr;
 	vkCmdBindPipeline = nullptr;
 	vkCmdBindVertexBuffers = nullptr;
 	vkCmdClearColorImage = nullptr;
 	vkCmdCopyBufferToImage = nullptr;
 	vkCmdDraw = nullptr;
+	vkCmdDrawIndexed = nullptr;
 	vkCmdEndRenderPass = nullptr;
 	vkCmdPipelineBarrier = nullptr;
 	vkCmdPushConstants = nullptr;
@@ -125,11 +127,13 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	
 	std::swap(vkCmdBeginRenderPass, rhs.vkCmdBeginRenderPass);
 	std::swap(vkCmdBindDescriptorSets, rhs.vkCmdBindDescriptorSets);
+	std::swap(vkCmdBindIndexBuffer, rhs.vkCmdBindIndexBuffer);
 	std::swap(vkCmdBindPipeline, rhs.vkCmdBindPipeline);
 	std::swap(vkCmdBindVertexBuffers, rhs.vkCmdBindVertexBuffers);
 	std::swap(vkCmdClearColorImage, rhs.vkCmdClearColorImage);
 	std::swap(vkCmdCopyBufferToImage, rhs.vkCmdCopyBufferToImage);
 	std::swap(vkCmdDraw, rhs.vkCmdDraw);
+	std::swap(vkCmdDrawIndexed, rhs.vkCmdDrawIndexed);
 	std::swap(vkCmdEndRenderPass, rhs.vkCmdEndRenderPass);
 	std::swap(vkCmdPipelineBarrier, rhs.vkCmdPipelineBarrier);
 	std::swap(vkCmdPushConstants, rhs.vkCmdPushConstants);
@@ -221,11 +225,13 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	
 	SET_PROC_ADDR(vkCmdBeginRenderPass);
 	SET_PROC_ADDR(vkCmdBindDescriptorSets);
+	SET_PROC_ADDR(vkCmdBindIndexBuffer);
 	SET_PROC_ADDR(vkCmdBindPipeline);
 	SET_PROC_ADDR(vkCmdBindVertexBuffers);
 	SET_PROC_ADDR(vkCmdClearColorImage);
 	SET_PROC_ADDR(vkCmdCopyBufferToImage);
 	SET_PROC_ADDR(vkCmdDraw);
+	SET_PROC_ADDR(vkCmdDrawIndexed);
 	SET_PROC_ADDR(vkCmdEndRenderPass);
 	SET_PROC_ADDR(vkCmdPipelineBarrier);
 	SET_PROC_ADDR(vkCmdPushConstants);
