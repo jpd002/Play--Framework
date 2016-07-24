@@ -55,7 +55,6 @@ void CDevice::Reset()
 	vkQueueWaitIdle = nullptr;
 	
 	vkCreateFramebuffer = nullptr;
-	vkCreateRenderPass = nullptr;
 	
 	vkBindBufferMemory = nullptr;
 	vkCreateBuffer = nullptr;
@@ -99,6 +98,9 @@ void CDevice::Reset()
 	
 	vkCreatePipelineLayout = nullptr;
 	vkDestroyPipelineLayout = nullptr;
+	
+	vkCreateRenderPass = nullptr;
+	vkDestroyRenderPass = nullptr;
 	
 	vkCreateSampler = nullptr;
 	vkDestroySampler = nullptr;
@@ -146,7 +148,6 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(vkQueueWaitIdle, rhs.vkQueueWaitIdle);
 	
 	std::swap(vkCreateFramebuffer, rhs.vkCreateFramebuffer);
-	std::swap(vkCreateRenderPass, rhs.vkCreateRenderPass);
 	
 	std::swap(vkBindBufferMemory, rhs.vkBindBufferMemory);
 	std::swap(vkCreateBuffer, rhs.vkCreateBuffer);
@@ -190,6 +191,9 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	
 	std::swap(vkCreatePipelineLayout, rhs.vkCreatePipelineLayout);
 	std::swap(vkDestroyPipelineLayout, rhs.vkDestroyPipelineLayout);
+	
+	std::swap(vkCreateRenderPass, rhs.vkCreateRenderPass);
+	std::swap(vkDestroyRenderPass, rhs.vkDestroyRenderPass);
 	
 	std::swap(vkCreateSampler, rhs.vkCreateSampler);
 	std::swap(vkDestroySampler, rhs.vkDestroySampler);
@@ -244,7 +248,6 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	SET_PROC_ADDR(vkQueueWaitIdle);
 	
 	SET_PROC_ADDR(vkCreateFramebuffer);
-	SET_PROC_ADDR(vkCreateRenderPass);
 	
 	SET_PROC_ADDR(vkBindBufferMemory);
 	SET_PROC_ADDR(vkCreateBuffer);
@@ -288,6 +291,9 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	
 	SET_PROC_ADDR(vkCreatePipelineLayout);
 	SET_PROC_ADDR(vkDestroyPipelineLayout);
+	
+	SET_PROC_ADDR(vkCreateRenderPass);
+	SET_PROC_ADDR(vkDestroyRenderPass);
 	
 	SET_PROC_ADDR(vkCreateSampler);
 	SET_PROC_ADDR(vkDestroySampler);

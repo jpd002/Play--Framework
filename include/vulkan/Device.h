@@ -51,7 +51,6 @@ namespace Framework
 			DECLARE_FUNCTION(vkQueueWaitIdle);
 			
 			DECLARE_FUNCTION(vkCreateFramebuffer)
-			DECLARE_FUNCTION(vkCreateRenderPass)
 			
 			//Buffer
 			DECLARE_FUNCTION(vkBindBufferMemory)
@@ -107,6 +106,10 @@ namespace Framework
 			//Pipeline Layout
 			DECLARE_FUNCTION(vkCreatePipelineLayout)
 			DECLARE_FUNCTION(vkDestroyPipelineLayout)
+			
+			//Render Pass
+			DECLARE_FUNCTION(vkCreateRenderPass)
+			DECLARE_FUNCTION(vkDestroyRenderPass)
 			
 			//Sampler
 			DECLARE_FUNCTION(vkCreateSampler)
