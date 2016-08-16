@@ -84,6 +84,11 @@ namespace Framework
 				return &m_ptr;
 			}
 
+			bool operator ==(const CComPtr& rhs) const
+			{
+				return m_ptr == rhs.m_ptr;
+			}
+
 			PtrType* Detach()
 			{
 				PtrType* result = m_ptr;
