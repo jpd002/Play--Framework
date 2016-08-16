@@ -1,5 +1,4 @@
-#ifndef _DIRECTINPUTKEYBOARD_H_
-#define _DIRECTINPUTKEYBOARD_H_
+#pragma once
 
 #include "Device.h"
 
@@ -13,9 +12,7 @@ namespace Framework
 									CKeyboard(LPDIRECTINPUTDEVICE8, HWND);
 			virtual					~CKeyboard();
 
-			virtual void			ProcessEvents(const InputEventHandler&);
+			void					ProcessEvents(const InputEventHandler&) override;
 		};
 	}
 }
-
-#endif

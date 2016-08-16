@@ -1,5 +1,4 @@
-#ifndef _DIRECTINPUTMANAGER_H_
-#define _DIRECTINPUTMANAGER_H_
+#pragma once
 
 #include "DirectInput.h"
 #include <memory>
@@ -56,5 +55,3 @@ namespace Framework
 		};
 	}
 }
-
-#endif

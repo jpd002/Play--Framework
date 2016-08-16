@@ -1,5 +1,4 @@
-#ifndef _DIRECTINPUTJOYSTICK_H_
-#define _DIRECTINPUTJOYSTICK_H_
+#pragma once
 
 #include "DirectInput.h"
 #include "Device.h"
@@ -15,7 +14,7 @@ namespace Framework
 			virtual					~CJoystick();
 
 			int						GetButtonCount() const;
-			virtual void			ProcessEvents(const InputEventHandler&);
+			void					ProcessEvents(const InputEventHandler&) override;
 
 		private:
 			static BOOL CALLBACK	EnumObjectsCallback(LPCDIDEVICEOBJECTINSTANCE, LPVOID);
@@ -26,5 +25,3 @@ namespace Framework
 		};
 	}
 }
-
-#endif

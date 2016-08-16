@@ -1,5 +1,4 @@
-#ifndef _DIRECTINPUTDEVICE_H_
-#define _DIRECTINPUTDEVICE_H_
+#pragma once
 
 #include "DirectInput.h"
 #include <functional>
@@ -26,5 +25,3 @@ namespace Framework
 		};
 	}
 }
-
-#endif
