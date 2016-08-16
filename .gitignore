@@ -5,6 +5,8 @@ Debug
 Release
 *.ipch
 *.sdf
+*.VC.db
+*.VC.opendb
 *.suo
 *.user
 *.userprops
