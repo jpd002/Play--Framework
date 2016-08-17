@@ -60,7 +60,7 @@ void CManager::CreateKeyboard(HWND window)
 	}
 	EnterCriticalSection(&m_updateMutex);
 	{
-		m_devices[GUID_SysKeyboard] = DevicePtr(new CKeyboard(device, window));
+		m_devices[GUID_SysKeyboard] = std::make_shared<CKeyboard>(device, window);
 	}
 	LeaveCriticalSection(&m_updateMutex);
 }
@@ -78,7 +78,7 @@ void CManager::CreateJoysticks(HWND window)
 		}
 		EnterCriticalSection(&m_updateMutex);
 		{
-			m_devices[deviceGuid] = DevicePtr(new CJoystick(device, window));
+			m_devices[deviceGuid] = std::make_shared<CJoystick>(device, window);
 		}
 		LeaveCriticalSection(&m_updateMutex);
 	}
