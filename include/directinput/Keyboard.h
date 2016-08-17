@@ -9,7 +9,7 @@ namespace Framework
 		class CKeyboard : public CDevice
 		{
 		public:
-									CKeyboard(LPDIRECTINPUTDEVICE8, HWND);
+									CKeyboard(const DirectInputDevicePtr&, HWND);
 			virtual					~CKeyboard();
 
 			void					ProcessEvents(const InputEventHandler&) override;

@@ -10,7 +10,7 @@ namespace Framework
 		class CJoystick : public CDevice
 		{
 		public:
-									CJoystick(LPDIRECTINPUTDEVICE8, HWND);
+									CJoystick(const DirectInputDevicePtr&, HWND);
 			virtual					~CJoystick();
 
 			int						GetButtonCount() const;

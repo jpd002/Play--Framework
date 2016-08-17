@@ -6,7 +6,7 @@
 
 using namespace Framework::DirectInput;
 
-CJoystick::CJoystick(LPDIRECTINPUTDEVICE8 device, HWND ownerWindow)
+CJoystick::CJoystick(const DirectInputDevicePtr& device, HWND ownerWindow)
 : CDevice(device)
 , m_buttonCount(0)
 {

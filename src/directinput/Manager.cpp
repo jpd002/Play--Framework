@@ -53,7 +53,7 @@ void CManager::UnregisterInputEventHandler(uint32 eventHandlerId)
 
 void CManager::CreateKeyboard(HWND window)
 {
-	LPDIRECTINPUTDEVICE8 device;
+	CDevice::DirectInputDevicePtr device;
 	if(FAILED(m_directInput->CreateDevice(GUID_SysKeyboard, &device, NULL)))
 	{
 		throw std::runtime_error("Couldn't create device.");
@@ -70,7 +70,7 @@ void CManager::CreateJoysticks(HWND window)
 	for(auto joystickIterator(std::begin(m_joystickInstances));
 		std::end(m_joystickInstances) != joystickIterator; joystickIterator++)
 	{
-		LPDIRECTINPUTDEVICE8 device;
+		CDevice::DirectInputDevicePtr device;
 		const auto& deviceGuid(*joystickIterator);
 		if(FAILED(m_directInput->CreateDevice(deviceGuid, &device, NULL)))
 		{

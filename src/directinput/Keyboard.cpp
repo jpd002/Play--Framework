@@ -5,7 +5,7 @@
 
 using namespace Framework::DirectInput;
 
-CKeyboard::CKeyboard(LPDIRECTINPUTDEVICE8 device, HWND window)
+CKeyboard::CKeyboard(const DirectInputDevicePtr& device, HWND window)
 : CDevice(device)
 {
 	HRESULT result = S_OK;
