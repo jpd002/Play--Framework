@@ -6,6 +6,7 @@
 #include <map>
 #include <unordered_map>
 #include "win32/GuidUtils.h"
+#include "win32/ComPtr.h"
 #include "Device.h"
 
 namespace Framework
@@ -33,6 +34,7 @@ namespace Framework
 			typedef std::map<GUID, DevicePtr> DeviceList;
 			typedef std::list<GUID> JoystickInstanceList;
 			typedef std::unordered_map<uint32, InputEventHandler> InputEventHandlerMap;
+			typedef Framework::Win32::CComPtr<IDirectInput8> DirectInputPtr;
 
 			void					CallInputEventHandlers(const GUID&, uint32, uint32);
 
@@ -42,7 +44,7 @@ namespace Framework
 			static BOOL CALLBACK	EnumDevicesCallback(LPCDIDEVICEINSTANCE, LPVOID);
 			BOOL					EnumDevicesCallbackImpl(LPCDIDEVICEINSTANCE);
 
-			LPDIRECTINPUT8			m_directInput;
+			DirectInputPtr			m_directInput;
 			JoystickInstanceList	m_joystickInstances;
 			DeviceList				m_devices;
 

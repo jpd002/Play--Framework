@@ -27,11 +27,6 @@ CManager::~CManager()
 	m_updateThreadOver = true;
 	WaitForSingleObject(m_updateThreadHandle, INFINITE);
 	DeleteCriticalSection(&m_updateMutex);
-	m_devices.clear();
-	if(m_directInput != NULL)
-	{
-		m_directInput->Release();
-	}
 }
 
 uint32 CManager::RegisterInputEventHandler(const InputEventHandler& inputEventHandler)
