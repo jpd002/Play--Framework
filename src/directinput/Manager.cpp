@@ -67,18 +67,16 @@ void CManager::CreateKeyboard(HWND window)
 
 void CManager::CreateJoysticks(HWND window)
 {
-	for(auto joystickIterator(std::begin(m_joystickInstances));
-		std::end(m_joystickInstances) != joystickIterator; joystickIterator++)
+	for(const auto& joystickInstance : m_joystickInstances)
 	{
 		CDevice::DirectInputDevicePtr device;
-		const auto& deviceGuid(*joystickIterator);
-		if(FAILED(m_directInput->CreateDevice(deviceGuid, &device, NULL)))
+		if(FAILED(m_directInput->CreateDevice(joystickInstance, &device, NULL)))
 		{
 			continue;
 		}
 		EnterCriticalSection(&m_updateMutex);
 		{
-			m_devices[deviceGuid] = std::make_shared<CJoystick>(device, window);
+			m_devices[joystickInstance] = std::make_shared<CJoystick>(device, window);
 		}
 		LeaveCriticalSection(&m_updateMutex);
 	}
@@ -115,10 +113,9 @@ BOOL CManager::EnumDevicesCallbackImpl(LPCDIDEVICEINSTANCE lpddi)
 
 void CManager::CallInputEventHandlers(const GUID& device, uint32 id, uint32 value)
 {
-	for(auto inputEventHandlerIterator(std::begin(m_inputEventHandlers));
-		inputEventHandlerIterator != std::end(m_inputEventHandlers); inputEventHandlerIterator++)
+	for(const auto& inputEventHandler : m_inputEventHandlers)
 	{
-		inputEventHandlerIterator->second(device, id, value);
+		inputEventHandler.second(device, id, value);
 	}
 }
 
