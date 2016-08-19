@@ -111,25 +111,24 @@ BOOL CManager::EnumDevicesCallbackImpl(LPCDIDEVICEINSTANCE lpddi)
 	return DIENUM_CONTINUE;
 }
 
-void CManager::CallInputEventHandlers(const GUID& device, uint32 id, uint32 value)
-{
-	for(const auto& inputEventHandler : m_inputEventHandlers)
-	{
-		inputEventHandler.second(device, id, value);
-	}
-}
-
 DWORD CManager::UpdateThreadProc()
 {
-	auto inputEventHandler = std::bind(&CManager::CallInputEventHandlers, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+	auto inputEventHandler = 
+		[this] (const GUID& device, uint32 id, uint32 value)
+		{
+			for(const auto& inputEventHandler : m_inputEventHandlers)
+			{
+				inputEventHandler.second(device, id, value);
+			}
+		};
+
 	while(!m_updateThreadOver)
 	{
 		EnterCriticalSection(&m_updateMutex);
 		{
-			for(auto deviceIterator(std::begin(m_devices));
-				deviceIterator != std::end(m_devices); deviceIterator++)
+			for(const auto& devicePair : m_devices)
 			{
-				auto& device = deviceIterator->second;
+				auto& device = devicePair.second;
 				device->ProcessEvents(inputEventHandler);
 			}
 		}

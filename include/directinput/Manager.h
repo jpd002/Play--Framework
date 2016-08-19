@@ -36,8 +36,6 @@ namespace Framework
 			typedef std::unordered_map<uint32, InputEventHandler> InputEventHandlerMap;
 			typedef Framework::Win32::CComPtr<IDirectInput8> DirectInputPtr;
 
-			void					CallInputEventHandlers(const GUID&, uint32, uint32);
-
 			DWORD					UpdateThreadProc();
 			static DWORD CALLBACK	UpdateThreadProcStub(void*);
 
