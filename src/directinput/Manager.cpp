@@ -29,6 +29,18 @@ CManager::~CManager()
 	DeleteCriticalSection(&m_updateMutex);
 }
 
+void CManager::SetFocusWindow(HWND focusWindow)
+{
+	EnterCriticalSection(&m_updateMutex);
+	{
+		for(const auto& devicePair : m_devices)
+		{
+			devicePair.second->SetFocusWindow(focusWindow);
+		}
+	}
+	LeaveCriticalSection(&m_updateMutex);
+}
+
 uint32 CManager::RegisterInputEventHandler(const InputEventHandler& inputEventHandler)
 {
 	uint32 eventHandlerId = m_nextInputEventHandlerId++;
@@ -51,7 +63,7 @@ void CManager::UnregisterInputEventHandler(uint32 eventHandlerId)
 	LeaveCriticalSection(&m_updateMutex);
 }
 
-void CManager::CreateKeyboard(HWND window)
+void CManager::CreateKeyboard()
 {
 	CDevice::DirectInputDevicePtr device;
 	if(FAILED(m_directInput->CreateDevice(GUID_SysKeyboard, &device, NULL)))
@@ -60,12 +72,12 @@ void CManager::CreateKeyboard(HWND window)
 	}
 	EnterCriticalSection(&m_updateMutex);
 	{
-		m_devices[GUID_SysKeyboard] = std::make_shared<CKeyboard>(device, window);
+		m_devices[GUID_SysKeyboard] = std::make_shared<CKeyboard>(device);
 	}
 	LeaveCriticalSection(&m_updateMutex);
 }
 
-void CManager::CreateJoysticks(HWND window)
+void CManager::CreateJoysticks()
 {
 	for(const auto& joystickInstance : m_joystickInstances)
 	{
@@ -76,7 +88,7 @@ void CManager::CreateJoysticks(HWND window)
 		}
 		EnterCriticalSection(&m_updateMutex);
 		{
-			m_devices[joystickInstance] = std::make_shared<CJoystick>(device, window);
+			m_devices[joystickInstance] = std::make_shared<CJoystick>(device);
 		}
 		LeaveCriticalSection(&m_updateMutex);
 	}

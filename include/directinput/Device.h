@@ -21,6 +21,7 @@ namespace Framework
 			virtual void				ProcessEvents(const InputEventHandler&) = 0;
 			bool						GetInfo(DIDEVICEINSTANCE*);
 			bool						GetObjectInfo(uint32, DIDEVICEOBJECTINSTANCE*);
+			void						SetFocusWindow(HWND);
 
 		protected:
 			DirectInputDevicePtr		m_device;

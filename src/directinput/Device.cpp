@@ -24,3 +24,12 @@ bool CDevice::GetObjectInfo(uint32 id, DIDEVICEOBJECTINSTANCE* objectInfo)
 	objectInfo->dwSize = sizeof(DIDEVICEOBJECTINSTANCE);
 	return !FAILED(m_device->GetObjectInfo(objectInfo, id, DIPH_BYOFFSET));
 }
+
+void CDevice::SetFocusWindow(HWND focusWindow)
+{
+	//Unacquire device just to be sure
+	m_device->Unacquire();
+
+	HRESULT result = m_device->SetCooperativeLevel(focusWindow, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
+	assert(SUCCEEDED(result));
+}

@@ -21,11 +21,13 @@ namespace Framework
 									CManager();
 			virtual					~CManager();
 
+			void					SetFocusWindow(HWND);
+
 			uint32					RegisterInputEventHandler(const InputEventHandler&);
 			void					UnregisterInputEventHandler(uint32);
 
-			void					CreateKeyboard(HWND);
-			void					CreateJoysticks(HWND);
+			void					CreateKeyboard();
+			void					CreateJoysticks();
 			bool					GetDeviceInfo(const GUID&, DIDEVICEINSTANCE*);
 			bool					GetDeviceObjectInfo(const GUID&, uint32, DIDEVICEOBJECTINSTANCE*);
 

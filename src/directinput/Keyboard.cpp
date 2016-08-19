@@ -5,15 +5,12 @@
 
 using namespace Framework::DirectInput;
 
-CKeyboard::CKeyboard(const DirectInputDevicePtr& device, HWND window)
+CKeyboard::CKeyboard(const DirectInputDevicePtr& device)
 : CDevice(device)
 {
 	HRESULT result = S_OK;
 
 	result = m_device->SetDataFormat(&c_dfDIKeyboard);
-	assert(SUCCEEDED(result));
-
-	result = m_device->SetCooperativeLevel(window, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
 	assert(SUCCEEDED(result));
 
 	{
@@ -28,8 +25,6 @@ CKeyboard::CKeyboard(const DirectInputDevicePtr& device, HWND window)
 		result = m_device->SetProperty(DIPROP_BUFFERSIZE, &p.diph);
 		assert(SUCCEEDED(result));
 	}
-
-	m_device->Acquire();
 }
 
 CKeyboard::~CKeyboard()
@@ -42,7 +37,6 @@ void CKeyboard::ProcessEvents(const InputEventHandler& eventHandler)
 	DIDEVICEOBJECTDATA deviceData[DIBUFFERSIZE];
 	DWORD elementCount = DIBUFFERSIZE;
 	HRESULT result = m_device->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), deviceData, &elementCount, 0);
-	assert(result != DI_BUFFEROVERFLOW);
 	if(FAILED(result))
 	{
 		m_device->Acquire();

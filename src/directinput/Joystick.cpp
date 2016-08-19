@@ -6,18 +6,16 @@
 
 using namespace Framework::DirectInput;
 
-CJoystick::CJoystick(const DirectInputDevicePtr& device, HWND ownerWindow)
+CJoystick::CJoystick(const DirectInputDevicePtr& device)
 : CDevice(device)
 , m_buttonCount(0)
 {
+	HRESULT result = S_OK;
+
 	m_device->EnumObjects(&EnumObjectsCallback, this, DIDFT_ALL);
 	if(FAILED(m_device->SetDataFormat(&c_dfDIJoystick)))
 	{
 		throw std::runtime_error("Couldn't SetDataFormat.");
-	}
-	if(FAILED(m_device->SetCooperativeLevel(ownerWindow, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE)))
-	{
-		throw std::runtime_error("Couldn't SetCooperativeLevel.");
 	}
 
 	{
@@ -29,15 +27,16 @@ CJoystick::CJoystick(const DirectInputDevicePtr& device, HWND ownerWindow)
 		p.diph.dwObj		= 0;
 		p.dwData			= DIBUFFERSIZE;
 
-		m_device->SetProperty(DIPROP_BUFFERSIZE, &p.diph);
+		result = m_device->SetProperty(DIPROP_BUFFERSIZE, &p.diph);
+		assert(SUCCEEDED(result));
 	}
-
-	m_device->Acquire();
 
 	{
 		DIDEVICEINSTANCE deviceInstance;
 		deviceInstance.dwSize = sizeof(DIDEVICEINSTANCE);
-		m_device->GetDeviceInfo(&deviceInstance);
+		result = m_device->GetDeviceInfo(&deviceInstance);
+		assert(SUCCEEDED(result));
+
 		m_deviceGuid = deviceInstance.guidInstance;
 	}
 }
@@ -52,7 +51,6 @@ void CJoystick::ProcessEvents(const InputEventHandler& eventHandler)
 	DIDEVICEOBJECTDATA deviceData[DIBUFFERSIZE];
 	DWORD elementCount = DIBUFFERSIZE;
 	HRESULT result = m_device->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), deviceData, &elementCount, 0);
-	assert(result != DI_BUFFEROVERFLOW);
 	if(FAILED(result))
 	{
 		m_device->Acquire();
