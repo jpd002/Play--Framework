@@ -10,6 +10,7 @@ namespace Framework
 		class CShaderModule
 		{
 		public:
+			        CShaderModule() = default;
 			        CShaderModule(CDevice&, Framework::CStream&);
 			        CShaderModule(const CShaderModule&) = delete;
 			virtual ~CShaderModule();
