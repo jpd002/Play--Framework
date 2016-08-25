@@ -68,7 +68,7 @@ LOCAL_SRC_FILES		:= 	../../src/Android/AssetManager.cpp \
 						../../src/zip/ZipInflateStream.cpp \
 						../../src/zip/ZipStoreStream.cpp
 LOCAL_CFLAGS			:= -Wno-extern-c-compat
-LOCAL_C_INCLUDES		:= $(BOOST_PATH) $(LOCAL_PATH)/../../include $(VULKAN_PATH)
+LOCAL_C_INCLUDES		:= $(BOOST_PATH) $(LOCAL_PATH)/../../include $(VULKAN_SDK)/Include
 LOCAL_CPP_FEATURES		:= exceptions rtti
 
 ifeq ($(APP_OPTIM),debug)
