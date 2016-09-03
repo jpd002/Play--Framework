@@ -37,6 +37,7 @@ add_library(Framework
 	../src/layout/LayoutObject.cpp
 	../src/layout/LayoutStretch.cpp
 	../src/layout/VerticalLayout.cpp
+	../src/LzAri.cpp
 	../src/math/MathStringUtils.cpp
 	../src/MemStream.cpp
 	../src/mpeg2/CodedBlockPatternTable.cpp
@@ -65,6 +66,7 @@ add_library(Framework
 	../src/StreamBitStream.cpp
 	../src/StdStream.cpp
 	../src/StdStreamUtils.cpp
+	../src/string_cast_sjis.cpp
 	../src/Utf8.cpp
 	../src/xml/FilteringNodeIterator.cpp
 	../src/xml/Node.cpp
