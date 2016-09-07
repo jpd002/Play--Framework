@@ -19,9 +19,7 @@ namespace Framework
 			HWND					GetItem(int);
 
 			void					DoModal();
-
-		protected:
-			unsigned int			Destroy();
+			unsigned int			Destroy() override;
 
 		private:
 			struct SZ_OR_ORD

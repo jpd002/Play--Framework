@@ -36,7 +36,7 @@ namespace Framework
 
 			//Helpers
 			void					Create(unsigned long, const TCHAR*, const TCHAR*, unsigned long, const CRect&, HWND, void*);
-			unsigned int			Destroy();
+			virtual unsigned int	Destroy();
 			unsigned int			Show(int);
 			unsigned int			Enable(unsigned int);
 			bool					IsWindow();
