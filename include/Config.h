@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <boost/filesystem/path.hpp>
+#include "boost_filesystem_def.h"
 #include <map>
 #include <mutex>
 #include "xml/Node.h"

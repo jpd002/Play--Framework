@@ -216,6 +216,7 @@
     <ClInclude Include="..\include\Base64.h" />
     <ClInclude Include="..\include\BasicUnion.h" />
     <ClInclude Include="..\include\BitStream.h" />
+    <ClInclude Include="..\include\boost_filesystem_def.h" />
     <ClInclude Include="..\include\Config.h" />
     <ClInclude Include="..\include\Convertible.h" />
     <ClInclude Include="..\include\countof.h" />

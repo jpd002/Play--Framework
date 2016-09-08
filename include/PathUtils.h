@@ -1,6 +1,6 @@
 #pragma once
 
-#include <boost/filesystem.hpp>
+#include "boost_filesystem_def.h"
 
 namespace Framework
 {

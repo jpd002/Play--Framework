@@ -148,5 +148,6 @@
     <ClInclude Include="..\include\winrt\StorageFileStream.h">
       <Filter>winrt</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\boost_filesystem_def.h" />
   </ItemGroup>
 </Project>
