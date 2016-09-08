@@ -1,6 +1,6 @@
 #include "string_cast_sjis.h"
 #include "alloca_def.h"
-#ifdef WIN32
+#ifdef _WIN32
 #include <windows.h>
 #elif defined(__APPLE__)
 
@@ -12,7 +12,7 @@ using namespace std;
 
 wstring string_cast_sjis(const string& input)
 {
-#ifdef WIN32
+#ifdef _WIN32
 	UINT codePage = 932;
 	int reqLength = MultiByteToWideChar(codePage, 0, input.c_str(), input.length(), NULL, 0);
 	wchar_t* output = reinterpret_cast<wchar_t*>(alloca((reqLength + 1) * sizeof(wchar_t)));

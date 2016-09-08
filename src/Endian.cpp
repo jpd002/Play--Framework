@@ -1,6 +1,6 @@
 #include "Endian.h"
 
-#ifdef WIN32
+#ifdef _WIN32
 #define LSB_FIRST
 #endif
 

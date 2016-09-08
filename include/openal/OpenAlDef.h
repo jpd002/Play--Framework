@@ -1,7 +1,7 @@
 #ifndef _OPENALDEF_H_
 #define _OPENALDEF_H_
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <al.h>
 #include <alc.h>
 #elif defined(__linux__) || defined(__FreeBSD__)

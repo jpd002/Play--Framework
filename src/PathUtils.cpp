@@ -147,7 +147,7 @@ void PathUtils::EnsurePathExists(const boost::filesystem::path& path)
 		bool exists = boost::filesystem::exists(buildPath, existsErrorCode);
 		if(existsErrorCode)
 		{
-#ifdef WIN32
+#ifdef _WIN32
 			if(existsErrorCode.value() == ERROR_ACCESS_DENIED)
 			{
 				//No problem, it exists, but we just don't have access

@@ -92,7 +92,7 @@ void CStdStream::Seek(int64 nPosition, STREAM_SEEK_DIRECTION nDirection)
 		break;
 	}
 	assert(m_file != nullptr);
-#ifdef WIN32
+#ifdef _WIN32
 	_fseeki64(m_file, nPosition, nDir);
 #else
 	int result = fseeko(m_file, nPosition, nDir);
@@ -109,7 +109,7 @@ bool CStdStream::IsEOF()
 uint64 CStdStream::Tell()
 {
 	assert(m_file != nullptr);
-#ifdef WIN32
+#ifdef _WIN32
 	return _ftelli64(m_file);
 #else
 	return ftello(m_file);
