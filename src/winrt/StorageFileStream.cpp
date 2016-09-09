@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "winrt/StorageFileStream.h"
 #include <ppltasks.h>
+#include <concrt.h>
 
 using namespace Framework;
 using namespace Framework::WinRt;
