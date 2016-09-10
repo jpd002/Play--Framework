@@ -30,6 +30,12 @@ void CShaderModule::Reset()
 	}
 }
 
+CShaderModule& CShaderModule::operator =(CShaderModule&& rhs)
+{
+	Reset();
+	MoveFrom(std::move(rhs));
+}
+
 CShaderModule::operator VkShaderModule() const
 {
 	return m_handle;
@@ -50,4 +56,10 @@ void CShaderModule::Create(Framework::CStream& stream)
 	CHECKVULKANERROR(result);
 	
 	delete [] shader;
+}
+
+void CShaderModule::MoveFrom(CShaderModule&& rhs)
+{
+	std::swap(m_device, rhs.m_device);
+	std::swap(m_handle, rhs.m_handle);
 }

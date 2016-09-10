@@ -19,10 +19,12 @@ namespace Framework
 			void Reset();
 			
 			CShaderModule& operator =(const CShaderModule&) = delete;
+			CShaderModule& operator =(CShaderModule&&);
 			               operator VkShaderModule() const;
 			
 		private:
 			void Create(Framework::CStream&);
+			void MoveFrom(CShaderModule&&);
 			
 			const CDevice* m_device = nullptr;
 			VkShaderModule m_handle = VK_NULL_HANDLE;
