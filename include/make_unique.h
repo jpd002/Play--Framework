@@ -24,7 +24,9 @@ _VARIADIC_EXPAND_0X(_MAKE_UNIQUE, , , , )
 
 #endif //(_MSC_VER < 1800)
 
-#else
+#else //!defined(_MSC_VER)
+
+#if (__cplusplus < 201402L)
 
 namespace std
 {
@@ -35,4 +37,6 @@ namespace std
 	}
 }
 
-#endif
+#endif //(__cplusplus < 201402L)
+
+#endif //!defined(_MSC_VER)
