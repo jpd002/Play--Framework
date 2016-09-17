@@ -34,6 +34,7 @@ CShaderModule& CShaderModule::operator =(CShaderModule&& rhs)
 {
 	Reset();
 	MoveFrom(std::move(rhs));
+	return (*this);
 }
 
 CShaderModule::operator VkShaderModule() const
