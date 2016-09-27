@@ -70,6 +70,7 @@ namespace Framework
 			//Descriptor Pool
 			DECLARE_FUNCTION(vkCreateDescriptorPool)
 			DECLARE_FUNCTION(vkDestroyDescriptorPool)
+			DECLARE_FUNCTION(vkResetDescriptorPool)
 			
 			//Descriptor Set
 			DECLARE_FUNCTION(vkAllocateDescriptorSets)

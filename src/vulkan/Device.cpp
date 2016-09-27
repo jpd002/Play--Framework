@@ -70,6 +70,7 @@ void CDevice::Reset()
 	
 	vkCreateDescriptorPool = nullptr;
 	vkDestroyDescriptorPool = nullptr;
+	vkResetDescriptorPool = nullptr;
 	
 	vkAllocateDescriptorSets = nullptr;
 	vkUpdateDescriptorSets = nullptr;
@@ -163,6 +164,7 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	
 	std::swap(vkCreateDescriptorPool, rhs.vkCreateDescriptorPool);
 	std::swap(vkDestroyDescriptorPool, rhs.vkDestroyDescriptorPool);
+	std::swap(vkResetDescriptorPool, rhs.vkResetDescriptorPool);
 	
 	std::swap(vkAllocateDescriptorSets, rhs.vkAllocateDescriptorSets);
 	std::swap(vkUpdateDescriptorSets, rhs.vkUpdateDescriptorSets);
@@ -263,6 +265,7 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	
 	SET_PROC_ADDR(vkCreateDescriptorPool);
 	SET_PROC_ADDR(vkDestroyDescriptorPool);
+	SET_PROC_ADDR(vkResetDescriptorPool);
 	
 	SET_PROC_ADDR(vkAllocateDescriptorSets);
 	SET_PROC_ADDR(vkUpdateDescriptorSets);
