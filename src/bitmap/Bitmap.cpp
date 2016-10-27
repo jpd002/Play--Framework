@@ -8,38 +8,17 @@
 
 using namespace Framework;
 
-CBitmap::CBitmap()
-: m_pixels(nullptr)
-, m_width(0)
-, m_height(0)
-, m_bpp(0)
-{
-
-}
-
 CBitmap::CBitmap(const CBitmap& src)
-: m_pixels(nullptr)
-, m_width(0)
-, m_height(0)
-, m_bpp(0)
 {
 	CopyFrom(src);
 }
 
 CBitmap::CBitmap(CBitmap&& src)
-: m_pixels(nullptr)
-, m_width(0)
-, m_height(0)
-, m_bpp(0)
 {
 	MoveFrom(std::move(src));
 }
 
 CBitmap::CBitmap(unsigned int nWidth, unsigned int nHeight, unsigned int nBPP)
-: m_pixels(nullptr)
-, m_width(0)
-, m_height(0)
-, m_bpp(0)
 {
 	Allocate(nWidth, nHeight, nBPP);
 }
@@ -384,8 +363,8 @@ void CBitmap::CopyFrom(const CBitmap& src)
 
 void CBitmap::MoveFrom(CBitmap&& src)
 {
-	std::swap(src.m_pixels,	m_pixels);
-	std::swap(src.m_width,	m_width);
-	std::swap(src.m_height,	m_height);
-	std::swap(src.m_bpp,	m_bpp);
+	std::swap(src.m_pixels, m_pixels);
+	std::swap(src.m_width,  m_width);
+	std::swap(src.m_height, m_height);
+	std::swap(src.m_bpp,    m_bpp);
 }

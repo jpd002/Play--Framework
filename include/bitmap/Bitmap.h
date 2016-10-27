@@ -29,7 +29,7 @@ namespace Framework
 	class CBitmap
 	{
 	public:
-						CBitmap();
+						CBitmap() = default;
 						CBitmap(const CBitmap&);
 						CBitmap(CBitmap&&);
 						CBitmap(unsigned int, unsigned int, unsigned int);
@@ -66,10 +66,10 @@ namespace Framework
 		void			CopyFrom(const CBitmap&);
 		void			MoveFrom(CBitmap&&);
 
-		unsigned int	m_width;
-		unsigned int	m_height;
-		unsigned int	m_bpp;
-		uint8*			m_pixels;
+		unsigned int	m_width = 0;
+		unsigned int	m_height = 0;
+		unsigned int	m_bpp = 0;
+		uint8*			m_pixels = nullptr;
 	};
 
 }
