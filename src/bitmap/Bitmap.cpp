@@ -91,11 +91,14 @@ CColor CBitmap::GetPixel(unsigned int x, unsigned int y) const
 	uint8* pixelPtr = (m_pixels + (GetPitch() * y) + (GetPixelSize() * x));
 	switch(m_bpp)
 	{
-	case 32:
-		return CColor(pixelPtr[0], pixelPtr[1], pixelPtr[2], pixelPtr[3]);
+	case 8:
+		return CColor(pixelPtr[0], 0, 0, 0);
 		break;
 	case 24:
 		return CColor(pixelPtr[0], pixelPtr[1], pixelPtr[2], 0);
+		break;
+	case 32:
+		return CColor(pixelPtr[0], pixelPtr[1], pixelPtr[2], pixelPtr[3]);
 		break;
 	default:
 		throw std::runtime_error("Unknown bit depth.");
@@ -116,6 +119,14 @@ void CBitmap::SetPixel(unsigned int x, unsigned int y, const CColor& color)
 	uint8* pixelPtr = (m_pixels + (GetPitch() * y) + (GetPixelSize() * x));
 	switch(m_bpp)
 	{
+	case 8:
+		pixelPtr[0] = color.r;
+		break;
+	case 24:
+		pixelPtr[0] = color.r;
+		pixelPtr[1] = color.g;
+		pixelPtr[2] = color.b;
+		break;
 	case 32:
 		pixelPtr[0] = color.r;
 		pixelPtr[1] = color.g;
