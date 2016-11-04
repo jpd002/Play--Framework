@@ -17,12 +17,17 @@ namespace Framework
 		typedef std::function<void (CStream&, const CColor&)> PixelWriterFunction;
 
 #pragma pack(push, 1)
-		struct HEADER
+		struct BMHEADER
 		{
 			uint16		nID;
 			uint32		nFileSize;
 			uint32		nReserved;
 			uint32		nDataOffset;
+		};
+		static_assert(sizeof(BMHEADER) == 0xE, "sizeof(BMHEADER) must be 14 bytes.");
+
+		struct BMINFOHEADER
+		{
 			uint32		nHeaderSize;
 			uint32		nWidth;
 			uint32		nHeight;
@@ -35,8 +40,10 @@ namespace Framework
 			uint32		nColors;
 			uint32		nImportantColors;
 		};
+		static_assert(sizeof(BMINFOHEADER) == 0x28, "sizeof(HEADER) must be 40 bytes.");
 #pragma pack(pop)
 
+		static void PixelWriter8(CStream&, const CColor&);
 		static void PixelWriter24(CStream&, const CColor&);
 		static void PixelWriter32(CStream&, const CColor&);
 	};
