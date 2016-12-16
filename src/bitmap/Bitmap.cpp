@@ -286,11 +286,13 @@ void CBitmap::DrawLine(int x1, int y1, int x2, int y2, const CColor& color)
 
 	assert(m_bpp == 32);
 
+	//Bail if all X coordinates of the line are outside the bounds of the bitmap
 	if((x1 < 0) && (x2 < 0)) return;
-	if((x1 >= m_width) && (x2 >= m_width)) return;
+	if((x1 >= static_cast<int>(m_width)) && (x2 >= static_cast<int>(m_width))) return;
 
+	//Likewise for Y coordinates
 	if((y1 < 0) && (y2 < 0)) return;
-	if((y1 >= m_height) && (y2 >= m_height)) return;
+	if((y1 >= static_cast<int>(m_height)) && (y2 >= static_cast<int>(m_height))) return;
 
 	int dx = x2 - x1;
 	int dy = y2 - y1;
@@ -312,8 +314,8 @@ void CBitmap::DrawLine(int x1, int y1, int x2, int y2, const CColor& color)
 		for(int x = x1; x <= x2; x++)
 		{
 			if(
-				(x >= 0) && (x < m_width) &&
-				(y >= 0) && (y < m_height)
+				(x >= 0) && (x < static_cast<int>(m_width)) &&
+				(y >= 0) && (y < static_cast<int>(m_height))
 				)
 			{
 				reinterpret_cast<uint32*>(m_pixels)[x + (y * m_width)] = convertedColor;
@@ -339,8 +341,8 @@ void CBitmap::DrawLine(int x1, int y1, int x2, int y2, const CColor& color)
 		for(int y = y1; y <= y2; y++)
 		{
 			if(
-				(x >= 0) && (x < m_width) &&
-				(y >= 0) && (y < m_height)
+				(x >= 0) && (x < static_cast<int>(m_width)) &&
+				(y >= 0) && (y < static_cast<int>(m_height))
 				)
 			{
 				reinterpret_cast<uint32*>(m_pixels)[x + (y * m_width)] = convertedColor;
