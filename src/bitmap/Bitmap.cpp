@@ -302,7 +302,7 @@ void CBitmap::DrawLine(int x1, int y1, int x2, int y2, const CColor& color)
 	if(abs(dy) < abs(dx))
 	{
 		float deltaErr = fabs(static_cast<float>(dy) / static_cast<float>(dx));
-		if(x1 > x2) 
+		if(x1 > x2)
 		{
 			std::swap(x1, x2);
 			std::swap(y1, y2);
@@ -329,7 +329,7 @@ void CBitmap::DrawLine(int x1, int y1, int x2, int y2, const CColor& color)
 	else
 	{
 		float deltaErr = fabs(static_cast<float>(dx) / static_cast<float>(dy));
-		if(y1 > y2) 
+		if(y1 > y2)
 		{
 			std::swap(x1, x2);
 			std::swap(y1, y2);
