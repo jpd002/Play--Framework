@@ -1,23 +1,12 @@
+#include <cassert>
 #include "win32/MDIFrame.h"
-#include "PtrMacro.h"
 
 using namespace Framework;
 using namespace Framework::Win32;
 
-CMDIFrame::CMDIFrame()
-: m_pMDIClient(NULL)
-{
-
-}
-
-CMDIFrame::~CMDIFrame()
-{
-	DELETEPTR(m_pMDIClient);
-}
-
 long CMDIFrame::OnWndProc(unsigned int nMsg, WPARAM wParam, LPARAM lParam)
 {
-	if(m_pMDIClient != NULL)
+	if(m_pMDIClient)
 	{
 		return (long)DefFrameProc(m_hWnd, m_pMDIClient->m_hWnd, nMsg, wParam, lParam);
 	}
@@ -29,5 +18,6 @@ long CMDIFrame::OnWndProc(unsigned int nMsg, WPARAM wParam, LPARAM lParam)
 
 void CMDIFrame::CreateClient(HMENU hMenu)
 {
-	m_pMDIClient = new CMDIClient(m_hWnd, hMenu);
+	assert(!m_pMDIClient);
+	m_pMDIClient = std::make_unique<CMDIClient>(m_hWnd, hMenu);
 }

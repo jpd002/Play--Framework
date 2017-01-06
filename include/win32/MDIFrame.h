@@ -1,26 +1,20 @@
-#ifndef _MDIFRAME_H_
-#define _MDIFRAME_H_
+#pragma once
 
+#include <memory>
 #include "Window.h"
 #include "MDIClient.h"
 
 namespace Framework
 {
-    namespace Win32
-    {
-	    class CMDIFrame : public CWindow
-	    {
-	    public:
-						    CMDIFrame();
-		    virtual         ~CMDIFrame();
-
+	namespace Win32
+	{
+		class CMDIFrame : public CWindow
+		{
 		protected:
-		    virtual long    OnWndProc(unsigned int, WPARAM, LPARAM);
-		    void            CreateClient(HMENU);
+			long       OnWndProc(unsigned int, WPARAM, LPARAM) override;
+			void       CreateClient(HMENU);
 
-		    CMDIClient*     m_pMDIClient;
-	    };
-    }
+			std::unique_ptr<CMDIClient> m_pMDIClient;
+		};
+	}
 }
-
-#endif
