@@ -448,7 +448,7 @@ LRESULT WINAPI CWindow::WndProc(HWND hWnd, unsigned int uiMsg, WPARAM wParam, LP
 			long nBrush = pThis->OnCtlColorStatic((HDC)wParam, (HWND)lParam);
 			if(!nBrush)
 			{
-				return (long)DefWindowProc(hWnd, uiMsg, wParam, lParam);
+				return DefWindowProc(hWnd, uiMsg, wParam, lParam);
 			}
 			else
 			{
