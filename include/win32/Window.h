@@ -29,7 +29,7 @@ namespace Framework
 			void					ClearClassPtr();
 			static CWindow*			GetClassPtr(HWND);
 			void					SubClass();
-			long					CallBaseWndProc(unsigned int, WPARAM, LPARAM);
+			LRESULT					CallBaseWndProc(unsigned int, WPARAM, LPARAM);
 			static bool				DoesWindowClassExist(const TCHAR*);
 			static bool				IsNotifySource(const CWindow*, const NMHDR*);
 			static bool				IsCommandSource(const CWindow*, HWND);

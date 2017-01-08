@@ -112,9 +112,9 @@ void CWindow::SubClass()
 	m_baseWndProc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(m_hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(SubClassWndProc)));
 }
 
-long CWindow::CallBaseWndProc(unsigned int uiMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CWindow::CallBaseWndProc(unsigned int uiMsg, WPARAM wParam, LPARAM lParam)
 {
-	return (long)CallWindowProc(m_baseWndProc, m_hWnd, uiMsg, wParam, lParam);
+	return CallWindowProc(m_baseWndProc, m_hWnd, uiMsg, wParam, lParam);
 }
 
 bool CWindow::DoesWindowClassExist(const TCHAR* className)
