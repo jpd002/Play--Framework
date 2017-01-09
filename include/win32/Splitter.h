@@ -19,11 +19,11 @@ namespace Framework
 			void			SetFixed(bool);
 
 		protected:
-			long			OnSize(unsigned int, unsigned int, unsigned int);
-			long			OnMouseMove(WPARAM, int, int);
-			long			OnLeftButtonDown(int, int);
-			long			OnLeftButtonUp(int, int);
-			long			OnNotify(WPARAM, NMHDR*);
+			long			OnSize(unsigned int, unsigned int, unsigned int) override;
+			long			OnMouseMove(WPARAM, int, int) override;
+			long			OnLeftButtonDown(int, int) override;
+			long			OnLeftButtonUp(int, int) override;
+			long			OnNotify(WPARAM, NMHDR*) override;
 
 			virtual CRect	GetPaneRect(unsigned int) = 0;
 			virtual CRect	GetEdgeRect() = 0;

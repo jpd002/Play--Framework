@@ -25,8 +25,8 @@ namespace Framework
 
 		protected:
 			long							OnSize(unsigned int, unsigned int, unsigned int);
-			long							OnEraseBkgnd();
-			long							OnNotify(WPARAM, NMHDR*);
+			long							OnEraseBkgnd() override;
+			long							OnNotify(WPARAM, NMHDR*) override;
 
 		private:
 			void							UpdateLayout();
