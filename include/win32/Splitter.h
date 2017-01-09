@@ -23,7 +23,7 @@ namespace Framework
 			long			OnMouseMove(WPARAM, int, int) override;
 			long			OnLeftButtonDown(int, int) override;
 			long			OnLeftButtonUp(int, int) override;
-			long			OnNotify(WPARAM, NMHDR*) override;
+			LRESULT			OnNotify(WPARAM, NMHDR*) override;
 
 			virtual CRect	GetPaneRect(unsigned int) = 0;
 			virtual CRect	GetEdgeRect() = 0;

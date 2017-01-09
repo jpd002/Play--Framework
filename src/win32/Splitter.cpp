@@ -111,9 +111,9 @@ long CSplitter::OnLeftButtonUp(int nX, int nY)
 	return TRUE;
 }
 
-long CSplitter::OnNotify(WPARAM wParam, NMHDR* pH)
+LRESULT CSplitter::OnNotify(WPARAM wParam, NMHDR* pH)
 {
-	return (long)SendMessage(GetParent(), WM_NOTIFY, wParam, (LPARAM)pH);
+	return SendMessage(GetParent(), WM_NOTIFY, wParam, (LPARAM)pH);
 }
 
 void CSplitter::ResizeChild(unsigned int index)

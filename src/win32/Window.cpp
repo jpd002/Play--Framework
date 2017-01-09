@@ -527,7 +527,7 @@ long CWindow::OnSysCommand(unsigned int nCmd, LPARAM lParam)
 	return TRUE;
 }
 
-long CWindow::OnNotify(WPARAM wParam, NMHDR* pHDR)
+LRESULT CWindow::OnNotify(WPARAM wParam, NMHDR* pHDR)
 {
 	return FALSE;
 }
@@ -647,9 +647,9 @@ long CWindow::OnActivate(unsigned int nType, bool bMinimized, HWND hWnd)
 	return TRUE;
 }
 
-long CWindow::OnMouseActivate(WPARAM wParam, LPARAM lParam)
+LRESULT CWindow::OnMouseActivate(WPARAM wParam, LPARAM lParam)
 {
-	return static_cast<long>(DefWindowProc(m_hWnd, WM_MOUSEACTIVATE, wParam, lParam));
+	return DefWindowProc(m_hWnd, WM_MOUSEACTIVATE, wParam, lParam);
 }
 
 long CWindow::OnActivateApp(bool nActive, DWORD nThreadId)
@@ -682,9 +682,9 @@ long CWindow::OnNcPaint(WPARAM)
 	return TRUE;
 }
 
-long CWindow::OnGetDlgCode(WPARAM wParam, LPARAM lParam)
+LRESULT CWindow::OnGetDlgCode(WPARAM wParam, LPARAM lParam)
 {
-	return static_cast<long>(DefWindowProc(m_hWnd, WM_GETDLGCODE, wParam, lParam));
+	return DefWindowProc(m_hWnd, WM_GETDLGCODE, wParam, lParam);
 }
 
 long CWindow::OnThemeChanged()

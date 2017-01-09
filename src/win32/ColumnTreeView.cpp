@@ -68,7 +68,7 @@ long CColumnTreeView::OnEraseBkgnd()
 	return FALSE;
 }
 
-long CColumnTreeView::OnNotify(WPARAM nId, NMHDR* pHdr)
+LRESULT CColumnTreeView::OnNotify(WPARAM nId, NMHDR* pHdr)
 {
 	bool nRelay = true;
 
@@ -120,7 +120,7 @@ long CColumnTreeView::OnNotify(WPARAM nId, NMHDR* pHdr)
 		Msg.idFrom			= 0;
 		Msg.code			= pHdr->code;
 		Msg.pOriginalMsg	= pHdr;
-		return static_cast<long>(SendMessage(GetParent(), WM_NOTIFY, nId, reinterpret_cast<LPARAM>(&Msg)));
+		return SendMessage(GetParent(), WM_NOTIFY, nId, reinterpret_cast<LPARAM>(&Msg));
 	}
 	else
 	{
