@@ -72,7 +72,7 @@ namespace Framework
 			virtual long			OnCommand(unsigned short, unsigned short, HWND);
 			virtual long			OnSysCommand(unsigned int, LPARAM);
 			virtual long			OnNotify(WPARAM, NMHDR*);
-			virtual long			OnWndProc(UINT, WPARAM, LPARAM);
+			virtual LRESULT			OnWndProc(UINT, WPARAM, LPARAM);
 			virtual long			OnSize(unsigned int, unsigned int, unsigned int);
 			virtual long			OnMove(int, int);
 			virtual long			OnLeftButtonUp(int, int);

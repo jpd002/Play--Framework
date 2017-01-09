@@ -28,7 +28,7 @@ namespace Framework
 			}
 
 		protected:
-			long OnWndProc(unsigned int nMsg, WPARAM wParam, LPARAM lParam) override
+			LRESULT OnWndProc(unsigned int nMsg, WPARAM wParam, LPARAM lParam) override
 			{
 				switch(nMsg)
 				{
@@ -67,7 +67,7 @@ namespace Framework
 					break;
 				}
 
-				return static_cast<long>(CallWindowProc(m_baseWndProc, m_hWnd, nMsg, wParam, lParam));
+				return CallWindowProc(m_baseWndProc, m_hWnd, nMsg, wParam, lParam);
 			}
 
 		private:

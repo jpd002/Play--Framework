@@ -18,7 +18,7 @@ CPropertyGridEdit::~CPropertyGridEdit()
 
 }
 
-long CPropertyGridEdit::OnWndProc(UINT msg, WPARAM wparam, LPARAM lparam)
+LRESULT CPropertyGridEdit::OnWndProc(UINT msg, WPARAM wparam, LPARAM lparam)
 {
 	switch(msg)
 	{

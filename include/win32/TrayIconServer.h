@@ -23,7 +23,7 @@ namespace Framework
 			void					RegisterHandler(const IconEventHandlerType&);
 
 		protected:
-			long					OnWndProc(unsigned int, WPARAM, LPARAM) override;
+			LRESULT					OnWndProc(unsigned int, WPARAM, LPARAM) override;
 
 		private:
 			typedef std::map<unsigned int, std::unique_ptr<CTrayIcon>> TrayIconMapType;

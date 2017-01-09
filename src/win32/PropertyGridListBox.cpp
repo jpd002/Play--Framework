@@ -18,7 +18,7 @@ CPropertyGridListBox::~CPropertyGridListBox()
 
 }
 
-long CPropertyGridListBox::OnWndProc(UINT msg, WPARAM wparam, LPARAM lparam)
+LRESULT CPropertyGridListBox::OnWndProc(UINT msg, WPARAM wparam, LPARAM lparam)
 {
 	switch(msg)
 	{

@@ -18,7 +18,7 @@ namespace Framework
 			StartEditionEvent	StartEdition;
 
 		protected:
-			long				OnWndProc(UINT, WPARAM, LPARAM) override;
+			LRESULT				OnWndProc(UINT, WPARAM, LPARAM) override;
 			long				OnLeftButtonDown(int, int) override;
 			long				OnLeftButtonUp(int, int) override;
 		};

@@ -507,7 +507,7 @@ LRESULT WINAPI CWindow::SubClassWndProc(HWND hWnd, unsigned int uiMsg, WPARAM wP
 	return DefWindowProc(hWnd, uiMsg, wParam, lParam);
 }
 
-long CWindow::OnWndProc(UINT uiMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CWindow::OnWndProc(UINT uiMsg, WPARAM wParam, LPARAM lParam)
 {
 	return TRUE;
 }

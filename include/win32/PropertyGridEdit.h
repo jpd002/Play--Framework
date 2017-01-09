@@ -18,7 +18,7 @@ namespace Framework
 			EditCompletedEvent	EditCompleted;
 
 		protected:
-			long				OnWndProc(UINT, WPARAM, LPARAM) override;
+			LRESULT				OnWndProc(UINT, WPARAM, LPARAM) override;
 
 		private:
 

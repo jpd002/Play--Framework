@@ -33,7 +33,7 @@ namespace Framework
 
 		protected:
 			long						OnSize(unsigned int, unsigned int, unsigned int) override;
-			long						OnWndProc(unsigned int, WPARAM, LPARAM) override;
+			LRESULT						OnWndProc(unsigned int, WPARAM, LPARAM) override;
 
 		private:
 			struct DRAWMETRICS

@@ -33,7 +33,7 @@ CTrayIcon* CTrayIconServer::Insert()
 	return result;
 }
 
-long CTrayIconServer::OnWndProc(unsigned int uiMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CTrayIconServer::OnWndProc(unsigned int uiMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch(uiMsg)
 	{

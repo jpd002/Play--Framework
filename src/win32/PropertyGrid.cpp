@@ -51,7 +51,7 @@ long CPropertyGrid::OnSize(unsigned int, unsigned int width, unsigned int height
 	return TRUE;
 }
 
-long CPropertyGrid::OnWndProc(unsigned int msg, WPARAM wparam, LPARAM lparam)
+LRESULT CPropertyGrid::OnWndProc(unsigned int msg, WPARAM wparam, LPARAM lparam)
 {
 	switch(msg)
 	{
