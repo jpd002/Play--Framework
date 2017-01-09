@@ -11,7 +11,7 @@ namespace Framework
 		class CMDIFrame : public CWindow
 		{
 		protected:
-			long       OnWndProc(unsigned int, WPARAM, LPARAM) override;
+			LRESULT    OnWndProc(unsigned int, WPARAM, LPARAM) override;
 			void       CreateClient(HMENU);
 
 			std::unique_ptr<CMDIClient> m_pMDIClient;

@@ -10,7 +10,7 @@ void CMDIChild::Create(unsigned long nStyleEx, const TCHAR* sClass, const TCHAR*
 	assert(m_hWnd != NULL);
 }
 
-long CMDIChild::OnWndProc(unsigned int nMsg, WPARAM wParam, LPARAM lParam)
+LRESULT CMDIChild::OnWndProc(unsigned int nMsg, WPARAM wParam, LPARAM lParam)
 {
-	return (long)DefMDIChildProc(m_hWnd, nMsg, wParam, lParam);
+	return DefMDIChildProc(m_hWnd, nMsg, wParam, lParam);
 }

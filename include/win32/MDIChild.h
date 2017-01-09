@@ -12,7 +12,7 @@ namespace Framework
 			void		Create(unsigned long, const TCHAR*, const TCHAR*, unsigned long, RECT*, HWND, void*);
 
 		protected:
-			long		OnWndProc(unsigned int, WPARAM, LPARAM) override;
+			LRESULT		OnWndProc(unsigned int, WPARAM, LPARAM) override;
 		};
 	}
 }
