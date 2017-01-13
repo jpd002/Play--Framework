@@ -19,7 +19,7 @@ if (UNIX OR WIN32 AND NOT ANDROID AND NOT APPLE)
 		)
 	endif()
 	list(APPEND PROJECT_LIBS glew_s)
-	include_directories(${GLEW_SOURCE}/include)
+	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/glew-2.0.0/include)
 endif()
 
 include_directories(../../include)
