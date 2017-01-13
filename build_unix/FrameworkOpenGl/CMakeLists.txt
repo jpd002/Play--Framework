@@ -14,8 +14,8 @@ if (UNIX OR WIN32 AND NOT ANDROID AND NOT APPLE)
 		set(BUILD_SHARED_LIBS off)
 		set(BUILD_UTILS off)
 		add_subdirectory(
-			${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/glew-cmake
-			${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/glew-cmake/build_${CMAKE_SYSTEM_NAME}
+			${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/glew-2.0.0
+			${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/glew-2.0.0/build_${CMAKE_SYSTEM_NAME}
 		)
 	endif()
 	list(APPEND PROJECT_LIBS glew_s)
