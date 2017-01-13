@@ -25,6 +25,23 @@ if(APPLE)
 	set(CXX_FLAGS "${CMAKE_CXX_FLAGS} -x objective-c++")
 endif(APPLE)
 
+find_package(ZLIB)
+if (NOT ZLIB_FOUND)
+	MESSAGE("-- Using Provided zlib source")
+	if(NOT TARGET zlibstatic)
+		add_subdirectory(
+			${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/zlib-1.2.8
+			${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/zlib-1.2.8/build_${CMAKE_SYSTEM_NAME}
+		)
+	endif()
+	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/zlib-1.2.8)
+	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/zlib-1.2.8/build_${CMAKE_SYSTEM_NAME})
+	list(APPEND PROJECT_LIBS zlibstatic)
+else()
+	include_directories(${ZLIB_INCLUDE_DIRS})
+	list(APPEND PROJECT_LIBS ${ZLIB_LIBRARIES})
+endif()
+
 if (NOT TARGET Boost::boost)
 	add_subdirectory(
 		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/boost-cmake
