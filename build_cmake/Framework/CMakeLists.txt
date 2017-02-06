@@ -25,19 +25,17 @@ if(APPLE)
 	set(CXX_FLAGS "${CMAKE_CXX_FLAGS} -x objective-c++")
 endif(APPLE)
 
-find_package(ZLIB)
-if (NOT ZLIB_FOUND)
-	MESSAGE("-- Using Provided zlib source")
+if (NOT ANDROID)
 	if(NOT TARGET zlibstatic)
+		MESSAGE("-- Using Provided zlib source")
 		add_subdirectory(
 			${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/zlib-1.2.8
-			${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/zlib-1.2.8/build_${CMAKE_SYSTEM_NAME}
+			${CMAKE_CURRENT_BINARY_DIR}/zlib-1.2.8
 		)
 	endif()
-	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/zlib-1.2.8)
-	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/zlib-1.2.8/build_${CMAKE_SYSTEM_NAME})
-	list(APPEND PROJECT_LIBS zlibstatic)
+	list(APPEND PROJECT_LIBS zlibstatic zlibheaders)
 else()
+	find_package(ZLIB REQUIRED)
 	include_directories(${ZLIB_INCLUDE_DIRS})
 	list(APPEND PROJECT_LIBS ${ZLIB_LIBRARIES})
 endif()
@@ -45,7 +43,7 @@ endif()
 if (NOT TARGET Boost::boost)
 	add_subdirectory(
 		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/boost-cmake
-		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/boost-cmake/build_${CMAKE_SYSTEM_NAME}
+		${CMAKE_CURRENT_BINARY_DIR}/boost-cmake
 	)
 endif()
 
@@ -147,4 +145,4 @@ endif()
 
 add_library(Framework ${COMMON_SRC_FILES} ${PLATFORM_SPECIFIC_SRC_FILES})
 set_target_properties(Framework PROPERTIES COMPILE_FLAGS "${CXX_FLAGS}")
-target_link_libraries(Framework PUBLIC Boost::boost)
+target_link_libraries(Framework PUBLIC Boost::boost ${PROJECT_LIBS})

@@ -32,7 +32,7 @@ endif (WIN32)
 if (NOT TARGET Boost::boost)
 	add_subdirectory(
 		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/boost-cmake
-		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/boost-cmake/build_${CMAKE_SYSTEM_NAME}
+		${CMAKE_CURRENT_BINARY_DIR}/boost-cmake
 	)
 endif()
 
