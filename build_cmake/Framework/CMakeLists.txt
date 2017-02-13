@@ -39,12 +39,6 @@ if (NOT TARGET Boost::boost)
 	)
 endif()
 
-if(ANDROID)
-	if(NOT TARGET cpufeatures)
-		include_directories("${CMAKE_ANDROID_NDK}/sources/android/cpufeatures")
-	endif()
-endif()
-
 if (WIN32)
 	add_definitions(-D_UNICODE -DUNICODE)
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
