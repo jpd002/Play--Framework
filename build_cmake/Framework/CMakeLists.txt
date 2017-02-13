@@ -88,6 +88,7 @@ set(COMMON_SRC_FILES
 	../../src/PtrStream.cpp
 	../../src/Stream.cpp
 	../../src/StreamBitStream.cpp
+	../../src/string_cast.cpp
 	../../src/StdStream.cpp
 	../../src/StdStreamUtils.cpp
 	../../src/Utf8.cpp
@@ -109,7 +110,6 @@ if (WIN32)
 		../../src/directinput/Joystick.cpp
 		../../src/directinput/Keyboard.cpp
 		../../src/directinput/Manager.cpp
-		../../src/string_cast.cpp
 	)
 endif (WIN32)
 
