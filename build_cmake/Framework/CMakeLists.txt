@@ -32,6 +32,12 @@ else()
 	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/zlib-1.2.8)
 endif(ZLIB_FOUND)
 
+find_package(ICUUC)
+if(ICUUC_FOUND)
+	include_directories(${ICUUC_INCLUDE_DIRS})
+	add_definitions(-DHAS_ICU)
+endif()
+
 if (NOT TARGET Boost::boost)
 	add_subdirectory(
 		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/boost-cmake
@@ -89,6 +95,7 @@ set(COMMON_SRC_FILES
 	../../src/Stream.cpp
 	../../src/StreamBitStream.cpp
 	../../src/string_cast.cpp
+	../../src/string_cast_sjis.cpp
 	../../src/StdStream.cpp
 	../../src/StdStreamUtils.cpp
 	../../src/Utf8.cpp
@@ -118,14 +125,6 @@ if(ANDROID)
 		../../src/android/AssetStream.cpp
 		../../src/android/AssetManager.cpp
 		../../src/PosixFileStream.cpp
-	)
-endif()
-
-if(NOT ANDROID)
-	set(PLATFORM_SPECIFIC_SRC_FILES
-		${PLATFORM_SPECIFIC_SRC_FILES}
-		
-		../../src/string_cast_sjis.cpp
 	)
 endif()
 
