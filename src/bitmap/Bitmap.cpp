@@ -280,6 +280,27 @@ CBitmap CBitmap::ResizeCanvas(unsigned int newWidth, unsigned int newHeight) con
 	return result;
 }
 
+CBitmap CBitmap::FlipVertical() const
+{
+	if(IsEmpty()) return CBitmap();
+
+	CBitmap result(m_width, m_height, m_bpp);
+
+	unsigned int srcPitch = GetPitch();
+	unsigned int dstPitch = result.GetPitch();
+
+	auto srcPtr = m_pixels + srcPitch * (m_height - 1);
+	auto dstPtr = result.m_pixels;
+	for(unsigned int y = 0; y < m_height; y++)
+	{
+		memcpy(dstPtr, srcPtr, dstPitch);
+		srcPtr -= srcPitch;
+		dstPtr += dstPitch;
+	}
+
+	return result;
+}
+
 void CBitmap::DrawLine(int x1, int y1, int x2, int y2, const CColor& color)
 {
 	uint32 convertedColor = (color.r << 0) | (color.g << 8) | (color.b << 16) | (color.a << 24);
