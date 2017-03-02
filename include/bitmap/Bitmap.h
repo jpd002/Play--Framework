@@ -59,6 +59,7 @@ namespace Framework
 		CBitmap			AddAlphaChannel(uint8 alphaValue) const;
 		CBitmap			Resize(unsigned int, unsigned int) const;
 		CBitmap			ResizeCanvas(unsigned int, unsigned int) const;
+		CBitmap			FlipVertical() const;
 
 		void			DrawLine(int x1, int y1, int x2, int y2, const CColor&);
 
