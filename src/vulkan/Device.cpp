@@ -54,8 +54,6 @@ void CDevice::Reset()
 	vkQueueSubmit = nullptr;
 	vkQueueWaitIdle = nullptr;
 	
-	vkCreateFramebuffer = nullptr;
-	
 	vkBindBufferMemory = nullptr;
 	vkCreateBuffer = nullptr;
 	vkDestroyBuffer = nullptr;
@@ -77,6 +75,9 @@ void CDevice::Reset()
 	
 	vkCreateDescriptorSetLayout = nullptr;
 	vkDestroyDescriptorSetLayout = nullptr;
+	
+	vkCreateFramebuffer = nullptr;
+	vkDestroyFramebuffer = nullptr;
 	
 	vkBindImageMemory = nullptr;
 	vkCreateImage = nullptr;
@@ -148,8 +149,6 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(vkQueueSubmit, rhs.vkQueueSubmit);
 	std::swap(vkQueueWaitIdle, rhs.vkQueueWaitIdle);
 	
-	std::swap(vkCreateFramebuffer, rhs.vkCreateFramebuffer);
-	
 	std::swap(vkBindBufferMemory, rhs.vkBindBufferMemory);
 	std::swap(vkCreateBuffer, rhs.vkCreateBuffer);
 	std::swap(vkDestroyBuffer, rhs.vkDestroyBuffer);
@@ -171,6 +170,9 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	
 	std::swap(vkCreateDescriptorSetLayout, rhs.vkCreateDescriptorSetLayout);
 	std::swap(vkDestroyDescriptorSetLayout, rhs.vkDestroyDescriptorSetLayout);
+	
+	std::swap(vkCreateFramebuffer, rhs.vkCreateFramebuffer);
+	std::swap(vkDestroyFramebuffer, rhs.vkDestroyFramebuffer);
 	
 	std::swap(vkBindImageMemory, rhs.vkBindImageMemory);
 	std::swap(vkCreateImage, rhs.vkCreateImage);
@@ -249,8 +251,6 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	SET_PROC_ADDR(vkQueueSubmit);
 	SET_PROC_ADDR(vkQueueWaitIdle);
 	
-	SET_PROC_ADDR(vkCreateFramebuffer);
-	
 	SET_PROC_ADDR(vkBindBufferMemory);
 	SET_PROC_ADDR(vkCreateBuffer);
 	SET_PROC_ADDR(vkDestroyBuffer);
@@ -272,6 +272,9 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	
 	SET_PROC_ADDR(vkCreateDescriptorSetLayout);
 	SET_PROC_ADDR(vkDestroyDescriptorSetLayout);
+	
+	SET_PROC_ADDR(vkCreateFramebuffer);
+	SET_PROC_ADDR(vkDestroyFramebuffer);
 	
 	SET_PROC_ADDR(vkBindImageMemory);
 	SET_PROC_ADDR(vkCreateImage);

@@ -50,8 +50,6 @@ namespace Framework
 			DECLARE_FUNCTION(vkQueueSubmit);
 			DECLARE_FUNCTION(vkQueueWaitIdle);
 			
-			DECLARE_FUNCTION(vkCreateFramebuffer)
-			
 			//Buffer
 			DECLARE_FUNCTION(vkBindBufferMemory)
 			DECLARE_FUNCTION(vkCreateBuffer)
@@ -79,6 +77,10 @@ namespace Framework
 			//Descriptor Set Layout
 			DECLARE_FUNCTION(vkCreateDescriptorSetLayout)
 			DECLARE_FUNCTION(vkDestroyDescriptorSetLayout)
+			
+			//Framebuffer
+			DECLARE_FUNCTION(vkCreateFramebuffer)
+			DECLARE_FUNCTION(vkDestroyFramebuffer)
 			
 			//Image
 			DECLARE_FUNCTION(vkBindImageMemory)
