@@ -13,6 +13,7 @@ namespace Framework
 			        CShaderModule() = default;
 			        CShaderModule(CDevice&, Framework::CStream&);
 			        CShaderModule(const CShaderModule&) = delete;
+			        CShaderModule(CShaderModule&&);
 			virtual ~CShaderModule();
 			
 			bool IsEmpty() const;
