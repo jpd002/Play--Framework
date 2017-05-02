@@ -40,6 +40,7 @@ namespace Framework
 			DECLARE_FUNCTION(vkCmdDraw)
 			DECLARE_FUNCTION(vkCmdDrawIndexed)
 			DECLARE_FUNCTION(vkCmdEndRenderPass)
+			DECLARE_FUNCTION(vkCmdNextSubpass)
 			DECLARE_FUNCTION(vkCmdPipelineBarrier)
 			DECLARE_FUNCTION(vkCmdPushConstants)
 			DECLARE_FUNCTION(vkCmdSetScissor)

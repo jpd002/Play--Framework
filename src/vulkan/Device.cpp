@@ -44,6 +44,7 @@ void CDevice::Reset()
 	vkCmdDraw = nullptr;
 	vkCmdDrawIndexed = nullptr;
 	vkCmdEndRenderPass = nullptr;
+	vkCmdNextSubpass = nullptr;
 	vkCmdPipelineBarrier = nullptr;
 	vkCmdPushConstants = nullptr;
 	vkCmdSetScissor = nullptr;
@@ -139,6 +140,7 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(vkCmdDraw, rhs.vkCmdDraw);
 	std::swap(vkCmdDrawIndexed, rhs.vkCmdDrawIndexed);
 	std::swap(vkCmdEndRenderPass, rhs.vkCmdEndRenderPass);
+	std::swap(vkCmdNextSubpass, rhs.vkCmdNextSubpass);
 	std::swap(vkCmdPipelineBarrier, rhs.vkCmdPipelineBarrier);
 	std::swap(vkCmdPushConstants, rhs.vkCmdPushConstants);
 	std::swap(vkCmdSetScissor, rhs.vkCmdSetScissor);
@@ -241,6 +243,7 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	SET_PROC_ADDR(vkCmdDraw);
 	SET_PROC_ADDR(vkCmdDrawIndexed);
 	SET_PROC_ADDR(vkCmdEndRenderPass);
+	SET_PROC_ADDR(vkCmdNextSubpass);
 	SET_PROC_ADDR(vkCmdPipelineBarrier);
 	SET_PROC_ADDR(vkCmdPushConstants);
 	SET_PROC_ADDR(vkCmdSetScissor);
