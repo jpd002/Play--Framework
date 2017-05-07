@@ -1,5 +1,8 @@
 #pragma once
 
+#ifdef _WIN32
+#include <Windows.h>
+#endif
 #include "Singleton.h"
 #include "VulkanDef.h"
 
@@ -19,8 +22,11 @@ namespace Framework
 			
 		private:
 			void    LoadLibrary();
-			
+#ifdef _WIN32
+			HMODULE m_vulkanModule = NULL;
+#else
 			void*   m_vulkanDl = nullptr;
+#endif
 		};
 	}
 }
