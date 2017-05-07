@@ -9,7 +9,7 @@ set(CMAKE_MODULE_PATH
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(VULKAN REQUIRED)
+find_package(Vulkan REQUIRED)
 
 include_directories(../../include ${VULKAN_INCLUDE_DIR})
 
