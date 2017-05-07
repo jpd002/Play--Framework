@@ -54,6 +54,9 @@ void CInstance::Reset()
 #if defined(VK_USE_PLATFORM_XCB_KHR)
 	vkCreateXcbSurfaceKHR = nullptr;
 #endif
+#if defined(VK_USE_PLATFORM_WIN32_KHR)
+	vkCreateWin32SurfaceKHR = nullptr;
+#endif
 }
 
 CInstance& CInstance::operator =(CInstance&& rhs)
@@ -86,6 +89,9 @@ CInstance& CInstance::operator =(CInstance&& rhs)
 #endif
 #if defined(VK_USE_PLATFORM_XCB_KHR)
 	std::swap(vkCreateXcbSurfaceKHR, rhs.vkCreateXcbSurfaceKHR);
+#endif
+#if defined(VK_USE_PLATFORM_WIN32_KHR)
+	std::swap(vkCreateWin32SurfaceKHR, rhs.vkCreateWin32SurfaceKHR);
 #endif
 	
 	return (*this);
@@ -127,5 +133,8 @@ void CInstance::Create(const VkInstanceCreateInfo& instanceCreateInfo)
 #endif
 #if defined(VK_USE_PLATFORM_XCB_KHR)
 	SET_PROC_ADDR(vkCreateXcbSurfaceKHR);
+#endif
+#if defined(VK_USE_PLATFORM_WIN32_KHR)
+	SET_PROC_ADDR(vkCreateWin32SurfaceKHR);
 #endif
 }

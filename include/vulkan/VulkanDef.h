@@ -12,6 +12,10 @@
 #ifndef VK_USE_PLATFORM_XCB_KHR
 #define VK_USE_PLATFORM_XCB_KHR
 #endif
+#elif defined(_WIN32)
+#ifndef VK_USE_PLATFORM_WIN32_KHR
+#define VK_USE_PLATFORM_WIN32_KHR
+#endif
 #endif
 
 #include <vulkan/vulkan.h>

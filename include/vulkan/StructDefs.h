@@ -58,6 +58,10 @@ namespace Framework
 		//VK_KHR_xcb_surface
 		DECLARE_STRUCT(XcbSurfaceCreateInfoKHR, VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR);
 #endif
+#if defined(VK_USE_PLATFORM_WIN32_KHR)
+		//VK_KHR_win32_surface
+		DECLARE_STRUCT(Win32SurfaceCreateInfoKHR, VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR);
+#endif
 	}
 }
 
