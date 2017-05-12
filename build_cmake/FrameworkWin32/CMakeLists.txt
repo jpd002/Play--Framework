@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(FrameworkWinUI)
+project(Framework_Win32)
 
 set(CMAKE_MODULE_PATH
 	${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/cmake-modules
@@ -35,6 +35,10 @@ endif()
 include_directories(../../include)
 
 set(SRC_FILES
+	../../src/directinput/Device.cpp 
+	../../src/directinput/Joystick.cpp
+	../../src/directinput/Keyboard.cpp
+	../../src/directinput/Manager.cpp
 	../../src/win32/AcceleratorTableGenerator.cpp
 	../../src/win32/ActiveXHost.cpp
 	../../src/win32/Button.cpp
@@ -86,5 +90,5 @@ set(SRC_FILES
 	../../src/win32/Window.cpp
 )
 
-add_library(FrameworkWinUI ${SRC_FILES})
-target_link_libraries(FrameworkWinUI PUBLIC Boost::boost)
+add_library(Framework_Win32 ${SRC_FILES})
+target_link_libraries(Framework_Win32 PUBLIC Boost::boost)

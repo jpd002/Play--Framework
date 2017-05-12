@@ -108,14 +108,6 @@ set(COMMON_SRC_FILES
 	../../src/zip/ZipInflateStream.cpp
 	../../src/zip/ZipStoreStream.cpp
 )
-if (WIN32)
-	set(PLATFORM_SPECIFIC_SRC_FILES
-		../../src/directinput/Device.cpp 
-		../../src/directinput/Joystick.cpp
-		../../src/directinput/Keyboard.cpp
-		../../src/directinput/Manager.cpp
-	)
-endif (WIN32)
 
 if(ANDROID)
 	set(PLATFORM_SPECIFIC_SRC_FILES
