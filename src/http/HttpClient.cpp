@@ -26,3 +26,13 @@ void CHttpClient::SetUrl(std::string url)
 {
 	m_url = std::move(url);
 }
+
+void CHttpClient::SetVerb(HTTP_VERB verb)
+{
+	m_verb = verb;
+}
+
+void CHttpClient::SetRequestBody(std::string requestBody)
+{
+	m_requestBody = std::move(requestBody);
+}
