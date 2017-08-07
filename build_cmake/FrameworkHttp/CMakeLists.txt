@@ -16,14 +16,27 @@ include_directories(../../include)
 
 set(SRC_FILES
 	../../src/http/HttpClient.cpp
-	../../src/http/HttpClientFactory.cpp
-	../../src/http/Win32HttpClient.cpp
-)
-
-set(HEADER_FILES
 	../../include/http/HttpClient.h
+	../../src/http/HttpClientFactory.cpp
 	../../include/http/HttpClientFactory.h
-	../../include/http/Win32HttpClient.h
 )
 
-add_library(Framework_Http ${SRC_FILES} ${HEADER_FILES})
+if(ANDROID)
+	set(PLATFORM_SRC_FILES
+		../../src/http/AndroidHttpClient.cpp
+		../../include/http/AndroidHttpClient.h
+		../../src/http/java_io_InputStream.cpp
+		../../include/http/java_io_InputStream.h
+		../../src/http/java_net_HttpURLConnection.cpp
+		../../include/http/java_net_HttpURLConnection.h
+		../../src/http/java_net_URL.cpp
+		../../include/http/java_net_URL.h
+	)
+else()
+	set(PLATFORM_SRC_FILES
+		../../src/http/Win32HttpClient.cpp
+		../../include/http/Win32HttpClient.h
+	)
+endif()
+
+add_library(Framework_Http ${SRC_FILES} ${PLATFORM_SRC_FILES})
