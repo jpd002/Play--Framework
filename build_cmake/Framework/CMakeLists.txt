@@ -113,6 +113,8 @@ if(ANDROID)
 	set(PLATFORM_SPECIFIC_SRC_FILES
 		../../src/android/AssetStream.cpp
 		../../src/android/AssetManager.cpp
+		../../src/android/JavaObject.cpp
+		../../src/android/JavaVM.cpp
 		../../src/PosixFileStream.cpp
 	)
 endif()
