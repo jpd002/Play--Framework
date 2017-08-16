@@ -11,6 +11,9 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+if(APPLE)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -x objective-c++")
+endif(APPLE)
 
 include_directories(../../include)
 
@@ -32,10 +35,15 @@ if(ANDROID)
 		../../src/http/java_net_URL.cpp
 		../../include/http/java_net_URL.h
 	)
-else()
+elseif(WIN32)
 	set(PLATFORM_SRC_FILES
 		../../src/http/Win32HttpClient.cpp
 		../../include/http/Win32HttpClient.h
+	)
+elseif(APPLE)
+	set(PLATFORM_SRC_FILES
+		../../src/http/AppleHttpClient.cpp
+		../../include/http/AppleHttpClient.h
 	)
 endif()
 
