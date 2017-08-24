@@ -34,15 +34,28 @@ RequestResult CAndroidHttpClient::SendRequest()
 
 	{
 		ScopedDisconnecter disconnecter(connection);
-		
-		auto inputStream = CJavaObject::CastTo<java::io::InputStream>(connection.getInputStream());
+
+		RequestResult result;
+		result.statusCode = static_cast<HTTP_STATUS_CODE>(connection.getResponseCode());
+
+		auto inputStream = 
+			[&] ()
+			{
+				uint32 resultClass = static_cast<uint32>(result.statusCode) / 100;
+				switch(resultClass)
+				{
+				case 4:
+				case 5:
+					return CJavaObject::CastTo<java::io::InputStream>(connection.getErrorStream());
+				default:
+					return CJavaObject::CastTo<java::io::InputStream>(connection.getInputStream());
+				}
+			}();
 
 		static const int bufferSize = 0x10000;
 		std::vector<jbyte> buffer;
 		buffer.resize(bufferSize);
 
-		RequestResult result;
-		result.statusCode = static_cast<HTTP_STATUS_CODE>(connection.getResponseCode());
 		while(1)
 		{
 			auto readResult = inputStream.read(buffer);

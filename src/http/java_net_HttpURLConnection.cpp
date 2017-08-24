@@ -12,6 +12,16 @@ void HttpURLConnection::disconnect()
 	Framework::CJavaVM::CheckException(env);
 }
 
+jobject HttpURLConnection::getErrorStream()
+{
+	auto env = Framework::CJavaVM::GetEnv();
+	const auto& classInfo = ClassInfo::GetInstance();
+	jobject result = env->CallObjectMethod(m_this, classInfo.getErrorStream);
+	Framework::CJavaVM::CheckException(env);
+	assert(result != NULL);
+	return result;
+}
+
 jobject HttpURLConnection::getInputStream()
 {
 	auto env = Framework::CJavaVM::GetEnv();
@@ -44,6 +54,10 @@ void HttpURLConnection_ClassInfo::PrepareClassInfo()
 	disconnect = env->GetMethodID(clazz, "disconnect", "()V");
 	Framework::CJavaVM::CheckException(env);
 	assert(disconnect != NULL);
+	
+	getErrorStream = env->GetMethodID(clazz, "getErrorStream", "()Ljava/io/InputStream;");
+	Framework::CJavaVM::CheckException(env);
+	assert(getErrorStream != NULL);
 	
 	getInputStream = env->GetMethodID(clazz, "getInputStream", "()Ljava/io/InputStream;");
 	Framework::CJavaVM::CheckException(env);

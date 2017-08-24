@@ -16,6 +16,7 @@ namespace java
 			
 			jclass clazz = NULL;
 			jmethodID disconnect = NULL;
+			jmethodID getErrorStream = NULL;
 			jmethodID getInputStream = NULL;
 			jmethodID getResponseCode = NULL;
 		};
@@ -32,6 +33,7 @@ namespace java
 			HttpURLConnection& operator =(HttpURLConnection&&);
 			
 			void disconnect();
+			jobject getErrorStream();
 			jobject getInputStream();
 			jint getResponseCode();
 		};
