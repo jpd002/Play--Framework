@@ -30,12 +30,12 @@ RequestResult CAndroidHttpClient::SendRequest()
 	auto env = CJavaVM::GetEnv();
 	
 	auto url = java::net::URL(env->NewStringUTF(m_url.c_str()));
-	auto connection = java::net::HttpURLConnection::CastTo(url.openConnection());
+	auto connection = CJavaObject::CastTo<java::net::HttpURLConnection>(url.openConnection());
 
 	{
 		ScopedDisconnecter disconnecter(connection);
 		
-		auto inputStream = java::io::InputStream::CastTo(connection.getInputStream());
+		auto inputStream = CJavaObject::CastTo<java::io::InputStream>(connection.getInputStream());
 
 		static const int bufferSize = 0x10000;
 		std::vector<jbyte> buffer;

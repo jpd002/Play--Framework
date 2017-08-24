@@ -4,23 +4,10 @@
 
 using namespace java::io;
 
-InputStream InputStream::CastTo(jobject src)
-{
-	auto env = Framework::CJavaVM::GetEnv();
-	const auto& classInfo = InputStream_ClassInfo::GetInstance();
-	if(env->IsInstanceOf(src, classInfo.clazz) == JNI_FALSE)
-	{
-		throw std::runtime_error("Invalid cast");
-	}
-	InputStream newObject;
-	newObject.Attach(src);
-	return newObject;
-}
-
 jint InputStream::read(std::vector<jbyte>& b)
 {
 	auto env = Framework::CJavaVM::GetEnv();
-	const auto& classInfo = InputStream_ClassInfo::GetInstance();
+	const auto& classInfo = ClassInfo::GetInstance();
 	auto bArray = env->NewByteArray(b.size());
 	auto result = env->CallIntMethod(m_this, classInfo.read, bArray);
 	Framework::CJavaVM::CheckException(env);
