@@ -30,6 +30,8 @@ if(ANDROID)
 		../../include/http/AndroidHttpClient.h
 		../../src/http/java_io_InputStream.cpp
 		../../include/http/java_io_InputStream.h
+		../../src/http/java_io_OutputStream.cpp
+		../../include/http/java_io_OutputStream.h
 		../../src/http/java_net_HttpURLConnection.cpp
 		../../include/http/java_net_HttpURLConnection.h
 		../../src/http/java_net_URL.cpp

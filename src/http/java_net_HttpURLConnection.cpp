@@ -32,6 +32,16 @@ jobject HttpURLConnection::getInputStream()
 	return result;
 }
 
+jobject HttpURLConnection::getOutputStream()
+{
+	auto env = Framework::CJavaVM::GetEnv();
+	const auto& classInfo = ClassInfo::GetInstance();
+	jobject result = env->CallObjectMethod(m_this, classInfo.getOutputStream);
+	Framework::CJavaVM::CheckException(env);
+	assert(result != NULL);
+	return result;
+}
+
 jint HttpURLConnection::getResponseCode()
 {
 	auto env = Framework::CJavaVM::GetEnv();
@@ -39,6 +49,14 @@ jint HttpURLConnection::getResponseCode()
 	auto result = env->CallIntMethod(m_this, classInfo.getResponseCode);
 	Framework::CJavaVM::CheckException(env);
 	return result;
+}
+
+void HttpURLConnection::setRequestMethod(jstring method)
+{
+	auto env = Framework::CJavaVM::GetEnv();
+	const auto& classInfo = ClassInfo::GetInstance();
+	env->CallVoidMethod(m_this, classInfo.setRequestMethod, method);
+	Framework::CJavaVM::CheckException(env);
 }
 
 void HttpURLConnection_ClassInfo::PrepareClassInfo()
@@ -63,7 +81,15 @@ void HttpURLConnection_ClassInfo::PrepareClassInfo()
 	Framework::CJavaVM::CheckException(env);
 	assert(getInputStream != NULL);
 	
+	getOutputStream = env->GetMethodID(clazz, "getOutputStream", "()Ljava/io/OutputStream;");
+	Framework::CJavaVM::CheckException(env);
+	assert(getOutputStream != NULL);
+	
 	getResponseCode = env->GetMethodID(clazz, "getResponseCode", "()I");
 	Framework::CJavaVM::CheckException(env);
 	assert(getResponseCode != NULL);
+	
+	setRequestMethod = env->GetMethodID(clazz, "setRequestMethod", "(Ljava/lang/String;)V");
+	Framework::CJavaVM::CheckException(env);
+	assert(setRequestMethod != NULL);
 }

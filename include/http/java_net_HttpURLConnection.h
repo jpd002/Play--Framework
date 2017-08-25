@@ -18,7 +18,9 @@ namespace java
 			jmethodID disconnect = NULL;
 			jmethodID getErrorStream = NULL;
 			jmethodID getInputStream = NULL;
+			jmethodID getOutputStream = NULL;
 			jmethodID getResponseCode = NULL;
+			jmethodID setRequestMethod = NULL;
 		};
 		
 		class HttpURLConnection : public Framework::CJavaObject
@@ -35,7 +37,9 @@ namespace java
 			void disconnect();
 			jobject getErrorStream();
 			jobject getInputStream();
+			jobject getOutputStream();
 			jint getResponseCode();
+			void setRequestMethod(jstring);
 		};
 	}
 }

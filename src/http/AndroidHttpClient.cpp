@@ -2,6 +2,7 @@
 #include "http/java_net_URL.h"
 #include "http/java_net_HttpURLConnection.h"
 #include "http/java_io_InputStream.h"
+#include "http/java_io_OutputStream.h"
 #include "android/JavaVM.h"
 
 using namespace Framework;
@@ -35,6 +36,16 @@ RequestResult CAndroidHttpClient::SendRequest()
 	{
 		ScopedDisconnecter disconnecter(connection);
 
+		auto verbString = (m_verb == HTTP_VERB::GET) ? "GET" : "POST";
+		connection.setRequestMethod(env->NewStringUTF(verbString));
+
+		if(m_verb == HTTP_VERB::POST)
+		{
+			auto outputStream = CJavaObject::CastTo<java::io::OutputStream>(connection.getOutputStream());
+			outputStream.write(reinterpret_cast<const jbyte*>(m_requestBody.c_str()), m_requestBody.size());
+			outputStream.close();
+		}
+		
 		RequestResult result;
 		result.statusCode = static_cast<HTTP_STATUS_CODE>(connection.getResponseCode());
 
