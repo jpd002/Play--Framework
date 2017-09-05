@@ -8,6 +8,8 @@
 #include "xml/FilteringNodeIterator.h"
 #include "StdStreamUtils.h"
 
+#define PREFERENCE_ATTRIBUTE_NAME_NAME "Name"
+
 using namespace Framework;
 
 CConfig::CConfig(const PathType& path, bool readonly)
@@ -217,7 +219,7 @@ void CConfig::Load()
 		if(!strcmp(sType, "integer"))
 		{
 			int value;
-			if(Xml::GetAttributeIntValue(pPref, "Value", &value))
+			if(Xml::GetAttributeIntValue(pPref, PREFERENCE_ATTRIBUTE_NAME_VALUE, &value))
 			{
 				RegisterPreferenceInteger(name, value);
 			}
@@ -225,7 +227,7 @@ void CConfig::Load()
 		else if(!strcmp(sType, "boolean"))
 		{
 			bool value;
-			if(Xml::GetAttributeBoolValue(pPref, "Value", &value))
+			if(Xml::GetAttributeBoolValue(pPref, PREFERENCE_ATTRIBUTE_NAME_VALUE, &value))
 			{
 				RegisterPreferenceBoolean(name, value);
 			}
@@ -233,7 +235,7 @@ void CConfig::Load()
 		else if(!strcmp(sType, "string"))
 		{
 			const char* value;
-			if(Xml::GetAttributeStringValue(pPref, "Value", &value))
+			if(Xml::GetAttributeStringValue(pPref, PREFERENCE_ATTRIBUTE_NAME_VALUE, &value))
 			{
 				RegisterPreferenceString(name, value);
 			}
@@ -350,7 +352,7 @@ void CConfig::CPreferenceInteger::Serialize(Xml::CNode* pNode) const
 {
 	CPreference::Serialize(pNode);
 
-	pNode->InsertAttribute(Xml::CreateAttributeIntValue("Value", m_value));
+	pNode->InsertAttribute(Xml::CreateAttributeIntValue(PREFERENCE_ATTRIBUTE_NAME_VALUE, m_value));
 }
 
 /////////////////////////////////////////////////////////
@@ -378,7 +380,7 @@ void CConfig::CPreferenceBoolean::Serialize(Xml::CNode* pNode) const
 {
 	CPreference::Serialize(pNode);
 
-	pNode->InsertAttribute(Xml::CreateAttributeBoolValue("Value", m_value));
+	pNode->InsertAttribute(Xml::CreateAttributeBoolValue(PREFERENCE_ATTRIBUTE_NAME_VALUE, m_value));
 }
 
 /////////////////////////////////////////////////////////
@@ -406,5 +408,5 @@ void CConfig::CPreferenceString::Serialize(Xml::CNode* pNode) const
 {
 	CPreference::Serialize(pNode);
 
-	pNode->InsertAttribute(Xml::CreateAttributeStringValue("Value", m_value.c_str()));
+	pNode->InsertAttribute(Xml::CreateAttributeStringValue(PREFERENCE_ATTRIBUTE_NAME_VALUE, m_value.c_str()));
 }
