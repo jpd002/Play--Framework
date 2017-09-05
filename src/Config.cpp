@@ -290,15 +290,14 @@ const char* CConfig::CPreference::GetTypeString() const
 	{
 	case TYPE_INTEGER:
 		return PREFERENCE_TYPE_NAME_INTEGER;
-		break;
 	case TYPE_BOOLEAN:
 		return PREFERENCE_TYPE_NAME_BOOLEAN;
-		break;
 	case TYPE_STRING:
 		return PREFERENCE_TYPE_NAME_STRING;
-		break;
+	default:
+		assert(false);
+		return "";
 	}
-	return "";
 }
 
 void CConfig::CPreference::Serialize(Xml::CNode* pNode) const
