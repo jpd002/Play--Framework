@@ -9,6 +9,12 @@
 #include "StdStreamUtils.h"
 
 #define PREFERENCE_ATTRIBUTE_NAME_NAME "Name"
+#define PREFERENCE_ATTRIBUTE_NAME_TYPE "Type"
+#define PREFERENCE_ATTRIBUTE_NAME_VALUE "Value"
+
+#define PREFERENCE_TYPE_NAME_INTEGER "integer"
+#define PREFERENCE_TYPE_NAME_BOOLEAN "boolean"
+#define PREFERENCE_TYPE_NAME_STRING "string"
 
 using namespace Framework;
 
@@ -200,42 +206,42 @@ void CConfig::Load()
 		return;
 	}
 
-	Xml::CNode* pConfig = document->Select("Config");
-	if(pConfig == NULL)
+	auto configNode = document->Select("Config");
+	if(!configNode)
 	{
 		return;
 	}
 
-	for(Xml::CFilteringNodeIterator itNode(pConfig, "Preference"); !itNode.IsEnd(); itNode++)
+	for(Xml::CFilteringNodeIterator itNode(configNode, "Preference"); !itNode.IsEnd(); itNode++)
 	{
-		Xml::CNode* pPref = (*itNode);
+		auto prefNode = (*itNode);
 
-		const char* sType = pPref->GetAttribute("Type");
-		const char* name = pPref->GetAttribute("Name");
+		auto type = prefNode->GetAttribute(PREFERENCE_ATTRIBUTE_NAME_TYPE);
+		auto name = prefNode->GetAttribute(PREFERENCE_ATTRIBUTE_NAME_NAME);
 
-		if(sType == NULL) continue;
-		if(name == NULL) continue;
+		if(!type) continue;
+		if(!name) continue;
 
-		if(!strcmp(sType, "integer"))
+		if(!strcmp(type, PREFERENCE_TYPE_NAME_INTEGER))
 		{
-			int value;
-			if(Xml::GetAttributeIntValue(pPref, PREFERENCE_ATTRIBUTE_NAME_VALUE, &value))
+			int value = 0;
+			if(Xml::GetAttributeIntValue(prefNode, PREFERENCE_ATTRIBUTE_NAME_VALUE, &value))
 			{
 				RegisterPreferenceInteger(name, value);
 			}
 		}
-		else if(!strcmp(sType, "boolean"))
+		else if(!strcmp(type, PREFERENCE_TYPE_NAME_BOOLEAN))
 		{
-			bool value;
-			if(Xml::GetAttributeBoolValue(pPref, PREFERENCE_ATTRIBUTE_NAME_VALUE, &value))
+			bool value = false;
+			if(Xml::GetAttributeBoolValue(prefNode, PREFERENCE_ATTRIBUTE_NAME_VALUE, &value))
 			{
 				RegisterPreferenceBoolean(name, value);
 			}
 		}
-		else if(!strcmp(sType, "string"))
+		else if(!strcmp(type, PREFERENCE_TYPE_NAME_STRING))
 		{
-			const char* value;
-			if(Xml::GetAttributeStringValue(pPref, PREFERENCE_ATTRIBUTE_NAME_VALUE, &value))
+			const char* value = nullptr;
+			if(Xml::GetAttributeStringValue(prefNode, PREFERENCE_ATTRIBUTE_NAME_VALUE, &value))
 			{
 				RegisterPreferenceString(name, value);
 			}
@@ -309,13 +315,13 @@ const char* CConfig::CPreference::GetTypeString() const
 	switch(m_type)
 	{
 	case TYPE_INTEGER:
-		return "integer";
-		break;
-	case TYPE_STRING:
-		return "string";
+		return PREFERENCE_TYPE_NAME_INTEGER;
 		break;
 	case TYPE_BOOLEAN:
-		return "boolean";
+		return PREFERENCE_TYPE_NAME_BOOLEAN;
+		break;
+	case TYPE_STRING:
+		return PREFERENCE_TYPE_NAME_STRING;
 		break;
 	}
 	return "";
@@ -323,8 +329,8 @@ const char* CConfig::CPreference::GetTypeString() const
 
 void CConfig::CPreference::Serialize(Xml::CNode* pNode) const
 {
-	pNode->InsertAttribute(Xml::CreateAttributeStringValue("Name", m_name.c_str()));
-	pNode->InsertAttribute(Xml::CreateAttributeStringValue("Type", GetTypeString()));
+	pNode->InsertAttribute(Xml::CreateAttributeStringValue(PREFERENCE_ATTRIBUTE_NAME_NAME, m_name.c_str()));
+	pNode->InsertAttribute(Xml::CreateAttributeStringValue(PREFERENCE_ATTRIBUTE_NAME_TYPE, GetTypeString()));
 }
 
 /////////////////////////////////////////////////////////
