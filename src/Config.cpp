@@ -220,6 +220,11 @@ void CConfig::Load()
 				RegisterPreferenceString(name, value);
 			}
 		}
+		else
+		{
+			//Unknown preference type
+			assert(false);
+		}
 	}
 }
 
