@@ -52,37 +52,11 @@ std::string CConfig::MakePreferenceName(const std::string& level0, const std::st
 }
 
 namespace Framework {
-	
-template <> std::shared_ptr<CConfig::CPreference> CConfig::CastPreference<CConfig::CPreference>(const PreferencePtr& preference)
+
+template <>
+std::shared_ptr<CConfig::CPreference> CConfig::CastPreference<CConfig::CPreference>(const PreferencePtr& preference)
 {
 	return preference;
-}
-
-template <> std::shared_ptr<CConfig::CPreferenceInteger> CConfig::CastPreference<CConfig::CPreferenceInteger>(const PreferencePtr& preference)
-{
-	if(preference->GetType() != TYPE_INTEGER)
-	{
-		return std::shared_ptr<CConfig::CPreferenceInteger>();
-	}
-	return std::static_pointer_cast<CConfig::CPreferenceInteger>(preference);
-}
-
-template <> std::shared_ptr<CConfig::CPreferenceBoolean> CConfig::CastPreference<CConfig::CPreferenceBoolean>(const PreferencePtr& preference)
-{
-	if(preference->GetType() != TYPE_BOOLEAN)
-	{
-		return std::shared_ptr<CConfig::CPreferenceBoolean>();
-	}
-	return std::static_pointer_cast<CConfig::CPreferenceBoolean>(preference);
-}
-
-template <> std::shared_ptr<CConfig::CPreferenceString> CConfig::CastPreference<CConfig::CPreferenceString>(const PreferencePtr& preference)
-{
-	if(preference->GetType() != TYPE_STRING)
-	{
-		return std::shared_ptr<CConfig::CPreferenceString>();
-	}
-	return std::static_pointer_cast<CConfig::CPreferenceString>(preference);
 }
 
 }

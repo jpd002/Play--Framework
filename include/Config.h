@@ -62,6 +62,11 @@ namespace Framework
 		class CPreferenceInteger : public CPreference
 		{
 		public:
+			enum
+			{
+				PREFERENCE_TYPE_ID = TYPE_INTEGER
+			};
+
 											CPreferenceInteger(const char*, int);
 			virtual							~CPreferenceInteger() = default;
 			int								GetValue() const;
@@ -75,6 +80,11 @@ namespace Framework
 		class CPreferenceBoolean : public CPreference
 		{
 		public:
+			enum
+			{
+				PREFERENCE_TYPE_ID = TYPE_BOOLEAN
+			};
+
 											CPreferenceBoolean(const char*, bool);
 			virtual							~CPreferenceBoolean() = default;
 			bool							GetValue() const;
@@ -88,6 +98,11 @@ namespace Framework
 		class CPreferenceString : public CPreference
 		{
 		public:
+			enum
+			{
+				PREFERENCE_TYPE_ID = TYPE_STRING
+			};
+
 											CPreferenceString(const char*, const char*);
 			virtual							~CPreferenceString() = default;
 			const char*						GetValue() const;
@@ -105,7 +120,16 @@ namespace Framework
 		void								InsertPreference(const PreferencePtr&);
 
 		template <typename Type> std::shared_ptr<Type>			FindPreference(const char*);
-		template <typename Type> static std::shared_ptr<Type>	CastPreference(const PreferencePtr&);
+
+		template <typename Type>
+		static std::shared_ptr<Type> CastPreference(const PreferencePtr& preference)
+		{
+			if(preference->GetType() != Type::PREFERENCE_TYPE_ID)
+			{
+				return std::shared_ptr<Type>();
+			}
+			return std::static_pointer_cast<Type>(preference);
+		}
 
 		PreferenceMapType					m_preferences;
 		std::mutex							m_mutex;
