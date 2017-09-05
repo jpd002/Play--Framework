@@ -292,11 +292,6 @@ CConfig::CPreference::CPreference(const char* name, PREFERENCE_TYPE nType)
 	
 }
 
-CConfig::CPreference::~CPreference()
-{
-	
-}
-
 const char* CConfig::CPreference::GetName() const
 {
 	return m_name.c_str();
@@ -341,11 +336,6 @@ CConfig::CPreferenceInteger::CPreferenceInteger(const char* name, int value)
 	
 }
 
-CConfig::CPreferenceInteger::~CPreferenceInteger()
-{
-
-}
-
 int CConfig::CPreferenceInteger::GetValue() const
 {
 	return m_value;
@@ -374,11 +364,6 @@ CConfig::CPreferenceBoolean::CPreferenceBoolean(const char* name, bool value)
 	
 }
 
-CConfig::CPreferenceBoolean::~CPreferenceBoolean()
-{
-
-}
-
 bool CConfig::CPreferenceBoolean::GetValue() const
 {
 	return m_value;
@@ -405,11 +390,6 @@ CConfig::CPreferenceString::CPreferenceString(const char* name, const char* valu
 , m_value(value)
 {
 	
-}
-
-CConfig::CPreferenceString::~CPreferenceString()
-{
-
 }
 
 const char* CConfig::CPreferenceString::GetValue() const

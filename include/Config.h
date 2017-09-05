@@ -48,11 +48,11 @@ namespace Framework
 		{
 		public:
 											CPreference(const char*, PREFERENCE_TYPE);
-			virtual							~CPreference();
+			virtual							~CPreference() = default;
 			const char*						GetName() const;
 			PREFERENCE_TYPE					GetType() const;
 			const char*						GetTypeString() const;
-			virtual	void					Serialize(Framework::Xml::CNode*) const;
+			virtual void					Serialize(Framework::Xml::CNode*) const;
 
 		private:
 			std::string						m_name;
@@ -63,10 +63,10 @@ namespace Framework
 		{
 		public:
 											CPreferenceInteger(const char*, int);
-			virtual							~CPreferenceInteger();
+			virtual							~CPreferenceInteger() = default;
 			int								GetValue() const;
 			void							SetValue(int);
-			virtual void					Serialize(Framework::Xml::CNode*) const;
+			void							Serialize(Framework::Xml::CNode*) const override;
 
 		private:
 			int								m_value;
@@ -76,10 +76,10 @@ namespace Framework
 		{
 		public:
 											CPreferenceBoolean(const char*, bool);
-			virtual							~CPreferenceBoolean();
+			virtual							~CPreferenceBoolean() = default;
 			bool							GetValue() const;
 			void							SetValue(bool);
-			virtual void					Serialize(Framework::Xml::CNode*) const;
+			void							Serialize(Framework::Xml::CNode*) const override;
 
 		private:
 			bool							m_value;
@@ -89,10 +89,10 @@ namespace Framework
 		{
 		public:
 											CPreferenceString(const char*, const char*);
-			virtual							~CPreferenceString();
+			virtual							~CPreferenceString() = default;
 			const char*						GetValue() const;
 			void							SetValue(const char*);
-			virtual void					Serialize(Framework::Xml::CNode*) const;
+			void							Serialize(Framework::Xml::CNode*) const override;
 
 		private:
 			std::string						m_value;
