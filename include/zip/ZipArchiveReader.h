@@ -18,7 +18,11 @@ namespace Framework
 
 										CZipArchiveReader(Framework::CStream&);
 		virtual							~CZipArchiveReader();
-		
+
+		//Non-copyable
+										CZipArchiveReader(const CZipArchiveReader&) = delete;
+		CZipArchiveReader&				operator =(const CZipArchiveReader&) = delete;
+
 		const FileHeaderList&			GetFileHeaders() const;
 
 		StreamPtr						BeginReadFile(const char*);
