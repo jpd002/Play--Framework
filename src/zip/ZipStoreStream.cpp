@@ -5,14 +5,9 @@
 
 using namespace Framework;
 
-CZipStoreStream::CZipStoreStream(CStream& baseStream, unsigned int length) 
+CZipStoreStream::CZipStoreStream(CStream& baseStream, unsigned int length)
 : m_baseStream(baseStream)
 , m_length(length)
-{
-
-}
-
-CZipStoreStream::~CZipStoreStream()
 {
 
 }
@@ -24,7 +19,7 @@ void CZipStoreStream::Seek(int64, STREAM_SEEK_DIRECTION)
 
 uint64 CZipStoreStream::Tell()
 {
-    throw std::runtime_error("Unsupported operation.");
+	throw std::runtime_error("Unsupported operation.");
 }
 
 uint64 CZipStoreStream::Read(void* buffer, uint64 size)
@@ -37,7 +32,7 @@ uint64 CZipStoreStream::Read(void* buffer, uint64 size)
 
 uint64 CZipStoreStream::Write(const void* buffer, uint64 size)
 {
-    throw std::runtime_error("Unsupported operation.");
+	throw std::runtime_error("Unsupported operation.");
 }
 
 bool CZipStoreStream::IsEOF()

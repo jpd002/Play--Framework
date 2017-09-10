@@ -1,5 +1,4 @@
-#ifndef _ZIPSTORESTREAM_H_
-#define _ZIPSTORESTREAM_H_
+#pragma once
 
 #include "Stream.h"
 
@@ -9,18 +8,16 @@ namespace Framework
 	{
 	public:
 								CZipStoreStream(Framework::CStream&, unsigned int);
-		virtual					~CZipStoreStream();
+		virtual					~CZipStoreStream() = default;
 
-		virtual void			Seek(int64, Framework::STREAM_SEEK_DIRECTION);
-		virtual uint64			Tell();
-		virtual uint64			Read(void*, uint64);
-		virtual uint64			Write(const void*, uint64);
-		virtual bool			IsEOF();
+		void					Seek(int64, Framework::STREAM_SEEK_DIRECTION) override;
+		uint64					Tell() override;
+		uint64					Read(void*, uint64) override;
+		uint64					Write(const void*, uint64) override;
+		bool					IsEOF() override;
 
 	private:
 		Framework::CStream&		m_baseStream;
-		unsigned int			m_length;
+		unsigned int			m_length = 0;
 	};
 }
-
-#endif
