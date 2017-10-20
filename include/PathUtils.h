@@ -21,5 +21,8 @@ namespace Framework
 #endif
 
 		void						EnsurePathExists(const boost::filesystem::path&);
+
+		std::string					GetNativeStringFromPath(const boost::filesystem::path&);
+		boost::filesystem::path		GetPathFromNativeString(const std::string&);
 	};
 };

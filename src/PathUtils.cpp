@@ -1,4 +1,5 @@
 #include "PathUtils.h"
+#include "Utf8.h"
 
 using namespace Framework;
 
@@ -173,4 +174,53 @@ void PathUtils::EnsurePathExists(const boost::filesystem::path& path)
 			boost::filesystem::create_directory(buildPath);
 		}
 	}
+}
+
+////////////////////////////////////////////
+//NativeString <-> Path Function Utils
+////////////////////////////////////////////
+
+template <typename StringType>
+static std::string GetNativeStringFromPathInternal(const StringType&);
+
+template <>
+std::string GetNativeStringFromPathInternal(const std::string& str)
+{
+	return str;
+}
+
+template <>
+std::string GetNativeStringFromPathInternal(const std::wstring& str)
+{
+	return Framework::Utf8::ConvertTo(str);
+}
+
+template <typename StringType>
+static StringType GetPathFromNativeStringInternal(const std::string&);
+
+template <>
+std::string GetPathFromNativeStringInternal(const std::string& str)
+{
+	return str;
+}
+
+template <>
+std::wstring GetPathFromNativeStringInternal(const std::string& str)
+{
+	return Framework::Utf8::ConvertFrom(str);
+}
+
+////////////////////////////////////////////
+//NativeString <-> Path Function Implementations
+////////////////////////////////////////////
+
+std::string PathUtils::GetNativeStringFromPath(const boost::filesystem::path& path)
+{
+	return GetNativeStringFromPathInternal(path.native());
+}
+
+boost::filesystem::path PathUtils::GetPathFromNativeString(const std::string& str)
+{
+	auto cvtStr = GetPathFromNativeStringInternal<boost::filesystem::path::string_type>(str);
+	return boost::filesystem::path(cvtStr);
 }
