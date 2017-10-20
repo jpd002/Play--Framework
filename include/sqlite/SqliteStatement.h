@@ -62,6 +62,10 @@ namespace Framework
 		{
 			bool hasRow = Step();
 			assert(hasRow);
+			if(!hasRow)
+			{
+				throw std::runtime_error("Expected a row, but none found.");
+			}
 		}
 
 		void StepNoResult()
