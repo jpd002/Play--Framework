@@ -45,6 +45,11 @@ namespace Framework
 			}
 		}
 
+		bool IsEmpty() const
+		{
+			return !m_handle;
+		}
+
 		void MoveFrom(CSqliteDb&& rhs)
 		{
 			std::swap(m_handle, rhs.m_handle);
