@@ -24,6 +24,7 @@ RequestResult CAppleHttpClient::SendRequest()
 				NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
 				result.statusCode = static_cast<HTTP_STATUS_CODE>([httpResponse statusCode]);
 				result.data.Write([data bytes], [data length]);
+				result.data.Seek(0, Framework::STREAM_SEEK_SET);
 			}
 			dispatch_semaphore_signal(waitSema);
 		};
