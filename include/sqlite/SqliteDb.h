@@ -12,9 +12,9 @@ namespace Framework
 	public:
 		CSqliteDb() = default;
 
-		CSqliteDb(const char* path, uint32 modeFlags)
+		CSqliteDb(const char* path, uint32 modeFlags, const char* vfsName = nullptr)
 		{
-			int result = sqlite3_open_v2(path, &m_handle, modeFlags, nullptr);
+			int result = sqlite3_open_v2(path, &m_handle, modeFlags, vfsName);
 			if(result != SQLITE_OK)
 			{
 				throw std::runtime_error("Failed to open database.");
