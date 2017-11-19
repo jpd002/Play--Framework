@@ -4,7 +4,7 @@
 #include <windows.h>
 #elif defined(__APPLE__)
 #include <CoreFoundation/CoreFoundation.h>
-#else
+#elif defined(HAS_ICU)
 #include <unicode/ucnv.h>
 #endif
 
@@ -34,7 +34,17 @@ std::wstring string_cast_win1252(const std::string& input)
 	output[length] = 0;
 	CFRelease(stringRef);
 	return std::wstring(output);
+#elif defined(HAS_ICU)
+	int32_t length = static_cast<int32_t>(input.length());
+	UErrorCode nStatus = U_ZERO_ERROR;
+	UChar* output = reinterpret_cast<UChar*>(alloca(length * sizeof(UChar)));
+
+	UConverter* pConverter = ucnv_open("cp1252", &nStatus);
+	ucnv_toUChars(pConverter, output, length, input.c_str(), length, &nStatus);
+	ucnv_close(pConverter);
+
+	return std::wstring(output, output + length);
 #else
-	assert(0);
+	return std::wstring(L"???");
 #endif
 }

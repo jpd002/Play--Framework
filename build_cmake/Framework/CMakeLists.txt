@@ -91,6 +91,7 @@ set(COMMON_SRC_FILES
 	../../src/StreamBitStream.cpp
 	../../src/string_cast.cpp
 	../../src/string_cast_sjis.cpp
+	../../src/string_cast_win1252.cpp
 	../../src/StdStream.cpp
 	../../src/StdStreamUtils.cpp
 	../../src/Utf8.cpp
