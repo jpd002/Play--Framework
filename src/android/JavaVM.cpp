@@ -28,6 +28,7 @@ void CJavaVM::CheckException(JNIEnv* env)
 	{
 		env->ExceptionDescribe();
 		jthrowable exception = env->ExceptionOccurred();
+		env->ExceptionClear();
 		throw JavaException(exception);
 	}
 }

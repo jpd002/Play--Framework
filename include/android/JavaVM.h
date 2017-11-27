@@ -1,11 +1,12 @@
 #pragma once
 
 #include <cstddef>
+#include <stdexcept>
 #include <jni.h>
 
 namespace Framework
 {
-	class JavaException
+	class JavaException : public std::exception
 	{
 	public:
 		JavaException(jthrowable exception)
