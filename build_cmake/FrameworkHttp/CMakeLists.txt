@@ -15,7 +15,12 @@ if(APPLE)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -x objective-c++")
 endif(APPLE)
 
-include_directories(../../include)
+if (NOT TARGET Framework)
+add_subdirectory(
+	${CMAKE_CURRENT_SOURCE_DIR}/../Framework
+	${CMAKE_CURRENT_BINARY_DIR}/Framework
+)
+endif()
 
 set(SRC_FILES
 	../../src/http/HttpClient.cpp
@@ -50,3 +55,5 @@ elseif(APPLE)
 endif()
 
 add_library(Framework_Http ${SRC_FILES} ${PLATFORM_SRC_FILES})
+target_link_libraries(Framework_Http PUBLIC Framework)
+target_include_directories(Framework_Http PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include)

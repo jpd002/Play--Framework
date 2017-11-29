@@ -49,8 +49,6 @@ if (WIN32)
 	add_definitions(-D_LIB)
 endif (WIN32)
 
-include_directories(../../include)
-
 set(COMMON_SRC_FILES
 	../../src/Base64.cpp
 	../../src/bitmap/Bitmap.cpp
@@ -121,3 +119,4 @@ endif()
 
 add_library(Framework ${COMMON_SRC_FILES} ${PLATFORM_SPECIFIC_SRC_FILES})
 target_link_libraries(Framework PUBLIC Boost::boost)
+target_include_directories(Framework PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include)
