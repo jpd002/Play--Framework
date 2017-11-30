@@ -6,6 +6,7 @@
 #include "xml/Parser.h"
 #include "xml/Utils.h"
 #include "xml/FilteringNodeIterator.h"
+#include "PathUtils.h"
 #include "StdStreamUtils.h"
 
 #define PREFERENCE_ATTRIBUTE_NAME_NAME "Name"
@@ -15,6 +16,7 @@
 #define PREFERENCE_TYPE_NAME_INTEGER "integer"
 #define PREFERENCE_TYPE_NAME_BOOLEAN "boolean"
 #define PREFERENCE_TYPE_NAME_STRING "string"
+#define PREFERENCE_TYPE_NAME_PATH "path"
 
 using namespace Framework;
 
@@ -113,6 +115,17 @@ void CConfig::RegisterPreferenceString(const char* name, const char* value)
 	InsertPreference(preference);
 }
 
+void CConfig::RegisterPreferencePath(const char* name, const PathType& value)
+{
+	if(FindPreference<CPreference>(name))
+	{
+		return;
+	}
+
+	auto preference = std::make_shared<CPreferencePath>(name, value);
+	InsertPreference(preference);
+}
+
 int CConfig::GetPreferenceInteger(const char* name)
 {
 	auto preference = FindPreference<CPreferenceInteger>(name);
@@ -131,6 +144,13 @@ const char* CConfig::GetPreferenceString(const char* name)
 {
 	auto preference = FindPreference<CPreferenceString>(name);
 	if(!preference) return "";
+	return preference->GetValue();
+}
+
+CConfig::PathType CConfig::GetPreferencePath(const char* name)
+{
+	auto preference = FindPreference<CPreferencePath>(name);
+	if(!preference) return PathType();
 	return preference->GetValue();
 }
 
@@ -156,6 +176,15 @@ bool CConfig::SetPreferenceString(const char* name, const char* value)
 {
 	if(m_readonly) throw std::runtime_error("Setting preference on read-only config is illegal.");
 	auto preference = FindPreference<CPreferenceString>(name);
+	if(!preference) return false;
+	preference->SetValue(value);
+	return true;
+}
+
+bool CConfig::SetPreferencePath(const char* name, const PathType& value)
+{
+	if(m_readonly) throw std::runtime_error("Setting preference on read-only config is illegal.");
+	auto preference = FindPreference<CPreferencePath>(name);
 	if(!preference) return false;
 	preference->SetValue(value);
 	return true;
@@ -218,6 +247,15 @@ void CConfig::Load()
 			if(Xml::GetAttributeStringValue(prefNode, PREFERENCE_ATTRIBUTE_NAME_VALUE, &value))
 			{
 				RegisterPreferenceString(name, value);
+			}
+		}
+		else if(!strcmp(type, PREFERENCE_TYPE_NAME_PATH))
+		{
+			const char* valueString = nullptr;
+			if(Xml::GetAttributeStringValue(prefNode, PREFERENCE_ATTRIBUTE_NAME_VALUE, &valueString))
+			{
+				auto value = PathUtils::GetPathFromNativeString(valueString);
+				RegisterPreferencePath(name, value);
 			}
 		}
 		else
@@ -299,6 +337,8 @@ const char* CConfig::CPreference::GetTypeString() const
 		return PREFERENCE_TYPE_NAME_BOOLEAN;
 	case TYPE_STRING:
 		return PREFERENCE_TYPE_NAME_STRING;
+	case TYPE_PATH:
+		return PREFERENCE_TYPE_NAME_PATH;
 	default:
 		assert(false);
 		return "";
@@ -393,4 +433,33 @@ void CConfig::CPreferenceString::Serialize(Xml::CNode* pNode) const
 	CPreference::Serialize(pNode);
 
 	pNode->InsertAttribute(Xml::CreateAttributeStringValue(PREFERENCE_ATTRIBUTE_NAME_VALUE, m_value.c_str()));
+}
+
+/////////////////////////////////////////////////////////
+//CPreferencePath implementation
+/////////////////////////////////////////////////////////
+
+CConfig::CPreferencePath::CPreferencePath(const char* name, const PathType& value)
+: CPreference(name, TYPE_PATH)
+, m_value(value)
+{
+
+}
+
+CConfig::PathType CConfig::CPreferencePath::GetValue() const
+{
+	return m_value;
+}
+
+void CConfig::CPreferencePath::SetValue(const PathType& value)
+{
+	m_value = value;
+}
+
+void CConfig::CPreferencePath::Serialize(Xml::CNode* node) const
+{
+	CPreference::Serialize(node);
+
+	auto valueString = PathUtils::GetNativeStringFromPath(m_value);
+	node->InsertAttribute(Xml::CreateAttributeStringValue(PREFERENCE_ATTRIBUTE_NAME_VALUE, valueString.c_str()));
 }
