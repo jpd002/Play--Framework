@@ -239,13 +239,13 @@ void CConfig::Save()
 	{
 		Framework::CStdStream stream(CreateOutputStdStream(m_path.native()));
 
-		Xml::CNode*	configNode = new Xml::CNode("Config", true);
+		auto configNode = new Xml::CNode("Config", true);
 
 		for(const auto& preferencePair : m_preferences)
 		{
 			const auto& preference = preferencePair.second;
 
-			Xml::CNode* preferenceNode = new Xml::CNode("Preference", true);
+			auto preferenceNode = new Xml::CNode("Preference", true);
 			preference->Serialize(preferenceNode);
 			configNode->InsertNode(preferenceNode);
 		}
