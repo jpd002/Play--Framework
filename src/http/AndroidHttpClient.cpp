@@ -76,6 +76,7 @@ RequestResult CAndroidHttpClient::SendRequest()
 			}
 			result.data.Write(buffer.data(), readResult);
 		}
+		result.data.Seek(0, Framework::STREAM_SEEK_SET);
 		
 		return result;
 	}
