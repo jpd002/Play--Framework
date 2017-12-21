@@ -35,19 +35,19 @@ if(ICUUC_FOUND)
 	add_definitions(-DHAS_ICU)
 endif()
 
-if (NOT TARGET Boost::boost)
+if(NOT TARGET Boost::boost)
 	add_subdirectory(
 		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/boost-cmake
 		${CMAKE_CURRENT_BINARY_DIR}/boost-cmake
 	)
 endif()
 
-if (WIN32)
+if(WIN32)
 	add_definitions(-D_UNICODE -DUNICODE)
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 	add_definitions(-D_SCL_SECURE_NO_WARNINGS)
 	add_definitions(-D_LIB)
-endif (WIN32)
+endif(WIN32)
 
 include_directories(../../include)
 
