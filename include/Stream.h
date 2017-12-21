@@ -16,7 +16,7 @@ namespace Framework
 	class CStream
 	{
 	public:
-		virtual			~CStream();
+		virtual			~CStream() = default;
 		virtual void	Seek(int64, STREAM_SEEK_DIRECTION) = 0;
 		virtual uint64	Tell() = 0;
 		virtual uint64	Read(void*, uint64) = 0;

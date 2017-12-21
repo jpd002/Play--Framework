@@ -3,11 +3,6 @@
 
 using namespace Framework;
 
-CStream::~CStream()
-{
-
-}
-
 void CStream::Flush()
 {
 
