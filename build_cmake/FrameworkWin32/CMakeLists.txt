@@ -67,5 +67,5 @@ set(SRC_FILES
 )
 
 add_library(Framework_Win32 ${SRC_FILES})
-target_link_libraries(Framework_Win32 PUBLIC Boost::boost)
+target_link_libraries(Framework_Win32 PUBLIC Boost::boost comctl32)
 target_include_directories(Framework_Win32 PUBLIC ${FRAMEWORK_INCLUDE_DIR})
