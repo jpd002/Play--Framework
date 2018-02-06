@@ -10,13 +10,19 @@ namespace Framework
 		enum class HTTP_STATUS_CODE
 		{
 			OK = 200,
-			NOT_FOUND = 404
+			TEMPORARY_REDIRECT = 307,
+			BAD_REQUEST = 400,
+			FORBIDDEN = 403,
+			NOT_FOUND = 404,
+			NOT_IMPLEMENTED = 501
 		};
 
 		enum class HTTP_VERB
 		{
+			DELETE,
 			GET,
-			POST
+			POST,
+			PUT
 		};
 
 		struct RequestResult
