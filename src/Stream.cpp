@@ -86,6 +86,22 @@ std::string CStream::ReadString(size_t length)
 	return std::string(stringBuffer, stringBuffer + length);
 }
 
+std::string CStream::ReadLine(bool ignoreCr)
+{
+	std::string result;
+	uint8 currChar = Read8();
+	while(!IsEOF())
+	{
+		if(currChar == '\n') break;
+		if(!(ignoreCr && (currChar == '\r')))
+		{
+			result += currChar;
+		}
+		currChar = Read8();
+	}
+	return result;
+}
+
 void CStream::Write8(uint8 nValue)
 {
 	Write(&nValue, 1);

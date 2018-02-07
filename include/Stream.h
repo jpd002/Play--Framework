@@ -38,6 +38,7 @@ namespace Framework
 
 		std::string		ReadString();
 		std::string		ReadString(size_t);
+		std::string		ReadLine(bool ignoreCr = true);
 
 		void			Write8(uint8);
 		void			Write16(uint16);
