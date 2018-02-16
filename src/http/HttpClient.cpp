@@ -32,6 +32,11 @@ void CHttpClient::SetVerb(HTTP_VERB verb)
 	m_verb = verb;
 }
 
+void CHttpClient::SetHeaders(HeaderMap headers)
+{
+	m_headers = std::move(headers);
+}
+
 void CHttpClient::SetRequestBody(std::string requestBody)
 {
 	m_requestBody = std::move(requestBody);
