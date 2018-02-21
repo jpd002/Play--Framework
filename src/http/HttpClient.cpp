@@ -22,6 +22,24 @@ std::string CHttpClient::UrlEncode(const std::string& input)
 	return result;
 }
 
+HeaderMap CHttpClient::ReadHeaderMap(Framework::CStream& stream)
+{
+	HeaderMap result;
+	auto line = stream.ReadLine();
+	while(!stream.IsEOF())
+	{
+		auto colonPos = line.find(':');
+		if(colonPos != std::string::npos)
+		{
+			auto key = std::string(line.substr(0, colonPos));
+			auto value = std::string(line.substr(colonPos + 2, line.length()));
+			result.insert(std::make_pair(key, value));
+		}
+		line = stream.ReadLine();
+	}
+	return result;
+}
+
 void CHttpClient::SetUrl(std::string url)
 {
 	m_url = std::move(url);

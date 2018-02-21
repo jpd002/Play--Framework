@@ -51,6 +51,8 @@ namespace Framework
 			virtual RequestResult SendRequest() = 0;
 
 		protected:
+			static HeaderMap ReadHeaderMap(Framework::CStream&);
+
 			std::string m_url;
 			HTTP_VERB m_verb = HTTP_VERB::GET;
 			HeaderMap m_headers;
