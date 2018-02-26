@@ -10,9 +10,6 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(MYSQL REQUIRED)
-include_directories(${MYSQL_INCLUDE_DIR})
-
-include_directories(../../include)
 
 set(SRC_FILES
 	../../src/mysql/Client.cpp
@@ -21,3 +18,4 @@ set(SRC_FILES
 )
 
 add_library(Framework_MySql ${SRC_FILES})
+target_include_directories(Framework_MySql PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include ${MYSQL_INCLUDE_DIR})

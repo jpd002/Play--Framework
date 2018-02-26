@@ -11,8 +11,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Vulkan REQUIRED)
 
-include_directories(../../include ${VULKAN_INCLUDE_DIR})
-
 set(SRC_FILES
 	../../src/vulkan/CommandBufferPool.cpp
 	../../src/vulkan/Device.cpp
@@ -22,3 +20,4 @@ set(SRC_FILES
 )
 
 add_library(Framework_Vulkan ${SRC_FILES})
+target_include_directories(Framework_Vulkan PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include ${VULKAN_INCLUDE_DIR})

@@ -19,20 +19,24 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 if(APPLE)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -x objective-c++")
+	set(OS_SPECIFIC_LIBS "-framework Foundation")
 endif(APPLE)
 
+set(INC_DIR)
+set(PROJECT_LIBS)
 find_package(ZLIB)
 if(ZLIB_FOUND)
-	include_directories(${ZLIB_INCLUDE_DIRS})
+	LIST(APPEND INC_DIR ${ZLIB_INCLUDE_DIRS})
 else()
 	MESSAGE("-- Using Provided zlib source")
-	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/zlib-1.2.8)
+	LIST(APPEND INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/zlib-1.2.8)
 endif(ZLIB_FOUND)
 
 find_package(ICUUC)
 if(ICUUC_FOUND)
-	include_directories(${ICUUC_INCLUDE_DIRS})
+	LIST(APPEND INC_DIR ${ICUUC_INCLUDE_DIRS})
 	add_definitions(-DHAS_ICU)
+	list(APPEND PROJECT_LIBS ${ICUUC_LIBRARIES})
 endif()
 
 if(NOT TARGET Boost::boost)
@@ -48,8 +52,6 @@ if(WIN32)
 	add_definitions(-D_SCL_SECURE_NO_WARNINGS)
 	add_definitions(-D_LIB)
 endif(WIN32)
-
-include_directories(../../include)
 
 set(COMMON_SRC_FILES
 	../../src/Base64.cpp
@@ -93,6 +95,7 @@ set(COMMON_SRC_FILES
 	../../src/StreamBitStream.cpp
 	../../src/string_cast.cpp
 	../../src/string_cast_sjis.cpp
+	../../src/string_cast_win1252.cpp
 	../../src/StdStream.cpp
 	../../src/StdStreamUtils.cpp
 	../../src/Utf8.cpp
@@ -120,4 +123,5 @@ if(ANDROID)
 endif()
 
 add_library(Framework ${COMMON_SRC_FILES} ${PLATFORM_SPECIFIC_SRC_FILES})
-target_link_libraries(Framework PUBLIC Boost::boost)
+target_link_libraries(Framework PUBLIC Boost::boost ${OS_SPECIFIC_LIBS} ${PROJECT_LIBS})
+target_include_directories(Framework PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include ${INC_DIR})
