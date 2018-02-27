@@ -1,6 +1,7 @@
 #include "HashUtils.h"
 #include <cassert>
 #include <vector>
+#include <cstring>
 #ifdef _WIN32
 #include <Windows.h>
 #include <Wincrypt.h>
