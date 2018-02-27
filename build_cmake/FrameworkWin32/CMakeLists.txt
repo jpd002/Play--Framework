@@ -1,31 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 project(Framework_Win32)
 
-set(CMAKE_MODULE_PATH
-	${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/cmake-modules
-	${CMAKE_MODULE_PATH}
-)
+include(../Framework_Common.cmake)
 
-if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE Release CACHE STRING
-		"Choose the type of build, options are: None Debug Release"
-		FORCE)
-endif()
-
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_DEBUG")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")
-
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-if (WIN32)
-	add_definitions(-D_UNICODE -DUNICODE)
-	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-	add_definitions(-D_SCL_SECURE_NO_WARNINGS)
-	add_definitions(-D_LIB)
-endif (WIN32)
-
-if (NOT TARGET Boost::boost)
+if(NOT TARGET Boost::boost)
 	add_subdirectory(
 		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/boost-cmake
 		${CMAKE_CURRENT_BINARY_DIR}/boost-cmake
@@ -90,4 +68,4 @@ set(SRC_FILES
 
 add_library(Framework_Win32 ${SRC_FILES})
 target_link_libraries(Framework_Win32 PUBLIC Boost::boost)
-target_include_directories(Framework_Win32 PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include)
+target_include_directories(Framework_Win32 PUBLIC ${FRAMEWORK_INCLUDE_DIR})

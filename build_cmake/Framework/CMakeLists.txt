@@ -1,40 +1,19 @@
 cmake_minimum_required(VERSION 2.8)
 project(Framework)
 
-set(CMAKE_MODULE_PATH
-	${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/cmake-modules
-	${CMAKE_MODULE_PATH}
-)
+include(../Framework_Common.cmake)
 
-if(NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE Release CACHE STRING
-		"Choose the type of build, options are: None Debug Release"
-		FORCE)
-endif()
-
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_DEBUG")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")
-
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-if(APPLE)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -x objective-c++")
-	set(OS_SPECIFIC_LIBS "-framework Foundation")
-endif(APPLE)
-
-set(INC_DIR)
-set(PROJECT_LIBS)
 find_package(ZLIB)
 if(ZLIB_FOUND)
-	LIST(APPEND INC_DIR ${ZLIB_INCLUDE_DIRS})
+	LIST(APPEND PROJECT_INCLUDES ${ZLIB_INCLUDE_DIRS})
 else()
 	MESSAGE("-- Using Provided zlib source")
-	LIST(APPEND INC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/zlib-1.2.8)
+	LIST(APPEND PROJECT_INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/zlib-1.2.8)
 endif(ZLIB_FOUND)
 
 find_package(ICUUC)
 if(ICUUC_FOUND)
-	LIST(APPEND INC_DIR ${ICUUC_INCLUDE_DIRS})
+	LIST(APPEND PROJECT_INCLUDES ${ICUUC_INCLUDE_DIRS})
 	add_definitions(-DHAS_ICU)
 	list(APPEND PROJECT_LIBS ${ICUUC_LIBRARIES})
 endif()
@@ -45,13 +24,6 @@ if(NOT TARGET Boost::boost)
 		${CMAKE_CURRENT_BINARY_DIR}/boost-cmake
 	)
 endif()
-
-if(WIN32)
-	add_definitions(-D_UNICODE -DUNICODE)
-	add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-	add_definitions(-D_SCL_SECURE_NO_WARNINGS)
-	add_definitions(-D_LIB)
-endif(WIN32)
 
 set(COMMON_SRC_FILES
 	../../src/Base64.cpp
@@ -113,7 +85,7 @@ set(COMMON_SRC_FILES
 )
 
 if(ANDROID)
-	set(PLATFORM_SPECIFIC_SRC_FILES
+	set(PLATFORM_SRC_FILES
 		../../src/android/AssetStream.cpp
 		../../src/android/AssetManager.cpp
 		../../src/android/JavaObject.cpp
@@ -122,6 +94,6 @@ if(ANDROID)
 	)
 endif()
 
-add_library(Framework ${COMMON_SRC_FILES} ${PLATFORM_SPECIFIC_SRC_FILES})
-target_link_libraries(Framework PUBLIC Boost::boost ${OS_SPECIFIC_LIBS} ${PROJECT_LIBS})
-target_include_directories(Framework PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include ${INC_DIR})
+add_library(Framework ${COMMON_SRC_FILES} ${PLATFORM_SRC_FILES})
+target_link_libraries(Framework PUBLIC Boost::boost ${PROJECT_LIBS})
+target_include_directories(Framework PUBLIC ${FRAMEWORK_INCLUDE_DIR} ${PROJECT_INCLUDES})

@@ -1,13 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(Framework_Vulkan)
 
-set(CMAKE_MODULE_PATH
-	${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/cmake-modules
-	${CMAKE_MODULE_PATH}
-)
-
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+include(../Framework_Common.cmake)
 
 find_package(Vulkan REQUIRED)
 
@@ -20,4 +14,4 @@ set(SRC_FILES
 )
 
 add_library(Framework_Vulkan ${SRC_FILES})
-target_include_directories(Framework_Vulkan PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include ${VULKAN_INCLUDE_DIR})
+target_include_directories(Framework_Vulkan PUBLIC ${FRAMEWORK_INCLUDE_DIR} ${VULKAN_INCLUDE_DIR})
