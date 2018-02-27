@@ -35,6 +35,7 @@ elseif(WIN32)
 		../../src/http/Win32HttpClient.cpp
 		../../include/http/Win32HttpClient.h
 	)
+	list(APPEND PROJECT_LIBS wininet)
 elseif(APPLE)
 	set(PLATFORM_SRC_FILES
 		../../src/http/AppleHttpClient.cpp
@@ -43,5 +44,5 @@ elseif(APPLE)
 endif()
 
 add_library(Framework_Http ${SRC_FILES} ${PLATFORM_SRC_FILES})
-target_link_libraries(Framework_Http PUBLIC Framework)
+target_link_libraries(Framework_Http PUBLIC Framework ${PROJECT_LIBS})
 target_include_directories(Framework_Http PUBLIC ${FRAMEWORK_INCLUDE_DIR})
