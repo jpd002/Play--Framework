@@ -1,8 +1,10 @@
 #include <cassert>
+#include <vector>
 #include "http/Win32HttpClient.h"
 #include "win32/InternetHandle.h"
 #include "tcharx.h"
 #include "string_cast.h"
+#include "PtrStream.h"
 
 using namespace Framework;
 using namespace Framework::Http;
@@ -52,9 +54,41 @@ RequestResult CWin32HttpClient::SendRequest()
 		throw std::runtime_error("Failed to connect to host.");
 	}
 
-	auto verbString = (m_verb == HTTP_VERB::GET) ? _T("GET") : _T("POST");
+	const TCHAR* verbString = nullptr;
+	switch(m_verb)
+	{
+	case HTTP_VERB::HEAD:
+		verbString = _T("HEAD");
+		break;
+	case HTTP_VERB::GET:
+		verbString = _T("GET");
+		break;
+	case HTTP_VERB::POST:
+		verbString = _T("POST");
+		break;
+	default:
+		assert(false);
+		break;
+	}
+
 	auto request = Framework::Win32::CInternetHandle(HttpOpenRequest(connect, verbString, components.urlPath.c_str(), nullptr, nullptr, nullptr, 0, 0));
 	assert(!request.IsEmpty());
+
+	//Add custom request headers
+	{
+		std::tstring headers;
+		for(auto headerPair : m_headers)
+		{
+			headers += string_cast<std::tstring>(headerPair.first) + _T(": ") + string_cast<std::tstring>(headerPair.second);
+			headers += _T("\r\n");
+		}
+
+		if(!headers.empty())
+		{
+			BOOL addRequestHeadersResult = HttpAddRequestHeaders(request, headers.c_str(), -1, HTTP_ADDREQ_FLAG_REPLACE | HTTP_ADDREQ_FLAG_ADD);
+			assert(addRequestHeadersResult);
+		}
+	}
 
 	auto optionalData = reinterpret_cast<LPVOID>(const_cast<char*>(m_requestBody.c_str()));
 	BOOL sendRequestResult = HttpSendRequest(request, nullptr, 0, optionalData, m_requestBody.size());
@@ -63,13 +97,33 @@ RequestResult CWin32HttpClient::SendRequest()
 		throw std::runtime_error("Failed to send request.");
 	}
 
+	//Get HTTP status code
 	DWORD statusCode = 0;
-	DWORD statusCodeSize = sizeof(DWORD);
-	BOOL queryInfoResult = HttpQueryInfo(request, HTTP_QUERY_STATUS_CODE | HTTP_QUERY_FLAG_NUMBER, &statusCode, &statusCodeSize, nullptr);
-	assert(queryInfoResult == TRUE);
+	{
+		DWORD statusCodeSize = sizeof(DWORD);
+		BOOL queryInfoResult = HttpQueryInfo(request, HTTP_QUERY_STATUS_CODE | HTTP_QUERY_FLAG_NUMBER, &statusCode, &statusCodeSize, nullptr);
+		assert(queryInfoResult == TRUE);
+	}
 
 	RequestResult result;
 	result.statusCode = static_cast<HTTP_STATUS_CODE>(statusCode);
+
+	//Get response headers
+	{
+		DWORD headersSize = 0;
+		BOOL queryInfoResult = HttpQueryInfo(request, HTTP_QUERY_RAW_HEADERS_CRLF, nullptr, &headersSize, NULL);
+		if(headersSize != 0)
+		{
+			std::vector<char> headersBytes;
+			headersBytes.resize(headersSize);
+			queryInfoResult = HttpQueryInfo(request, HTTP_QUERY_RAW_HEADERS_CRLF, headersBytes.data(), &headersSize, NULL);
+			assert(queryInfoResult == TRUE);
+			auto headers = string_cast<std::string>(reinterpret_cast<const TCHAR*>(headersBytes.data()));
+			Framework::CPtrStream headerStream(headers.data(), headers.size());
+			result.headers = ReadHeaderMap(headerStream);
+		}
+	}
+
 	while(1)
 	{
 		uint8 buff[0x10000];
