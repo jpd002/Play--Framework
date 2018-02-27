@@ -18,6 +18,12 @@ if(ICUUC_FOUND)
 	list(APPEND PROJECT_LIBS ${ICUUC_LIBRARIES})
 endif()
 
+find_package(OpenSSL)
+if(OPENSSL_FOUND)
+	LIST(APPEND PROJECT_LIBS ${OPENSSL_LIBRARIES})
+	add_definitions(-DHAS_OPENSSL)
+endif()
+
 if(NOT TARGET Boost::boost)
 	add_subdirectory(
 		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/boost-cmake
@@ -35,6 +41,8 @@ set(COMMON_SRC_FILES
 	../../src/BitStream.cpp
 	../../src/Config.cpp
 	../../src/Endian.cpp
+	../../src/HashUtils.cpp
+	../../include/HashUtils.h
 	../../src/idct/IEEE1180.cpp
 	../../src/layout/FlatLayout.cpp
 	../../src/layout/GridLayout.cpp
