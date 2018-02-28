@@ -9,6 +9,7 @@ namespace Framework
 		boost::filesystem::path		GetAppResourcesPath();
 		boost::filesystem::path		GetRoamingDataPath();
 		boost::filesystem::path		GetPersonalDataPath();
+		boost::filesystem::path		GetCachePath();
 		
 #ifdef _WIN32
 		boost::filesystem::path		GetPathFromCsidl(int);

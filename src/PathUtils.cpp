@@ -42,6 +42,11 @@ boost::filesystem::path PathUtils::GetAppResourcesPath()
 	return boost::filesystem::path(".");
 }
 
+boost::filesystem::path PathUtils::GetCachePath()
+{
+	return GetPathFromCsidl(CSIDL_LOCAL_APPDATA);
+}
+
 #endif	// !WINAPI_PARTITION_APP
 
 #endif	// _WIN32
