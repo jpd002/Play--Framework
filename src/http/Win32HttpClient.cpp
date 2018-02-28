@@ -71,7 +71,8 @@ RequestResult CWin32HttpClient::SendRequest()
 		break;
 	}
 
-	auto request = Framework::Win32::CInternetHandle(HttpOpenRequest(connect, verbString, components.urlPath.c_str(), nullptr, nullptr, nullptr, 0, 0));
+	DWORD openRequestFlags = (components.scheme == INTERNET_SCHEME_HTTPS) ? INTERNET_FLAG_SECURE : 0;
+	auto request = Framework::Win32::CInternetHandle(HttpOpenRequest(connect, verbString, components.urlPath.c_str(), nullptr, nullptr, nullptr, openRequestFlags, 0));
 	assert(!request.IsEmpty());
 
 	//Add custom request headers
