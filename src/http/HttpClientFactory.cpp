@@ -6,6 +6,8 @@
 #include "http/AndroidHttpClient.h"
 #elif defined(__APPLE__)
 #include "http/AppleHttpClient.h"
+#elif defined(HAS_CURL)
+#include "http/CurlHttpClient.h"
 #endif
 
 using namespace Framework::Http;
@@ -18,6 +20,8 @@ std::unique_ptr<CHttpClient> Framework::Http::CreateHttpClient()
 	return std::make_unique<CAndroidHttpClient>();
 #elif defined(__APPLE__)
 	return std::make_unique<CAppleHttpClient>();
+#elif defined(HAS_CURL)
+	return std::make_unique<CCurlHttpClient>();
 #else
 	throw std::runtime_error("Platform not supported");
 #endif

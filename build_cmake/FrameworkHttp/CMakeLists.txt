@@ -41,6 +41,19 @@ elseif(APPLE)
 		../../src/http/AppleHttpClient.cpp
 		../../include/http/AppleHttpClient.h
 	)
+else()
+	find_package(CURL REQUIRED)
+	if(CURL_FOUND)
+		include_directories(${CURL_INCLUDE_DIRS})
+		
+		set(PLATFORM_SRC_FILES
+			../../src/http/CurlHttpClient.cpp
+			../../include/http/CurlHttpClient.h
+		)
+		
+		add_definitions(-DHAS_CURL)
+		set(PROJECT_LIBS ${CURL_LIBRARIES})
+	endif()
 endif()
 
 add_library(Framework_Http ${SRC_FILES} ${PLATFORM_SRC_FILES})
