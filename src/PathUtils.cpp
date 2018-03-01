@@ -77,6 +77,13 @@ boost::filesystem::path PathUtils::GetPersonalDataPath()
 	return GetRoamingDataPath();
 }
 
+boost::filesystem::path PathUtils::GetCachePath()
+{
+	NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+	std::string directory = [[paths objectAtIndex: 0] UTF8String];
+	return boost::filesystem::path(directory);
+}
+
 #elif defined(__ANDROID__)
 
 static boost::filesystem::path s_filesDirPath;
