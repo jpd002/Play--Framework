@@ -104,6 +104,11 @@ boost::filesystem::path PathUtils::GetPersonalDataPath()
 	return s_filesDirPath;
 }
 
+boost::filesystem::path PathUtils::GetCachePath()
+{
+	throw std::runtime_error("Not implemented.");
+}
+
 void PathUtils::SetFilesDirPath(const char* filesDirPath)
 {
 	s_filesDirPath = filesDirPath;
