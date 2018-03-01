@@ -58,13 +58,6 @@ boost::filesystem::path PathUtils::GetCachePath()
 #include <CoreFoundation/CoreFoundation.h>
 #include <Foundation/Foundation.h>
 
-boost::filesystem::path PathUtils::GetSettingsPath()
-{
-	NSArray* paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-	std::string directory = [[paths objectAtIndex: 0] UTF8String];
-	return boost::filesystem::path(directory);
-}
-
 boost::filesystem::path PathUtils::GetRoamingDataPath()
 {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
