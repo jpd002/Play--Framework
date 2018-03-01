@@ -127,6 +127,11 @@ boost::filesystem::path PathUtils::GetPersonalDataPath()
 	return boost::filesystem::path(getenv("HOME")) / ".local/share";
 }
 
+boost::filesystem::path PathUtils::GetCachePath()
+{
+	return boost::filesystem::path(getenv("HOME")) / ".cache";
+}
+
 #else	// !DEFINED(__ANDROID__) || !DEFINED(__APPLE__) || !DEFINED(__linux__) || !DEFINED(__FreeBSD__)
 
 #include <pwd.h>
