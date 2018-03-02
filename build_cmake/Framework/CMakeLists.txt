@@ -108,5 +108,5 @@ if(ANDROID)
 endif()
 
 add_library(Framework ${COMMON_SRC_FILES} ${PLATFORM_SRC_FILES})
-target_link_libraries(Framework PUBLIC Boost::boost ${PROJECT_LIBS} PRIVATE ${PRIVATE_PROJECT_LIBS})
+target_link_libraries(Framework PUBLIC Boost::boost Boost::filesystem ${PROJECT_LIBS} PRIVATE ${PRIVATE_PROJECT_LIBS})
 target_include_directories(Framework PUBLIC ${FRAMEWORK_INCLUDE_DIR} ${PROJECT_INCLUDES})
