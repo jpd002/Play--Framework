@@ -12,6 +12,7 @@ std::string CHttpClient::UrlEncode(const std::string& input)
 		{
 		case ':':
 		case ' ':
+		case '&':
 			result += string_format("%%%02x", inputChar);
 			break;
 		default:
