@@ -111,8 +111,10 @@ RequestResult CCurlHttpClient::SendRequest()
 			headerList = nullptr;
 		}
 
-		//if(performResult != CURLE_OK)
-		if(false)
+		if(!(
+		    (performResult == CURLE_OK) ||
+		    ((performResult == CURLE_PARTIAL_FILE) && (m_verb == Framework::Http::HTTP_VERB::HEAD))
+		))
 		{
 			auto errorMessage = string_format("Failed to execute request: %s.", curl_easy_strerror(performResult));
 			throw std::runtime_error(errorMessage);
