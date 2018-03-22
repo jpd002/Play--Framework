@@ -1,7 +1,7 @@
 #ifndef _TYPES_H_
 #define _TYPES_H_
 
-typedef char int8;
+typedef signed char int8;
 typedef unsigned char uint8;
 
 typedef short int16;
