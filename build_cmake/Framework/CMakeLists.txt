@@ -45,6 +45,8 @@ set(COMMON_SRC_FILES
 	../../src/bitmap/TGA.cpp
 	../../src/BitStream.cpp
 	../../src/Config.cpp
+	../../src/Csv.cpp
+	../../include/Csv.h
 	../../src/Endian.cpp
 	../../src/HashUtils.cpp
 	../../include/HashUtils.h
