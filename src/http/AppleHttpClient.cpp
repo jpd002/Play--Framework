@@ -10,7 +10,27 @@ RequestResult CAppleHttpClient::SendRequest()
 	NSURLSession* session = [NSURLSession sessionWithConfiguration: sessionConfig];
 	
 	NSURL* url = [NSURL URLWithString: [NSString stringWithUTF8String: m_url.c_str()]];
-	NSURLRequest* request = [NSURLRequest requestWithURL: url];
+	NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL: url];
+	
+	switch(m_verb)
+	{
+	default:
+		assert(false);
+	case HTTP_VERB::GET:
+		[request setHTTPMethod: @"GET"];
+		break;
+	case HTTP_VERB::HEAD:
+		[request setHTTPMethod: @"HEAD"];
+		break;
+	}
+	
+	for(const auto& header : m_headers)
+	{
+		NSString* key = [NSString stringWithUTF8String: header.first.c_str()];
+		NSString* value = [NSString stringWithUTF8String: header.second.c_str()];
+		[request setValue: value forHTTPHeaderField: key];
+	}
+	
 	auto waitSema = dispatch_semaphore_create(0);
 	__block RequestResult result;
 	__block NSError* requestError = nil;
@@ -23,6 +43,13 @@ RequestResult CAppleHttpClient::SendRequest()
 			{
 				NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
 				result.statusCode = static_cast<HTTP_STATUS_CODE>([httpResponse statusCode]);
+				
+				for(NSString* key in httpResponse.allHeaderFields)
+				{
+					NSString* value = [httpResponse.allHeaderFields valueForKey: key];
+					result.headers.insert(std::make_pair([key UTF8String], [value UTF8String]));
+				}
+				
 				result.data.Write([data bytes], [data length]);
 				result.data.Seek(0, Framework::STREAM_SEEK_SET);
 			}
