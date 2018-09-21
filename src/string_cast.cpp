@@ -34,15 +34,10 @@ string string_cast<string>(const wchar_t* src)
 template <>
 wstring string_cast<wstring>(const char* sSource)
 {
-	size_t nSize;
-	wchar_t* sConvert;
-
-	nSize = strlen(sSource) + 1;
-	sConvert = (wchar_t*)alloca(nSize * sizeof(wchar_t));
-
-	mbstowcs(sConvert, sSource, nSize);
-
-	return wstring(sConvert);
+	size_t size = strlen(sSource) + 1;
+	auto convert = reinterpret_cast<wchar_t*>(alloca(size * sizeof(wchar_t)));
+	mbstowcs(convert, sSource, size);
+	return wstring(convert);
 }
 
 template <>
