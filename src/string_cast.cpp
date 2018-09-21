@@ -13,9 +13,10 @@ string string_cast<string>(const wchar_t* src)
 	size_t srcSize = wcslen(src);
 	char* dst = reinterpret_cast<char*>(alloca((srcSize * maxCharSize) + 1));
 	char* dstPtr = dst;
+	mbstate_t mbState = {};
 	for(unsigned int i = 0; i < srcSize; i++)
 	{
-		int charSize = wctomb(dstPtr, src[i]);
+		int charSize = wcrtomb(dstPtr, src[i], &mbState);
 		if(charSize < 0)
 		{
 			(*dstPtr) = '?';
