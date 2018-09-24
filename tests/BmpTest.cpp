@@ -14,7 +14,7 @@ void FillBitmap(Framework::CBitmap& bitmap)
 	}
 }
 
-int main(int argc, char** argv)
+void BmpTest_Execute()
 {
 	//Write 32-bpp BMP
 	{
@@ -42,5 +42,4 @@ int main(int argc, char** argv)
 		Framework::CStdStream inputStream("test8.bmp", "rb");
 		auto bitmap = Framework::CBMP::ReadBitmap(inputStream);
 	}
-	return 0;
 }
