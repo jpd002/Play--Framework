@@ -58,7 +58,7 @@ uint32 CBitStream::PeekBits_MSBF(uint8 size)
 
 void CBitStream::SeekToByteAlign()
 {
-	unsigned int remainder = GetBitIndex();
+	unsigned int remainder = GetBitIndex() & 0x07;
 	if(remainder == 0) return;
 	Advance(8 - remainder);
 }
