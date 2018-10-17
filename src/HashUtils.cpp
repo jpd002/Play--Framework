@@ -5,6 +5,10 @@
 #ifdef _WIN32
 #include <Windows.h>
 #include <Wincrypt.h>
+#elif defined(__APPLE__)
+#define COMMON_DIGEST_FOR_OPENSSL
+#include <CommonCrypto/CommonDigest.h>
+#include <CommonCrypto/CommonHMAC.h>
 #elif defined(HAS_OPENSSL)
 #include <openssl/sha.h>
 #include <openssl/hmac.h>
@@ -44,7 +48,7 @@ std::array<uint8, 0x20> Framework::HashUtils::ComputeSha256(const void* data, si
 
 	succeeded = CryptReleaseContext(context, 0);
 	assert(succeeded);
-#elif defined(HAS_OPENSSL)
+#elif defined(HAS_OPENSSL) || defined(__APPLE__)
 	SHA256_CTX c;
 	SHA256_Init(&c);
 	SHA256_Update(&c, data, dataSize);
@@ -120,6 +124,9 @@ std::array<uint8, 0x20> Framework::HashUtils::ComputeHmacSha256(const void* key,
 
 	succeeded = CryptReleaseContext(context, 0);
 	assert(succeeded);
+#elif defined(__APPLE__)
+	static_assert(CC_SHA256_DIGEST_LENGTH == 0x20, "Expecting a 32-byte size array.");
+	CCHmac(kCCHmacAlgSHA256, key, keySize, reinterpret_cast<const unsigned char*>(data), dataSize, result.data());
 #elif defined(HAS_OPENSSL)
 	uint8 interResult[EVP_MAX_MD_SIZE];
 	unsigned int resultSize = 0;
