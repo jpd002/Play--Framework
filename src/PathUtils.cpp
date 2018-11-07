@@ -61,7 +61,7 @@ boost::filesystem::path PathUtils::GetCachePath()
 boost::filesystem::path PathUtils::GetRoamingDataPath()
 {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	std::string directory = [[paths objectAtIndex: 0] UTF8String];
+	std::string directory = [[paths objectAtIndex: 0] fileSystemRepresentation];
 	return boost::filesystem::path(directory);
 }
 
@@ -69,7 +69,7 @@ boost::filesystem::path PathUtils::GetAppResourcesPath()
 {
 	NSBundle* bundle = [NSBundle mainBundle];
 	NSString* bundlePath = [bundle resourcePath];
-	return boost::filesystem::path([bundlePath UTF8String]);
+	return boost::filesystem::path([bundlePath fileSystemRepresentation]);
 }
 
 boost::filesystem::path PathUtils::GetPersonalDataPath()
@@ -80,7 +80,7 @@ boost::filesystem::path PathUtils::GetPersonalDataPath()
 boost::filesystem::path PathUtils::GetCachePath()
 {
 	NSArray* paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-	std::string directory = [[paths objectAtIndex: 0] UTF8String];
+	std::string directory = [[paths objectAtIndex: 0] fileSystemRepresentation];
 	return boost::filesystem::path(directory);
 }
 
