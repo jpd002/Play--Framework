@@ -5,7 +5,7 @@ using namespace Framework;
 
 #ifdef _WIN32
 
-#if WINAPI_FAMILY_PARTITION(WINAPI_FAMILY_APP)
+#if WINAPI_FAMILY_ONE_PARTITION(WINAPI_FAMILY, WINAPI_PARTITION_APP)
 
 boost::filesystem::path PathUtils::GetPersonalDataPath()
 {
