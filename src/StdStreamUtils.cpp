@@ -25,3 +25,15 @@ CStdStream Framework::CreateOutputStdStream(const std::string& path)
 {
 	return CStdStream(path.c_str(), "wb");
 }
+
+template <>
+CStdStream Framework::CreateUpdateExistingStdStream(const std::wstring& path)
+{
+	return CStdStream(path.c_str(), L"r+b");
+}
+
+template <>
+CStdStream Framework::CreateUpdateExistingStdStream(const std::string& path)
+{
+	return CStdStream(path.c_str(), "r+b");
+}
