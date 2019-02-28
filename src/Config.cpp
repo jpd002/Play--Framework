@@ -209,6 +209,12 @@ void CConfig::Load()
 		return;
 	}
 
+	//ParseDocument can return null if parsing failed
+	if(!document)
+	{
+		return;
+	}
+
 	auto configNode = document->Select("Config");
 	if(!configNode)
 	{
