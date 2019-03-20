@@ -66,6 +66,9 @@ RequestResult CWin32HttpClient::SendRequest()
 	case HTTP_VERB::POST:
 		verbString = _T("POST");
 		break;
+	case HTTP_VERB::PUT:
+		verbString = _T("PUT");
+		break;
 	default:
 		assert(false);
 		break;
