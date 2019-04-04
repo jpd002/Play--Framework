@@ -2,7 +2,9 @@
 
 #include <string>
 #include <stdarg.h>
+#include "maybe_unused.h"
 
+FRAMEWORK_MAYBE_UNUSED
 static std::string string_format(const char* format, va_list ap)
 {
 	int size = 256;
@@ -28,6 +30,7 @@ static std::string string_format(const char* format, va_list ap)
 	return result;
 }
 
+FRAMEWORK_MAYBE_UNUSED
 static std::wstring string_format(const wchar_t* format, va_list ap)
 {
 	int size = 256;

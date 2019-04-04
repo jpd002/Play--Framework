@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <cassert>
 #include "Types.h"
+#include "maybe_unused.h"
 
 namespace Framework
 {
@@ -39,7 +40,7 @@ namespace Framework
 		{
 			if(m_handle)
 			{
-				int result = sqlite3_close_v2(m_handle);
+				FRAMEWORK_MAYBE_UNUSED int result = sqlite3_close_v2(m_handle);
 				assert(result == SQLITE_OK);
 				m_handle = nullptr;
 			}

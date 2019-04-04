@@ -33,7 +33,7 @@ namespace Framework
 		{
 			if(m_handle)
 			{
-				int result = sqlite3_finalize(m_handle);
+				FRAMEWORK_MAYBE_UNUSED int result = sqlite3_finalize(m_handle);
 				assert(result == SQLITE_OK);
 				m_handle = nullptr;
 			}
@@ -41,13 +41,13 @@ namespace Framework
 
 		void BindText(int param, const char* value, bool isStatic = false)
 		{
-			int result = sqlite3_bind_text(m_handle, param, value, -1, isStatic ? SQLITE_STATIC : SQLITE_TRANSIENT);
+			FRAMEWORK_MAYBE_UNUSED int result = sqlite3_bind_text(m_handle, param, value, -1, isStatic ? SQLITE_STATIC : SQLITE_TRANSIENT);
 			assert(result == SQLITE_OK);
 		}
 
 		void BindInteger(int param, uint32 value)
 		{
-			int result = sqlite3_bind_int(m_handle, param, value);
+			FRAMEWORK_MAYBE_UNUSED int result = sqlite3_bind_int(m_handle, param, value);
 			assert(result == SQLITE_OK);
 		}
 
@@ -70,7 +70,7 @@ namespace Framework
 
 		void StepNoResult()
 		{
-			bool hasRow = Step();
+			FRAMEWORK_MAYBE_UNUSED bool hasRow = Step();
 			assert(!hasRow);
 		}
 

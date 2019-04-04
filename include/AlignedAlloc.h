@@ -8,6 +8,9 @@
 #include <unistd.h>
 #endif
 
+#include "maybe_unused.h"
+
+FRAMEWORK_MAYBE_UNUSED
 static size_t framework_getpagesize()
 {
 #if defined(_MSC_VER)
@@ -19,6 +22,7 @@ static size_t framework_getpagesize()
 #endif
 }
 
+FRAMEWORK_MAYBE_UNUSED
 static void* framework_aligned_alloc(size_t allocSize, size_t alignment)
 {
 #if defined(_MSC_VER)
@@ -35,6 +39,7 @@ static void* framework_aligned_alloc(size_t allocSize, size_t alignment)
 #endif
 }
 
+FRAMEWORK_MAYBE_UNUSED
 static void framework_aligned_free(void* ptr)
 {
 #if defined(_MSC_VER)

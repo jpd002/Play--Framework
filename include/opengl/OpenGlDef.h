@@ -41,8 +41,10 @@
 
 #endif
 
+#include "maybe_unused.h"
+
 #ifdef _DEBUG
-#define CHECKGLERROR() { auto errorCode = glGetError(); assert(errorCode == GL_NO_ERROR); }
+#define CHECKGLERROR() { FRAMEWORK_MAYBE_UNUSED auto errorCode = glGetError(); assert(errorCode == GL_NO_ERROR); }
 #else
 #define CHECKGLERROR()
 #endif
