@@ -61,6 +61,7 @@ set(COMMON_SRC_FILES
 	../../src/layout/VerticalLayout.cpp
 	../../src/LzAri.cpp
 	../../src/math/MathStringUtils.cpp
+	../../include/maybe_unused.h
 	../../src/MemStream.cpp
 	../../src/mpeg2/CodedBlockPatternTable.cpp
 	../../src/mpeg2/DcSizeChrominanceTable.cpp
