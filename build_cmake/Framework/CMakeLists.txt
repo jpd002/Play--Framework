@@ -87,6 +87,8 @@ set(COMMON_SRC_FILES
 	../../include/std_experimental_map.h
 	../../src/StdStream.cpp
 	../../src/StdStreamUtils.cpp
+	../../src/ThreadPool.cpp
+	../../include/ThreadPool.h
 	../../src/Utf8.cpp
 	../../src/xml/FilteringNodeIterator.cpp
 	../../src/xml/Node.cpp
