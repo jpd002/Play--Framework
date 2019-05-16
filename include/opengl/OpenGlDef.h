@@ -33,6 +33,12 @@
 
 #endif
 
+#elif defined(__arch64__) && defined(__linux__)
+
+#include <GLES3/gl3.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+
 #elif defined(__linux__) || defined(__FreeBSD__)
 
 #include <GL/glew.h>
