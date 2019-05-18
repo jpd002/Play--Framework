@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include "maybe_unused.h"
 
 class CVector2
 {
@@ -115,6 +116,7 @@ public:
 	float		y;
 };
 
+FRAMEWORK_MAYBE_UNUSED
 static CVector2 operator *(float lhs, const CVector2& rhs)
 {
 	return CVector2(lhs * rhs.x, lhs * rhs.y);
