@@ -28,6 +28,10 @@ endif()
 set(SRC_FILES
 	../../src/opengl/Program.cpp
 	../../src/opengl/Shader.cpp
+	../../include/opengl/OpenGlDef.h
+	../../include/opengl/Program.h
+	../../include/opengl/Resource.h
+	../../include/opengl/Shader.h
 )
 
 add_library(Framework_OpenGl ${SRC_FILES})
