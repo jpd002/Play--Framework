@@ -11,6 +11,7 @@ if(NOT TARGET Boost::boost)
 endif()
 
 set(SRC_FILES
+	../../include/direct3d9/D3D9TextureUtils.h
 	../../src/directinput/Device.cpp 
 	../../src/directinput/Joystick.cpp
 	../../src/directinput/Keyboard.cpp
