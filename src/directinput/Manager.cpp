@@ -2,13 +2,15 @@
 #include "directinput/Keyboard.h"
 #include "directinput/Joystick.h"
 #include <stdexcept>
+#include <wbemidl.h>
 
 using namespace Framework::DirectInput;
 
-CManager::CManager()
+CManager::CManager(bool filterXInput)
 : m_updateThreadHandle(NULL)
 , m_updateThreadOver(false)
 , m_nextInputEventHandlerId(1)
+, m_filterXInput(filterXInput)
 {
 	if(FAILED(DirectInput8Create(GetModuleHandle(NULL), DIRECTINPUT_VERSION, IID_IDirectInput8, reinterpret_cast<void**>(&m_directInput), NULL)))
 	{
@@ -112,6 +114,123 @@ bool CManager::GetDeviceObjectInfo(const GUID& deviceId, uint32 id, DIDEVICEOBJE
 	return device->GetObjectInfo(id, objectInfo);
 }
 
+//Based on code available here: https://docs.microsoft.com/en-us/windows/desktop/xinput/xinput-and-directinput
+bool CManager::IsXInputDevice(const GUID& productId)
+{
+	HRESULT result = S_OK;
+
+	Framework::Win32::CComPtr<IWbemLocator> wbemLocator;
+	result = CoCreateInstance(__uuidof(WbemLocator), NULL, CLSCTX_INPROC_SERVER, __uuidof(IWbemLocator), reinterpret_cast<void**>(&wbemLocator));
+	assert(SUCCEEDED(result));
+
+	if(FAILED(result) || wbemLocator.IsEmpty())
+	{
+		return false;
+	}
+
+	Framework::Win32::CComPtr<IWbemServices> wbemServices;
+
+	{
+		BSTR bstrNamespace = SysAllocString(L"\\\\.\\root\\cimv2");
+
+		result = wbemLocator->ConnectServer(bstrNamespace, NULL, NULL, 0L, 0L, NULL, NULL, reinterpret_cast<IWbemServices**>(&wbemServices));
+		assert(SUCCEEDED(result));
+		SysFreeString(bstrNamespace);
+	
+		if(FAILED(result) || wbemServices.IsEmpty())
+		{
+			return false;
+		}
+	}
+
+	//Switch security level to IMPERSONATE.
+	result = CoSetProxyBlanket(wbemServices, RPC_C_AUTHN_WINNT, RPC_C_AUTHZ_NONE, NULL, RPC_C_AUTHN_LEVEL_CALL, RPC_C_IMP_LEVEL_IMPERSONATE, NULL, EOAC_NONE);
+	assert(SUCCEEDED(result));
+
+	Framework::Win32::CComPtr<IEnumWbemClassObject> enumDevices;
+
+	{
+		BSTR bstrClassName = SysAllocString(L"Win32_PNPEntity");
+
+		result = wbemServices->CreateInstanceEnum(bstrClassName, 0, NULL, reinterpret_cast<IEnumWbemClassObject**>(&enumDevices));
+		assert(SUCCEEDED(result));
+		SysFreeString(bstrClassName);
+
+		if(FAILED(result) || enumDevices.IsEmpty())
+		{
+			return false;
+		}
+	}
+
+	BSTR bstrDeviceID  = SysAllocString(L"DeviceID");
+	bool isXInputDevice = false;
+
+	// Loop over all devices
+	while(!isXInputDevice)
+	{
+		static const unsigned int devicesPerIter = 20;
+		IWbemClassObject* devices[devicesPerIter];
+		ULONG returned = 0;
+
+		result = enumDevices->Next(10000, 20, reinterpret_cast<IWbemClassObject**>(&devices), &returned);
+		assert(SUCCEEDED(result));
+
+		if(FAILED(result))
+		{
+			break;
+		}
+
+		if(returned == 0) break;
+
+		for(uint32 deviceIndex = 0; deviceIndex < returned; deviceIndex++)
+		{
+			// For each device, get its device ID
+			auto device = devices[deviceIndex];
+			VARIANT deviceId;
+			result = device->Get(bstrDeviceID, 0L, &deviceId, NULL, NULL);
+			if(SUCCEEDED(result) && (deviceId.vt == VT_BSTR) && (deviceId.bstrVal != NULL))
+			{
+				// Check if the device ID contains "IG_".  If it does, then it's an XInput device
+				// This information can not be found from DirectInput 
+				if(wcsstr(deviceId.bstrVal, L"IG_"))
+				{
+					// If it does, then get the VID/PID from var.bstrVal
+					DWORD vid = 0;
+					{
+						auto vidString = wcsstr(deviceId.bstrVal, L"VID_");
+						if(vidString && swscanf(vidString, L"VID_%4X", &vid) != 1)
+						{
+							vid = 0;
+						}
+					}
+
+					DWORD pid = 0;
+					{
+						auto pidString = wcsstr(deviceId.bstrVal, L"PID_");
+						if(pidString && swscanf(pidString, L"PID_%4X", &pid) != 1)
+						{
+							pid = 0;
+						}
+					}
+
+					// Compare the VID/PID to the DInput device
+					DWORD vidpid = MAKELONG(vid, pid);
+					if(vidpid == productId.Data1)
+					{
+						isXInputDevice = true;
+						break;
+					}
+				}
+			}
+			device->Release();
+		}
+	}
+
+	SysFreeString(bstrDeviceID);
+
+	return isXInputDevice;
+}
+
 BOOL CALLBACK CManager::EnumDevicesCallback(LPCDIDEVICEINSTANCE lpddi, LPVOID pvRef)
 {
 	return static_cast<CManager*>(pvRef)->EnumDevicesCallbackImpl(lpddi);
@@ -119,6 +238,10 @@ BOOL CALLBACK CManager::EnumDevicesCallback(LPCDIDEVICEINSTANCE lpddi, LPVOID pv
 
 BOOL CManager::EnumDevicesCallbackImpl(LPCDIDEVICEINSTANCE lpddi)
 {
+	if(m_filterXInput && IsXInputDevice(lpddi->guidProduct))
+	{
+		return DIENUM_CONTINUE;
+	}
 	m_joystickInstances.push_back(lpddi->guidInstance);
 	return DIENUM_CONTINUE;
 }

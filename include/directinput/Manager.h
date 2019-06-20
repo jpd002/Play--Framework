@@ -18,7 +18,7 @@ namespace Framework
 		public:
 			typedef std::function<void (const GUID&, uint32, uint32)> InputEventHandler;
 
-									CManager();
+									CManager(bool filterXInput = false);
 			virtual					~CManager();
 
 			void					SetFocusWindow(HWND);
@@ -41,6 +41,7 @@ namespace Framework
 			DWORD					UpdateThreadProc();
 			static DWORD CALLBACK	UpdateThreadProcStub(void*);
 
+			static bool				IsXInputDevice(const GUID&);
 			static BOOL CALLBACK	EnumDevicesCallback(LPCDIDEVICEINSTANCE, LPVOID);
 			BOOL					EnumDevicesCallbackImpl(LPCDIDEVICEINSTANCE);
 
@@ -54,6 +55,8 @@ namespace Framework
 			HANDLE					m_updateThreadHandle;
 			bool					m_updateThreadOver;
 			CRITICAL_SECTION		m_updateMutex;
+
+			bool					m_filterXInput = false;
 		};
 	}
 }
