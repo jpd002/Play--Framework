@@ -41,11 +41,6 @@ CJoystick::CJoystick(const DirectInputDevicePtr& device)
 	}
 }
 
-CJoystick::~CJoystick()
-{
-
-}
-
 void CJoystick::ProcessEvents(const InputEventHandler& eventHandler)
 {
 	DIDEVICEOBJECTDATA deviceData[DIBUFFERSIZE];

@@ -11,7 +11,7 @@ namespace Framework
 		{
 		public:
 									CJoystick(const DirectInputDevicePtr&);
-			virtual					~CJoystick();
+			virtual					~CJoystick() = default;
 
 			int						GetButtonCount() const;
 			void					ProcessEvents(const InputEventHandler&) override;
