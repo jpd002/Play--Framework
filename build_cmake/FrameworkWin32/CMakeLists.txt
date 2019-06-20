@@ -13,9 +13,13 @@ endif()
 set(SRC_FILES
 	../../include/direct3d9/D3D9TextureUtils.h
 	../../src/directinput/Device.cpp 
+	../../include/directinput/Device.h
 	../../src/directinput/Joystick.cpp
+	../../include/directinput/Joystick.h
 	../../src/directinput/Keyboard.cpp
+	../../include/directinput/Keyboard.h
 	../../src/directinput/Manager.cpp
+	../../include/directinput/Manager.h
 	../../src/win32/AcceleratorTableGenerator.cpp
 	../../src/win32/ActiveXHost.cpp
 	../../src/win32/Button.cpp
