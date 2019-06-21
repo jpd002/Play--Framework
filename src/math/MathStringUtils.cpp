@@ -2,7 +2,8 @@
 #include "math/MathStringUtils.h"
 #include <vector>
 #include <sstream>
-#include <boost/algorithm/string.hpp>
+#include <algorithm>
+#include "StringUtils.h"
 
 float MathStringUtils::ParseFloat(const std::string& valueString)
 {
@@ -17,7 +18,7 @@ float MathStringUtils::ParseFloat(const std::string& valueString)
 CVector2 MathStringUtils::ParseVector2(const std::string& vectorString)
 {
 	std::vector<std::string> components;
-	boost::split(components, vectorString, boost::is_any_of(", "), boost::algorithm::token_compress_on);
+	StringUtils::split(components, vectorString, ',', true);
 	CVector2 result(0, 0);
 	if(components.size() != 2) return result;
 	result.x = ParseFloat(components[0]);
@@ -28,7 +29,7 @@ CVector2 MathStringUtils::ParseVector2(const std::string& vectorString)
 CVector3 MathStringUtils::ParseVector3(const std::string& vectorString)
 {
 	std::vector<std::string> components;
-	boost::split(components, vectorString, boost::is_any_of(", "), boost::algorithm::token_compress_on);
+	StringUtils::split(components, vectorString, ',', true);
 	CVector3 result(0, 0, 0);
 	if(components.size() != 3) return result;
 	result.x = ParseFloat(components[0]);
