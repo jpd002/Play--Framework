@@ -2,7 +2,7 @@
 
 #include "LayoutObject.h"
 #include "LayoutBase.h"
-#include <boost/multi_array.hpp>
+#include <vector>
 
 namespace Framework
 {
@@ -24,7 +24,7 @@ namespace Framework
 		void					SetObject(unsigned int, unsigned int, const LayoutObjectPtr&);
 
 	private:
-		typedef boost::multi_array<LayoutObjectPtr, 2> GridArray;
+		typedef std::vector<std::vector<LayoutObjectPtr>> GridArray;
 
 		void					RebuildLayouts();
 		CLayoutBaseItem			CreateColLayoutBaseItem(unsigned int) const;

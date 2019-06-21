@@ -1,13 +1,18 @@
 #include <assert.h>
 #include "layout/GridLayout.h"
 #include "PtrMacro.h"
+#include <algorithm>
 
 using namespace Framework;
 
 CGridLayout::CGridLayout(unsigned int cols, unsigned int rows, unsigned int spacing) 
 : CLayoutObject(1, 1)
-, m_objects(boost::extents[cols][rows])
 {
+	m_objects.resize(cols);
+	for(int i = 0; i < cols; ++i)
+	{
+		m_objects[i].resize(rows);
+	}
 	m_cols = cols;
 	m_rows = rows;
 	m_spacing = spacing;
