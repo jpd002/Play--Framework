@@ -4,7 +4,8 @@
 #include <functional>
 #include <memory>
 #include <map>
-#include <boost/signals2.hpp>
+#include <vector>
+#include "Signal.hpp"
 
 namespace Framework
 {
@@ -27,12 +28,13 @@ namespace Framework
 
 		private:
 			typedef std::map<unsigned int, std::unique_ptr<CTrayIcon>> TrayIconMapType;
-			typedef boost::signals2::signal<void (CTrayIcon*, LPARAM)> IconEventSignalType;
+			typedef CSignal<void (CTrayIcon*, LPARAM)> IconEventSignalType;
 
 			TrayIconMapType			m_icons;
 			IconEventSignalType		m_iconEventSignal;
 			unsigned int			m_nextIconId = 1;
 			unsigned int			m_taskBarCreatedMessage = 0;
+			std::vector<IconEventSignalType::CConnectionPtr> m_IconEventSignalTypeConnectionList;
 		};
 	}
 }

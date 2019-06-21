@@ -1,7 +1,7 @@
 #pragma once
 
-#include <boost/signals2.hpp>
 #include "win32/ListBox.h"
+#include "Signal.hpp"
 
 namespace Framework
 {
@@ -10,7 +10,7 @@ namespace Framework
 		class CPropertyGridListBox : public Framework::Win32::CListBox
 		{
 		public:
-			typedef boost::signals2::signal<void (unsigned int)> StartEditionEvent;
+			typedef CSignal<void (unsigned int)> StartEditionEvent;
 
 								CPropertyGridListBox(HWND);
 			virtual				~CPropertyGridListBox();

@@ -20,7 +20,7 @@ CTrayIconServer::~CTrayIconServer()
 
 void CTrayIconServer::RegisterHandler(const IconEventHandlerType& Handler)
 {
-	m_iconEventSignal.connect(Handler);
+	m_IconEventSignalTypeConnectionList.push_back(m_iconEventSignal.connect(Handler));
 }
 
 CTrayIcon* CTrayIconServer::Insert()

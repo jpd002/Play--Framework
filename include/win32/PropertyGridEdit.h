@@ -1,7 +1,7 @@
 #pragma once
 
 #include "win32/Edit.h"
-#include <boost/signals2.hpp>
+#include "Signal.hpp"
 
 namespace Framework
 {
@@ -10,7 +10,7 @@ namespace Framework
 		class CPropertyGridEdit : public CEdit
 		{
 		public:
-			typedef boost::signals2::signal<void (bool)> EditCompletedEvent;
+			typedef CSignal<void (bool)> EditCompletedEvent;
 
 								CPropertyGridEdit(HWND);
 			virtual				~CPropertyGridEdit();
