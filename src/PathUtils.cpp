@@ -86,7 +86,7 @@ boost::filesystem::path PathUtils::GetCachePath()
 
 #elif defined(__ANDROID__)
 
-static boost::filesystem::path s_filesDirPath;
+static boost::filesystem::path s_filesDirPath = getenv("EXTERNAL_STORAGE");
 
 boost::filesystem::path PathUtils::GetAppResourcesPath()
 {
