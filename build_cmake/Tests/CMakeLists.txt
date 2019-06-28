@@ -9,6 +9,8 @@ set(tests_srcs
 	../../tests/Main.cpp
 	../../tests/StringCastTest.cpp
 	../../tests/StringCastTest.h
+	../../tests/StringUtilsTest.cpp
+	../../tests/StringUtilsTest.h
 )
 
 if(NOT TARGET Framework)
