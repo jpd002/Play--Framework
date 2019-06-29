@@ -82,6 +82,7 @@ set(COMMON_SRC_FILES
 	../../src/Stream.cpp
 	../../src/StreamBitStream.cpp
 	../../src/StringUtils.cpp
+	../../include/StringUtils.h
 	../../src/string_cast.cpp
 	../../src/string_cast_sjis.cpp
 	../../src/string_cast_win1252.cpp
