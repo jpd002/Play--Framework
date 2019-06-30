@@ -1,6 +1,7 @@
 build_android/libs
 build_android/obj
 build_cmake/Framework*/build*
+build_cmake/Tests/build*
 build_ios/build
 Debug
 Release
