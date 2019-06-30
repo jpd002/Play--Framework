@@ -7,6 +7,8 @@ set(tests_srcs
 	../../tests/BmpTest.cpp
 	../../tests/BmpTest.h
 	../../tests/Main.cpp
+	../../tests/MathStringUtilsTest.cpp
+	../../tests/MathStringUtilsTest.h
 	../../tests/StringCastTest.cpp
 	../../tests/StringCastTest.h
 	../../tests/StringUtilsTest.cpp
