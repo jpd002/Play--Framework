@@ -19,11 +19,11 @@ CPropertyGrid::CPropertyGrid(HWND parentWnd)
 	SetClassPtr();
 
 	m_edit = std::make_unique<CPropertyGridEdit>(m_hWnd);
-	m_EditCompletedConnection = m_edit->EditCompleted.connect([&] (bool canceled) { OnEditCompleted(canceled); });
+	m_EditCompletedConnection = m_edit->EditCompleted.Connect([&] (bool canceled) { OnEditCompleted(canceled); });
 	m_edit->Show(SW_HIDE);
 
 	m_listBox = std::make_unique<CPropertyGridListBox>(m_hWnd);
-	m_StartEditionConnection = m_listBox->StartEdition.connect([&] (unsigned int itemIndex) { OnStartEdition(itemIndex); });
+	m_StartEditionConnection = m_listBox->StartEdition.Connect([&] (unsigned int itemIndex) { OnStartEdition(itemIndex); });
 
 	m_drawMetrics.part0Width		= PointsToPixels(WIDTH_PART0);
 	m_drawMetrics.dividerPosition	= PointsToPixels(DIVIDER_POSITION);

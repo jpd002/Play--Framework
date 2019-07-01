@@ -28,7 +28,7 @@ namespace Framework
 
 		CSignal() = default;
 
-		CConnectionPtr connect(const CSlotFunction& func, bool oneShot = false)
+		CConnectionPtr Connect(const CSlotFunction& func, bool oneShot = false)
 		{
 			if(func)
 			{
@@ -43,13 +43,22 @@ namespace Framework
 			return nullptr;
 		}
 
-		CConnectionPtr connectOnce(const CSlotFunction& func)
+		CConnectionPtr ConnectOnce(const CSlotFunction& func)
 		{
-			return connect(func, true);
+			return Connect(func, true);
+		}
+
+		void Reset()
+		{
+			std::unique_lock<std::mutex> lock(m_lock);
+
+			m_connections.clear();
 		}
 
 		void operator()(Args... args)
 		{
+			std::unique_lock<std::mutex> lock(m_lock);
+
 			m_connections.erase(
 				std::remove_if(
 					m_connections.begin(), 
@@ -59,7 +68,7 @@ namespace Framework
 						auto connectionPtr = connection.lock();
 						if(connectionPtr)
 							(*connectionPtr)(args...);
-						return !connectionPtr || (*connectionPtr).isOneShot() || !(*connectionPtr).isConnected();
+						return !connectionPtr || (*connectionPtr).IsOneShot();
 					}
 				), 
 				m_connections.end()
@@ -72,7 +81,6 @@ namespace Framework
 				CConnection(const CSlotFunction slot, bool oneShot)
 				: m_slot(slot)
 				, m_oneShot(oneShot)
-				, m_connected(true)
 				{
 				}
 
@@ -82,29 +90,17 @@ namespace Framework
 
 				void operator()(Args... args)
 				{
-					if(m_connected)
-					{
-						if(m_slot)
-							(m_slot)(args...);
-
-						if(m_oneShot)
-							m_connected = false;
-					}
+					if(m_slot)
+						(m_slot)(args...);
 				}
 			
-				bool isOneShot()
+				bool IsOneShot() const
 				{
 					return m_oneShot;
 				}
 
-				bool isConnected()
-				{
-					return m_connected;
-				}
-
 			private:
 				CSlotFunction m_slot;
-				bool m_connected;
 				bool m_oneShot;
 		};
 	private:
