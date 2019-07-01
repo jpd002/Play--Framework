@@ -5,11 +5,11 @@
 
 namespace StringUtils
 {
-	void replace_all(std::string&, const std::string, std::string);
-	void erase_all(std::string&, std::string);
-	void split(std::vector<std::string>&, const std::string&,  char = ' ', bool = false);
+	std::string ReplaceAll(const std::string&, const std::string, const std::string);
+	std::string EraseAll(const std::string&, const std::string);
+	std::vector<std::string> Split(const std::string&,  char = ' ', bool = false);
 
-	void ltrim(std::string&);
-	void rtrim(std::string&);
-	void trim(std::string&);
+	std::string TrimStart(const std::string&);
+	std::string TrimEnd(const std::string&);
+	std::string Trim(const std::string&);
 }

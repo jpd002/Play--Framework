@@ -4,54 +4,59 @@
 #include <sstream>
 #include <iostream>
 
-void StringUtils::replace_all(std::string& str, const std::string replace, std::string replaceWith)
+std::string StringUtils::ReplaceAll(const std::string& str, const std::string replace, const std::string replaceWith)
 {
-	auto str2 = str;
+	std::string ret = str;
 	std::string::size_type pos = 0;
-	while((pos = str2.find(replace, pos)) != std::string::npos)
+	while((pos = ret.find(replace, pos)) != std::string::npos)
 	{
-		str2 = str2.substr(0, pos)
+		ret = ret.substr(0, pos)
 		+ replaceWith
-		+ str2.substr(pos + replace.size());
+		+ ret.substr(pos + replace.size());
 		pos += replaceWith.size();
 	}
-	str.clear();
-	str += str2;
+	return ret;
 }
 
-void StringUtils::erase_all(std::string& str, std::string remove)
+std::string StringUtils::EraseAll(const std::string& str, const std::string remove)
 {
-	StringUtils::replace_all(str, remove, "");
+	return StringUtils::ReplaceAll(str, remove, "");
 }
 
-void StringUtils::ltrim(std::string& ret)
+std::string StringUtils::TrimStart(const std::string& str)
 {
+	std::string ret = str;
 	auto itr = ret.begin();
 	while(std::isspace((*itr)))
 	{
 		++itr;
 	}
 	ret.erase(ret.begin(), itr);
+	return ret;
 }
 
-void StringUtils::rtrim(std::string& ret)
+std::string StringUtils::TrimEnd(const std::string& str)
 {
+	std::string ret = str;
 	auto itr = ret.rbegin();
 	while(std::isspace((*itr)))
 	{
 		++itr;
 	}
 	ret.erase(itr.base(), ret.end());
+	return ret;
 }
 
-void StringUtils::trim(std::string& ret)
+std::string StringUtils::Trim(const std::string& str)
 {
-	ltrim(ret);
-	rtrim(ret);
+	std::string ret = str;
+	ret = TrimStart(ret);
+	ret = TrimEnd(ret);
+	return ret;
 }
 
 // split function based on https://www.fluentcpp.com/2017/04/21/how-to-split-a-string-in-c/
-void StringUtils::split(std::vector<std::string>& ret, const std::string& s, char delimiter, bool trim)
+std::vector<std::string> StringUtils::Split(const std::string& s, char delimiter, bool trim)
 {
 	std::vector<std::string> tokens;
 	std::string token;
@@ -64,8 +69,8 @@ void StringUtils::split(std::vector<std::string>& ret, const std::string& s, cha
 	{
 		for(int i = 0; i < tokens.size(); i++)
 		{
-			StringUtils::trim(tokens[i]);
+			tokens[i] = StringUtils::Trim(tokens[i]);
 		}
 	}
-	ret.insert(ret.end(), tokens.begin(), tokens.end());
+	return tokens;
 }

@@ -17,8 +17,7 @@ float MathStringUtils::ParseFloat(const std::string& valueString)
 
 CVector2 MathStringUtils::ParseVector2(const std::string& vectorString)
 {
-	std::vector<std::string> components;
-	StringUtils::split(components, vectorString, ',', true);
+	std::vector<std::string> components = StringUtils::Split(vectorString, ',', true);
 	CVector2 result(0, 0);
 	if(components.size() != 2) return result;
 	result.x = ParseFloat(components[0]);
@@ -28,8 +27,7 @@ CVector2 MathStringUtils::ParseVector2(const std::string& vectorString)
 
 CVector3 MathStringUtils::ParseVector3(const std::string& vectorString)
 {
-	std::vector<std::string> components;
-	StringUtils::split(components, vectorString, ',', true);
+	std::vector<std::string> components = StringUtils::Split(vectorString, ',', true);
 	CVector3 result(0, 0, 0);
 	if(components.size() != 3) return result;
 	result.x = ParseFloat(components[0]);
