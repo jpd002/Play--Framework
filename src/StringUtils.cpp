@@ -27,7 +27,7 @@ std::string StringUtils::TrimStart(const std::string& str)
 {
 	std::string ret = str;
 	auto itr = ret.begin();
-	while(std::isspace((*itr)))
+	while(itr != ret.end() && std::isspace((*itr)))
 	{
 		++itr;
 	}
@@ -39,7 +39,7 @@ std::string StringUtils::TrimEnd(const std::string& str)
 {
 	std::string ret = str;
 	auto itr = ret.rbegin();
-	while(std::isspace((*itr)))
+	while(itr != ret.rend() && std::isspace((*itr)))
 	{
 		++itr;
 	}
