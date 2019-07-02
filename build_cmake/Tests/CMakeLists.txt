@@ -9,6 +9,8 @@ set(tests_srcs
 	../../tests/Main.cpp
 	../../tests/MathStringUtilsTest.cpp
 	../../tests/MathStringUtilsTest.h
+	../../tests/SignalTest.cpp
+	../../tests/SignalTest.h
 	../../tests/StringCastTest.cpp
 	../../tests/StringCastTest.h
 	../../tests/StringUtilsTest.cpp
