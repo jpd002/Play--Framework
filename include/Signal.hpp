@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <cassert>
 #include <mutex>
 #include <memory>
 #include <vector>
@@ -30,17 +31,14 @@ namespace Framework
 
 		CConnectionPtr Connect(const CSlotFunction& func, bool oneShot = false)
 		{
-			if(func)
-			{
-				std::unique_lock<std::mutex> lock(m_lock);
+			assert(func);
 
-				CConnectionPtr connection = std::make_shared<CConnection>(func, oneShot);
-				m_connections.push_back(connection);
+			std::unique_lock<std::mutex> lock(m_lock);
 
-				return connection;
-			}
+			CConnectionPtr connection = std::make_shared<CConnection>(func, oneShot);
+			m_connections.push_back(connection);
 
-			return nullptr;
+			return connection;
 		}
 
 		CConnectionPtr ConnectOnce(const CSlotFunction& func)
@@ -90,8 +88,7 @@ namespace Framework
 
 				void operator()(Args... args)
 				{
-					if(m_slot)
-						(m_slot)(args...);
+					(m_slot)(args...);
 				}
 			
 				bool IsOneShot() const
