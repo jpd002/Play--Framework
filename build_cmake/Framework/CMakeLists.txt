@@ -83,6 +83,7 @@ set(COMMON_SRC_FILES
 	../../src/mpeg2/VLCTable.cpp
 	../../src/PathUtils.cpp
 	../../src/PtrStream.cpp
+	../../include/Signal.hpp
 	../../src/Stream.cpp
 	../../src/StreamBitStream.cpp
 	../../src/StringUtils.cpp
