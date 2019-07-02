@@ -33,7 +33,7 @@
 
 #endif
 
-#elif defined(__aarch64__) && defined(__linux__)
+#elif defined(GLES_COMPATIBILITY) && defined(__linux__)
 
 #include <GLES3/gl3.h>
 #include <GL/gl.h>
