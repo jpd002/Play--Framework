@@ -1,5 +1,7 @@
 #pragma once
 
+#include "nodiscard.h"
+
 #include <algorithm>
 #include <cassert>
 #include <mutex>
@@ -29,7 +31,7 @@ namespace Framework
 
 		CSignal() = default;
 
-		CConnectionPtr Connect(const CSlotFunction& func, bool oneShot = false)
+		FRAMEWORK_NODISCARD CConnectionPtr Connect(const CSlotFunction& func, bool oneShot = false)
 		{
 			assert(func);
 
@@ -41,7 +43,7 @@ namespace Framework
 			return connection;
 		}
 
-		CConnectionPtr ConnectOnce(const CSlotFunction& func)
+		FRAMEWORK_NODISCARD CConnectionPtr ConnectOnce(const CSlotFunction& func)
 		{
 			return Connect(func, true);
 		}
