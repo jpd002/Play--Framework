@@ -82,10 +82,6 @@ namespace Framework
 				{
 				}
 
-				~CConnection()
-				{
-				}
-
 				void operator()(Args... args)
 				{
 					(m_slot)(args...);
