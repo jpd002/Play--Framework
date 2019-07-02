@@ -37,3 +37,7 @@ set(SRC_FILES
 add_library(Framework_OpenGl ${SRC_FILES})
 target_link_libraries(Framework_OpenGl PUBLIC Framework ${PROJECT_LIBS})
 target_include_directories(Framework_OpenGl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include)
+
+if(TARGET_PLATFORM_ANDROID OR TARGET_PLATFORM_IOS OR TARGET_PLATFORM_UNIX_AARCH64)
+	target_compile_definitions(Framework_OpenGl PUBLIC GLES_COMPATIBILITY)
+endif()
