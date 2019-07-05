@@ -33,15 +33,14 @@
 
 #endif
 
-#elif defined(GLES_COMPATIBILITY) && defined(__linux__)
-
-#include <GLES3/gl3.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-
 #elif defined(__linux__) || defined(__FreeBSD__)
 
+#if defined(USE_GLEW)
 #include <GL/glew.h>
+#elif defined(GLES_COMPATIBILITY)
+#include <GLES3/gl3.h>
+#endif
+
 #include <GL/gl.h>
 #include <GL/glu.h>
 

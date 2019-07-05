@@ -17,6 +17,7 @@ else()
 	set(USE_GLES OFF CACHE BOOL "Use GLES")
 endif()
 
+set(USE_GLEW OFF)
 if(NOT USE_GLES AND NOT APPLE)
 	if (NOT TARGET glew_s)
 		add_subdirectory(
@@ -25,6 +26,7 @@ if(NOT USE_GLES AND NOT APPLE)
 		)
 	endif()
 	list(APPEND PROJECT_LIBS glew_s)
+	set(USE_GLEW ON)
 endif()
 
 if (NOT TARGET Framework)
@@ -48,4 +50,7 @@ target_include_directories(Framework_OpenGl PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/.
 
 if(USE_GLES)
 	target_compile_definitions(Framework_OpenGl PUBLIC GLES_COMPATIBILITY)
+endif()
+if(USE_GLEW)
+	target_compile_definitions(Framework_OpenGl PUBLIC USE_GLEW)
 endif()
