@@ -1,15 +1,19 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1)
 project(Framework)
 
 include(../Framework_Common.cmake)
 
 find_package(ZLIB)
-if(ZLIB_FOUND)
-	LIST(APPEND PROJECT_INCLUDES ${ZLIB_INCLUDE_DIRS})
-else()
+if(NOT ZLIB_FOUND)
 	MESSAGE("-- Using Provided zlib source")
-	LIST(APPEND PROJECT_INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/zlib-1.2.8)
-endif(ZLIB_FOUND)
+	if(NOT TARGET zlibstatic)
+		add_subdirectory(
+			${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/build_cmake/zlib-1.2.8
+			${CMAKE_CURRENT_BINARY_DIR}/zlib-1.2.8
+		)
+	endif()
+endif(NOT ZLIB_FOUND)
+LIST(APPEND PROJECT_LIBS ZLIB::ZLIB)
 
 find_package(ICUUC)
 if(ICUUC_FOUND)
