@@ -37,12 +37,12 @@
 
 #if defined(USE_GLEW)
 #include <GL/glew.h>
-#elif defined(GLES_COMPATIBILITY)
-#include <GLES3/gl3.h>
-#endif
-
 #include <GL/gl.h>
 #include <GL/glu.h>
+#elif defined(GLES_COMPATIBILITY)
+#include <EGL/egl.h>
+#include <GLES3/gl3.h>
+#endif
 
 #endif
 
