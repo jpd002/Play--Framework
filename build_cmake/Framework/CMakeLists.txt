@@ -81,6 +81,7 @@ set(COMMON_SRC_FILES
 	../../src/mpeg2/MotionCodeTable.cpp
 	../../src/mpeg2/QuantiserScaleTable.cpp
 	../../src/mpeg2/VLCTable.cpp
+	../../include/nodiscard.h
 	../../src/PathUtils.cpp
 	../../src/PtrStream.cpp
 	../../include/Signal.hpp
