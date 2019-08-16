@@ -5,7 +5,7 @@
 #include <memory>
 #include <map>
 #include <vector>
-#include "Signal.hpp"
+#include "Signal.h"
 
 namespace Framework
 {

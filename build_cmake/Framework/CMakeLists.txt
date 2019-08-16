@@ -84,7 +84,7 @@ set(COMMON_SRC_FILES
 	../../include/nodiscard.h
 	../../src/PathUtils.cpp
 	../../src/PtrStream.cpp
-	../../include/Signal.hpp
+	../../include/Signal.h
 	../../src/Stream.cpp
 	../../src/StreamBitStream.cpp
 	../../src/StringUtils.cpp

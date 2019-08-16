@@ -1,7 +1,7 @@
 #pragma once
 
 #include "win32/ListBox.h"
-#include "Signal.hpp"
+#include "Signal.h"
 
 namespace Framework
 {

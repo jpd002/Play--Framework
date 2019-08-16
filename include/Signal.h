@@ -11,7 +11,6 @@
 
 namespace Framework
 {
-
 	template<typename> class CSignal;
 	template<typename T, typename... Args>
 	class CSignal<T (Args...)>
@@ -19,32 +18,27 @@ namespace Framework
 	public:
 		class CConnection;
 
-		typedef std::shared_ptr<CConnection> CConnectionPtr;
-		typedef std::weak_ptr<CConnection> CConnectionWeakPtr;
-		typedef std::vector<CConnectionPtr> CConnectionListPtr;
-
-		typedef CSignal<T (Args...)> CSignalProto;
-		typedef std::function<void()> CConectionFunction;
-		typedef std::function<T (Args...)> CSlotFunction;
-		typedef std::weak_ptr<const CSlotFunction> CSlotFunctionPtr;
+		typedef std::shared_ptr<CConnection> Connection;
+		typedef std::weak_ptr<CConnection> WeakConnection;
+		typedef std::function<T (Args...)> SlotFunction;
 
 		CSignal() = default;
 
 		FRAMEWORK_NODISCARD
-		CConnectionPtr Connect(const CSlotFunction& func, bool oneShot = false)
+		Connection Connect(const SlotFunction& func, bool oneShot = false)
 		{
 			assert(func);
 
 			std::unique_lock<std::mutex> lock(m_lock);
 
-			CConnectionPtr connection = std::make_shared<CConnection>(func, oneShot);
+			auto connection = std::make_shared<CConnection>(func, oneShot);
 			m_connections.push_back(connection);
 
 			return connection;
 		}
 
 		FRAMEWORK_NODISCARD
-		CConnectionPtr ConnectOnce(const CSlotFunction& func)
+		Connection ConnectOnce(const SlotFunction& func)
 		{
 			return Connect(func, true);
 		}
@@ -64,11 +58,13 @@ namespace Framework
 				std::remove_if(
 					m_connections.begin(), 
 					m_connections.end(),
-					[&](CConnectionWeakPtr& connection)
+					[&](WeakConnection& connection)
 					{
 						auto connectionPtr = connection.lock();
 						if(connectionPtr)
+						{
 							(*connectionPtr)(args...);
+						}
 						return !connectionPtr || (*connectionPtr).IsOneShot();
 					}
 				), 
@@ -79,7 +75,7 @@ namespace Framework
 		class CConnection
 		{
 			public:
-				CConnection(const CSlotFunction slot, bool oneShot)
+				CConnection(const SlotFunction slot, bool oneShot)
 				: m_slot(slot)
 				, m_oneShot(oneShot)
 				{
@@ -96,11 +92,11 @@ namespace Framework
 				}
 
 			private:
-				CSlotFunction m_slot;
+				SlotFunction m_slot;
 				bool m_oneShot;
 		};
 	private:
-		std::vector<CConnectionWeakPtr> m_connections;
+		std::vector<WeakConnection> m_connections;
 		std::mutex m_lock;
 	};
 }

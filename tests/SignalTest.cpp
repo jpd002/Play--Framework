@@ -1,5 +1,5 @@
 #include "SignalTest.h"
-#include "Signal.hpp"
+#include "Signal.h"
 #include <cassert>
 
 void SignalTest_Execute()

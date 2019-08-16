@@ -1,7 +1,7 @@
 #pragma once
 
 #include "win32/Edit.h"
-#include "Signal.hpp"
+#include "Signal.h"
 
 namespace Framework
 {
