@@ -56,8 +56,8 @@ namespace Framework
 			PropertyGridListBoxPtr		m_listBox;
 			PropertyGridEditPtr			m_edit;
 			int							m_editingIndex = -1;
-			Framework::Win32::CPropertyGridListBox::StartEditionEvent::CConnectionPtr m_StartEditionConnection;
-			Framework::Win32::CPropertyGridEdit::EditCompletedEvent::CConnectionPtr m_EditCompletedConnection;
+			Framework::Win32::CPropertyGridListBox::StartEditionEvent::Connection m_StartEditionConnection;
+			Framework::Win32::CPropertyGridEdit::EditCompletedEvent::Connection m_EditCompletedConnection;
 		};
 	}
 }

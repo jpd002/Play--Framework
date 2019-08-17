@@ -34,7 +34,7 @@ namespace Framework
 			IconEventSignalType		m_iconEventSignal;
 			unsigned int			m_nextIconId = 1;
 			unsigned int			m_taskBarCreatedMessage = 0;
-			std::vector<IconEventSignalType::CConnectionPtr> m_IconEventSignalTypeConnectionList;
+			std::vector<IconEventSignalType::Connection> m_IconEventSignalTypeConnectionList;
 		};
 	}
 }
