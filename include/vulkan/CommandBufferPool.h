@@ -11,10 +11,10 @@ namespace Framework
 		class CCommandBufferPool
 		{
 		public:
-				CCommandBufferPool() = default;
-			        CCommandBufferPool(CDevice&, uint32_t);
-				CCommandBufferPool(const CCommandBufferPool&) = delete;
-				CCommandBufferPool(CCommandBufferPool&&);
+			CCommandBufferPool() = default;
+			CCommandBufferPool(CDevice&, uint32_t);
+			CCommandBufferPool(const CCommandBufferPool&) = delete;
+			CCommandBufferPool(CCommandBufferPool&&);
 
 			virtual ~CCommandBufferPool();
 
