@@ -11,10 +11,11 @@ namespace Framework
 		class CInstance
 		{
 		public:
-			        CInstance() = default;
-			        CInstance(const VkInstanceCreateInfo&);
-			        CInstance(const CInstance&) = delete;
-			        CInstance(CInstance&&);
+			         CInstance() = default;
+			explicit CInstance(VkInstance);
+			         CInstance(const VkInstanceCreateInfo&);
+			         CInstance(const CInstance&) = delete;
+			         CInstance(CInstance&&);
 			
 			virtual ~CInstance();
 			
@@ -60,7 +61,9 @@ namespace Framework
 #endif
 		private:
 			void    Create(const VkInstanceCreateInfo&);
+			void    GetProcAddrs();
 			
+			bool m_ownsHandle = false;
 			VkInstance m_handle = VK_NULL_HANDLE;
 		};
 	}

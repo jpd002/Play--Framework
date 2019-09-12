@@ -6,9 +6,17 @@
 
 using namespace Framework::Vulkan;
 
+CInstance::CInstance(VkInstance handle)
+	: m_handle(handle)
+{
+	GetProcAddrs();
+}
+
 CInstance::CInstance(const VkInstanceCreateInfo& instanceCreateInfo)
+	: m_ownsHandle(true)
 {
 	Create(instanceCreateInfo);
+	GetProcAddrs();
 }
 
 CInstance::~CInstance()
@@ -23,7 +31,7 @@ bool CInstance::IsEmpty() const
 
 void CInstance::Reset()
 {
-	if(m_handle != VK_NULL_HANDLE)
+	if(m_ownsHandle && m_handle != VK_NULL_HANDLE)
 	{
 		this->vkDestroyInstance(m_handle, nullptr);
 		m_handle = VK_NULL_HANDLE;
@@ -64,6 +72,7 @@ CInstance& CInstance::operator =(CInstance&& rhs)
 	Reset();
 	
 	std::swap(m_handle, rhs.m_handle);
+	std::swap(m_ownsHandle, rhs.m_ownsHandle);
 	
 	std::swap(vkDestroyInstance, rhs.vkDestroyInstance);
 	
@@ -108,7 +117,10 @@ void CInstance::Create(const VkInstanceCreateInfo& instanceCreateInfo)
 	
 	auto result = CLoader::GetInstance().vkCreateInstance(&instanceCreateInfo, nullptr, &m_handle);
 	CHECKVULKANERROR(result);
-	
+}
+
+void CInstance::GetProcAddrs()
+{
 	SET_PROC_ADDR(vkDestroyInstance);
 	
 	SET_PROC_ADDR(vkCreateDevice);
