@@ -21,4 +21,4 @@ set(SRC_FILES
 )
 
 add_library(Framework_Vulkan ${SRC_FILES})
-target_include_directories(Framework_Vulkan PUBLIC ${FRAMEWORK_INCLUDE_DIR} ${VULKAN_INCLUDE_DIR})
+target_include_directories(Framework_Vulkan PUBLIC ${FRAMEWORK_INCLUDE_DIR} ${Vulkan_INCLUDE_DIR})
