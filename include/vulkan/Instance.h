@@ -59,6 +59,10 @@ namespace Framework
 			//VK_KHR_win32_surface
 			DECLARE_FUNCTION(vkCreateWin32SurfaceKHR)
 #endif
+#if defined(VK_USE_PLATFORM_MACOS_MVK)
+			//VK_MVK_macos_surface
+			DECLARE_FUNCTION(vkCreateMacOSSurfaceMVK)
+#endif
 		private:
 			void    Create(const VkInstanceCreateInfo&);
 			void    GetProcAddrs();
