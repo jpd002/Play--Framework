@@ -68,6 +68,9 @@ void CInstance::Reset()
 #if defined(VK_USE_PLATFORM_MACOS_MVK)
 	vkCreateMacOSSurfaceMVK = nullptr;
 #endif
+#if defined(VK_USE_PLATFORM_IOS_MVK)
+	vkCreateIOSSurfaceMVK = nullptr;
+#endif
 }
 
 CInstance& CInstance::operator =(CInstance&& rhs)
@@ -107,6 +110,9 @@ CInstance& CInstance::operator =(CInstance&& rhs)
 #endif
 #if defined(VK_USE_PLATFORM_MACOS_MVK)
 	std::swap(vkCreateMacOSSurfaceMVK, rhs.vkCreateMacOSSurfaceMVK);
+#endif
+#if defined(VK_USE_PLATFORM_IOS_MVK)
+	std::swap(vkCreateIOSSurfaceMVK, rhs.vkCreateIOSSurfaceMVK);
 #endif
 	
 	return (*this);
@@ -157,5 +163,8 @@ void CInstance::GetProcAddrs()
 #endif
 #if defined(VK_USE_PLATFORM_MACOS_MVK)
 	SET_PROC_ADDR(vkCreateMacOSSurfaceMVK);
+#endif
+#if defined(VK_USE_PLATFORM_IOS_MVK)
+	SET_PROC_ADDR(vkCreateIOSSurfaceMVK);
 #endif
 }
