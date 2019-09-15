@@ -130,6 +130,7 @@ namespace Framework
 			//VK_KHR_swapchain
 			DECLARE_FUNCTION(vkAcquireNextImageKHR)
 			DECLARE_FUNCTION(vkCreateSwapchainKHR)
+			DECLARE_FUNCTION(vkDestroySwapchainKHR)
 			DECLARE_FUNCTION(vkGetSwapchainImagesKHR)
 			DECLARE_FUNCTION(vkQueuePresentKHR)
 		

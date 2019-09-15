@@ -116,6 +116,7 @@ void CDevice::Reset()
 	
 	vkAcquireNextImageKHR = nullptr;
 	vkCreateSwapchainKHR = nullptr;
+	vkDestroySwapchainKHR = nullptr;
 	vkGetSwapchainImagesKHR = nullptr;
 	vkQueuePresentKHR = nullptr;
 }
@@ -212,6 +213,7 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	
 	std::swap(vkAcquireNextImageKHR, rhs.vkAcquireNextImageKHR);
 	std::swap(vkCreateSwapchainKHR, rhs.vkCreateSwapchainKHR);
+	std::swap(vkDestroySwapchainKHR, rhs.vkDestroySwapchainKHR);
 	std::swap(vkGetSwapchainImagesKHR, rhs.vkGetSwapchainImagesKHR);
 	std::swap(vkQueuePresentKHR, rhs.vkQueuePresentKHR);
 	
@@ -315,6 +317,7 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	
 	SET_PROC_ADDR(vkAcquireNextImageKHR);
 	SET_PROC_ADDR(vkCreateSwapchainKHR);
+	SET_PROC_ADDR(vkDestroySwapchainKHR);
 	SET_PROC_ADDR(vkGetSwapchainImagesKHR);
 	SET_PROC_ADDR(vkQueuePresentKHR);
 }
