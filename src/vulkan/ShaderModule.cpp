@@ -47,7 +47,8 @@ void CShaderModule::Create(Framework::CStream& stream)
 	auto shaderLength = stream.GetLength();
 	assert((shaderLength & 0x03) == 0);
 	uint32* shader = new uint32[shaderLength / 4];
-	stream.Read(shader, shaderLength);
+	uint64 read = stream.Read(shader, shaderLength);
+	assert(read == shaderLength);
 	
 	auto shaderModuleCreateInfo = Framework::Vulkan::ShaderModuleCreateInfo();
 	shaderModuleCreateInfo.codeSize = shaderLength;
