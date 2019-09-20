@@ -11,12 +11,14 @@ set(SRC_FILES
 	../../src/vulkan/Instance.cpp
 	../../src/vulkan/Loader.cpp
 	../../src/vulkan/ShaderModule.cpp
+	../../src/vulkan/Utils.cpp
 	
 	../../include/vulkan/CommandBufferPool.h
 	../../include/vulkan/Device.h
 	../../include/vulkan/Instance.h
 	../../include/vulkan/Loader.h
 	../../include/vulkan/ShaderModule.h
+	../../include/vulkan/Utils.h
 	../../include/vulkan/VulkanDef.h
 )
 
