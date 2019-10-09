@@ -18,6 +18,7 @@ set(SRC_FILES
 	../../include/vulkan/Instance.h
 	../../include/vulkan/Loader.h
 	../../include/vulkan/ShaderModule.h
+	../../include/vulkan/StructDefs.h
 	../../include/vulkan/Utils.h
 	../../include/vulkan/VulkanDef.h
 )
