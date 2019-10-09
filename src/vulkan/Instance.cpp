@@ -48,6 +48,7 @@ void CInstance::Reset()
 	vkGetPhysicalDeviceProperties = nullptr;
 	vkGetPhysicalDeviceQueueFamilyProperties = nullptr;
 	
+	vkDestroySurfaceKHR = nullptr;
 	vkGetPhysicalDeviceSurfaceCapabilitiesKHR = nullptr;
 	vkGetPhysicalDeviceSurfaceFormatsKHR = nullptr;
 	vkGetPhysicalDeviceSurfacePresentModesKHR = nullptr;
@@ -91,6 +92,7 @@ CInstance& CInstance::operator =(CInstance&& rhs)
 	std::swap(vkGetPhysicalDeviceProperties, rhs.vkGetPhysicalDeviceProperties);
 	std::swap(vkGetPhysicalDeviceQueueFamilyProperties, rhs.vkGetPhysicalDeviceQueueFamilyProperties);
 	
+	std::swap(vkDestroySurfaceKHR, rhs.vkDestroySurfaceKHR);
 	std::swap(vkGetPhysicalDeviceSurfaceCapabilitiesKHR, rhs.vkGetPhysicalDeviceSurfaceCapabilitiesKHR);
 	std::swap(vkGetPhysicalDeviceSurfaceFormatsKHR, rhs.vkGetPhysicalDeviceSurfaceFormatsKHR);
 	std::swap(vkGetPhysicalDeviceSurfacePresentModesKHR, rhs.vkGetPhysicalDeviceSurfacePresentModesKHR);
@@ -144,6 +146,7 @@ void CInstance::GetProcAddrs()
 	SET_PROC_ADDR(vkGetPhysicalDeviceProperties);
 	SET_PROC_ADDR(vkGetPhysicalDeviceQueueFamilyProperties);
 	
+	SET_PROC_ADDR(vkDestroySurfaceKHR);
 	SET_PROC_ADDR(vkGetPhysicalDeviceSurfaceCapabilitiesKHR);
 	SET_PROC_ADDR(vkGetPhysicalDeviceSurfaceFormatsKHR);
 	SET_PROC_ADDR(vkGetPhysicalDeviceSurfacePresentModesKHR);

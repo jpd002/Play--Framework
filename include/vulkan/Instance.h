@@ -42,6 +42,7 @@ namespace Framework
 			DECLARE_FUNCTION(vkDestroyDebugReportCallbackEXT)
 			
 			//VK_KHR_surface
+			DECLARE_FUNCTION(vkDestroySurfaceKHR)
 			DECLARE_FUNCTION(vkGetPhysicalDeviceSurfaceCapabilitiesKHR)
 			DECLARE_FUNCTION(vkGetPhysicalDeviceSurfaceFormatsKHR)
 			DECLARE_FUNCTION(vkGetPhysicalDeviceSurfacePresentModesKHR)
