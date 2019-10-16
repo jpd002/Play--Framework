@@ -50,10 +50,8 @@ set(COMMON_SRC_FILES
 	../../src/BitStream.cpp
 	../../src/Config.cpp
 	../../src/Csv.cpp
-	../../include/Csv.h
 	../../src/Endian.cpp
 	../../src/HashUtils.cpp
-	../../include/HashUtils.h
 	../../src/idct/IEEE1180.cpp
 	../../src/layout/FlatLayout.cpp
 	../../src/layout/GridLayout.cpp
@@ -65,7 +63,6 @@ set(COMMON_SRC_FILES
 	../../src/layout/VerticalLayout.cpp
 	../../src/LzAri.cpp
 	../../src/math/MathStringUtils.cpp
-	../../include/maybe_unused.h
 	../../src/MemStream.cpp
 	../../src/mpeg2/CodedBlockPatternTable.cpp
 	../../src/mpeg2/DcSizeChrominanceTable.cpp
@@ -81,22 +78,17 @@ set(COMMON_SRC_FILES
 	../../src/mpeg2/MotionCodeTable.cpp
 	../../src/mpeg2/QuantiserScaleTable.cpp
 	../../src/mpeg2/VLCTable.cpp
-	../../include/nodiscard.h
 	../../src/PathUtils.cpp
 	../../src/PtrStream.cpp
-	../../include/signal/Signal.h
 	../../src/Stream.cpp
 	../../src/StreamBitStream.cpp
 	../../src/StringUtils.cpp
-	../../include/StringUtils.h
 	../../src/string_cast.cpp
 	../../src/string_cast_sjis.cpp
 	../../src/string_cast_win1252.cpp
-	../../include/std_experimental_map.h
 	../../src/StdStream.cpp
 	../../src/StdStreamUtils.cpp
 	../../src/ThreadPool.cpp
-	../../include/ThreadPool.h
 	../../src/Utf8.cpp
 	../../src/xml/FilteringNodeIterator.cpp
 	../../src/xml/Node.cpp
@@ -109,6 +101,15 @@ set(COMMON_SRC_FILES
 	../../src/zip/ZipFile.cpp
 	../../src/zip/ZipInflateStream.cpp
 	../../src/zip/ZipStoreStream.cpp
+
+	../../include/Csv.h
+	../../include/HashUtils.h
+	../../include/maybe_unused.h
+	../../include/nodiscard.h
+	../../include/signal/Signal.h
+	../../include/StringUtils.h
+	../../include/std_experimental_map.h
+	../../include/ThreadPool.h
 )
 
 if(ANDROID)
