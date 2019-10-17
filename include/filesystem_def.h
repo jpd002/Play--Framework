@@ -1,6 +1,6 @@
 #pragma once
 
-#if defined(__has_include) && __has_include(<filesystem>) && !defined(__APPLE__)
+#if defined(__has_include) && __has_include(<filesystem>) && !defined(__APPLE__) && !defined(__ANDROID__)
 	#include <filesystem>
 	namespace fs = std::filesystem;
 #else
