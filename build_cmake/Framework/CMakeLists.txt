@@ -59,6 +59,7 @@ set(COMMON_SRC_FILES
 	../../src/Config.cpp
 	../../src/Csv.cpp
 	../../src/Endian.cpp
+	../../src/FilesystemUtils.cpp
 	../../src/HashUtils.cpp
 	../../src/idct/IEEE1180.cpp
 	../../src/layout/FlatLayout.cpp
@@ -112,6 +113,7 @@ set(COMMON_SRC_FILES
 
 	../../include/Csv.h
 	../../include/filesystem_def.h
+	../../include/FilesystemUtils.h
 	../../include/HashUtils.h
 	../../include/maybe_unused.h
 	../../include/nodiscard.h
