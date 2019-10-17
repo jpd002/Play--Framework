@@ -15,6 +15,14 @@ if(NOT ZLIB_FOUND)
 endif(NOT ZLIB_FOUND)
 LIST(APPEND PROJECT_LIBS ZLIB::ZLIB)
 
+if(NOT TARGET ghc_filesystem)
+	add_subdirectory(
+		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/ghc_filesystem
+		${CMAKE_CURRENT_BINARY_DIR}/ghc_filesystem
+	)
+endif()
+LIST(APPEND PROJECT_LIBS ghc_filesystem)
+
 find_package(ICUUC)
 if(ICUUC_FOUND)
 	LIST(APPEND PROJECT_INCLUDES ${ICUUC_INCLUDE_DIRS})
@@ -103,6 +111,7 @@ set(COMMON_SRC_FILES
 	../../src/zip/ZipStoreStream.cpp
 
 	../../include/Csv.h
+	../../include/filesystem_def.h
 	../../include/HashUtils.h
 	../../include/maybe_unused.h
 	../../include/nodiscard.h
@@ -123,5 +132,5 @@ if(ANDROID)
 endif()
 
 add_library(Framework ${COMMON_SRC_FILES} ${PLATFORM_SRC_FILES})
-target_link_libraries(Framework PUBLIC Boost::boost Boost::filesystem ${PROJECT_LIBS} PRIVATE ${PRIVATE_PROJECT_LIBS})
+target_link_libraries(Framework PUBLIC Boost::boost ${PROJECT_LIBS} PRIVATE ${PRIVATE_PROJECT_LIBS})
 target_include_directories(Framework PUBLIC ${FRAMEWORK_INCLUDE_DIR} ${PROJECT_INCLUDES})

@@ -1,9 +1,9 @@
 #pragma once
 
 #include <string>
-#include "boost_filesystem_def.h"
 #include <map>
 #include <mutex>
+#include "filesystem_def.h"
 #include "xml/Node.h"
 
 namespace Framework
@@ -11,7 +11,7 @@ namespace Framework
 	class CConfig
 	{
 	public:
-		typedef boost::filesystem::path PathType;
+		typedef fs::path PathType;
 
 											CConfig(const PathType&, bool readonly = false);
 											CConfig(const CConfig&) = delete;

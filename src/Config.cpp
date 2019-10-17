@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
+#include <cassert>
 #include "Config.h"
 #include "StdStream.h"
 #include "xml/Writer.h"
