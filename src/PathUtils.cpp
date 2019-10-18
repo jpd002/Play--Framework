@@ -49,11 +49,7 @@ fs::path PathUtils::GetCachePath()
 
 #endif	// !WINAPI_PARTITION_APP
 
-#endif	// _WIN32
-
-#if defined(_POSIX_VERSION)
-
-#if defined(__APPLE__)
+#elif defined(__APPLE__)
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <Foundation/Foundation.h>
@@ -147,9 +143,7 @@ fs::path PathUtils::GetPersonalDataPath()
 	return fs::path(userInfo->pw_dir);
 }
 
-#endif	// !DEFINED(__APPLE__)
-
-#endif	// !DEFINED(_POSIX_VERSION)
+#endif
 
 void PathUtils::EnsurePathExists(const fs::path& path)
 {
