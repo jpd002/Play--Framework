@@ -16,7 +16,7 @@ endif()
 
 set(USE_GLEW OFF)
 if(NOT USE_GLES AND NOT APPLE)
-	find_package(GLEW REQUIRED)
+	find_package(GLEW)
 	if(GLEW_FOUND)
 		list(APPEND PROJECT_LIBS ${GLEW_LIBRARIES})
 		include_directories(${GLEW_INCLUDE_DIRS})
