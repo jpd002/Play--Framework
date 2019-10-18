@@ -18,7 +18,7 @@ set(USE_GLEW OFF)
 if(NOT USE_GLES AND NOT APPLE)
 	find_package(GLEW)
 	if(GLEW_FOUND)
-		list(APPEND PROJECT_LIBS ${GLEW_LIBRARIES})
+		list(APPEND PROJECT_LIBS GLEW::GLEW})
 	else()
 		if (NOT TARGET glew_s)
 			add_subdirectory(
