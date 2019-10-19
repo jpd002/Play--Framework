@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1)
 project(Framework_OpenGl)
 
 set(CMAKE_MODULE_PATH
@@ -16,13 +16,18 @@ endif()
 
 set(USE_GLEW OFF)
 if(NOT USE_GLES AND NOT APPLE)
-	if (NOT TARGET glew_s)
-		add_subdirectory(
-			${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/glew-2.0.0
-			${CMAKE_CURRENT_BINARY_DIR}/glew-2.0.0
-		)
+	find_package(GLEW)
+	if(GLEW_FOUND)
+		list(APPEND PROJECT_LIBS GLEW::GLEW})
+	else()
+		if (NOT TARGET glew_s)
+			add_subdirectory(
+				${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/glew-2.0.0
+				${CMAKE_CURRENT_BINARY_DIR}/glew-2.0.0
+			)
+		endif()
+		list(APPEND PROJECT_LIBS glew_s)
 	endif()
-	list(APPEND PROJECT_LIBS glew_s)
 	set(USE_GLEW ON)
 endif()
 
