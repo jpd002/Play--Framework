@@ -3,6 +3,18 @@
 #include <Windows.h>
 #endif
 
+namespace
+{
+	//From https://stackoverflow.com/a/58237530
+	template <typename TP>
+	std::time_t to_time_t(TP tp)
+	{
+		using namespace std::chrono;
+		auto sctp = time_point_cast<system_clock::duration>(tp - TP::clock::now() + system_clock::now());
+		return system_clock::to_time_t(sctp);
+	}
+}
+
 time_t Framework::ConvertFsTimeToSystemTime(const fs::file_time_type& fileTime)
 {
 	//This is temporary till we get clock_cast in C++20
@@ -28,7 +40,7 @@ time_t Framework::ConvertFsTimeToSystemTime(const fs::file_time_type& fileTime)
 		return 0;
 	}
 #else
-	return fs::file_time_type::clock::to_time_t(fileTime);
+	return to_time_t(fileTime);
 #endif
 }
 
