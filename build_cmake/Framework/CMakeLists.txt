@@ -37,13 +37,6 @@ if(OPENSSL_FOUND)
 	add_definitions(-DHAS_OPENSSL)
 endif()
 
-if(NOT TARGET Boost::boost)
-	add_subdirectory(
-		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/boost-cmake
-		${CMAKE_CURRENT_BINARY_DIR}/boost-cmake
-	)
-endif()
-
 if(APPLE)
 	LIST(APPEND PRIVATE_PROJECT_LIBS "-framework Foundation")
 endif()
@@ -134,5 +127,5 @@ if(ANDROID)
 endif()
 
 add_library(Framework ${COMMON_SRC_FILES} ${PLATFORM_SRC_FILES})
-target_link_libraries(Framework PUBLIC Boost::boost ${PROJECT_LIBS} PRIVATE ${PRIVATE_PROJECT_LIBS})
+target_link_libraries(Framework PUBLIC ${PROJECT_LIBS} PRIVATE ${PRIVATE_PROJECT_LIBS})
 target_include_directories(Framework PUBLIC ${FRAMEWORK_INCLUDE_DIR} ${PROJECT_INCLUDES})

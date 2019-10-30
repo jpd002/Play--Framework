@@ -1,7 +1,7 @@
 #include "win32/WebBrowser.h"
 #include <assert.h>
 #include <ExDispid.h>
-#include <boost/filesystem.hpp>
+#include "filesystem_def.h"
 
 using namespace Framework;
 using namespace Framework::Win32;
@@ -110,15 +110,15 @@ void CWebBrowser::EnsureIE9ModeIsActivated()
 	{
 		return;
 	}
-	boost::filesystem::path modulePath = 
+	auto modulePath = 
 		[]()
 		{
 			TCHAR modulePath[MAX_PATH + 1];
 			GetModuleFileName(NULL, modulePath, MAX_PATH);
 			modulePath[MAX_PATH] = 0;
-			return boost::filesystem::path(modulePath);
+			return fs::path(modulePath);
 		}();
-	auto moduleFileName = modulePath.leaf().native();
+	auto moduleFileName = modulePath.filename().native();
 	DWORD emulationValue = 9000;
 	result = RegSetValueEx(emulationKey, moduleFileName.c_str(), 0, REG_DWORD, reinterpret_cast<BYTE*>(&emulationValue), sizeof(emulationValue));
 	assert(result == ERROR_SUCCESS);

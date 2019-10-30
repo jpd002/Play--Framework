@@ -3,13 +3,6 @@ project(Framework_Win32)
 
 include(../Framework_Common.cmake)
 
-if(NOT TARGET Boost::boost)
-	add_subdirectory(
-		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/boost-cmake
-		${CMAKE_CURRENT_BINARY_DIR}/boost-cmake
-	)
-endif()
-
 set(SRC_FILES
 	../../include/direct3d9/D3D9TextureUtils.h
 	../../src/directinput/Device.cpp 
@@ -72,5 +65,5 @@ set(SRC_FILES
 )
 
 add_library(Framework_Win32 ${SRC_FILES})
-target_link_libraries(Framework_Win32 PUBLIC Boost::boost comctl32)
+target_link_libraries(Framework_Win32 PUBLIC comctl32)
 target_include_directories(Framework_Win32 PUBLIC ${FRAMEWORK_INCLUDE_DIR})
