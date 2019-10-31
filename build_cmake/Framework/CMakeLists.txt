@@ -108,6 +108,14 @@ set(COMMON_SRC_FILES
 	../../include/filesystem_def.h
 	../../include/FilesystemUtils.h
 	../../include/HashUtils.h
+	../../include/layout/FlatLayout.h
+	../../include/layout/GridLayout.h
+	../../include/layout/HorizontalLayout.h
+	../../include/layout/LayoutBase.h
+	../../include/layout/LayoutBaseItem.h
+	../../include/layout/LayoutObject.h
+	../../include/layout/LayoutStretch.h
+	../../include/layout/VerticalLayout.h
 	../../include/maybe_unused.h
 	../../include/nodiscard.h
 	../../include/signal/Signal.h
