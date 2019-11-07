@@ -41,6 +41,7 @@ void CDevice::Reset()
 	vkCmdBindVertexBuffers = nullptr;
 	vkCmdClearColorImage = nullptr;
 	vkCmdCopyBufferToImage = nullptr;
+	vkCmdDispatch = nullptr;
 	vkCmdDraw = nullptr;
 	vkCmdDrawIndexed = nullptr;
 	vkCmdEndRenderPass = nullptr;
@@ -94,6 +95,7 @@ void CDevice::Reset()
 	vkUnmapMemory = nullptr;
 	
 	vkCreateGraphicsPipelines = nullptr;
+	vkCreateComputePipelines = nullptr;
 	vkDestroyPipeline = nullptr;
 	
 	vkCreatePipelineCache = nullptr;
@@ -138,6 +140,7 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(vkCmdBindVertexBuffers, rhs.vkCmdBindVertexBuffers);
 	std::swap(vkCmdClearColorImage, rhs.vkCmdClearColorImage);
 	std::swap(vkCmdCopyBufferToImage, rhs.vkCmdCopyBufferToImage);
+	std::swap(vkCmdDispatch, rhs.vkCmdDispatch);
 	std::swap(vkCmdDraw, rhs.vkCmdDraw);
 	std::swap(vkCmdDrawIndexed, rhs.vkCmdDrawIndexed);
 	std::swap(vkCmdEndRenderPass, rhs.vkCmdEndRenderPass);
@@ -191,6 +194,7 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(vkUnmapMemory, rhs.vkUnmapMemory);
 	
 	std::swap(vkCreateGraphicsPipelines, rhs.vkCreateGraphicsPipelines);
+	std::swap(vkCreateComputePipelines, rhs.vkCreateComputePipelines);
 	std::swap(vkDestroyPipeline, rhs.vkDestroyPipeline);
 	
 	std::swap(vkCreatePipelineCache, rhs.vkCreatePipelineCache);
@@ -242,6 +246,7 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	SET_PROC_ADDR(vkCmdBindVertexBuffers);
 	SET_PROC_ADDR(vkCmdClearColorImage);
 	SET_PROC_ADDR(vkCmdCopyBufferToImage);
+	SET_PROC_ADDR(vkCmdDispatch);
 	SET_PROC_ADDR(vkCmdDraw);
 	SET_PROC_ADDR(vkCmdDrawIndexed);
 	SET_PROC_ADDR(vkCmdEndRenderPass);
@@ -295,6 +300,7 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	SET_PROC_ADDR(vkUnmapMemory);
 	
 	SET_PROC_ADDR(vkCreateGraphicsPipelines);
+	SET_PROC_ADDR(vkCreateComputePipelines);
 	SET_PROC_ADDR(vkDestroyPipeline);
 	
 	SET_PROC_ADDR(vkCreatePipelineCache);

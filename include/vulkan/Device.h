@@ -37,6 +37,7 @@ namespace Framework
 			DECLARE_FUNCTION(vkCmdBindVertexBuffers)
 			DECLARE_FUNCTION(vkCmdClearColorImage)
 			DECLARE_FUNCTION(vkCmdCopyBufferToImage)
+			DECLARE_FUNCTION(vkCmdDispatch)
 			DECLARE_FUNCTION(vkCmdDraw)
 			DECLARE_FUNCTION(vkCmdDrawIndexed)
 			DECLARE_FUNCTION(vkCmdEndRenderPass)
@@ -101,6 +102,7 @@ namespace Framework
 			
 			//Pipeline
 			DECLARE_FUNCTION(vkCreateGraphicsPipelines)
+			DECLARE_FUNCTION(vkCreateComputePipelines)
 			DECLARE_FUNCTION(vkDestroyPipeline)
 			
 			//Pipeline Cache
