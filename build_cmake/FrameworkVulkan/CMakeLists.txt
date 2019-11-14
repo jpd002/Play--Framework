@@ -5,6 +5,13 @@ include(../Framework_Common.cmake)
 
 find_package(Vulkan REQUIRED)
 
+if(NOT TARGET Framework)
+	add_subdirectory(
+		${CMAKE_CURRENT_SOURCE_DIR}/../Framework
+		${CMAKE_CURRENT_BINARY_DIR}/Framework
+	)
+endif()
+
 set(SRC_FILES
 	../../src/vulkan/CommandBufferPool.cpp
 	../../src/vulkan/Device.cpp
@@ -25,3 +32,4 @@ set(SRC_FILES
 
 add_library(Framework_Vulkan ${SRC_FILES})
 target_include_directories(Framework_Vulkan PUBLIC ${FRAMEWORK_INCLUDE_DIR} ${Vulkan_INCLUDE_DIR})
+target_link_libraries(Framework_Vulkan PUBLIC Framework)
