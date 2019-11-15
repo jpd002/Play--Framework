@@ -3,9 +3,9 @@
 #include "Stream.h"
 #include "Device.h"
 
-namespace Framework 
-{ 
-	namespace Vulkan 
+namespace Framework
+{
+	namespace Vulkan
 	{
 		class CShaderModule
 		{
