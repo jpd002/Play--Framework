@@ -14,6 +14,7 @@ endif()
 
 set(SRC_FILES
 	../../src/vulkan/CommandBufferPool.cpp
+	../../src/vulkan/Buffer.cpp
 	../../src/vulkan/Device.cpp
 	../../src/vulkan/Instance.cpp
 	../../src/vulkan/Loader.cpp
@@ -21,6 +22,7 @@ set(SRC_FILES
 	../../src/vulkan/Utils.cpp
 	
 	../../include/vulkan/CommandBufferPool.h
+	../../include/vulkan/Buffer.h
 	../../include/vulkan/Device.h
 	../../include/vulkan/Instance.h
 	../../include/vulkan/Loader.h
