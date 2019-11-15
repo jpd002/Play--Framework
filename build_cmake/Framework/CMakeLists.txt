@@ -16,6 +16,7 @@ endif(NOT ZLIB_FOUND)
 LIST(APPEND PROJECT_LIBS ZLIB::ZLIB)
 
 if(NOT TARGET ghc_filesystem)
+	SET(GHC_FILESYSTEM_WITH_INSTALL OFF CACHE BOOL "Disable header/cmake file installation")
 	add_subdirectory(
 		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/ghc_filesystem
 		${CMAKE_CURRENT_BINARY_DIR}/ghc_filesystem
