@@ -46,6 +46,7 @@ namespace Framework
 			DECLARE_FUNCTION(vkCmdPushConstants)
 			DECLARE_FUNCTION(vkCmdSetScissor)
 			DECLARE_FUNCTION(vkCmdSetViewport)
+			DECLARE_FUNCTION(vkCmdUpdateBuffer)
 			
 			DECLARE_FUNCTION(vkGetDeviceQueue)
 			

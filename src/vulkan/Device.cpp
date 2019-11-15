@@ -50,6 +50,7 @@ void CDevice::Reset()
 	vkCmdPushConstants = nullptr;
 	vkCmdSetScissor = nullptr;
 	vkCmdSetViewport = nullptr;
+	vkCmdUpdateBuffer = nullptr;
 	
 	vkGetDeviceQueue = nullptr;
 	
@@ -149,6 +150,7 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(vkCmdPushConstants, rhs.vkCmdPushConstants);
 	std::swap(vkCmdSetScissor, rhs.vkCmdSetScissor);
 	std::swap(vkCmdSetViewport, rhs.vkCmdSetViewport);
+	std::swap(vkCmdUpdateBuffer, rhs.vkCmdUpdateBuffer);
 	
 	std::swap(vkGetDeviceQueue, rhs.vkGetDeviceQueue);
 	
@@ -255,6 +257,7 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	SET_PROC_ADDR(vkCmdPushConstants);
 	SET_PROC_ADDR(vkCmdSetScissor);
 	SET_PROC_ADDR(vkCmdSetViewport);
+	SET_PROC_ADDR(vkCmdUpdateBuffer);
 	
 	SET_PROC_ADDR(vkGetDeviceQueue);
 	
