@@ -51,7 +51,7 @@ CBuffer::operator VkBuffer() const
 	return m_handle;
 }
 
-CBuffer::operator VkDeviceMemory() const
+VkDeviceMemory CBuffer::GetMemory() const
 {
 	return m_memory;
 }

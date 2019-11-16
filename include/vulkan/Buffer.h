@@ -20,7 +20,8 @@ namespace Framework
 			CBuffer& operator =(const CBuffer&) = delete;
 			CBuffer& operator =(CBuffer&&);
 			         operator VkBuffer() const;
-			         operator VkDeviceMemory() const;
+
+			VkDeviceMemory GetMemory() const;
 			
 		private:
 			void Create(const VkPhysicalDeviceMemoryProperties&, VkBufferUsageFlags, uint32);
