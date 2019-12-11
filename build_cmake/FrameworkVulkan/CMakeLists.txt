@@ -16,6 +16,7 @@ set(SRC_FILES
 	../../src/vulkan/CommandBufferPool.cpp
 	../../src/vulkan/Buffer.cpp
 	../../src/vulkan/Device.cpp
+	../../src/vulkan/Image.cpp
 	../../src/vulkan/Instance.cpp
 	../../src/vulkan/Loader.cpp
 	../../src/vulkan/ShaderModule.cpp
@@ -24,6 +25,7 @@ set(SRC_FILES
 	../../include/vulkan/CommandBufferPool.h
 	../../include/vulkan/Buffer.h
 	../../include/vulkan/Device.h
+	../../include/vulkan/Image.h
 	../../include/vulkan/Instance.h
 	../../include/vulkan/Loader.h
 	../../include/vulkan/ShaderModule.h
