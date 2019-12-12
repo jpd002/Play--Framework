@@ -12,6 +12,7 @@ namespace Framework
 		public:
 			        CBuffer() = default;
 			        CBuffer(CDevice&, const VkPhysicalDeviceMemoryProperties&, VkBufferUsageFlags, uint32);
+			        CBuffer(const CBuffer&) = delete;
 			virtual ~CBuffer();
 			
 			bool IsEmpty() const;
