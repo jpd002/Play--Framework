@@ -74,6 +74,26 @@ uint32 CImage::GetLinearSize() const
 	}
 }
 
+VkImageView CImage::CreateImageView()
+{
+	auto imageViewCreateInfo = Framework::Vulkan::ImageViewCreateInfo();
+	imageViewCreateInfo.image    = m_handle;
+	imageViewCreateInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+	imageViewCreateInfo.format   = m_format;
+	imageViewCreateInfo.components = 
+	{
+		VK_COMPONENT_SWIZZLE_R, VK_COMPONENT_SWIZZLE_G, 
+		VK_COMPONENT_SWIZZLE_B, VK_COMPONENT_SWIZZLE_A 
+	};
+	imageViewCreateInfo.subresourceRange = { VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1 };
+
+	VkImageView imageView = VK_NULL_HANDLE;
+	auto result = m_device->vkCreateImageView(*m_device, &imageViewCreateInfo, nullptr, &imageView);
+	CHECKVULKANERROR(result);
+
+	return imageView;
+}
+
 void CImage::SetLayout(VkQueue queue, CCommandBufferPool& commandBufferPool,
 	VkImageLayout layout, VkAccessFlags accessFlags)
 {

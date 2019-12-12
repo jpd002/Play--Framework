@@ -23,6 +23,8 @@ namespace Framework
 			
 			uint32 GetLinearSize() const;
 
+			VkImageView CreateImageView();
+
 			void SetLayout(VkQueue, CCommandBufferPool&, VkImageLayout, VkAccessFlags);
 			void Fill(VkQueue, CCommandBufferPool&, const VkPhysicalDeviceMemoryProperties&, const void*);
 
