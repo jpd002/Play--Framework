@@ -16,6 +16,11 @@ CImage::CImage(CDevice& device, const VkPhysicalDeviceMemoryProperties& memoryPr
 	Create(memoryProperties, usage, format, width, height);
 }
 
+CImage::CImage(CImage&& rhs)
+{
+	MoveFrom(std::move(rhs));
+}
+
 CImage::~CImage()
 {
 	Reset();

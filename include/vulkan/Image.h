@@ -14,6 +14,8 @@ namespace Framework
 		public:
 			        CImage() = default;
 			        CImage(CDevice&, const VkPhysicalDeviceMemoryProperties&, VkImageUsageFlags, VkFormat, uint32, uint32);
+			        CImage(const CImage&) = delete;
+			        CImage(CImage&&);
 			virtual ~CImage();
 			
 			bool IsEmpty() const;
