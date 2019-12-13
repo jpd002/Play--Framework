@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(Framework_Vulkan)
 
+include(Header)
 include(../Framework_Common.cmake)
 
 find_package(Vulkan REQUIRED)
@@ -11,6 +12,7 @@ if(NOT TARGET Framework)
 		${CMAKE_CURRENT_BINARY_DIR}/Framework
 	)
 endif()
+list(APPEND FRAMEWORK_VULKAN_LIBS Framework)
 
 set(SRC_FILES
 	../../src/vulkan/CommandBufferPool.cpp
@@ -34,6 +36,10 @@ set(SRC_FILES
 	../../include/vulkan/VulkanDef.h
 )
 
+if(TARGET_PLATFORM_UNIX)
+	list(APPEND FRAMEWORK_VULKAN_LIBS dl)
+endif()
+
 add_library(Framework_Vulkan ${SRC_FILES})
 target_include_directories(Framework_Vulkan PUBLIC ${FRAMEWORK_INCLUDE_DIR} ${Vulkan_INCLUDE_DIR})
-target_link_libraries(Framework_Vulkan PUBLIC Framework)
+target_link_libraries(Framework_Vulkan PUBLIC ${FRAMEWORK_VULKAN_LIBS})
