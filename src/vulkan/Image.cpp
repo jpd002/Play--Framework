@@ -1,3 +1,4 @@
+#include <cstring>
 #include "vulkan/Image.h"
 #include "vulkan/StructDefs.h"
 #include "vulkan/Utils.h"
