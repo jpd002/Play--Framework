@@ -32,7 +32,13 @@ void CLoader::LoadLibrary()
 #else
 	assert(m_vulkanDl == nullptr);
 	
-	m_vulkanDl = dlopen("libvulkan.so", RTLD_NOW | RTLD_LOCAL);
+#ifdef __APPLE__
+	const char* libPath = "@executable_path/../Resources/libMoltenVK.dylib";
+#else
+	const char* libPath = "libvulkan.so";
+#endif
+	
+	m_vulkanDl = dlopen(libPath, RTLD_NOW | RTLD_LOCAL);
 	if(!m_vulkanDl)
 	{
 		throw std::runtime_error(string_format("Failed to load Vulkan library: %s.", dlerror()));
