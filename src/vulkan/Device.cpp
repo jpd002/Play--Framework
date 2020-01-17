@@ -79,6 +79,11 @@ void CDevice::Reset()
 	vkCreateDescriptorSetLayout = nullptr;
 	vkDestroyDescriptorSetLayout = nullptr;
 	
+	vkCreateFence = nullptr;
+	vkDestroyFence = nullptr;
+	vkResetFences = nullptr;
+	vkWaitForFences = nullptr;
+
 	vkCreateFramebuffer = nullptr;
 	vkDestroyFramebuffer = nullptr;
 	
@@ -179,6 +184,11 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(vkCreateDescriptorSetLayout, rhs.vkCreateDescriptorSetLayout);
 	std::swap(vkDestroyDescriptorSetLayout, rhs.vkDestroyDescriptorSetLayout);
 	
+	std::swap(vkCreateFence, rhs.vkCreateFence);
+	std::swap(vkDestroyFence, rhs.vkDestroyFence);
+	std::swap(vkResetFences, rhs.vkResetFences);
+	std::swap(vkWaitForFences, rhs.vkWaitForFences);
+
 	std::swap(vkCreateFramebuffer, rhs.vkCreateFramebuffer);
 	std::swap(vkDestroyFramebuffer, rhs.vkDestroyFramebuffer);
 	
@@ -286,6 +296,11 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	SET_PROC_ADDR(vkCreateDescriptorSetLayout);
 	SET_PROC_ADDR(vkDestroyDescriptorSetLayout);
 	
+	SET_PROC_ADDR(vkCreateFence);
+	SET_PROC_ADDR(vkDestroyFence);
+	SET_PROC_ADDR(vkResetFences);
+	SET_PROC_ADDR(vkWaitForFences);
+
 	SET_PROC_ADDR(vkCreateFramebuffer);
 	SET_PROC_ADDR(vkDestroyFramebuffer);
 	

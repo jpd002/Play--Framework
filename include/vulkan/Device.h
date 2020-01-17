@@ -81,6 +81,12 @@ namespace Framework
 			DECLARE_FUNCTION(vkCreateDescriptorSetLayout)
 			DECLARE_FUNCTION(vkDestroyDescriptorSetLayout)
 			
+			//Fence
+			DECLARE_FUNCTION(vkCreateFence)
+			DECLARE_FUNCTION(vkDestroyFence)
+			DECLARE_FUNCTION(vkResetFences)
+			DECLARE_FUNCTION(vkWaitForFences)
+
 			//Framebuffer
 			DECLARE_FUNCTION(vkCreateFramebuffer)
 			DECLARE_FUNCTION(vkDestroyFramebuffer)
