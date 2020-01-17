@@ -81,6 +81,7 @@ void CDevice::Reset()
 	
 	vkCreateFence = nullptr;
 	vkDestroyFence = nullptr;
+	vkGetFenceStatus = nullptr;
 	vkResetFences = nullptr;
 	vkWaitForFences = nullptr;
 
@@ -186,6 +187,7 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	
 	std::swap(vkCreateFence, rhs.vkCreateFence);
 	std::swap(vkDestroyFence, rhs.vkDestroyFence);
+	std::swap(vkGetFenceStatus, rhs.vkGetFenceStatus);
 	std::swap(vkResetFences, rhs.vkResetFences);
 	std::swap(vkWaitForFences, rhs.vkWaitForFences);
 
@@ -298,6 +300,7 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	
 	SET_PROC_ADDR(vkCreateFence);
 	SET_PROC_ADDR(vkDestroyFence);
+	SET_PROC_ADDR(vkGetFenceStatus);
 	SET_PROC_ADDR(vkResetFences);
 	SET_PROC_ADDR(vkWaitForFences);
 

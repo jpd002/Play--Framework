@@ -84,6 +84,7 @@ namespace Framework
 			//Fence
 			DECLARE_FUNCTION(vkCreateFence)
 			DECLARE_FUNCTION(vkDestroyFence)
+			DECLARE_FUNCTION(vkGetFenceStatus)
 			DECLARE_FUNCTION(vkResetFences)
 			DECLARE_FUNCTION(vkWaitForFences)
 
