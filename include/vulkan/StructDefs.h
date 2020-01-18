@@ -1,8 +1,9 @@
 #pragma once
 
 #include <vulkan/vulkan.h>
+#include "maybe_unused.h"
 
-#define DECLARE_STRUCT(structName, structId) static Vk##structName structName() { Vk##structName result = { structId }; return result; }
+#define DECLARE_STRUCT(structName, structId) FRAMEWORK_MAYBE_UNUSED static Vk##structName structName() { Vk##structName result = { structId }; return result; }
 
 namespace Framework
 {
