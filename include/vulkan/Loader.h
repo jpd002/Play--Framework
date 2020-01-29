@@ -17,6 +17,8 @@ namespace Framework
 		public:
 			CLoader();
 			
+			void* GetLibraryProcAddr(const char*);
+			
 			DECLARE_FUNCTION(vkCreateInstance)
 			DECLARE_FUNCTION(vkGetInstanceProcAddr);
 			

@@ -16,6 +16,15 @@ CLoader::CLoader()
 	LoadLibrary();
 }
 
+void* CLoader::GetLibraryProcAddr(const char* procName)
+{
+#ifdef _WIN32
+	return nullptr;
+#else
+	return dlsym(m_vulkanDl, procName);
+#endif
+}
+
 void CLoader::LoadLibrary()
 {
 #ifdef _WIN32
