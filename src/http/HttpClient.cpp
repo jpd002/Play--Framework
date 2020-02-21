@@ -1,27 +1,24 @@
 #include "http/HttpClient.h"
 #include "string_format.h"
 
+#include <set>
+
 using namespace Framework::Http;
 
 std::string CHttpClient::UrlEncode(const std::string& input)
 {
+	static const std::set<char> allowedSymbols = {'-', '_', '.', '~', '/'};
+
 	std::string result;
 	for(auto inputChar : input)
 	{
-		switch(inputChar)
+		if(isalnum(inputChar) || allowedSymbols.find(inputChar) != allowedSymbols.end())
 		{
-		case ':':
-		case ' ':
-		case '&':
-		case '+':
-		case '\'':
-		case '(':
-		case ')':
-			result += string_format("%%%02X", inputChar);
-			break;
-		default:
 			result += inputChar;
-			break;
+		}
+		else
+		{
+			result += string_format("%%%02X", inputChar);
 		}
 	}
 	return result;
