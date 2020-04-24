@@ -5,7 +5,7 @@
 #include "maybe_unused.h"
 
 FRAMEWORK_MAYBE_UNUSED
-static std::string string_format(const char* format, va_list ap)
+static std::string string_format_internal(const char* format, va_list ap)
 {
 	int size = 256;
 	std::string result;
@@ -31,7 +31,7 @@ static std::string string_format(const char* format, va_list ap)
 }
 
 FRAMEWORK_MAYBE_UNUSED
-static std::wstring string_format(const wchar_t* format, va_list ap)
+static std::wstring string_format_internal(const wchar_t* format, va_list ap)
 {
 	int size = 256;
 	std::wstring result;
@@ -61,7 +61,7 @@ static std::basic_string<CharType> string_format(const CharType* format, ...)
 {
 	va_list ap;
 	va_start(ap, format);
-	auto result = string_format(format, ap);
+	auto result = string_format_internal(format, ap);
 	va_end(ap);
 	return result;
 }
