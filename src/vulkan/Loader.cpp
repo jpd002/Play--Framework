@@ -41,16 +41,27 @@ void CLoader::LoadLibrary()
 #else
 	assert(m_vulkanDl == nullptr);
 	
+	std::vector<const char*> libPaths;
 #ifdef __APPLE__
-	const char* libPath = "@executable_path/../Resources/libMoltenVK.dylib";
+	libPaths.push_back("@executable_path/../Resources/libMoltenVK.dylib");
 #else
-	const char* libPath = "libvulkan.so";
+	libPaths.push_back("libvulkan.so");
+	libPaths.push_back("libvulkan.so.1");
 #endif
 	
-	m_vulkanDl = dlopen(libPath, RTLD_NOW | RTLD_LOCAL);
+	for(const auto& libPath : libPaths)
+	{
+		m_vulkanDl = dlopen(libPath, RTLD_NOW | RTLD_LOCAL);
+		if(m_vulkanDl)
+		{
+			break;
+		}
+		printf("Warning: Failed attempt to load Vulkan library from '%s': %s.\n" libPath, dlerror());
+	}
+
 	if(!m_vulkanDl)
 	{
-		throw std::runtime_error(string_format("Failed to load Vulkan library: %s.", dlerror()));
+		throw std::runtime_error("Failed to find an appropriate Vulkan library to load.");
 	}
 	
 	vkCreateInstance      = reinterpret_cast<PFN_vkCreateInstance>(dlsym(m_vulkanDl, "vkCreateInstance"));
