@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <tchar.h>
 #else
+#include <vector>
 #include <dlfcn.h>
 #endif
 #include <stdexcept>
@@ -56,7 +57,7 @@ void CLoader::LoadLibrary()
 		{
 			break;
 		}
-		printf("Warning: Failed attempt to load Vulkan library from '%s': %s.\n" libPath, dlerror());
+		printf("Warning: Failed attempt to load Vulkan library from '%s': %s.\n", libPath, dlerror());
 	}
 
 	if(!m_vulkanDl)
