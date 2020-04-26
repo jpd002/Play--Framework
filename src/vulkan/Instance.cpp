@@ -42,6 +42,7 @@ void CInstance::Reset()
 	vkCreateDevice = nullptr;
 	vkDestroyDevice = nullptr;
 	
+	vkEnumerateDeviceExtensionProperties = nullptr;
 	vkEnumeratePhysicalDevices = nullptr;
 	vkGetDeviceProcAddr = nullptr;
 	vkGetPhysicalDeviceMemoryProperties = nullptr;
@@ -86,6 +87,7 @@ CInstance& CInstance::operator =(CInstance&& rhs)
 	std::swap(vkCreateDevice, rhs.vkCreateDevice);
 	std::swap(vkDestroyDevice, rhs.vkDestroyDevice);
 
+	std::swap(vkEnumerateDeviceExtensionProperties, rhs.vkEnumerateDeviceExtensionProperties);
 	std::swap(vkEnumeratePhysicalDevices, rhs.vkEnumeratePhysicalDevices);
 	std::swap(vkGetDeviceProcAddr, rhs.vkGetDeviceProcAddr);
 	std::swap(vkGetPhysicalDeviceMemoryProperties, rhs.vkGetPhysicalDeviceMemoryProperties);
@@ -140,6 +142,7 @@ void CInstance::GetProcAddrs()
 	SET_PROC_ADDR(vkCreateDevice);
 	SET_PROC_ADDR(vkDestroyDevice);
 
+	SET_PROC_ADDR(vkEnumerateDeviceExtensionProperties)
 	SET_PROC_ADDR(vkEnumeratePhysicalDevices);
 	SET_PROC_ADDR(vkGetDeviceProcAddr);
 	SET_PROC_ADDR(vkGetPhysicalDeviceMemoryProperties);

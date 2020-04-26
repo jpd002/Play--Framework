@@ -31,6 +31,7 @@ namespace Framework
 			DECLARE_FUNCTION(vkCreateDevice)
 			DECLARE_FUNCTION(vkDestroyDevice)
 			
+			DECLARE_FUNCTION(vkEnumerateDeviceExtensionProperties)
 			DECLARE_FUNCTION(vkEnumeratePhysicalDevices)
 			DECLARE_FUNCTION(vkGetDeviceProcAddr)
 			DECLARE_FUNCTION(vkGetPhysicalDeviceMemoryProperties)
