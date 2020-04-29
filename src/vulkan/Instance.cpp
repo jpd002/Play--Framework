@@ -132,7 +132,10 @@ void CInstance::Create(const VkInstanceCreateInfo& instanceCreateInfo)
 	assert(m_handle == VK_NULL_HANDLE);
 	
 	auto result = CLoader::GetInstance().vkCreateInstance(&instanceCreateInfo, nullptr, &m_handle);
-	CHECKVULKANERROR(result);
+	if(result != VK_SUCCESS)
+	{
+		throw std::runtime_error("Failed to create Vulkan instance.");
+	}
 }
 
 void CInstance::GetProcAddrs()
