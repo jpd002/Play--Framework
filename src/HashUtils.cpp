@@ -2,6 +2,7 @@
 #include <cassert>
 #include <vector>
 #include <cstring>
+#include <stdexcept>
 #ifdef _WIN32
 #include <Windows.h>
 #include <Wincrypt.h>
