@@ -2,6 +2,7 @@
 
 #include "Types.h"
 #include <array>
+#include <cstddef>
 
 namespace Framework
 {
