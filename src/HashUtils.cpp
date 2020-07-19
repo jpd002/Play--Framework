@@ -22,7 +22,7 @@ std::array<uint8, 0x20> Framework::HashUtils::ComputeSha256(const void* data, si
 	BOOL succeeded = FALSE;
 
 	HCRYPTPROV context = NULL;
-	succeeded = CryptAcquireContext(&context, NULL, NULL, PROV_RSA_AES, 0);
+	succeeded = CryptAcquireContext(&context, NULL, NULL, PROV_RSA_AES, CRYPT_VERIFYCONTEXT);
 	assert(succeeded);
 
 	{
@@ -67,7 +67,7 @@ std::array<uint8, 0x20> Framework::HashUtils::ComputeHmacSha256(const void* key,
 	BOOL succeeded = FALSE;
 
 	HCRYPTPROV context = NULL;
-	succeeded = CryptAcquireContext(&context, NULL, NULL, PROV_RSA_AES, 0);
+	succeeded = CryptAcquireContext(&context, NULL, NULL, PROV_RSA_AES, CRYPT_VERIFYCONTEXT);
 	assert(succeeded);
 
 	HCRYPTKEY cryptKey = NULL;
