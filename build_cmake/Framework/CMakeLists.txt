@@ -119,6 +119,7 @@ set(COMMON_SRC_FILES
 	../../include/maybe_unused.h
 	../../include/nodiscard.h
 	../../include/signal/Signal.h
+	../../include/Singleton.h
 	../../include/StringUtils.h
 	../../include/std_experimental_map.h
 	../../include/ThreadPool.h
