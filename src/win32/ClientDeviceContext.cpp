@@ -1,4 +1,5 @@
 #include "win32/ClientDeviceContext.h"
+#include <cassert>
 
 using namespace Framework;
 using namespace Framework::Win32;
@@ -12,5 +13,6 @@ CClientDeviceContext::CClientDeviceContext(HWND wnd)
 
 CClientDeviceContext::~CClientDeviceContext()
 {
-	ReleaseDC(m_wnd, m_dc);
+	int result = ReleaseDC(m_wnd, m_dc);
+	assert(result == 1);
 }
