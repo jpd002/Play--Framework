@@ -1,10 +1,7 @@
 #include "amazon/AmazonClient.h"
 #include "http/HttpClientFactory.h"
-#include <map>
 #include <algorithm>
 #include <cassert>
-#include <cstdlib>
-#include <cstring>
 #include <ctime>
 #include <stdexcept>
 #include "HashUtils.h"
