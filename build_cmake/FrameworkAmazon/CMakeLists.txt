@@ -12,7 +12,9 @@ endif()
 
 set(SRC_FILES
 	../../src/amazon/AmazonClient.cpp
+	../../src/amazon/AmazonS3Client.cpp
 	../../include/amazon/AmazonClient.h
+	../../include/amazon/AmazonS3Client.h
 )
 
 add_library(${PROJECT_NAME} ${SRC_FILES})
