@@ -4,6 +4,11 @@
 #include <map>
 #include "MemStream.h"
 
+//Win32 defines DELETE
+#ifdef DELETE
+#undef DELETE
+#endif
+
 namespace Framework
 {
 	namespace Http
