@@ -46,7 +46,7 @@
 #include <cassert>
 
 #ifdef _DEBUG
-#define CHECKVULKANERROR(errorCode) { assert(errorCode == VK_SUCCESS); }
+#define CHECKVULKANERROR(errorCode) do { assert(errorCode == VK_SUCCESS); } while (0)
 #else
-#define CHECKVULKANERROR(errorCode)
+#define CHECKVULKANERROR(errorCode) do { } while (0)
 #endif
