@@ -22,6 +22,12 @@ RequestResult CAppleHttpClient::SendRequest()
 	case HTTP_VERB::HEAD:
 		[request setHTTPMethod: @"HEAD"];
 		break;
+	case HTTP_VERB::POST:
+		[request setHTTPMethod: @"POST"];
+		break;
+	case HTTP_VERB::PUT:
+		[request setHTTPMethod: @"PUT"];
+		break;
 	}
 	
 	for(const auto& header : m_headers)
@@ -29,6 +35,12 @@ RequestResult CAppleHttpClient::SendRequest()
 		NSString* key = [NSString stringWithUTF8String: header.first.c_str()];
 		NSString* value = [NSString stringWithUTF8String: header.second.c_str()];
 		[request setValue: value forHTTPHeaderField: key];
+	}
+	
+	if(!m_requestBody.empty())
+	{
+		NSData* bodyData = [NSData dataWithBytes: m_requestBody.c_str() length: m_requestBody.length()];
+		[request setHTTPBody: bodyData];
 	}
 	
 	auto waitSema = dispatch_semaphore_create(0);
