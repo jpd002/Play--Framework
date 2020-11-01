@@ -123,6 +123,12 @@ set(COMMON_SRC_FILES
 	../../include/StringUtils.h
 	../../include/std_experimental_map.h
 	../../include/ThreadPool.h
+	../../include/zip/ZipArchiveReader.h
+	../../include/zip/ZipArchiveWriter.h
+	../../include/zip/ZipDeflateStream.h
+	../../include/zip/ZipFile.h
+	../../include/zip/ZipInflateStream.h
+	../../include/zip/ZipStoreStream.h
 )
 
 if(ANDROID)
