@@ -17,7 +17,7 @@ protected:
 		std::string urlHost;
 		std::string uri;
 		std::string query;
-		std::string content;
+		Framework::Http::ByteArray content;
 		Framework::Http::HeaderMap headers;
 	};
 
