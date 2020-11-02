@@ -94,7 +94,7 @@ RequestResult CWin32HttpClient::SendRequest()
 		}
 	}
 
-	auto optionalData = reinterpret_cast<LPVOID>(const_cast<char*>(m_requestBody.c_str()));
+	auto optionalData = reinterpret_cast<LPVOID>(m_requestBody.data());
 	BOOL sendRequestResult = HttpSendRequest(request, nullptr, 0, optionalData, m_requestBody.size());
 	if(sendRequestResult == FALSE)
 	{
