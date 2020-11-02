@@ -57,7 +57,12 @@ void CHttpClient::SetHeaders(HeaderMap headers)
 	m_headers = std::move(headers);
 }
 
-void CHttpClient::SetRequestBody(std::string requestBody)
+void CHttpClient::SetRequestBody(ByteArray requestBody)
 {
 	m_requestBody = std::move(requestBody);
+}
+
+void CHttpClient::SetRequestBody(std::string requestBody)
+{
+	SetRequestBody(ByteArray(requestBody.c_str(), requestBody.c_str() + requestBody.length()));
 }

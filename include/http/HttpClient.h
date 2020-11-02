@@ -2,6 +2,7 @@
 
 #include <string>
 #include <map>
+#include <vector>
 #include "MemStream.h"
 
 //Win32 defines DELETE
@@ -35,6 +36,7 @@ namespace Framework
 			PUT
 		};
 
+		typedef std::vector<uint8> ByteArray;
 		typedef std::map<std::string, std::string> HeaderMap;
 
 		struct RequestResult
@@ -54,6 +56,7 @@ namespace Framework
 			void SetUrl(std::string);
 			void SetVerb(HTTP_VERB);
 			void SetHeaders(HeaderMap);
+			void SetRequestBody(ByteArray);
 			void SetRequestBody(std::string);
 			virtual RequestResult SendRequest() = 0;
 
@@ -63,7 +66,7 @@ namespace Framework
 			std::string m_url;
 			HTTP_VERB m_verb = HTTP_VERB::GET;
 			HeaderMap m_headers;
-			std::string m_requestBody;
+			ByteArray m_requestBody;
 		};
 	}
 }
