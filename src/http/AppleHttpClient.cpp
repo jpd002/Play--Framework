@@ -39,7 +39,7 @@ RequestResult CAppleHttpClient::SendRequest()
 	
 	if(!m_requestBody.empty())
 	{
-		NSData* bodyData = [NSData dataWithBytes: m_requestBody.c_str() length: m_requestBody.length()];
+		NSData* bodyData = [NSData dataWithBytes: m_requestBody.data() length: m_requestBody.size()];
 		[request setHTTPBody: bodyData];
 	}
 	
