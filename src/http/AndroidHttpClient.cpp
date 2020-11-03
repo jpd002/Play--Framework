@@ -42,7 +42,7 @@ RequestResult CAndroidHttpClient::SendRequest()
 		if(m_verb == HTTP_VERB::POST)
 		{
 			auto outputStream = CJavaObject::CastTo<java::io::OutputStream>(connection.getOutputStream());
-			outputStream.write(reinterpret_cast<const jbyte*>(m_requestBody.c_str()), m_requestBody.size());
+			outputStream.write(reinterpret_cast<const jbyte*>(m_requestBody.data()), m_requestBody.size());
 			outputStream.close();
 		}
 		
