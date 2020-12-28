@@ -19,8 +19,16 @@ static int bitmanip_ctz(uint32 value)
 	return r;
 }
 
+static int bitmanip_ctzll(uint64 value)
+{
+	unsigned long r = 0;
+	_BitScanForward64(&r, value);
+	return r;
+}
+
 #define __builtin_popcount __popcnt
 #define __builtin_clz bitmanip_clz
 #define __builtin_ctz bitmanip_ctz
+#define __builtin_ctzll bitmanip_ctzll
 
 #endif
