@@ -2,16 +2,17 @@
 
 #ifdef _MSC_VER
 
+#include "Types.h"
 #include <intrin.h>
 
-static unsigned long bitmanip_clz(unsigned long value)
+static int bitmanip_clz(uint32 value)
 {
 	unsigned long r = 0;
 	_BitScanReverse(&r, value);
 	return (31 - r);
 }
 
-static unsigned long bitmanip_ctz(unsigned long value)
+static int bitmanip_ctz(uint32 value)
 {
 	unsigned long r = 0;
 	_BitScanForward(&r, value);
