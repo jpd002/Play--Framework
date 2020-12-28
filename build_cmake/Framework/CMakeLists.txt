@@ -104,6 +104,7 @@ set(COMMON_SRC_FILES
 	../../src/zip/ZipInflateStream.cpp
 	../../src/zip/ZipStoreStream.cpp
 
+	../../include/BitManip.h
 	../../include/Csv.h
 	../../include/filesystem_def.h
 	../../include/FilesystemUtils.h
