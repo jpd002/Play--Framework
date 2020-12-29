@@ -21,9 +21,21 @@ static int bitmanip_ctz(uint32 value)
 
 static int bitmanip_ctzll(uint64 value)
 {
+#if defined(_M_X64)
 	unsigned long r = 0;
 	_BitScanForward64(&r, value);
 	return r;
+#elif defined(_M_IX86)
+	unsigned long r = 0;
+	if(_BitScanForward(&r, static_cast<uint32>(value)))
+	{
+		return r;
+	}
+	_BitScanForward(&r, static_cast<uint32>(value >> 32));
+	return r + 32;
+#else
+#error "Unsupported architecture."
+#endif
 }
 
 #define __builtin_popcount __popcnt
