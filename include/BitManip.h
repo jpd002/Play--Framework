@@ -5,21 +5,21 @@
 #include "Types.h"
 #include <intrin.h>
 
-static int bitmanip_clz(uint32 value)
+static inline int bitmanip_clz(uint32 value)
 {
 	unsigned long r = 0;
 	_BitScanReverse(&r, value);
 	return (31 - r);
 }
 
-static int bitmanip_ctz(uint32 value)
+static inline int bitmanip_ctz(uint32 value)
 {
 	unsigned long r = 0;
 	_BitScanForward(&r, value);
 	return r;
 }
 
-static int bitmanip_ctzll(uint64 value)
+static inline int bitmanip_ctzll(uint64 value)
 {
 #if defined(_M_X64)
 	unsigned long r = 0;
