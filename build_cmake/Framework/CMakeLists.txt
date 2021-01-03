@@ -123,6 +123,7 @@ set(COMMON_SRC_FILES
 	../../include/Singleton.h
 	../../include/StringUtils.h
 	../../include/std_experimental_map.h
+	../../include/std_experimental_set.h
 	../../include/ThreadPool.h
 	../../include/zip/ZipArchiveReader.h
 	../../include/zip/ZipArchiveWriter.h
