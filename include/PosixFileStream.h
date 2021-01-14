@@ -22,6 +22,7 @@ namespace Framework
 		
 	private:
 		int			m_fd = 0;
+		bool		m_isEof = false;
 	};
 
 }

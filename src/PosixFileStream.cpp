@@ -40,11 +40,12 @@ void CPosixFileStream::Seek(int64 position, STREAM_SEEK_DIRECTION direction)
 	{
 		throw std::runtime_error("Seek failed.");
 	}
+	m_isEof = false;
 }
 
 bool CPosixFileStream::IsEOF()
 {
-	throw std::runtime_error("Not implemented.");
+	return m_isEof;
 }
 
 uint64 CPosixFileStream::Tell()
@@ -63,6 +64,10 @@ uint64 CPosixFileStream::Read(void* buffer, uint64 length)
 	if(result < 0)
 	{
 		throw std::runtime_error("Read failed.");
+	}
+	if(result == 0)
+	{
+		m_isEof = true;
 	}
 	return result;
 }
