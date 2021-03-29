@@ -149,7 +149,8 @@ void CImage::Fill(VkQueue queue, CCommandBufferPool& commandBufferPool,
 	auto result = VK_SUCCESS;
 
 	auto imageSize = GetLinearSize();
-	auto stagingBuffer = CBuffer(*m_device, memoryProperties, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, imageSize);
+	auto stagingBuffer = CBuffer(*m_device, memoryProperties,
+		VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, imageSize);
 	
 	{
 		void* bufferPtr = nullptr;

@@ -11,7 +11,7 @@ namespace Framework
 		{
 		public:
 			        CBuffer() = default;
-			        CBuffer(CDevice&, const VkPhysicalDeviceMemoryProperties&, VkBufferUsageFlags, uint32);
+			        CBuffer(CDevice&, const VkPhysicalDeviceMemoryProperties&, VkBufferUsageFlags, VkMemoryPropertyFlags, uint32);
 			        CBuffer(const CBuffer&) = delete;
 			virtual ~CBuffer();
 			
@@ -25,7 +25,7 @@ namespace Framework
 			VkDeviceMemory GetMemory() const;
 			
 		private:
-			void Create(const VkPhysicalDeviceMemoryProperties&, VkBufferUsageFlags, uint32);
+			void Create(const VkPhysicalDeviceMemoryProperties&, VkBufferUsageFlags, VkMemoryPropertyFlags, uint32);
 			void MoveFrom(CBuffer&&);
 			
 			const CDevice* m_device = nullptr;

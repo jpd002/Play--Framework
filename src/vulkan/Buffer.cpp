@@ -4,10 +4,10 @@
 
 using namespace Framework::Vulkan;
 
-CBuffer::CBuffer(CDevice& device, const VkPhysicalDeviceMemoryProperties& memoryProperties, VkBufferUsageFlags usage, uint32 size)
+CBuffer::CBuffer(CDevice& device, const VkPhysicalDeviceMemoryProperties& memoryProperties, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, uint32 size)
 : m_device(&device)
 {
-	Create(memoryProperties, usage, size);
+	Create(memoryProperties, usage, properties, size);
 }
 
 CBuffer::~CBuffer()
@@ -56,7 +56,7 @@ VkDeviceMemory CBuffer::GetMemory() const
 	return m_memory;
 }
 
-void CBuffer::Create(const VkPhysicalDeviceMemoryProperties& memoryProperties, VkBufferUsageFlags usage, uint32 size)
+void CBuffer::Create(const VkPhysicalDeviceMemoryProperties& memoryProperties, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, uint32 size)
 {
 	auto result = VK_SUCCESS;
 
@@ -71,7 +71,7 @@ void CBuffer::Create(const VkPhysicalDeviceMemoryProperties& memoryProperties, V
 
 	auto memoryAllocateInfo = Framework::Vulkan::MemoryAllocateInfo();
 	memoryAllocateInfo.allocationSize = memoryRequirements.size;
-	memoryAllocateInfo.memoryTypeIndex = GetMemoryTypeIndex(memoryProperties, memoryRequirements.memoryTypeBits, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
+	memoryAllocateInfo.memoryTypeIndex = GetMemoryTypeIndex(memoryProperties, memoryRequirements.memoryTypeBits, properties);
 	assert(memoryAllocateInfo.memoryTypeIndex != Framework::Vulkan::VULKAN_MEMORY_TYPE_INVALID);
 
 	result = m_device->vkAllocateMemory(*m_device, &memoryAllocateInfo, nullptr, &m_memory);
