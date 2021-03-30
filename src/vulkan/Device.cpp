@@ -40,6 +40,7 @@ void CDevice::Reset()
 	vkCmdBindPipeline = nullptr;
 	vkCmdBindVertexBuffers = nullptr;
 	vkCmdClearColorImage = nullptr;
+	vkCmdCopyBuffer = nullptr;
 	vkCmdCopyBufferToImage = nullptr;
 	vkCmdDispatch = nullptr;
 	vkCmdDraw = nullptr;
@@ -146,6 +147,7 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(vkCmdBindPipeline, rhs.vkCmdBindPipeline);
 	std::swap(vkCmdBindVertexBuffers, rhs.vkCmdBindVertexBuffers);
 	std::swap(vkCmdClearColorImage, rhs.vkCmdClearColorImage);
+	std::swap(vkCmdCopyBuffer, rhs.vkCmdCopyBuffer);
 	std::swap(vkCmdCopyBufferToImage, rhs.vkCmdCopyBufferToImage);
 	std::swap(vkCmdDispatch, rhs.vkCmdDispatch);
 	std::swap(vkCmdDraw, rhs.vkCmdDraw);
@@ -259,6 +261,7 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	SET_PROC_ADDR(vkCmdBindPipeline);
 	SET_PROC_ADDR(vkCmdBindVertexBuffers);
 	SET_PROC_ADDR(vkCmdClearColorImage);
+	SET_PROC_ADDR(vkCmdCopyBuffer);
 	SET_PROC_ADDR(vkCmdCopyBufferToImage);
 	SET_PROC_ADDR(vkCmdDispatch);
 	SET_PROC_ADDR(vkCmdDraw);

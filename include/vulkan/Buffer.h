@@ -7,6 +7,8 @@ namespace Framework
 {
 	namespace Vulkan
 	{
+		class CCommandBufferPool;
+
 		class CBuffer
 		{
 		public:
@@ -23,14 +25,19 @@ namespace Framework
 			         operator VkBuffer() const;
 
 			VkDeviceMemory GetMemory() const;
+
+			void Read(VkQueue, CCommandBufferPool&, const VkPhysicalDeviceMemoryProperties&, void*);
+			void Write(VkQueue, CCommandBufferPool&, const VkPhysicalDeviceMemoryProperties&, const void*);
 			
 		private:
 			void Create(const VkPhysicalDeviceMemoryProperties&, VkBufferUsageFlags, VkMemoryPropertyFlags, uint32);
 			void MoveFrom(CBuffer&&);
 			
-			const CDevice* m_device = nullptr;
+			CDevice* m_device = nullptr;
 			VkBuffer m_handle = VK_NULL_HANDLE;
 			VkDeviceMemory m_memory = VK_NULL_HANDLE;
+
+			uint32 m_size = 0;
 		};
 	}
 }
