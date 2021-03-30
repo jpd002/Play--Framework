@@ -1,3 +1,4 @@
+#include <cstring>
 #include "vulkan/Buffer.h"
 #include "vulkan/StructDefs.h"
 #include "vulkan/Utils.h"
