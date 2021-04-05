@@ -48,6 +48,13 @@ struct ListObjectsResult
 	std::vector<Object> objects;
 };
 
+struct PutObjectRequest
+{
+	std::string key;
+	std::string bucket;
+	std::vector<uint8> data;
+};
+
 class CAmazonS3Client : public CAmazonClient
 {
 public:
@@ -57,4 +64,5 @@ public:
 	GetObjectResult GetObject(const GetObjectRequest&);
 	HeadObjectResult HeadObject(const HeadObjectRequest&);
 	ListObjectsResult ListObjects(std::string);
+	void PutObject(const PutObjectRequest&);
 };

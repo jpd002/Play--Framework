@@ -136,3 +136,19 @@ ListObjectsResult CAmazonS3Client::ListObjects(std::string bucket)
 
 	return result;
 }
+
+void CAmazonS3Client::PutObject(const PutObjectRequest& request)
+{
+	Request rq;
+	rq.method = Framework::Http::HTTP_VERB::PUT;
+	rq.uri = "/" + Framework::Http::CHttpClient::UrlEncode(request.key);
+	rq.host = string_format("%s.s3-%s.amazonaws.com", request.bucket.c_str(), m_region.c_str());
+	rq.urlHost = rq.host;
+	rq.content = request.data;
+	
+	auto response = ExecuteRequest(rq);
+	if(response.statusCode != Framework::Http::HTTP_STATUS_CODE::OK)
+	{
+		throw std::runtime_error("Failed to put object.");
+	}
+}
