@@ -17,7 +17,7 @@ struct GetBucketLocationResult
 struct GetObjectRequest
 {
 	std::string bucket;
-	std::string object;
+	std::string key;
 	std::pair<uint64, uint64> range;
 };
 
@@ -29,7 +29,7 @@ struct GetObjectResult
 struct HeadObjectRequest
 {
 	std::string bucket;
-	std::string object;
+	std::string key;
 };
 
 struct HeadObjectResult
