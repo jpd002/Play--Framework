@@ -6,8 +6,8 @@
 
 #define S3_HOSTNAME "s3.amazonaws.com"
 
-CAmazonS3Client::CAmazonS3Client(std::string accessKeyId, std::string secretAccessKey, std::string region)
-    : CAmazonClient("s3", accessKeyId, secretAccessKey, region)
+CAmazonS3Client::CAmazonS3Client(CAmazonCredentials credentials, std::string region)
+    : CAmazonClient("s3", std::move(credentials), std::move(region))
 {
 }
 

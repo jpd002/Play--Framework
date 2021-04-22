@@ -4,10 +4,22 @@
 #include <vector>
 #include "http/HttpClient.h"
 
+struct CAmazonCredentials
+{
+	std::string accessKeyId;
+	std::string secretAccessKey;
+	std::string sessionToken;
+	
+	bool IsValid() const
+	{
+		return !accessKeyId.empty() && !secretAccessKey.empty();
+	}
+};
+
 class CAmazonClient
 {
 public:
-	CAmazonClient(std::string, std::string, std::string, std::string);
+	CAmazonClient(std::string, CAmazonCredentials, std::string);
 
 protected:
 	struct Request
@@ -24,7 +36,6 @@ protected:
 	Framework::Http::RequestResult ExecuteRequest(const Request&);
 
 	std::string m_service;
-	std::string m_accessKeyId;
-	std::string m_secretAccessKey;
+	CAmazonCredentials m_credentials;
 	std::string m_region;
 };

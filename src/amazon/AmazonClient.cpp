@@ -19,6 +19,29 @@ static std::string hashToString(const std::array<uint8, 0x20> hash)
 	return result;
 }
 
+static std::string buildSignedHeadersParam(const Framework::Http::HeaderMap& headers)
+{
+	std::string result;
+	for(auto headerPairIterator = headers.begin();
+		headerPairIterator != headers.end(); headerPairIterator++)
+	{
+		bool isEnd =
+			[&]() {
+			auto headerPairIteratorCopy = headerPairIterator;
+			headerPairIteratorCopy++;
+			return headerPairIteratorCopy == std::end(headers);
+		}();
+		auto headerKey = headerPairIterator->first;
+		std::transform(headerKey.begin(), headerKey.end(), headerKey.begin(), &::tolower);
+		result += headerKey;
+		if(!isEnd)
+		{
+			result += ";";
+		}
+	}
+	return result;
+}
+
 static std::string buildCanonicalRequest(Framework::Http::HTTP_VERB method, const std::string& uri, const std::string& query, const std::string& hashedPayload, const Framework::Http::HeaderMap& headers)
 {
 	std::string result;
@@ -67,23 +90,7 @@ static std::string buildCanonicalRequest(Framework::Http::HTTP_VERB method, cons
 	result += "\n";
 
 	//SignedHeaders
-	for (auto headerPairIterator = headers.begin();
-		headerPairIterator != headers.end(); headerPairIterator++)
-	{
-		bool isEnd =
-			[&]() {
-			auto headerPairIteratorCopy = headerPairIterator;
-			headerPairIteratorCopy++;
-			return headerPairIteratorCopy == std::end(headers);
-		}();
-		auto headerKey = headerPairIterator->first;
-		std::transform(headerKey.begin(), headerKey.end(), headerKey.begin(), &::tolower);
-		result += headerKey;
-		if (!isEnd)
-		{
-			result += ";";
-		}
-	}
+	result += buildSignedHeadersParam(headers);
 	result += "\n";
 
 	//HashedPayload
@@ -130,18 +137,17 @@ static std::string timeToString(const tm* timeInfo)
 	return std::string(output);
 }
 
-CAmazonClient::CAmazonClient(std::string service, std::string accessKeyId, std::string secretAccessKey, std::string region)
-    : m_service(service)
-    , m_accessKeyId(std::move(accessKeyId))
-    , m_secretAccessKey(std::move(secretAccessKey))
+CAmazonClient::CAmazonClient(std::string service, CAmazonCredentials credentials, std::string region)
+    : m_service(std::move(service))
+    , m_credentials(std::move(credentials))
     , m_region(std::move(region))
 {
 }
 
 Framework::Http::RequestResult CAmazonClient::ExecuteRequest(const Request& request)
 {
-	assert(!m_accessKeyId.empty());
-	assert(!m_secretAccessKey.empty());
+	assert(!m_credentials.accessKeyId.empty());
+	assert(!m_credentials.secretAccessKey.empty());
 	assert(!request.host.empty());
 	assert(!request.urlHost.empty());
 
@@ -161,7 +167,11 @@ Framework::Http::RequestResult CAmazonClient::ExecuteRequest(const Request& requ
 	headers.insert(std::make_pair("Host", request.host));
 	headers.insert(std::make_pair("x-amz-content-sha256", contentHashString));
 	headers.insert(std::make_pair("x-amz-date", timestamp));
-
+	if(!m_credentials.sessionToken.empty())
+	{
+		headers.insert(std::make_pair("x-amz-security-token", m_credentials.sessionToken));
+	}
+	
 	auto canonicalRequest = buildCanonicalRequest(request.method, request.uri, request.query, contentHashString, headers);
 #ifdef DEBUG_REQUEST
 	printf("canonicalRequest:\n%s\n\n", canonicalRequest.c_str());
@@ -172,11 +182,12 @@ Framework::Http::RequestResult CAmazonClient::ExecuteRequest(const Request& requ
 	printf("stringToSign:\n%s\n\n", stringToSign.c_str());
 #endif
 
-	auto signingKey = buildSigningKey(m_secretAccessKey, date, m_region, m_service, requestType);
+	auto signedHeaders = buildSignedHeadersParam(headers);
+	auto signingKey = buildSigningKey(m_credentials.secretAccessKey, date, m_region, m_service, requestType);
 	auto signature = hashToString(Framework::HashUtils::ComputeHmacSha256(signingKey.data(), signingKey.size(), stringToSign.c_str(), stringToSign.length()));
 
-	auto authorizationString = string_format("AWS4-HMAC-SHA256 Credential=%s/%s, SignedHeaders=host;x-amz-content-sha256;x-amz-date, Signature=%s",
-		m_accessKeyId.c_str(), scope.c_str(), signature.c_str());
+	auto authorizationString = string_format("AWS4-HMAC-SHA256 Credential=%s/%s, SignedHeaders=%s, Signature=%s",
+		m_credentials.accessKeyId.c_str(), scope.c_str(), signedHeaders.c_str(), signature.c_str());
 	headers.insert(std::make_pair("Authorization", authorizationString));
 	headers.insert(request.headers.begin(), request.headers.end());
 
