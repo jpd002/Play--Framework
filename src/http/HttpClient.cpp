@@ -5,6 +5,8 @@
 
 using namespace Framework::Http;
 
+GlobalSettingMap CHttpClient::m_globalSettings;
+
 std::string CHttpClient::UrlEncode(const std::string& input)
 {
 	static const std::set<char> allowedSymbols = {'-', '_', '.', '~', '/'};
@@ -22,6 +24,11 @@ std::string CHttpClient::UrlEncode(const std::string& input)
 		}
 	}
 	return result;
+}
+
+void CHttpClient::SetGlobalSetting(GLOBAL_SETTING setting, std::string value)
+{
+	m_globalSettings[setting] = value;
 }
 
 HeaderMap CHttpClient::ReadHeaderMap(Framework::CStream& stream)

@@ -36,8 +36,14 @@ namespace Framework
 			PUT
 		};
 
+		enum class GLOBAL_SETTING
+		{
+			CERTIFICATE_AUTHORITY_BUNDLE,
+		};
+
 		typedef std::vector<uint8> ByteArray;
 		typedef std::map<std::string, std::string> HeaderMap;
+		typedef std::map<GLOBAL_SETTING, std::string> GlobalSettingMap;
 
 		struct RequestResult
 		{
@@ -52,6 +58,7 @@ namespace Framework
 			virtual ~CHttpClient() = default;
 
 			static std::string UrlEncode(const std::string&);
+			static void SetGlobalSetting(GLOBAL_SETTING, std::string);
 
 			void SetUrl(std::string);
 			void SetVerb(HTTP_VERB);
@@ -63,6 +70,8 @@ namespace Framework
 		protected:
 			static HeaderMap ReadHeaderMap(Framework::CStream&);
 
+			static GlobalSettingMap m_globalSettings;
+			
 			std::string m_url;
 			HTTP_VERB m_verb = HTTP_VERB::GET;
 			HeaderMap m_headers;

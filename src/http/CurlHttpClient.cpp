@@ -74,6 +74,12 @@ RequestResult CCurlHttpClient::SendRequest()
 		curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, &headerCallback);
 		curl_easy_setopt(curl, CURLOPT_HEADERDATA, &responseHeadersStream);
 
+		auto caBundlePath = m_globalSettings[GLOBAL_SETTING::CERTIFICATE_AUTHORITY_BUNDLE];
+		if(!caBundlePath.empty())
+		{
+			curl_easy_setopt(curl, CURLOPT_CAINFO, caBundlePath.c_str());
+		}
+
 		switch(m_verb)
 		{
 		case HTTP_VERB::DELETE:
