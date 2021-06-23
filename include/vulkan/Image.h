@@ -23,9 +23,9 @@ namespace Framework
 			
 			uint32 GetLinearSize() const;
 
-			VkImageView CreateImageView();
+			VkImageView CreateImageView(VkImageAspectFlags);
 
-			void SetLayout(VkQueue, CCommandBufferPool&, VkImageLayout, VkAccessFlags);
+			void SetLayout(VkQueue, CCommandBufferPool&, VkImageLayout, VkImageAspectFlags, VkAccessFlags);
 			void Fill(VkQueue, CCommandBufferPool&, const VkPhysicalDeviceMemoryProperties&, const void*);
 
 			CImage& operator =(const CImage&) = delete;
