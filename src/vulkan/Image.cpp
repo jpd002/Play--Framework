@@ -8,11 +8,12 @@
 using namespace Framework::Vulkan;
 
 CImage::CImage(CDevice& device, const VkPhysicalDeviceMemoryProperties& memoryProperties,
-	VkImageUsageFlags usage, VkFormat format, uint32 width, uint32 height)
+	VkImageUsageFlags usage, VkFormat format, uint32 width, uint32 height, VkMemoryPropertyFlags properties)
 : m_device(&device)
 , m_format(format)
 , m_width(width)
 , m_height(height)
+, m_properties(properties)
 {
 	Create(memoryProperties, usage, format, width, height);
 }
@@ -252,7 +253,7 @@ void CImage::Create(const VkPhysicalDeviceMemoryProperties& memoryProperties,
 		auto memoryAllocateInfo = Framework::Vulkan::MemoryAllocateInfo();
 		memoryAllocateInfo.allocationSize  = memoryRequirements.size;
 		memoryAllocateInfo.memoryTypeIndex = Framework::Vulkan::GetMemoryTypeIndex(
-			memoryProperties, memoryRequirements.memoryTypeBits, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+			memoryProperties, memoryRequirements.memoryTypeBits, m_properties);
 
 		auto result = m_device->vkAllocateMemory(*m_device, &memoryAllocateInfo, nullptr, &m_memory);
 		CHECKVULKANERROR(result);
