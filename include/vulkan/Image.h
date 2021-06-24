@@ -13,7 +13,7 @@ namespace Framework
 		{
 		public:
 			        CImage() = default;
-			        CImage(CDevice&, const VkPhysicalDeviceMemoryProperties&, VkImageUsageFlags, VkFormat, uint32, uint32);
+			        CImage(CDevice&, const VkPhysicalDeviceMemoryProperties&, VkImageUsageFlags, VkFormat, uint32, uint32, VkMemoryPropertyFlags = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
 			        CImage(const CImage&) = delete;
 			        CImage(CImage&&);
 			virtual ~CImage();
@@ -39,6 +39,7 @@ namespace Framework
 			CDevice* m_device = nullptr;
 			VkImage m_handle = VK_NULL_HANDLE;
 			VkDeviceMemory m_memory = VK_NULL_HANDLE;
+			VkMemoryPropertyFlags m_properties = 0;
 
 			VkFormat m_format = VK_FORMAT_UNDEFINED;
 			uint32 m_width = 0;
