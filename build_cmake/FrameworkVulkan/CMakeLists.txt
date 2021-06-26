@@ -4,7 +4,10 @@ project(Framework_Vulkan)
 include(Header)
 include(../Framework_Common.cmake)
 
-find_package(Vulkan REQUIRED)
+# Android SDK already comes with the necessary headers
+if(NOT TARGET_PLATFORM_ANDROID)
+	find_package(Vulkan REQUIRED)
+endif()
 
 if(NOT TARGET Framework)
 	add_subdirectory(
