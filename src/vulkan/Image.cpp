@@ -254,6 +254,7 @@ void CImage::Create(const VkPhysicalDeviceMemoryProperties& memoryProperties,
 		memoryAllocateInfo.allocationSize  = memoryRequirements.size;
 		memoryAllocateInfo.memoryTypeIndex = Framework::Vulkan::GetMemoryTypeIndex(
 			memoryProperties, memoryRequirements.memoryTypeBits, m_properties);
+		assert(memoryAllocateInfo.memoryTypeIndex != VULKAN_MEMORY_TYPE_INVALID);
 
 		auto result = m_device->vkAllocateMemory(*m_device, &memoryAllocateInfo, nullptr, &m_memory);
 		CHECKVULKANERROR(result);
