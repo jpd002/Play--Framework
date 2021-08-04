@@ -16,6 +16,7 @@ namespace Framework
 #endif	//WIN32
 #if defined(__ANDROID__)
 		void SetFilesDirPath(const char*);
+		void SetCacheDirPath(const char*);
 #endif
 
 		void EnsurePathExists(const fs::path&);

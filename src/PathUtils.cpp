@@ -83,6 +83,7 @@ fs::path PathUtils::GetCachePath()
 #elif defined(__ANDROID__)
 
 static fs::path s_filesDirPath;
+static fs::path s_cacheDirPath;
 
 fs::path PathUtils::GetAppResourcesPath()
 {
@@ -102,12 +103,17 @@ fs::path PathUtils::GetPersonalDataPath()
 
 fs::path PathUtils::GetCachePath()
 {
-	throw std::runtime_error("Not implemented.");
+	return s_cacheDirPath;
 }
 
 void PathUtils::SetFilesDirPath(const char* filesDirPath)
 {
 	s_filesDirPath = filesDirPath;
+}
+
+void PathUtils::SetCacheDirPath(const char* cacheDirPath)
+{
+	s_cacheDirPath = cacheDirPath;
 }
 
 #elif defined(__linux__) || defined(__FreeBSD__)
