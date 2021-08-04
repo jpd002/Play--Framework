@@ -17,10 +17,13 @@ namespace java
 			jclass clazz = NULL;
 			jmethodID disconnect = NULL;
 			jmethodID getErrorStream = NULL;
+			jmethodID getHeaderField = NULL;
+			jmethodID getHeaderFieldKey = NULL;
 			jmethodID getInputStream = NULL;
 			jmethodID getOutputStream = NULL;
 			jmethodID getResponseCode = NULL;
 			jmethodID setRequestMethod = NULL;
+			jmethodID setRequestProperty = NULL;
 		};
 		
 		class HttpURLConnection : public Framework::CJavaObject
@@ -36,10 +39,13 @@ namespace java
 			
 			void disconnect();
 			jobject getErrorStream();
+			jstring getHeaderField(jint);
+			jstring getHeaderFieldKey(jint);
 			jobject getInputStream();
 			jobject getOutputStream();
 			jint getResponseCode();
 			void setRequestMethod(jstring);
+			void setRequestProperty(jstring, jstring);
 		};
 	}
 }
