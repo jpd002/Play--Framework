@@ -11,6 +11,18 @@ void CJavaVM::SetJavaVM(JavaVM* vm)
 	m_vm = vm;
 }
 
+void CJavaVM::AttachCurrentThread(JNIEnv** env)
+{
+	assert(m_vm != nullptr);
+	m_vm->AttachCurrentThread(env, nullptr);
+}
+
+void CJavaVM::DetachCurrentThread()
+{
+	assert(m_vm != nullptr);
+	m_vm->DetachCurrentThread();
+}
+
 JNIEnv* CJavaVM::GetEnv()
 {
 	assert(m_vm != nullptr);

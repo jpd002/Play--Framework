@@ -23,6 +23,9 @@ namespace Framework
 	public:
 		static void SetJavaVM(JavaVM*);
 		
+		static void AttachCurrentThread(JNIEnv**);
+		static void DetachCurrentThread();
+		
 		static JNIEnv* GetEnv();
 		
 		static void CheckException(JNIEnv*);
