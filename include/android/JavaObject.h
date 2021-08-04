@@ -31,6 +31,11 @@ namespace Framework
 			return newObject;
 		}
 		
+		operator jobject() const
+		{
+			return m_this;
+		}
+		
 	protected:
 		void Attach(jobject);
 		

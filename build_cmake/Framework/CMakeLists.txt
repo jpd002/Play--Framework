@@ -137,9 +137,21 @@ if(ANDROID)
 	set(PLATFORM_SRC_FILES
 		../../src/android/AssetStream.cpp
 		../../src/android/AssetManager.cpp
+		../../src/android/java_security_MessageDigest.cpp
 		../../src/android/JavaObject.cpp
 		../../src/android/JavaVM.cpp
+		../../src/android/javax_crypto_Mac.cpp
+		../../src/android/javax_crypto_spec_SecretKeySpec.cpp
 		../../src/PosixFileStream.cpp
+		
+		../../include/android/AssetStream.h
+		../../include/android/AssetManager.h
+		../../include/android/java_security_MessageDigest.h
+		../../include/android/JavaObject.h
+		../../include/android/JavaVM.h
+		../../include/android/javax_crypto_Mac.h
+		../../include/android/javax_crypto_spec_SecretKeySpec.h
+		../../include/PosixFileStream.h
 	)
 endif()
 
