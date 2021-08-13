@@ -13,11 +13,15 @@ CPosixFileStream::CPosixFileStream(const char* path, int flags)
 	{
 		throw std::runtime_error("Invalid file handle.");
 	}
+	m_ownsFd = true;
 }
 
 CPosixFileStream::~CPosixFileStream()
 {
-	close(m_fd);
+	if(m_ownsFd)
+	{
+		close(m_fd);
+	}
 }
 
 void CPosixFileStream::Seek(int64 position, STREAM_SEEK_DIRECTION direction)

@@ -44,3 +44,16 @@ void CJavaVM::CheckException(JNIEnv* env)
 		throw JavaException(exception);
 	}
 }
+
+void JavaException::GetExceptionMessage()
+{
+	auto env = CJavaVM::GetEnv();
+	jclass clazz = env->GetObjectClass(m_exception);
+	jmethodID getMessage = env->GetMethodID(clazz, "getMessage", "()Ljava/lang/String;");
+	jstring messageObject = static_cast<jstring>(env->CallObjectMethod(m_exception, getMessage));
+	const char* messageString = env->GetStringUTFChars(messageObject, NULL);
+	m_message = messageString;
+	env->ReleaseStringUTFChars(messageObject, messageString);
+	env->DeleteLocalRef(messageObject);
+	env->DeleteLocalRef(clazz);
+}

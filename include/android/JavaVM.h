@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <stdexcept>
+#include <string>
 #include <jni.h>
 
 namespace Framework
@@ -12,12 +13,21 @@ namespace Framework
 		JavaException(jthrowable exception)
 			: m_exception(exception)
 		{
-			
+			GetExceptionMessage();
 		}
-		
+
+		const char* what() const noexcept override
+		{
+			return m_message.c_str();
+		}
+
 		jthrowable m_exception = NULL;
+		std::string m_message;
+
+	private:
+		void GetExceptionMessage();
 	};
-	
+
 	class CJavaVM
 	{
 	public:

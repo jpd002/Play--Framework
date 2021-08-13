@@ -6,11 +6,7 @@ using namespace Framework;
 
 CJavaObject::~CJavaObject()
 {
-	if(m_this != NULL)
-	{
-		auto env = Framework::CJavaVM::GetEnv();
-		env->DeleteGlobalRef(m_this);
-	}
+	Reset();
 }
 
 void CJavaObject::Attach(jobject srcObject)
@@ -19,4 +15,20 @@ void CJavaObject::Attach(jobject srcObject)
 	auto env = Framework::CJavaVM::GetEnv();
 	m_this = env->NewGlobalRef(srcObject);
 	assert(m_this != NULL);
+}
+
+void CJavaObject::Reset()
+{
+	if(m_this != NULL)
+	{
+		auto env = Framework::CJavaVM::GetEnv();
+		env->DeleteGlobalRef(m_this);
+	}
+	m_this = NULL;
+}
+
+void CJavaObject::MoveFrom(CJavaObject&& rhs)
+{
+	assert(m_this == NULL);
+	std::swap(rhs.m_this, m_this);
 }

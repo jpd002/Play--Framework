@@ -17,6 +17,19 @@ namespace Framework
 		CJavaObject(const CJavaObject&) = delete;
 		CJavaObject& operator =(const CJavaObject&) = delete;
 		
+		//Moveable
+		CJavaObject(CJavaObject&& src)
+		{
+			MoveFrom(std::move(src));
+		}
+		
+		CJavaObject& operator =(CJavaObject&& rhs)
+		{
+			Reset();
+			MoveFrom(std::move(rhs));
+			return (*this);
+		}
+		
 		template <typename ObjectType>
 		static ObjectType CastTo(jobject src)
 		{
@@ -36,8 +49,15 @@ namespace Framework
 			return m_this;
 		}
 		
+		bool IsEmpty() const
+		{
+			return (m_this == NULL);
+		}
+		
 	protected:
 		void Attach(jobject);
+		void Reset();
+		void MoveFrom(CJavaObject&&);
 		
 		jobject m_this = NULL;
 	};
