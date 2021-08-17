@@ -1,4 +1,5 @@
 #include "android/ContentStream.h"
+#include <stdexcept>
 #include "android/ContentResolver.h"
 #include "android/android_net_Uri.h"
 
@@ -11,6 +12,10 @@ CContentStream::CContentStream(const char* path, const char* mode)
 	auto pathUri = android::net::Uri::parse(env->NewStringUTF(path));
 	auto& contentResolver = CContentResolver::GetInstance().GetContentResolver();
 	m_pfd = contentResolver.openFileDescriptor(pathUri, env->NewStringUTF(mode));
+	if(m_pfd.IsEmpty())
+	{
+		throw std::runtime_error("Failed to open file.");
+	}
 	m_fd = m_pfd.getFd();
 }
 

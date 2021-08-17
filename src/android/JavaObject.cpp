@@ -12,6 +12,11 @@ CJavaObject::~CJavaObject()
 void CJavaObject::Attach(jobject srcObject)
 {
 	assert(m_this == NULL);
+	if(srcObject == NULL)
+	{
+		//Attaching nothing is not a problem
+		return;
+	}
 	auto env = Framework::CJavaVM::GetEnv();
 	m_this = env->NewGlobalRef(srcObject);
 	assert(m_this != NULL);
