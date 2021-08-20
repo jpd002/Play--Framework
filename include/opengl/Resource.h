@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include "OpenGlDef.h"
 
 namespace Framework
