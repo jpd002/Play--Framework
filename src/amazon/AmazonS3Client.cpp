@@ -3,6 +3,7 @@
 #include <memory>
 #include "string_format.h"
 #include "xml/Parser.h"
+#include "Url.h"
 
 #define S3_HOSTNAME "s3.amazonaws.com"
 
@@ -49,7 +50,7 @@ GetObjectResult CAmazonS3Client::GetObject(const GetObjectRequest& request)
 {
 	Request rq;
 	rq.method = Framework::Http::HTTP_VERB::GET;
-	rq.uri = "/" + Framework::Http::CHttpClient::UrlEncode(request.key);
+	rq.uri = "/" + Framework::UrlEncode(request.key);
 	rq.host = string_format("%s.s3-%s.amazonaws.com", request.bucket.c_str(), m_region.c_str());
 	rq.urlHost = rq.host;
 
@@ -78,7 +79,7 @@ HeadObjectResult CAmazonS3Client::HeadObject(const HeadObjectRequest& request)
 {
 	Request rq;
 	rq.method = Framework::Http::HTTP_VERB::HEAD;
-	rq.uri = "/" + Framework::Http::CHttpClient::UrlEncode(request.key);
+	rq.uri = "/" + Framework::UrlEncode(request.key);
 	rq.host = string_format("%s.s3-%s.amazonaws.com", request.bucket.c_str(), m_region.c_str());
 	rq.urlHost = rq.host;
 
@@ -141,7 +142,7 @@ void CAmazonS3Client::PutObject(const PutObjectRequest& request)
 {
 	Request rq;
 	rq.method = Framework::Http::HTTP_VERB::PUT;
-	rq.uri = "/" + Framework::Http::CHttpClient::UrlEncode(request.key);
+	rq.uri = "/" + Framework::UrlEncode(request.key);
 	rq.host = string_format("%s.s3-%s.amazonaws.com", request.bucket.c_str(), m_region.c_str());
 	rq.urlHost = rq.host;
 	rq.content = request.data;

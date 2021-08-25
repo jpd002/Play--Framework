@@ -57,7 +57,6 @@ namespace Framework
 		public:
 			virtual ~CHttpClient() = default;
 
-			static std::string UrlEncode(const std::string&);
 			static void SetGlobalSetting(GLOBAL_SETTING, std::string);
 
 			void SetUrl(std::string);
