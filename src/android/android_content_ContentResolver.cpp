@@ -18,6 +18,10 @@ void ContentResolver_ClassInfo::PrepareClassInfo()
 	openFileDescriptor = env->GetMethodID(clazz, "openFileDescriptor", "(Landroid/net/Uri;Ljava/lang/String;)Landroid/os/ParcelFileDescriptor;");
 	Framework::CJavaVM::CheckException(env);
 	assert(openFileDescriptor != NULL);
+
+	query = env->GetMethodID(clazz, "query", "(Landroid/net/Uri;[Ljava/lang/String;Landroid/os/Bundle;Landroid/os/CancellationSignal;)Landroid/database/Cursor;");
+	Framework::CJavaVM::CheckException(env);
+	assert(query != NULL);
 }
 
 android::os::ParcelFileDescriptor ContentResolver::openFileDescriptor(jobject uri, jstring mode)
@@ -28,4 +32,14 @@ android::os::ParcelFileDescriptor ContentResolver::openFileDescriptor(jobject ur
 	Framework::CJavaVM::CheckException(env);
 
 	return Framework::CJavaObject::CastTo<android::os::ParcelFileDescriptor>(pfdObject);
+}
+
+android::database::Cursor ContentResolver::query(jobject uri, jobjectArray projection, jobject queryArgs, jobject cancellationSignal)
+{
+	auto env = Framework::CJavaVM::GetEnv();
+	const auto& classInfo = ClassInfo::GetInstance();
+	jobject cursorObject = env->CallObjectMethod(m_this, classInfo.query, uri, projection, queryArgs, cancellationSignal);
+	Framework::CJavaVM::CheckException(env);
+
+	return Framework::CJavaObject::CastTo<android::database::Cursor>(cursorObject);
 }

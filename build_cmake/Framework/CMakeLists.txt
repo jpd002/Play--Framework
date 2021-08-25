@@ -139,12 +139,14 @@ set(COMMON_SRC_FILES
 if(ANDROID)
 	set(PLATFORM_SRC_FILES
 		../../src/android/android_content_ContentResolver.cpp
+		../../src/android/android_database_Cursor.cpp
 		../../src/android/android_net_Uri.cpp
 		../../src/android/android_os_ParcelFileDescriptor.cpp
 		../../src/android/AssetStream.cpp
 		../../src/android/AssetManager.cpp
 		../../src/android/ContentResolver.cpp
 		../../src/android/ContentStream.cpp
+		../../src/android/ContentUtils.cpp
 		../../src/android/java_security_MessageDigest.cpp
 		../../src/android/JavaObject.cpp
 		../../src/android/JavaVM.cpp
@@ -153,12 +155,14 @@ if(ANDROID)
 		../../src/PosixFileStream.cpp
 		
 		../../include/android/android_content_ContentResolver.h
+		../../include/android/android_database_Cursor.h
 		../../include/android/android_net_Uri.h
 		../../include/android/android_os_ParcelFileDescriptor.h
 		../../include/android/AssetStream.h
 		../../include/android/AssetManager.h
 		../../include/android/ContentResolver.h
 		../../include/android/ContentStream.h
+		../../include/android/ContentUtils.h
 		../../include/android/java_security_MessageDigest.h
 		../../include/android/JavaObject.h
 		../../include/android/JavaVM.h
