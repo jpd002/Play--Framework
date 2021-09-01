@@ -49,8 +49,8 @@ void JavaException::GetExceptionMessage()
 {
 	auto env = CJavaVM::GetEnv();
 	jclass clazz = env->GetObjectClass(m_exception);
-	jmethodID getMessage = env->GetMethodID(clazz, "getMessage", "()Ljava/lang/String;");
-	jstring messageObject = static_cast<jstring>(env->CallObjectMethod(m_exception, getMessage));
+	jmethodID toString = env->GetMethodID(clazz, "toString", "()Ljava/lang/String;");
+	jstring messageObject = static_cast<jstring>(env->CallObjectMethod(m_exception, toString));
 	const char* messageString = env->GetStringUTFChars(messageObject, NULL);
 	m_message = messageString;
 	env->ReleaseStringUTFChars(messageObject, messageString);
