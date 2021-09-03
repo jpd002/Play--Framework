@@ -18,6 +18,9 @@
 
 #elif defined(_WIN32)
 
+	//The vulkan.h header includes windows.h
+	#define NOMINMAX
+
 	#ifndef VK_USE_PLATFORM_WIN32_KHR
 	#define VK_USE_PLATFORM_WIN32_KHR
 	#endif
