@@ -33,7 +33,7 @@ bool CContentUtils::DoesFileExist(const fs::path& filePath)
 	auto pathUri = android::net::Uri::parse(env->NewStringUTF(uri.c_str()));
 	try
 	{
-		auto cursor = contentResolver.query(pathUri, NULL, NULL, NULL);
+		auto cursor = contentResolver.query(pathUri, NULL, NULL, NULL, NULL, NULL);
 		bool exists = cursor.getCount() > 0;
 		cursor.close();
 		return exists;

@@ -27,7 +27,7 @@ namespace android
 			typedef ContentResolver_ClassInfo ClassInfo;
 			
 			android::os::ParcelFileDescriptor openFileDescriptor(jobject, jstring);
-			android::database::Cursor query(jobject, jobjectArray, jobject, jobject);
+			android::database::Cursor query(jobject, jobjectArray, jstring, jobjectArray, jstring, jobject);
 			
 		private:
 		

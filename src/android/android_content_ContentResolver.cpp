@@ -19,7 +19,7 @@ void ContentResolver_ClassInfo::PrepareClassInfo()
 	Framework::CJavaVM::CheckException(env);
 	assert(openFileDescriptor != NULL);
 
-	query = env->GetMethodID(clazz, "query", "(Landroid/net/Uri;[Ljava/lang/String;Landroid/os/Bundle;Landroid/os/CancellationSignal;)Landroid/database/Cursor;");
+	query = env->GetMethodID(clazz, "query", "(Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Ljava/lang/String;Landroid/os/CancellationSignal;)Landroid/database/Cursor;");
 	Framework::CJavaVM::CheckException(env);
 	assert(query != NULL);
 }
@@ -34,11 +34,11 @@ android::os::ParcelFileDescriptor ContentResolver::openFileDescriptor(jobject ur
 	return Framework::CJavaObject::CastTo<android::os::ParcelFileDescriptor>(pfdObject);
 }
 
-android::database::Cursor ContentResolver::query(jobject uri, jobjectArray projection, jobject queryArgs, jobject cancellationSignal)
+android::database::Cursor ContentResolver::query(jobject uri, jobjectArray projection, jstring selection, jobjectArray selectionArgs, jstring sortOrder, jobject cancellationSignal)
 {
 	auto env = Framework::CJavaVM::GetEnv();
 	const auto& classInfo = ClassInfo::GetInstance();
-	jobject cursorObject = env->CallObjectMethod(m_this, classInfo.query, uri, projection, queryArgs, cancellationSignal);
+	jobject cursorObject = env->CallObjectMethod(m_this, classInfo.query, uri, projection, selection, selectionArgs, sortOrder, cancellationSignal);
 	Framework::CJavaVM::CheckException(env);
 
 	return Framework::CJavaObject::CastTo<android::database::Cursor>(cursorObject);
