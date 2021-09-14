@@ -42,7 +42,7 @@ elseif(APPLE)
 		../../include/http/AppleHttpClient.h
 	)
 else()
-	find_package(CURL REQUIRED)
+	find_package(CURL)
 	if(CURL_FOUND)
 		include_directories(${CURL_INCLUDE_DIRS})
 		
