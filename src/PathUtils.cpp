@@ -116,7 +116,7 @@ void PathUtils::SetCacheDirPath(const char* cacheDirPath)
 	s_cacheDirPath = cacheDirPath;
 }
 
-#elif defined(__linux__) || defined(__FreeBSD__)
+#elif defined(__linux__) || defined(__FreeBSD__) || defined(__EMSCRIPTEN__)
 
 // TODO: is this an appropriate translation?
 fs::path PathUtils::GetAppResourcesPath()

@@ -1,9 +1,15 @@
 cmake_minimum_required(VERSION 3.0)
 project(Framework_OpenAl)
 
+include(Header)
 include(../Framework_Common.cmake)
 
-find_package(OpenAL REQUIRED)
+if(TARGET_PLATFORM_JS)
+	set(OPENAL_INCLUDE_DIR "")
+	set(OPENAL_LIBRARY "openal")
+else()
+	find_package(OpenAL REQUIRED)
+endif()
 
 set(SRC_FILES
 	../../src/openal/Buffer.cpp
