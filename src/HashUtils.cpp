@@ -55,16 +55,21 @@ std::array<uint8, 0x20> Framework::HashUtils::ComputeSha256(const void* data, si
 	assert(succeeded);
 #elif defined(__ANDROID__)
 	auto env = CJavaVM::GetEnv();
-	auto messageDigest = java::security::MessageDigest::getInstance(env->NewStringUTF("SHA-256"));
+
+	jstring algoString = env->NewStringUTF("SHA-256");
+	auto messageDigest = java::security::MessageDigest::getInstance(algoString);
+	env->DeleteLocalRef(algoString);
 
 	jbyteArray dataArray = env->NewByteArray(dataSize);
 	env->SetByteArrayRegion(dataArray, 0, dataSize, reinterpret_cast<const jbyte*>(data));
 	jbyteArray hash = messageDigest.digest(dataArray);
+	env->DeleteLocalRef(dataArray);
 
 	assert(env->GetArrayLength(hash) == 0x20);
 	jbyte* hashBytes = env->GetByteArrayElements(hash, NULL);
 	memcpy(result.data(), hashBytes, 0x20);
 	env->ReleaseByteArrayElements(hash, hashBytes, JNI_ABORT);
+	env->DeleteLocalRef(hash);
 #elif defined(HAS_OPENSSL) || defined(__APPLE__)
 	SHA256_CTX c;
 	SHA256_Init(&c);
@@ -144,21 +149,28 @@ std::array<uint8, 0x20> Framework::HashUtils::ComputeHmacSha256(const void* key,
 #elif defined(__ANDROID__)
 	auto env = CJavaVM::GetEnv();
 
+	jstring algoString = env->NewStringUTF("HmacSHA256");
+
 	jbyteArray keyData = env->NewByteArray(keySize);
 	env->SetByteArrayRegion(keyData, 0, keySize, reinterpret_cast<const jbyte*>(key));
-	auto secretKey = javax::crypto::spec::SecretKeySpec(keyData, env->NewStringUTF("HmacSHA256"));
+	auto secretKey = javax::crypto::spec::SecretKeySpec(keyData, algoString);
+	env->DeleteLocalRef(keyData);
 
-	auto mac = javax::crypto::Mac::getInstance(env->NewStringUTF("HmacSHA256"));
+	auto mac = javax::crypto::Mac::getInstance(algoString);
 	mac.init(secretKey);
+
+	env->DeleteLocalRef(algoString);
 
 	jbyteArray dataArray = env->NewByteArray(dataSize);
 	env->SetByteArrayRegion(dataArray, 0, dataSize, reinterpret_cast<const jbyte*>(data));
 	jbyteArray hash = mac.doFinal(dataArray);
+	env->DeleteLocalRef(dataArray);
 
 	assert(env->GetArrayLength(hash) == 0x20);
 	jbyte* hashBytes = env->GetByteArrayElements(hash, NULL);
 	memcpy(result.data(), hashBytes, 0x20);
 	env->ReleaseByteArrayElements(hash, hashBytes, JNI_ABORT);
+	env->DeleteLocalRef(hash);
 #elif defined(__APPLE__)
 	static_assert(CC_SHA256_DIGEST_LENGTH == 0x20, "Expecting a 32-byte size array.");
 	CCHmac(kCCHmacAlgSHA256, key, keySize, reinterpret_cast<const unsigned char*>(data), dataSize, result.data());

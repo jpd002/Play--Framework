@@ -60,6 +60,8 @@ RequestResult CAndroidHttpClient::SendRequest()
 			jstring headerKey = env->NewStringUTF(header.first.c_str());
 			jstring headerValue = env->NewStringUTF(header.second.c_str());
 			connection.setRequestProperty(headerKey, headerValue);
+			env->DeleteLocalRef(headerKey);
+			env->DeleteLocalRef(headerValue);
 		}
 		
 		if(m_verb == HTTP_VERB::POST)

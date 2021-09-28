@@ -26,6 +26,8 @@ void OutputStream::write(const jbyte* b, size_t bSize)
 
 	env->CallVoidMethod(m_this, classInfo.write, bArray);
 	Framework::CJavaVM::CheckException(env);
+
+	env->DeleteLocalRef(bArray);
 }
 
 void OutputStream_ClassInfo::PrepareClassInfo()

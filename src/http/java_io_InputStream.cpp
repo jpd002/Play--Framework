@@ -12,6 +12,7 @@ jint InputStream::read(std::vector<jbyte>& b)
 	auto result = env->CallIntMethod(m_this, classInfo.read, bArray);
 	Framework::CJavaVM::CheckException(env);
 	env->GetByteArrayRegion(bArray, 0, b.size(), b.data());
+	env->DeleteLocalRef(bArray);
 	return result;
 }
 
