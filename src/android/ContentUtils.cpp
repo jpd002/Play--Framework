@@ -16,10 +16,16 @@ std::string CContentUtils::BuildUriFromPath(const fs::path& filePath)
 {
 	assert(IsContentPath(filePath));
 	auto uriPath = Framework::UrlEncode(filePath.string().substr(9));
-	//Encode the last slash
-	auto lastSlashPos = uriPath.rfind('/');
-	assert(lastSlashPos != std::string::npos);
-	uriPath.replace(lastSlashPos, 1, "%2F");
+	//Encode every slash after the last colon in the URI
+	auto slashSearchPos = uriPath.rfind("%3A");
+	assert(slashSearchPos != std::string::npos);
+	while(1)
+	{
+		auto nextSlashPos = uriPath.find('/', slashSearchPos);
+		if(nextSlashPos == std::string::npos) break;
+		uriPath.replace(nextSlashPos, 1, "%2F");
+		slashSearchPos += 3;
+	}
 	auto uri = "content://" + uriPath;
 	return uri;
 }
