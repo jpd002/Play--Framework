@@ -54,8 +54,16 @@ namespace Framework
 		bool Step()
 		{
 			int result = sqlite3_step(m_handle);
-			assert((result == SQLITE_ROW) || (result == SQLITE_DONE));
-			return (result == SQLITE_ROW);
+			switch(result)
+			{
+			case SQLITE_ROW:
+				return true;
+			case SQLITE_DONE:
+				return false;
+			default:
+				assert(false);
+				throw std::runtime_error("Unexpected error while stepping statement.");
+			}
 		}
 
 		void StepWithResult()
