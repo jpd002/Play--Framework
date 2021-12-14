@@ -44,6 +44,10 @@
 #include <GLES3/gl3.h>
 #endif
 
+#elif defined(__EMSCRIPTEN__)
+
+#include <GLES3/gl3.h>
+
 #endif
 
 #include "maybe_unused.h"
