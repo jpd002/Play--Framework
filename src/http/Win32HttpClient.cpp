@@ -5,6 +5,7 @@
 #include "tcharx.h"
 #include "string_cast.h"
 #include "PtrStream.h"
+#include "string_format.h"
 
 using namespace Framework;
 using namespace Framework::Http;
@@ -98,7 +99,8 @@ RequestResult CWin32HttpClient::SendRequest()
 	BOOL sendRequestResult = HttpSendRequest(request, nullptr, 0, optionalData, m_requestBody.size());
 	if(sendRequestResult == FALSE)
 	{
-		throw std::runtime_error("Failed to send request.");
+		DWORD lastError = GetLastError();
+		throw std::runtime_error(string_format("Failed to send request, error %d.", lastError));
 	}
 
 	//Get HTTP status code
