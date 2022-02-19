@@ -121,6 +121,10 @@ void PathUtils::SetCacheDirPath(const char* cacheDirPath)
 // TODO: is this an appropriate translation?
 fs::path PathUtils::GetAppResourcesPath()
 {
+	if(getenv("APPIMAGE"))
+	{
+		return fs::path(getenv("APPDIR")) / "usr/share";
+	}
 	return fs::path(getenv("HOME")) / ".local/share";
 }
 
