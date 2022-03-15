@@ -51,7 +51,6 @@ set(COMMON_SRC_FILES
 	../../src/BitStream.cpp
 	../../src/Config.cpp
 	../../src/Csv.cpp
-	../../src/Endian.cpp
 	../../src/FilesystemUtils.cpp
 	../../src/HashUtils.cpp
 	../../src/idct/IEEE1180.cpp
@@ -107,6 +106,7 @@ set(COMMON_SRC_FILES
 
 	../../include/BitManip.h
 	../../include/Csv.h
+	../../include/Endian.h
 	../../include/filesystem_def.h
 	../../include/FilesystemUtils.h
 	../../include/HashUtils.h
