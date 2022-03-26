@@ -31,6 +31,10 @@ namespace Framework
 			return __builtin_bswap64(value);
 		}
 
+		static uint64 ToMSBF64(uint64 value)
+		{
+			return __builtin_bswap64(value);
+		}
 	};
 
 	template <>
