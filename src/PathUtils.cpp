@@ -125,6 +125,10 @@ fs::path PathUtils::GetAppResourcesPath()
 	{
 		return fs::path(getenv("APPDIR")) / "usr/share";
 	}
+	if(getenv("XDG_DATA_HOME"))
+	{
+		return fs::path(getenv("XDG_DATA_HOME"));
+	}
 	return fs::path(getenv("HOME")) / ".local/share";
 }
 
@@ -135,11 +139,19 @@ fs::path PathUtils::GetRoamingDataPath()
 
 fs::path PathUtils::GetPersonalDataPath()
 {
+	if(getenv("XDG_CONFIG_HOME"))
+	{
+		return fs::path(getenv("XDG_CONFIG_HOME"));
+	}
 	return fs::path(getenv("HOME")) / ".local/share";
 }
 
 fs::path PathUtils::GetCachePath()
 {
+	if(getenv("XDG_CACHE_HOME"))
+	{
+		return fs::path(getenv("XDG_CACHE_HOME"));
+	}
 	return fs::path(getenv("HOME")) / ".cache";
 }
 
