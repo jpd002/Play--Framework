@@ -125,9 +125,13 @@ fs::path PathUtils::GetAppResourcesPath()
 	{
 		return fs::path(getenv("APPDIR")) / "usr/share";
 	}
-	if(getenv("XDG_DATA_HOME"))
+
+	auto path = fs::path("/app/share");
+	std::error_code existsErrorCode;
+	bool exists = fs::exists(path, existsErrorCode);
+	if(!existsErrorCode && exists)
 	{
-		return fs::path(getenv("XDG_DATA_HOME"));
+		return path;
 	}
 	return fs::path(getenv("HOME")) / ".local/share";
 }
