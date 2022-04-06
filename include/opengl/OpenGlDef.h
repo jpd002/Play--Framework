@@ -42,6 +42,8 @@
 #elif defined(GLES_COMPATIBILITY)
 #include <EGL/egl.h>
 #include <GLES3/gl3.h>
+// egl can reference Xlib.h->X.h which defines None, which causes issues with qt (qgroupaction) down the line for using None in enum
+#undef None
 #endif
 
 #elif defined(__EMSCRIPTEN__)
