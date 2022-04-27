@@ -129,6 +129,8 @@ void CBuffer::Read(VkQueue queue, CCommandBufferPool& commandBufferPool,
 	result = m_device->vkQueueWaitIdle(queue);
 	CHECKVULKANERROR(result);
 
+	commandBufferPool.FreeBuffer(commandBuffer);
+
 	{
 		void* bufferPtr = nullptr;
 		result = m_device->vkMapMemory(*m_device, stagingBuffer.GetMemory(), 0, VK_WHOLE_SIZE, 0, &bufferPtr);
@@ -194,6 +196,8 @@ void CBuffer::Write(VkQueue queue, CCommandBufferPool& commandBufferPool,
 	//Wait for queue ops to complete
 	result = m_device->vkQueueWaitIdle(queue);
 	CHECKVULKANERROR(result);
+
+	commandBufferPool.FreeBuffer(commandBuffer);
 }
 
 void CBuffer::MoveFrom(CBuffer&& rhs)

@@ -142,6 +142,8 @@ void CImage::SetLayout(VkQueue queue, CCommandBufferPool& commandBufferPool,
 	
 	result = m_device->vkQueueWaitIdle(queue);
 	CHECKVULKANERROR(result);
+
+	commandBufferPool.FreeBuffer(commandBuffer);
 }
 
 void CImage::Fill(VkQueue queue, CCommandBufferPool& commandBufferPool, 
@@ -220,6 +222,8 @@ void CImage::Fill(VkQueue queue, CCommandBufferPool& commandBufferPool,
 	//Wait for queue ops to complete
 	result = m_device->vkQueueWaitIdle(queue);
 	CHECKVULKANERROR(result);
+
+	commandBufferPool.FreeBuffer(commandBuffer);
 }
 
 void CImage::Create(const VkPhysicalDeviceMemoryProperties& memoryProperties,
