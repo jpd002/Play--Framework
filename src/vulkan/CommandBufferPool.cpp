@@ -24,9 +24,6 @@ void CCommandBufferPool::Reset()
 	if(m_handle != VK_NULL_HANDLE)
 	{
 		assert(m_device != nullptr);
-		m_device->vkFreeCommandBuffers(*m_device, m_handle, m_buffers.size(), m_buffers.data());
-		m_buffers.clear();
-		m_bufferIndex = 0;
 		m_device->vkDestroyCommandPool(*m_device, m_handle, nullptr);
 		m_device = nullptr;
 		m_handle = VK_NULL_HANDLE;
@@ -40,40 +37,33 @@ CCommandBufferPool& CCommandBufferPool::operator =(CCommandBufferPool&& rhs)
 	std::swap(m_device, rhs.m_device);
 	std::swap(m_handle, rhs.m_handle);
 	
-	std::swap(m_buffers, rhs.m_buffers);
-	std::swap(m_bufferIndex, rhs.m_bufferIndex);
-	
 	return (*this);
 }
 
 VkCommandBuffer CCommandBufferPool::AllocateBuffer()
 {
 	VkCommandBuffer buffer = VK_NULL_HANDLE;
-	if(m_bufferIndex < m_buffers.size())
-	{
-		buffer = m_buffers[m_bufferIndex++];
-		auto result = m_device->vkResetCommandBuffer(buffer, VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT);
-		CHECKVULKANERROR(result);
-	}
-	else
-	{
-		auto bufferAllocateInfo = Framework::Vulkan::CommandBufferAllocateInfo();
-		bufferAllocateInfo.commandPool        = m_handle;
-		bufferAllocateInfo.level              = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
-		bufferAllocateInfo.commandBufferCount = 1;
 
-		auto result = m_device->vkAllocateCommandBuffers(*m_device, &bufferAllocateInfo, &buffer);
-		CHECKVULKANERROR(result);
-		
-		m_buffers.push_back(buffer);
-		m_bufferIndex++;
-	}
+	auto bufferAllocateInfo = Framework::Vulkan::CommandBufferAllocateInfo();
+	bufferAllocateInfo.commandPool        = m_handle;
+	bufferAllocateInfo.level              = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+	bufferAllocateInfo.commandBufferCount = 1;
+
+	auto result = m_device->vkAllocateCommandBuffers(*m_device, &bufferAllocateInfo, &buffer);
+	CHECKVULKANERROR(result);
+
 	return buffer;
+}
+
+void CCommandBufferPool::FreeBuffer(VkCommandBuffer commandBuffer)
+{
+	m_device->vkFreeCommandBuffers(*m_device, m_handle, 1, &commandBuffer);
 }
 
 void CCommandBufferPool::ResetBuffers()
 {
-	m_bufferIndex = 0;
+	//Not implemented, needs to call vkResetCommandPool
+	assert(false);
 }
 
 void CCommandBufferPool::Create(uint32_t queueFamilyIndex)

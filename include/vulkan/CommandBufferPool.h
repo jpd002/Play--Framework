@@ -1,6 +1,5 @@
 #pragma once
 
-#include <vector>
 #include "Types.h"
 #include "Device.h"
 
@@ -25,6 +24,8 @@ namespace Framework
 			CCommandBufferPool& operator =(CCommandBufferPool&&);
 
 			VkCommandBuffer AllocateBuffer();
+			void            FreeBuffer(VkCommandBuffer);
+
 			void            ResetBuffers();
 
 		private:
@@ -34,8 +35,6 @@ namespace Framework
 
 			const CDevice* m_device = nullptr;
 			VkCommandPool m_handle = VK_NULL_HANDLE;
-			CommandBufferArray m_buffers;
-			uint32 m_bufferIndex = 0;
 		};
 	}
 }
