@@ -5,8 +5,8 @@
 #include "xml/Parser.h"
 #include "Url.h"
 
-CAmazonS3Client::CAmazonS3Client(CAmazonCredentials credentials, std::string region, std::string endpoint)
-    : CAmazonClient("s3", std::move(credentials), std::move(region))
+CAmazonS3Client::CAmazonS3Client(CAmazonConfigs configs, std::string region, std::string endpoint)
+    : CAmazonClient("s3", std::move(configs), std::move(region))
     , m_endpoint(endpoint)
 {
 }

@@ -4,11 +4,19 @@
 #include <vector>
 #include "http/HttpClient.h"
 
-struct CAmazonCredentials
+struct CAmazonConfigs
 {
+	enum S3PROVIDER
+	{
+		AWS_S3 = 0,
+		CF_R2 = 1
+	};
+
 	std::string accessKeyId;
 	std::string secretAccessKey;
 	std::string sessionToken;
+	std::string accountKeyId;
+	S3PROVIDER m_provider;
 	
 	bool IsValid() const
 	{
@@ -19,7 +27,7 @@ struct CAmazonCredentials
 class CAmazonClient
 {
 public:
-	CAmazonClient(std::string, CAmazonCredentials, std::string);
+	CAmazonClient(std::string, CAmazonConfigs, std::string);
 
 protected:
 	struct Request
@@ -36,6 +44,6 @@ protected:
 	Framework::Http::RequestResult ExecuteRequest(const Request&);
 
 	std::string m_service;
-	CAmazonCredentials m_credentials;
+	CAmazonConfigs m_configs;
 	std::string m_region;
 };
