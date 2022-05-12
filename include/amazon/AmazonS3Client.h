@@ -58,7 +58,7 @@ struct PutObjectRequest
 class CAmazonS3Client : public CAmazonClient
 {
 public:
-	CAmazonS3Client(CAmazonConfigs, std::string = "us-east-1", std::string = "amazonaws.com");
+	CAmazonS3Client(CAmazonConfigs, std::string = "us-east-1");
 
 	GetBucketLocationResult GetBucketLocation(const GetBucketLocationRequest&);
 	GetObjectResult GetObject(const GetObjectRequest&);
@@ -67,5 +67,5 @@ public:
 	void PutObject(const PutObjectRequest&);
 
 private:
-	std::string m_endpoint;
+	Request CreateRequest(Framework::Http::HTTP_VERB, std::string, std::string = "");
 };
