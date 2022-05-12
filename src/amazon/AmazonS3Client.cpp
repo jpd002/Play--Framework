@@ -5,10 +5,9 @@
 #include "xml/Parser.h"
 #include "Url.h"
 
-#define S3_HOSTNAME "s3.amazonaws.com"
-
-CAmazonS3Client::CAmazonS3Client(CAmazonCredentials credentials, std::string region)
+CAmazonS3Client::CAmazonS3Client(CAmazonCredentials credentials, std::string region, std::string endpoint)
     : CAmazonClient("s3", std::move(credentials), std::move(region))
+    , m_endpoint(endpoint)
 {
 }
 
@@ -21,8 +20,8 @@ GetBucketLocationResult CAmazonS3Client::GetBucketLocation(const GetBucketLocati
 
 	Request rq;
 	rq.method = Framework::Http::HTTP_VERB::GET;
-	rq.host = S3_HOSTNAME;
-	rq.urlHost = S3_HOSTNAME;
+	rq.host = string_format("s3.%s", m_endpoint.c_str());
+	rq.urlHost = rq.host;
 	rq.uri = string_format("/%s", request.bucket.c_str());
 	//We add a bucket parameter even if the S3 API doesn't use it to prevent caching
 	rq.query = string_format("bucket=%s&location=", request.bucket.c_str());
@@ -51,7 +50,7 @@ GetObjectResult CAmazonS3Client::GetObject(const GetObjectRequest& request)
 	Request rq;
 	rq.method = Framework::Http::HTTP_VERB::GET;
 	rq.uri = string_format("/%s/%s", request.bucket.c_str(), Framework::UrlEncode(request.key).c_str());
-	rq.host = string_format("s3.%s.amazonaws.com", m_region.c_str());
+	rq.host = string_format("s3.%s.%s", m_region.c_str(), m_endpoint.c_str());
 	rq.urlHost = rq.host;
 
 	if(request.range.first != request.range.second)
@@ -80,7 +79,7 @@ HeadObjectResult CAmazonS3Client::HeadObject(const HeadObjectRequest& request)
 	Request rq;
 	rq.method = Framework::Http::HTTP_VERB::HEAD;
 	rq.uri = string_format("/%s/%s", request.bucket.c_str(), Framework::UrlEncode(request.key).c_str());
-	rq.host = string_format("s3.%s.amazonaws.com", m_region.c_str());
+	rq.host = string_format("s3.%s.%s", m_region.c_str(), m_endpoint.c_str());
 	rq.urlHost = rq.host;
 
 	auto response = ExecuteRequest(rq);
@@ -112,7 +111,7 @@ ListObjectsResult CAmazonS3Client::ListObjects(std::string bucket)
 	Request rq;
 	rq.method = Framework::Http::HTTP_VERB::GET;
 	rq.uri = string_format("/%s", bucket.c_str());
-	rq.host = string_format("s3.%s.amazonaws.com", m_region.c_str());
+	rq.host = string_format("s3.%s.%s", m_region.c_str(), m_endpoint.c_str());
 	rq.urlHost = rq.host;
 
 	auto response = ExecuteRequest(rq);
@@ -143,7 +142,7 @@ void CAmazonS3Client::PutObject(const PutObjectRequest& request)
 	Request rq;
 	rq.method = Framework::Http::HTTP_VERB::PUT;
 	rq.uri = string_format("/%s/%s", request.bucket.c_str(), Framework::UrlEncode(request.key).c_str());
-	rq.host = string_format("s3.%s.amazonaws.com", m_region.c_str());
+	rq.host = string_format("s3.%s.%s", m_region.c_str(), m_endpoint.c_str());
 	rq.urlHost = rq.host;
 	rq.content = request.data;
 	
