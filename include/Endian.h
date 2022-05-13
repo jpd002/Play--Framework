@@ -31,6 +31,11 @@ namespace Framework
 			return __builtin_bswap64(value);
 		}
 
+		static uint16 ToMSBF16(uint16 value)
+		{
+			return __builtin_bswap16(value);
+		}
+
 		static uint32 ToMSBF32(uint32 value)
 		{
 			return __builtin_bswap32(value);
