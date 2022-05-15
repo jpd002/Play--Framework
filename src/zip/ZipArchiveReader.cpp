@@ -1,4 +1,4 @@
-#include <zlib.h>
+#include <zstd_zlibwrapper.h>
 #include <algorithm>
 #include <functional>
 #include <stdexcept>

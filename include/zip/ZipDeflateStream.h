@@ -1,7 +1,7 @@
 #ifndef _ZIPDEFLATESTREAM_H_
 #define _ZIPDEFLATESTREAM_H_
 
-#include <zlib.h>
+#include <zstd_zlibwrapper.h>
 #include "Stream.h"
 
 namespace Framework

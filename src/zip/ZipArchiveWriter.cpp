@@ -2,7 +2,7 @@
 #include "zip/ZipArchiveWriter.h"
 #include "zip/ZipDeflateStream.h"
 #include "zip/ZipDefs.h"
-#include <zlib.h>
+#include <zstd_zlibwrapper.h>
 
 using namespace Framework;
 using namespace std;

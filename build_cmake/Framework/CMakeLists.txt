@@ -3,17 +3,13 @@ project(Framework)
 
 include(../Framework_Common.cmake)
 
-find_package(ZLIB)
-if(NOT ZLIB_FOUND)
-	MESSAGE("-- Using Provided zlib source")
-	if(NOT TARGET zlibstatic)
-		add_subdirectory(
-			${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/build_cmake/zlib-1.2.8
-			${CMAKE_CURRENT_BINARY_DIR}/zlib-1.2.8
-		)
-	endif()
-endif(NOT ZLIB_FOUND)
-LIST(APPEND PROJECT_LIBS ZLIB::ZLIB)
+if(NOT TARGET libzstd_zlibwrapper_static)
+	add_subdirectory(
+		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/build_cmake/zstd_zlibwrapper
+		${CMAKE_CURRENT_BINARY_DIR}/zstd_zlibwrapper
+	)
+endif()
+LIST(APPEND PROJECT_LIBS libzstd_zlibwrapper_static)
 
 if(NOT TARGET ghc_filesystem)
 	add_subdirectory(
