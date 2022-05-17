@@ -54,7 +54,7 @@ CZipArchiveReader::StreamPtr CZipArchiveReader::BeginReadFile(const char* fileNa
 	m_stream.Seek(fileHeader.extraFieldLength, STREAM_SEEK_CUR);
 
 	StreamPtr resultStream;
-	if(fileHeader.compressionMethod == 8)
+	if(fileHeader.compressionMethod == 8 || fileHeader.compressionMethod == 93)
 	{
 		//Deflate
 		uint32 compressedSize = fileHeader.compressedSize;
