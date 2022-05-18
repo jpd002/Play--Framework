@@ -11,7 +11,7 @@ CAmazonS3Client::CAmazonS3Client(CAmazonConfigs configs, std::string region)
 {
 }
 
-CAmazonClient::Request CAmazonS3Client::CreateRequest(Framework::Http::HTTP_VERB method, std::string bucket, std::string key)
+CAmazonClient::Request CAmazonS3Client::CreateRequest(Framework::Http::HTTP_VERB method, std::string bucket, std::string path)
 {
 	Request rq;
 	rq.method = method;
@@ -21,9 +21,9 @@ CAmazonClient::Request CAmazonS3Client::CreateRequest(Framework::Http::HTTP_VERB
 	{
 		auto endpoint = "r2.cloudflarestorage.com";
 		rq.uri = string_format("/%s", bucket.c_str());
-		if(!key.empty())
+		if(!path.empty())
 		{
-			rq.uri = string_format("%s/%s", rq.uri.c_str(), key.c_str());
+			rq.uri = string_format("%s/%s", rq.uri.c_str(), path.c_str());
 		}
 		rq.host = string_format("%s.%s", m_configs.accountKeyId.c_str(), endpoint);
 		rq.urlHost = rq.host;
@@ -34,9 +34,9 @@ CAmazonClient::Request CAmazonS3Client::CreateRequest(Framework::Http::HTTP_VERB
 	assert(m_configs.m_provider == CAmazonConfigs::S3PROVIDER::AWS_S3);
 
 	rq.uri = "/";
-	if(!key.empty())
+	if(!path.empty())
 	{
-		rq.uri = string_format("/%s", key.c_str());
+		rq.uri = string_format("/%s", path.c_str());
 	}
 
 	std::string endpoint = "amazonaws.com";
