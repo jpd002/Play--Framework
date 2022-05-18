@@ -11,7 +11,7 @@ CAmazonS3Client::CAmazonS3Client(CAmazonConfigs configs, std::string region)
 {
 }
 
-CAmazonClient::Request CAmazonS3Client::CreateRequest(Framework::Http::HTTP_VERB method, std::string bucket, std::string path)
+CAmazonClient::Request CAmazonS3Client::CreateRequest(Framework::Http::HTTP_VERB method, std::string bucket, std::string region, std::string path)
 {
 	Request rq;
 	rq.method = method;
@@ -40,14 +40,14 @@ CAmazonClient::Request CAmazonS3Client::CreateRequest(Framework::Http::HTTP_VERB
 	}
 
 	std::string endpoint = "amazonaws.com";
-	if(m_region.empty())
+	if(region.empty())
 	{
 		rq.host = string_format("%s.s3.%s", bucket.c_str(), endpoint.c_str());
 		rq.urlHost = string_format("s3.%s", endpoint.c_str());
 	}
 	else
 	{
-		rq.host = string_format("%s.s3-%s.%s", bucket.c_str(), m_region.c_str(), endpoint.c_str());
+		rq.host = string_format("%s.s3-%s.%s", bucket.c_str(), region.c_str(), endpoint.c_str());
 		rq.urlHost = rq.host;
 	}
 	return rq;
@@ -68,8 +68,7 @@ GetBucketLocationResult CAmazonS3Client::GetBucketLocation(const GetBucketLocati
 	{
 		throw new std::runtime_error("Bucket name must be provided.");
 	}
-
-	Request rq = CreateRequest(Framework::Http::HTTP_VERB::GET, request.bucket);
+	Request rq = CreateRequest(Framework::Http::HTTP_VERB::GET, request.bucket, "");
 	//We add a bucket parameter even if the S3 API doesn't use it to prevent caching
 	rq.query = string_format("bucket=%s&location=", request.bucket.c_str());
 
@@ -92,7 +91,7 @@ GetBucketLocationResult CAmazonS3Client::GetBucketLocation(const GetBucketLocati
 
 GetObjectResult CAmazonS3Client::GetObject(const GetObjectRequest& request)
 {
-	Request rq = CreateRequest(Framework::Http::HTTP_VERB::GET, request.bucket, Framework::UrlEncode(request.key));
+	Request rq = CreateRequest(Framework::Http::HTTP_VERB::GET, request.bucket, m_region, Framework::UrlEncode(request.key));
 
 	if(request.range.first != request.range.second)
 	{
@@ -117,7 +116,7 @@ GetObjectResult CAmazonS3Client::GetObject(const GetObjectRequest& request)
 
 HeadObjectResult CAmazonS3Client::HeadObject(const HeadObjectRequest& request)
 {
-	Request rq = CreateRequest(Framework::Http::HTTP_VERB::HEAD, request.bucket, Framework::UrlEncode(request.key));
+	Request rq = CreateRequest(Framework::Http::HTTP_VERB::HEAD, request.bucket, m_region, Framework::UrlEncode(request.key));
 
 	auto response = ExecuteRequest(rq);
 	if(response.statusCode != Framework::Http::HTTP_STATUS_CODE::OK)
@@ -145,7 +144,7 @@ HeadObjectResult CAmazonS3Client::HeadObject(const HeadObjectRequest& request)
 
 ListObjectsResult CAmazonS3Client::ListObjects(std::string bucket)
 {
-	Request rq = CreateRequest(Framework::Http::HTTP_VERB::GET, bucket);
+	Request rq = CreateRequest(Framework::Http::HTTP_VERB::GET, bucket, m_region);
 
 	auto response = ExecuteRequest(rq);
 	if(response.statusCode != Framework::Http::HTTP_STATUS_CODE::OK)
@@ -172,7 +171,7 @@ ListObjectsResult CAmazonS3Client::ListObjects(std::string bucket)
 
 void CAmazonS3Client::PutObject(const PutObjectRequest& request)
 {
-	Request rq = CreateRequest(Framework::Http::HTTP_VERB::PUT, Framework::UrlEncode(request.key));
+	Request rq = CreateRequest(Framework::Http::HTTP_VERB::PUT, request.bucket.c_str(), m_region, Framework::UrlEncode(request.key));
 	rq.content = request.data;
 	
 	auto response = ExecuteRequest(rq);

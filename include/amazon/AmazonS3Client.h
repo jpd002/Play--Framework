@@ -67,5 +67,5 @@ public:
 	void PutObject(const PutObjectRequest&);
 
 private:
-	Request CreateRequest(Framework::Http::HTTP_VERB, std::string, std::string = "");
+	Request CreateRequest(Framework::Http::HTTP_VERB, std::string, std::string, std::string = "");
 };
