@@ -15,36 +15,41 @@ CAmazonClient::Request CAmazonS3Client::CreateRequest(Framework::Http::HTTP_VERB
 {
 	Request rq;
 	rq.method = method;
-	rq.uri = string_format("/%s", bucket.c_str());
-	if(!key.empty())
-	{
-		rq.uri = string_format("%s/%s", rq.uri.c_str(), key.c_str());
-	}
 
-	std::string endpoint;
-	switch (m_configs.m_provider)
+	// Path‐style bucket access
+	if(m_configs.m_provider == CAmazonConfigs::S3PROVIDER::CF_R2)
 	{
-	case CAmazonConfigs::S3PROVIDER::CF_R2:
-		endpoint = "r2.cloudflarestorage.com";
-		rq.host = string_format("%s.%s", m_configs.accountKeyId.c_str(), endpoint.c_str());
+		auto endpoint = "r2.cloudflarestorage.com";
+		rq.uri = string_format("/%s", bucket.c_str());
+		if(!key.empty())
+		{
+			rq.uri = string_format("%s/%s", rq.uri.c_str(), key.c_str());
+		}
+		rq.host = string_format("%s.%s", m_configs.accountKeyId.c_str(), endpoint);
 		rq.urlHost = rq.host;
 		return rq;
-	default:
-		assert(false);
-	case CAmazonConfigs::S3PROVIDER::AWS_S3:
-		endpoint = "amazonaws.com";
-		break;
 	}
 
+	// Virtual hosted‐style bucket access
+	assert(m_configs.m_provider == CAmazonConfigs::S3PROVIDER::AWS_S3);
+
+	rq.uri = "/";
+	if(!key.empty())
+	{
+		rq.uri = string_format("/%s", key.c_str());
+	}
+
+	std::string endpoint = "amazonaws.com";
 	if(m_region.empty())
 	{
-		rq.host = string_format("s3.%s", endpoint.c_str());
+		rq.host = string_format("%s.s3.%s", bucket.c_str(), endpoint.c_str());
+		rq.urlHost = string_format("s3.%s", endpoint.c_str());
 	}
 	else
 	{
-		rq.host = string_format("s3.%s.%s", m_region.c_str(), endpoint.c_str());
+		rq.host = string_format("%s.s3-%s.%s", bucket.c_str(), m_region.c_str(), endpoint.c_str());
+		rq.urlHost = rq.host;
 	}
-	rq.urlHost = rq.host;
 	return rq;
 }
 
