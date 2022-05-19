@@ -1,7 +1,7 @@
 #ifndef _GZIPSTREAM_H_
 #define _GZIPSTREAM_H_
 
-#include <zlib.h>
+#include <zstd_zlibwrapper.h>
 #include "Stream.h"
 
 namespace Framework

@@ -2,7 +2,7 @@
 #include <string.h>
 #include <assert.h>
 #include <math.h>
-#include <zlib.h>
+#include <zstd_zlibwrapper.h>
 #include "bitmap/PNG.h"
 #include "Endian.h"
 #include "PtrStream.h"

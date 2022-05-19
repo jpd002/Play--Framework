@@ -1,5 +1,5 @@
 #include "zip/ZipStoreStream.h"
-#include <zlib.h>
+#include <zstd_zlibwrapper.h>
 #include <stdexcept>
 #include <algorithm>
 

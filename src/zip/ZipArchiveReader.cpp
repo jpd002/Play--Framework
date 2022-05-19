@@ -1,4 +1,4 @@
-#include <zlib.h>
+#include <zstd_zlibwrapper.h>
 #include <algorithm>
 #include <functional>
 #include <stdexcept>
@@ -54,7 +54,7 @@ CZipArchiveReader::StreamPtr CZipArchiveReader::BeginReadFile(const char* fileNa
 	m_stream.Seek(fileHeader.extraFieldLength, STREAM_SEEK_CUR);
 
 	StreamPtr resultStream;
-	if(fileHeader.compressionMethod == 8)
+	if(fileHeader.compressionMethod == COMPRESSION_METHOD::DEFLATE || fileHeader.compressionMethod == COMPRESSION_METHOD::ZSTD)
 	{
 		//Deflate
 		uint32 compressedSize = fileHeader.compressedSize;
@@ -66,7 +66,7 @@ CZipArchiveReader::StreamPtr CZipArchiveReader::BeginReadFile(const char* fileNa
 			new CZipInflateStream(m_stream, compressedSize),
 			std::bind(&CZipArchiveReader::EndReadFile, this, std::placeholders::_1));
 	}
-	else if(fileHeader.compressionMethod == 0)
+	else if(fileHeader.compressionMethod == COMPRESSION_METHOD::STORE)
 	{
 		//Store
 		uint32 compressedSize = fileHeader.compressedSize;

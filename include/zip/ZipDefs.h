@@ -22,6 +22,13 @@ namespace Framework
             DIRENDHEADER_SIG = 0x06054B50,
         };
 
+        enum COMPRESSION_METHOD
+        {
+            STORE = 0,
+            DEFLATE = 8,
+            ZSTD = 93
+        };
+
     #pragma pack(push, 1)
         struct ZIPFILEHEADER
         {
