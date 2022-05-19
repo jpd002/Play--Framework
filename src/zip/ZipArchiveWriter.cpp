@@ -44,7 +44,7 @@ void CZipArchiveWriter::Write(CStream& stream)
         fileHeader.versionNeeded = 0x14;
         fileHeader.compressedSize = 0;
         fileHeader.uncompressedSize = 0;
-        fileHeader.compressionMethod = ZWRAP_isUsingZSTDcompression() ? 93 : 8;
+        fileHeader.compressionMethod = ZWRAP_isUsingZSTDcompression() ? COMPRESSION_METHOD::ZSTD : COMPRESSION_METHOD::DEFLATE;
         fileHeader.fileNameLength = static_cast<uint16>(fileName.length());
         fileHeader.crc = 0;
 
