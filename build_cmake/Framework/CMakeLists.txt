@@ -102,7 +102,7 @@ set(COMMON_SRC_FILES
 
 	../../include/BitManip.h
 	../../include/Csv.h
-	../../include/Endian.h
+	../../include/EndianUtils.h
 	../../include/filesystem_def.h
 	../../include/FilesystemUtils.h
 	../../include/HashUtils.h

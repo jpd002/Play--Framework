@@ -4,7 +4,7 @@
 #include <math.h>
 #include <zstd_zlibwrapper.h>
 #include "bitmap/PNG.h"
-#include "Endian.h"
+#include "EndianUtils.h"
 #include "PtrStream.h"
 #include "PtrMacro.h"
 #include "StreamBitStream.h"
