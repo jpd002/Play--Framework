@@ -86,6 +86,7 @@ set(COMMON_SRC_FILES
 	../../src/StdStream.cpp
 	../../src/StdStreamUtils.cpp
 	../../src/ThreadPool.cpp
+	../../src/ThreadUtils.cpp
 	../../src/Url.cpp
 	../../src/Utf8.cpp
 	../../src/xml/FilteringNodeIterator.cpp
@@ -122,6 +123,7 @@ set(COMMON_SRC_FILES
 	../../include/std_experimental_map.h
 	../../include/std_experimental_set.h
 	../../include/ThreadPool.h
+	../../include/ThreadUtils.h
 	../../include/Url.h
 	../../include/Utf8.h
 	../../include/zip/ZipArchiveReader.h
