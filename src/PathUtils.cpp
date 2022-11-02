@@ -1,4 +1,5 @@
 #include "PathUtils.h"
+#include "maybe_unused.h"
 #include "Utf8.h"
 
 using namespace Framework;
@@ -216,7 +217,7 @@ void PathUtils::EnsurePathExists(const fs::path& path)
 ////////////////////////////////////////////
 
 template <typename StringType>
-static std::string GetNativeStringFromPathInternal(const StringType&);
+FRAMEWORK_MAYBE_UNUSED static std::string GetNativeStringFromPathInternal(const StringType&);
 
 template <>
 std::string GetNativeStringFromPathInternal(const std::string& str)
@@ -231,7 +232,7 @@ std::string GetNativeStringFromPathInternal(const std::wstring& str)
 }
 
 template <typename StringType>
-static StringType GetPathFromNativeStringInternal(const std::string&);
+FRAMEWORK_MAYBE_UNUSED static StringType GetPathFromNativeStringInternal(const std::string&);
 
 template <>
 std::string GetPathFromNativeStringInternal(const std::string& str)
