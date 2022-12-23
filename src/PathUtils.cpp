@@ -119,7 +119,6 @@ void PathUtils::SetCacheDirPath(const char* cacheDirPath)
 
 #elif defined(__linux__) || defined(__FreeBSD__) || defined(__EMSCRIPTEN__)
 
-// TODO: is this an appropriate translation?
 fs::path PathUtils::GetAppResourcesPath()
 {
 	if(getenv("APPIMAGE"))
@@ -127,6 +126,7 @@ fs::path PathUtils::GetAppResourcesPath()
 		return fs::path(getenv("APPDIR")) / "usr/share";
 	}
 
+	//Flatpak
 	auto path = fs::path("/app/share");
 	std::error_code existsErrorCode;
 	bool exists = fs::exists(path, existsErrorCode);
@@ -134,7 +134,11 @@ fs::path PathUtils::GetAppResourcesPath()
 	{
 		return path;
 	}
-	return fs::path(getenv("HOME")) / ".local/share";
+
+	//TODO: We should probably append an app name to this path, as installing there pollutes the directory.
+	//Also, the prefix path can be overridden by the build system, which makes hardcoding this not appropriate,
+	//but works for the default settings.
+	return "/usr/local/share";
 }
 
 fs::path PathUtils::GetRoamingDataPath()
