@@ -1,12 +1,8 @@
 cmake_minimum_required(VERSION 3.1)
 project(Framework_OpenGl)
 
-set(CMAKE_MODULE_PATH
-	${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/cmake-modules
-	${CMAKE_MODULE_PATH}
-)
-
 include(Header)
+include(../Framework_Common.cmake)
 
 if(TARGET_PLATFORM_ANDROID OR TARGET_PLATFORM_IOS OR TARGET_PLATFORM_UNIX_ARM OR TARGET_PLATFORM_JS)
 	set(USE_GLES ON CACHE BOOL "Use GLES")
