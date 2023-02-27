@@ -55,8 +55,11 @@ void CInstance::Reset()
 	vkGetPhysicalDeviceSurfacePresentModesKHR = nullptr;
 	vkGetPhysicalDeviceSurfaceSupportKHR = nullptr;
 	
-	vkCreateDebugReportCallbackEXT = nullptr;
-	vkDestroyDebugReportCallbackEXT = nullptr;
+	vkCmdBeginDebugUtilsLabelEXT = nullptr;
+	vkCmdEndDebugUtilsLabelEXT = nullptr;
+	vkCreateDebugUtilsMessengerEXT = nullptr;
+	vkDestroyDebugUtilsMessengerEXT = nullptr;
+	vkSetDebugUtilsObjectNameEXT = nullptr;
 	
 #if defined(VK_USE_PLATFORM_ANDROID_KHR)
 	vkCreateAndroidSurfaceKHR = nullptr;
@@ -100,8 +103,11 @@ CInstance& CInstance::operator =(CInstance&& rhs)
 	std::swap(vkGetPhysicalDeviceSurfacePresentModesKHR, rhs.vkGetPhysicalDeviceSurfacePresentModesKHR);
 	std::swap(vkGetPhysicalDeviceSurfaceSupportKHR, rhs.vkGetPhysicalDeviceSurfaceSupportKHR);
 	
-	std::swap(vkCreateDebugReportCallbackEXT, rhs.vkCreateDebugReportCallbackEXT);
-	std::swap(vkDestroyDebugReportCallbackEXT, rhs.vkDestroyDebugReportCallbackEXT);
+	std::swap(vkCmdBeginDebugUtilsLabelEXT, rhs.vkCmdBeginDebugUtilsLabelEXT);
+	std::swap(vkCmdEndDebugUtilsLabelEXT, rhs.vkCmdEndDebugUtilsLabelEXT);
+	std::swap(vkCreateDebugUtilsMessengerEXT, rhs.vkCreateDebugUtilsMessengerEXT);
+	std::swap(vkDestroyDebugUtilsMessengerEXT, rhs.vkDestroyDebugUtilsMessengerEXT);
+	std::swap(vkSetDebugUtilsObjectNameEXT, rhs.vkSetDebugUtilsObjectNameEXT);
 	
 #if defined(VK_USE_PLATFORM_ANDROID_KHR)
 	std::swap(vkCreateAndroidSurfaceKHR, rhs.vkCreateAndroidSurfaceKHR);
@@ -158,8 +164,11 @@ void CInstance::GetProcAddrs()
 	SET_PROC_ADDR(vkGetPhysicalDeviceSurfacePresentModesKHR);
 	SET_PROC_ADDR(vkGetPhysicalDeviceSurfaceSupportKHR);
 	
-	SET_PROC_ADDR(vkCreateDebugReportCallbackEXT);
-	SET_PROC_ADDR(vkDestroyDebugReportCallbackEXT);
+	SET_PROC_ADDR(vkCmdBeginDebugUtilsLabelEXT);
+	SET_PROC_ADDR(vkCmdEndDebugUtilsLabelEXT);
+	SET_PROC_ADDR(vkCreateDebugUtilsMessengerEXT);
+	SET_PROC_ADDR(vkDestroyDebugUtilsMessengerEXT);
+	SET_PROC_ADDR(vkSetDebugUtilsObjectNameEXT);
 	
 #if defined(VK_USE_PLATFORM_ANDROID_KHR)
 	SET_PROC_ADDR(vkCreateAndroidSurfaceKHR);

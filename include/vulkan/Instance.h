@@ -38,9 +38,12 @@ namespace Framework
 			DECLARE_FUNCTION(vkGetPhysicalDeviceProperties)
 			DECLARE_FUNCTION(vkGetPhysicalDeviceQueueFamilyProperties)
 			
-			//VK_EXT_debug_report
-			DECLARE_FUNCTION(vkCreateDebugReportCallbackEXT)
-			DECLARE_FUNCTION(vkDestroyDebugReportCallbackEXT)
+			//VK_EXT_debug_utils
+			DECLARE_FUNCTION(vkCmdBeginDebugUtilsLabelEXT)
+			DECLARE_FUNCTION(vkCmdEndDebugUtilsLabelEXT)
+			DECLARE_FUNCTION(vkCreateDebugUtilsMessengerEXT)
+			DECLARE_FUNCTION(vkDestroyDebugUtilsMessengerEXT)
+			DECLARE_FUNCTION(vkSetDebugUtilsObjectNameEXT)
 			
 			//VK_KHR_surface
 			DECLARE_FUNCTION(vkDestroySurfaceKHR)
