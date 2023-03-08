@@ -84,7 +84,6 @@ set(COMMON_SRC_FILES
 	../../src/string_cast_sjis.cpp
 	../../src/string_cast_win1252.cpp
 	../../src/StdStream.cpp
-	../../src/StdStreamUtils.cpp
 	../../src/ThreadPool.cpp
 	../../src/ThreadUtils.cpp
 	../../src/Url.cpp

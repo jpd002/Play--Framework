@@ -5,29 +5,59 @@
 namespace Framework
 {
 	template <typename StringType>
-	CStdStream CreateInputStdStream(const StringType&);
+	constexpr const typename StringType::value_type* GetInputStdStreamMode()
+	{
+		if constexpr (std::is_same_v<StringType, std::wstring>)
+		{
+			return L"rb";
+		}
+		else
+		{
+			return "rb";
+		}
+	}
 
 	template <typename StringType>
-	CStdStream CreateOutputStdStream(const StringType&);
+	constexpr const typename StringType::value_type* GetOutputStdStreamMode()
+	{
+		if constexpr (std::is_same_v<StringType, std::wstring>)
+		{
+			return L"wb";
+		}
+		else
+		{
+			return "wb";
+		}
+	}
 
 	template <typename StringType>
-	CStdStream CreateUpdateExistingStdStream(const StringType&);
+	constexpr const typename StringType::value_type* GetUpdateExistingStdStreamMode()
+	{
+		if constexpr (std::is_same_v<StringType, std::wstring>)
+		{
+			return L"r+b";
+		}
+		else
+		{
+			return "r+b";
+		}
+	}
 
-	template <>
-	CStdStream CreateInputStdStream(const std::wstring&);
+	template <typename StringType>
+	CStdStream CreateInputStdStream(const StringType& path)
+	{
+		return CStdStream(path.c_str(), GetInputStdStreamMode<StringType>());
+	}
 
-	template <>
-	CStdStream CreateInputStdStream(const std::string&);
+	template <typename StringType>
+	CStdStream CreateOutputStdStream(const StringType& path)
+	{
+		return CStdStream(path.c_str(), GetOutputStdStreamMode<StringType>());
+	}
 
-	template <>
-	CStdStream CreateOutputStdStream(const std::wstring&);
-
-	template <>
-	CStdStream CreateOutputStdStream(const std::string&);
-
-	template <>
-	CStdStream CreateUpdateExistingStdStream(const std::wstring&);
-
-	template <>
-	CStdStream CreateUpdateExistingStdStream(const std::string&);
+	template <typename StringType>
+	CStdStream CreateUpdateExistingStdStream(const StringType& path)
+	{
+		return CStdStream(path.c_str(), GetUpdateExistingStdStreamMode<StringType>());
+	}
 }
