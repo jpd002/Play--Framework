@@ -66,6 +66,12 @@ wstring string_cast<wstring>(const string& sSource)
 }
 
 template <>
+string string_cast<string>(const string& sSource)
+{
+	return sSource;
+}
+
+template <>
 wstring string_cast<wstring>(const wstring& sSource)
 {
 	return sSource;
