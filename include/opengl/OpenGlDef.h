@@ -16,6 +16,7 @@
 #elif defined(__APPLE__)
 
 #include <TargetConditionals.h>
+#define GL_SILENCE_DEPRECATION
 
 #if TARGET_OS_IPHONE
 
