@@ -52,7 +52,7 @@ void CIEEE1180::PrepareTable()
 	}
 }
 
-void CIEEE1180::Transform(int16* pUV, int16* pXY)
+void CIEEE1180::Transform(const int16* pUV, int16* pXY)
 {
 	int i, j, k, v;
 	double partial_product;

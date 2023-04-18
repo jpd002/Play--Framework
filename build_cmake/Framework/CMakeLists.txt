@@ -50,6 +50,7 @@ set(COMMON_SRC_FILES
 	../../src/FilesystemUtils.cpp
 	../../src/HashUtils.cpp
 	../../src/idct/IEEE1180.cpp
+	../../src/idct/TrivialC.cpp
 	../../src/layout/FlatLayout.cpp
 	../../src/layout/GridLayout.cpp
 	../../src/layout/HorizontalLayout.cpp

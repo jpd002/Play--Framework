@@ -1,5 +1,4 @@
-#ifndef _IDCT_IEEE1180_H_
-#define _IDCT_IEEE1180_H_
+#pragma once
 
 #include "idct/Interface.h"
 
@@ -12,7 +11,7 @@ namespace IDCT
 								CIEEE1180();
 		virtual					~CIEEE1180();
 		static CInterface*		GetInstance();
-		virtual void			Transform(int16*, int16*);
+		void					Transform(const int16*, int16*) override;
 
 	private:
 		void					PrepareTable();
@@ -22,5 +21,3 @@ namespace IDCT
 	};
 
 };
-
-#endif

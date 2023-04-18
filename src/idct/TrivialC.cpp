@@ -47,7 +47,7 @@ void CTrivialC::PrepareTables()
 	}
 }
 
-void CTrivialC::Transform(int16* pUV, int16* pXY)
+void CTrivialC::Transform(const int16* pUV, int16* pXY)
 {
 	//IDCT
 	//		    1     7   7                      2*x+1                2*y+1
@@ -60,7 +60,7 @@ void CTrivialC::Transform(int16* pUV, int16* pXY)
 	//	       { 1 otherwise
 
 	unsigned int x, y;
-	short* pTemp;
+	const short* pTemp;
 	double nSum;
 	for(y = 0; y < 8; y++)
 	{
