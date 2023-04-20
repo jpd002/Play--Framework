@@ -23,16 +23,19 @@ namespace Framework
 
 		void								RegisterPreferenceInteger(const char*, int);
 		void								RegisterPreferenceBoolean(const char*, bool);
+		void								RegisterPreferenceFloat(const char*, float);
 		void								RegisterPreferenceString(const char*, const char*);
 		void								RegisterPreferencePath(const char*, const PathType&);
 
 		int									GetPreferenceInteger(const char*);
 		bool								GetPreferenceBoolean(const char*);
+		float								GetPreferenceFloat(const char*);
 		const char*							GetPreferenceString(const char*);
 		PathType							GetPreferencePath(const char*);
 
 		bool								SetPreferenceInteger(const char*, int);
 		bool								SetPreferenceBoolean(const char*, bool);
+		bool								SetPreferenceFloat(const char*, float);
 		bool								SetPreferenceString(const char*, const char*);
 		bool								SetPreferencePath(const char*, const PathType&);
 
@@ -44,6 +47,7 @@ namespace Framework
 		{
 			TYPE_INTEGER,
 			TYPE_BOOLEAN,
+			TYPE_FLOAT,
 			TYPE_STRING,
 			TYPE_PATH,
 		};
@@ -97,6 +101,24 @@ namespace Framework
 
 		private:
 			bool							m_value;
+		};
+
+		class CPreferenceFloat : public CPreference
+		{
+		public:
+			enum
+			{
+				PREFERENCE_TYPE_ID = TYPE_FLOAT
+			};
+
+											CPreferenceFloat(const char*, float);
+			virtual							~CPreferenceFloat() = default;
+			float							GetValue() const;
+			void							SetValue(float);
+			void							Serialize(Framework::Xml::CNode*) const override;
+
+		private:
+			float							m_value = 0;
 		};
 
 		class CPreferenceString : public CPreference

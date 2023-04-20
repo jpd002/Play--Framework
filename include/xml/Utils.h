@@ -32,6 +32,7 @@ namespace Framework
 		AttributeType	CreateAttributeStringValue(const char*, const char*);
 		AttributeType	CreateAttributeIntValue(const char*, int);
 		AttributeType	CreateAttributeBoolValue(const char*, bool);
+		AttributeType	CreateAttributeFloatValue(const char*, float);
 
 		std::string		EscapeText(const std::string&);
 		std::string		UnescapeText(const std::string&);

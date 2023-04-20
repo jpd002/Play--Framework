@@ -16,6 +16,7 @@
 
 #define PREFERENCE_TYPE_NAME_INTEGER "integer"
 #define PREFERENCE_TYPE_NAME_BOOLEAN "boolean"
+#define PREFERENCE_TYPE_NAME_FLOAT "float"
 #define PREFERENCE_TYPE_NAME_STRING "string"
 #define PREFERENCE_TYPE_NAME_PATH "path"
 
@@ -105,6 +106,17 @@ void CConfig::RegisterPreferenceBoolean(const char* name, bool value)
 	InsertPreference(preference);
 }
 
+void CConfig::RegisterPreferenceFloat(const char* name, float value)
+{
+	if(FindPreference<CPreference>(name))
+	{
+		return;
+	}
+
+	auto preference = std::make_shared<CPreferenceFloat>(name, value);
+	InsertPreference(preference);
+}
+
 void CConfig::RegisterPreferenceString(const char* name, const char* value)
 {
 	if(FindPreference<CPreference>(name))
@@ -141,6 +153,13 @@ bool CConfig::GetPreferenceBoolean(const char* name)
 	return preference->GetValue();
 }
 
+float CConfig::GetPreferenceFloat(const char* name)
+{
+	auto preference = FindPreference<CPreferenceFloat>(name);
+	if(!preference) return 0;
+	return preference->GetValue();
+}
+
 const char* CConfig::GetPreferenceString(const char* name)
 {
 	auto preference = FindPreference<CPreferenceString>(name);
@@ -168,6 +187,15 @@ bool CConfig::SetPreferenceBoolean(const char* name, bool value)
 {
 	if(m_readonly) throw std::runtime_error("Setting preference on read-only config is illegal.");
 	auto preference = FindPreference<CPreferenceBoolean>(name);
+	if(!preference) return false;
+	preference->SetValue(value);
+	return true;
+}
+
+bool CConfig::SetPreferenceFloat(const char* name, float value)
+{
+	if(m_readonly) throw std::runtime_error("Setting preference on read-only config is illegal.");
+	auto preference = FindPreference<CPreferenceFloat>(name);
 	if(!preference) return false;
 	preference->SetValue(value);
 	return true;
@@ -246,6 +274,14 @@ void CConfig::Load()
 			if(Xml::GetAttributeBoolValue(prefNode, PREFERENCE_ATTRIBUTE_NAME_VALUE, &value))
 			{
 				RegisterPreferenceBoolean(name, value);
+			}
+		}
+		else if(!strcmp(type, PREFERENCE_TYPE_NAME_FLOAT))
+		{
+			float value = 0;
+			if(Xml::GetAttributeFloatValue(prefNode, PREFERENCE_ATTRIBUTE_NAME_VALUE, &value))
+			{
+				RegisterPreferenceFloat(name, value);
 			}
 		}
 		else if(!strcmp(type, PREFERENCE_TYPE_NAME_STRING))
@@ -342,6 +378,8 @@ const char* CConfig::CPreference::GetTypeString() const
 		return PREFERENCE_TYPE_NAME_INTEGER;
 	case TYPE_BOOLEAN:
 		return PREFERENCE_TYPE_NAME_BOOLEAN;
+	case TYPE_FLOAT:
+		return PREFERENCE_TYPE_NAME_FLOAT;
 	case TYPE_STRING:
 		return PREFERENCE_TYPE_NAME_STRING;
 	case TYPE_PATH:
@@ -412,6 +450,34 @@ void CConfig::CPreferenceBoolean::Serialize(Xml::CNode* pNode) const
 	CPreference::Serialize(pNode);
 
 	pNode->InsertAttribute(Xml::CreateAttributeBoolValue(PREFERENCE_ATTRIBUTE_NAME_VALUE, m_value));
+}
+
+/////////////////////////////////////////////////////////
+//CPreferenceFloat implementation
+/////////////////////////////////////////////////////////
+
+CConfig::CPreferenceFloat::CPreferenceFloat(const char* name, float value)
+: CPreference(name, TYPE_FLOAT)
+, m_value(value)
+{
+	
+}
+
+float CConfig::CPreferenceFloat::GetValue() const
+{
+	return m_value;
+}
+
+void CConfig::CPreferenceFloat::SetValue(float value)
+{
+	m_value = value;
+}
+
+void CConfig::CPreferenceFloat::Serialize(Xml::CNode* pNode) const
+{
+	CPreference::Serialize(pNode);
+
+	pNode->InsertAttribute(Xml::CreateAttributeFloatValue(PREFERENCE_ATTRIBUTE_NAME_VALUE, m_value));
 }
 
 /////////////////////////////////////////////////////////

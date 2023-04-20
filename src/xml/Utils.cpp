@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdexcept>
 #include "xml/Utils.h"
+#include "string_format.h"
 
 using namespace Framework;
 
@@ -257,6 +258,12 @@ Xml::AttributeType Xml::CreateAttributeIntValue(const char* sName, int nValue)
 Xml::AttributeType Xml::CreateAttributeBoolValue(const char* sName, bool nValue)
 {
 	return AttributeType(sName, nValue ? "true" : "false");
+}
+
+Xml::AttributeType Xml::CreateAttributeFloatValue(const char* sName, float nValue)
+{
+	auto sValue = string_format("%f", nValue);
+	return AttributeType(sName, sValue);
 }
 
 std::string Xml::EscapeText(const std::string& text)
