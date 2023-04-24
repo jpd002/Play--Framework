@@ -11,10 +11,16 @@ void CJavaVM::SetJavaVM(JavaVM* vm)
 	m_vm = vm;
 }
 
-void CJavaVM::AttachCurrentThread(JNIEnv** env)
+void CJavaVM::AttachCurrentThread(JNIEnv** env, const char* threadName)
 {
 	assert(m_vm != nullptr);
-	m_vm->AttachCurrentThread(env, nullptr);
+
+	JavaVMAttachArgs args = {};
+	args.version = JNI_VERSION_1_6;
+	args.name = threadName;
+
+	[[maybe_unused]] jint result = m_vm->AttachCurrentThread(env, &args);
+	assert(result == JNI_OK);
 }
 
 void CJavaVM::DetachCurrentThread()

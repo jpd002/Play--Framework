@@ -33,7 +33,7 @@ namespace Framework
 	public:
 		static void SetJavaVM(JavaVM*);
 		
-		static void AttachCurrentThread(JNIEnv**);
+		static void AttachCurrentThread(JNIEnv**, const char* = nullptr);
 		static void DetachCurrentThread();
 		
 		static JNIEnv* GetEnv();

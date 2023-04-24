@@ -32,5 +32,7 @@ void ThreadUtils::SetThreadName(std::thread& thread, const char* name)
 		auto wideName = string_cast<std::wstring>(name);
 		SetThreadDescriptionFunc(thread.native_handle(), wideName.c_str());
 	}
+#elif defined(__ANDROID__)
+	pthread_setname_np(thread.native_handle(), name);
 #endif
 }
