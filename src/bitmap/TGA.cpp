@@ -1,6 +1,7 @@
 #include "bitmap/TGA.h"
 #include <stdexcept>
-#include <assert.h>
+#include <cassert>
+#include "maybe_unused.h"
 
 using namespace Framework;
 
@@ -20,7 +21,7 @@ Framework::CBitmap CTGA::ReadBitmap(CStream& stream)
 	}
 
 	bool originIsTop = (header.descriptor & 0x20) != 0;
-	bool originIsRight = (header.descriptor & 0x10) != 0;
+	FRAMEWORK_MAYBE_UNUSED bool originIsRight = (header.descriptor & 0x10) != 0;
 
 	assert(!originIsRight);
 

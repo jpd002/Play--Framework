@@ -1,5 +1,4 @@
-#ifndef _ZIPDEFLATESTREAM_H_
-#define _ZIPDEFLATESTREAM_H_
+#pragma once
 
 #include <zstd_zlibwrapper.h>
 #include "Stream.h"
@@ -9,19 +8,19 @@ namespace Framework
     class CZipDeflateStream : public Framework::CStream
     {
     public:
-                                CZipDeflateStream(Framework::CStream&);
-        virtual                 ~CZipDeflateStream();
+                        CZipDeflateStream(Framework::CStream&);
+        virtual         ~CZipDeflateStream();
 
-        uint32                  GetCrc() const;
-        uint64                  GetCompressedLength() const;
-        uint64                  GetUncompressedLength() const;
+        uint32          GetCrc() const;
+        uint64          GetCompressedLength() const;
+        uint64          GetUncompressedLength() const;
 
-        virtual void	        Seek(int64, Framework::STREAM_SEEK_DIRECTION);
-	    virtual uint64	        Tell();
-	    virtual uint64	        Read(void*, uint64);
-	    virtual uint64	        Write(const void*, uint64);
-	    virtual bool	        IsEOF();
-        virtual void            Flush();
+        void            Seek(int64, Framework::STREAM_SEEK_DIRECTION) override;
+        uint64          Tell() override;
+        uint64          Read(void*, uint64) override;
+        uint64          Write(const void*, uint64) override;
+        bool            IsEOF() override;
+        void            Flush() override;
 
     private:
         enum BUFFERSIZE
@@ -30,11 +29,9 @@ namespace Framework
         };
 
         Framework::CStream&     m_baseStream;
-        uint32                  m_crc;
-        uint64                  m_compressedLength;
-        uint64                  m_uncompressedLength;
+        uint32                  m_crc = 0;
+        uint64                  m_compressedLength = 0;
+        uint64                  m_uncompressedLength = 0;
         z_stream                m_zStream;
     };
 }
-
-#endif

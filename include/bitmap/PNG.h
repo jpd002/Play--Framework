@@ -13,7 +13,6 @@ namespace Framework
 		static CBitmap		ReadBitmap(CStream&);
 
 	private:
-							CPNG();
 							~CPNG();
 
 		class CIHDR
@@ -23,13 +22,13 @@ namespace Framework
 			unsigned int	GetSamplesPerPixel();
 			unsigned int	CalculateNeededBufferSize();
 
-			uint32			m_nWidth;
-			uint32			m_nHeight;
-			uint8			m_nDepth;
-			uint8			m_nColorType;
-			uint8			m_nCompression;
-			uint8			m_nFilter;
-			uint8			m_nInterlace;
+			uint32			m_nWidth = 0;
+			uint32			m_nHeight = 0;
+			uint8			m_nDepth = 0;
+			uint8			m_nColorType = 0;
+			uint8			m_nCompression = 0;
+			uint8			m_nFilter = 0;
+			uint8			m_nInterlace = 0;
 		};
 
 		CBitmap				DoRead(CStream&);
@@ -44,9 +43,9 @@ namespace Framework
 
 		CIHDR				m_IHDR;
 		uint8				m_nPalette[0x300];
-		uint8*				m_pBuffer;
-		uint8*				m_pIDAT;
-		unsigned int		m_nIDATSize;
+		uint8*				m_pBuffer = nullptr;
+		uint8*				m_pIDAT = nullptr;
+		unsigned int		m_nIDATSize = 0;
 	};
 
 }

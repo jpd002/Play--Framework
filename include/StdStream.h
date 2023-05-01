@@ -9,7 +9,7 @@ namespace Framework
 	class CStdStream : public CStream
 	{
 	public:
-						CStdStream();
+						CStdStream() = default;
 						CStdStream(CStdStream&&);
 		explicit		CStdStream(FILE*);
 						CStdStream(const char*, const char*);

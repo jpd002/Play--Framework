@@ -15,10 +15,10 @@ namespace Framework
 		uint64		Write(const void*, uint64);
 		bool		IsEOF();
 	private:
-		uint64		m_position;
-		uint64		m_size;
-		const char*	m_data;
-		bool		m_isEof;
+		const char*	m_data = nullptr;
+		uint64		m_size = 0;
+		uint64		m_position = 0;
+		bool		m_isEof = false;
 	};
 
 }

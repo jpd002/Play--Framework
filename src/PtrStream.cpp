@@ -7,8 +7,6 @@ using namespace Framework;
 CPtrStream::CPtrStream(const void* data, uint64 size)
 : m_data(reinterpret_cast<const char*>(data))
 , m_size(size)
-, m_position(0)
-, m_isEof(false)
 {
 
 }

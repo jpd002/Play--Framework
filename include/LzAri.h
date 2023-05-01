@@ -1,7 +1,5 @@
-#ifndef _LZARI_H_
-#define _LZARI_H_
+#pragma once
 
-#include <stdio.h>
 #include "Types.h"
 #include "Stream.h"
 
@@ -36,8 +34,7 @@ namespace Framework
 			N_CHAR		= (256 - THRESHOLD + F) /* character code = 0, 1, ..., N_CHAR - 1 */
 		};
 
-								CLzAri();
-		virtual					~CLzAri();
+		virtual					~CLzAri() = default;
 
 		void					PutBit(int);
 		void					FlushBitBuffer();
@@ -70,21 +67,19 @@ namespace Framework
 		int						match_position, match_length;  /* of longest match.  These are set by the InsertNode() procedure. */
 		int						lson[N + 1], rson[N + 257], dad[N + 1];  /* left & right children & parents -- These constitute binary search trees. */
 
-		uint32					low, high, value;
-		int						shifts;					/* counts for magnifying low and high around Q2 */
+		uint32					low = 0, high = Q4, value = 0;
+		int						shifts = 0;				/* counts for magnifying low and high around Q2 */
 		int						char_to_sym[N_CHAR], sym_to_char[N_CHAR + 1];
 		unsigned int			sym_freq[N_CHAR + 1];	/* frequency for symbols */
 		unsigned int			sym_cum[N_CHAR + 1];	/* cumulative freq for symbols */
 		unsigned int			position_cum[N + 1];	/* cumulative freq for positions */
 
-		Framework::CStream*		inputStream;
-		Framework::CStream*		outputStream;
+		Framework::CStream*		inputStream = nullptr;
+		Framework::CStream*		outputStream = nullptr;
 
-		unsigned int			putBuffer;
-		unsigned int			putMask;
-		unsigned int			getBuffer;
-		unsigned int			getMask;
+		unsigned int			putBuffer = 0;
+		unsigned int			putMask = 128;
+		unsigned int			getBuffer = 0;
+		unsigned int			getMask = 0;
 	};
 }
-
-#endif

@@ -1,14 +1,12 @@
 #include "zip/ZipDeflateStream.h"
 #include <stdexcept>
-#include <assert.h>
+#include <cassert>
+#include "maybe_unused.h"
 
 using namespace Framework;
 
-CZipDeflateStream::CZipDeflateStream(CStream& baseStream) :
-m_baseStream(baseStream),
-m_crc(0),
-m_uncompressedLength(0),
-m_compressedLength(0)
+CZipDeflateStream::CZipDeflateStream(CStream& baseStream)
+: m_baseStream(baseStream)
 {
     m_zStream.zalloc = Z_NULL;
     m_zStream.zfree = Z_NULL;
@@ -16,7 +14,7 @@ m_compressedLength(0)
     if(deflateInit2(&m_zStream, Z_DEFAULT_COMPRESSION, 
         Z_DEFLATED, -15, 8, Z_DEFAULT_STRATEGY) != Z_OK)
     {
-		throw std::runtime_error("Error initializing deflate stream.");
+        throw std::runtime_error("Error initializing deflate stream.");
     }
 }
 
@@ -69,7 +67,7 @@ uint64 CZipDeflateStream::Write(const void* buffer, uint64 size)
         m_zStream.avail_out = BUFFERSIZE;
         m_zStream.next_out = outBuffer;
 
-        int ret = deflate(&m_zStream, Z_NO_FLUSH);
+        FRAMEWORK_MAYBE_UNUSED int ret = deflate(&m_zStream, Z_NO_FLUSH);
         assert(ret != Z_STREAM_ERROR);
 
         uint64 have = BUFFERSIZE - m_zStream.avail_out;
@@ -95,7 +93,7 @@ void CZipDeflateStream::Flush()
         m_zStream.avail_out = BUFFERSIZE;
         m_zStream.next_out = outBuffer;
 
-        int ret = deflate(&m_zStream, Z_FINISH);
+        FRAMEWORK_MAYBE_UNUSED int ret = deflate(&m_zStream, Z_FINISH);
         assert(ret != Z_STREAM_ERROR);
 
         uint64 have = BUFFERSIZE - m_zStream.avail_out;

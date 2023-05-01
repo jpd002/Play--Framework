@@ -16,26 +16,6 @@
 
 using namespace Framework;
 
-CLzAri::CLzAri()
-: putBuffer(0)
-, putMask(128)
-, getBuffer(0)
-, getMask(0)
-, low(0)
-, high(Q4)
-, value(0)
-, shifts(0)
-, inputStream(nullptr)
-, outputStream(nullptr)
-{
-
-}
-
-CLzAri::~CLzAri()
-{
-
-}
-
 void CLzAri::Decompress(Framework::CStream& dst, Framework::CStream& src)
 {
 	CLzAri ari;

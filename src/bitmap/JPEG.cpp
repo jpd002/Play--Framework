@@ -7,6 +7,7 @@
 #include "idct/IEEE1180.h"
 #include "StreamBitStream.h"
 #include "PtrMacro.h"
+#include "maybe_unused.h"
 
 using namespace Framework;
 
@@ -108,14 +109,14 @@ uint8 CJPEG::HuffGetBit()
 	{
 		if(m_nHuffSkipNext)
 		{
-			uint8 markerEscape = m_stream->GetBits_MSBF(8);
+			FRAMEWORK_MAYBE_UNUSED uint8 markerEscape = m_stream->GetBits_MSBF(8);
 			assert(markerEscape == 0x00);
 			m_nHuffSkipNext = false;
 		}
 		if(m_stream->PeekBits_MSBF(8) == 0xFF)
 		{
 			//Trap if we want to...
-			uint16 fullMarker = m_stream->PeekBits_MSBF(16);
+			FRAMEWORK_MAYBE_UNUSED uint16 fullMarker = m_stream->PeekBits_MSBF(16);
 			assert(fullMarker == 0xFF00);
 			m_nHuffSkipNext = true;
 		}
@@ -569,10 +570,7 @@ CBitmap CJPEG::Process()
 
 unsigned int CJPEG::ProcessSOF0()
 {
-	uint16 nLength;
-	unsigned int i;
-
-	nLength = (uint16)m_stream->GetBits_MSBF(16);
+	FRAMEWORK_MAYBE_UNUSED uint16 nLength = (uint16)m_stream->GetBits_MSBF(16);
 	
 	m_Frame.nType		= 0xFFC0;
 	m_Frame.nPrecision	= (uint8)m_stream->GetBits_MSBF(8); 
@@ -587,7 +585,7 @@ unsigned int CJPEG::ProcessSOF0()
 
 	m_Frame.pCompoment = (FRAMECOMPONENT*)malloc(sizeof(FRAMECOMPONENT) * m_Frame.nComponents);
 	
-	for(i = 0; i < m_Frame.nComponents; i++)
+	for(unsigned int i = 0; i < m_Frame.nComponents; i++)
 	{
 		m_Frame.pCompoment[i].nC	= (uint8)m_stream->GetBits_MSBF(8);
 		m_Frame.pCompoment[i].nHV	= (uint8)m_stream->GetBits_MSBF(8);
@@ -656,10 +654,7 @@ unsigned int CJPEG::ProcessDHT()
 
 unsigned int CJPEG::ProcessSOS()
 {
-	uint16 nLength;
-	unsigned int i;
-
-	nLength = (uint16)m_stream->GetBits_MSBF(16);
+	FRAMEWORK_MAYBE_UNUSED uint16 nLength = (uint16)m_stream->GetBits_MSBF(16);
 
 	m_Scan.nComponents = (uint8)m_stream->GetBits_MSBF(8);
 
@@ -667,7 +662,7 @@ unsigned int CJPEG::ProcessSOS()
 
 	m_Scan.pComponent = (SCANCOMPONENT*)malloc(sizeof(SCANCOMPONENT) * m_Scan.nComponents);
 
-	for(i = 0; i < m_Scan.nComponents; i++)
+	for(unsigned int i = 0; i < m_Scan.nComponents; i++)
 	{
 		m_Scan.pComponent[i].nCs	= (uint8)m_stream->GetBits_MSBF(8);
 		m_Scan.pComponent[i].nTdTa	= (uint8)m_stream->GetBits_MSBF(8);
