@@ -45,6 +45,7 @@ namespace Framework
 			DECLARE_FUNCTION(vkCmdNextSubpass)
 			DECLARE_FUNCTION(vkCmdPipelineBarrier)
 			DECLARE_FUNCTION(vkCmdPushConstants)
+			DECLARE_FUNCTION(vkCmdSetBlendConstants)
 			DECLARE_FUNCTION(vkCmdSetScissor)
 			DECLARE_FUNCTION(vkCmdSetViewport)
 			DECLARE_FUNCTION(vkCmdUpdateBuffer)
