@@ -5,119 +5,97 @@
 #include <zstd_zlibwrapper.h>
 
 using namespace Framework;
-using namespace std;
-using namespace Zip;
-
-CZipArchiveWriter::CZipArchiveWriter()
-{
-
-}
-
-CZipArchiveWriter::~CZipArchiveWriter()
-{
-    for(FileList::iterator fileIterator(m_files.begin());
-        m_files.end() != fileIterator; fileIterator++)
-    {
-        delete (*fileIterator);
-    }
-}
+using namespace Framework::Zip;
 
 void CZipArchiveWriter::Write(CStream& stream)
 {
-    typedef pair<std::string, ZIPDIRFILEHEADER> DirectoryEntry;
-    typedef list<DirectoryEntry> DirectoryEntryList;
+	typedef std::pair<std::string, ZIPDIRFILEHEADER> DirectoryEntry;
+	typedef std::list<DirectoryEntry> DirectoryEntryList;
 
-    DirectoryEntryList directoryEntries;
+	DirectoryEntryList directoryEntries;
 
-    for(FileList::iterator fileIterator(m_files.begin());
-        m_files.end() != fileIterator; fileIterator++)
-    {
-        CZipFile* file(*fileIterator);
+	for(const auto& file : m_files)
+	{
+		std::string fileName(file->GetName());
+		uint32 relativePosition = static_cast<uint32>(stream.Tell());
 
-        string fileName(file->GetName());
-        uint32 relativePosition = static_cast<uint32>(stream.Tell());
+		//Build an incomplete file header
+		ZIPFILEHEADER fileHeader = {};
+		fileHeader.signature = FILEHEADER_SIG;
+		fileHeader.versionNeeded = 0x14;
+		fileHeader.compressedSize = 0;
+		fileHeader.uncompressedSize = 0;
+		fileHeader.compressionMethod = ZWRAP_isUsingZSTDcompression() ? COMPRESSION_METHOD::ZSTD : COMPRESSION_METHOD::DEFLATE;
+		fileHeader.fileNameLength = static_cast<uint16>(fileName.length());
+		fileHeader.crc = 0;
 
-        //Build an incomplete file header
-        ZIPFILEHEADER fileHeader;
-        memset(&fileHeader, 0, sizeof(ZIPFILEHEADER));
-        fileHeader.signature = FILEHEADER_SIG;
-        fileHeader.versionNeeded = 0x14;
-        fileHeader.compressedSize = 0;
-        fileHeader.uncompressedSize = 0;
-        fileHeader.compressionMethod = ZWRAP_isUsingZSTDcompression() ? COMPRESSION_METHOD::ZSTD : COMPRESSION_METHOD::DEFLATE;
-        fileHeader.fileNameLength = static_cast<uint16>(fileName.length());
-        fileHeader.crc = 0;
+		//Write file header
+		stream.Write(&fileHeader, sizeof(ZIPFILEHEADER));
 
-        //Write file header
-        stream.Write(&fileHeader, sizeof(ZIPFILEHEADER));
+		//Write file name
+		stream.Write(fileName.c_str(), fileName.length());
 
-        //Write file name
-        stream.Write(fileName.c_str(), fileName.length());
+		//Write body
+		CZipDeflateStream proxyStream(stream);
+		file->Write(proxyStream);
+		proxyStream.Flush();
 
-        //Write body
-        CZipDeflateStream proxyStream(stream);
-        file->Write(proxyStream);
-        proxyStream.Flush();
+		//Update header with info
+		fileHeader.crc = proxyStream.GetCrc();
+		fileHeader.compressedSize = static_cast<uint32>(proxyStream.GetCompressedLength());
+		fileHeader.uncompressedSize = static_cast<uint32>(proxyStream.GetUncompressedLength());
 
-        //Update header with info
-        fileHeader.crc = proxyStream.GetCrc();
-        fileHeader.compressedSize = static_cast<uint32>(proxyStream.GetCompressedLength());
-        fileHeader.uncompressedSize = static_cast<uint32>(proxyStream.GetUncompressedLength());
+		//Write back old header
+		stream.Seek(relativePosition, STREAM_SEEK_SET);
+		stream.Write(&fileHeader, sizeof(ZIPFILEHEADER));
+		stream.Seek(0, STREAM_SEEK_END);
 
-        //Write back old header
-        stream.Seek(relativePosition, STREAM_SEEK_SET);
-        stream.Write(&fileHeader, sizeof(ZIPFILEHEADER));
-        stream.Seek(0, STREAM_SEEK_END);
+		//Create directory entry for this file
+		ZIPDIRFILEHEADER dirFileHeader;
+		memset(&dirFileHeader, 0, sizeof(ZIPDIRFILEHEADER));
+		dirFileHeader.signature = DIRFILEHEADER_SIG;
+		dirFileHeader.versionMadeBy = 0x14;
+		dirFileHeader.versionNeeded = 0x14;
+		dirFileHeader.crc = fileHeader.crc;
+		dirFileHeader.fileStartOffset = relativePosition;
+		dirFileHeader.compressedSize = fileHeader.compressedSize;
+		dirFileHeader.uncompressedSize = fileHeader.uncompressedSize;
+		dirFileHeader.fileNameLength = fileHeader.fileNameLength;
+		dirFileHeader.compressionMethod = fileHeader.compressionMethod;
 
-        //Create directory entry for this file
-        ZIPDIRFILEHEADER dirFileHeader;
-        memset(&dirFileHeader, 0, sizeof(ZIPDIRFILEHEADER));
-        dirFileHeader.signature = DIRFILEHEADER_SIG;
-        dirFileHeader.versionMadeBy = 0x14;
-        dirFileHeader.versionNeeded = 0x14;
-        dirFileHeader.crc = fileHeader.crc;
-        dirFileHeader.fileStartOffset = relativePosition;
-        dirFileHeader.compressedSize = fileHeader.compressedSize;
-        dirFileHeader.uncompressedSize = fileHeader.uncompressedSize;
-        dirFileHeader.fileNameLength = fileHeader.fileNameLength;
-        dirFileHeader.compressionMethod = fileHeader.compressionMethod;
+		directoryEntries.push_back(DirectoryEntry(fileName, dirFileHeader));
+	}
 
-        directoryEntries.push_back(DirectoryEntry(fileName, dirFileHeader));
-    }
+	//Write directory
+	uint64 dirStart = stream.Tell();
 
-    //Write directory
-    uint64 dirStart = stream.Tell();
+	for(const auto& entry : directoryEntries)
+	{
+		//Write file header
+		stream.Write(&entry.second, sizeof(ZIPDIRFILEHEADER));
 
-    for(DirectoryEntryList::const_iterator entryIterator(directoryEntries.begin());
-        directoryEntries.end() != entryIterator; entryIterator++)
-    {
-        const DirectoryEntry& entry(*entryIterator);
+		//Write file name
+		stream.Write(entry.first.c_str(), entry.first.length());
+	}
 
-        //Write file header
-        stream.Write(&entry.second, sizeof(ZIPDIRFILEHEADER));
+	uint64 dirEnd = stream.Tell();
 
-        //Write file name
-        stream.Write(entry.first.c_str(), entry.first.length());
-    }
+	//Write directory header
+	{
+		ZIPDIRENDHEADER dirHeader;
+		memset(&dirHeader, 0, sizeof(ZIPDIRENDHEADER));
+		dirHeader.signature = DIRENDHEADER_SIG;
+		dirHeader.dirEntryCount = static_cast<uint16>(directoryEntries.size());
+		dirHeader.totalDirEntryCount = static_cast<uint16>(directoryEntries.size());
+		dirHeader.dirSize = static_cast<uint32>(dirEnd - dirStart);
+		dirHeader.dirStartOffset = static_cast<uint32>(dirStart);
 
-    uint64 dirEnd = stream.Tell();
-
-    //Write directory header
-    {
-        ZIPDIRENDHEADER dirHeader;
-        memset(&dirHeader, 0, sizeof(ZIPDIRENDHEADER));
-        dirHeader.signature = DIRENDHEADER_SIG;
-        dirHeader.dirEntryCount = static_cast<uint16>(directoryEntries.size());
-        dirHeader.totalDirEntryCount = static_cast<uint16>(directoryEntries.size());
-        dirHeader.dirSize = static_cast<uint32>(dirEnd - dirStart);
-        dirHeader.dirStartOffset = static_cast<uint32>(dirStart);
-
-        //Write file header
-        stream.Write(&dirHeader, sizeof(ZIPDIRENDHEADER));
-    }
+		//Write file header
+		stream.Write(&dirHeader, sizeof(ZIPDIRENDHEADER));
+	}
 }
 
-void CZipArchiveWriter::InsertFile(CZipFile* file)
+void CZipArchiveWriter::InsertFile(ZipFilePtr file)
 {
-    m_files.push_back(file);
+	m_files.emplace_back(std::move(file));
 }

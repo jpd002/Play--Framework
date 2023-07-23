@@ -1,5 +1,4 @@
-#ifndef _ZIPARCHIVEWRITER_H_
-#define _ZIPARCHIVEWRITER_H_
+#pragma once
 
 #include <list>
 #include "ZipFile.h"
@@ -7,20 +6,20 @@
 
 namespace Framework
 {
-    class CZipArchiveWriter
-    {
-    public:
-                                CZipArchiveWriter();
-        virtual                 ~CZipArchiveWriter();
+	class CZipArchiveWriter
+	{
+	public:
+		typedef std::unique_ptr<CZipFile> ZipFilePtr;
+		
+		CZipArchiveWriter() = default;
+		virtual ~CZipArchiveWriter() = default;
 
-        void                    Write(Framework::CStream&);
-        void                    InsertFile(CZipFile*);
+		void Write(Framework::CStream&);
+		void InsertFile(ZipFilePtr);
 
-    private:
-        typedef std::list<CZipFile*> FileList;
+	private:
+		typedef std::list<ZipFilePtr> FileList;
 
-        FileList                m_files;
-    };
+		FileList m_files;
+	};
 }
-
-#endif
