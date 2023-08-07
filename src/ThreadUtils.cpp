@@ -9,7 +9,7 @@
 #include <tchar.h>
 #include "string_cast.h"
 
-typedef HRESULT (*SetThreadDescriptionFuncType)(HANDLE, PCWSTR);
+typedef HRESULT (WINAPI *SetThreadDescriptionFuncType)(HANDLE, PCWSTR);
 static SetThreadDescriptionFuncType SetThreadDescriptionFunc = nullptr;
 #endif
 
