@@ -17,7 +17,6 @@ void CPtrStream::Seek(int64 position, STREAM_SEEK_DIRECTION direction)
 	switch(direction)
 	{
 	case STREAM_SEEK_SET:
-		assert((uint64)position <= m_size);
 		m_position = position;
 		break;
 	case STREAM_SEEK_CUR:
@@ -43,7 +42,7 @@ bool CPtrStream::IsEOF()
 
 uint64 CPtrStream::Read(void* buffer, uint64 size)
 {
-	if(m_position == m_size)
+	if(m_position >= m_size)
 	{
 		m_isEof = true;
 		return 0;
