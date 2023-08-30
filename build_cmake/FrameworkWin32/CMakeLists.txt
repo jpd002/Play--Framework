@@ -1,4 +1,3 @@
-cmake_minimum_required(VERSION 3.0)
 project(Framework_Win32)
 
 include(../Framework_Common.cmake)
