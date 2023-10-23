@@ -64,4 +64,75 @@ namespace Framework
 	{
 		value = FromMSBF64(value);
 	}
+
+	class MSBFU16
+	{
+	public:
+		MSBFU16(uint16 value)
+		{
+			(*this) = value;
+		}
+		
+		MSBFU16& operator =(uint16 rhs)
+		{
+			value = CEndian::ToMSBF16(rhs);
+			return (*this);
+		}
+
+		operator uint16() const
+		{
+			return CEndian::FromMSBF16(value);
+		}
+		
+	private:
+		uint16 value = 0;
+	};
+
+	class MSBFS32
+	{
+	public:
+		operator int32() const
+		{
+			return CEndian::FromMSBF32(value);
+		}
+		
+	private:
+		int32 value = 0;
+	};
+
+	class MSBFU32
+	{
+	public:
+		MSBFU32& operator =(uint32 rhs)
+		{
+			value = CEndian::ToMSBF32(rhs);
+			return (*this);
+		}
+
+		operator uint32() const
+		{
+			return CEndian::FromMSBF32(value);
+		}
+		
+	private:
+		uint32 value = 0;
+	};
+
+	class MSBFU64
+	{
+	public:
+		MSBFU64& operator =(uint64 rhs)
+		{
+			value = CEndian::ToMSBF64(rhs);
+			return (*this);
+		}
+		
+		operator uint64() const
+		{
+			return CEndian::FromMSBF64(value);
+		}
+		
+	private:
+		uint64 value = 0;
+	};
 }
