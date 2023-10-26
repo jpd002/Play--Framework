@@ -22,6 +22,17 @@ static inline int bitmanip_ctz(uint32 value)
 	return r;
 }
 
+static inline int bitmanip_clzll(uint64 value)
+{
+#if defined(_M_X64)
+	unsigned long r = 0;
+	_BitScanReverse64(&r, value);
+	return (63 - r);
+#else
+#error "Unsupported architecture."
+#endif
+}
+
 static inline int bitmanip_ctzll(uint64 value)
 {
 #if defined(_M_X64)
@@ -44,7 +55,10 @@ static inline int bitmanip_ctzll(uint64 value)
 #define __builtin_popcount __popcnt
 #define __builtin_clz bitmanip_clz
 #define __builtin_ctz bitmanip_ctz
+#define __builtin_clzll bitmanip_clzll
 #define __builtin_ctzll bitmanip_ctzll
+#define __builtin_rotateleft32 _rotl
+#define __builtin_rotateleft64 _rotl64
 
 #endif
 
