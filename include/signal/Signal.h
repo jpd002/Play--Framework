@@ -43,6 +43,18 @@ namespace Framework
 			return Connect(func, true);
 		}
 
+		FRAMEWORK_NODISCARD
+		Connection ConnectOverride(const SlotFunction& func, bool oneShot = false)
+		{
+			assert(func);
+			std::unique_lock<std::mutex> lock(m_lock);
+
+			auto connection = std::make_shared<CConnection>(func, oneShot);
+			m_overrideConnection = connection;
+
+			return connection;
+		}
+
 		void Reset()
 		{
 			std::unique_lock<std::mutex> lock(m_lock);
@@ -54,19 +66,30 @@ namespace Framework
 		{
 			std::unique_lock<std::mutex> lock(m_lock);
 
+			auto processConnection = [&](WeakConnection& connection)
+			{
+				auto connectionPtr = connection.lock();
+				if(connectionPtr)
+				{
+					(*connectionPtr)(args...);
+				}
+				return !connectionPtr || (*connectionPtr).IsOneShot();;
+			};
+
+			if(m_overrideConnection.lock()) 
+			{
+				if(processConnection(m_overrideConnection))
+				{
+					m_overrideConnection.reset();
+				}
+				return;
+			}
+
 			m_connections.erase(
 				std::remove_if(
 					m_connections.begin(), 
 					m_connections.end(),
-					[&](WeakConnection& connection)
-					{
-						auto connectionPtr = connection.lock();
-						if(connectionPtr)
-						{
-							(*connectionPtr)(args...);
-						}
-						return !connectionPtr || (*connectionPtr).IsOneShot();
-					}
+					processConnection
 				), 
 				m_connections.end()
 			);
@@ -97,6 +120,7 @@ namespace Framework
 		};
 	private:
 		std::vector<WeakConnection> m_connections;
+		WeakConnection m_overrideConnection;
 		std::mutex m_lock;
 	};
 }
