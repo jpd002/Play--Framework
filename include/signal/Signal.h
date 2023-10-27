@@ -66,17 +66,17 @@ namespace Framework
 		{
 			std::unique_lock<std::mutex> lock(m_lock);
 
-			auto processConnection = [&](WeakConnection& connection)
+			auto processConnection = [&](const WeakConnection& connection)
 			{
 				auto connectionPtr = connection.lock();
 				if(connectionPtr)
 				{
 					(*connectionPtr)(args...);
 				}
-				return !connectionPtr || (*connectionPtr).IsOneShot();;
+				return !connectionPtr || (*connectionPtr).IsOneShot();
 			};
 
-			if(m_overrideConnection.lock()) 
+			if(!m_overrideConnection.expired())
 			{
 				if(processConnection(m_overrideConnection))
 				{
@@ -87,10 +87,10 @@ namespace Framework
 
 			m_connections.erase(
 				std::remove_if(
-					m_connections.begin(), 
+					m_connections.begin(),
 					m_connections.end(),
 					processConnection
-				), 
+				),
 				m_connections.end()
 			);
 		}
