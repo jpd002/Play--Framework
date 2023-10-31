@@ -96,6 +96,18 @@ void CManager::CreateJoysticks()
 	}
 }
 
+
+void CManager::SetJoystickVibration(GUID deviceId, uint8 largeMotor, uint8 smallMotor)
+{
+	auto itr = m_devices.find(deviceId);
+	if(itr != m_devices.end())
+	{
+		auto joystickDevice = std::dynamic_pointer_cast<CJoystick>(itr->second);
+		assert(joystickDevice);
+		joystickDevice->SetVibration(largeMotor, smallMotor);
+	}
+}
+
 bool CManager::GetDeviceInfo(const GUID& deviceId, DIDEVICEINSTANCE* deviceInfo)
 {
 	if(!deviceInfo) return false;
