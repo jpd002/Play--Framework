@@ -28,6 +28,7 @@ namespace Framework
 
 			void					CreateKeyboard();
 			void					CreateJoysticks();
+			std::list<GUID>			GetJoystickIds();
 			bool					GetDeviceInfo(const GUID&, DIDEVICEINSTANCE*);
 			bool					GetDeviceObjectInfo(const GUID&, uint32, DIDEVICEOBJECTINSTANCE*);
 

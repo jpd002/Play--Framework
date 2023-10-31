@@ -96,6 +96,10 @@ void CManager::CreateJoysticks()
 	}
 }
 
+std::list<GUID> CManager::GetJoystickIds()
+{
+	return m_joystickInstances;
+}
 
 void CManager::SetJoystickVibration(GUID deviceId, uint8 largeMotor, uint8 smallMotor)
 {
