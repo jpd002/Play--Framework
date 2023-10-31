@@ -39,6 +39,62 @@ CJoystick::CJoystick(const DirectInputDevicePtr& device)
 
 		m_deviceGuid = deviceInstance.guidInstance;
 	}
+
+	CreateVibrationEffects();
+}
+
+void CJoystick::CreateVibrationEffects()
+{
+	DICONSTANTFORCE constantForce;
+	DIEFFECT diEffect;
+	ZeroMemory(&diEffect, sizeof(diEffect));
+	diEffect.dwSize = sizeof(DIEFFECT);
+	diEffect.dwFlags = DIEFF_CARTESIAN;
+	diEffect.dwDuration = 2000000;
+	diEffect.cAxes = 1;
+	diEffect.lpEnvelope = 0;
+	diEffect.cbTypeSpecificParams = sizeof(DICONSTANTFORCE);
+	diEffect.lpvTypeSpecificParams = &constantForce;
+
+	constantForce.lMagnitude = 1000;
+	auto res = m_device->CreateEffect(GUID_ConstantForce, &diEffect, &m_pEffectSmall, NULL);
+	if(FAILED(res))
+	{
+		return;
+	}
+
+	constantForce.lMagnitude = 3000;
+	if(FAILED(m_device->CreateEffect(GUID_ConstantForce, &diEffect, &m_pEffectMedium, NULL)))
+	{
+		return;
+	}
+
+	constantForce.lMagnitude = 5000;
+	if(FAILED(m_device->CreateEffect(GUID_ConstantForce, &diEffect, &m_pEffectLarge, NULL)))
+	{
+		return;
+	}
+	m_hasVibrationSupport = true;
+}
+
+void CJoystick::SetVibration(uint8_t largeMotor, uint8_t smallMotor)
+{
+	if(!m_hasVibrationSupport)
+		return;
+
+	if(smallMotor)
+	{
+		m_pEffectSmall->Start(1, 0);
+	}
+
+	if(largeMotor <= 100)
+	{
+		m_pEffectMedium->Start(1, 0);
+	}
+	else
+	{
+		m_pEffectLarge->Start(1, 0);
+	}
 }
 
 void CJoystick::ProcessEvents(const InputEventHandler& eventHandler)

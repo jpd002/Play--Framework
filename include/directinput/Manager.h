@@ -28,8 +28,11 @@ namespace Framework
 
 			void					CreateKeyboard();
 			void					CreateJoysticks();
+			std::list<GUID>			GetJoystickIds();
 			bool					GetDeviceInfo(const GUID&, DIDEVICEINSTANCE*);
 			bool					GetDeviceObjectInfo(const GUID&, uint32, DIDEVICEOBJECTINSTANCE*);
+
+			void					SetJoystickVibration(GUID deviceId, uint8 largeMotor, uint8 smallMotor);
 
 		private:
 			typedef std::shared_ptr<CDevice> DevicePtr;

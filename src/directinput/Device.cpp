@@ -30,6 +30,6 @@ void CDevice::SetFocusWindow(HWND focusWindow)
 	//Unacquire device just to be sure
 	m_device->Unacquire();
 
-	HRESULT result = m_device->SetCooperativeLevel(focusWindow, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
+	HRESULT result = m_device->SetCooperativeLevel(focusWindow, DISCL_FOREGROUND | DISCL_EXCLUSIVE);
 	assert(SUCCEEDED(result));
 }
