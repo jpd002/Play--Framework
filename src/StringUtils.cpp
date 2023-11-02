@@ -74,3 +74,17 @@ std::vector<std::string> StringUtils::Split(const std::string& s, char delimiter
 	}
 	return tokens;
 }
+
+std::string StringUtils::Join(const std::vector<std::string>& strings, const std::string& delimiter)
+{
+	std::string result;
+	for(int i = 0; i < strings.size(); i++)
+	{
+		result += strings[i];
+		if(i != strings.size() - 1)
+		{
+			result += delimiter;
+		}
+	}
+	return result;
+}
