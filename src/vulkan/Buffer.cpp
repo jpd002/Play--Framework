@@ -13,6 +13,11 @@ CBuffer::CBuffer(CDevice& device, const VkPhysicalDeviceMemoryProperties& memory
 	Create(memoryProperties, usage, properties, size);
 }
 
+CBuffer::CBuffer(CBuffer&& rhs)
+{
+	MoveFrom(std::move(rhs));
+}
+
 CBuffer::~CBuffer()
 {
 	Reset();
