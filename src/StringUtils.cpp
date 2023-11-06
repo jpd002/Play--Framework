@@ -88,3 +88,10 @@ std::string StringUtils::Join(const std::vector<std::string>& strings, const std
 	}
 	return result;
 }
+
+std::string StringUtils::ToLower(const std::string& str)
+{
+	std::string ret = str;
+	std::transform(ret.begin(), ret.end(), ret.begin(), [](auto c) { return std::tolower(c); });
+	return ret;
+}

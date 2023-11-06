@@ -13,4 +13,6 @@ namespace StringUtils
 	std::string TrimStart(const std::string&);
 	std::string TrimEnd(const std::string&);
 	std::string Trim(const std::string&);
+
+	std::string ToLower(const std::string&);
 }
