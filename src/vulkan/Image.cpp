@@ -2,7 +2,6 @@
 #include "vulkan/Image.h"
 #include "vulkan/StructDefs.h"
 #include "vulkan/Utils.h"
-#include "vulkan/Buffer.h"
 #include "vulkan/CommandBufferPool.h"
 
 using namespace Framework::Vulkan;
@@ -158,18 +157,15 @@ void CImage::SetLayout(VkQueue queue, CCommandBufferPool& commandBufferPool,
 	commandBufferPool.FreeBuffer(commandBuffer);
 }
 
-void CImage::Fill(VkQueue queue, CCommandBufferPool& commandBufferPool, 
-	const VkPhysicalDeviceMemoryProperties& memoryProperties, const void* imageData)
+CBuffer CImage::CreateFillStagingBuffer(const VkPhysicalDeviceMemoryProperties& memoryProperties, const void* imageData) const
 {
-	auto result = VK_SUCCESS;
-
 	auto imageSize = GetLinearSize();
 	auto stagingBuffer = CBuffer(*m_device, memoryProperties,
 		VK_BUFFER_USAGE_TRANSFER_SRC_BIT, VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT, imageSize);
-	
+
 	{
 		void* bufferPtr = nullptr;
-		result = m_device->vkMapMemory(*m_device, stagingBuffer.GetMemory(), 0, VK_WHOLE_SIZE, 0, &bufferPtr);
+		auto result = m_device->vkMapMemory(*m_device, stagingBuffer.GetMemory(), 0, VK_WHOLE_SIZE, 0, &bufferPtr);
 		CHECKVULKANERROR(result);
 
 		memcpy(bufferPtr, imageData, imageSize);
@@ -177,17 +173,11 @@ void CImage::Fill(VkQueue queue, CCommandBufferPool& commandBufferPool,
 		m_device->vkUnmapMemory(*m_device, stagingBuffer.GetMemory());
 	}
 
-	auto commandBuffer = commandBufferPool.AllocateBuffer();
-	
-	//Start command buffer
-	{
-		auto commandBufferBeginInfo = Framework::Vulkan::CommandBufferBeginInfo();
-		commandBufferBeginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
-		
-		result = m_device->vkBeginCommandBuffer(commandBuffer, &commandBufferBeginInfo);
-		CHECKVULKANERROR(result);
-	}
-	
+	return stagingBuffer;
+}
+
+void CImage::RecordFill(VkCommandBuffer commandBuffer, const CBuffer& stagingBuffer)
+{
 	//Transition image from whatever state to TRANSFER_DST_OPTIMAL
 	{
 		auto imageMemoryBarrier = Framework::Vulkan::ImageMemoryBarrier();
@@ -216,6 +206,26 @@ void CImage::Fill(VkQueue queue, CCommandBufferPool& commandBufferPool,
 		m_device->vkCmdCopyBufferToImage(commandBuffer, stagingBuffer, m_handle, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
 			1, &bufferImageCopy);
 	}
+}
+
+void CImage::Fill(VkQueue queue, CCommandBufferPool& commandBufferPool, 
+	const VkPhysicalDeviceMemoryProperties& memoryProperties, const void* imageData)
+{
+	auto result = VK_SUCCESS;
+	auto stagingBuffer = CreateFillStagingBuffer(memoryProperties, imageData);
+	
+	auto commandBuffer = commandBufferPool.AllocateBuffer();
+	
+	//Start command buffer
+	{
+		auto commandBufferBeginInfo = Framework::Vulkan::CommandBufferBeginInfo();
+		commandBufferBeginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+		
+		result = m_device->vkBeginCommandBuffer(commandBuffer, &commandBufferBeginInfo);
+		CHECKVULKANERROR(result);
+	}
+	
+	RecordFill(commandBuffer, stagingBuffer);
 
 	//Finish command buffer
 	result = m_device->vkEndCommandBuffer(commandBuffer);

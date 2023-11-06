@@ -2,6 +2,7 @@
 
 #include "Types.h"
 #include "Device.h"
+#include "Buffer.h"
 
 namespace Framework
 {
@@ -24,6 +25,9 @@ namespace Framework
 			uint32 GetLinearSize() const;
 
 			VkImageView CreateImageView();
+
+			CBuffer CreateFillStagingBuffer(const VkPhysicalDeviceMemoryProperties&, const void*) const;
+			void RecordFill(VkCommandBuffer, const CBuffer&);
 
 			void SetLayout(VkQueue, CCommandBufferPool&, VkImageLayout, VkAccessFlags);
 			void Fill(VkQueue, CCommandBufferPool&, const VkPhysicalDeviceMemoryProperties&, const void*);
