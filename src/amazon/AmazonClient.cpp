@@ -137,17 +137,17 @@ static std::string timeToString(const tm* timeInfo)
 	return std::string(output);
 }
 
-CAmazonClient::CAmazonClient(std::string service, CAmazonCredentials credentials, std::string region)
+CAmazonClient::CAmazonClient(std::string service, CAmazonConfigs configs, std::string region)
     : m_service(std::move(service))
-    , m_credentials(std::move(credentials))
+    , m_configs(std::move(configs))
     , m_region(std::move(region))
 {
 }
 
 Framework::Http::RequestResult CAmazonClient::ExecuteRequest(const Request& request)
 {
-	assert(!m_credentials.accessKeyId.empty());
-	assert(!m_credentials.secretAccessKey.empty());
+	assert(!m_configs.accessKeyId.empty());
+	assert(!m_configs.secretAccessKey.empty());
 	assert(!request.host.empty());
 	assert(!request.urlHost.empty());
 
@@ -167,9 +167,9 @@ Framework::Http::RequestResult CAmazonClient::ExecuteRequest(const Request& requ
 	headers.insert(std::make_pair("Host", request.host));
 	headers.insert(std::make_pair("x-amz-content-sha256", contentHashString));
 	headers.insert(std::make_pair("x-amz-date", timestamp));
-	if(!m_credentials.sessionToken.empty())
+	if(!m_configs.sessionToken.empty())
 	{
-		headers.insert(std::make_pair("x-amz-security-token", m_credentials.sessionToken));
+		headers.insert(std::make_pair("x-amz-security-token", m_configs.sessionToken));
 	}
 	
 	auto canonicalRequest = buildCanonicalRequest(request.method, request.uri, request.query, contentHashString, headers);
@@ -183,11 +183,11 @@ Framework::Http::RequestResult CAmazonClient::ExecuteRequest(const Request& requ
 #endif
 
 	auto signedHeaders = buildSignedHeadersParam(headers);
-	auto signingKey = buildSigningKey(m_credentials.secretAccessKey, date, m_region, m_service, requestType);
+	auto signingKey = buildSigningKey(m_configs.secretAccessKey, date, m_region, m_service, requestType);
 	auto signature = hashToString(Framework::HashUtils::ComputeHmacSha256(signingKey.data(), signingKey.size(), stringToSign.c_str(), stringToSign.length()));
 
 	auto authorizationString = string_format("AWS4-HMAC-SHA256 Credential=%s/%s, SignedHeaders=%s, Signature=%s",
-		m_credentials.accessKeyId.c_str(), scope.c_str(), signedHeaders.c_str(), signature.c_str());
+		m_configs.accessKeyId.c_str(), scope.c_str(), signedHeaders.c_str(), signature.c_str());
 	headers.insert(std::make_pair("Authorization", authorizationString));
 	headers.insert(request.headers.begin(), request.headers.end());
 
