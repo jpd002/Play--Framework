@@ -68,6 +68,8 @@ namespace Framework
 	class MSBFU16
 	{
 	public:
+		MSBFU16() = default;
+
 		MSBFU16(uint16 value)
 		{
 			(*this) = value;
@@ -91,6 +93,12 @@ namespace Framework
 	class MSBFS32
 	{
 	public:
+		MSBFS32& operator =(int32 rhs)
+		{
+			value = CEndian::ToMSBF32(rhs);
+			return (*this);
+		}
+
 		operator int32() const
 		{
 			return CEndian::FromMSBF32(value);
