@@ -8,14 +8,13 @@ namespace Framework
 	namespace Xml
 	{
 
-		class CWriter
+		class CWriter final
 		{
 		public:
 			static void			WriteDocument(CStream&, CNode*);
 
 		private:
 								CWriter(CStream&);
-								~CWriter();
 			void				WriteNode(CNode*, unsigned int);
 			void				DumpString(const char*);
 			void				DumpTabs(unsigned int);

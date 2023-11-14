@@ -7,50 +7,37 @@
 using namespace Framework;
 using namespace Framework::Xml;
 
-CNode::CNode()
-{
-
-}
-
-CNode::CNode(const char* text, bool isTag)
-: m_text(text)
+CNode::CNode(std::string text, bool isTag)
+: m_text(std::move(text))
 , m_isTag(isTag)
 {
 
 }
 
-CNode::~CNode()
-{
-	while(m_children.size() != 0)
-	{
-		delete (*m_children.rbegin());
-		m_children.pop_back();
-	}
-}
-
-CNode* CNode::InsertNode(CNode* node)
+CNode* CNode::InsertNode(OwningNodePtr node)
 {
 	assert(node->m_parent == nullptr);
 	node->m_parent = this;
-	m_children.push_back(node);
-	return node;
+	auto result = node.get();
+	m_children.push_back(std::move(node));
+	return result;
 }
 
 CNode* CNode::InsertTextNode(const char* text)
 {
-	return InsertNode(new CNode(text, false));
+	return InsertNode(std::make_unique<CNode>(text, false));
 }
 
 CNode* CNode::InsertTagNode(const char* name)
 {
-	return InsertNode(new CNode(name, true));
+	return InsertNode(std::make_unique<CNode>(name, true));
 }
 
-void CNode::InsertNodeAt(CNode* node, NodeIterator& itPosition)
+void CNode::InsertNodeAt(OwningNodePtr node, OwningNodeIterator itPosition)
 {
 	assert(node->m_parent == nullptr);
 	node->m_parent = this;
-	m_children.insert(itPosition, node);
+	m_children.insert(itPosition, std::move(node));
 }
 
 const char* CNode::GetText() const
@@ -69,9 +56,9 @@ bool CNode::IsTag() const
 	return m_isTag;
 }
 
-CNode* CNode::InsertAttribute(const AttributeType& attribute)
+CNode* CNode::InsertAttribute(AttributeType attribute)
 {
-	m_attributes.insert(attribute);
+	m_attributes.insert(std::move(attribute));
 	return this;
 }
 
@@ -93,15 +80,15 @@ unsigned int CNode::GetChildCount() const
 CNode* CNode::GetFirstChild()
 {
 	assert(!m_children.empty());
-	return *m_children.begin();
+	return m_children.begin()->get();
 }
 
-const CNode::NodeList& CNode::GetChildren() const
+const CNode::OwningNodeList& CNode::GetChildren() const
 {
 	return m_children;
 }
 
-void CNode::RemoveChild(NodeIterator nodeIterator)
+void CNode::RemoveChild(OwningNodeIterator nodeIterator)
 {
 	m_children.erase(nodeIterator);
 }
@@ -129,7 +116,7 @@ CNode* CNode::Search(const char* name)
 		if(!node->IsTag()) continue;
 		if(!stricmp(node->GetText(), name))
 		{
-			return node;
+			return node.get();
 		}
 	}
 	return nullptr;

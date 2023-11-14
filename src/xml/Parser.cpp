@@ -18,11 +18,6 @@ CParser::CParser(CStream& stream, CNode* root)
 
 }
 
-CParser::~CParser()
-{
-
-}
-
 bool CParser::Parse()
 {
 	char nValue = 0;
@@ -64,10 +59,10 @@ bool CParser::ProcessChar_Text(char nChar)
 	{
 		//Tag is starting
 
-		if(m_text.size() != 0)
+		if(!m_text.empty())
 		{
-			m_node->InsertNode(new CNode(UnescapeText(m_text).c_str(), false));
-			m_text = "";
+			m_node->InsertNode(std::make_unique<CNode>(UnescapeText(m_text), false));
+			m_text.clear();
 		}
 
 		m_state = STATE_TAG;
@@ -81,7 +76,7 @@ bool CParser::ProcessChar_Text(char nChar)
 
 bool CParser::ProcessChar_Tag(char nChar)
 {
-	if((nChar == '!') && (m_text.size() == 0))
+	if((nChar == '!') && (m_text.empty()))
 	{
 		m_state = STATE_COMMENT;
 		return true;
@@ -119,25 +114,25 @@ bool CParser::ProcessChar_Tag(char nChar)
 			else
 			{
 				//Create a new node
-				CNode* pChild = new CNode(m_text.c_str(), true);
-				m_node->InsertNode(pChild);
+				auto child = m_node->InsertNode(std::make_unique<CNode>(std::move(m_text), true));
 
 				//Copy attributes
-				while(m_attributes.size() != 0)
+				for(auto attrIterator = m_attributes.rbegin();
+					attrIterator != m_attributes.rend(); attrIterator++)
 				{
-					pChild->InsertAttribute(*m_attributes.rbegin());
-					m_attributes.pop_back();
+					child->InsertAttribute(std::move(*attrIterator));
 				}
+				m_attributes.clear();
 
 				//Go down if it's not an singleton
 				if(!m_isTagEnd)
 				{
-					m_node = pChild;
+					m_node = child;
 				}
 			}
 		}
 
-		m_text = "";
+		m_text.clear();
 		m_state = STATE_TEXT;
 		return true;
 	}
@@ -176,10 +171,9 @@ bool CParser::ProcessChar_AttributeValue(char nChar)
 {
 	if(nChar == '"')
 	{
-		m_attributes.push_back(AttributeType(m_attributeName, UnescapeText(m_attributeValue)));
+		m_attributes.push_back(AttributeType(std::move(m_attributeName), UnescapeText(m_attributeValue)));
 
 		m_state = STATE_ATTRIBUTE_NAME;
-		m_attributeName = "";
 		return true;
 	}
 	m_attributeValue += nChar;
@@ -203,17 +197,16 @@ bool CParser::ProcessChar_Comment(char nChar)
 	return true;
 }
 
-CNode* CParser::ParseDocument(CStream& stream)
+OwningNodePtr CParser::ParseDocument(CStream& stream)
 {
-	CNode* root = new CNode();
+	auto root = std::make_unique<CNode>();
 
-	CParser Parser(stream, root);
+	CParser Parser(stream, root.get());
 	bool nRet = Parser.Parse();
 
 	if(!nRet)
 	{
-		delete root;
-		return NULL;
+		return OwningNodePtr();
 	}
 
 	return root;

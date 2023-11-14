@@ -216,31 +216,31 @@ float Xml::GetAttributeFloatValue(Xml::CNode* node, const char* name)
 	return value;
 }
 
-Xml::CNode* Xml::CreateNodeStringValue(const char* sName, const char* sValue)
+Xml::OwningNodePtr Xml::CreateNodeStringValue(const char* sName, const char* sValue)
 {
-	Xml::CNode* pNode = new Xml::CNode(sName, true);
-	pNode->InsertNode(new Xml::CNode(sValue, false));
-	return pNode;
+	auto node = std::make_unique<Xml::CNode>(sName, true);
+	node->InsertNode(std::make_unique<Xml::CNode>(sValue, false));
+	return node;
 }
 
-Xml::CNode* Xml::CreateNodeIntValue(const char* sName, int nValue)
+Xml::OwningNodePtr Xml::CreateNodeIntValue(const char* sName, int nValue)
 {
 	char sValue[256];
 
-	Xml::CNode* pNode = new Xml::CNode(sName, true);
+	auto node = std::make_unique<Xml::CNode>(sName, true);
 	sprintf(sValue, "%i", nValue);
-	pNode->InsertNode(new Xml::CNode(sValue, false));
+	node->InsertNode(std::make_unique<Xml::CNode>(sValue, false));
 
-	return pNode;
+	return node;
 }
 
-Xml::CNode* Xml::CreateNodeBoolValue(const char* sName, bool nValue)
+Xml::OwningNodePtr Xml::CreateNodeBoolValue(const char* sName, bool nValue)
 {
-	Xml::CNode* pNode = new Xml::CNode(sName, true);
+	auto node = std::make_unique<Xml::CNode>(sName, true);
 	const char* sValue = nValue ? "true" : "false";
-	pNode->InsertNode(new Xml::CNode(sValue, false));
+	node->InsertNode(std::make_unique<Xml::CNode>(sValue, false));
 
-	return pNode;
+	return node;
 }
 
 Xml::AttributeType Xml::CreateAttributeStringValue(const char* sName, const char* sValue)
@@ -305,6 +305,11 @@ std::string Xml::EscapeText(const std::string& text)
 
 std::string Xml::UnescapeText(const std::string& text)
 {
+	auto ampPos = text.find('&');
+	if(ampPos == std::string::npos)
+	{
+		return text;
+	}
 	std::string result;
 	for(auto charIterator(text.begin());
 		charIterator != text.end(); charIterator++)

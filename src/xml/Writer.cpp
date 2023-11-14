@@ -11,11 +11,6 @@ CWriter::CWriter(CStream& stream)
 
 }
 
-CWriter::~CWriter()
-{
-
-}
-
 void CWriter::WriteDocument(CStream& stream, CNode* node)
 {
 	CWriter writer(stream);
@@ -75,7 +70,7 @@ void CWriter::WriteNode(CNode* currentNode, unsigned int level)
 
 	for(const auto& node : currentNode->GetChildren())
 	{
-		WriteNode(node, level + 1);
+		WriteNode(node.get(), level + 1);
 	}
 
 	DumpTabs(level);

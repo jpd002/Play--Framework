@@ -1,5 +1,4 @@
-#ifndef _XML_PARSER_H_
-#define _XML_PARSER_H_
+#pragma once
 
 #include "Node.h"
 #include "Stream.h"
@@ -10,17 +9,15 @@ namespace Framework
 	namespace Xml
 	{
 		
-		class CParser
+		class CParser final
 		{
 		public:
-			static CNode*				ParseDocument(CStream&);
+			static OwningNodePtr		ParseDocument(CStream&);
 
 		private:
 										CParser(CStream&, CNode*);
-										~CParser();
 
 			bool						Parse();
-			void						DumpText();
 			bool						ProcessChar_Text(char);
 			bool						ProcessChar_Tag(char);
 			bool						ProcessChar_AttributeName(char);
@@ -50,5 +47,3 @@ namespace Framework
 	}
 
 }
-
-#endif

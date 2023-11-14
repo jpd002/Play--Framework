@@ -231,7 +231,7 @@ void CConfig::Load()
 	try
 	{
 		Framework::CStdStream configFile(CreateInputStdStream(m_path.native()));
-		document = std::unique_ptr<Xml::CNode>(Xml::CParser::ParseDocument(configFile));
+		document = Xml::CParser::ParseDocument(configFile);
 	}
 	catch(...)
 	{
@@ -320,20 +320,20 @@ void CConfig::Save()
 	{
 		Framework::CStdStream stream(CreateOutputStdStream(m_path.native()));
 
-		auto configNode = new Xml::CNode("Config", true);
+		auto configNode = std::make_unique<Xml::CNode>("Config", true);
 
 		for(const auto& preferencePair : m_preferences)
 		{
 			const auto& preference = preferencePair.second;
 
-			auto preferenceNode = new Xml::CNode("Preference", true);
-			preference->Serialize(preferenceNode);
-			configNode->InsertNode(preferenceNode);
+			auto preferenceNode = std::make_unique<Xml::CNode>("Preference", true);
+			preference->Serialize(preferenceNode.get());
+			configNode->InsertNode(std::move(preferenceNode));
 		}
 
 		{
-			auto document = std::unique_ptr<Xml::CNode>(new Xml::CNode);
-			document->InsertNode(configNode);
+			auto document = std::make_unique<Xml::CNode>();
+			document->InsertNode(std::move(configNode));
 			Xml::CWriter::WriteDocument(stream, document.get());
 		}
 	}

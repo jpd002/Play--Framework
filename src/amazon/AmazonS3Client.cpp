@@ -35,7 +35,7 @@ GetBucketLocationResult CAmazonS3Client::GetBucketLocation(const GetBucketLocati
 
 	GetBucketLocationResult result;
 
-	auto documentNode = std::unique_ptr<Framework::Xml::CNode>(Framework::Xml::CParser::ParseDocument(response.data));
+	auto documentNode = Framework::Xml::CParser::ParseDocument(response.data);
 	auto locationConstraintNode = documentNode->Select("LocationConstraint");
 	if(locationConstraintNode)
 	{
@@ -123,7 +123,7 @@ ListObjectsResult CAmazonS3Client::ListObjects(std::string bucket)
 
 	ListObjectsResult result;
 
-	auto documentNode = std::unique_ptr<Framework::Xml::CNode>(Framework::Xml::CParser::ParseDocument(response.data));
+	auto documentNode = Framework::Xml::CParser::ParseDocument(response.data);
 	auto contentsNodes = documentNode->SelectNodes("ListBucketResult/Contents");
 	for(const auto& contentsNode : contentsNodes)
 	{

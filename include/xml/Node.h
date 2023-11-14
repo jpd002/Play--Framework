@@ -1,46 +1,49 @@
-#ifndef _XML_NODE_H_
-#define _XML_NODE_H_
+#pragma once
 
 #include <string>
 #include <list>
 #include <map>
+#include <memory>
 
 namespace Framework
 {
 
 	namespace Xml
 	{
+		class CNode;
 
 		typedef std::pair<std::string, std::string> AttributeType;
+		typedef std::unique_ptr<CNode> OwningNodePtr;
 
-		class CNode
+		class CNode final
 		{
 		public:
 			typedef std::list<CNode*>					NodeList;
+			typedef std::list<OwningNodePtr>			OwningNodeList;
 			typedef std::map<std::string, std::string>	AttributeList;
 			typedef NodeList::iterator					NodeIterator;
+			typedef OwningNodeList::iterator			OwningNodeIterator;
 			typedef AttributeList::iterator				AttributeIterator;
 
-										CNode();
-										CNode(const char*, bool);
-										~CNode();
+										CNode() = default;
+										CNode(std::string, bool);
 
-			CNode* 						InsertNode(CNode*);
+			CNode* 						InsertNode(OwningNodePtr);
 			CNode*						InsertTextNode(const char*);
 			CNode*						InsertTagNode(const char*);
-			void						InsertNodeAt(CNode*, NodeIterator&);
+			void						InsertNodeAt(OwningNodePtr, OwningNodeIterator);
 			const char*					GetText() const;
 			const char*					GetInnerText() const;
 			bool						IsTag() const;
 
-			CNode*						InsertAttribute(const AttributeType&);
+			CNode*						InsertAttribute(AttributeType);
 			CNode*						InsertAttribute(const char*, const char*);
 
 			CNode*						GetParent() const;
 			CNode*						GetFirstChild();
 			unsigned int				GetChildCount() const;
-			const NodeList&				GetChildren() const;
-			void						RemoveChild(NodeIterator);
+			const OwningNodeList&		GetChildren() const;
+			void						RemoveChild(OwningNodeIterator);
 
 			const char*					GetAttribute(const char*) const;
 			unsigned int				GetAttributeCount() const;
@@ -56,12 +59,10 @@ namespace Framework
 			std::string					m_text;
 			CNode*						m_parent = nullptr;
 			bool						m_isTag = false;
-			NodeList					m_children;
+			OwningNodeList				m_children;
 			AttributeList				m_attributes;
 		};
 
 	}
 
 }
-
-#endif

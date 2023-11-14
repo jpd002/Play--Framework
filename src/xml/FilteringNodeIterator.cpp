@@ -11,15 +11,10 @@ CFilteringNodeIterator::CFilteringNodeIterator(CNode* node, const char* filter)
 	SeekToNext();
 }
 
-CFilteringNodeIterator::~CFilteringNodeIterator()
-{
-
-}
-
 CNode* CFilteringNodeIterator::operator *()
 {
 	if(m_nodeIterator == std::end(m_node->GetChildren())) return nullptr;
-	return (*m_nodeIterator);
+	return m_nodeIterator->get();
 }
 
 CFilteringNodeIterator& CFilteringNodeIterator::operator ++(int nAmount)
@@ -38,7 +33,7 @@ void CFilteringNodeIterator::SeekToNext()
 {
 	for(; m_nodeIterator != std::end(m_node->GetChildren()); m_nodeIterator++)
 	{
-		const CNode* node = (*m_nodeIterator);
+		const CNode* node = m_nodeIterator->get();
 		if(!node->IsTag()) continue;
 		if(stricmp(node->GetText(), m_filter)) continue;
 		break;

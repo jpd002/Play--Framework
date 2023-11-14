@@ -1,5 +1,4 @@
-#ifndef _XML_UTILS_H_
-#define _XML_UTILS_H_
+#pragma once
 
 #include <string>
 #include "Node.h"
@@ -25,9 +24,9 @@ namespace Framework
 		int				GetAttributeIntValue(CNode*, const char*);
 		float			GetAttributeFloatValue(CNode*, const char*);
 
-		Xml::CNode*		CreateNodeStringValue(const char*, const char*);
-		Xml::CNode*		CreateNodeIntValue(const char*, int);
-		Xml::CNode*		CreateNodeBoolValue(const char*, bool);
+		OwningNodePtr	CreateNodeStringValue(const char*, const char*);
+		OwningNodePtr	CreateNodeIntValue(const char*, int);
+		OwningNodePtr	CreateNodeBoolValue(const char*, bool);
 
 		AttributeType	CreateAttributeStringValue(const char*, const char*);
 		AttributeType	CreateAttributeIntValue(const char*, int);
@@ -38,5 +37,3 @@ namespace Framework
 		std::string		UnescapeText(const std::string&);
 	}
 }
-
-#endif
