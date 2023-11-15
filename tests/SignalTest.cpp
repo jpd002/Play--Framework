@@ -1,6 +1,6 @@
 #include "SignalTest.h"
 #include "signal/Signal.h"
-#include <cassert>
+#include "TestDefs.h"
 
 void SignalTest_Execute()
 {
@@ -13,7 +13,7 @@ void SignalTest_Execute()
 		Framework::CSignal<void (int)> sig;
 		sig.Connect(setFct);
 		sig(2);
-		assert(value == 0);
+		TEST_VERIFY(value == 0);
 	}
 	
 	{
@@ -21,7 +21,7 @@ void SignalTest_Execute()
 		Framework::CSignal<void (int)> sig;
 		auto conn = sig.Connect(setFct);
 		sig(2);
-		assert(value == 2);
+		TEST_VERIFY(value == 2);
 	}
 	
 	{
@@ -32,7 +32,7 @@ void SignalTest_Execute()
 		sig(5);
 		conn.reset();
 		sig(6);
-		assert(value == 5);
+		TEST_VERIFY(value == 5);
 	}
 	
 	{
@@ -42,7 +42,7 @@ void SignalTest_Execute()
 		sig(4);
 		sig(5);
 		sig(6);
-		assert(value == 4);
+		TEST_VERIFY(value == 4);
 	}
 	
 	{
@@ -52,6 +52,6 @@ void SignalTest_Execute()
 		auto conn = sig.Connect(incFct);
 		sig();
 		sig();
-		assert(value == 3);
+		TEST_VERIFY(value == 3);
 	}
 }

@@ -3,6 +3,7 @@
 #include "StringCastTest.h"
 #include "StringUtilsTest.h"
 #include "MathStringUtilsTest.h"
+#include "XmlTest.h"
 
 int main(int argc, char** argv)
 {
@@ -11,5 +12,6 @@ int main(int argc, char** argv)
 	StringCastTest_Execute();
 	StringUtilsTest_Execute();
 	MathStringUtilsTest_Execute();
+	XmlTest_Execute();
 	return 0;
 }

@@ -1,4 +1,4 @@
-project(Tests)
+project(FrameworkTests)
 
 include(../Framework_Common.cmake)
 
@@ -14,6 +14,9 @@ set(tests_srcs
 	../../tests/StringCastTest.h
 	../../tests/StringUtilsTest.cpp
 	../../tests/StringUtilsTest.h
+	../../tests/TestDefs.h
+	../../tests/XmlTest.cpp
+	../../tests/XmlTest.h
 )
 
 if(NOT TARGET Framework)
@@ -23,5 +26,7 @@ if(NOT TARGET Framework)
 	)
 endif()
 
-add_executable(Tests ${tests_srcs})
-target_link_libraries(Tests Framework)
+enable_testing()
+add_executable(FrameworkTests ${tests_srcs})
+target_link_libraries(FrameworkTests Framework)
+add_test(FrameworkTests FrameworkTests)
