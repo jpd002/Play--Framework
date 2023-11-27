@@ -2,11 +2,13 @@
 #include <Windows.h>
 #include <tchar.h>
 #else
-#include <vector>
 #include <dlfcn.h>
 #endif
 #include <stdexcept>
 #include <cassert>
+#include <cstring>
+#include <vector>
+#include <algorithm>
 #include "vulkan/Loader.h"
 #include "string_format.h"
 
@@ -20,10 +22,40 @@ CLoader::CLoader()
 void* CLoader::GetLibraryProcAddr(const char* procName)
 {
 #ifdef _WIN32
-	return nullptr;
+	return GetProcAddress(m_vulkanModule, procName);
 #else
 	return dlsym(m_vulkanDl, procName);
 #endif
+}
+
+bool CLoader::IsInstanceLayerPresent(const char* layerName)
+{
+	uint32_t layerCount = 0;
+	auto result = vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
+	CHECKVULKANERROR(result);
+
+	std::vector<VkLayerProperties> layers;
+	layers.resize(layerCount);
+	result = vkEnumerateInstanceLayerProperties(&layerCount, layers.data());
+	CHECKVULKANERROR(result);
+
+	auto layer = std::find_if(std::begin(layers), std::end(layers), [&](const auto& layer) { return !strcmp(layerName, layer.layerName); });
+	return layer != std::end(layers);
+}
+
+bool CLoader::IsInstanceExtensionPresent(const char* extensionName)
+{
+	uint32_t extensionCount = 0;
+	auto result = vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+	CHECKVULKANERROR(result);
+
+	std::vector<VkExtensionProperties> extensions;
+	extensions.resize(extensionCount);
+	result = vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions.data());
+	CHECKVULKANERROR(result);
+
+	auto extension = std::find_if(std::begin(extensions), std::end(extensions), [&](const auto& extension) { return !strcmp(extensionName, extension.extensionName); });
+	return extension != std::end(extensions);
 }
 
 void CLoader::LoadLibrary()
@@ -37,8 +69,6 @@ void CLoader::LoadLibrary()
 		throw std::runtime_error("Failed to load Vulkan library.");
 	}
 
-	vkCreateInstance      = reinterpret_cast<PFN_vkCreateInstance>(GetProcAddress(m_vulkanModule, "vkCreateInstance"));
-	vkGetInstanceProcAddr = reinterpret_cast<PFN_vkGetInstanceProcAddr>(GetProcAddress(m_vulkanModule, "vkGetInstanceProcAddr"));
 #else
 	assert(m_vulkanDl == nullptr);
 	
@@ -65,8 +95,10 @@ void CLoader::LoadLibrary()
 	{
 		throw std::runtime_error("Failed to find an appropriate Vulkan library to load.");
 	}
-	
-	vkCreateInstance      = reinterpret_cast<PFN_vkCreateInstance>(dlsym(m_vulkanDl, "vkCreateInstance"));
-	vkGetInstanceProcAddr = reinterpret_cast<PFN_vkGetInstanceProcAddr>(dlsym(m_vulkanDl, "vkGetInstanceProcAddr"));
 #endif
+
+	vkCreateInstance                       = reinterpret_cast<PFN_vkCreateInstance>(GetLibraryProcAddr("vkCreateInstance"));
+	vkGetInstanceProcAddr                  = reinterpret_cast<PFN_vkGetInstanceProcAddr>(GetLibraryProcAddr("vkGetInstanceProcAddr"));
+	vkEnumerateInstanceLayerProperties     = reinterpret_cast<PFN_vkEnumerateInstanceLayerProperties>(GetLibraryProcAddr("vkEnumerateInstanceLayerProperties"));
+	vkEnumerateInstanceExtensionProperties = reinterpret_cast<PFN_vkEnumerateInstanceExtensionProperties>(GetLibraryProcAddr("vkEnumerateInstanceExtensionProperties"));
 }

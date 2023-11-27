@@ -18,9 +18,13 @@ namespace Framework
 			CLoader();
 			
 			void* GetLibraryProcAddr(const char*);
-			
+			bool IsInstanceLayerPresent(const char*);
+			bool IsInstanceExtensionPresent(const char*);
+
 			DECLARE_FUNCTION(vkCreateInstance)
-			DECLARE_FUNCTION(vkGetInstanceProcAddr);
+			DECLARE_FUNCTION(vkGetInstanceProcAddr)
+			DECLARE_FUNCTION(vkEnumerateInstanceLayerProperties)
+			DECLARE_FUNCTION(vkEnumerateInstanceExtensionProperties)
 			
 		private:
 			void    LoadLibrary();

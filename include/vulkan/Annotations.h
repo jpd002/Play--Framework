@@ -26,7 +26,10 @@ namespace Framework
 				}
 
 				assert(m_instance);
-				assert(m_instance->vkCmdBeginDebugUtilsLabelEXT);
+				if(!m_instance->vkCmdBeginDebugUtilsLabelEXT)
+				{
+					return;
+				}
 
 				auto labelInfo = Framework::Vulkan::DebugUtilsLabelEXT();
 				labelInfo.pLabelName = labelName;
@@ -45,7 +48,10 @@ namespace Framework
 				}
 
 				assert(m_instance);
-				assert(m_instance->vkCmdEndDebugUtilsLabelEXT);
+				if(!m_instance->vkCmdEndDebugUtilsLabelEXT)
+				{
+					return;
+				}
 
 				m_instance->vkCmdEndDebugUtilsLabelEXT(commandBuffer);
 			}
@@ -75,7 +81,10 @@ namespace Framework
 
 				assert(m_instance);
 				assert(m_device);
-				assert(m_instance->vkSetDebugUtilsObjectNameEXT);
+				if(!m_instance->vkSetDebugUtilsObjectNameEXT)
+				{
+					return;
+				}
 
 				auto objectNameInfo = Framework::Vulkan::DebugUtilsObjectNameInfoEXT();
 				objectNameInfo.objectType = objectType;
