@@ -30,7 +30,7 @@ bool Xml::GetNodeStringValue(Xml::CNode* pNode, const char* sPath, const char** 
 	return true;
 }
 
-bool Xml::GetNodeIntValue(Xml::CNode* pNode, const char* sPath, int* pValue)
+bool Xml::GetNodeIntValue(Xml::CNode* pNode, const char* sPath, int32* pValue)
 {
 	const char* sText(nullptr);
 	if(!GetNodeStringValue(pNode, sPath, &sText))
@@ -85,7 +85,7 @@ std::string Xml::GetNodeStringValue(Xml::CNode* pNode, const char* sPath)
 
 int Xml::GetNodeIntValue(Xml::CNode* node, const char* path)
 {
-	int value = 0;
+	int32 value = 0;
 	if(!GetNodeIntValue(node, path, &value))
 	{
 		throw std::exception();
@@ -127,7 +127,7 @@ bool Xml::GetAttributeStringValue(Xml::CNode* node, const char* name, std::strin
 	return true;
 }
 
-bool Xml::GetAttributeIntValue(Xml::CNode* pNode, const char* sName, int* pValue)
+bool Xml::GetAttributeIntValue(Xml::CNode* pNode, const char* sName, int32* pValue)
 {
 	const char* sText(nullptr);
 	if(!GetAttributeStringValue(pNode, sName, &sText))
@@ -141,6 +141,23 @@ bool Xml::GetAttributeIntValue(Xml::CNode* pNode, const char* sName, int* pValue
 	}
 
 	(*pValue) = atoi(sText);
+	return true;
+}
+
+bool Xml::GetAttributeInt64Value(Xml::CNode* node, const char* name, int64* value)
+{
+	const char* text(nullptr);
+	if(!GetAttributeStringValue(node, name, &text))
+	{
+		return false;
+	}
+
+	if(value == nullptr)
+	{
+		return false;
+	}
+
+	(*value) = atoll(text);
 	return true;
 }
 
@@ -196,10 +213,20 @@ std::string Xml::GetAttributeStringValue(Xml::CNode* pNode, const char* sName)
 	return sValue;
 }
 
-int Xml::GetAttributeIntValue(Xml::CNode* pNode, const char* sName)
+int32 Xml::GetAttributeIntValue(Xml::CNode* pNode, const char* sName)
 {
-	int nValue = 0;
+	int32 nValue = 0;
 	if(!GetAttributeIntValue(pNode, sName, &nValue))
+	{
+		throw std::exception();
+	}
+	return nValue;
+}
+
+int64 Xml::GetAttributeInt64Value(Xml::CNode* node, const char* name)
+{
+	int64 nValue = 0;
+	if(!GetAttributeInt64Value(node, name, &nValue))
 	{
 		throw std::exception();
 	}
@@ -223,7 +250,7 @@ Xml::OwningNodePtr Xml::CreateNodeStringValue(const char* sName, const char* sVa
 	return node;
 }
 
-Xml::OwningNodePtr Xml::CreateNodeIntValue(const char* sName, int nValue)
+Xml::OwningNodePtr Xml::CreateNodeIntValue(const char* sName, int32 nValue)
 {
 	char sValue[256];
 
@@ -248,22 +275,28 @@ Xml::AttributeType Xml::CreateAttributeStringValue(const char* sName, const char
 	return AttributeType(sName, sValue);
 }
 
-Xml::AttributeType Xml::CreateAttributeIntValue(const char* sName, int nValue)
+Xml::AttributeType Xml::CreateAttributeIntValue(const char* sName, int32 nValue)
 {
 	char sValue[256];
 	sprintf(sValue, "%i", nValue);
 	return AttributeType(sName, sValue);
 }
 
-Xml::AttributeType Xml::CreateAttributeBoolValue(const char* sName, bool nValue)
+Xml::AttributeType Xml::CreateAttributeInt64Value(const char* sName, int64 nValue)
 {
-	return AttributeType(sName, nValue ? "true" : "false");
+	auto sValue = string_format("%lld", nValue);
+	return AttributeType(sName, sValue);
 }
 
 Xml::AttributeType Xml::CreateAttributeFloatValue(const char* sName, float nValue)
 {
 	auto sValue = string_format("%f", nValue);
 	return AttributeType(sName, sValue);
+}
+
+Xml::AttributeType Xml::CreateAttributeBoolValue(const char* sName, bool nValue)
+{
+	return AttributeType(sName, nValue ? "true" : "false");
 }
 
 std::string Xml::EscapeText(const std::string& text)
