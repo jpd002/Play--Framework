@@ -17,7 +17,7 @@ namespace Framework
 		typedef std::list<std::string> FileNameList;
 
 										CZipArchiveReader(Framework::CStream&);
-		virtual							~CZipArchiveReader();
+		virtual							~CZipArchiveReader() = default;
 
 		//Non-copyable
 										CZipArchiveReader(const CZipArchiveReader&) = delete;

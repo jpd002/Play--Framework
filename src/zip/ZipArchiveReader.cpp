@@ -18,11 +18,6 @@ m_readingLock(false)
 	Read(m_stream);
 }
 
-CZipArchiveReader::~CZipArchiveReader()
-{
-
-}
-
 const CZipArchiveReader::FileHeaderList& CZipArchiveReader::GetFileHeaders() const
 {
 	return m_files;
