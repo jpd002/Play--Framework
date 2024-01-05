@@ -111,6 +111,13 @@ namespace Framework
 	class MSBFU32
 	{
 	public:
+		MSBFU32() = default;
+
+		MSBFU32(uint32 value)
+		{
+			(*this) = value;
+		}
+
 		MSBFU32& operator =(uint32 rhs)
 		{
 			value = CEndian::ToMSBF32(rhs);
@@ -129,6 +136,8 @@ namespace Framework
 	class MSBFU64
 	{
 	public:
+		MSBFU64() = default;
+
 		MSBFU64& operator =(uint64 rhs)
 		{
 			value = CEndian::ToMSBF64(rhs);
@@ -142,5 +151,27 @@ namespace Framework
 		
 	private:
 		uint64 value = 0;
+	};
+
+	class MSBFFP32
+	{
+	public:
+		MSBFFP32() = default;
+
+		MSBFFP32& operator =(float rhs)
+		{
+			uint32 intValue = *reinterpret_cast<uint32*>(&rhs);
+			value = CEndian::ToMSBF32(intValue);
+			return (*this);
+		}
+		
+		operator float() const
+		{
+			uint32 intValue = CEndian::FromMSBF32(value);
+			return *reinterpret_cast<float*>(&intValue);
+		}
+		
+	private:
+		uint32 value = 0;
 	};
 }
