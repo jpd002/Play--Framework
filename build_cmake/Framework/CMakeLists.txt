@@ -101,6 +101,7 @@ set(COMMON_SRC_FILES
 	../../src/zip/ZipStoreStream.cpp
 
 	../../include/BitManip.h
+	../../include/Breakpoint.h
 	../../include/Csv.h
 	../../include/EndianUtils.h
 	../../include/filesystem_def.h
