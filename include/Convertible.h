@@ -18,7 +18,7 @@ struct convertible
 };
 
 template<typename ConvertibleType>
-ConvertibleType make_convertible(typename ConvertibleType::IntegerType value)
+inline ConvertibleType make_convertible(typename ConvertibleType::IntegerType value)
 {
 	static_assert(sizeof(typename ConvertibleType::IntegerType) == sizeof(ConvertibleType), "Convertible structure size must be the same as integer type.");
 	ConvertibleType result = ConvertibleType();
