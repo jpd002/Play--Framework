@@ -14,6 +14,8 @@ set(SRC_FILES
 	../../include/http/HttpClient.h
 	../../src/http/HttpClientFactory.cpp
 	../../include/http/HttpClientFactory.h
+	../../src/http/HttpServer.cpp
+	../../include/http/HttpServer.h
 )
 
 if(ANDROID)

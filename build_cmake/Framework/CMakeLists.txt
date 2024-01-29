@@ -77,6 +77,7 @@ set(COMMON_SRC_FILES
 	../../src/mpeg2/VLCTable.cpp
 	../../src/PathUtils.cpp
 	../../src/PtrStream.cpp
+	../../src/SocketStream.cpp
 	../../src/Stream.cpp
 	../../src/StreamBitStream.cpp
 	../../src/StringUtils.cpp
@@ -119,6 +120,7 @@ set(COMMON_SRC_FILES
 	../../include/nodiscard.h
 	../../include/signal/Signal.h
 	../../include/Singleton.h
+	../../include/SocketStream.h
 	../../include/std_experimental_map.h
 	../../include/std_experimental_set.h
 	../../include/StdStream.h
