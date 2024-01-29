@@ -120,6 +120,7 @@ set(COMMON_SRC_FILES
 	../../include/nodiscard.h
 	../../include/signal/Signal.h
 	../../include/Singleton.h
+	../../include/SocketDef.h
 	../../include/SocketStream.h
 	../../include/std_experimental_map.h
 	../../include/std_experimental_set.h

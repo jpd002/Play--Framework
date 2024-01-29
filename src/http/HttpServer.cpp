@@ -1,8 +1,6 @@
 #include "http/HttpServer.h"
 #include <cassert>
-#include <unistd.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
+#include <stdexcept>
 #include "StringUtils.h"
 #include "SocketStream.h"
 
@@ -11,22 +9,28 @@ using namespace Framework;
 CHttpServer::CHttpServer(uint16 port, const RequestHandler& requestHandler)
     : m_requestHandler(requestHandler)
 {
+	InitializeSocketSupport();
 	Start(port);
 }
 
 CHttpServer::~CHttpServer()
 {
-	if(m_serverSock != -1)
+	if(m_serverSock != INVALID_SOCKET)
 	{
+#ifdef _WIN32
+		closesocket(m_serverSock);
+#else
 		close(m_serverSock);
+#endif
 	}
 	m_serverThread.join();
 }
 
 void CHttpServer::Start(uint16 port)
 {
-	assert(m_serverSock == -1);
+	assert(m_serverSock == INVALID_SOCKET);
 	m_serverSock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+	assert(m_serverSock != INVALID_SOCKET);
 
 	sockaddr_in sa = {};
 	sa.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -34,11 +38,11 @@ void CHttpServer::Start(uint16 port)
 	sa.sin_port = htons(port);
 	int result = bind(m_serverSock, reinterpret_cast<sockaddr*>(&sa), sizeof(sockaddr_in));
 	assert(result == 0);
-	
+
 	result = listen(m_serverSock, SOMAXCONN);
 	assert(result == 0);
-	
-	m_serverThread = std::thread([this](){ ServerThreadProc(); });
+
+	m_serverThread = std::thread([this]() { ServerThreadProc(); });
 }
 
 void CHttpServer::ServerThreadProc()
@@ -47,8 +51,8 @@ void CHttpServer::ServerThreadProc()
 	{
 		sockaddr_in sa = {};
 		socklen_t addrLength = sizeof(sockaddr_in);
-		int clientSocket = accept(m_serverSock, reinterpret_cast<sockaddr*>(&sa), &addrLength);
-		if(clientSocket == -1)
+		SOCKET clientSocket = accept(m_serverSock, reinterpret_cast<sockaddr*>(&sa), &addrLength);
+		if(clientSocket == INVALID_SOCKET)
 		{
 			break;
 		}
@@ -63,12 +67,12 @@ void CHttpServer::ProcessRequest(int clientSocket)
 		auto clientStream = CSocketStream(clientSocket);
 		auto line = clientStream.ReadLine();
 		auto parts = StringUtils::Split(line);
-		
+
 		if(parts.size() != 3)
 		{
 			throw std::runtime_error("Bad request.");
 		}
-		
+
 		Request request;
 
 		//Read headers
@@ -86,7 +90,7 @@ void CHttpServer::ProcessRequest(int clientSocket)
 			auto headerValue = StringUtils::TrimStart(std::string(line.begin() + delimit + 1, line.end()));
 			request.headers.insert(std::make_pair(headerName, headerValue));
 		}
-		
+
 		auto contentLenghtHeaderIterator = request.headers.find("Content-Length");
 		if(contentLenghtHeaderIterator != std::end(request.headers))
 		{
@@ -98,7 +102,7 @@ void CHttpServer::ProcessRequest(int clientSocket)
 				contentLength -= readAmount;
 			}
 		}
-		
+
 		request.url = parts[1];
 		m_requestHandler(request);
 
@@ -106,7 +110,7 @@ void CHttpServer::ProcessRequest(int clientSocket)
 		response += "HTTP/1.1 200 OK\r\n";
 		//TODO: Append some body here
 		response += "\r\n";
-		
+
 		clientStream.Write(response.c_str(), response.size());
 	}
 	catch(...)
