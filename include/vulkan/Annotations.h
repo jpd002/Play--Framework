@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include "StructDefs.h"
 #include "Instance.h"
 #include "Device.h"
 
