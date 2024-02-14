@@ -4,6 +4,7 @@
 #include <functional>
 #include <map>
 #include <vector>
+#include <string>
 #include "Types.h"
 #include "SocketDef.h"
 

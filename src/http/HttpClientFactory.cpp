@@ -1,4 +1,5 @@
 #include "http/HttpClientFactory.h"
+#include <stdexcept>
 
 #ifdef _WIN32
 #include "http/Win32HttpClient.h"
