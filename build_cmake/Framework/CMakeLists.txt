@@ -119,6 +119,7 @@ set(COMMON_SRC_FILES
 	../../include/maybe_unused.h
 	../../include/nodiscard.h
 	../../include/signal/Signal.h
+	../../include/SimdDefs.h
 	../../include/Singleton.h
 	../../include/SocketDef.h
 	../../include/SocketStream.h
