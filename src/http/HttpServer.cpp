@@ -1,14 +1,26 @@
 #include "http/HttpServer.h"
 #include <cassert>
 #include <stdexcept>
+#include <cstdarg>
 #include "StringUtils.h"
 #include "SocketStream.h"
+#include "StdStreamUtils.h"
 
 using namespace Framework;
 
-CHttpServer::CHttpServer(uint16 port, const RequestHandler& requestHandler)
+CHttpServer::CHttpServer(uint16 port, const RequestHandler& requestHandler, const fs::path& logPath)
     : m_requestHandler(requestHandler)
 {
+	if(!logPath.empty())
+	{
+		try
+		{
+			m_logStream = std::make_unique<CStdStream>(logPath.native().c_str(), GetAppendStdStreamMode<fs::path::string_type>());
+		}
+		catch(...)
+		{
+		}
+	}
 	InitializeSocketSupport();
 	Start(port);
 }
@@ -31,6 +43,10 @@ void CHttpServer::Start(uint16 port)
 	assert(m_serverSock == INVALID_SOCKET);
 	m_serverSock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	assert(m_serverSock != INVALID_SOCKET);
+	if(m_serverSock == INVALID_SOCKET)
+	{
+		Log("Failed to create socket (error: %d).\r\n", errno);
+	}
 
 	sockaddr_in sa = {};
 	sa.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -38,9 +54,21 @@ void CHttpServer::Start(uint16 port)
 	sa.sin_port = htons(port);
 	int result = bind(m_serverSock, reinterpret_cast<sockaddr*>(&sa), sizeof(sockaddr_in));
 	assert(result == 0);
+	if(result != 0)
+	{
+		Log("Failed to bind socket to port %d (error: %d).\r\n", port, errno);
+	}
 
 	result = listen(m_serverSock, SOMAXCONN);
 	assert(result == 0);
+	if(result != 0)
+	{
+		Log("Failed to listen (error: %d).\r\n", errno);
+	}
+	else
+	{
+		Log("Server ready and listening on port %d.\r\n", port);
+	}
 
 	m_serverThread = std::thread([this]() { ServerThreadProc(); });
 }
@@ -54,6 +82,7 @@ void CHttpServer::ServerThreadProc()
 		SOCKET clientSocket = accept(m_serverSock, reinterpret_cast<sockaddr*>(&sa), &addrLength);
 		if(clientSocket == INVALID_SOCKET)
 		{
+			Log("Failed to accept (error: %d). Terminating server.\r\n", errno);
 			break;
 		}
 		ProcessRequest(clientSocket);
@@ -104,6 +133,8 @@ void CHttpServer::ProcessRequest(int clientSocket)
 		}
 
 		request.url = parts[1];
+		Log("Processing request %s '%s'.\r\n", parts[0].c_str(), request.url.c_str());
+
 		m_requestHandler(request);
 
 		std::string response;
@@ -115,6 +146,16 @@ void CHttpServer::ProcessRequest(int clientSocket)
 	}
 	catch(...)
 	{
-		//Abort
+		Log("Failed to process request from client.\r\n");
 	}
+}
+
+void CHttpServer::Log(const char* format, ...)
+{
+	if(!m_logStream) return;
+	va_list args;
+	va_start(args, format);
+	vfprintf(*m_logStream, format, args);
+	va_end(args);
+	m_logStream->Flush();
 }

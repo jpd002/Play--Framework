@@ -7,6 +7,8 @@
 #include <string>
 #include "Types.h"
 #include "SocketDef.h"
+#include "filesystem_def.h"
+#include "StdStream.h"
 
 namespace Framework
 {
@@ -22,7 +24,7 @@ namespace Framework
 
 		using RequestHandler = std::function<void(const Request&)>;
 
-		CHttpServer(uint16, const RequestHandler&);
+		CHttpServer(uint16, const RequestHandler&, const fs::path&);
 		CHttpServer(CHttpServer&) = delete;
 		~CHttpServer();
 
@@ -32,9 +34,12 @@ namespace Framework
 		void Start(uint16);
 		void ServerThreadProc();
 		void ProcessRequest(int);
+		
+		void Log(const char*, ...);
 
 		RequestHandler m_requestHandler;
 		SOCKET m_serverSock = INVALID_SOCKET;
 		std::thread m_serverThread;
+		std::unique_ptr<CStdStream> m_logStream;
 	};
 }

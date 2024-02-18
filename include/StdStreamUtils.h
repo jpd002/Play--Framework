@@ -44,6 +44,19 @@ namespace Framework
 	}
 
 	template <typename StringType>
+	constexpr const typename StringType::value_type* GetAppendStdStreamMode()
+	{
+		if constexpr (std::is_same_v<StringType, std::wstring>)
+		{
+			return L"ab";
+		}
+		else
+		{
+			return "ab";
+		}
+	}
+
+	template <typename StringType>
 	CStdStream CreateInputStdStream(const StringType& path)
 	{
 		return CStdStream(path.c_str(), GetInputStdStreamMode<StringType>());
