@@ -57,9 +57,13 @@ fs::path PathUtils::GetCachePath()
 
 fs::path PathUtils::GetRoamingDataPath()
 {
+#if TARGET_OS_TV
+	return GetCachePath();
+#else
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	std::string directory = [[paths objectAtIndex: 0] fileSystemRepresentation];
 	return fs::path(directory);
+#endif
 }
 
 fs::path PathUtils::GetAppResourcesPath()
