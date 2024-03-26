@@ -28,5 +28,5 @@ endif()
 
 enable_testing()
 add_executable(FrameworkTests ${tests_srcs})
-target_link_libraries(FrameworkTests Framework)
-add_test(FrameworkTests FrameworkTests)
+target_link_libraries(FrameworkTests PUBLIC Framework)
+add_test(NAME FrameworkTests COMMAND FrameworkTests)
