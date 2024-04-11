@@ -140,6 +140,10 @@ void CZipArchiveReader::Read(Framework::CStream& stream)
 	}
 	ZIPDIRENDHEADER dirHeader;
 	stream.Read(&dirHeader, sizeof(ZIPDIRENDHEADER));
+	if(dirHeader.dirStartOffset == ~0U)
+	{
+		throw std::runtime_error("ZIP64 archive not supported.");
+	}
 
 	stream.Seek(dirHeader.dirStartOffset, STREAM_SEEK_SET);
 	for(unsigned int i = 0; i < dirHeader.dirEntryCount; i++)
