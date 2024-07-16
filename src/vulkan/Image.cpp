@@ -9,10 +9,10 @@ using namespace Framework::Vulkan;
 CImage::CImage(CDevice& device, const VkPhysicalDeviceMemoryProperties& memoryProperties,
 	VkImageUsageFlags usage, VkFormat format, uint32 width, uint32 height, VkMemoryPropertyFlags properties)
 : m_device(&device)
+, m_properties(properties)
 , m_format(format)
 , m_width(width)
 , m_height(height)
-, m_properties(properties)
 {
 	Create(memoryProperties, usage, format, width, height);
 }
@@ -253,8 +253,6 @@ void CImage::Fill(VkQueue queue, CCommandBufferPool& commandBufferPool,
 void CImage::Create(const VkPhysicalDeviceMemoryProperties& memoryProperties,
 	VkImageUsageFlags usage, VkFormat format, uint32 width, uint32 height)
 {
-	auto result = VK_SUCCESS;
-
 	{
 		auto imageCreateInfo = Framework::Vulkan::ImageCreateInfo();
 		imageCreateInfo.imageType     = VK_IMAGE_TYPE_2D;
