@@ -78,7 +78,10 @@ uint32 CImage::GetLinearSize() const
 	case VK_FORMAT_A1R5G5B5_UNORM_PACK16:
 		return m_width * m_height * sizeof(uint16);
 	case VK_FORMAT_R8_UNORM:
+	case VK_FORMAT_BC3_UNORM_BLOCK:
 		return m_width * m_height;
+	case VK_FORMAT_BC1_RGB_UNORM_BLOCK:
+		return m_width * m_height / 2;
 	default:
 		assert(false);
 		return 0;
