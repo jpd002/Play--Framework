@@ -67,6 +67,8 @@ uint32 CImage::GetLinearSize() const
 {
 	switch(m_format)
 	{
+	case VK_FORMAT_R16G16B16A16_SFLOAT:
+		return m_width * m_height * 8;
 	case VK_FORMAT_R8G8B8A8_UNORM:
 	case VK_FORMAT_R8G8B8A8_UINT:
 	case VK_FORMAT_A8B8G8R8_UNORM_PACK32:
