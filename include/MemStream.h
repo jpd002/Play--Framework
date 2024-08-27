@@ -8,7 +8,7 @@ namespace Framework
 	class CMemStream : public CStream
 	{
 	public:
-							CMemStream();
+							CMemStream() = default;
 							CMemStream(const CMemStream&);
 		virtual				~CMemStream();
 

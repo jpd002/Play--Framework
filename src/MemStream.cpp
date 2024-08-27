@@ -10,11 +10,6 @@
 
 using namespace Framework;
 
-CMemStream::CMemStream() 
-{
-
-}
-
 CMemStream::CMemStream(const CMemStream& src)
 {
 	CopyFrom(src);
