@@ -174,4 +174,26 @@ namespace Framework
 	private:
 		uint32 value = 0;
 	};
+
+	class MSBFFP64
+	{
+	public:
+		MSBFFP64() = default;
+
+		MSBFFP64& operator =(double rhs)
+		{
+			uint64 intValue = *reinterpret_cast<uint64*>(&rhs);
+			value = CEndian::ToMSBF64(intValue);
+			return (*this);
+		}
+		
+		operator double() const
+		{
+			uint64 intValue = CEndian::FromMSBF64(value);
+			return *reinterpret_cast<double*>(&intValue);
+		}
+		
+	private:
+		uint64 value = 0;
+	};
 }
