@@ -1,4 +1,5 @@
 #include "vulkan/VulkanDef.h"
+#include <stdexcept>
 #include "vulkan/Instance.h"
 #include "vulkan/Loader.h"
 
