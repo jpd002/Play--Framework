@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include "Types.h"
 
 #ifdef _MSC_VER
 
