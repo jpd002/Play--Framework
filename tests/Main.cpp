@@ -1,3 +1,4 @@
+#include "BitManipTest.h"
 #include "BmpTest.h"
 #include "SignalTest.h"
 #include "StringCastTest.h"
@@ -7,6 +8,7 @@
 
 int main(int argc, char** argv)
 {
+	BitManipTest_Execute();
 	BmpTest_Execute();
 	SignalTest_Execute();
 	StringCastTest_Execute();

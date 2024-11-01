@@ -3,6 +3,8 @@ project(FrameworkTests)
 include(../Framework_Common.cmake)
 
 set(tests_srcs
+	../../tests/BitManipTest.cpp
+	../../tests/BitManipTest.h
 	../../tests/BmpTest.cpp
 	../../tests/BmpTest.h
 	../../tests/Main.cpp
