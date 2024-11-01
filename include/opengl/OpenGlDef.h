@@ -35,7 +35,11 @@
 
 #endif
 
-#elif defined(__linux__) || defined(__FreeBSD__)
+#elif defined(__EMSCRIPTEN__)
+
+#include <GLES3/gl3.h>
+
+#else
 
 #if defined(USE_GLEW)
 #include <GL/glew.h>
@@ -47,10 +51,6 @@
 // egl can reference Xlib.h->X.h which defines None, which causes issues with qt (qgroupaction) down the line for using None in enum
 #undef None
 #endif
-
-#elif defined(__EMSCRIPTEN__)
-
-#include <GLES3/gl3.h>
 
 #endif
 
