@@ -28,6 +28,14 @@ static inline int bitmanip_clzll(uint64 value)
 	unsigned long r = 0;
 	_BitScanReverse64(&r, value);
 	return (63 - r);
+#elif defined(_M_IX86)
+	unsigned long r = 0;
+	if(_BitScanReverse(&r, static_cast<uint32>(value >> 32)))
+	{
+		return 31 - r;
+	}
+	_BitScanReverse(&r, static_cast<uint32>(value));
+	return 63 - r;
 #else
 #error "Unsupported architecture."
 #endif
