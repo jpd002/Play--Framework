@@ -76,6 +76,8 @@ void CLoader::LoadLibrary()
 #ifdef __APPLE__
 	libPaths.push_back("@executable_path/../Resources/libMoltenVK.dylib");
 	libPaths.push_back("@executable_path/libMoltenVK.dylib");
+	libPaths.push_back("@executable_path/Frameworks/MoltenVK.framework/MoltenVK");
+	libPaths.push_back("@executable_path/Contents/Frameworks/MoltenVK.framework/MoltenVK");
 #else
 	libPaths.push_back("libvulkan.so");
 	libPaths.push_back("libvulkan.so.1");
