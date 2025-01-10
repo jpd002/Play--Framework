@@ -70,6 +70,17 @@ static inline int bitmanip_ctzll(uint64 value)
 
 #endif
 
+#if defined(__GNUC__) && !defined(__clang__)
+
+static inline uint32 bitmanip_rotateleft32(uint32 value, uint8 shiftAmount)
+{
+	return (value << shiftAmount) | (value >> (32 - shiftAmount));
+}
+
+#define __builtin_rotateleft32 bitmanip_rotateleft32
+
+#endif
+
 namespace Framework
 {
 	static constexpr bool IsPowerOfTwo(uint32 number)

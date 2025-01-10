@@ -7,7 +7,11 @@ void BitManipTest_Execute()
 	//Results are undefined if 0 is provided to ctz/clz
 
 	int result = 0;
-	
+
+	//rotateleft32 ---------------
+	result = __builtin_rotateleft32(0xF0000000, 4);
+	TEST_VERIFY(result == 0x0000000F);
+
 	//ctzll ----------------------
 	result = __builtin_ctzll(1ULL << 36);
 	TEST_VERIFY(result == 36);
