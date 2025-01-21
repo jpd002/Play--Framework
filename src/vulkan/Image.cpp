@@ -210,6 +210,62 @@ void CImage::RecordFill(VkCommandBuffer commandBuffer, const CBuffer& stagingBuf
 	}
 }
 
+void CImage::Clear(VkQueue queue, CCommandBufferPool& commandBufferPool,
+                   const VkClearColorValue& clearColor)
+{
+	auto result = VK_SUCCESS;
+	auto commandBuffer = commandBufferPool.AllocateBuffer();
+
+	//Start command buffer
+	{
+		auto commandBufferBeginInfo = Framework::Vulkan::CommandBufferBeginInfo();
+		commandBufferBeginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
+
+		result = m_device->vkBeginCommandBuffer(commandBuffer, &commandBufferBeginInfo);
+		CHECKVULKANERROR(result);
+	}
+
+	//Transition image from whatever state to TRANSFER_DST_OPTIMAL
+	{
+		auto imageMemoryBarrier = Framework::Vulkan::ImageMemoryBarrier();
+		imageMemoryBarrier.image = m_handle;
+		imageMemoryBarrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+		imageMemoryBarrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+		imageMemoryBarrier.srcAccessMask = 0;
+		imageMemoryBarrier.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+		imageMemoryBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+		imageMemoryBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
+		imageMemoryBarrier.subresourceRange = {VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1};
+
+		m_device->vkCmdPipelineBarrier(commandBuffer, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT,
+		                               0, 0, nullptr, 0, nullptr, 1, &imageMemoryBarrier);
+	}
+
+	VkImageSubresourceRange range = {VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1};
+	m_device->vkCmdClearColorImage(commandBuffer, m_handle, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+	                               &clearColor, 1, &range);
+
+	//Finish command buffer
+	result = m_device->vkEndCommandBuffer(commandBuffer);
+	CHECKVULKANERROR(result);
+
+	//Submit command buffer
+	{
+		auto submitInfo = Framework::Vulkan::SubmitInfo();
+		submitInfo.commandBufferCount = 1;
+		submitInfo.pCommandBuffers = &commandBuffer;
+
+		result = m_device->vkQueueSubmit(queue, 1, &submitInfo, VK_NULL_HANDLE);
+		CHECKVULKANERROR(result);
+	}
+
+	//Wait for queue ops to complete
+	result = m_device->vkQueueWaitIdle(queue);
+	CHECKVULKANERROR(result);
+
+	commandBufferPool.FreeBuffer(commandBuffer);
+}
+
 void CImage::Fill(VkQueue queue, CCommandBufferPool& commandBufferPool, 
 	const VkPhysicalDeviceMemoryProperties& memoryProperties, const void* imageData)
 {
