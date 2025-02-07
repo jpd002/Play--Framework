@@ -27,6 +27,7 @@ namespace Framework
 			CDevice& operator =(CDevice&&);
 			         operator VkDevice() const;
 			
+			DECLARE_FUNCTION(vkResetCommandPool)
 			DECLARE_FUNCTION(vkBeginCommandBuffer)
 			DECLARE_FUNCTION(vkEndCommandBuffer)
 			
@@ -95,6 +96,9 @@ namespace Framework
 			DECLARE_FUNCTION(vkDestroyFramebuffer)
 			
 			//Image
+			DECLARE_FUNCTION(vkCmdCopyImageToBuffer)
+			DECLARE_FUNCTION(vkCmdCopyImage)
+			DECLARE_FUNCTION(vkCmdBlitImage)
 			DECLARE_FUNCTION(vkBindImageMemory)
 			DECLARE_FUNCTION(vkCreateImage)
 			DECLARE_FUNCTION(vkDestroyImage)

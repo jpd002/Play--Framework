@@ -31,6 +31,7 @@ void CDevice::Reset()
 		m_handle = VK_NULL_HANDLE;
 	}
 	
+	vkResetCommandPool = nullptr;
 	vkBeginCommandBuffer = nullptr;
 	vkEndCommandBuffer = nullptr;
 	
@@ -90,6 +91,9 @@ void CDevice::Reset()
 	vkCreateFramebuffer = nullptr;
 	vkDestroyFramebuffer = nullptr;
 	
+	vkCmdCopyImageToBuffer = nullptr;
+	vkCmdCopyImage = nullptr;
+	vkCmdBlitImage = nullptr;
 	vkBindImageMemory = nullptr;
 	vkCreateImage = nullptr;
 	vkDestroyImage = nullptr;
@@ -139,6 +143,7 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(m_handle, rhs.m_handle);
 	std::swap(m_instance, rhs.m_instance);
 	
+	std::swap(vkResetCommandPool, rhs.vkResetCommandPool);
 	std::swap(vkBeginCommandBuffer, rhs.vkBeginCommandBuffer);
 	std::swap(vkEndCommandBuffer, rhs.vkEndCommandBuffer);
 	
@@ -198,6 +203,9 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	std::swap(vkCreateFramebuffer, rhs.vkCreateFramebuffer);
 	std::swap(vkDestroyFramebuffer, rhs.vkDestroyFramebuffer);
 	
+	std::swap(vkCmdCopyImageToBuffer, rhs.vkCmdCopyImageToBuffer);
+	std::swap(vkCmdCopyImage, rhs.vkCmdCopyImage);
+	std::swap(vkCmdBlitImage, rhs.vkCmdBlitImage);
 	std::swap(vkBindImageMemory, rhs.vkBindImageMemory);
 	std::swap(vkCreateImage, rhs.vkCreateImage);
 	std::swap(vkDestroyImage, rhs.vkDestroyImage);
@@ -254,6 +262,7 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	auto result = m_instance->vkCreateDevice(physicalDevice, &deviceCreateInfo, nullptr, &m_handle);
 	CHECKVULKANERROR(result);
 	
+	SET_PROC_ADDR(vkResetCommandPool);
 	SET_PROC_ADDR(vkBeginCommandBuffer);
 	SET_PROC_ADDR(vkEndCommandBuffer);
 	
@@ -313,6 +322,9 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 	SET_PROC_ADDR(vkCreateFramebuffer);
 	SET_PROC_ADDR(vkDestroyFramebuffer);
 	
+	SET_PROC_ADDR(vkCmdCopyImageToBuffer);
+	SET_PROC_ADDR(vkCmdCopyImage);
+	SET_PROC_ADDR(vkCmdBlitImage);
 	SET_PROC_ADDR(vkBindImageMemory);
 	SET_PROC_ADDR(vkCreateImage);
 	SET_PROC_ADDR(vkDestroyImage);
