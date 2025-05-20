@@ -1,6 +1,7 @@
 #include "XmlTest.h"
 #include <string>
 #include <cstring>
+#include <cstdint>
 #include "PtrStream.h"
 #include "xml/Parser.h"
 #include "xml/Utils.h"
