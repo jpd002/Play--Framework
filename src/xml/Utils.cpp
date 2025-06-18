@@ -252,11 +252,9 @@ Xml::OwningNodePtr Xml::CreateNodeStringValue(const char* sName, const char* sVa
 
 Xml::OwningNodePtr Xml::CreateNodeIntValue(const char* sName, int32 nValue)
 {
-	char sValue[256];
-
 	auto node = std::make_unique<Xml::CNode>(sName, true);
-	sprintf(sValue, "%i", nValue);
-	node->InsertNode(std::make_unique<Xml::CNode>(sValue, false));
+	auto sValue = string_format("%d", nValue);
+	node->InsertNode(std::make_unique<Xml::CNode>(std::move(sValue), false));
 
 	return node;
 }
@@ -277,21 +275,20 @@ Xml::AttributeType Xml::CreateAttributeStringValue(const char* sName, const char
 
 Xml::AttributeType Xml::CreateAttributeIntValue(const char* sName, int32 nValue)
 {
-	char sValue[256];
-	sprintf(sValue, "%i", nValue);
-	return AttributeType(sName, sValue);
+	auto sValue = string_format("%d", nValue);
+	return AttributeType(sName, std::move(sValue));
 }
 
 Xml::AttributeType Xml::CreateAttributeInt64Value(const char* sName, int64 nValue)
 {
 	auto sValue = string_format("%lld", nValue);
-	return AttributeType(sName, sValue);
+	return AttributeType(sName, std::move(sValue));
 }
 
 Xml::AttributeType Xml::CreateAttributeFloatValue(const char* sName, float nValue)
 {
 	auto sValue = string_format("%f", nValue);
-	return AttributeType(sName, sValue);
+	return AttributeType(sName, std::move(sValue));
 }
 
 Xml::AttributeType Xml::CreateAttributeBoolValue(const char* sName, bool nValue)
