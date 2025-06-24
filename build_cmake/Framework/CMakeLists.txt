@@ -12,7 +12,7 @@ LIST(APPEND PROJECT_LIBS libzstd_zlibwrapper_static)
 
 if(NOT TARGET ghc_filesystem)
 	add_subdirectory(
-		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/ghc_filesystem
+		${CMAKE_CURRENT_SOURCE_DIR}/../../../Dependencies/build_cmake/ghc_filesystem
 		${CMAKE_CURRENT_BINARY_DIR}/ghc_filesystem
 	)
 endif()
