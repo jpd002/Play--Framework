@@ -15,6 +15,11 @@ set(SRC_FILES
 	../../src/openal/Context.cpp
 	../../src/openal/Device.cpp
 	../../src/openal/Source.cpp
+	../../include/openal/Buffer.h
+	../../include/openal/Context.h
+	../../include/openal/Device.h
+	../../include/openal/OpenAlDef.h
+	../../include/openal/Source.h
 )
 
 add_library(Framework_OpenAl ${SRC_FILES})
