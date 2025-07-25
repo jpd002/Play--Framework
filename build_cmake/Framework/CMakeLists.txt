@@ -119,7 +119,13 @@ set(COMMON_SRC_FILES
 	../../include/layout/LayoutStretch.h
 	../../include/layout/VerticalLayout.h
 	../../include/maybe_unused.h
+	../../include/MemStream.h
 	../../include/nodiscard.h
+	../../include/offsetof_def.h
+	../../include/PathUtils.h
+	../../include/placeholder_def.h
+	../../include/PtrMacro.h
+	../../include/PtrStream.h
 	../../include/signal/Signal.h
 	../../include/SimdDefs.h
 	../../include/Singleton.h
