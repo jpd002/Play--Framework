@@ -139,6 +139,7 @@ void CDevice::Reset()
 
 	vkCmdBuildAccelerationStructuresKHR = nullptr;
 	vkCreateAccelerationStructureKHR = nullptr;
+	vkDestroyAccelerationStructureKHR = nullptr;
 	vkGetAccelerationStructureBuildSizesKHR = nullptr;
 
 	vkCmdTraceRaysKHR = nullptr;
@@ -261,6 +262,7 @@ CDevice& CDevice::operator =(CDevice&& rhs)
 	
 	std::swap(vkCmdBuildAccelerationStructuresKHR, rhs.vkCmdBuildAccelerationStructuresKHR);
 	std::swap(vkCreateAccelerationStructureKHR, rhs.vkCreateAccelerationStructureKHR);
+	std::swap(vkDestroyAccelerationStructureKHR, rhs.vkDestroyAccelerationStructureKHR);
 	std::swap(vkGetAccelerationStructureBuildSizesKHR, rhs.vkGetAccelerationStructureBuildSizesKHR);
 
 	std::swap(vkCmdTraceRaysKHR, rhs.vkCmdTraceRaysKHR);
@@ -390,6 +392,7 @@ void CDevice::Create(VkPhysicalDevice physicalDevice, const VkDeviceCreateInfo& 
 
 	SET_PROC_ADDR(vkCmdBuildAccelerationStructuresKHR);
 	SET_PROC_ADDR(vkCreateAccelerationStructureKHR);
+	SET_PROC_ADDR(vkDestroyAccelerationStructureKHR);
 	SET_PROC_ADDR(vkGetAccelerationStructureBuildSizesKHR);
 
 	SET_PROC_ADDR(vkCmdTraceRaysKHR);

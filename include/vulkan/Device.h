@@ -156,6 +156,7 @@ namespace Framework
 			//VK_KHR_acceleration_structure
 			DECLARE_FUNCTION(vkCmdBuildAccelerationStructuresKHR)
 			DECLARE_FUNCTION(vkCreateAccelerationStructureKHR)
+			DECLARE_FUNCTION(vkDestroyAccelerationStructureKHR)
 			DECLARE_FUNCTION(vkGetAccelerationStructureBuildSizesKHR)
 
 			//VK_KHR_ray_tracing_pipeline
