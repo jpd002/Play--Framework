@@ -112,7 +112,7 @@ VkImageView CImage::CreateImageView()
 }
 
 void CImage::SetLayout(VkQueue queue, CCommandBufferPool& commandBufferPool,
-	VkImageLayout layout, VkAccessFlags accessFlags)
+	VkImageLayout newLayout, VkImageLayout oldLayout)
 {
 	auto result = VK_SUCCESS;
 	auto commandBuffer = commandBufferPool.AllocateBuffer();
@@ -129,10 +129,10 @@ void CImage::SetLayout(VkQueue queue, CCommandBufferPool& commandBufferPool,
 	{
 		auto imageMemoryBarrier = Framework::Vulkan::ImageMemoryBarrier();
 		imageMemoryBarrier.image               = m_handle;
-		imageMemoryBarrier.oldLayout           = VK_IMAGE_LAYOUT_UNDEFINED;
-		imageMemoryBarrier.newLayout           = layout;
+		imageMemoryBarrier.oldLayout           = oldLayout;
+		imageMemoryBarrier.newLayout           = newLayout;
 		imageMemoryBarrier.srcAccessMask       = 0;
-		imageMemoryBarrier.dstAccessMask       = accessFlags;
+		imageMemoryBarrier.dstAccessMask       = 0;
 		imageMemoryBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
 		imageMemoryBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
 		imageMemoryBarrier.subresourceRange    = { VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1 };

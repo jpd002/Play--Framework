@@ -29,7 +29,7 @@ namespace Framework
 			CBuffer CreateFillStagingBuffer(const VkPhysicalDeviceMemoryProperties&, const void*) const;
 			void RecordFill(VkCommandBuffer, const CBuffer&);
 
-			void SetLayout(VkQueue, CCommandBufferPool&, VkImageLayout, VkAccessFlags);
+			void SetLayout(VkQueue, CCommandBufferPool&, VkImageLayout, VkImageLayout = VK_IMAGE_LAYOUT_UNDEFINED);
 			void Clear(VkQueue, CCommandBufferPool&, const VkClearColorValue&);
 			void Fill(VkQueue, CCommandBufferPool&, const VkPhysicalDeviceMemoryProperties&, const void*);
 
