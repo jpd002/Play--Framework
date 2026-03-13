@@ -268,9 +268,9 @@ Xml::OwningNodePtr Xml::CreateNodeBoolValue(const char* sName, bool nValue)
 	return node;
 }
 
-Xml::AttributeType Xml::CreateAttributeStringValue(const char* sName, const char* sValue)
+Xml::AttributeType Xml::CreateAttributeStringValue(const char* sName, std::string sValue)
 {
-	return AttributeType(sName, sValue);
+	return AttributeType(sName, std::move(sValue));
 }
 
 Xml::AttributeType Xml::CreateAttributeIntValue(const char* sName, int32 nValue)

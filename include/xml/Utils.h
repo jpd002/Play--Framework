@@ -31,7 +31,7 @@ namespace Framework
 		OwningNodePtr	CreateNodeIntValue(const char*, int);
 		OwningNodePtr	CreateNodeBoolValue(const char*, bool);
 
-		AttributeType	CreateAttributeStringValue(const char*, const char*);
+		AttributeType	CreateAttributeStringValue(const char*, std::string);
 		AttributeType	CreateAttributeIntValue(const char*, int32);
 		AttributeType	CreateAttributeInt64Value(const char*, int64);
 		AttributeType	CreateAttributeFloatValue(const char*, float);
