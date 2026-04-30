@@ -16,8 +16,8 @@ endif()
 list(APPEND FRAMEWORK_VULKAN_LIBS Framework)
 
 set(SRC_FILES
-	../../src/vulkan/CommandBufferPool.cpp
 	../../src/vulkan/Buffer.cpp
+	../../src/vulkan/CommandBufferPool.cpp
 	../../src/vulkan/Device.cpp
 	../../src/vulkan/Image.cpp
 	../../src/vulkan/Instance.cpp
@@ -25,8 +25,9 @@ set(SRC_FILES
 	../../src/vulkan/ShaderModule.cpp
 	../../src/vulkan/Utils.cpp
 	
-	../../include/vulkan/CommandBufferPool.h
+	../../include/vulkan/Annotations.h
 	../../include/vulkan/Buffer.h
+	../../include/vulkan/CommandBufferPool.h
 	../../include/vulkan/Device.h
 	../../include/vulkan/Image.h
 	../../include/vulkan/Instance.h
