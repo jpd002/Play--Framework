@@ -91,6 +91,21 @@ uint32 CImage::GetLinearSize() const
 	}
 }
 
+VkImageAspectFlags CImage::GetImageAspect() const
+{
+	switch(m_format)
+	{
+	case VK_FORMAT_D24_UNORM_S8_UINT:
+		return VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
+	default:
+		assert(false);
+		[[fallthrough]];
+	case VK_FORMAT_R8G8B8A8_UNORM:
+	case VK_FORMAT_R16G16_SFLOAT:
+		return VK_IMAGE_ASPECT_COLOR_BIT;
+	}
+}
+
 VkImageView CImage::CreateImageView()
 {
 	auto imageViewCreateInfo = Framework::Vulkan::ImageViewCreateInfo();
@@ -102,7 +117,7 @@ VkImageView CImage::CreateImageView()
 		VK_COMPONENT_SWIZZLE_R, VK_COMPONENT_SWIZZLE_G, 
 		VK_COMPONENT_SWIZZLE_B, VK_COMPONENT_SWIZZLE_A 
 	};
-	imageViewCreateInfo.subresourceRange = { VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1 };
+	imageViewCreateInfo.subresourceRange = { GetImageAspect(), 0, 1, 0, 1 };
 
 	VkImageView imageView = VK_NULL_HANDLE;
 	auto result = m_device->vkCreateImageView(*m_device, &imageViewCreateInfo, nullptr, &imageView);
@@ -135,7 +150,7 @@ void CImage::SetLayout(VkQueue queue, CCommandBufferPool& commandBufferPool,
 		imageMemoryBarrier.dstAccessMask       = 0;
 		imageMemoryBarrier.srcQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
 		imageMemoryBarrier.dstQueueFamilyIndex = VK_QUEUE_FAMILY_IGNORED;
-		imageMemoryBarrier.subresourceRange    = { VK_IMAGE_ASPECT_COLOR_BIT, 0, 1, 0, 1 };
+		imageMemoryBarrier.subresourceRange    = { GetImageAspect(), 0, 1, 0, 1 };
 		
 		m_device->vkCmdPipelineBarrier(commandBuffer, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
 			0, 0, nullptr, 0, nullptr, 1, &imageMemoryBarrier);

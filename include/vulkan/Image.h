@@ -23,6 +23,7 @@ namespace Framework
 			void Reset();
 			
 			uint32 GetLinearSize() const;
+			VkImageAspectFlags GetImageAspect() const;
 
 			VkImageView CreateImageView();
 
