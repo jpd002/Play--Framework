@@ -102,6 +102,7 @@ VkImageAspectFlags CImage::GetImageAspect() const
 		[[fallthrough]];
 	case VK_FORMAT_R8G8B8A8_UNORM:
 	case VK_FORMAT_R16G16_SFLOAT:
+	case VK_FORMAT_R32_UINT:
 		return VK_IMAGE_ASPECT_COLOR_BIT;
 	}
 }
