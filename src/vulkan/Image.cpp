@@ -97,6 +97,8 @@ VkImageAspectFlags CImage::GetImageAspect() const
 	{
 	case VK_FORMAT_D24_UNORM_S8_UINT:
 		return VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
+	case VK_FORMAT_D32_SFLOAT:
+		return VK_IMAGE_ASPECT_DEPTH_BIT;
 	default:
 		assert(false);
 		[[fallthrough]];
